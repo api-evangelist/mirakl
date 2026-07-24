@@ -1,0 +1,303 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers Catalog Configuration API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Catalog Configuration
+paths:
+  /v1/catalog-configuration/channels/{channel_id}:
+    parameters:
+    - $ref: '#/components/parameters/channel_id_path'
+    post:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: only once, at channel setup</div>
+
+        <div class="max-call-frequency">Maximum usage: 1 per minute</div>
+
+        </div>'
+      operationId: configureChannelCatalog
+      requestBody:
+        content:
+          application/json; charset=UTF-8:
+            examples:
+              application/json; charset=UTF-8-0:
+                summary: Channel 1 - Catalog capabilities
+                value: "{\n    \"offer_configuration\": {\n        \"custom_attributes\": [\n            {\n                \"id\": \"OFFER_STATE\",\n                \"type\": \"List\",\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Offer condition\"\n                    }\n                ],\n                \"configuration_modes\": [\n                    \"CONSTANT\",\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The condition of the offer.\"\n                    }\n                ],\n                \"max_size\": 1,\n                \"requirement_level\": \"REQUIRED\",\n                \"values\": [\n                    {\n                        \"id\": \"NEW\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"New\"\n                            }\n                        ]\n                    },\n                    {\n                        \"id\": \"REFURBISHED\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"Refurbished - as good as new\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            {\n                \"id\": \"ASIN\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"ASIN of the product. You are strongly encouraged to provide this value.\"\n                    }\n                ],\n                \"requirement_level\": \"RECOMMENDED\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Amazon Standard Identification Number\"\n                    }\n                ]\n            },\n            {\n                \"id\": \"productTaxCode\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The tax code for the product.\"\n                    }\n                ],\n                \"requirement_level\": \"OPTIONAL\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Product Tax Code\"\n                    }\n                ]\n            },\n            {\n                \"id\": \"length\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The length of the product.\"\n                    }\n                ],\n                \"requirement_level\": \"OPTIONAL\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Length\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"use_case_configurations\": {\n        \"offer_creation\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"GTIN\", \"ID\", \"STOCK\" ],\n                \"custom_attributes\": [ \"OFFER_STATE\" ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ \"STANDARD_PRICE\", \"DISCOUNT_PRICE\" ],\n                \"custom_attributes\": [ \"length\" ]\n            }\n        },\n\n        \"offer_update\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"ID\" ],\n                \"custom_attributes\": [ ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ ],\n                \"custom_attributes\": [ \"productTaxCode\" ]\n            }\n        }\n    }\n}\n"
+              application/json; charset=UTF-8-1:
+                summary: Channel 2 - Catalog capabilities
+                value: "{\n    \"offer_configuration\": {\n        \"custom_attributes\": [\n            {\n                \"id\": \"CONDITION\",\n                \"type\": \"List\",\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Offer condition\"\n                    }\n                ],\n                \"configuration_modes\": [\n                    \"CONSTANT\",\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The condition of the offer.\"\n                    }\n                ],\n                \"max_size\": 1,\n                \"requirement_level\": \"REQUIRED\",\n                \"values\": [\n                    {\n                        \"id\": \"NEW\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"New\"\n                            }\n                        ]\n                    },\n                    {\n                        \"id\": \"REFURBISHED\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"Refurbished - as good as new\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            {\n                \"id\": \"taxcode\",\n                \"type\": \"Text\",\n                \"max_size\": 255,\n                \"configuration_modes\": [\n                    \"CONSTANT\",\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The tax code\"\n                    }\n                ],\n                \"requirement_level\": \"RECOMMENDED\",\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Tax code\"\n                    }\n                ]\n            }\n        ]\n    },\n\n    \"use_case_configurations\": {\n        \"offer_creation\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"GTIN\", \"ID\", \"STOCK\" ],\n                \"custom_attributes\": [ ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ \"STANDARD_PRICE\", \"DISCOUNT_PRICE\" ],\n                \"custom_attributes\": [ ]\n            }\n        },\n\n        \"offer_update\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"ID\" ],\n                \"custom_attributes\": [ ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ ],\n                \"custom_attributes\": [ ]\n            }\n        }\n    }\n}\n"
+              application/json; charset=UTF-8-auto:
+                summary: Complete example with value types (application/json; charset=utf-8)
+                value:
+                  offer_configuration:
+                    custom_attributes:
+                    - id: string
+                      type: Boolean
+                      configuration_modes:
+                      - CONSTANT
+                      requirement_level: OPTIONAL
+                      labels:
+                      - locale: en_US
+                        value: string
+                      descriptions:
+                      - locale: en_US
+                        value: string
+                    pricing_configuration:
+                      discount_price_period:
+                        support: SUPPORTED
+                        start_date:
+                          requirement_level: OPTIONAL
+                        end_date:
+                          requirement_level: OPTIONAL
+                  use_case_configurations:
+                    offer_creation:
+                      support: SUPPORTED
+                      required:
+                        standard_attributes:
+                        - ID
+                        custom_attributes:
+                        - string
+                      optional:
+                        standard_attributes:
+                        - ID
+                        custom_attributes:
+                        - string
+                    offer_update:
+                      support: SUPPORTED
+                      required:
+                        standard_attributes:
+                        - ID
+                        custom_attributes:
+                        - string
+                      optional:
+                        standard_attributes:
+                        - ID
+                        custom_attributes:
+                        - string
+            schema:
+              $ref: '#/components/schemas/ChannelCatalogCapabilities'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+      security:
+      - Bearer:
+        - connect-channel-platform:channel-catalog:configure
+      summary: configureChannelCatalog - Configure Catalog capabilities for a channel
+      tags:
+      - Catalog Configuration
+components:
+  schemas:
+    Attribute:
+      type: object
+      discriminator:
+        mapping:
+          Boolean: '#/components/schemas/BooleanAttribute'
+          List: '#/components/schemas/ListAttribute'
+          Numeric: '#/components/schemas/NumericAttribute'
+          Text: '#/components/schemas/TextAttribute'
+        propertyName: type
+      properties:
+        configuration_modes:
+          type: array
+          description: List of accepted configuration modes for providing the value
+          items:
+            $ref: '#/components/schemas/ConfigurationMode'
+          minItems: 1
+        descriptions:
+          type: array
+          description: Additional attribute descriptions
+          items:
+            $ref: '#/components/schemas/Localized'
+        id:
+          type: string
+          description: Id of the attribute
+          minLength: 1
+        labels:
+          type: array
+          description: Labels of the attribute
+          items:
+            $ref: '#/components/schemas/Localized'
+          minItems: 1
+        requirement_level:
+          type: string
+          description: 'Requirement level of the attribute
+
+
+            Enum: `"OPTIONAL"`, `"RECOMMENDED"`, `"REQUIRED"`
+
+            '
+        type:
+          $ref: '#/components/schemas/AttributeType'
+      required:
+      - configuration_modes
+      - id
+      - labels
+      - requirement_level
+      - type
+    UseCaseConfigurations:
+      type: object
+      description: "Configuration for offer related features by use case. \nThis API provides the configuration of required offer fields by use cases\n"
+      properties:
+        offer_creation:
+          $ref: '#/components/schemas/UseCaseConfiguration'
+          description: Configuration for offer creation
+        offer_update:
+          $ref: '#/components/schemas/UseCaseConfiguration'
+          description: Configuration for offer update
+      required:
+      - offer_creation
+      - offer_update
+    ChannelCatalogCapabilities:
+      type: object
+      properties:
+        offer_configuration:
+          $ref: '#/components/schemas/OfferConfiguration'
+        use_case_configurations:
+          $ref: '#/components/schemas/UseCaseConfigurations'
+    PricingConfigurationField:
+      type: object
+      description: Pricing configuration field
+      properties:
+        requirement_level:
+          type: string
+          description: 'Requirement level of the attribute
+
+
+            Enum: `"OPTIONAL"`, `"REQUIRED"`
+
+            '
+      required:
+      - requirement_level
+    Localized:
+      type: object
+      properties:
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: The localized value in this locale
+      required:
+      - locale
+      - value
+    UseCaseConfigurationAttributes:
+      type: object
+      properties:
+        custom_attributes:
+          type: array
+          items:
+            type: string
+        standard_attributes:
+          type: array
+          items:
+            type: string
+            description: 'Enum: `"ID"`, `"STANDARD_PRICE"`, `"DISCOUNT_PRICE"`, `"STOCK"`, `"GTIN"`
+
+              '
+    DiscountPricePeriod:
+      type: object
+      description: Configuration for discount price period.
+      properties:
+        end_date:
+          $ref: '#/components/schemas/PricingConfigurationField'
+        start_date:
+          $ref: '#/components/schemas/PricingConfigurationField'
+        support:
+          type: string
+          description: 'Support for the discount price period
+
+
+            Enum: `"SUPPORTED"`, `"UNSUPPORTED"`
+
+            '
+      required:
+      - end_date
+      - start_date
+      - support
+    AttributeType:
+      type: string
+      description: 'Enum: `"Boolean"`, `"Numeric"`, `"Text"`, `"List"`
+
+        '
+    ConfigurationMode:
+      type: string
+      description: 'The user can configure an attribute via:
+
+        - `CONSTANT`: a constant value for all the catalog
+
+        - `VARIABLE`: a value that can be different for each item, based on an attribute
+
+
+
+        Enum: `"CONSTANT"`, `"VARIABLE"`
+
+        '
+    OfferConfiguration:
+      type: object
+      properties:
+        custom_attributes:
+          type: array
+          description: Attributes the sellers must configure for offer-related features
+          items:
+            $ref: '#/components/schemas/Attribute'
+        pricing_configuration:
+          $ref: '#/components/schemas/PricingConfiguration'
+    UseCaseConfiguration:
+      type: object
+      description: "Configuration for a specific use case. \nThis API provides the configuration of required offer fields by use cases\n"
+      properties:
+        optional:
+          $ref: '#/components/schemas/UseCaseConfigurationAttributes'
+          description: Optional fields for the use case
+        required:
+          $ref: '#/components/schemas/UseCaseConfigurationAttributes'
+          description: Required fields for the use case
+        support:
+          type: string
+          description: 'Support for the use case
+
+
+            Enum: `"SUPPORTED"`, `"UNSUPPORTED"`
+
+            '
+      required:
+      - required
+      - support
+    Locale:
+      type: string
+      description: The language format can be ISO-639 or ISO-639_ISO-3166
+      examples:
+      - en_US
+    PricingConfiguration:
+      type: object
+      description: Configuration for pricing capabilities.
+      properties:
+        discount_price_period:
+          $ref: '#/components/schemas/DiscountPricePeriod'
+  parameters:
+    channel_id_path:
+      description: Connect Channel identifier
+      explode: false
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: string
+        examples:
+        - '1234'
+        minLength: 1
+      style: simple
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

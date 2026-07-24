@@ -1,0 +1,2088 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers Products API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Products
+paths:
+  /api/mcm/products/sources/status/export:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Delta export of the source product data sheet status in JSON format.
+
+
+        Define a cron job in your system that periodically calls this API and sets the previous
+
+        request date as the `updated_since` query parameter.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Differential: every 15 minutes</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- Differential: every 5 minutes <br/>- Full: every 4 hours</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/mcm/page/topics/Mirakl/mcm/integration_mcm/cm11.htm">More context</a></li><li><a href="https://help.mirakl.com/bundle/mcm/page/topics/Mirakl/mcm/troubleshooting_mcm.htm">Error troubleshooting</a></li></ul></div>'
+      operationId: CM11
+      parameters:
+      - description: Export start date. Given date must respect ISO-8601 format and must be URL encoded
+        explode: true
+        in: query
+        name: updated_since
+        required: false
+        schema:
+          type: string
+          format: date-time
+        style: form
+      - description: Export end date. Given date must respect ISO-8601 format and must be URL encoded
+        explode: true
+        in: query
+        name: updated_to
+        required: false
+        schema:
+          type: string
+          format: date-time
+        style: form
+      - description: 'The status of the product : LIVE / NOT_LIVE'
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+          enum:
+          - LIVE
+          - NOT_LIVE
+        style: form
+      - description: The provider unique identifier of the product
+        explode: true
+        in: query
+        name: provider_unique_identifier
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 100
+          minItems: 0
+          uniqueItems: true
+        style: form
+      - description: 'The unique identifier of the product with type (structure: \"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\").'
+        explode: true
+        in: query
+        name: unique_identifier
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 100
+          minItems: 0
+          uniqueItems: true
+        style: form
+      - description: The provider id
+        explode: true
+        in: query
+        name: provider_id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                  - errors:
+                    - channels:
+                      - BE
+                      - FR
+                      code: MCM-04012
+                      message: The product has been rejected by the operator temporarily.
+                      rejection_details:
+                        message: This product is obsolete
+                        reason_code: '2'
+                        reason_label: The product does not fit the targeted audience
+                    - channels:
+                      - US
+                      - CA
+                      code: MCM-04012
+                      message: The operator has requested changes to your product data.
+                      rejection_details:
+                        message: The description in English is not detailed enough.
+                        reason_code: '5'
+                        reason_label: A better description is required
+                    - code: MCM-0L000
+                      message: The product has not been synchronized yet.
+                    - code: MCM-04000
+                      integration_details:
+                      - attribute_code: color
+                        code: WARNING
+                        message: is not mapped
+                      message: The product integration contains errors.
+                    provider_unique_identifier: shopSku1
+                    status: NOT_LIVE
+                    unique_identifiers:
+                    - code: EAN
+                      value: EAN1
+                    - code: EAN
+                      value: EAN2
+                    - code: ISBN
+                      value: ISBN1
+                    warnings:
+                    - attribute_code: mainImageLarge
+                      code: MCM-05000
+                      message: The 'mainImageLarge' attribute is required.
+                  - provider_unique_identifier: shopSku2
+                    status: LIVE
+                    warnings:
+                    - attribute_code: productTitle_fr
+                      code: MCM-05000
+                      message: The 'productTitle_fr' attribute is required.
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value: string
+              schema:
+                type: array
+                format: binary
+                items:
+                  $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure'
+          description: Export success
+        '204':
+          description: No source product data sheet status to export
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: CM11 - Export Source Product Data Sheet status
+      tags:
+      - Products
+  /api/hierarchies:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Every hour</div>
+
+        <div class="max-call-frequency">Maximum usage: Every hour</div>
+
+        </div>'
+      operationId: H11
+      parameters:
+      - description: Catalog category code
+        explode: true
+        in: query
+        name: hierarchy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of children catalog category levels to retrieve. If not specified, all child catalog categories are retrieved
+        explode: true
+        in: query
+        name: max_level
+        required: false
+        schema:
+          type: integer
+          format: int32
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    hierarchies:
+                    - code: '5911111'
+                      label: Suncare
+                      label_translations:
+                      - locale: en
+                        value: Suncare
+                      - locale: fr
+                        value: Protection solaire
+                      level: 2
+                      parent_code: '59'
+                    - code: '5911112'
+                      label: Toiletries
+                      label_translations:
+                      - locale: en
+                        value: Toiletries
+                      - locale: fr
+                        value: Articles de toilette
+                      level: 2
+                      parent_code: '59'
+                    - code: '5911113'
+                      label: Womens Hair Removal
+                      label_translations:
+                      - locale: en
+                        value: Womens Hair Removal
+                      - locale: fr
+                        value: Épilation Femmes
+                      level: 2
+                      parent_code: '59'
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    hierarchies:
+                    - code: string
+                      label: string
+                      label_translations:
+                      - locale: string
+                        value: string
+                      level: 0
+                      parent_code: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/H11_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: H11 - List Catalog categories (parents and children) related to a Catalog category
+      tags:
+      - Products
+  /api/products/imports:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Returns the import identifier to track the status of the import
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Every hour, for each seller</div>
+
+        <div class="max-call-frequency">Maximum usage: Every 15 minutes, for each seller</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mci/Operator/sync_pim.html">More context</a></li></ul></div>'
+      operationId: P41
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples:
+              multipart/form-data-auto:
+                summary: Complete example with value types (multipart/form-data)
+                value:
+                  conversion_options:
+                    ai_enrichment:
+                      status: ENABLED
+                    ai_rewrite:
+                      status: ENABLED
+                    ai_translation:
+                      status: ENABLED
+                  conversion_type: AI_CONVERTER
+                  file: string
+                  operator_format: true
+                  shop: 0
+            schema:
+              type: object
+              properties:
+                conversion_options:
+                  $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions'
+                  description: Options used for product file conversion when conversion_type is <code>AI_CONVERTER</code>
+                conversion_type:
+                  type: string
+                  description: 'Product file conversion type. If Catalog Transformer is enabled but the conversionType is not specified, then the default configuration from the shop settings will be used
+
+
+                    Enum: `"AI_CONVERTER"`, `"STANDARD"`
+
+                    '
+                file:
+                  type: string
+                  format: binary
+                  description: Import file (CSV or XML or XLSX) to upload. Use <code>multipart/form-data</code> with name <code>file</code>
+                operator_format:
+                  type: boolean
+                  default: false
+                  description: Force the use of the operator product format
+                shop:
+                  type: integer
+                  format: int64
+                  description: Shop identifier
+              required:
+              - file
+              - shop
+      responses:
+        '201':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    import_id: 2035
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    import_id: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/P41_Response_201'
+          description: Created
+          headers:
+            Location:
+              description: Pre-calculated URL to call to get the import status
+              explode: false
+              schema: {}
+              style: simple
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: P41 - Import products to the operator information system
+      tags:
+      - Products
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -i -X POST \\\n  https://your-instance.mirakl.net/api/products/imports \\\n  -H 'Content-Type: multipart/form-data' \\\n  -F 'conversion_options=\"{\\\"ai_enrichment\\\":{\\\"status\\\":\\\"ENABLED\\\"},\\\"ai_rewrite\\\":{\\\"status\\\":\\\"ENABLED\\\"},\\\"ai_translation\\\":{\\\"status\\\":\\\"ENABLED\\\"}}\";type=application/json' \\\n  -F 'conversion_type=\"\\\"AI_CONVERTER\\\"\";type=application/json' \\\n  -F 'file=@path/to/file' \\\n  -F 'operator_format=\"true\";type=application/json' \\\n  -F 'shop=\"0\";type=application/json'\n"
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        If the last_request_date param is not set the api returns all product imports.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Every 5 minutes</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per minute</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mci/Operator/sync_pim.html">More context</a></li></ul><div class="extension-title">Pagination</div>
+
+
+        <p>This resource supports offset pagination (<a href="#section/Offset-pagination-and-sort">see documentation</a>)</p>
+
+
+        <div class="extension-title">Sort fields</div>
+
+
+        <code>sort</code> field can have the following values:<ul><li><b>dateCreated</b> (Default) - Sort by creation date (asc by default)</li></ul>
+
+
+        </div>'
+      operationId: P51
+      parameters:
+      - description: Return only product imports that have changed since this date
+        explode: true
+        in: query
+        name: last_request_date
+        required: false
+        schema:
+          type: string
+          format: date-time
+        style: form
+      - description: Product import status. One of <code>CANCELLED</code>, <code>WAITING</code>, <code>RUNNING</code>, <code>SENT</code>, <code>COMPLETE</code>, <code>FAILED</code>
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: If <code>true</code> returns only product import trackings with transformed file
+        explode: true
+        in: query
+        name: has_transformed_file
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Shop identifier
+        explode: true
+        in: query
+        name: shop_id
+        required: false
+        schema:
+          type: integer
+          format: int64
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    product_import_trackings:
+                    - date_created: '2019-04-05T13:13:06Z'
+                      has_error_report: true
+                      has_new_product_report: true
+                      has_transformation_error_report: true
+                      has_transformed_file: false
+                      import_id: 2008
+                      import_status: COMPLETE
+                      shop_id: 2000
+                      transform_lines_in_error: 5
+                      transform_lines_in_success: 0
+                      transform_lines_read: 5
+                      transform_lines_with_warning: 0
+                    - date_created: '2019-04-05T13:13:25Z'
+                      has_error_report: false
+                      has_new_product_report: false
+                      has_transformation_error_report: false
+                      has_transformed_file: true
+                      import_id: 2009
+                      import_status: SENT
+                      shop_id: 2000
+                      transform_lines_in_error: 0
+                      transform_lines_in_success: 1
+                      transform_lines_read: 1
+                      transform_lines_with_warning: 0
+                    total_count: 2
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    product_import_trackings:
+                    - conversion_options:
+                        ai_enrichment:
+                          status: ENABLED
+                        ai_rewrite:
+                          status: ENABLED
+                        ai_translation:
+                          status: ENABLED
+                      conversion_type: AI_CONVERTER
+                      date_created: '2023-03-28T09:34:42Z'
+                      has_error_report: true
+                      has_new_product_report: true
+                      has_transformation_error_report: true
+                      has_transformed_file: true
+                      import_id: 0
+                      import_status: TRANSFORMATION_WAITING
+                      integration_details:
+                        invalid_products: 0
+                        products_not_accepted_in_time: 0
+                        products_not_synchronized_in_time: 0
+                        products_reimported: 0
+                        products_successfully_synchronized: 0
+                        products_with_synchronization_issues: 0
+                        products_with_wrong_identifiers: 0
+                        rejected_products: 0
+                      reason_status: string
+                      shop_id: 0
+                      transform_lines_in_error: 0
+                      transform_lines_in_success: 0
+                      transform_lines_read: 0
+                      transform_lines_with_warning: 0
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/P51_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: P51 - Get information about product import statuses
+      tags:
+      - Products
+  /api/products/imports/{import}:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per minute until getting the import final status</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per minute</div>
+
+        </div>'
+      operationId: P42
+      parameters:
+      - description: Import identifier
+        explode: false
+        in: path
+        name: import
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    date_created: '2019-04-05T12:56:21Z'
+                    has_error_report: false
+                    has_new_product_report: false
+                    has_transformation_error_report: false
+                    has_transformed_file: true
+                    import_id: 2005
+                    import_status: SENT
+                    shop_id: 2000
+                    transform_lines_in_error: 0
+                    transform_lines_in_success: 1
+                    transform_lines_read: 1
+                    transform_lines_with_warning: 0
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    conversion_options:
+                      ai_enrichment:
+                        status: ENABLED
+                      ai_rewrite:
+                        status: ENABLED
+                      ai_translation:
+                        status: ENABLED
+                    conversion_type: AI_CONVERTER
+                    date_created: '2023-03-28T09:34:42Z'
+                    has_error_report: true
+                    has_new_product_report: true
+                    has_transformation_error_report: true
+                    has_transformed_file: true
+                    import_id: 0
+                    import_status: TRANSFORMATION_WAITING
+                    integration_details:
+                      invalid_products: 0
+                      products_not_accepted_in_time: 0
+                      products_not_synchronized_in_time: 0
+                      products_reimported: 0
+                      products_successfully_synchronized: 0
+                      products_with_synchronization_issues: 0
+                      products_with_wrong_identifiers: 0
+                      rejected_products: 0
+                    reason_status: string
+                    shop_id: 0
+                    transform_lines_in_error: 0
+                    transform_lines_in_success: 0
+                    transform_lines_read: 0
+                    transform_lines_with_warning: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/P42_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: P42 - Get the import status for a product import
+      tags:
+      - Products
+  /api/products/imports/{import}/error_report:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        This API returns either a CSV file (MCM enabled) or a file in a format defined by the operator (MCM disabled).
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Each time an error report is needed</div>
+
+        <div class="max-call-frequency">Maximum usage: Each time an error report is needed</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mci/Operator/catalog_integration_process_using_api.html">More context</a></li></ul></div>'
+      operationId: P44
+      parameters:
+      - description: Import identifier
+        explode: false
+        in: path
+        name: import
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              examples:
+                application/octet-stream-auto:
+                  summary: Complete example with value types (application/octet-stream)
+                  value: string
+              schema:
+                type: string
+                format: binary
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: P44 - Get the error report file for a product import ("Non-integrated products report")
+      tags:
+      - Products
+  /api/products/imports/{import}/new_product_report:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        This API returns either a CSV file (MCM enabled) or a file in a format defined by the operator (MCM disabled).
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Each time an integration report is needed</div>
+
+        <div class="max-call-frequency">Maximum usage: Each time an integration report is needed</div>
+
+        </div>'
+      operationId: P45
+      parameters:
+      - description: Import identifier
+        explode: false
+        in: path
+        name: import
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              examples:
+                application/octet-stream-auto:
+                  summary: Complete example with value types (application/octet-stream)
+                  value: string
+              schema:
+                type: string
+                format: binary
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: P45 - Get the product integration report file for a product import ("Added products report")
+      tags:
+      - Products
+  /api/products/imports/{import}/transformed_file:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        This API returns a CSV file.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Each time a transformed file is available</div>
+
+        <div class="max-call-frequency">Maximum usage: Each time a transformed file is available</div>
+
+        </div>'
+      operationId: P46
+      parameters:
+      - description: Import identifier
+        explode: false
+        in: path
+        name: import
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        '200':
+          content:
+            text/csv:
+              examples:
+                text/csv-auto:
+                  summary: Complete example with value types (text/csv)
+                  value: string
+              schema:
+                type: string
+                format: binary
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: P46 - Get the transformed file for a product import ("File in operator format")
+      tags:
+      - Products
+  /api/products/imports/{import}/transformation_error_report:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        This API returns a CSV, XLSX or XML file, depending on the file format provided by the seller.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Each time an error report is needed</div>
+
+        <div class="max-call-frequency">Maximum usage: Each time an error report is needed</div>
+
+        </div>'
+      operationId: P47
+      parameters:
+      - description: Import identifier
+        explode: false
+        in: path
+        name: import
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              examples:
+                application/octet-stream-auto:
+                  summary: Complete example with value types (application/octet-stream)
+                  value: string
+              schema:
+                type: string
+                format: binary
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: P47 - Get the transformation error report file for a product import ("Source file error report")
+      tags:
+      - Products
+  /api/products/attributes:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Retrieves all attributes for parents and children of the requested hierarchy
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Every hour</div>
+
+        <div class="max-call-frequency">Maximum usage: Every hour</div>
+
+        </div>'
+      operationId: PM11
+      parameters:
+      - description: Code of the hierarchy (category) for which to retrieve the attributes. If not specified, all attributes are retrieved.
+        explode: true
+        in: query
+        name: hierarchy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of children hierarchy (category) levels to retrieve. If not specified, attributes from all children hierarchies are retrieved.
+        explode: true
+        in: query
+        name: max_level
+        required: false
+        schema:
+          type: integer
+          format: int32
+        style: form
+      - description: List of channel codes
+        explode: true
+        in: query
+        name: channels
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        style: form
+      - description: Set to "<code>true</code>" to get only the attributes that have roles.
+        explode: true
+        in: query
+        name: with_roles
+        required: false
+        schema:
+          type: boolean
+          default: false
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    attributes:
+                    - channels:
+                      - code: WEBSITE_EN
+                      code: washingInstructions3
+                      default_value: null
+                      description: How do you wash the product
+                      description_translations:
+                      - locale: en
+                        value: How do you wash the product
+                      example: null
+                      hierarchy_code: '3012'
+                      label: Washing Instructions
+                      label_translations:
+                      - locale: en
+                        value: Washing Instructions
+                      locale: en_US
+                      requirement_level: OPTIONAL
+                      roles: []
+                      transformations: CAMEL_CASE
+                      type: TEXT
+                      type_parameter: null
+                      validations: MIN_LENGTH|10
+                      variant: false
+                    - channels:
+                      - code: WEBSITE_FR
+                      - code: WEBSITE_EN
+                      code: toolsIncluded3
+                      default_value: null
+                      description: Are tools included for the assembly of this product
+                      description_translations:
+                      - locale: en
+                        value: Are tools included for the assembly of this product
+                      example: null
+                      hierarchy_code: '5610102'
+                      label: Tools Included
+                      label_translations:
+                      - locale: en
+                        value: Tools Included
+                      requirement_level: OPTIONAL
+                      roles: []
+                      type: LIST
+                      type_parameter: Boolean
+                      variant: false
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    attributes:
+                    - channels:
+                      - code: string
+                      code: string
+                      default_value: string
+                      description: string
+                      description_translations:
+                      - locale: string
+                        value: string
+                      example: string
+                      hierarchy_code: string
+                      label: string
+                      label_translations:
+                      - locale: string
+                        value: string
+                      locale: string
+                      required: true
+                      requirement_level: OPTIONAL
+                      roles:
+                      - parameters:
+                        - name: string
+                          value: string
+                        type: string
+                      transformations: string
+                      type: string
+                      type_parameter: string
+                      type_parameters:
+                      - name: string
+                        value: string
+                      unique_code: string
+                      validations: string
+                      values:
+                      - code: string
+                      values_list: string
+                      variant: true
+              schema:
+                type: object
+                $ref: '#/components/schemas/PM11_Response_200'
+            text/csv:
+              examples:
+                text/csv-1:
+                  summary: Example with business values (text/csv)
+                  value: 'code;label;label[en];hierarchy-code;description;description[en];example;requirement-level;type;type-parameter;variant;default-value;transformations;validations;roles;type-parameters;channels;locale
+
+                    washingInstructions3;Washing Instructions;Washing Instructions;3012;How do you wash the product;How do you wash the product;;OPTIONAL;TEXT;;false;;CAMEL_CASE;MIN_LENGTH|10;;;WEBSITE_EN;en_US
+
+                    toolsIncluded3;Tools Included;Tools Included;5610102;Are tools included for the assembly of this product;Are tools included for the assembly of this product;;OPTIONAL;LIST;Boolean;false;;;;;LIST_CODE|Boolean;WEBSITE_FR,WEBSITE_EN;
+
+                    '
+                text/csv-auto:
+                  summary: Complete example with value types (text/csv)
+                  value: string
+              schema:
+                type: object
+                format: binary
+                $ref: '#/components/schemas/PM11_Response_200_TextCsv_Ext_FileStructure'
+          description: Export success
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: PM11 - Get the product attribute configuration
+      tags:
+      - Products
+  /api/values_lists:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Every hour</div>
+
+        <div class="max-call-frequency">Maximum usage: Every hour</div>
+
+        </div>'
+      operationId: VL11
+      parameters:
+      - description: The operator's values list code. If not specified, all values lists are retrieved
+        explode: true
+        in: query
+        name: code
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    values_lists:
+                    - code: Jewellery
+                      label: Bijoux
+                      label_translations:
+                      - locale: en
+                        value: Jewellery
+                      - locale: fr
+                        value: Bijoux
+                      values:
+                      - code: Accessories
+                        label: Accessoires
+                        label_translations:
+                        - locale: en
+                          value: Accessories
+                        - locale: fr
+                          value: Accessoires
+                      - code: Bracelets
+                        label: Bracelets
+                        label_translations:
+                        - locale: en
+                          value: Bracelets
+                        - locale: fr
+                          value: Bracelets
+                      - code: Necklaces
+                        label: Colliers
+                        label_translations:
+                        - locale: en
+                          value: Necklaces
+                        - locale: fr
+                          value: Colliers
+                      - code: Rings
+                        label: Anneaux
+                        label_translations:
+                        - locale: en
+                          value: Rings
+                        - locale: fr
+                          value: Anneaux
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    values_lists:
+                    - code: string
+                      label: string
+                      label_translations:
+                      - locale: string
+                        value: string
+                      values:
+                      - code: string
+                        label: string
+                        label_translations:
+                        - locale: string
+                          value: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/VL11_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: VL11 - Get information about operator's value lists
+      tags:
+      - Products
+  /api/products:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Note: this resource returns 100 products maximum <br/> Results are sorted by product sku asc, then by product identifier type asc and then by product identifier asc
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: At each product page display</div>
+
+        <div class="max-call-frequency">Maximum usage: At each product page display</div>
+
+        <div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: P31
+      parameters:
+      - description: 'List of the product''s identifiers with type, _(structure: "`product_references=<productIdType>|<productId>,<productIdType>|<productId>, ...`")_
+
+          where accepted `<productIdType>` are operator’s product references, like `EAN` or `UPC` for example.
+
+
+          Note that `SHOP_SKU` or `SKU` are invalid `<productIdType>` for this API.
+
+          '
+        explode: true
+        in: query
+        name: product_references
+        required: true
+        schema:
+          type: string
+        style: form
+      - deprecated: true
+        description: 'List of the product''s identifiers with type, _(structure: "`products=<productId>|<productIdType>,<productId>|<productIdType>, ...`")_
+
+          where accepted `<productIdType>` are operator’s product references, like `EAN` or `UPC` for example.
+
+
+          Note that `SHOP_SKU` or `SKU` are invalid `<productIdType>` for this API.
+
+          '
+        explode: true
+        in: query
+        name: products
+        required: false
+        schema:
+          type: string
+          deprecated: true
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    products:
+                    - authorized_shop_ids: []
+                      category_code: '5110114'
+                      category_label: Coffee Machines
+                      product_id: '9312432012041'
+                      product_id_type: EAN
+                      product_sku: MKP100000000037254
+                      product_title: Breville Cafe Roma Stainless Espresso/Cappuccino Machine - ESP8C
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    products:
+                    - authorized_shop_ids:
+                      - string
+                      category_code: string
+                      category_label: string
+                      product_id: string
+                      product_id_type: string
+                      product_sku: string
+                      product_title: string
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/P31_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: P31 - Get products for a list of product references
+      tags:
+      - Products
+components:
+  schemas:
+    H11_Response_200_Hierarchies:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Hierarchy code
+        label:
+          type: string
+          description: Hierarchy label
+        label_translations:
+          type: array
+          description: Hierarchy label translation
+          items:
+            $ref: '#/components/schemas/H11_Response_200_Hierarchies_LabelTranslations'
+        level:
+          type: integer
+          format: int32
+          description: Hierarchy level
+        parent_code:
+          type: string
+          description: Parent Hierarchy code
+      required:
+      - code
+      - label_translations
+      - level
+      - parent_code
+    PM11_Response_200_Attributes:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: Channels
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes_Channels'
+        code:
+          type: string
+          description: Attribute code
+        default_value:
+          type: string
+          deprecated: true
+          description: <p>Default value for value list type attributes</p><p>Use the "type_parameters" field for "LIST" attribute types to retrieve the default value.</p>
+        description:
+          type: string
+          description: Attribute description
+        description_translations:
+          type: array
+          description: Translations of the attribute description
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes_DescriptionTranslations'
+        example:
+          type: string
+          description: Attribute example to help sellers when they fill the product creation form
+        hierarchy_code:
+          type: string
+          description: The code of the hierarchy (category) this attribute belongs to. If this field is empty, the attribute is shared among all hierarchies.
+        label:
+          type: string
+          description: Attribute label
+        label_translations:
+          type: array
+          description: Translations of the attribute label
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes_LabelTranslations'
+        locale:
+          type: string
+          description: 'Attribute localization.
+
+
+            The language format can either be:
+
+            - ISO-639 (E.g. "en")
+
+            - ISO-639_ISO-3166 (E.g. "en_US")
+
+            '
+        required:
+          type: boolean
+          deprecated: true
+          description: <p>Whether or not the attribute is required</p><p>This field is deprecated. Use the "requirement_level" field instead.</p>
+        requirement_level:
+          type: string
+          description: 'Requirement level of the attribute
+
+
+            Enum: `"OPTIONAL"`, `"REQUIRED"`, `"RECOMMENDED"`, `"DISABLED"`
+
+            '
+        roles:
+          type: array
+          description: Attribute roles
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes_Roles'
+        transformations:
+          type: string
+          description: Transformations applied to the attribute (a list of transformations separated by commas)
+        type:
+          type: string
+          description: Attribute type
+        type_parameter:
+          type: string
+          deprecated: true
+          description: <p>Type parameter</p><p>This field is deprecated. Use the "type_parameters" field instead.</p>
+        type_parameters:
+          type: array
+          description: Specificities of the attribute type, for example the date format, or the maximum size of a media
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes_TypeParameters'
+        unique_code:
+          type: string
+          description: Unique code of the attribute
+        validations:
+          type: string
+          description: Validations applied to the attribute (a list of validations separated by commas)
+        values:
+          type: array
+          deprecated: true
+          description: A list of authorized values for this attribute
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes_Values'
+        values_list:
+          type: string
+          deprecated: true
+          description: <p>This code points to the list defining the authorized values for this attribute.</p><p>This API is deprecated. Use the "type_parameter" field for "LIST" attribute types to retrieve the value list code.</p>
+        variant:
+          type: boolean
+          description: 'Whether or not the attribute is a variation axis. Possible values: <code>true</code> or <code>false</code>'
+      required:
+      - code
+      - description_translations
+      - label_translations
+      - required
+      - requirement_level
+      - roles
+      - type
+      - type_parameter
+      - variant
+    P42_Response_200_ConversionOptions_AiRewrite:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    VL11_Response_200_ValuesLists_Values_LabelTranslations:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Locale
+        value:
+          type: string
+          description: Translation
+    P42_Response_200_IntegrationDetails:
+      type: object
+      properties:
+        invalid_products:
+          type: integer
+          format: int64
+          description: Number of invalid products
+        products_not_accepted_in_time:
+          type: integer
+          format: int64
+          description: Number of products that haven't been accepted in the required time
+        products_not_synchronized_in_time:
+          type: integer
+          format: int64
+          description: Number of products that haven't been synchronized in the required time
+        products_reimported:
+          type: integer
+          format: int64
+          description: Number of products that have been reimported in a more recent file
+        products_successfully_synchronized:
+          type: integer
+          format: int64
+          description: Number of products successfully synchronized on operator system
+        products_with_synchronization_issues:
+          type: integer
+          format: int64
+          description: Number of products having synchronization issues with operator system
+        products_with_wrong_identifiers:
+          type: integer
+          format: int64
+          description: Number of products having wrong identifiers
+        rejected_products:
+          type: integer
+          format: int64
+          description: Number of rejected products by operator system
+    P51_Response_200_ProductImportTrackings:
+      type: object
+      properties:
+        conversion_options:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions'
+          description: Options used for the conversion
+        conversion_type:
+          type: string
+          description: 'Type of conversion applied on products
+
+
+            Enum: `"AI_CONVERTER"`
+
+            '
+        date_created:
+          type: string
+          format: date-time
+          description: Import creation date
+        has_error_report:
+          type: boolean
+          description: Returns true if error report is available. Value is filled when the import status is <code>COMPLETE</code>.
+        has_new_product_report:
+          type: boolean
+          description: Returns true if new product report is available. Value is filled when the import status is <code>COMPLETE</code>.
+        has_transformation_error_report:
+          type: boolean
+          description: Returns true if transformation error report is available. Value is filled when the import status is <code>SENT</code> or <code>COMPLETE</code>.
+        has_transformed_file:
+          type: boolean
+          description: Returns true if transformed file is available. Value is filled when the import status is <code>SENT</code> or <code>COMPLETE</code>.
+        import_id:
+          type: integer
+          format: int64
+          description: Import identifier
+        import_status:
+          type: string
+          description: 'Import status
+
+
+            Enum: `"TRANSFORMATION_WAITING"`, `"TRANSFORMATION_RUNNING"`, `"TRANSFORMATION_FAILED"`, `"WAITING"`, `"RUNNING"`, `"SENT"`, `"COMPLETE"`, `"CANCELLED"`, `"FAILED"`
+
+            '
+        integration_details:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_IntegrationDetails'
+          description: Integration details
+        reason_status:
+          type: string
+          description: A message explaining the reason of the import status, if relevant
+        shop_id:
+          type: integer
+          format: int64
+          description: Shop identifier
+        transform_lines_in_error:
+          type: integer
+          format: int64
+          description: Total count of transformed lines in error
+        transform_lines_in_success:
+          type: integer
+          format: int64
+          description: Total count of transformed lines in success
+        transform_lines_read:
+          type: integer
+          format: int64
+          description: Total count of transformed lines read
+        transform_lines_with_warning:
+          type: integer
+          format: int64
+          description: Total count of transformed lines with warning
+      required:
+      - date_created
+      - has_error_report
+      - has_new_product_report
+      - has_transformed_file
+      - import_id
+      - import_status
+      - shop_id
+      - transform_lines_in_error
+      - transform_lines_in_success
+      - transform_lines_read
+      - transform_lines_with_warning
+    CM11_Response_200_Ext_FileStructure_Errors_IntegrationDetails:
+      type: object
+      properties:
+        attribute_code:
+          type: string
+          description: The integration error's attribute code
+        code:
+          type: string
+          description: The Mirakl code of the integration error
+        message:
+          type: string
+          description: The Mirakl label of the integration error
+      required:
+      - attribute_code
+      - code
+    P31_Response_200_Products:
+      type: object
+      properties:
+        authorized_shop_ids:
+          type: array
+          description: List of the shop ids that are allowed to sell this product, or an empty list if there is no restriction on this product
+          items:
+            type: string
+        category_code:
+          type: string
+          description: Product category code
+        category_label:
+          type: string
+          description: '<span>Product category label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        product_id:
+          type: string
+          description: Product ID
+        product_id_type:
+          type: string
+          description: Product ID type
+        product_sku:
+          type: string
+          description: Product SKU
+        product_title:
+          type: string
+          description: Product title
+      required:
+      - authorized_shop_ids
+      - category_code
+      - category_label
+      - product_id
+      - product_id_type
+      - product_sku
+      - product_title
+    P41_Request_MultipartFormData_ConversionOptions:
+      type: object
+      properties:
+        ai_enrichment:
+          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiEnrichment'
+          description: Enable AI enrichment. Default to <code>DISABLED</code>
+        ai_rewrite:
+          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiRewrite'
+          description: Enable AI rewrite. Default to <code>ENABLED</code>
+        ai_translation:
+          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiTranslation'
+          description: Enable AI translation. Default to <code>DISABLED</code>
+    P42_Response_200:
+      type: object
+      properties:
+        conversion_options:
+          $ref: '#/components/schemas/P42_Response_200_ConversionOptions'
+          description: Options used for the conversion
+        conversion_type:
+          type: string
+          description: 'Type of conversion applied on products
+
+
+            Enum: `"AI_CONVERTER"`
+
+            '
+        date_created:
+          type: string
+          format: date-time
+          description: Import creation date
+        has_error_report:
+          type: boolean
+          description: Returns true if error report is available. Value is filled when the import status is <code>COMPLETE</code>.
+        has_new_product_report:
+          type: boolean
+          description: Returns true if new product report is available. Value is filled when the import status is <code>COMPLETE</code>.
+        has_transformation_error_report:
+          type: boolean
+          description: Returns true if transformation error report is available. Value is filled when the import status is <code>SENT</code> or <code>COMPLETE</code>.
+        has_transformed_file:
+          type: boolean
+          description: Returns true if transformed file is available. Value is filled when the import status is <code>SENT</code> or <code>COMPLETE</code>.
+        import_id:
+          type: integer
+          format: int64
+          description: Import identifier
+        import_status:
+          type: string
+          description: 'Import status
+
+
+            Enum: `"TRANSFORMATION_WAITING"`, `"TRANSFORMATION_RUNNING"`, `"TRANSFORMATION_FAILED"`, `"WAITING"`, `"RUNNING"`, `"SENT"`, `"COMPLETE"`, `"CANCELLED"`, `"FAILED"`
+
+            '
+        integration_details:
+          $ref: '#/components/schemas/P42_Response_200_IntegrationDetails'
+          description: Integration details
+        reason_status:
+          type: string
+          description: A message explaining the reason of the import status, if relevant
+        shop_id:
+          type: integer
+          format: int64
+          description: Shop identifier
+        transform_lines_in_error:
+          type: integer
+          format: int64
+          description: Total count of transformed lines in error
+        transform_lines_in_success:
+          type: integer
+          format: int64
+          description: Total count of transformed lines in success
+        transform_lines_read:
+          type: integer
+          format: int64
+          description: Total count of transformed lines read
+        transform_lines_with_warning:
+          type: integer
+          format: int64
+          description: Total count of transformed lines with warning
+      required:
+      - date_created
+      - has_error_report
+      - has_new_product_report
+      - has_transformed_file
+      - import_id
+      - import_status
+      - shop_id
+      - transform_lines_in_error
+      - transform_lines_in_success
+      - transform_lines_read
+      - transform_lines_with_warning
+    P51_Response_200_ProductImportTrackings_ConversionOptions_AiRewrite:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    PM11_Response_200:
+      type: object
+      description: JSON output
+      properties:
+        attributes:
+          type: array
+          description: List of attributes
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes'
+      required:
+      - attributes
+    P51_Response_200_ProductImportTrackings_ConversionOptions:
+      type: object
+      properties:
+        ai_enrichment:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiEnrichment'
+          description: Enable AI enrichment
+        ai_rewrite:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiRewrite'
+          description: Enable AI rewrite
+        ai_translation:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiTranslation'
+          description: Enable AI translation
+    P41_Request_MultipartFormData_ConversionOptions_AiTranslation:
+      type: object
+      description: Enable AI translation. Default to <code>DISABLED</code>
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    PM11_Response_200_Attributes_DescriptionTranslations:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Locale
+        value:
+          type: string
+          description: Translation
+      required:
+      - locale
+      - value
+    CM11_Response_200_Ext_FileStructure_Errors:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: Channels on which the rejection reason applies
+          items:
+            type: string
+          uniqueItems: true
+        code:
+          type: string
+          description: The Mirakl error code
+        integration_details:
+          type: array
+          description: The details of the integration error
+          items:
+            $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Errors_IntegrationDetails'
+        message:
+          type: string
+          description: The error message
+        rejection_details:
+          $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Errors_RejectionDetails'
+          description: The details of the rejection reason
+      required:
+      - code
+      - message
+    PM11_Response_200_TextCsv_Ext_FileStructure:
+      type: object
+      description: CSV output
+      properties:
+        channels:
+          type: string
+          description: Channels (A list of codes separated by commas)
+        code:
+          type: string
+          description: Attribute code
+        default-value:
+          type: string
+          deprecated: true
+          description: <p>Default value for value list type attributes</p><p>Use the "type_parameters" field for "LIST" attribute types to retrieve the default value.</p>
+        description:
+          type: string
+          description: Attribute description
+        description[xx]:
+          type: string
+          description: The attribute description in a specific language. "xx" is replaced by the language code.
+        example:
+          type: string
+          description: Attribute example to help sellers when they fill the product creation form
+        hierarchy-code:
+          type: string
+          description: The code of the hierarchy (category) this attribute belongs to. If this field is empty, the attribute is shared among all hierarchies.
+        label:
+          type: string
+          description: Attribute label
+        label[xx]:
+          type: string
+          description: The attribute label in a specific language. "xx" is replaced by the language code.
+        locale:
+          type: string
+          description: 'Attribute localization.
+
+
+            The language format can either be:
+
+            - ISO-639 (E.g. "en")
+
+            - ISO-639_ISO-3166 (E.g. "en_US")
+
+            '
+        required:
+          type: boolean
+          deprecated: true
+          description: <p>Whether or not the attribute is required</p><p>This field is deprecated. Use the "requirement_level" field instead.</p>
+        requirement-level:
+          type: string
+          description: 'Requirement level of the attribute
+
+
+            Enum: `"OPTIONAL"`, `"REQUIRED"`, `"RECOMMENDED"`, `"DISABLED"`
+
+            '
+        roles:
+          type: string
+          description: Attribute roles (A list of roles separated by commas)
+        transformations:
+          type: string
+          description: Transformations applied to the attribute (a list of transformations separated by commas)
+        type:
+          type: string
+          description: Attribute type
+        type-parameter:
+          type: string
+          deprecated: true
+          description: <p>Type parameter</p><p>This field is deprecated. Use the "type-parameters" field instead.</p>
+        type-parameters:
+          type: string
+          description: Specificities of the attribute type, for example the date format, or the maximum size of a media (A list of 'name|value' separated by commas)
+        unique-code:
+          type: string
+          description: Unique code of the attribute
+        validations:
+          type: string
+          description: Validations applied to the attribute (a list of validations separated by commas)
+        values:
+          type: string
+          deprecated: true
+          description: A list of authorized values for this attribute
+        values-list:
+          type: string
+          deprecated: true
+          description: <p>This code points to the list defining the authorized values for this attribute.</p><p>This API is deprecated. Use the "type_parameter" field for "LIST" attribute types to retrieve the value list code.</p>
+        variant:
+          type: boolean
+          description: 'Whether or not the attribute is a variation axis. Possible values: <code>true</code> or <code>false</code>'
+      required:
+      - code
+      - description[xx]
+      - label[xx]
+      - required
+      - requirement-level
+      - roles
+      - type
+      - type-parameter
+      - variant
+    P51_Response_200_ProductImportTrackings_IntegrationDetails:
+      type: object
+      properties:
+        invalid_products:
+          type: integer
+          format: int64
+          description: Number of invalid products
+        products_not_accepted_in_time:
+          type: integer
+          format: int64
+          description: Number of products that haven't been accepted in the required time
+        products_not_synchronized_in_time:
+          type: integer
+          format: int64
+          description: Number of products that haven't been synchronized in the required time
+        products_reimported:
+          type: integer
+          format: int64
+          description: Number of products that have been reimported in a more recent file
+        products_successfully_synchronized:
+          type: integer
+          format: int64
+          description: Number of products successfully synchronized on operator system
+        products_with_synchronization_issues:
+          type: integer
+          format: int64
+          description: Number of products having synchronization issues with operator system
+        products_with_wrong_identifiers:
+          type: integer
+          format: int64
+          description: Number of products having wrong identifiers
+        rejected_products:
+          type: integer
+          format: int64
+          description: Number of rejected products by operator system
+    P31_Response_200:
+      type: object
+      properties:
+        products:
+          type: array
+          description: Products
+          items:
+            $ref: '#/components/schemas/P31_Response_200_Products'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count
+      required:
+      - products
+      - total_count
+    P51_Response_200_ProductImportTrackings_ConversionOptions_AiTranslation:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    VL11_Response_200_ValuesLists:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Value list code
+        label:
+          type: string
+          description: Value list label
+        label_translations:
+          type: array
+          description: Value list translations
+          items:
+            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_LabelTranslations'
+        values:
+          type: array
+          description: Value list's of value list
+          items:
+            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_Values'
+      required:
+      - code
+      - label_translations
+    PM11_Response_200_Attributes_Values:
+      type: object
+      deprecated: true
+      properties:
+        code:
+          type: string
+          description: <p>Value code</p><p>This API is deprecated. Use the "type_parameter" field for "LIST" attribute types to retrieve the value list code.</p>
+      required:
+      - code
+    VL11_Response_200_ValuesLists_Values:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Value code
+        label:
+          type: string
+          description: Value label
+        label_translations:
+          type: array
+          description: Value label translation
+          items:
+            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_Values_LabelTranslations'
+      required:
+      - code
+      - label_translations
+    P41_Request_MultipartFormData_ConversionOptions_AiEnrichment:
+      type: object
+      description: Enable AI translation. Default to <code>DISABLED</code>
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    P42_Response_200_ConversionOptions:
+      type: object
+      properties:
+        ai_enrichment:
+          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiEnrichment'
+          description: Enable AI enrichment
+        ai_rewrite:
+          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiRewrite'
+          description: Enable AI rewrite
+        ai_translation:
+          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiTranslation'
+          description: Enable AI translation
+    CM11_Response_200_Ext_FileStructure_Warnings:
+      type: object
+      properties:
+        attribute_code:
+          type: string
+          description: The warning's attribute code
+        code:
+          type: string
+          description: The Mirakl warning code
+        message:
+          type: string
+          description: The warning message
+      required:
+      - code
+      - message
+    VL11_Response_200_ValuesLists_LabelTranslations:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Locale
+        value:
+          type: string
+          description: Translation
+    H11_Response_200_Hierarchies_LabelTranslations:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Locale
+        value:
+          type: string
+          description: Translation
+    P51_Response_200_ProductImportTrackings_ConversionOptions_AiEnrichment:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    P41_Response_201:
+      type: object
+      properties:
+        import_id:
+          type: integer
+          format: int64
+          description: Import identifier
+      required:
+      - import_id
+    CM11_Response_200_Ext_FileStructure_Errors_RejectionDetails:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The operator's message for the rejection reason
+        reason_code:
+          type: string
+          description: The Mirakl code of the rejection reason
+        reason_label:
+          type: string
+          description: '<span>The Mirakl label of the rejection reason </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - reason_code
+      - reason_label
+    P42_Response_200_ConversionOptions_AiEnrichment:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    PM11_Response_200_Attributes_Channels:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Channel code
+      required:
+      - code
+    PM11_Response_200_Attributes_Roles:
+      type: object
+      properties:
+        parameters:
+          type: array
+          description: Attribute role parameters
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes_Roles_Parameters'
+        type:
+          type: string
+          description: Role type of the attribute
+      required:
+      - parameters
+      - type
+    PM11_Response_200_Attributes_LabelTranslations:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Locale
+        value:
+          type: string
+          description: Translation
+      required:
+      - locale
+      - value
+    VL11_Response_200:
+      type: object
+      properties:
+        values_lists:
+          type: array
+          description: List of values list
+          items:
+            $ref: '#/components/schemas/VL11_Response_200_ValuesLists'
+    P42_Response_200_ConversionOptions_AiTranslation:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    CM11_Response_200_Ext_FileStructure_UniqueIdentifiers:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The unique identifier type
+        value:
+          type: string
+          description: The unique identifier value
+      required:
+      - code
+      - value
+    P41_Request_MultipartFormData_ConversionOptions_AiRewrite:
+      type: object
+      description: Enable AI translation. Default to <code>DISABLED</code>
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    PM11_Response_200_Attributes_Roles_Parameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the parameter
+        value:
+          type: string
+          description: Value of the parameter
+      required:
+      - name
+      - value
+    P51_Response_200:
+      type: object
+      properties:
+        product_import_trackings:
+          type: array
+          description: List of product import status information
+          items:
+            $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings'
+        total_count:
+          type: integer
+          format: int32
+          description: Total count of product import status information
+      required:
+      - total_count
+    CM11_Response_200_Ext_FileStructure:
+      type: object
+      description: JSON output
+      properties:
+        errors:
+          type: array
+          description: The acceptance, synchronization and integration errors on the product
+          items:
+            $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Errors'
+        provider_unique_identifier:
+          type: string
+          description: The provider unique identifier
+        status:
+          type: string
+          description: 'The liveness status of the product : LIVE or NOT_LIVE'
+        unique_identifiers:
+          type: array
+          description: The unique identifiers for the product
+          items:
+            $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_UniqueIdentifiers'
+        warnings:
+          type: array
+          description: The errors of the product
+          items:
+            $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Warnings'
+      required:
+      - status
+    PM11_Response_200_Attributes_TypeParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the parameter
+        value:
+          type: string
+          description: Value of the parameter
+      required:
+      - name
+      - value
+    H11_Response_200:
+      type: object
+      properties:
+        hierarchies:
+          type: array
+          description: List of hierarchies
+          items:
+            $ref: '#/components/schemas/H11_Response_200_Hierarchies'
+      required:
+      - hierarchies
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Carriers
+paths:
+  /v1/orders/channels/{channel_id}/carriers:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to share the channel''s allowed list of carriers with Mirakl Connect, and keep it synchronized over time.
+
+
+        **Important:**
+
+        - You must provide the complete list of carriers in a single request, any carriers not included will be deleted
+
+        - If the marketplace allows it, you can add an "Other" carrier to cover unlisted carriers; otherwise, only include formally supported carriers
+
+        - We recommend sharing the full list of carriers: Mirakl Connect automatically maps carriers with slight naming differences
+
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: When the channel''s allowed list of carriers changes</div>
+
+        <div class="max-call-frequency">Maximum usage: 1 / hour</div>
+
+        </div>'
+      operationId: upsertCarriers
+      parameters:
+      - description: Unique identifier of the sales channel
+        explode: false
+        in: path
+        name: channel_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  carriers:
+                  - channel_carrier_id: string
+                    name: string
+            schema:
+              $ref: '#/components/schemas/UpsertCarriersRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 'The channel was not found. This may occur if: - The channel_id does not exist - The channel does not belong to the calling connector''s technology'
+      security:
+      - Bearer:
+        - connect-channel-platform:carrier:upsert
+      summary: upsertCarriers - Upsert carriers
+      tags:
+      - Carriers
+components:
+  schemas:
+    UpsertCarriersRequest:
+      type: object
+      properties:
+        carriers:
+          type: array
+          description: List of carriers available on the channel
+          items:
+            $ref: '#/components/schemas/CarrierRequest'
+          maxItems: 5000
+          minItems: 1
+      required:
+      - carriers
+    ErrorItem:
+      type: object
+      properties:
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
+        message:
+          type: string
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - 'An error occurred while processing your request: id is null'
+      required:
+      - message
+    CarrierRequest:
+      type: object
+      properties:
+        channel_carrier_id:
+          type: string
+          description: Unique identifier of the carrier on the channel
+        name:
+          type: string
+          description: Display name of the carrier
+      required:
+      - channel_carrier_id
+      - name
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        message:
+          type: string
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - An error occurred while processing your request
+      required:
+      - code
+      - message
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

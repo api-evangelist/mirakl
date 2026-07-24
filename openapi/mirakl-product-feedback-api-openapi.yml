@@ -1,0 +1,242 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers Product Feedback API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Product Feedback
+paths:
+  /v1/channel-catalog/{channel_id}/store-catalog-items/{store_id}:
+    parameters:
+    - $ref: '#/components/parameters/channel_id_path'
+    - $ref: '#/components/parameters/store_id_path'
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Updates the store catalog items for a specific channel with the provided product IDs.
+
+
+        **Behavior:**
+
+        - If the specified store does not exist in Mirakl Connect, a 404 error is returned.
+
+        - This is an asynchronous operation - the request is accepted and processed in the background.
+
+        - Products that do not exist in Mirakl Connect are silently ignored (no error returned when the request is accepted).
+
+        - Successfully matched products will be updated regardless of unmatched products in the same request.
+
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: 20 per second</div>
+
+        <div class="max-call-frequency">Maximum usage: 30 per second</div>
+
+        </div>'
+      operationId: updateStoreCatalogItems
+      requestBody:
+        content:
+          application/json; charset=UTF-8:
+            examples:
+              application/json; charset=UTF-8-auto:
+                summary: Complete example with value types (application/json; charset=utf-8)
+                value:
+                  store_catalog_items:
+                  - id: string
+                    diagnostics:
+                    - message: string
+                      channel_diagnostic_id: string
+                      channel_attribute_id: string
+                      connector_override_action: REMOVED
+                    offer_diagnostics:
+                    - message: string
+                      channel_diagnostic_id: string
+                      channel_attribute_id: string
+                      connector_override_action: REMOVED
+                    product_diagnostics:
+                    - message: string
+                      channel_diagnostic_id: string
+                      channel_attribute_id: string
+                      connector_override_action: REMOVED
+                    offer_status: OFFER_ACTIVE
+                    product_status: PRODUCT_DOES_NOT_EXIST
+            schema:
+              $ref: '#/components/schemas/UpdateStoreCatalogItemsRequest'
+        required: true
+      responses:
+        '202':
+          description: 'Request accepted for processing.
+
+
+            The store catalog items update has been queued and will be processed asynchronously.
+
+            Non-existent products will be silently ignored during processing.
+
+            '
+        '400':
+          description: Bad Request - Invalid request format.
+        '404':
+          description: Channel or Store not found in Mirakl Connect.
+      security:
+      - Bearer:
+        - connect-channel-platform:store-catalog-items:update
+      summary: updateStoreCatalogItems - Update Store Catalog Items for a given channel
+      tags:
+      - Product Feedback
+components:
+  parameters:
+    channel_id_path:
+      description: Connect Channel identifier
+      explode: false
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: string
+        examples:
+        - '1234'
+        minLength: 1
+      style: simple
+    store_id_path:
+      deprecated: true
+      description: Store identifier in the channel
+      explode: false
+      in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
+        minLength: 1
+      style: simple
+  schemas:
+    UpdateStoreCatalogItem:
+      type: object
+      properties:
+        diagnostics:
+          type:
+          - array
+          - 'null'
+          deprecated: true
+          description: A list of general diagnostics related to the store catalog item (deprecated use offer_diagnostics instead).
+          items:
+            $ref: '#/components/schemas/Diagnostic'
+          maxItems: 100
+          minItems: 0
+        id:
+          type: string
+          description: The item identifier of the store catalog item.
+        offer_diagnostics:
+          type:
+          - array
+          - 'null'
+          description: A list of diagnostics related to the offer status of the store catalog item, this list should reflect all the current active diagnostics. Use an empty list to clear all the diagnostics.
+          items:
+            $ref: '#/components/schemas/Diagnostic'
+          maxItems: 100
+          minItems: 0
+        offer_status:
+          type: string
+          description: 'The status of the offer in the channel. Possible values are:
+
+            - <b>OFFER_ACTIVE</b>: The offer is active and visible in the channel.
+
+            Only price, stock and offer specific information updates will be sent from now on.
+
+            (no product or offer creation will be sent from connect once an offer is declared as active).
+
+            - <b>OFFER_DOES_NOT_EXIST</b>: The offer is not found in the channel.
+
+            An offer creation attempt will be sent.
+
+            - <b>ACTION_REQUIRED</b>: The offer requires an action, such as updates or fixes, before it can be active.
+
+            An offer creation will be retried after the action.
+
+
+
+            Enum: `"OFFER_ACTIVE"`, `"OFFER_DOES_NOT_EXIST"`, `"ACTION_REQUIRED"`
+
+            '
+        product_diagnostics:
+          type:
+          - array
+          - 'null'
+          description: A list of diagnostics related to the product status of the store catalog item, this list should reflect all the current active diagnostics. Use an empty list to clear all the diagnostics.
+          items:
+            $ref: '#/components/schemas/Diagnostic'
+          maxItems: 100
+          minItems: 0
+        product_status:
+          type: string
+          description: 'The status of the product in the channel. Possible values are:
+
+            - <b>PRODUCT_DOES_NOT_EXIST</b>: The product is not found in the channel.
+
+            - <b>PRODUCT_PENDING_APPROVAL</b>: The product has been submitted and is waiting for approval in the channel.
+
+            - <b>PRODUCT_REFUSED</b>: The product was reviewed but rejected by the channel.
+
+            - <b>PRODUCT_CREATED</b>: The product exists and has been successfully created in the channel.
+
+            - <b>ACTION_REQUIRED</b>: The product requires an action, such as updates or fixes, before it can proceed.
+
+
+
+            Enum: `"PRODUCT_DOES_NOT_EXIST"`, `"PRODUCT_PENDING_APPROVAL"`, `"PRODUCT_REFUSED"`, `"PRODUCT_CREATED"`, `"ACTION_REQUIRED"`
+
+            '
+      required:
+      - id
+    UpdateStoreCatalogItemsRequest:
+      type: object
+      properties:
+        store_catalog_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateStoreCatalogItem'
+          maxItems: 10000
+          minItems: 1
+      required:
+      - store_catalog_items
+    Diagnostic:
+      type: object
+      description: Represents a diagnostic message related to a catalog item.
+      properties:
+        channel_attribute_id:
+          type:
+          - string
+          - 'null'
+          description: The identifier of the channel attribute related to the diagnostic.
+        channel_diagnostic_id:
+          type:
+          - string
+          - 'null'
+          description: The diagnostic identifier in the channel.
+        connector_override_action:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          description: 'Enum: `"REMOVED"`, `null`
+
+            '
+        message:
+          type: string
+          description: The diagnostic message.
+      required:
+      - message
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

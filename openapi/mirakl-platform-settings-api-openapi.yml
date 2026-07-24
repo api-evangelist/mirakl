@@ -1,0 +1,2859 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers Platform Settings API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Platform Settings
+paths:
+  /api/additional_fields:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/config_custom_fields/config_custom_fields.html">More context</a></li></ul><div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: AF01
+      parameters:
+      - description: 'A comma separated list of entities on which the additional fields must apply. Accepted values are <code>OFFER</code>, <code>SHOP</code>, <code>ORDER</code> and <code>ORDER_LINE</code>. Ex: <code>OFFER,SHOP</code>.'
+        explode: true
+        in: query
+        name: entities
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    additional_fields:
+                    - code: ecotax
+                      description: The amount of the price to be collected as Eco tax.
+                      entity: OFFER
+                      label: Eco tax
+                      required: false
+                      type: NUMERIC
+                    - code: gift-message
+                      description: Message to send with the order.
+                      entity: ORDER_LINE
+                      label: Gift Message
+                      required: false
+                      shop_permission: READ_WRITE
+                      type: STRING
+                    - channels:
+                      - US
+                      - FR
+                      code: customer-care-phone
+                      description: Phone number to contact customer care service.
+                      entity: SHOP
+                      label: Customer care phone number
+                      models:
+                      - MARKETPLACE
+                      required: false
+                      shop_permission: READ_WRITE
+                      type: STRING
+                    - accepted_values:
+                      - Opt-In
+                      - Headhunted
+                      - Contact-Form
+                      code: recruitment
+                      description: How the shop has been recruited on the platform.
+                      entity: SHOP
+                      label: Recruitment Method
+                      required: false
+                      shop_permission: READ_WRITE
+                      type: LIST
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    additional_fields:
+                    - accepted_values:
+                      - string
+                      channels:
+                      - string
+                      code: string
+                      default_value: string
+                      description: string
+                      entity: SHOP
+                      label: string
+                      models:
+                      - MARKETPLACE
+                      regex: string
+                      required: true
+                      shop_permission: INVISIBLE
+                      type: STRING
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/AF01_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: AF01 - List all custom fields
+      tags:
+      - Platform Settings
+  /api/channels:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Results are sorted by code
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        <div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: CH11
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    channels:
+                    - code: BFR
+                      description: Black Friday
+                      label: Black Friday
+                    - code: CA
+                      description: Website CA
+                      label: Website CA
+                    - code: CHR
+                      description: Christmas
+                      label: Christmas
+                    - code: FR
+                      description: Website FR
+                      label: Website FR
+                    - code: US
+                      description: Website US
+                      label: Website US
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    channels:
+                    - code: string
+                      description: string
+                      label: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/CH11_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: CH11 - List all enabled channels
+      tags:
+      - Platform Settings
+  /api/currencies:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        List currency codes and labels activated on the platform
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        <div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: CUR01
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    currencies:
+                    - code: EUR
+                      label: Euro
+                      platform_default: true
+                    - code: JPY
+                      label: Japanese Yen
+                    - code: USD
+                      label: US Dollar
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    currencies:
+                    - code: string
+                      label: string
+                      platform_default: true
+              schema:
+                type: object
+                $ref: '#/components/schemas/CUR01_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: CUR01 - List currency codes and labels
+      tags:
+      - Platform Settings
+  /api/documents:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/display_order_documents_on_front.html">More context</a></li></ul><div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: DO01
+      parameters:
+      - description: 'A comma separated list of values, representing the type of entities the document type should be related to. Accepted values are <code>ORDER</code>, <code>SHOP</code>. Ex: <code>ORDER,SHOP</code>'
+        explode: true
+        in: query
+        name: entities
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    documents:
+                    - code: SYSTEM_DELIVERY_BILL
+                      description: Delivery slip
+                      entity: ORDER
+                      label: Delivery slip
+                    - code: CUSTOMER_INVOICE
+                      description: Invoice
+                      entity: ORDER
+                      label: Invoice
+                    - code: LEGAL_DOC
+                      description: Legal documents
+                      entity: SHOP
+                      label: Legal documents
+                      models:
+                      - MARKETPLACE
+                    - code: ID_CARD
+                      description: General Manager ID card
+                      entity: SHOP
+                      label: General Manager ID card
+                      models:
+                      - MARKETPLACE
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    documents:
+                    - code: string
+                      description: string
+                      entity: ORDER
+                      label: string
+                      mime_types:
+                      - string
+                      models:
+                      - MARKETPLACE
+              schema:
+                type: object
+                $ref: '#/components/schemas/DO01_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: DO01 - List all document types
+      tags:
+      - Platform Settings
+  /api/locales:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        List locale codes and labels from your platform to automate product format exports (API H01, PM01, VL01) from your PIM system
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        </div>'
+      operationId: L01
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    locales:
+                    - code: de_DE
+                      label: Deutsch
+                    - code: en_US
+                      label: English - US
+                      platform_default: true
+                    - code: es_ES
+                      label: Español
+                    - code: fr_FR
+                      label: Français
+                    - code: it_IT
+                      label: Italiano
+                    - code: nl_NL
+                      label: Nederlands
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    locales:
+                    - code: string
+                      label: string
+                      platform_default: true
+              schema:
+                type: object
+                $ref: '#/components/schemas/L01_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: L01 - List locale codes and labels
+      tags:
+      - Platform Settings
+  /api/platform/configuration:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        List platform configurations such as general information, modules and features activated.<br/>
+
+        <br/>
+
+        Note: This configuration represents modules and major features enabled during platform setup. This differs from the PC02 API which export the platform business settings configurable by the operator in the back office.
+
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: PC01
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    features:
+                      catalog:
+                        allow_shop_contribution_to_all_channels: true
+                        exclude_invalid_products: true
+                        list_of_multiple_values_separator: '|'
+                        product_acceptance_by_channel: true
+                        product_data_validation_by_channel: true
+                        product_import_only_on_leaf: true
+                      circular_economy_data_collection: false
+                      competitive_pricing_tool: false
+                      direct_payment_customer_store:
+                        activated: false
+                        refund_cancel_authorized: false
+                      disable_seller_alternative_carrier: false
+                      lead_time_to_ship_by_sellers_enabled: 'YES'
+                      multi_currency: true
+                      no_reply_needed: true
+                      offer_prices_decimals: '2'
+                      operator_csv_delimiter: SEMICOLON
+                      order_conditions:
+                        lead_time_to_ship: true
+                        maximum_order_quantity: false
+                        minimum_order_quantity: false
+                        package_order_quantity: false
+                      order_tax_mode: TAX_EXCLUDED
+                      order_workflows:
+                        no_customer_payment_confirmation: true
+                        order_acceptance: NOT_AUTOMATIC
+                        pause_debit_workflow: false
+                        pay_on_due_date: true
+                        pay_on_shipment: true
+                        sellers_edit_shipping_origin: false
+                        shipping_and_billing_details_before_acceptance: false
+                      pricing:
+                        channel_pricing: DISABLED
+                        scheduled_pricing: false
+                        volume_discount: true
+                        volume_pricing: false
+                      product_data_validation_by_channel: true
+                      shipment:
+                        multi_part_item_shipment: true
+                        multi_shipment: true
+                      shop_tax_options:
+                        local_tax_number:
+                          mandatory: true
+                          validation_regex: regex_local_tax_number
+                        tax_identification_number:
+                          mandatory: true
+                          validation_regex: regex_tax_identification_number
+                      tax_collection:
+                        activated: 'NO'
+                        product_tax_code_mandatory: true
+                        tax_collection_by_operator: false
+                      tax_id_number:
+                        mandatory: false
+                      warehouses:
+                        geolocation: true
+                        restricted_countries:
+                        - FRA
+                        - USA
+                    modules:
+                      mirakl_catalog_integrator: true
+                      mirakl_catalog_manager: false
+                      mirakl_catalog_transformer: true
+                      mirakl_platform_services: false
+                      offer_management: true
+                      order_management: true
+                      promotions: true
+                      quotes: true
+                      tax_manager:
+                        activated: false
+                        tax_provider:
+                          avalara: false
+                          vertex: false
+                    platform_configuration:
+                      customer_model:
+                        b2b: false
+                        b2c: true
+                      platform_model:
+                        drop_ship: true
+                        marketplace: true
+                        one_creditor: true
+                    platform_name: ''
+                    tenant_name: tenantname-prod
+                    timezone: Europe/Paris
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    features:
+                      catalog:
+                        allow_shop_contribution_to_all_channels: true
+                        exclude_invalid_products: true
+                        list_of_multiple_values_separator: string
+                        product_acceptance_by_channel: true
+                        product_data_validation_by_channel: true
+                        product_import_only_on_leaf: true
+                      circular_economy_data_collection: true
+                      competitive_pricing_tool: true
+                      direct_payment_customer_store:
+                        activated: true
+                        refund_cancel_authorized: true
+                      disable_seller_alternative_carrier: true
+                      dropship:
+                        retail_pricing_edition_enabled: 'YES'
+                        retail_pricing_enabled: true
+                      kyc_status_per_seller: true
+                      lead_time_to_ship_by_sellers_enabled: 'YES'
+                      multi_currency: true
+                      multi_payout_psp_per_seller: true
+                      no_reply_needed: true
+                      offer_prices_decimals: string
+                      operator_csv_delimiter: COMMA
+                      order_conditions:
+                        lead_time_to_ship: true
+                        maximum_order_quantity: true
+                        minimum_order_quantity: true
+                        package_order_quantity: true
+                      order_tax_mode: TAX_INCLUDED
+                      order_workflows:
+                        no_customer_payment_confirmation: true
+                        order_acceptance: AUTOMATIC
+                        pause_debit_workflow: true
+                        pay_on_due_date: true
+                        pay_on_shipment: true
+                        sellers_edit_shipping_origin: true
+                        shipping_and_billing_details_before_acceptance: true
+                      payment_confirmation: true
+                      pricing:
+                        channel_pricing: MULTI
+                        discount_period_required: true
+                        discount_price_creation_in_the_past_blocked: true
+                        scheduled_pricing: true
+                        volume_discount: true
+                        volume_pricing: true
+                      product_data_validation_by_channel: true
+                      promotion:
+                        cart_promotion_campaign: true
+                        discount_campaign: true
+                        seller_promotion: true
+                      returns:
+                        drop_ship: true
+                        marketplace: true
+                        one_creditor: true
+                      shipment:
+                        multi_part_item_shipment: true
+                        multi_shipment: true
+                      shop_tax_options:
+                        local_tax_number:
+                          mandatory: true
+                          validation_regex: string
+                        tax_identification_number:
+                          mandatory: true
+                          validation_regex: string
+                      tax_collection:
+                        activated: 'YES'
+                        product_tax_code_mandatory: true
+                        tax_collection_by_operator: true
+                      tax_id_number:
+                        mandatory: true
+                        validation_regex: string
+                      warehouses:
+                        geolocation: true
+                        restricted_countries:
+                        - AFG
+                    modules:
+                      mirakl_catalog_integrator: true
+                      mirakl_catalog_manager: true
+                      mirakl_catalog_transformer: true
+                      mirakl_platform_services: true
+                      offer_management: true
+                      offer_management_mode: string
+                      order_management: true
+                      order_management_mode: string
+                      promotions: true
+                      quotes: true
+                      tax_manager:
+                        activated: true
+                        tax_provider:
+                          avalara: true
+                          vertex: true
+                    platform_configuration:
+                      customer_model:
+                        b2b: true
+                        b2c: true
+                      enhanced_seller_invoicing:
+                        enabled: true
+                      platform_model:
+                        drop_ship: true
+                        marketplace: true
+                        one_creditor: true
+                    platform_name: string
+                    tenant_name: string
+                    timezone: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/PC01_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: PC01 - List platform configurations
+      tags:
+      - Platform Settings
+  /api/version:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this endpoint to check that Mirakl Platform is up.<br/>You can ignore the response body that is subject to change, checking the response code is enough.
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: V01
+      parameters:
+      - description: Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used.
+        explode: true
+        in: query
+        name: shop_id
+        required: false
+        schema:
+          type: integer
+          format: int64
+        style: form
+      responses:
+        '200':
+          description: OK
+      summary: V01 - Health Check endpoint
+      tags:
+      - Platform Settings
+  /api/offers/states:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Sorted by sort index, set in the back-office
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        <div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: OF61
+      parameters:
+      - description: Filter offer condition on their active status. If true, only active offer conditions are returned. If false, only inactive offer conditions are returned. If not specified, all offer conditions are returned.
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    offer_states:
+                    - active: false
+                      code: '8'
+                      label: Collectors - Acceptable Condition
+                    - active: true
+                      code: '10'
+                      label: Refurbished
+                    total_count: 2
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    offer_states:
+                    - active: true
+                      code: string
+                      label: string
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/OF61_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: OF61 - List offer conditions
+      tags:
+      - Platform Settings
+  /api/reasons:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        This API returns cancellation, refund, incident, and message reasons.<br>Reasons are sorted by type then sort index (set in the back-office)
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Each time a page must display a list of reasons</div>
+
+        <div class="max-call-frequency">Maximum usage: Each time a page must display a list of reasons</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/display_order_details_and_features.html">More context</a></li></ul><div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: RE01
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    reasons:
+                    - code: '1'
+                      is_customer_right: true
+                      is_operator_right: true
+                      is_shop_right: false
+                      label: Item not received
+                      type: INCIDENT_OPEN
+                    - code: '10'
+                      is_customer_right: true
+                      is_operator_right: true
+                      is_shop_right: false
+                      label: Replacement item received
+                      type: INCIDENT_CLOSE
+                    - code: '15'
+                      is_customer_right: false
+                      is_operator_right: true
+                      is_shop_right: true
+                      label: Out of stock
+                      type: REFUND
+                    - code: '26'
+                      is_customer_right: true
+                      is_operator_right: true
+                      is_shop_right: true
+                      label: Other question
+                      type: ORDER_MESSAGING
+                    - code: '33'
+                      is_customer_right: true
+                      is_operator_right: false
+                      is_shop_right: true
+                      label: Other question
+                      type: OFFER_MESSAGING
+                    - code: '34'
+                      is_customer_right: true
+                      is_operator_right: true
+                      is_shop_right: true
+                      label: Cancelled by the client prior to shipping
+                      type: CANCELATION
+                    - code: MMP_SELLER_MESSAGING_ONBOARDING
+                      is_customer_right: false
+                      is_operator_right: true
+                      is_shop_right: true
+                      label: Onboarding
+                      type: MMP_SELLER_MESSAGING
+                    - code: MPS_SELLER_MESSAGING_ONBOARDING
+                      is_customer_right: false
+                      is_operator_right: true
+                      is_shop_right: true
+                      label: Onboarding
+                      type: MPS_SELLER_MESSAGING
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    reasons:
+                    - code: string
+                      is_customer_right: true
+                      is_operator_right: true
+                      is_shop_right: true
+                      label: string
+                      type: INCIDENT_OPEN
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/RE01_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: RE01 - List reasons
+      tags:
+      - Platform Settings
+  /api/reasons/{reason_type}:
+    get:
+      deprecated: true
+      description: '<div class="extension-title">Deprecated endpoint</div>
+
+
+        This API is going to be removed in future update. Consider using RE01.
+
+
+        <div class="extension-title">Description</div>
+
+
+        This API returns cancellation, refund, incident, and message reasons.<br>Reasons are sorted by sort index (set in the back-office)
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Each time a page must display a list of reasons</div>
+
+        <div class="max-call-frequency">Maximum usage: Each time a page must display a list of reasons</div>
+
+        <div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: RE02
+      parameters:
+      - description: Reason type
+        explode: false
+        in: path
+        name: reason_type
+        required: true
+        schema:
+          type: string
+          enum:
+          - INCIDENT_OPEN
+          - MPS_INCIDENT_OPEN
+          - INCIDENT_CLOSE
+          - MPS_INCIDENT_CLOSE
+          - REFUND
+          - MPS_REFUND
+          - MESSAGING
+          - ORDER_MESSAGING
+          - MPS_ORDER_MESSAGING
+          - MPS_OFFER_MESSAGING
+          - CANCELATION
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    reasons:
+                    - code: '14'
+                      label: No response from the shop
+                    - code: '15'
+                      label: Out of stock
+                    - code: '16'
+                      label: Cancelled by the client prior to shipping
+                    - code: '17'
+                      label: Item returned
+                    - code: '18'
+                      label: Item not received
+                    - code: '19'
+                      label: Agreement found with the vendor
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    reasons:
+                    - code: string
+                      label: string
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/RE02_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: RE02 - List reasons by type
+      tags:
+      - Platform Settings
+      x-badges:
+      - color: noIntegrationBadge
+        name: ⚠️ No Integration Allowed ⚠️
+        position: after
+  /api/reasons/incident_open:
+    get:
+      deprecated: true
+      description: '<div class="extension-title">Deprecated endpoint</div>
+
+
+        This API is going to be removed in future update, use RE02 with parameter <code>reason_type=''INCIDENT_OPEN''</code>
+
+
+        <div class="extension-title">Description</div>
+
+
+        Note: Result returns only reasons where the user''s role have the right <br>Note: Reasons are sorted by sort index, set in the back-office
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once on incident creation page view</div>
+
+        <div class="max-call-frequency">Maximum usage: Once on incident creation page view</div>
+
+        </div>'
+      operationId: RE11
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    reasons:
+                    - code: '1'
+                      label: Item not received
+                    - code: '2'
+                      label: Item not as ordered
+                    - code: '3'
+                      label: Defective item
+                    - code: '4'
+                      label: Right to retract order
+                    - code: '5'
+                      label: Counterfeit item
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    reasons:
+                    - code: string
+                      label: string
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/RE11_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: 'RE11 - List of reasons with type: incident open'
+      tags:
+      - Platform Settings
+      x-badges:
+      - color: noIntegrationBadge
+        name: ⚠️ No Integration Allowed ⚠️
+        position: after
+  /api/reasons/incident_close:
+    get:
+      deprecated: true
+      description: '<div class="extension-title">Deprecated endpoint</div>
+
+
+        This API is going to be removed in future update, use RE02 with parameter <code>reason_type=''INCIDENT_CLOSE''</code>
+
+
+        <div class="extension-title">Description</div>
+
+
+        Note: Result returns only reasons where the user''s role have the right <br>Note: Reasons are sorted by sort index, set in the back-office
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once on incident closing page view</div>
+
+        <div class="max-call-frequency">Maximum usage: Once on incident closing page view</div>
+
+        </div>'
+      operationId: RE12
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    reasons:
+                    - code: '8'
+                      label: I finally received my order
+                    - code: '9'
+                      label: Item fit the description after all
+                    - code: '10'
+                      label: Replacement item received
+                    - code: '11'
+                      label: Agreement made with the vendor
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    reasons:
+                    - code: string
+                      label: string
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/RE12_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: 'RE12 - List of reasons with type: incident close'
+      tags:
+      - Platform Settings
+      x-badges:
+      - color: noIntegrationBadge
+        name: ⚠️ No Integration Allowed ⚠️
+        position: after
+  /api/reasons/messaging:
+    get:
+      deprecated: true
+      description: '<div class="extension-title">Deprecated endpoint</div>
+
+
+        This API is going to be removed in future update, use RE02 with parameter <code>reason_type=''MESSAGING''</code>
+
+
+        <div class="extension-title">Description</div>
+
+
+        Note: Result returns only reasons where the user''s role have the right <br>Note: Reasons are sorted by sort index, set in the back-office
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once on message creation page view</div>
+
+        <div class="max-call-frequency">Maximum usage: Once on message creation page view</div>
+
+        </div>'
+      operationId: RE14
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    reasons:
+                    - code: '20'
+                      label: Question about delivery
+                    - code: '21'
+                      label: Cancel the order
+                    - code: '22'
+                      label: Issue with item received
+                    - code: '23'
+                      label: Item not received
+                    - code: '24'
+                      label: Request an invoice
+                    - code: '25'
+                      label: Information on the product
+                    - code: '26'
+                      label: Other question
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    reasons:
+                    - code: string
+                      label: string
+                    total_count: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/RE14_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: 'RE14 - List of reasons with type: messaging'
+      tags:
+      - Platform Settings
+      x-badges:
+      - color: noIntegrationBadge
+        name: ⚠️ No Integration Allowed ⚠️
+        position: after
+  /api/shipping/zones:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Results are sorted by index, set in the back-office
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        <div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: SH11
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    shipping_zones:
+                    - code: DOM1
+                      description: Domestic 1
+                      label: Domestic 1
+                    - code: DOM2
+                      description: Domestic 2
+                      label: Domestic 2
+                    - code: INT1
+                      description: International 1
+                      label: International 1
+                    - code: INT2
+                      description: International 2
+                      label: International 2
+                    - code: INT3
+                      description: International 3
+                      label: International 3
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    shipping_zones:
+                    - code: string
+                      description: string
+                      label: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SH11_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: SH11 - List all active shipping zones
+      tags:
+      - Platform Settings
+  /api/shipping/types:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Results are sorted by index, set in the back-office
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        <div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: SH12
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    shipping_types:
+                    - click_and_collect: false
+                      code: STD
+                      delivery_by_operator: false
+                      description: Standard Delivery (3-5 days)
+                      ignore_lead_time_to_ship: true
+                      label: Standard
+                      mandatory_tracking: true
+                      standard_code: CU_ADD-STD
+                    - click_and_collect: false
+                      code: EXP
+                      delivery_by_operator: false
+                      description: Express Delivery (1-2 days)
+                      label: Express
+                      mandatory_tracking: true
+                      standard_code: CU_ADD-EXP
+                    - click_and_collect: false
+                      code: NEX
+                      delivery_by_operator: true
+                      description: Next day delivery (ordered before 5 pm)
+                      label: Next day delivery
+                      mandatory_tracking: true
+                      standard_code: CU_ADD-NEXT_DAY
+                    - click_and_collect: true
+                      code: CLC
+                      delivery_by_operator: false
+                      description: Collect In Store
+                      label: Click & collect
+                      mandatory_tracking: false
+                      standard_code: CLC_OPERATOR-STD
+                    - click_and_collect: false
+                      code: PIP
+                      delivery_by_operator: false
+                      description: Pickup Point
+                      label: Pickup Point
+                      mandatory_tracking: false
+                      standard_code: PICK_UP_POINT-STD
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    shipping_types:
+                    - click_and_collect: true
+                      code: string
+                      delivery_by_operator: true
+                      description: string
+                      ignore_lead_time_to_ship: true
+                      label: string
+                      mandatory_tracking: true
+                      standard_code: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SH12_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: SH12 -  List all active shipping methods
+      tags:
+      - Platform Settings
+  /api/shipping/carriers:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Results are sorted alphabetically by carrier label
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        </div>'
+      operationId: SH21
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    carriers:
+                    - code: FED
+                      label: Fed Ex
+                      standard_code: FED
+                      tracking_url: http://www.fedex.com/Tracking?action=track&tracknumbers={trackingId}
+                    - code: UPS
+                      label: UPS
+                      standard_code: UPS
+                      tracking_url: https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={trackingId}
+                    - code: DHL
+                      label: DHL
+                      standard_code: DHL
+                      tracking_url: http://www.dhl.co.uk/en/express/tracking.html?AWB={trackingId}&brand=DHL
+                    - code: DPD
+                      label: DPD
+                      standard_code: DPD
+                      tracking_url: http://www.dpd.co.uk/apps/tracking/?parcel={trackingId}
+                    - code: TNT
+                      label: TNT
+                      standard_code: TNT
+                      tracking_url: http://www.tnt.com/webtracker/tracking.do?navigation=1&searchType=CON&respLang=en&genericSiteIdent=.&cons={trackingId}
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    carriers:
+                    - code: string
+                      label: string
+                      standard_code: string
+                      tracking_url: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SH21_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: SH21 - List all carriers
+      tags:
+      - Platform Settings
+  /api/shipping/logistic_classes:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Results are sorted by index, set in the back-office
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per day</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per day</div>
+
+        <div class="extension-title">Localization</div>
+
+
+        <p>This resource supports <code>locale</code> parameter (<a href="#section/Locale">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class="flag"></span></p></div>'
+      operationId: SH31
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    logistic_classes:
+                    - code: S
+                      description: Small
+                      label: Small
+                    - code: M
+                      description: Medium
+                      label: Medium
+                    - code: L
+                      description: Large
+                      label: Large
+                    - code: OV1
+                      description: Oversize 1
+                      label: Oversize 1
+                    - code: OV2
+                      description: Oversize 2
+                      label: Oversize 2
+                    - code: FREE
+                      description: Free Shipping
+                      label: Free Shipping
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    logistic_classes:
+                    - code: string
+                      description: string
+                      label: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SH31_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: SH31 - List all logistic classes
+      tags:
+      - Platform Settings
+  /api/shipping/configuration/shop:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Every week</div>
+
+        <div class="max-call-frequency">Maximum usage: Every hour</div>
+
+        </div>'
+      operationId: SH42
+      parameters:
+      - description: Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used.
+        explode: true
+        in: query
+        name: shop_id
+        required: false
+        schema:
+          type: integer
+          format: int64
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    delivery_times:
+                    - delivery_time:
+                        earliest_days: 1
+                        latest_days: 2
+                      set_by: SHOP
+                      shipping_type_code: NEX
+                      shipping_zone_code: DOM1
+                    - delivery_time:
+                        earliest_days: 2
+                        latest_days: 4
+                      set_by: OPERATOR
+                      shipping_type_code: STD
+                      shipping_zone_code: DOM1
+                    last_updated_date: '2026-02-24T17:09:09.920Z'
+                    lead_time_to_ship:
+                      default_value: 3
+                      shop_value: 1
+                    order_cut_off_times:
+                    - cut_off_time: 07:30:00Z
+                      set_by: SHOP
+                      shipping_type_code: NEX
+                    - cut_off_time: 02:00:00Z
+                      set_by: OPERATOR
+                      shipping_type_code: STD
+                    order_free_shipping: false
+                    shop_id: '3'
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    delivery_times:
+                    - delivery_time:
+                        earliest_days: 0
+                        latest_days: 0
+                      set_by: OPERATOR
+                      shipping_type_code: string
+                      shipping_zone_code: string
+                    last_updated_date: '2023-03-28T09:34:42Z'
+                    lead_time_to_ship:
+                      default_value: 0
+                      shop_value: 0
+                    order_cut_off_times:
+                    - cut_off_time: string
+                      is_required: true
+                      set_by: OPERATOR
+                      shipping_type_code: string
+                    order_free_shipping: true
+                    shipping_paid_by_operator: true
+                    shop_id: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SH42_Response_200'
+          description: OK
+      security:
+      - Shop-API-Key:
+        - ROLE_SHOP_ADMIN
+      summary: SH42 - Get shop shipping configuration
+      tags:
+      - Platform Settings
+  /api/shipping/charges/shop:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Get shipping charges and their configuration
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Every week</div>
+
+        <div class="max-call-frequency">Maximum usage: Every hour</div>
+
+        </div>'
+      operationId: SH52
+      parameters:
+      - description: Retrieve only the shipping charge configurations customized by the seller
+        explode: true
+        in: query
+        name: overridden_by_shop
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used.
+        explode: true
+        in: query
+        name: shop_id
+        required: false
+        schema:
+          type: integer
+          format: int64
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    configuration:
+                    - logistic_class_code: S
+                      overridden_by_shop: true
+                      prices:
+                        additional_price: 2
+                        free_shipping_threshold: null
+                        initial_price: 3
+                        type: FIXED_PRICE
+                      shipping_method_code: STD
+                      shipping_zone_code: DOM1
+                    - logistic_class_code: M
+                      overridden_by_shop: true
+                      prices:
+                        ranges:
+                        - price: 5
+                          threshold: 0
+                        - price: 7
+                          threshold: 50
+                        - price: 8
+                          threshold: 100
+                        type: ORDER_RANGE
+                      shipping_method_code: STD
+                      shipping_zone_code: DOM1
+                    - logistic_class_code: L
+                      overridden_by_shop: true
+                      prices:
+                        type: FREE_SHIPPING
+                      shipping_method_code: STD
+                      shipping_zone_code: DOM1
+                    currency_iso_code: EUR
+                    last_updated_date: '2022-03-03T08:52:10Z'
+                    shop_id: 123
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    configuration:
+                    - logistic_class_code: string
+                      overridden_by_shop: true
+                      prices:
+                        additional_price: 0
+                        free_shipping_threshold: 0
+                        initial_price: 0
+                        ranges:
+                        - price: 0
+                          threshold: 0
+                        type: FIXED_PRICE
+                      shipping_method_code: string
+                      shipping_zone_code: string
+                    currency_iso_code: AED
+                    last_updated_date: '2023-03-28T09:34:42Z'
+                    shop_id: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/SH52_Response_200'
+          description: OK
+      security:
+      - Shop-API-Key:
+        - ROLE_SHOP_ADMIN
+      summary: SH52 - Get shipping charges configured for a shop account
+      tags:
+      - Platform Settings
+components:
+  schemas:
+    SH21_Response_200:
+      type: object
+      properties:
+        carriers:
+          type: array
+          description: List of carriers
+          items:
+            $ref: '#/components/schemas/SH21_Response_200_Carriers'
+      required:
+      - carriers
+    PC01_Response_200_PlatformConfiguration_EnhancedSellerInvoicing:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Enhanced seller invoicing activated.
+      required:
+      - enabled
+    SH42_Response_200_DeliveryTimes:
+      type: object
+      description: Delivery time entry for a shipping type and zone
+      properties:
+        delivery_time:
+          $ref: '#/components/schemas/SH42_Response_200_DeliveryTimes_DeliveryTime'
+          description: Delivery time range in days
+        set_by:
+          type: string
+          description: 'Whether the delivery time was set by the shop or the operator
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`
+
+            '
+        shipping_type_code:
+          type: string
+          description: Shipping type code
+        shipping_zone_code:
+          type: string
+          description: Shipping zone code
+      required:
+      - set_by
+      - shipping_type_code
+      - shipping_zone_code
+    CH11_Response_200:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: List of channels
+          items:
+            $ref: '#/components/schemas/CH11_Response_200_Channels'
+    RE02_Response_200:
+      type: object
+      properties:
+        reasons:
+          type: array
+          description: List of reasons
+          items:
+            $ref: '#/components/schemas/RE02_Response_200_Reasons'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count of elements returned by the query (No pagination)
+      required:
+      - reasons
+      - total_count
+    RE14_Response_200_Reasons:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Reason code
+        label:
+          type: string
+          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - label
+    PC01_Response_200_Features_TaxIdNumber:
+      type: object
+      properties:
+        mandatory:
+          type: boolean
+          description: Tax ID number mandatory
+        validation_regex:
+          type: string
+          description: Regular expression to match for sellers tax number ID
+      required:
+      - mandatory
+    SH52_Response_200_Configuration:
+      type: object
+      properties:
+        logistic_class_code:
+          type: string
+          description: The logistic class code.
+        overridden_by_shop:
+          type: boolean
+          description: Indicates whether the shop provided a custom configuration or not.
+        prices:
+          $ref: '#/components/schemas/SH52_Response_200_Configuration_Prices'
+          description: The details of the prices applying on the shipping charge.
+        shipping_method_code:
+          type: string
+          description: The shipping method code.
+        shipping_zone_code:
+          type: string
+          description: The shipping zone code.
+      required:
+      - logistic_class_code
+      - overridden_by_shop
+      - prices
+      - shipping_method_code
+      - shipping_zone_code
+    CH11_Response_200_Channels:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Channel code
+        description:
+          type: string
+          description: Channel description
+        label:
+          type: string
+          description: '<span>Channel label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - description
+      - label
+    PC01_Response_200_PlatformConfiguration_CustomerModel:
+      type: object
+      properties:
+        b2b:
+          type: boolean
+          description: 'Customer model Business to Business is enabled: if true, customers can be linked to a customer organization'
+        b2c:
+          type: boolean
+          description: 'Customer model Business to Customer is enabled: if true, customers can be created without being linked to a customer organization'
+      required:
+      - b2b
+      - b2c
+    OF61_Response_200:
+      type: object
+      properties:
+        offer_states:
+          type: array
+          description: Offer conditions
+          items:
+            $ref: '#/components/schemas/OF61_Response_200_OfferStates'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count (no pagination)
+      required:
+      - offer_states
+      - total_count
+    L01_Response_200:
+      type: object
+      properties:
+        locales:
+          type: array
+          description: List of locales
+          items:
+            $ref: '#/components/schemas/L01_Response_200_Locales'
+      required:
+      - locales
+    PC01_Response_200_Modules_TaxManager:
+      type: object
+      deprecated: true
+      properties:
+        activated:
+          type: boolean
+          description: Tax Manager activated
+        tax_provider:
+          $ref: '#/components/schemas/PC01_Response_200_Modules_TaxManager_TaxProvider'
+          description: The tax provider processing tax estimation
+      required:
+      - activated
+      - tax_provider
+    SH42_Response_200_LeadTimeToShip:
+      type: object
+      description: Lead time to ship configuration
+      properties:
+        default_value:
+          type: integer
+          format: int32
+          description: Platform default lead time to ship in days
+        shop_value:
+          type: integer
+          format: int32
+          description: Shop-specific lead time to ship in days
+      required:
+      - default_value
+      - shop_value
+    SH11_Response_200_ShippingZones:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Shipping zone code
+        description:
+          type: string
+          description: Shipping zone description
+        label:
+          type: string
+          description: '<span>Shipping zone label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - description
+      - label
+    SH52_Response_200_Configuration_Prices:
+      type: object
+      properties:
+        additional_price:
+          type: number
+          format: with decimals
+          description: The value of the additional price per additional offer unit in the order. Not applicable when type is FREE_SHIPPING or ORDER_RANGE.
+        free_shipping_threshold:
+          type: number
+          format: with decimals
+          description: The minimum order value threshold, above which shipping becomes free for the customer. Not applicable when type is ORDER_RANGE.
+        initial_price:
+          type: number
+          format: with decimals
+          description: The value of the standard shipping price. Not applicable when type is FREE_SHIPPING or ORDER_RANGE.
+        ranges:
+          type: array
+          description: The details of the shipping price ranges. Applicable only when type is ORDER_RANGE.
+          items:
+            $ref: '#/components/schemas/SH52_Response_200_Configuration_Prices_Ranges'
+        type:
+          type: string
+          description: 'The rule applying on the shipping charge.
+
+
+            Enum: `"FIXED_PRICE"`, `"FREE_SHIPPING"`, `"ORDER_RANGE"`
+
+            '
+      required:
+      - type
+    SH52_Response_200_Configuration_Prices_Ranges:
+      type: object
+      properties:
+        price:
+          type: number
+          format: with decimals
+          description: The value of the shipping price.
+        threshold:
+          type: number
+          format: with decimals
+          description: The threshold amounts from which the configured shipping price applies.
+      required:
+      - price
+      - threshold
+    PC01_Response_200_Features_ShopTaxOptions_TaxIdentificationNumber:
+      type: object
+      properties:
+        mandatory:
+          type: boolean
+          description: Defines if the tax identification number is mandatory
+        validation_regex:
+          type: string
+          description: Regular expression that the tax identification number must match
+      required:
+      - mandatory
+    PC01_Response_200_PlatformConfiguration_PlatformModel:
+      type: object
+      properties:
+        drop_ship:
+          type: boolean
+          description: Drop ship platform model activated
+        marketplace:
+          type: boolean
+          description: Marketplace platform model activated
+        one_creditor:
+          type: boolean
+          description: One creditor platform model activated
+      required:
+      - drop_ship
+      - marketplace
+      - one_creditor
+    PC01_Response_200_Modules:
+      type: object
+      properties:
+        mirakl_catalog_integrator:
+          type: boolean
+          description: Mirakl Catalog integrator activated. Allows operator to manage catalog structure into Mirakl.
+        mirakl_catalog_manager:
+          type: boolean
+          description: Mirakl Catalog Manager activated. Allows operator to remove the complexity of integrating catalogs from multiple sources.
+        mirakl_catalog_transformer:
+          type: boolean
+          description: Mirakl Catalog Transformer activated.
+        mirakl_platform_services:
+          type: boolean
+          description: 'Mirakl Platform for Services activated. Specific module for services management: separated from the product management module.'
+        offer_management:
+          type: boolean
+          description: Offer management available on the platform
+        offer_management_mode:
+          type: string
+          description: 'Offer management mode on the platform: SIMPLE: All shops can push offers. HYBRID: The operator decides whether a shop can push offers on the platform.'
+        order_management:
+          type: boolean
+          description: Order management available on the platform
+        order_management_mode:
+          type: string
+          description: 'Order management mode on the platform: SIMPLE: All shops can process orders. HYBRID: The operator decides whether a shop can process orders on the platform.'
+        promotions:
+          type: boolean
+          deprecated: true
+          description: 'Deprecated: Promotion availability is now controlled by operator settings (cart_promotion_campaign and seller_promotion).'
+        quotes:
+          type: boolean
+          description: Quote module activated
+        tax_manager:
+          $ref: '#/components/schemas/PC01_Response_200_Modules_TaxManager'
+          deprecated: true
+          description: <p>Allows operator to be connected with a tax calculation provider</p><p>The tax_manager feature is not supported anymore.</p>
+      required:
+      - mirakl_catalog_integrator
+      - mirakl_catalog_manager
+      - mirakl_catalog_transformer
+      - mirakl_platform_services
+      - offer_management
+      - order_management
+      - promotions
+      - quotes
+      - tax_manager
+    PC01_Response_200_PlatformConfiguration:
+      type: object
+      properties:
+        customer_model:
+          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_CustomerModel'
+          description: The customer organization activation on the platform
+        enhanced_seller_invoicing:
+          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_EnhancedSellerInvoicing'
+          description: Enhanced seller invoicing activation on the platform
+        platform_model:
+          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_PlatformModel'
+          description: 'The platform models activated on the platform '
+      required:
+      - customer_model
+      - enhanced_seller_invoicing
+      - platform_model
+    CUR01_Response_200_Currencies:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Currency code
+        label:
+          type: string
+          description: Currency label
+        platform_default:
+          type: boolean
+          description: Default currency of the platform
+      required:
+      - code
+      - label
+    PC01_Response_200_Features_Pricing:
+      type: object
+      properties:
+        channel_pricing:
+          type: string
+          description: 'Allows sellers to create prices applicable on the operator’s different storefronts materialized as sales channels in Mirakl. DISABLED: No channel pricing. SINGLE: Allows sellers to create one price per channel. MULTI: Allows sellers to create multiple prices per channel.
+
+
+            Enum: `"MULTI"`, `"SINGLE"`, `"DISABLED"`
+
+            '
+        discount_period_required:
+          type: boolean
+          description: Requires sellers to set start and end dates when creating or updating discounts on default and specific prices.
+        discount_price_creation_in_the_past_blocked:
+          type: boolean
+          description: Prevents sellers from setting discount end dates in the past for their default and specific prices.
+        scheduled_pricing:
+          type: boolean
+          description: Allows sellers to set up multiple prices in advance
+        volume_discount:
+          type: boolean
+          description: Allows discounts for bulk purchases
+        volume_pricing:
+          type: boolean
+          description: Allows pricing for bulk purchases
+      required:
+      - channel_pricing
+      - discount_period_required
+      - discount_price_creation_in_the_past_blocked
+      - scheduled_pricing
+      - volume_discount
+      - volume_pricing
+    DO01_Response_200:
+      type: object
+      properties:
+        documents:
+          type: array
+          description: Document types
+          items:
+            $ref: '#/components/schemas/DO01_Response_200_Documents'
+      required:
+      - documents
+    PC01_Response_200_Features_OrderConditions:
+      type: object
+      properties:
+        lead_time_to_ship:
+          type: boolean
+          deprecated: true
+          description: <p>Allows sellers to inform a lead time to ship on their offers</p><p>Use "lead_time_to_ship_by_sellers_enabled" attribute instead.</p>
+        maximum_order_quantity:
+          type: boolean
+          description: Allows sellers to request for a maximum order quantity
+        minimum_order_quantity:
+          type: boolean
+          description: Allows sellers to request for a minimum order quantity
+        package_order_quantity:
+          type: boolean
+          description: Allows sellers to set an order quantity increment
+      required:
+      - lead_time_to_ship
+      - maximum_order_quantity
+      - minimum_order_quantity
+      - package_order_quantity
+    RE11_Response_200:
+      type: object
+      properties:
+        reasons:
+          type: array
+          description: List of reasons
+          items:
+            $ref: '#/components/schemas/RE11_Response_200_Reasons'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count of elements returned by the query (No pagination)
+      required:
+      - reasons
+      - total_count
+    PC01_Response_200_Features_DirectPaymentCustomerStore:
+      type: object
+      properties:
+        activated:
+          type: boolean
+          description: Direct payment customer store activated
+        refund_cancel_authorized:
+          type: boolean
+          description: Allows refund and cancelation for transactions taking place outside of Mirakl between customers and sellers
+      required:
+      - activated
+      - refund_cancel_authorized
+    RE01_Response_200_Reasons:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Reason code
+        is_customer_right:
+          type: boolean
+          description: Indicate if reason is enabled to the customer
+        is_operator_right:
+          type: boolean
+          description: Indicate if reason is enabled to the operator
+        is_shop_right:
+          type: boolean
+          description: Indicate if reason is enabled to the shop
+        label:
+          type: string
+          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        type:
+          type: string
+          description: "Type of the reason\n\nEnum: `\"INCIDENT_OPEN\"`, `\"MPS_INCIDENT_OPEN\"`, `\"INCIDENT_CLOSE\"`, `\"MPS_INCIDENT_CLOSE\"`, `\"REFUND\"`, `\"MPS_REFUND\"`, `\"ORDER_MESSAGING\"`, `\"MPS_ORDER_MESSAGING\"`, `\"MPS_OFFER_MESSAGING\"`, `\"OFFER_MESSAGING\"`, `\"CANCELATION\"`, `\"MMP_SELLER_MESSAGING\"`, `\"MPS_SELLER_MESSAGING\"`, `\"RETURN\"`, `\"RETURN_REJECTION\"`, `\"RETURN_NON_COMPLIANT\"`\n\n<details>\n  <summary>See deprecated values</summary>\n\n  Deprecated values: `\"MESSAGING\"`\n</details>\n"
+      required:
+      - code
+      - is_customer_right
+      - is_operator_right
+      - is_shop_right
+      - label
+      - type
+    OF61_Response_200_OfferStates:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether or not the offer state is active on the platform
+        code:
+          type: string
+          description: Offer condition code
+        label:
+          type: string
+          description: '<span>Offer condition label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - active
+      - code
+      - label
+    PC01_Response_200_Features_Returns:
+      type: object
+      properties:
+        drop_ship:
+          type: boolean
+          description: Enables returns management in Drop ship
+        marketplace:
+          type: boolean
+          description: Enables returns management in Marketplace
+        one_creditor:
+          type: boolean
+          description: Enables returns management in One creditor
+    L01_Response_200_Locales:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Locale code
+        label:
+          type: string
+          description: Locale label
+        platform_default:
+          type: boolean
+          description: Default locale of the platform
+      required:
+      - code
+      - label
+    SH12_Response_200_ShippingTypes:
+      type: object
+      properties:
+        click_and_collect:
+          type: boolean
+          description: Shipping type corresponds to “click&collect”
+        code:
+          type: string
+          description: Shipping type code
+        delivery_by_operator:
+          type: boolean
+          description: Shipping type is managed by operator on behalf of shops
+        description:
+          type: string
+          description: Shipping type description
+        ignore_lead_time_to_ship:
+          type: boolean
+          description: When true, the lead time to ship is ignored for shipping deadline computation
+        label:
+          type: string
+          description: '<span>Shipping type label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        mandatory_tracking:
+          type: boolean
+          description: Shops must provide tracking details before confirming shipment for a given shipping type
+        standard_code:
+          type: string
+          description: Shipping type standard code
+      required:
+      - click_and_collect
+      - code
+      - delivery_by_operator
+      - description
+      - label
+      - mandatory_tracking
+    SH42_Response_200_DeliveryTimes_DeliveryTime:
+      type: object
+      description: Delivery time range configuration
+      properties:
+        earliest_days:
+          type: integer
+          format: int32
+          description: Minimum number of delivery days
+        latest_days:
+          type: integer
+          format: int32
+          description: Maximum number of delivery days
+      required:
+      - earliest_days
+      - latest_days
+    PC01_Response_200_Features_ShopTaxOptions:
+      type: object
+      properties:
+        local_tax_number:
+          $ref: '#/components/schemas/PC01_Response_200_Features_ShopTaxOptions_LocalTaxNumber'
+          description: The VAT/GST number of a seller billing information and fiscal representative
+        tax_identification_number:
+          $ref: '#/components/schemas/PC01_Response_200_Features_ShopTaxOptions_TaxIdentificationNumber'
+          description: The tax identification number of a seller billing information
+      required:
+      - tax_identification_number
+    PC01_Response_200_Features_ShopTaxOptions_LocalTaxNumber:
+      type: object
+      properties:
+        mandatory:
+          type: boolean
+          description: Defines if the VAT/GST number is mandatory
+        validation_regex:
+          type: string
+          description: Regular expression that the VAT/GST number must match
+      required:
+      - mandatory
+    AF01_Response_200:
+      type: object
+      properties:
+        additional_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AF01_Response_200_AdditionalFields'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+      required:
+      - additional_fields
+      - total_count
+    SH11_Response_200:
+      type: object
+      properties:
+        shipping_zones:
+          type: array
+          description: List of shipping zones
+          items:
+            $ref: '#/components/schemas/SH11_Response_200_ShippingZones'
+      required:
+      - shipping_zones
+    RE14_Response_200:
+      type: object
+      properties:
+        reasons:
+          type: array
+          description: List of reasons
+          items:
+            $ref: '#/components/schemas/RE14_Response_200_Reasons'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count of elements returned by the query (No pagination)
+      required:
+      - reasons
+      - total_count
+    RE11_Response_200_Reasons:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Reason code
+        label:
+          type: string
+          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - label
+    SH21_Response_200_Carriers:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Carrier code
+        label:
+          type: string
+          description: Carrier label
+        standard_code:
+          type: string
+          description: Carrier standard code
+        tracking_url:
+          type: string
+          description: Carrier tracking URL
+      required:
+      - code
+      - label
+    PC01_Response_200_Features_Warehouses:
+      type: object
+      properties:
+        geolocation:
+          type: boolean
+          description: Geolocation on warehouses activated
+        restricted_countries:
+          type: array
+          description: 'The list of the restricted countries applying on warehouses. Format ISO 3166-1 alpha-3 code (3 letters country code). Possible values : AFG, ALA, ALB, DZA, ASM, AND, AGO, AIA, ATA, ATG, ARG, ARM, ABW, AUS, AUT, AZE, BHS, BHR, BGD, BRB, BLR, BEL, BLZ, BEN, BMU, BTN, BOL, BES, BIH, BWA, BVT, BRA, IOT, BRN, BGR, BFA, BDI, KHM, CMR, CAN, CPV, CYM, CAF, TCD, CHL, CHN, CXR, CCK, COL, COM, COG, COD, COK, CRI, CIV, HRV, CUB, CUW, CYP, CZE, DNK, DJI, DMA, DOM, ECU, EGY, SLV, GNQ, ERI, EST, ETH, FLK, FRO, FJI, FIN, FRA, GUF, PYF, ATF, GAB, GMB, GEO, DEU, GHA, GIB, GRC, GRL, GRD, GLP, GUM, GTM, GGY, GIN, GNB, GUY, HTI, HMD, VAT, HND, HKG, HUN, ISL, IND, IDN, IRQ, IRL, IMN, ISR, ITA, JAM, JPN, JEY, JOR, KAZ, KEN, KIR, KOR, KWT, KGZ, LAO, LVA, LBN, LSO, LBR, LBY, LIE, LTU, LUX, MAC, MKD, MDG, MWI, MYS, MDV, MLI, MLT, MHL, MTQ, MRT, MUS, MYT, MEX, FSM, MDA, MCO, MNG, MNE, MSR, MAR, MOZ, MMR, NAM, NRU, NPL, NLD, NCL, NZL, NIC, NER, NGA, NIU, NFK, MNP, NOR, OMN, PAK, PLW, PSE, PAN, PNG, PRY, PER, PHL, PCN, POL, PRT, PRI, QAT, REU, ROU, RUS, RWA, BLM, SHN, KNA, LCA, MAF, SPM, VCT, WSM, SMR, STP, SAU, SEN, SRB, SYC, SLE, SGP, SXM, SVK, SVN, SLB, SOM, ZAF, SGS, SSD, ESP, LKA, SUR, SJM, SWZ, SWE, CHE, TWN, TJK, TZA, THA, TLS, TGO, TKL, TON, TTO, TUN, TUR, TKM, TCA, TUV, UGA, UKR, ARE, GBR, USA, UMI, URY, UZB, VUT, VEN, VNM, VGB, VIR, WLF, YEM, ZMB, ZWE'
+          items:
+            type: string
+            description: 'Enum: `"AFG"`, `"ALA"`, `"ALB"`, `"DZA"`, `"ASM"`, `"AND"`, `"AGO"`, `"AIA"`, `"ATA"`, `"ATG"`, `"ARG"`, `"ARM"`, `"ABW"`, `"AUS"`, `"AUT"`, `"AZE"`, `"BHS"`, `"BHR"`, `"BGD"`, `"BRB"`, `"BLR"`, `"BEL"`, `"BLZ"`, `"BEN"`, `"BMU"`, `"BTN"`, `"BOL"`, `"BES"`, `"BIH"`, `"BWA"`, `"BVT"`, `"BRA"`, `"IOT"`, `"BRN"`, `"BGR"`, `"BFA"`, `"BDI"`, `"KHM"`, `"CMR"`, `"CAN"`, `"CPV"`, `"CYM"`, `"CAF"`, `"TCD"`, `"CHL"`, `"CHN"`, `"CXR"`, `"CCK"`, `"COL"`, `"COM"`, `"COG"`, `"COD"`, `"COK"`, `"CRI"`, `"CIV"`, `"HRV"`, `"CUB"`, `"CUW"`, `"CYP"`, `"CZE"`, `"DNK"`, `"DJI"`, `"DMA"`, `"DOM"`, `"ECU"`, `"EGY"`, `"SLV"`, `"GNQ"`, `"ERI"`, `"EST"`, `"ETH"`, `"FLK"`, `"FRO"`, `"FJI"`, `"FIN"`, `"FRA"`, `"GUF"`, `"PYF"`, `"ATF"`, `"GAB"`, `"GMB"`, `"GEO"`, `"DEU"`, `"GHA"`, `"GIB"`, `"GRC"`, `"GRL"`, `"GRD"`, `"GLP"`, `"GUM"`, `"GTM"`, `"GGY"`, `"GIN"`, `"GNB"`, `"GUY"`, `"HTI"`, `"HMD"`, `"VAT"`, `"HND"`, `"HKG"`, `"HUN"`, `"ISL"`, `"IND"`, `"IDN"`, `"IRQ"`, `"IRL"`, `"IMN"`, `"ISR"`, `"ITA"`, `"JAM"`, `"JPN"`, `"JEY"`, `"JOR"`, `"KAZ"`, `"KEN"`, `"KIR"`, `"KOR"`, `"KWT"`, `"KGZ"`, `"LAO"`, `"LVA"`, `"LBN"`, `"LSO"`, `"LBR"`, `"LBY"`, `"LIE"`, `"LTU"`, `"LUX"`, `"MAC"`, `"MKD"`, `"MDG"`, `"MWI"`, `"MYS"`, `"MDV"`, `"MLI"`, `"MLT"`, `"MHL"`, `"MTQ"`, `"MRT"`, `"MUS"`, `"MYT"`, `"MEX"`, `"FSM"`, `"MDA"`, `"MCO"`, `"MNG"`, `"MNE"`, `"MSR"`, `"MAR"`, `"MOZ"`, `"MMR"`, `"NAM"`, `"NRU"`, `"NPL"`, `"NLD"`, `"NCL"`, `"NZL"`, `"NIC"`, `"NER"`, `"NGA"`, `"NIU"`, `"NFK"`, `"MNP"`, `"NOR"`, `"OMN"`, `"PAK"`, `"PLW"`, `"PSE"`, `"PAN"`, `"PNG"`, `"PRY"`, `"PER"`, `"PHL"`, `"PCN"`, `"POL"`, `"PRT"`, `"PRI"`, `"QAT"`, `"REU"`, `"ROU"`, `"RUS"`, `"RWA"`, `"BLM"`, `"SHN"`, `"KNA"`, `"LCA"`, `"MAF"`, `"SPM"`, `"VCT"`, `"WSM"`, `"SMR"`, `"STP"`, `"SAU"`, `"SEN"`, `"SRB"`, `"SYC"`, `"SLE"`, `"SGP"`, `"SXM"`, `"SVK"`, `"SVN"`, `"SLB"`, `"SOM"`, `"ZAF"`, `"SGS"`, `"SSD"`, `"ESP"`, `"LKA"`, `"SUR"`, `"SJM"`, `"SWZ"`, `"SWE"`, `"CHE"`, `"TWN"`, `"TJK"`, `"TZA"`, `"THA"`, `"TLS"`, `"TGO"`, `"TKL"`, `"TON"`, `"TTO"`, `"TUN"`, `"TUR"`, `"TKM"`, `"TCA"`, `"TUV"`, `"UGA"`, `"UKR"`, `"ARE"`, `"GBR"`, `"USA"`, `"UMI"`, `"URY"`, `"UZB"`, `"VUT"`, `"VEN"`, `"VNM"`, `"VGB"`, `"VIR"`, `"WLF"`, `"YEM"`, `"ZMB"`, `"ZWE"`
+
+              '
+      required:
+      - geolocation
+      - restricted_countries
+    SH31_Response_200_LogisticClasses:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Logistic class code
+        description:
+          type: string
+          description: Logistic class description
+        label:
+          type: string
+          description: '<span>Logistic class label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - description
+      - label
+    RE12_Response_200:
+      type: object
+      properties:
+        reasons:
+          type: array
+          description: List of reasons
+          items:
+            $ref: '#/components/schemas/RE12_Response_200_Reasons'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count of elements returned by the query (No pagination)
+      required:
+      - reasons
+      - total_count
+    PC01_Response_200_Features_TaxCollection:
+      type: object
+      properties:
+        activated:
+          type: string
+          description: 'Tax collection activated. NO: Not activated. YES: Activated for all stores. YES_PER_STORE: Activated for some stores.
+
+
+            Enum: `"YES"`, `"NO"`, `"YES_PER_STORE"`
+
+            '
+        product_tax_code_mandatory:
+          type: boolean
+          description: Product tax code mandatory at offer level
+        tax_collection_by_operator:
+          type: boolean
+          description: Operator in charge of tax collection on behalf of sellers
+      required:
+      - activated
+      - product_tax_code_mandatory
+      - tax_collection_by_operator
+    PC01_Response_200_Modules_TaxManager_TaxProvider:
+      type: object
+      properties:
+        avalara:
+          type: boolean
+          description: Avalara configured as tax provider
+        vertex:
+          type: boolean
+          description: Vertex configured as tax provider
+      required:
+      - avalara
+      - vertex
+    PC01_Response_200_Features_OrderWorkflows:
+      type: object
+      properties:
+        no_customer_payment_confirmation:
+          type: boolean
+          description: Allows seller payments to be completely separated from customer debits
+        order_acceptance:
+          type: string
+          description: 'Indicate if shop accounts must accept new orders and take responsibility for the transaction. NOT_AUTOMATIC: All shop accounts must accept their orders manually. AUTOMATIC: Orders are automatically accepted. BOTH: AUTOMATIC or NOT_AUTOMATIC mode depending on the store account
+
+
+            Enum: `"AUTOMATIC"`, `"NOT_AUTOMATIC"`, `"BOTH"`
+
+            '
+        pause_debit_workflow:
+          type: boolean
+          description: Pause the order debit workflow when taxes must be recalculated
+        pay_on_due_date:
+          type: boolean
+          description: Allows professionals to pay their orders after the receipt of the items or an explicit invoice
+        pay_on_shipment:
+          type: boolean
+          description: Allows operators to debit orders before they have been fully shipped
+        sellers_edit_shipping_origin:
+          type: boolean
+          description: Allow shop accounts to edit shipping origin to ensures accurate tax calculations with shipping origin data
+        shipping_and_billing_details_before_acceptance:
+          type: boolean
+          description: Indicate if shipping and billing details are displayed before order acceptance
+      required:
+      - no_customer_payment_confirmation
+      - order_acceptance
+      - pause_debit_workflow
+      - pay_on_due_date
+      - pay_on_shipment
+      - sellers_edit_shipping_origin
+      - shipping_and_billing_details_before_acceptance
+    SH52_Response_200:
+      type: object
+      description: Shop shipping configuration
+      properties:
+        configuration:
+          type: array
+          description: The configuration of the shipping charges.
+          items:
+            $ref: '#/components/schemas/SH52_Response_200_Configuration'
+        currency_iso_code:
+          type: string
+          description: '3-letters ISO code of the currency used on the shipping charges.
+
+
+            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
+
+            '
+        last_updated_date:
+          type: string
+          format: date-time
+          description: The date and time of update of the shipping charge configuration.
+        shop_id:
+          type: integer
+          format: int64
+          description: The shop identifier for which shipping charges are configured.
+      required:
+      - configuration
+      - currency_iso_code
+      - last_updated_date
+      - shop_id
+    RE02_Response_200_Reasons:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Reason code
+        label:
+          type: string
+          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - label
+    DO01_Response_200_Documents:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Type code
+        description:
+          type: string
+          description: Type description
+        entity:
+          type: string
+          description: 'Entity type linked to the document type
+
+
+            Enum: `"ORDER"`, `"SHOP"`
+
+            '
+        label:
+          type: string
+          description: '<span>Type label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        mime_types:
+          type: array
+          description: Authorized mime types
+          items:
+            type: string
+        models:
+          type: array
+          description: The list of platform models on which this document type is available. This field is only present for document types linked to a 'SHOP' entity.
+          items:
+            type: string
+            description: 'Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
+
+              '
+      required:
+      - code
+      - description
+      - entity
+      - label
+    PC01_Response_200_Features:
+      type: object
+      properties:
+        catalog:
+          $ref: '#/components/schemas/PC01_Response_200_Features_Catalog'
+          description: Catalog related features
+        circular_economy_data_collection:
+          type: boolean
+          description: Allows operators to collect data related to the circular economy regulation
+        competitive_pricing_tool:
+          type: boolean
+          description: The competitive pricing tool allows stores to view and possibly match competing Marketplace offers
+        direct_payment_customer_store:
+          $ref: '#/components/schemas/PC01_Response_200_Features_DirectPaymentCustomerStore'
+          description: Allows transactions taking place outside of Mirakl between customers and sellers
+        disable_seller_alternative_carrier:
+          type: boolean
+          description: Prevent stores from specifying alternatives carriers outside those predefined by the operator
+        dropship:
+          $ref: '#/components/schemas/PC01_Response_200_Features_Dropship'
+          description: Dropship related features
+        kyc_status_per_seller:
+          type: boolean
+          description: Allows PSPs to provide operators with seller KYC statuses
+        lead_time_to_ship_by_sellers_enabled:
+          type: string
+          description: 'Allows sellers to override the default lead time to ship
+
+
+            Enum: `"YES"`, `"NO"`, `"YES_PER_STORE"`
+
+            '
+        multi_currency:
+          type: boolean
+          description: Defines if platform support multi currencies
+        multi_payout_psp_per_seller:
+          type: boolean
+          description: Allows the operator to use Hybrid pay-out PSP feature
+        no_reply_needed:
+          type: boolean
+          description: Allows to end order-related conversations when the last message sent from customer does not specifically require a reply
+        offer_prices_decimals:
+          type: string
+          description: Defines maximum number of decimals in offer prices
+        operator_csv_delimiter:
+          type: string
+          description: 'The delimiter used in the CSV files exported from the back office. COMMA: '','' delimiter. SEMICOLON: '';'' delimiter.
+
+
+            Enum: `"COMMA"`, `"SEMICOLON"`
+
+            '
+        order_conditions:
+          $ref: '#/components/schemas/PC01_Response_200_Features_OrderConditions'
+          description: Order conditions related features activated
+        order_tax_mode:
+          type: string
+          description: 'Prices with tax included or excluded in order-related APIs. TAX_INCLUDED: Prices with tax included. TAX_EXCLUDED: Prices with tax excluded.
+
+
+            Enum: `"TAX_INCLUDED"`, `"TAX_EXCLUDED"`
+
+            '
+        order_workflows:
+          $ref: '#/components/schemas/PC01_Response_200_Features_OrderWorkflows'
+          description: Order workflows activated
+        payment_confirmation:
+          type: boolean
+          description: Allows the operator to mark an accounting document as "Paid" when the corresponding amount is confirmed to be paid to the seller
+        pricing:
+          $ref: '#/components/schemas/PC01_Response_200_Features_Pricing'
+          description: Pricing related features activated
+        product_data_validation_by_channel:
+          type: boolean
+          deprecated: true
+          description: <p>Facilitates the management of attributes in a multilingual context</p><p>Moved in catalog section. Use catalog.product_data_validation_by_channel instead.</p>
+        promotion:
+          $ref: '#/components/schemas/PC01_Response_200_Features_Promotion'
+          description: Promotion related features activated
+        returns:
+          $ref: '#/components/schemas/PC01_Response_200_Features_Returns'
+          description: Returns management feature activated
+        shipment:
+          $ref: '#/components/schemas/PC01_Response_200_Features_Shipment'
+          description: Shipment related features activated
+        shop_tax_options:
+          $ref: '#/components/schemas/PC01_Response_200_Features_ShopTaxOptions'
+          description: Tax-related options for professional shops
+        tax_collection:
+          $ref: '#/components/schemas/PC01_Response_200_Features_TaxCollection'
+          description: Allows the collection of information required to calculate taxes, with or without the tax connector
+        tax_id_number:
+          $ref: '#/components/schemas/PC01_Response_200_Features_TaxIdNumber'
+          description: Unique identifier used to conduct tax-related formalities
+        warehouses:
+          $ref: '#/components/schemas/PC01_Response_200_Features_Warehouses'
+          description: Allows operators to apply specific configuration on store account warehouses
+      required:
+      - catalog
+      - circular_economy_data_collection
+      - competitive_pricing_tool
+      - direct_payment_customer_store
+      - disable_seller_alternative_carrier
+      - dropship
+      - kyc_status_per_seller
+      - lead_time_to_ship_by_sellers_enabled
+      - multi_currency
+      - multi_payout_psp_per_seller
+      - no_reply_needed
+      - offer_prices_decimals
+      - operator_csv_delimiter
+      - order_conditions
+      - order_tax_mode
+      - order_workflows
+      - payment_confirmation
+      - pricing
+      - product_data_validation_by_channel
+      - promotion
+      - returns
+      - shipment
+      - shop_tax_options
+      - tax_collection
+      - tax_id_number
+      - warehouses
+    RE01_Response_200:
+      type: object
+      properties:
+        reasons:
+          type: array
+          description: List of reasons detailed
+          items:
+            $ref: '#/components/schemas/RE01_Response_200_Reasons'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count of elements returned by the query (no pagination)
+      required:
+      - reasons
+      - total_count
+    PC01_Response_200_Features_Shipment:
+      type: object
+      properties:
+        multi_part_item_shipment:
+          type: boolean
+          description: Allows sellers to create several packages for a same item in an order
+        multi_shipment:
+          type: boolean
+          description: Allows sellers to create several shipments for a same order
+      required:
+      - multi_part_item_shipment
+      - multi_shipment
+    PC01_Response_200_Features_Dropship:
+      type: object
+      properties:
+        retail_pricing_edition_enabled:
+          type: string
+          description: 'Retail pricing edition enabled
+
+
+            Enum: `"YES"`, `"NO"`, `"YES_PER_STORE"`
+
+            '
+        retail_pricing_enabled:
+          type: boolean
+          description: Retail pricing activated on dropship offers
+    PC01_Response_200_Features_Catalog:
+      type: object
+      properties:
+        allow_shop_contribution_to_all_channels:
+          type: boolean
+          description: Allows shops to contribute data to all sales channels when enabled; otherwise, data can only be pushed to channels the shop belongs to
+        exclude_invalid_products:
+          type: boolean
+          description: When enabled, products with validation errors will be excluded from product imports and won't be transmitted to MCM
+        list_of_multiple_values_separator:
+          type: string
+          description: Character used to separate values in the 'Multiple Values List' type attributes
+        product_acceptance_by_channel:
+          type: boolean
+          description: Allows operators to accept or reject products according to sales channels
+        product_data_validation_by_channel:
+          type: boolean
+          description: Facilitates the management of attributes in a multilingual context
+        product_import_only_on_leaf:
+          type: boolean
+          description: Prevents the import of products into non-leaf categories
+      required:
+      - allow_shop_contribution_to_all_channels
+      - exclude_invalid_products
+      - list_of_multiple_values_separator
+      - product_acceptance_by_channel
+      - product_data_validation_by_channel
+      - product_import_only_on_leaf
+    SH42_Response_200_OrderCutOffTimes:
+      type: object
+      description: Seller order cut-off time entry for a shipping type
+      properties:
+        cut_off_time:
+          type: string
+          description: Order cut-off time
+        is_required:
+          type: boolean
+          description: Whether the cut-off time configuration is mandatory for the shop
+        set_by:
+          type: string
+          description: 'Whether the cut-off time was set by the shop, the operator, or is not needed
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"NOT_NEEDED"`
+
+            '
+        shipping_type_code:
+          type: string
+          description: Shipping type code
+      required:
+      - cut_off_time
+      - is_required
+      - set_by
+      - shipping_type_code
+    CUR01_Response_200:
+      type: object
+      properties:
+        currencies:
+          type: array
+          description: List of currencies
+          items:
+            $ref: '#/components/schemas/CUR01_Response_200_Currencies'
+      required:
+      - currencies
+    PC01_Response_200:
+      type: object
+      properties:
+        features:
+          $ref: '#/components/schemas/PC01_Response_200_Features'
+          description: Features activated on the platform
+        modules:
+          $ref: '#/components/schemas/PC01_Response_200_Modules'
+          description: Modules activated on the platform
+        platform_configuration:
+          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration'
+          description: High level platform configurations
+        platform_name:
+          type: string
+          description: Operator platform name
+        tenant_name:
+          type: string
+          description: Tenant platform name
+        timezone:
+          type: string
+          description: Platform timezone
+      required:
+      - features
+      - modules
+      - platform_configuration
+      - platform_name
+      - tenant_name
+      - timezone
+    RE12_Response_200_Reasons:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Reason code
+        label:
+          type: string
+          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - label
+    PC01_Response_200_Features_Promotion:
+      type: object
+      properties:
+        cart_promotion_campaign:
+          type: boolean
+          description: Allows the operator to create cart promotion campaigns.
+        discount_campaign:
+          type: boolean
+          description: Allows the operator to create discount campaigns.
+        seller_promotion:
+          type: boolean
+          description: Allows stores to create promotions.
+      required:
+      - cart_promotion_campaign
+      - discount_campaign
+      - seller_promotion
+    AF01_Response_200_AdditionalFields:
+      type: object
+      properties:
+        accepted_values:
+          type: array
+          description: The list of accepted values for this additional field. This field is only present for additional fields of type 'LIST'
+          items:
+            type: string
+        channels:
+          type: array
+          description: The list of channels using this additional field. This field is only present for additional fields linked to a 'SHOP' entity.
+          items:
+            type: string
+        code:
+          type: string
+          description: Additional field code
+        default_value:
+          type: string
+          deprecated: true
+        description:
+          type: string
+          description: The description of the additional field.
+        entity:
+          type: string
+          description: 'The object on which the additional field applies
+
+
+            Enum: `"SHOP"`, `"OFFER"`, `"ORDER_LINE"`, `"ORDER"`
+
+            '
+        label:
+          type: string
+          description: '<span>Additional field label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        models:
+          type: array
+          description: The list of platform models using this additional field. This field is only present for additional fields linked to a 'SHOP' entity.
+          items:
+            type: string
+            description: 'Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
+
+              '
+        regex:
+          type: string
+          description: The regular expression that is used to validate the value value of this field.<br/>This field is only present for additional fields of type 'REGEX'.
+        required:
+          type: boolean
+          description: Whether or not this additionnal field will be required
+        shop_permission:
+          type: string
+          description: 'The shop permission field determines how Shops are allowed to use a Custom field.<ul><li><strong>INVISIBLE</strong>: the field is visible only for the operator and front users. Shops cannot update its value.</li><li><strong>READ_WRITE</strong>: all users can see and update the value of the field, provided they have access to the entity associated with the field.</li></ul>
+
+
+            Enum: `"INVISIBLE"`, `"READ_ONLY"`, `"READ_WRITE"`
+
+            '
+        type:
+          type: string
+          description: 'Additional field type:<ul><li><strong>STRING</strong> chain of characters (up to 2000 characters)</li><li><strong>DATE</strong> date in yyyy-mm-dd format</li><li><strong>NUMERIC</strong> decimal value (eg 52.63)</li><li><strong>BOOLEAN</strong> true or false</li><li><strong>LINK</strong> valid URL</li><li><strong>LIST</strong> list of values. Valid values are specified in accepted_values field</li><li><strong>REGEX</strong> regular expression. The regex that is used to validate the value of this field is specified in the regex field</li><li><strong>TEXTAREA</strong> long chain of characters (up to 5000 characters). May have multiple lines</li></ul>
+
+
+            Enum: `"STRING"`, `"DATE"`, `"NUMERIC"`, `"BOOLEAN"`, `"LINK"`, `"REGEX"`, `"TEXTAREA"`, `"LIST"`, `"MULTIPLE_VALUES_LIST"`
+
+            '
+      required:
+      - code
+      - label
+      - required
+      - shop_permission
+      - type
+    SH42_Response_200:
+      type: object
+      description: Seller shop shipping configuration
+      properties:
+        delivery_times:
+          type: array
+          description: Delivery time configurations per shipping type and zone
+          items:
+            $ref: '#/components/schemas/SH42_Response_200_DeliveryTimes'
+        last_updated_date:
+          type: string
+          format: date-time
+          description: Date of last shipping configuration update
+        lead_time_to_ship:
+          $ref: '#/components/schemas/SH42_Response_200_LeadTimeToShip'
+          description: Lead time to ship configuration
+        order_cut_off_times:
+          type: array
+          description: Order cut-off time configurations per shipping type
+          items:
+            $ref: '#/components/schemas/SH42_Response_200_OrderCutOffTimes'
+        order_free_shipping:
+          type: boolean
+          description: Whether free shipping is enabled for all orders
+        shipping_paid_by_operator:
+          type: boolean
+          description: Whether the operator collects shipping charges on behalf of the shops
+        shop_id:
+          type: string
+          description: Shop identifier
+      required:
+      - delivery_times
+      - lead_time_to_ship
+      - order_cut_off_times
+      - order_free_shipping
+      - shipping_paid_by_operator
+      - shop_id
+    SH12_Response_200:
+      type: object
+      properties:
+        shipping_types:
+          type: array
+          description: List of shipping types
+          items:
+            $ref: '#/components/schemas/SH12_Response_200_ShippingTypes'
+    SH31_Response_200:
+      type: object
+      properties:
+        logistic_classes:
+          type: array
+          description: List of logistic classes
+          items:
+            $ref: '#/components/schemas/SH31_Response_200_LogisticClasses'
+      required:
+      - logistic_classes
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

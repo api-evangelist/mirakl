@@ -1,0 +1,270 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers Picklists API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Picklists
+paths:
+  /api/picklists:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Every 15 minutes</div>
+
+        <div class="max-call-frequency">Maximum usage: Every 5 minutes</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage-picklists.htm">More context</a></li></ul><div class="extension-title">Pagination</div>
+
+
+        <p>This resource supports seek pagination (<a href="#section/Seek-pagination-and-sort">see documentation</a>)</p>
+
+
+        <div class="extension-title">Sort fields</div>
+
+
+        <code>sort</code> field can have the following values:<ul><li><b>pickupDate</b> (Default) - Sort by pickup date (asc by default)</li></ul>
+
+
+        </div>'
+      operationId: PL11
+      parameters:
+      - description: Pick run code for filtering.
+        explode: true
+        in: query
+        name: pickrun_code
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter picklists with a pick-up date after the given date.
+        explode: true
+        in: query
+        name: pickup_date_min
+        required: false
+        schema:
+          type: string
+          format: date-time
+        style: form
+      - description: Filter picklists with a pick-up date before the given date.
+        explode: true
+        in: query
+        name: pickup_date_max
+        required: false
+        schema:
+          type: string
+          format: date-time
+        style: form
+      - description: Picklist id for filtering. This parameter can be supplied multiple times (picklist_id=OR01-A&picklist_id=OR02-A...).
+        explode: true
+        in: query
+        name: picklist_id
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: Shop id for filtering.
+        explode: true
+        in: query
+        name: shop_id
+        required: false
+        schema:
+          type: integer
+          format: int64
+        style: form
+      - description: Picklist state for filtering. This parameter can be supplied multiple times (picklist_state=WAITING_PREPARATION&picklist_state=IN_PREPARATION...).
+        explode: true
+        in: query
+        name: picklist_state
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...).
+        explode: true
+        in: query
+        name: order_line_id
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    data:
+                    - date_created: '2022-09-28T13:37:00Z'
+                      id: picklist01
+                      last_updated: '2022-09-28T13:37:00Z'
+                      order_lines:
+                      - id: ORDER-001-A-1
+                      - id: ORDER-001-A-2
+                      - id: ORDER-002-A-1
+                      - id: ORDER-003-A-1
+                      picklist_lines:
+                      - offer_id: 2135
+                        quantity: 3
+                      - offer_id: 2136
+                        quantity: 1
+                      pickrun_code: pickrun1
+                      pickup_date: '2022-10-01T00:00:00Z'
+                      shop_id: 2000
+                      state: WAITING_PREPARATION
+                    - date_created: '2022-09-28T15:00:00Z'
+                      id: picklist02
+                      last_updated: '2022-09-28T15:00:00Z'
+                      order_lines:
+                      - id: ORDER-004-A-1
+                      picklist_lines:
+                      - offer_id: 2201
+                        quantity: 15
+                      pickrun_code: null
+                      pickup_date: '2022-10-24T00:00:00Z'
+                      shop_id: 2000
+                      state: WAITING_PREPARATION
+                    next_page_token: bGltaXQ9MSZhZnRlcj0yMDIyLTEyLTI0VDAwOjAwOjAwWiZhZnRlcj04Y2ViNWQxZi05MjQ4LTQyYjEtYTdkNS05NzYwNzAxOGQzNGEmc29ydD1waWNrdXBEYXRlLEFTQw==
+                    previous_page_token: null
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    data:
+                    - date_created: '2023-03-28T09:34:42Z'
+                      id: string
+                      last_updated: '2023-03-28T09:34:42Z'
+                      order_lines:
+                      - id: string
+                      picklist_lines:
+                      - offer_id: 0
+                        quantity: 0
+                      pickrun_code: string
+                      pickup_date: '2023-03-28T09:34:42Z'
+                      shop_id: 0
+                      state: NOTHING_TO_PREPARE
+                    next_page_token: string
+                    previous_page_token: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/PL11_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: PL11 - List picklists
+      tags:
+      - Picklists
+components:
+  schemas:
+    PL11_Response_200_Data_OrderLines:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Picklist order line id
+      required:
+      - id
+    PL11_Response_200_Data:
+      type: object
+      properties:
+        date_created:
+          type: string
+          format: date-time
+          description: Picklist creation date
+        id:
+          type: string
+          description: Picklist identifier
+        last_updated:
+          type: string
+          format: date-time
+          description: Picklist last update date
+        order_lines:
+          type: array
+          description: Picklist order line identifiers
+          items:
+            $ref: '#/components/schemas/PL11_Response_200_Data_OrderLines'
+        picklist_lines:
+          type: array
+          description: Picklist lines
+          items:
+            $ref: '#/components/schemas/PL11_Response_200_Data_PicklistLines'
+        pickrun_code:
+          type: string
+          description: Pickrun code
+        pickup_date:
+          type: string
+          format: date-time
+          description: Pickup date
+        shop_id:
+          type: integer
+          format: int64
+          description: Picklist shop identifier
+        state:
+          type: string
+          description: 'Picklist state
+
+
+            Enum: `"NOTHING_TO_PREPARE"`, `"WAITING_PREPARATION"`, `"IN_PREPARATION"`, `"READY_FOR_PICKUP"`, `"CLOSED"`
+
+            '
+      required:
+      - date_created
+      - id
+      - last_updated
+      - order_lines
+      - picklist_lines
+      - pickup_date
+      - state
+    PL11_Response_200_Data_PicklistLines:
+      type: object
+      properties:
+        offer_id:
+          type: integer
+          format: int64
+          description: Identifier of the offer to pick
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity of offers to pick
+      required:
+      - offer_id
+      - quantity
+    PL11_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/PL11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

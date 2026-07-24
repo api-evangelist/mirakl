@@ -1,0 +1,4908 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers Services API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Services
+paths:
+  /api/mms/locations:
+    post:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: 30 per minute</div>
+
+        <div class="max-call-frequency">Maximum usage: 30 per minute</div>
+
+        </div>'
+      operationId: SL01
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  contact_info:
+                    email: urna@elit.edu
+                    phone: 1-919-506-3035
+                  description: Open every day except on monday
+                  geography:
+                    address:
+                      formatted_address: 2466 White Ave, Chico, CA 95973, États-Unis
+                    radius: 2000
+                    type: CIRCLE
+                  label: 2466 White Avenue
+                  opening_hours:
+                    friday:
+                    - closing_time: '12:00'
+                      opening_time: 09:00
+                    - closing_time: '18:00'
+                      opening_time: '14:00'
+                    monday: []
+                    saturday:
+                    - closing_time: '12:00'
+                      opening_time: 08:00
+                    - closing_time: '19:00'
+                      opening_time: '14:00'
+                    sunday:
+                    - closing_time: '12:00'
+                      opening_time: 08:00
+                    - closing_time: '18:00'
+                      opening_time: '14:00'
+                    thursday:
+                    - closing_time: '12:00'
+                      opening_time: 08:00
+                    - closing_time: '18:00'
+                      opening_time: '14:00'
+                    tuesday:
+                    - closing_time: '12:00'
+                      opening_time: 09:00
+                    - closing_time: '18:00'
+                      opening_time: '14:00'
+                    wednesday:
+                    - closing_time: '12:00'
+                      opening_time: 08:00
+                    - closing_time: '19:00'
+                      opening_time: '14:00'
+                  shop:
+                    id: 152
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  contact_info:
+                    email: string
+                    phone: string
+                  description: string
+                  geography:
+                    type: POINT
+                  label: string
+                  opening_hours:
+                    friday:
+                    - closing_time: string
+                      opening_time: string
+                    monday:
+                    - closing_time: string
+                      opening_time: string
+                    saturday:
+                    - closing_time: string
+                      opening_time: string
+                    sunday:
+                    - closing_time: string
+                      opening_time: string
+                    thursday:
+                    - closing_time: string
+                      opening_time: string
+                    tuesday:
+                    - closing_time: string
+                      opening_time: string
+                    wednesday:
+                    - closing_time: string
+                      opening_time: string
+                  shop:
+                    id: 0
+            schema:
+              $ref: '#/components/schemas/SL01_Request'
+      responses:
+        '201':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    contact_info:
+                      email: urna@elit.edu
+                      phone: 1-919-506-3035
+                    description: Open every day except on monday
+                    geography:
+                      address:
+                        city: Chico
+                        company: 2466 White Avenue
+                        country_code: US
+                        formatted_address: 2466 White Ave, Chico, CA 95973, États-Unis
+                        state: CA
+                        street1: 2466 White Avenue
+                        zip_code: '95973'
+                      center:
+                        latitude: 39.7613779
+                        longitude: -121.8500737
+                      radius: 2000
+                      type: CIRCLE
+                    id: 30ef2a4c-0ee1-4afe-ac0a-3ef30df43c70
+                    label: 2466 White Avenue
+                    opening_hours:
+                      friday:
+                      - closing_time: '12:00'
+                        opening_time: 09:00
+                      - closing_time: '18:00'
+                        opening_time: '14:00'
+                      monday: []
+                      saturday:
+                      - closing_time: '12:00'
+                        opening_time: 08:00
+                      - closing_time: '19:00'
+                        opening_time: '14:00'
+                      sunday:
+                      - closing_time: '12:00'
+                        opening_time: 08:00
+                      - closing_time: '18:00'
+                        opening_time: '14:00'
+                      thursday:
+                      - closing_time: '12:00'
+                        opening_time: 08:00
+                      - closing_time: '18:00'
+                        opening_time: '14:00'
+                      tuesday:
+                      - closing_time: '12:00'
+                        opening_time: 09:00
+                      - closing_time: '18:00'
+                        opening_time: '14:00'
+                      wednesday:
+                      - closing_time: '12:00'
+                        opening_time: 08:00
+                      - closing_time: '19:00'
+                        opening_time: '14:00'
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    contact_info:
+                      email: string
+                      phone: string
+                    description: string
+                    geography:
+                      type: POINT
+                    id: string
+                    label: string
+                    medias:
+                    - mime_type: string
+                      url: string
+                    opening_hours:
+                      friday:
+                      - closing_time: string
+                        opening_time: string
+                      monday:
+                      - closing_time: string
+                        opening_time: string
+                      saturday:
+                      - closing_time: string
+                        opening_time: string
+                      sunday:
+                      - closing_time: string
+                        opening_time: string
+                      thursday:
+                      - closing_time: string
+                        opening_time: string
+                      tuesday:
+                      - closing_time: string
+                        opening_time: string
+                      wednesday:
+                      - closing_time: string
+                        opening_time: string
+                    shop:
+                      id: 0
+                    shop_overridden_opening_hours:
+                    - friday:
+                        availability: string
+                        opening_hours:
+                        - closing_time: string
+                          opening_time: string
+                      monday:
+                        availability: string
+                        opening_hours:
+                        - closing_time: string
+                          opening_time: string
+                      saturday:
+                        availability: string
+                        opening_hours:
+                        - closing_time: string
+                          opening_time: string
+                      shop_id: 0
+                      sunday:
+                        availability: string
+                        opening_hours:
+                        - closing_time: string
+                          opening_time: string
+                      thursday:
+                        availability: string
+                        opening_hours:
+                        - closing_time: string
+                          opening_time: string
+                      tuesday:
+                        availability: string
+                        opening_hours:
+                        - closing_time: string
+                          opening_time: string
+                      wednesday:
+                        availability: string
+                        opening_hours:
+                        - closing_time: string
+                          opening_time: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SL01_Response_201'
+          description: Created
+      summary: SL01 - Create a location
+      tags:
+      - Services
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Asynchronous: once per day <br/>- Synchronous: each time you need to create a service</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- Asynchronous: every hour <br/>- Synchronous: each time you need to create a service</div>
+
+        <div class="extension-title">Pagination</div>
+
+
+        <p>This resource supports seek pagination (<a href="#section/Seek-pagination-and-sort">see documentation</a>)</p>
+
+
+        </div>'
+      operationId: SL12
+      parameters:
+      - description: 'Shop id to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: shop
+        required: false
+        schema:
+          type: integer
+          format: int64
+        style: form
+      - description: 'Service Location IDs to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: location_id
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: 'Service Location type to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: location_type
+        required: false
+        schema:
+          type: string
+          enum:
+          - AT_CUSTOMER_LOCATION
+          - AT_SHOP_LOCATION
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    data:
+                    - contact_info:
+                        email: urna@elit.edu
+                        phone: 1-919-506-3035
+                      geography:
+                        address:
+                          city: Chico
+                          company: 2466 White Avenue
+                          country_code: US
+                          formatted_address: 2466 White Ave, Chico, CA 95973, États-Unis
+                          state: CA
+                          street1: 2466 White Avenue
+                          zip_code: '95973'
+                        center:
+                          latitude: 39.7613779
+                          longitude: -121.8500737
+                        radius: 2000
+                        type: CIRCLE
+                      id: 30ef2a4c-0ee1-4afe-ac0a-3ef30df43c70
+                      label: 2466 White Avenue
+                      medias:
+                      - mime_type: image/jpeg
+                        url: /api/mms/location-medias/b2b321a7-c5ea-4694-bac3-2cc74de9e2e0
+                      opening_hours:
+                        friday:
+                        - closing_time: '12:00'
+                          opening_time: 09:00
+                        - closing_time: '18:00'
+                          opening_time: '14:00'
+                        monday: []
+                        saturday:
+                        - closing_time: '12:00'
+                          opening_time: 08:00
+                        - closing_time: '19:00'
+                          opening_time: '14:00'
+                        sunday:
+                        - closing_time: '12:00'
+                          opening_time: 08:00
+                        - closing_time: '18:00'
+                          opening_time: '14:00'
+                        thursday:
+                        - closing_time: '12:00'
+                          opening_time: 08:00
+                        - closing_time: '18:00'
+                          opening_time: '14:00'
+                        tuesday:
+                        - closing_time: '12:00'
+                          opening_time: 09:00
+                        - closing_time: '18:00'
+                          opening_time: '14:00'
+                        wednesday:
+                        - closing_time: '12:00'
+                          opening_time: 08:00
+                        - closing_time: '19:00'
+                          opening_time: '14:00'
+                      shop:
+                        id: 152
+                      shop_overridden_opening_hours:
+                      - friday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 09:00
+                          - closing_time: '18:00'
+                            opening_time: '14:00'
+                        monday:
+                          availability: NOT_AVAILABLE
+                        saturday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 08:00
+                          - closing_time: '19:00'
+                            opening_time: '14:00'
+                        shop_id: 42
+                        sunday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 08:00
+                          - closing_time: '18:00'
+                            opening_time: '14:00'
+                        thursday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 08:00
+                          - closing_time: '18:00'
+                            opening_time: '14:00'
+                        tuesday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 09:00
+                          - closing_time: '18:00'
+                            opening_time: '14:00'
+                        wednesday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 08:00
+                          - closing_time: '19:00'
+                            opening_time: '14:00'
+                    - contact_info:
+                        email: nonummy@vulputatelacusCras.co.uk
+                        phone: 1-919-656-6541
+                      geography:
+                        address:
+                          city: Roscoe
+                          company: 2467 Bend River Road
+                          country_code: US
+                          formatted_address: Bend River Rd, Roscoe, IL 61073, États-Unis
+                          state: IL
+                          street1: 2467 Bend River Road
+                          zip_code: '61073'
+                        geocode:
+                          latitude: 42.431015
+                          longitude: -89.0403527
+                        type: POINT
+                      id: 87ac4bd2-48d6-4afe-a1bf-4a82b663aed4
+                      label: 2467 Bend River Road
+                      opening_hours:
+                        friday: []
+                        monday:
+                        - closing_time: '12:00'
+                          opening_time: 09:00
+                        - closing_time: '18:00'
+                          opening_time: '14:00'
+                        saturday:
+                        - closing_time: '12:00'
+                          opening_time: 08:00
+                        - closing_time: '19:00'
+                          opening_time: '14:00'
+                        sunday:
+                        - closing_time: '12:00'
+                          opening_time: 09:00
+                        - closing_time: '18:00'
+                          opening_time: '14:00'
+                        thursday: []
+                        tuesday: []
+                        wednesday:
+                        - closing_time: '12:00'
+                          opening_time: 08:00
+                        - closing_time: '19:00'
+                          opening_time: '14:00'
+                      shop:
+                        id: 153
+                      shop_overridden_opening_hours:
+                      - friday:
+                          availability: NOT_AVAILABLE
+                        monday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 09:00
+                          - closing_time: '18:00'
+                            opening_time: '14:00'
+                        saturday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 08:00
+                          - closing_time: '19:00'
+                            opening_time: '14:00'
+                        shop_id: 42
+                        sunday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 09:00
+                          - closing_time: '18:00'
+                            opening_time: '14:00'
+                        thursday:
+                          availability: NOT_AVAILABLE
+                        tuesday:
+                          availability: NOT_AVAILABLE
+                        wednesday:
+                          availability: OVERRIDDEN_HOURS
+                          opening_hours:
+                          - closing_time: '12:00'
+                            opening_time: 08:00
+                          - closing_time: '19:00'
+                            opening_time: '14:00'
+                    next_page_token: bGltaXQ9MiZhZnRlcj04N2FjNGJkMi00OGQ2LTRhZmUtYTFiZi00YTgyYjY2M2FlZDQmc29ydD1sYWJlbCxBU0M=.CFpfMq4SqojszIok6kfjG9yjnHAjku5bbfX4AXqRC3s=
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    data:
+                    - contact_info:
+                        email: string
+                        phone: string
+                      description: string
+                      geography:
+                        type: POINT
+                      id: string
+                      label: string
+                      medias:
+                      - mime_type: string
+                        url: string
+                      opening_hours:
+                        friday:
+                        - closing_time: string
+                          opening_time: string
+                        monday:
+                        - closing_time: string
+                          opening_time: string
+                        saturday:
+                        - closing_time: string
+                          opening_time: string
+                        sunday:
+                        - closing_time: string
+                          opening_time: string
+                        thursday:
+                        - closing_time: string
+                          opening_time: string
+                        tuesday:
+                        - closing_time: string
+                          opening_time: string
+                        wednesday:
+                        - closing_time: string
+                          opening_time: string
+                      shop:
+                        id: 0
+                      shop_overridden_opening_hours:
+                      - friday:
+                          availability: string
+                          opening_hours:
+                          - closing_time: string
+                            opening_time: string
+                        monday:
+                          availability: string
+                          opening_hours:
+                          - closing_time: string
+                            opening_time: string
+                        saturday:
+                          availability: string
+                          opening_hours:
+                          - closing_time: string
+                            opening_time: string
+                        shop_id: 0
+                        sunday:
+                          availability: string
+                          opening_hours:
+                          - closing_time: string
+                            opening_time: string
+                        thursday:
+                          availability: string
+                          opening_hours:
+                          - closing_time: string
+                            opening_time: string
+                        tuesday:
+                          availability: string
+                          opening_hours:
+                          - closing_time: string
+                            opening_time: string
+                        wednesday:
+                          availability: string
+                          opening_hours:
+                          - closing_time: string
+                            opening_time: string
+                    next_page_token: string
+                    previous_page_token: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SL12_Response_200'
+          description: OK
+      summary: SL12 - List locations
+      tags:
+      - Services
+  /api/mms/locations/{location_id}:
+    delete:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: 20 per second</div>
+
+        <div class="max-call-frequency">Maximum usage: 60 per second</div>
+
+        </div>'
+      operationId: SL06
+      parameters:
+      - description: Id of the location to delete.
+        explode: false
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '204':
+          description: No Content
+      summary: SL06 - Delete a location
+      tags:
+      - Services
+  /api/mms/models:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Asynchronous: once per day <br/>- Synchronous: at each faceting display</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- Asynchronous: every hour <br/>- Synchronous: at each faceting display</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/displaying_services.htm">More context</a></li></ul><div class="extension-title">Pagination</div>
+
+
+        <p>This resource supports seek pagination (<a href="#section/Seek-pagination-and-sort">see documentation</a>)</p>
+
+
+        <div class="extension-title">Sort fields</div>
+
+
+        <code>sort</code> field can have the following values:<ul><li><b>title</b> - Sort by title (asc by default)</li><li><b>code</b> (Default) - Sort by code (asc by default)</li></ul>
+
+
+        </div>'
+      operationId: SM11
+      parameters:
+      - description: 'Category codes to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: category_code
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: 'Model codes to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: model_code
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: 'Location types to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: location_type
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NO_LOCATION
+            - AT_CUSTOMER_LOCATION
+            - AT_SHOP_LOCATION
+        style: form
+      - description: 'Booking types to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: booking_type
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NO_BOOKING
+            - DATETIME_REQUEST
+            - SCHEDULED_EVENTS
+        style: form
+      - description: 'Consumption types to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: consumption_type
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - VOUCHER
+            - CONFIRMATION_BY_SHOP
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values
+                  value:
+                    data:
+                    - booking:
+                        type: DATETIME_REQUEST
+                      categories:
+                      - code: LOGO_DESIGN
+                        label: Logo Design
+                      code: LOGO
+                      consumption:
+                        type: VOUCHER
+                      custom_attributes:
+                      - code: DISABLED_ACCESSIBILITY
+                        label: Accessible to disabled
+                        service_configuration:
+                          minimum_number_of_elements: 1
+                        type: BOOLEAN
+                      - code: HEIGHT_DIFF
+                        label: Height difference
+                        precision: 2
+                        service_configuration:
+                          minimum_number_of_elements: 0
+                        type: DECIMAL
+                      - code: AGE_MIN
+                        label: Age minimum
+                        service_configuration:
+                          minimum_number_of_elements: 1
+                        type: INTEGER
+                      - available_values:
+                        - code: HIKING_STICKS
+                          label: hiking sticks
+                        - code: ADAPTED_OUTFIT
+                          label: adapted outfit
+                        - code: BOOTS
+                          label: boots
+                        code: EQUIPT_TO_BRING
+                        label: Equipment & gear to bring
+                        service_configuration:
+                          minimum_number_of_elements: 0
+                        type: VALUE_LIST
+                      - code: PREMIUM_PACKAGE
+                        label: Premium package
+                        order_configuration:
+                          maximum_number_of_elements: 1
+                          shop_permission: READ_WRITE
+                        service_configuration:
+                          minimum_number_of_elements: 0
+                        type: BOOLEAN
+                      location:
+                        type: NO_LOCATION
+                      pricing:
+                        options:
+                        - code: BRING_YOUR_OWN_MATERIAL
+                          label: Bring your own material
+                          service_configuration:
+                            minimum_number_of_elements: 1
+                          type: BOOLEAN
+                        - available_values:
+                          - code: ONE_HOUR
+                            label: 1 hour
+                          - code: TWO_HOURS
+                            label: 2 hours
+                          - code: THREE_HOURS
+                            label: 3 hours
+                          code: WORK_DURATION
+                          label: Work duration
+                          order_configuration:
+                            maximum_number_of_elements: 1
+                          service_configuration:
+                            description_allowed: true
+                            maximum_number_of_elements: 1
+                            minimum_number_of_elements: 0
+                          type: VALUE_LIST
+                        type: FIXED_PRICE
+                      quantity:
+                        on_marketplace:
+                        - ALLOW_UNLIMITED
+                        per_order:
+                        - ALLOW_FIXED
+                      title: What do you need to ask for a logo design ?
+                    - booking:
+                        type: NO_BOOKING
+                      categories:
+                      - code: ATM_REPAIR
+                        label: ATM Repair
+                      - code: DISHWASHER
+                        label: Dishwasher
+                      - code: COPIER_REPAIR
+                        label: Copier Repair
+                      code: OTHER_REPAIR
+                      consumption:
+                        type: VOUCHER
+                      custom_attributes: []
+                      location:
+                        type: AT_CUSTOMER_LOCATION
+                      pricing:
+                        type: FIXED_PRICE
+                      quantity:
+                        on_marketplace:
+                        - ALLOW_FIXED
+                        per_order:
+                        - ALLOW_UNLIMITED
+                      title: Other reparation services
+                    next_page_token: bGltaXQ9MiZhZnRlcj1PVEhFUl9SRVBBSVImc29ydD1jb2RlLEFTQw==.xbaxi4cZXKhHIqhuSR6Afp3xoKiW-RBAUEiSVQ3B9C0=
+                application/json-1:
+                  summary: Example with scheduled events
+                  value:
+                    data:
+                    - booking:
+                        type: SCHEDULED_EVENTS
+                      categories:
+                      - code: CHILDREN_ANIMATIONS
+                        label: Children animations
+                      code: CLOWN_SHOW
+                      consumption:
+                        type: VOUCHER
+                      custom_attributes: []
+                      description: Model regrouping clown shows.
+                      location:
+                        type: AT_SHOP_LOCATION
+                      pricing:
+                        type: FIXED_PRICE
+                      quantity:
+                        on_marketplace:
+                        - NO_QUANTITY
+                        per_order:
+                        - NO_QUANTITY
+                      title: Clown show
+                    next_page_token: bGltaXQ9MSZhZnRlcj1PVEhFUl9SRVBBSVImc29ydD1jb2RlLEFTQw==.FLjQC3Q1O1OGr6XXmWaZD0fwJgrv1fir6fi-i9sl8Cs=
+                application/json-2:
+                  summary: Example with multi price
+                  value:
+                    data:
+                    - booking:
+                        type: DATETIME_REQUEST
+                      categories:
+                      - code: YOGA_CLASSES
+                        label: Yoga classes
+                      code: PRIVATE_YOGA_LESSON
+                      consumption:
+                        type: VOUCHER
+                      custom_attributes: []
+                      description: Model regrouping yoga lessons at customer location.
+                      location:
+                        type: AT_CUSTOMER_LOCATION
+                      pricing:
+                        price_per_unit_options:
+                        - code: YOGA_MEMBER_STATUS
+                          label: Member status
+                          order_configuration:
+                            minimum_number_of_elements: 1
+                          service_configuration:
+                            minimum_number_of_elements: 1
+                          type: VALUE_LIST
+                          values:
+                          - code: NORMAL
+                            label: Normal
+                          - code: MEMBER
+                            label: Member
+                        type: FIXED_PRICE_MULTI
+                      quantity:
+                        on_marketplace:
+                        - ALLOW_UNLIMITED
+                        per_order:
+                        - ALLOW_UNLIMITED
+                      title: Private yoga lesson
+                    next_page_token: bGltaXQ9MSZhZnRlcj1PVEhFUl9SRVBBSVImc29ydD1jb2RlLEFTQw==.FLjQC3Q1O1OGr6XXmWaZD0fwJgrv1fir6fi-i9sl8Cs=
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    data:
+                    - booking:
+                        type: NO_BOOKING
+                      categories:
+                      - code: string
+                        label: string
+                      code: string
+                      consumption:
+                        type: VOUCHER
+                      custom_attributes:
+                      - code: string
+                        label: string
+                        order_configuration:
+                          maximum_number_of_elements: 0
+                          shop_permission: INVISIBLE
+                        service_configuration:
+                          maximum_number_of_elements: 0
+                          minimum_number_of_elements: 0
+                        type: BOOLEAN
+                      description: string
+                      location:
+                        type: NO_LOCATION
+                      pricing:
+                        options:
+                        - code: string
+                          label: string
+                          order_configuration:
+                            maximum_number_of_elements: 0
+                          type: BOOLEAN
+                        price_per_unit_options:
+                        - code: string
+                          label: string
+                          order_configuration:
+                            minimum_number_of_elements: 0
+                          service_configuration:
+                            minimum_number_of_elements: 0
+                          type: VALUE_LIST
+                          values:
+                          - code: string
+                            label: string
+                        type: FIXED_PRICE
+                      quantity:
+                        on_marketplace:
+                        - ALLOW_UNLIMITED
+                        per_order:
+                        - ALLOW_UNLIMITED
+                      title: string
+                    next_page_token: string
+                    previous_page_token: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SM11_Response_200'
+          description: OK
+      summary: SM11 - List service models
+      tags:
+      - Services
+  /api/mms/services:
+    post:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: 60 per minute</div>
+
+        <div class="max-call-frequency">Maximum usage: 60 per minute</div>
+
+        </div>'
+      operationId: SOF25
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values
+                value:
+                  booking:
+                    type: NO_BOOKING
+                  category:
+                    code: MEALS_AND_DINNERS
+                  custom_attribute_values:
+                  - code: DISABLED_ACCESSIBILITY
+                    type: BOOLEAN
+                    value: true
+                  - code: AGE_MIN
+                    type: INTEGER
+                    value: 18
+                  - code: FOOD_SPECIALITY
+                    type: VALUE_LIST
+                    value:
+                    - code: FRENCH
+                    - code: CHINESE
+                  date_availability_end: '2022-05-31T10:15:00Z'
+                  date_availability_start: '2017-03-15T10:15:00Z'
+                  description: You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.
+                  inactive_reasons:
+                  - MANUALLY_DISABLED
+                  location:
+                    shop_locations:
+                    - id: 702c3e56-dcca-41e2-b6bd-72ba3fa809be
+                    - id: 98a6f82d-2408-4609-b182-d1b80b8a9b55
+                    type: AT_SHOP_LOCATION
+                  model:
+                    code: FOOD
+                  pricing:
+                    options:
+                    - code: BRING_YOUR_OWN_MATERIAL
+                      type: BOOLEAN
+                      values:
+                      - amount: 45.8
+                        value: true
+                      - amount: 0
+                        value: false
+                    - code: EQUIPT_TO_BRING
+                      type: VALUE_LIST
+                      values:
+                      - amount: 45.8
+                        code: HIKING_STICKS
+                      - amount: 12
+                        code: ADAPTED_OUTFIT
+                      - amount: 22
+                        code: BOOTS
+                    price_per_unit: 77
+                    type: FIXED_PRICE
+                  quantity:
+                    available: 12
+                    max_per_order: 1
+                    type: LIMITED
+                  service_tax_code: SERVICE_TAX_CODE
+                  shop:
+                    id: 122
+                  title: Alliance Royal Package Diner
+              application/json-1:
+                summary: Example with scheduled events
+                value:
+                  booking:
+                    duration: PT1H30M
+                    sessions:
+                    - available_units: 10
+                      time_slot:
+                        start: '2024-09-12T10:30:00Z'
+                    - available_units: 20
+                      time_slot:
+                        start: '2024-09-20T10:30:00Z'
+                    type: SCHEDULED_EVENTS
+                  category:
+                    code: CHILDREN_ANIMATIONS
+                  date_availability_start: '2023-07-20T00:00:00Z'
+                  description: Unleash laughter and joy with our unforgettable clown show! Experience side-splitting humor, mesmerizing tricks, and boundless energy. Perfect for all ages, it's an entertainment extravaganza that will leave you smiling from start to finish. Join us for an incredible dose of fun and magical moments!
+                  inactive_reasons:
+                  - MANUALLY_DISABLED
+                  location:
+                    shop_locations:
+                    - id: e6fec1dc-0721-4ac8-9244-fefbfb44b951
+                    type: AT_SHOP_LOCATION
+                  model:
+                    code: CLOWN_SHOW
+                  pricing:
+                    price_per_unit: 50
+                    type: FIXED_PRICE
+                  quantity:
+                    type: NO_QUANTITY
+                  service_tax_code: SERVICE_TAX_CODE
+                  shop:
+                    id: 122
+                  title: 'Jubilant Jesters: A Riot of Laughter with Our Whimsical Clown Show!'
+              application/json-2:
+                summary: Example with multi price
+                value:
+                  booking:
+                    duration: PT1H
+                    type: DATETIME_REQUEST
+                  category:
+                    code: YOGA_CLASSES
+                  custom_attribute_values:
+                  - code: YOGA_LEVEL
+                    type: VALUE_LIST
+                    value:
+                    - code: BEGINNER
+                    - code: INTERMEDIATE
+                    - code: EXPERT
+                  date_availability_start: '2023-07-20T00:00:00Z'
+                  description: Elevate your yoga practice with private classes at home. Experience personalized instruction tailored to your needs and goals. Enjoy the convenience and focused attention as you find balance and inner peace in the comfort of your own space. Transform your well-being with our exceptional private yoga classes.
+                  inactive_reasons:
+                  - MANUALLY_DISABLED
+                  location:
+                    shop_locations:
+                    - id: e6fec1dc-0721-4ac8-9244-fefbfb44b951
+                    type: AT_CUSTOMER_LOCATION
+                  model:
+                    code: PRIVATE_YOGA_LESSON
+                  pricing:
+                    price_per_unit_options:
+                    - code: YOGA_MEMBER_STATUS
+                      type: VALUE_LIST
+                      values:
+                      - amount: 80
+                        code: NORMAL
+                      - amount: 50
+                        code: MEMBER
+                    type: FIXED_PRICE_MULTI
+                  quantity:
+                    type: NO_QUANTITY
+                  service_tax_code: SERVICE_TAX_CODE
+                  shop:
+                    id: 122
+                  title: 'Personalized Yoga Oasis: Elevate Your Practice with Private Classes at Home'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  booking:
+                    type: NO_BOOKING
+                  category:
+                    code: string
+                  custom_attribute_values:
+                  - code: string
+                    type: BOOLEAN
+                    value: object
+                  date_availability_end: '2023-03-28T09:34:42Z'
+                  date_availability_start: '2023-03-28T09:34:42Z'
+                  description: string
+                  inactive_reasons:
+                  - MANUALLY_DISABLED
+                  location:
+                    type: NO_LOCATION
+                  model:
+                    code: string
+                  pricing:
+                    options:
+                    - code: string
+                      type: string
+                    type: FIXED_PRICE
+                  quantity:
+                    max_per_order: 0
+                    type: NO_QUANTITY
+                  service_tax_code: string
+                  shop:
+                    id: 0
+                  title: string
+            schema:
+              $ref: '#/components/schemas/SOF25_Request'
+      responses:
+        '201':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values
+                  value:
+                    booking:
+                      type: NO_BOOKING
+                    category:
+                      code: MEALS_AND_DINNERS
+                      label: Meals & Dinners
+                    code: UEVT44VJXD
+                    consumption:
+                      type: VOUCHER
+                    custom_attribute_values:
+                    - code: DISABLED_ACCESSIBILITY
+                      label: Accessible to disabled
+                      type: BOOLEAN
+                      value: true
+                    - code: AGE_MIN
+                      label: Age minimum
+                      type: INTEGER
+                      value: 18
+                    - code: FOOD_SPECIALITY
+                      label: Food specialty
+                      type: VALUE_LIST
+                      value:
+                      - code: FRENCH
+                        label: French food
+                      - code: CHINESE
+                        label: Chinese
+                    date_availability_start: '2017-03-15T10:15:00Z'
+                    date_created: '2017-03-29T13:52:37Z'
+                    date_updated: '2017-03-29T13:52:37Z'
+                    description: You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.
+                    inactive_reasons:
+                    - MANUALLY_DISABLED
+                    location:
+                      shop_locations:
+                      - geography:
+                          distance: 5000
+                          geocode:
+                            latitude: 48.8501395
+                            longitude: 2.3522323
+                          type: POINT
+                        id: 702c3e56-dcca-41e2-b6bd-72ba3fa809be
+                        label: Restaurant
+                      - geography:
+                          distance: 10000
+                          geocode:
+                            latitude: 48.8604325
+                            longitude: 2.3508443
+                          type: POINT
+                        id: 98a6f82d-2408-4609-b182-d1b80b8a9b55
+                        label: Delivery
+                      type: AT_SHOP_LOCATION
+                    model:
+                      code: FOOD
+                      title: All services related to food
+                    pricing:
+                      max_price_per_unit: 202.6
+                      min_price_per_unit: 77
+                      options:
+                      - code: BRING_YOUR_OWN_MATERIAL
+                        label: Bring your own material
+                        type: BOOLEAN
+                        values:
+                        - amount: 45.8
+                          value: true
+                        - amount: 0
+                          value: false
+                      - code: EQUIPT_TO_BRING
+                        label: Equipment & gear to bring
+                        type: VALUE_LIST
+                        values:
+                        - amount: 45.8
+                          code: HIKING_STICKS
+                          label: hiking sticks
+                        - amount: 12
+                          code: ADAPTED_OUTFIT
+                          label: adapted outfit
+                        - amount: 22
+                          code: BOOTS
+                          label: boots
+                      price_per_unit: 77
+                      type: FIXED_PRICE
+                    quantity:
+                      available: 12
+                      max_per_order: 1
+                      type: LIMITED
+                    shop:
+                      currency_code: EUR
+                      id: 122
+                      name: Advansed Teksyztems
+                    title: Alliance Royal Package Diner
+                application/json-1:
+                  summary: Example with scheduled events
+                  value:
+                    booking:
+                      duration: PT1H30M
+                      sessions:
+                      - available_units: 10
+                        id: 208d4dd0-0c1d-4ca5-9083-d51b972be6c1
+                        time_slot:
+                          end: '2024-09-12T12:00:00Z'
+                          start: '2024-09-12T10:30:00Z'
+                      - available_units: 20
+                        id: 302f0527-1dae-499e-95c5-2178406c396d
+                        time_slot:
+                          end: '2024-09-20T12:00:00Z'
+                          start: '2024-09-20T10:30:00Z'
+                      type: SCHEDULED_EVENTS
+                    category:
+                      code: CHILDREN_ANIMATIONS
+                      label: Children animations
+                    code: JUBILANT_JESTERS
+                    consumption:
+                      type: VOUCHER
+                    custom_attribute_values: []
+                    date_availability_start: '2023-07-20T00:00:00Z'
+                    date_created: '2023-07-18T13:52:37Z'
+                    date_updated: '2023-07-18T13:52:37Z'
+                    description: Unleash laughter and joy with our unforgettable clown show! Experience side-splitting humor, mesmerizing tricks, and boundless energy. Perfect for all ages, it's an entertainment extravaganza that will leave you smiling from start to finish. Join us for an incredible dose of fun and magical moments!
+                    inactive_reasons:
+                    - MANUALLY_DISABLED
+                    location:
+                      shop_locations:
+                      - geography:
+                          geocode:
+                            latitude: 48.86725
+                            longitude: 2.3845
+                          type: POINT
+                        id: e6fec1dc-0721-4ac8-9244-fefbfb44b951
+                        label: Laughing out loud
+                      type: AT_SHOP_LOCATION
+                    model:
+                      code: CLOWN_SHOW
+                      title: Clown show
+                    pricing:
+                      max_price_per_unit: 50
+                      min_price_per_unit: 50
+                      options: []
+                      price_per_unit: 50
+                      type: FIXED_PRICE
+                    quantity:
+                      type: NO_QUANTITY
+                    shop:
+                      currency_code: EUR
+                      id: 122
+                      name: Laughing out loud
+                    title: 'Jubilant Jesters: A Riot of Laughter with Our Whimsical Clown Show!'
+                application/json-2:
+                  summary: Example with multi price
+                  value:
+                    booking:
+                      duration: PT1H
+                      type: DATETIME_REQUEST
+                    category:
+                      code: YOGA_CLASSES
+                      label: Yoga classes
+                    code: PERSONALIZED_YOGA_OASIS
+                    consumption:
+                      type: VOUCHER
+                    custom_attribute_values:
+                    - code: YOGA_LEVEL
+                      label: Yoga level
+                      type: VALUE_LIST
+                      value:
+                      - code: BEGINNER
+                        label: Beginner
+                      - code: INTERMEDIATE
+                        label: Intermediate
+                      - code: EXPERT
+                        label: Expert
+                    date_availability_start: '2023-07-20T00:00:00Z'
+                    date_created: '2023-07-18T13:52:37Z'
+                    date_updated: '2023-07-18T13:52:37Z'
+                    description: Elevate your yoga practice with private classes at home. Experience personalized instruction tailored to your needs and goals. Enjoy the convenience and focused attention as you find balance and inner peace in the comfort of your own space. Transform your well-being with our exceptional private yoga classes.
+                    inactive_reasons:
+                    - MANUALLY_DISABLED
+                    location:
+                      shop_locations:
+                      - geography:
+                          center:
+                            latitude: 48.84132
+                            longitude: 2.30743
+                          radius: 10000
+                          type: CIRCLE
+                        id: e6fec1dc-0721-4ac8-9244-fefbfb44b951
+                        label: Yoga club
+                      type: AT_CUSTOMER_LOCATION
+                    model:
+                      code: PRIVATE_YOGA_LESSON
+                      title: Private yoga lesson
+                    pricing:
+                      max_price_per_unit: 80
+                      min_price_per_unit: 50
+                      price_per_unit_options:
+                      - code: YOGA_MEMBER_STATUS
+                        label: Member status
+                        type: VALUE_LIST
+                        values:
+                        - amount: 80
+                          code: NORMAL
+                          label: Normal
+                        - amount: 50
+                          code: MEMBER
+                          label: Member
+                      type: FIXED_PRICE_MULTI
+                    quantity:
+                      type: NO_QUANTITY
+                    shop:
+                      currency_code: EUR
+                      id: 122
+                      name: Yoga club
+                    title: 'Personalized Yoga Oasis: Elevate Your Practice with Private Classes at Home'
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    booking:
+                      type: NO_BOOKING
+                    category:
+                      code: string
+                      label: string
+                    code: string
+                    consumption:
+                      type: VOUCHER
+                    custom_attribute_values:
+                    - code: string
+                      label: string
+                      type: BOOLEAN
+                      value: object
+                    date_availability_end: '2023-03-28T09:34:42Z'
+                    date_availability_start: '2023-03-28T09:34:42Z'
+                    date_created: '2023-03-28T09:34:42Z'
+                    date_updated: '2023-03-28T09:34:42Z'
+                    description: string
+                    inactive_reasons:
+                    - MANUALLY_DISABLED
+                    location:
+                      type: NO_LOCATION
+                    medias:
+                    - mime_type: string
+                      url: string
+                    model:
+                      code: string
+                      title: string
+                    pricing:
+                      max_price_per_unit: 0
+                      min_price_per_unit: 0
+                      options:
+                      - code: string
+                        label: string
+                        type: BOOLEAN
+                      type: FIXED_PRICE
+                    quantity:
+                      max_per_order: 0
+                      type: NO_QUANTITY
+                    service_tax_code: string
+                    shop:
+                      currency_code: string
+                      id: 0
+                      name: string
+                    title: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SOF25_Response_201'
+          description: Created
+      summary: SOF25 - Create a service
+      tags:
+      - Services
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Once per hour</div>
+
+        <div class="max-call-frequency">Maximum usage: Once per hour</div>
+
+        <div class="extension-title">Pagination</div>
+
+
+        <p>This resource supports seek pagination (<a href="#section/Seek-pagination-and-sort">see documentation</a>)</p>
+
+
+        <div class="extension-title">Sort fields</div>
+
+
+        <code>sort</code> field can have the following values:<ul><li><b>date_created</b> - Sort by last created date (asc by default)</li><li><b>date_updated</b> - Sort by last updated date (asc by default)</li><li><b>title</b> (Default) - Sort by title (asc by default)</li></ul>
+
+
+        </div>'
+      operationId: SOF11
+      parameters:
+      - description: 'Category codes to include in result. Children categories of the specified codes are also included. (default: include all)'
+        explode: true
+        in: query
+        name: category_code
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: 'Service codes to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: service_code
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: 'Model codes to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: model_code
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: 'Service state to include in result. (default: include all)'
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+        style: form
+      - description: Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used.
+        explode: true
+        in: query
+        name: shop_id
+        required: false
+        schema:
+          type: integer
+          format: int64
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values
+                  value:
+                    data:
+                    - booking:
+                        type: NO_BOOKING
+                      category:
+                        code: MEALS_AND_DINNERS
+                        label: Meals & Dinners
+                      code: UEVT44VJXD
+                      consumption:
+                        type: VOUCHER
+                      custom_attribute_values:
+                      - code: DISABLED_ACCESSIBILITY
+                        label: Accessible to disabled
+                        type: BOOLEAN
+                        value: true
+                      - code: AGE_MIN
+                        label: Age minimum
+                        type: INTEGER
+                        value: 18
+                      - code: FOOD_SPECIALITY
+                        label: Food specialty
+                        type: VALUE_LIST
+                        value:
+                        - code: FRENCH
+                          label: French food
+                        - code: CHINESE
+                          label: Chinese
+                      date_availability_start: '2017-03-15T10:15:00Z'
+                      date_created: '2017-03-29T13:52:37Z'
+                      date_updated: '2017-03-29T13:52:37Z'
+                      description: You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.
+                      inactive_reasons:
+                      - MANUALLY_DISABLED
+                      location:
+                        shop_locations:
+                        - geography:
+                            distance: 5000
+                            geocode:
+                              latitude: 48.8501395
+                              longitude: 2.3522323
+                            type: POINT
+                          id: 702c3e56-dcca-41e2-b6bd-72ba3fa809be
+                          label: Restaurant
+                        - geography:
+                            distance: 10000
+                            geocode:
+                              latitude: 48.8604325
+                              longitude: 2.3508443
+                            type: POINT
+                          id: 98a6f82d-2408-4609-b182-d1b80b8a9b55
+                          label: Delivery
+                        type: AT_SHOP_LOCATION
+                      medias:
+                      - mime_type: image/jpeg
+                        url: /images/service-01.jpg
+                      model:
+                        code: FOOD
+                        title: All services related to food
+                      pricing:
+                        max_price_per_unit: 202.6
+                        min_price_per_unit: 77
+                        options:
+                        - code: BRING_YOUR_OWN_MATERIAL
+                          label: Bring your own material
+                          type: BOOLEAN
+                          values:
+                          - amount: 45.8
+                            value: true
+                          - amount: 0
+                            value: false
+                        - code: EQUIPT_TO_BRING
+                          label: Equipment & gear to bring
+                          type: VALUE_LIST
+                          values:
+                          - amount: 45.8
+                            code: HIKING_STICKS
+                            label: hiking sticks
+                          - amount: 12
+                            code: ADAPTED_OUTFIT
+                            label: adapted outfit
+                          - amount: 22
+                            code: BOOTS
+                            label: boots
+                        price_per_unit: 77
+                        type: FIXED_PRICE
+                      quantity:
+                        available: 12
+                        max_per_order: 1
+                        type: LIMITED
+                      title: Alliance Royal Package Diner
+                    previous_page_token: YmVmb3JlPVVFVlQ0NFZKWEQmbGltaXQ9MSZzb3J0PXByb3ZpZGVyX3JhdGluZyxERVND.SB48uOZTJdHkoM-ebma4VxB7SUtpwmswT-tbw-lnkJw=
+                application/json-1:
+                  summary: Example with scheduled events
+                  value:
+                    data:
+                    - booking:
+                        duration: PT1H30M
+                        sessions:
+                        - available_units: 10
+                          id: 208d4dd0-0c1d-4ca5-9083-d51b972be6c1
+                          time_slot:
+                            end: '2024-09-12T12:00:00Z'
+                            start: '2024-09-12T10:30:00Z'
+                        - available_units: 20
+                          id: 302f0527-1dae-499e-95c5-2178406c396d
+                          time_slot:
+                            end: '2024-09-20T12:00:00Z'
+                            start: '2024-09-20T10:30:00Z'
+                        type: SCHEDULED_EVENTS
+                      category:
+                        code: CHILDREN_ANIMATIONS
+                        label: Children animations
+                      code: JUBILANT_JESTERS
+                      consumption:
+                        type: VOUCHER
+                      custom_attribute_values: []
+                      date_availability_start: '2023-07-20T00:00:00Z'
+                      date_created: '2023-07-18T13:52:37Z'
+                      date_updated: '2023-07-18T13:52:37Z'
+                      description: Unleash laughter and joy with our unforgettable clown show! Experience side-splitting humor, mesmerizing tricks, and boundless energy. Perfect for all ages, it's an entertainment extravaganza that will leave you smiling from start to finish. Join us for an incredible dose of fun and magical moments!
+                      inactive_reasons:
+                      - MANUALLY_DISABLED
+                      location:
+                        shop_locations:
+                        - geography:
+                            geocode:
+                              latitude: 48.86725
+                              longitude: 2.3845
+                            type: POINT
+                          id: e6fec1dc-0721-4ac8-9244-fefbfb44b951
+                          label: Laughing out loud
+                        type: AT_SHOP_LOCATION
+                      medias:
+                      - mime_type: image/jpeg
+                        url: /images/service-01.jpg
+                      model:
+                        code: CLOWN_SHOW
+                        title: Clown show
+                      pricing:
+                        max_price_per_unit: 50
+                        min_price_per_unit: 50
+                        options: []
+                        price_per_unit: 50
+                        type: FIXED_PRICE
+                      quantity:
+                        type: NO_QUANTITY
+                      title: 'Jubilant Jesters: A Riot of Laughter with Our Whimsical Clown Show!'
+                    previous_page_token: YmVmb3JlPVVFVlQ0NFZKWEQmbGltaXQ9MSZzb3J0PXByb3ZpZGVyX3JhdGluZyxERVND.SB48uOZTJdHkoM-ebma4VxB7SUtpwmswT-tbw-lnkJw=
+                application/json-2:
+                  summary: Example with multi price
+                  value:
+                    data:
+                    - booking:
+                        duration: PT1H
+                        type: DATETIME_REQUEST
+                      category:
+                        code: YOGA_CLASSES
+                        label: Yoga classes
+                      code: PERSONALIZED_YOGA_OASIS
+                      consumption:
+                        type: VOUCHER
+                      custom_attribute_values:
+                      - code: YOGA_LEVEL
+                        label: Yoga level
+                        type: VALUE_LIST
+                        value:
+                        - code: BEGINNER
+                          label: Beginner
+                        - code: INTERMEDIATE
+                          label: Intermediate
+                        - code: EXPERT
+                          label: Expert
+                      date_availability_start: '2023-07-20T00:00:00Z'
+                      date_created: '2023-07-18T13:52:37Z'
+                      date_updated: '2023-07-18T13:52:37Z'
+                      description: Elevate your yoga practice with private classes at home. Experience personalized instruction tailored to your needs and goals. Enjoy the convenience and focused attention as you find balance and inner peace in the comfort of your own space. Transform your well-being with our exceptional private yoga classes.
+                      inactive_reasons:
+                      - MANUALLY_DISABLED
+                      location:
+                        shop_locations:
+                        - geography:
+                            center:
+                              latitude: 48.84132
+                              longitude: 2.30743
+                            radius: 10000
+                            type: CIRCLE
+                          id: e6fec1dc-0721-4ac8-9244-fefbfb44b951
+                          label: Yoga club
+                        type: AT_CUSTOMER_LOCATION
+                      medias:
+                      - mime_type: image/jpeg
+                        url: /images/service-01.jpg
+                      model:
+                        code: PRIVATE_YOGA_LESSON
+                        title: Private yoga lesson
+                      pricing:
+                        max_price_per_unit: 80
+                        min_price_per_unit: 50
+                        price_per_unit_options:
+                        - code: YOGA_MEMBER_STATUS
+                          label: Member status
+                          type: VALUE_LIST
+                          values:
+                          - amount: 80
+                            code: NORMAL
+                            label: Normal
+                          - amount: 50
+                            code: MEMBER
+                            label: Member
+                        type: FIXED_PRICE_MULTI
+                      quantity:
+                        type: NO_QUANTITY
+                      title: 'Personalized Yoga Oasis: Elevate Your Practice with Private Classes at Home'
+                    previous_page_token: YmVmb3JlPVVFVlQ0NFZKWEQmbGltaXQ9MSZzb3J0PXByb3ZpZGVyX3JhdGluZyxERVND.SB48uOZTJdHkoM-ebma4VxB7SUtpwmswT-tbw-lnkJw=
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    data:
+                    - booking:
+                        type: NO_BOOKING
+                      category:
+                        code: string
+                        label: string
+                      code: string
+                      consumption:
+                        type: VOUCHER
+                      custom_attribute_values:
+                      - code: string
+                        label: string
+                        type: BOOLEAN
+                        value: object
+                      date_availability_end: '2023-03-28T09:34:42Z'
+                      date_availability_start: '2023-03-28T09:34:42Z'
+                      date_created: '2023-03-28T09:34:42Z'
+                      date_updated: '2023-03-28T09:34:42Z'
+                      description: string
+                      inactive_reasons:
+                      - MANUALLY_DISABLED
+                      location:
+                        type: NO_LOCATION
+                      medias:
+                      - mime_type: string
+                        url: string
+                      model:
+                        code: string
+                        title: string
+                      pricing:
+                        max_price_per_unit: 0
+                        min_price_per_unit: 0
+                        options:
+                        - code: string
+                          label: string
+                          type: BOOLEAN
+                        type: FIXED_PRICE
+                      quantity:
+                        max_per_order: 0
+                        type: NO_QUANTITY
+                      service_tax_code: string
+                      title: string
+                    next_page_token: string
+                    previous_page_token: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SOF11_Response_200'
+          description: OK
+      summary: SOF11 - List services
+      tags:
+      - Services
+  /api/mms/services/{service_code}:
+    put:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: 60 per minute</div>
+
+        <div class="max-call-frequency">Maximum usage: 60 per minute</div>
+
+        </div>'
+      operationId: SOF26
+      parameters:
+      - description: Code of the service to update.
+        explode: false
+        in: path
+        name: service_code
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values
+                value:
+                  booking:
+                    type: NO_BOOKING
+                  category:
+                    code: MEALS_AND_DINNERS
+                  custom_attribute_values:
+                  - code: DISABLED_ACCESSIBILITY
+                    type: BOOLEAN
+                    value: true
+                  - code: AGE_MIN
+                    type: INTEGER
+                    value: 18
+                  - code: FOOD_SPECIALITY
+                    type: VALUE_LIST
+                    value:
+                    - code: FRENCH
+                    - code: CHINESE
+                  date_availability_end: '2022-05-31T10:15:00Z'
+                  date_availability_start: '2017-03-15T10:15:00Z'
+                  description: You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.
+                  location:
+                    shop_locations:
+                    - id: 702c3e56-dcca-41e2-b6bd-72ba3fa809be
+                    - id: 98a6f82d-2408-4609-b182-d1b80b8a9b55
+                    type: AT_SHOP_LOCATION
+                  model:
+                    code: FOOD
+                  pricing:
+                    options:
+                    - code: BRING_YOUR_OWN_MATERIAL
+                      type: BOOLEAN
+                      values:
+                      - amount: 45.8
+                        value: true
+                      - amount: 0
+                        value: false
+                    - code: EQUIPT_TO_BRING
+                      type: VALUE_LIST
+                      values:
+                      - amount: 45.8
+                        code: HIKING_STICKS
+                      - amount: 12
+                        code: ADAPTED_OUTFIT
+                      - amount: 22
+                        code: BOOTS
+                    price_per_unit: 77
+                    type: FIXED_PRICE
+                  quantity:
+                    available: 12
+                    max_per_order: 1
+                    type: LIMITED
+                  service_tax_code: SERVICE_TAX_CODE
+                  shop:
+                    id: 122
+                  title: Alliance Royal Package Diner
+              application/json-1:
+                summary: Example with multi price
+                value:
+                  pricing:
+                    price_per_unit_options:
+                    - code: YOGA_MEMBER_STATUS
+                      type: VALUE_LIST
+                      values:
+                      - amount: 80
+                        code: NORMAL
+                      - amount: 50
+                        code: MEMBER
+                    type: FIXED_PRICE_MULTI
+                  shop:
+                    id: 122
+              application/json-2:
+                summary: Example with scheduled events
+                value:
+                  booking:
+                    duration: PT1H30M
+                    sessions:
+                    - available_units: 10
+                      id: 208d4dd0-0c1d-4ca5-9083-d51b972be6c1
+                      time_slot:
+                        start: '2024-09-12T10:30:00Z'
+                    - available_units: 20
+                      time_slot:
+                        start: '2024-09-20T10:30:00Z'
+                    type: SCHEDULED_EVENTS
+                  shop:
+                    id: 122
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  booking:
+                    type: NO_BOOKING
+                  category:
+                    code: string
+                  custom_attribute_values:
+                  - code: string
+                    type: BOOLEAN
+                    value: object
+                  date_availability_end: '2023-03-28T09:34:42Z'
+                  date_availability_start: '2023-03-28T09:34:42Z'
+                  description: string
+                  inactive_reasons:
+                  - MANUALLY_DISABLED
+                  location:
+                    type: NO_LOCATION
+                  model:
+                    code: string
+                  pricing:
+                    options:
+                    - code: string
+                      type: string
+                    type: FIXED_PRICE
+                  quantity:
+                    max_per_order: 0
+                    type: NO_QUANTITY
+                  service_tax_code: string
+                  shop:
+                    id: 0
+                  title: string
+            schema:
+              $ref: '#/components/schemas/SOF26_Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values
+                  value:
+                    booking:
+                      type: NO_BOOKING
+                    category:
+                      code: MEALS_AND_DINNERS
+                      label: Meals & Dinners
+                    code: UEVT44VJXD
+                    consumption:
+                      type: VOUCHER
+                    custom_attribute_values:
+                    - code: DISABLED_ACCESSIBILITY
+                      label: Accessible to disabled
+                      type: BOOLEAN
+                      value: true
+                    - code: AGE_MIN
+                      label: Age minimum
+                      type: INTEGER
+                      value: 18
+                    - code: FOOD_SPECIALITY
+                      label: Food specialty
+                      type: VALUE_LIST
+                      value:
+                      - code: FRENCH
+                        label: French food
+                      - code: CHINESE
+                        label: Chinese
+                    date_availability_start: '2017-03-15T10:15:00Z'
+                    date_created: '2017-03-29T13:52:37Z'
+                    date_updated: '2017-03-29T13:52:37Z'
+                    description: You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.
+                    inactive_reasons:
+                    - MANUALLY_DISABLED
+                    location:
+                      shop_locations:
+                      - geography:
+                          distance: 5000
+                          geocode:
+                            latitude: 48.8501395
+                            longitude: 2.3522323
+                          type: POINT
+                        id: 702c3e56-dcca-41e2-b6bd-72ba3fa809be
+                        label: Restaurant
+                      - geography:
+                          distance: 10000
+                          geocode:
+                            latitude: 48.8604325
+                            longitude: 2.3508443
+                          type: POINT
+                        id: 98a6f82d-2408-4609-b182-d1b80b8a9b55
+                        label: Delivery
+                      type: AT_SHOP_LOCATION
+                    medias:
+                    - mime_type: image/jpeg
+                      url: /images/service-01.jpg
+                    model:
+                      code: FOOD
+                      title: All services related to food
+                    pricing:
+                      max_price_per_unit: 202.6
+                      min_price_per_unit: 77
+                      options:
+                      - code: BRING_YOUR_OWN_MATERIAL
+                        label: Bring your own material
+                        type: BOOLEAN
+                        values:
+                        - amount: 45.8
+                          value: true
+                        - amount: 0
+                          value: false
+                      - code: EQUIPT_TO_BRING
+                        label: Equipment & gear to bring
+                        type: VALUE_LIST
+                        values:
+                        - amount: 45.8
+                          code: HIKING_STICKS
+                          label: hiking sticks
+                        - amount: 12
+                          code: ADAPTED_OUTFIT
+                          label: adapted outfit
+                        - amount: 22
+                          code: BOOTS
+                          label: boots
+                      price_per_unit: 77
+                      type: FIXED_PRICE
+                    quantity:
+                      available: 12
+                      max_per_order: 1
+                      type: LIMITED
+                    shop:
+                      currency_code: EUR
+                      id: 122
+                      name: Advansed Teksyztems
+                    title: Alliance Royal Package Diner
+                application/json-1:
+                  summary: Example with multi price
+                  value:
+                    booking:
+                      duration: PT1H
+                      type: DATETIME_REQUEST
+                    category:
+                      code: YOGA_CLASSES
+                      label: Yoga classes
+                    code: PERSONALIZED_YOGA_OASIS
+                    consumption:
+                      type: VOUCHER
+                    custom_attribute_values:
+                    - code: YOGA_LEVEL
+                      label: Yoga level
+                      type: VALUE_LIST
+                      value:
+                      - code: BEGINNER
+                        label: Beginner
+                      - code: INTERMEDIATE
+                        label: Intermediate
+                      - code: EXPERT
+                        label: Expert
+                    date_availability_start: '2023-07-20T00:00:00Z'
+                    date_created: '2023-07-18T13:52:37Z'
+                    date_updated: '2023-07-18T13:52:37Z'
+                    description: Elevate your yoga practice with private classes at home. Experience personalized instruction tailored to your needs and goals. Enjoy the convenience and focused attention as you find balance and inner peace in the comfort of your own space. Transform your well-being with our exceptional private yoga classes.
+                    inactive_reasons:
+                    - MANUALLY_DISABLED
+                    location:
+                      shop_locations:
+                      - geography:
+                          center:
+                            latitude: 48.84132
+                            longitude: 2.30743
+                          radius: 10000
+                          type: CIRCLE
+                        id: e6fec1dc-0721-4ac8-9244-fefbfb44b951
+                        label: Yoga club
+                      type: AT_CUSTOMER_LOCATION
+                    medias:
+                    - mime_type: image/jpeg
+                      url: /images/service-01.jpg
+                    model:
+                      code: PRIVATE_YOGA_LESSON
+                      title: Private yoga lesson
+                    pricing:
+                      max_price_per_unit: 80
+                      min_price_per_unit: 50
+                      price_per_unit_options:
+                      - code: YOGA_MEMBER_STATUS
+                        label: Member status
+                        type: VALUE_LIST
+                        values:
+                        - amount: 80
+                          code: NORMAL
+                          label: Normal
+                        - amount: 50
+                          code: MEMBER
+                          label: Member
+                      type: FIXED_PRICE_MULTI
+                    quantity:
+                      type: NO_QUANTITY
+                    shop:
+                      currency_code: EUR
+                      id: 122
+                      name: Yoga club
+                    title: 'Personalized Yoga Oasis: Elevate Your Practice with Private Classes at Home'
+                application/json-2:
+                  summary: Example with scheduled events
+                  value:
+                    booking:
+                      duration: PT1H30M
+                      sessions:
+                      - available_units: 10
+                        id: 208d4dd0-0c1d-4ca5-9083-d51b972be6c1
+                        time_slot:
+                          end: '2024-09-12T12:00:00Z'
+                          start: '2024-09-12T10:30:00Z'
+                      - available_units: 20
+                        id: 302f0527-1dae-499e-95c5-2178406c396d
+                        time_slot:
+                          end: '2024-09-20T12:00:00Z'
+                          start: '2024-09-20T10:30:00Z'
+                      type: SCHEDULED_EVENTS
+                    category:
+                      code: CHILDREN_ANIMATIONS
+                      label: Children animations
+                    code: JUBILANT_JESTERS
+                    consumption:
+                      type: VOUCHER
+                    custom_attribute_values: []
+                    date_availability_start: '2023-07-20T00:00:00Z'
+                    date_created: '2023-07-18T13:52:37Z'
+                    date_updated: '2023-07-18T13:52:37Z'
+                    description: Unleash laughter and joy with our unforgettable clown show! Experience side-splitting humor, mesmerizing tricks, and boundless energy. Perfect for all ages, it's an entertainment extravaganza that will leave you smiling from start to finish. Join us for an incredible dose of fun and magical moments!
+                    inactive_reasons:
+                    - MANUALLY_DISABLED
+                    location:
+                      shop_locations:
+                      - geography:
+                          geocode:
+                            latitude: 48.86725
+                            longitude: 2.3845
+                          type: POINT
+                        id: e6fec1dc-0721-4ac8-9244-fefbfb44b951
+                        label: Laughing out loud
+                      type: AT_SHOP_LOCATION
+                    medias:
+                    - mime_type: image/jpeg
+                      url: /images/service-01.jpg
+                    model:
+                      code: CLOWN_SHOW
+                      title: Clown show
+                    pricing:
+                      max_price_per_unit: 50
+                      min_price_per_unit: 50
+                      options: []
+                      price_per_unit: 50
+                      type: FIXED_PRICE
+                    quantity:
+                      type: NO_QUANTITY
+                    shop:
+                      currency_code: EUR
+                      id: 122
+                      name: Laughing out loud
+                    title: 'Jubilant Jesters: A Riot of Laughter with Our Whimsical Clown Show!'
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    booking:
+                      type: NO_BOOKING
+                    category:
+                      code: string
+                      label: string
+                    code: string
+                    consumption:
+                      type: VOUCHER
+                    custom_attribute_values:
+                    - code: string
+                      label: string
+                      type: BOOLEAN
+                      value: object
+                    date_availability_end: '2023-03-28T09:34:42Z'
+                    date_availability_start: '2023-03-28T09:34:42Z'
+                    date_created: '2023-03-28T09:34:42Z'
+                    date_updated: '2023-03-28T09:34:42Z'
+                    description: string
+                    inactive_reasons:
+                    - MANUALLY_DISABLED
+                    location:
+                      type: NO_LOCATION
+                    medias:
+                    - mime_type: string
+                      url: string
+                    model:
+                      code: string
+                      title: string
+                    pricing:
+                      max_price_per_unit: 0
+                      min_price_per_unit: 0
+                      options:
+                      - code: string
+                        label: string
+                        type: BOOLEAN
+                      type: FIXED_PRICE
+                    quantity:
+                      max_per_order: 0
+                      type: NO_QUANTITY
+                    service_tax_code: string
+                    shop:
+                      currency_code: string
+                      id: 0
+                      name: string
+                    title: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SOF26_Response_200'
+          description: OK
+      summary: SOF26 - Update a service
+      tags:
+      - Services
+    delete:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: 30 per minute</div>
+
+        <div class="max-call-frequency">Maximum usage: 30 per minute</div>
+
+        </div>'
+      operationId: SOF27
+      parameters:
+      - description: Code of the service to delete.
+        explode: false
+        in: path
+        name: service_code
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '204':
+          description: No Content
+      summary: SOF27 - Delete a service
+      tags:
+      - Services
+components:
+  schemas:
+    SOF25_Request:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SOF25_Request_Booking'
+          description: Service booking method. The type of the booking must reflect the associated Model's booking. By default, <code>booking</code> will be of type <code>NO_BOOKING</code>.
+        category:
+          $ref: '#/components/schemas/SOF25_Request_Category'
+          description: Service category
+        custom_attribute_values:
+          type: array
+          description: Service custom attributes values
+          items:
+            $ref: '#/components/schemas/SOF25_Request_CustomAttributeValues'
+        date_availability_end:
+          type: string
+          format: date-time
+          description: Date when the service ends being available
+        date_availability_start:
+          type: string
+          format: date-time
+          description: Date when the service starts being available
+        description:
+          type: string
+          description: Service description
+          maxLength: 2000
+          minLength: 0
+        inactive_reasons:
+          type: array
+          description: Reason why the service is inactive.
+          items:
+            type: string
+            description: 'Enum: `"MANUALLY_DISABLED"`
+
+              '
+          uniqueItems: true
+        location:
+          $ref: '#/components/schemas/SOF25_Request_Location'
+          description: Service location method. The type of the location must reflect the associated Model's location. By default, <code>location</code> will be of type <code>NO_LOCATION</code>.
+        model:
+          $ref: '#/components/schemas/SOF25_Request_Model'
+          description: Service model
+        pricing:
+          $ref: '#/components/schemas/SOF25_Request_Pricing'
+          description: Service pricing method
+        quantity:
+          $ref: '#/components/schemas/SOF25_Request_Quantity'
+          description: Service quantity method. By default, <code>quantity</code> will be of type <code>NO_QUANTITY</code>.
+        service_tax_code:
+          type: string
+          description: Service tax code
+        shop:
+          $ref: '#/components/schemas/SOF25_Request_Shop'
+          description: Shop which the service belong to
+        title:
+          type: string
+          description: Service title
+          maxLength: 150
+          minLength: 3
+      required:
+      - category
+      - model
+      - pricing
+      - shop
+      - title
+    SL01_Response_201_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
+    SOF25_Response_201_Category:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Category code
+        label:
+          type: string
+          description: Category label
+      required:
+      - code
+      - label
+    SOF25_Request_Pricing:
+      type: object
+      description: Service pricing method
+      discriminator:
+        mapping:
+          ESTIMATED_PRICE: '#/components/schemas/SOF25_Request_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF25_Request_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF25_Request_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF25_Request_Pricing_FixedPriceMulti'
+        propertyName: type
+      properties:
+        options:
+          type: array
+          description: Service pricing options.
+          items:
+            $ref: '#/components/schemas/SOF25_Request_Pricing_Options'
+        type:
+          type: string
+          description: 'Price type. It must be equal to the price type in the Model configuration.
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+      required:
+      - type
+    SM11_Response_200_Data_Pricing_PricePerUnitOptions:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code
+        label:
+          type: string
+          description: Label
+        order_configuration:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_OrderConfiguration'
+        service_configuration:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_ServiceConfiguration'
+        type:
+          type: string
+          description: 'Enum: `"VALUE_LIST"`
+
+            '
+        values:
+          type: array
+          description: Values of the list
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_Values'
+      required:
+      - code
+      - label
+      - type
+      - values
+    SOF26_Response_200_Consumption:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Type of consumption
+
+
+            Enum: `"VOUCHER"`, `"CONFIRMATION_BY_SHOP"`
+
+            '
+      required:
+      - type
+    SL01_Response_201_ShopOverriddenOpeningHours_Monday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Thursday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Request_Booking:
+      type: object
+      description: Service booking method. The type of the booking must reflect the associated Model's booking. By default, <code>booking</code> will be of type <code>NO_BOOKING</code>.
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF25_Request_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF25_Request_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF25_Request_Booking_ScheduledEvents'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+      required:
+      - type
+    SL01_Response_201_ShopOverriddenOpeningHours_Sunday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Sunday_OpeningHours'
+      required:
+      - availability
+    SOF11_Response_200_Data_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
+    SOF25_Request_Category:
+      type: object
+      description: Service category
+      properties:
+        code:
+          type: string
+          description: Service category code. The category must exist in the configuration.
+      required:
+      - code
+    SM11_Response_200_Data_Pricing_PricePerUnitOptions_ServiceConfiguration:
+      type: object
+      properties:
+        minimum_number_of_elements:
+          type: integer
+          format: int32
+          description: 'Minimum number of elements.
+
+
+            Enum: `"1"`
+
+            '
+      required:
+      - minimum_number_of_elements
+    SL01_Request_Geography:
+      type: object
+      description: Geographic information for this location
+      discriminator:
+        mapping:
+          CIRCLE: '#/components/schemas/SL01_Request_Geography_Circle'
+          POINT: '#/components/schemas/SL01_Request_Geography_Point'
+          ZONE_REFERENCES: '#/components/schemas/SL01_Request_Geography_ZoneReferences'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
+
+            '
+      required:
+      - type
+    SL01_Request_OpeningHours:
+      type: object
+      description: Location opening hours
+      properties:
+        friday:
+          type: array
+          description: Friday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Friday'
+        monday:
+          type: array
+          description: Monday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Monday'
+        saturday:
+          type: array
+          description: Saturday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Saturday'
+        sunday:
+          type: array
+          description: Sunday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Sunday'
+        thursday:
+          type: array
+          description: Thursday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Thursday'
+        tuesday:
+          type: array
+          description: Tuesday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Tuesday'
+        wednesday:
+          type: array
+          description: Wednesday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Wednesday'
+    SL01_Request_OpeningHours_Saturday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OpeningHours_Monday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Response_200_Pricing_Options:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF26_Response_200_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF26_Response_200_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Option code
+        label:
+          type: string
+          description: Option label
+        type:
+          type: string
+          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+      required:
+      - code
+      - label
+    SOF26_Request_Quantity:
+      type: object
+      description: Service quantity method.
+      discriminator:
+        mapping:
+          LIMITED: '#/components/schemas/SOF26_Request_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF26_Request_Quantity_NoQuantity'
+        propertyName: type
+      properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
+          maximum: 1000
+          minimum: 1
+        type:
+          type: string
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
+
+            '
+      required:
+      - type
+    SL12_Response_200_Data_OpeningHours_Friday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_OpeningHours_Thursday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Request_OpeningHours_Thursday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_OpeningHours_Monday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data:
+      type: object
+      properties:
+        contact_info:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ContactInfo'
+          description: Location contact information
+        description:
+          type: string
+          description: Location description
+        geography:
+          $ref: '#/components/schemas/SL12_Response_200_Data_Geography'
+          description: Geographic information for this location
+        id:
+          type: string
+          description: Location ID
+        label:
+          type: string
+          description: Location label
+        medias:
+          type: array
+          description: Medias associated to the location
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_Medias'
+        opening_hours:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours'
+          description: Location opening hours
+        shop:
+          $ref: '#/components/schemas/SL12_Response_200_Data_Shop'
+          description: Shop details
+        shop_overridden_opening_hours:
+          type: array
+          description: Overridden opening hours. Only available for an operator location
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours'
+      required:
+      - geography
+      - id
+      - label
+    SOF26_Request_CustomAttributeValues:
+      type: object
+      description: Service custom attributes values
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF26_Request_CustomAttributeValues_Boolean'
+          DATE_TIME: '#/components/schemas/SOF26_Request_CustomAttributeValues_DateTime'
+          DECIMAL: '#/components/schemas/SOF26_Request_CustomAttributeValues_Decimal'
+          INTEGER: '#/components/schemas/SOF26_Request_CustomAttributeValues_Integer'
+          LINK: '#/components/schemas/SOF26_Request_CustomAttributeValues_Link'
+          LONG_TEXT: '#/components/schemas/SOF26_Request_CustomAttributeValues_LongText'
+          TEXT: '#/components/schemas/SOF26_Request_CustomAttributeValues_Text'
+          VALUE_LIST: '#/components/schemas/SOF26_Request_CustomAttributeValues_ValueList'
+          VIDEO: '#/components/schemas/SOF26_Request_CustomAttributeValues_Video'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Custom attribute code. The attribute must exist in the configuration.
+        type:
+          type: string
+          description: 'Custom attribute type
+
+
+            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+        value:
+          type: object
+          description: Custom attribute value. Value is removed if not set or set to <code>null</code>.
+      required:
+      - code
+      - type
+    SL01_Response_201_ShopOverriddenOpeningHours_Tuesday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Tuesday_OpeningHours'
+      required:
+      - availability
+    SOF26_Request_Pricing:
+      type: object
+      description: Service pricing method
+      discriminator:
+        mapping:
+          ESTIMATED_PRICE: '#/components/schemas/SOF26_Request_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF26_Request_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF26_Request_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF26_Request_Pricing_FixedPriceMulti'
+        propertyName: type
+      properties:
+        options:
+          type: array
+          description: Service pricing options.
+          items:
+            $ref: '#/components/schemas/SOF26_Request_Pricing_Options'
+        type:
+          type: string
+          description: 'Price type. It must be equal to the price type in the Model configuration.
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+    SL12_Response_200_Data_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
+    SL01_Response_201_Shop:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Shop identifier
+      required:
+      - id
+    SL01_Request_OpeningHours_Friday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_ShopOverriddenOpeningHours_Sunday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Thursday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Thursday_OpeningHours'
+      required:
+      - availability
+    SL01_Response_201_OpeningHours_Sunday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_OpeningHours_Saturday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Response_201_CustomAttributeValues:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_Boolean'
+          DATE_TIME: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_DateTime'
+          DECIMAL: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_Decimal'
+          INTEGER: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_Integer'
+          LINK: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_Link'
+          LONG_TEXT: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_LongText'
+          TEXT: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_Text'
+          VALUE_LIST: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_ValueList'
+          VIDEO: '#/components/schemas/SOF25_Response_201_CustomAttributeValues_Video'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Custom attribute code
+        label:
+          type: string
+          description: Custom attribute label
+        type:
+          type: string
+          description: 'Custom attribute field type
+
+
+            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+        value:
+          type: object
+          description: Custom attribute field value
+      required:
+      - code
+      - label
+      - type
+    SL01_Response_201:
+      type: object
+      properties:
+        contact_info:
+          $ref: '#/components/schemas/SL01_Response_201_ContactInfo'
+          description: Location contact information
+        description:
+          type: string
+          description: Location description
+        geography:
+          $ref: '#/components/schemas/SL01_Response_201_Geography'
+          description: Geographic information for this location
+        id:
+          type: string
+          description: Location ID
+        label:
+          type: string
+          description: Location label
+        medias:
+          type: array
+          description: Medias associated to the location
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_Medias'
+        opening_hours:
+          $ref: '#/components/schemas/SL01_Response_201_OpeningHours'
+          description: Location opening hours
+        shop:
+          $ref: '#/components/schemas/SL01_Response_201_Shop'
+          description: Shop details
+        shop_overridden_opening_hours:
+          type: array
+          description: Overridden opening hours. Only available for an operator location
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours'
+      required:
+      - geography
+      - id
+      - label
+    SOF11_Response_200_Data_Location:
+      type: object
+      discriminator:
+        mapping:
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF11_Response_200_Data_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF11_Response_200_Data_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF11_Response_200_Data_Location_NoLocation'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+    SOF25_Request_Location:
+      type: object
+      description: Service location method. The type of the location must reflect the associated Model's location. By default, <code>location</code> will be of type <code>NO_LOCATION</code>.
+      discriminator:
+        mapping:
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF25_Request_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF25_Request_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF25_Request_Location_NoLocation'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+      required:
+      - type
+    SM11_Response_200_Data_Quantity:
+      type: object
+      properties:
+        on_marketplace:
+          type: array
+          description: Quantity requirements on the marketplace
+          items:
+            type: string
+            description: 'Enum: `"ALLOW_UNLIMITED"`, `"ALLOW_FIXED"`, `"NO_QUANTITY"`
+
+              '
+          uniqueItems: true
+        per_order:
+          type: array
+          description: Quantity requirements per order
+          items:
+            type: string
+            description: 'Enum: `"ALLOW_UNLIMITED"`, `"ALLOW_FIXED"`, `"NO_QUANTITY"`
+
+              '
+          uniqueItems: true
+      required:
+      - on_marketplace
+      - per_order
+    SL01_Response_201_ShopOverriddenOpeningHours_Wednesday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Wednesday_OpeningHours'
+      required:
+      - availability
+    SM11_Response_200_Data_Pricing_PricePerUnitOptions_OrderConfiguration:
+      type: object
+      properties:
+        minimum_number_of_elements:
+          type: integer
+          format: int32
+          description: 'Minimum number of elements.
+
+
+            Enum: `"1"`
+
+            '
+      required:
+      - minimum_number_of_elements
+    SOF26_Request_Model:
+      type: object
+      description: Service model
+      properties:
+        code:
+          type: string
+          description: Service model code. Must be equal to the service's model code.
+      required:
+      - code
+    SM11_Response_200_Data_CustomAttributes_OrderConfiguration:
+      type: object
+      properties:
+        maximum_number_of_elements:
+          type: integer
+          format: int32
+          description: Maximum number of elements. Present only for ValueLists. Absent when no limit.
+        shop_permission:
+          type: string
+          description: 'Determines how Shops are allowed to use the custom attribute
+
+
+            Enum: `"INVISIBLE"`, `"READ_ONLY"`, `"READ_WRITE"`
+
+            '
+      required:
+      - shop_permission
+    SL01_Response_201_ShopOverriddenOpeningHours_Friday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Friday_OpeningHours'
+      required:
+      - availability
+    SOF25_Response_201_Pricing_Options:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF25_Response_201_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF25_Response_201_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Option code
+        label:
+          type: string
+          description: Option label
+        type:
+          type: string
+          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+      required:
+      - code
+      - label
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Saturday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SM11_Response_200_Data_Consumption:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Consumption type
+
+
+            Enum: `"VOUCHER"`, `"CONFIRMATION_BY_SHOP"`
+
+            '
+      required:
+      - type
+    SL12_Response_200_Data_OpeningHours_Wednesday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF11_Response_200_Data_Pricing_Options:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Option code
+        label:
+          type: string
+          description: Option label
+        type:
+          type: string
+          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+      required:
+      - code
+      - label
+    SM11_Response_200_Data_Categories:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Category code
+        label:
+          type: string
+          description: Category label
+      required:
+      - code
+      - label
+    SM11_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Friday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Request_Category:
+      type: object
+      description: Service category
+      properties:
+        code:
+          type: string
+          description: Service category code. The category must exist in the configuration.
+      required:
+      - code
+    SL01_Response_201_OpeningHours_Friday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Monday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF11_Response_200_Data_Booking:
+      type: object
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF11_Response_200_Data_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF11_Response_200_Data_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF11_Response_200_Data_Booking_ScheduledEvents'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+    SM11_Response_200_Data:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Booking'
+          description: Indicates the booking method for services based on the model
+        categories:
+          type: array
+          description: Service model categories
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_Categories'
+        code:
+          type: string
+          description: Service model code
+        consumption:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Consumption'
+          description: Indicates the consumption method for services based on the model
+        custom_attributes:
+          type: array
+          description: Service model custom attributes. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+        description:
+          type: string
+          description: Service model description
+        location:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Location'
+          description: Indicates the location method for services based on the model
+        pricing:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing'
+          description: Indicates the pricing method for services based on the model
+        quantity:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Quantity'
+          description: Indicate the quantity fields requirements for services based on the model
+        title:
+          type: string
+          description: Service model title
+      required:
+      - booking
+      - categories
+      - code
+      - consumption
+      - custom_attributes
+      - location
+      - pricing
+      - quantity
+      - title
+    SOF11_Response_200_Data_Quantity:
+      type: object
+      discriminator:
+        mapping:
+          LIMITED: '#/components/schemas/SOF11_Response_200_Data_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF11_Response_200_Data_Quantity_NoQuantity'
+        propertyName: type
+      properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
+        type:
+          type: string
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
+
+            '
+    SOF25_Request_Shop:
+      type: object
+      description: Shop which the service belong to
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Shop identifier
+      required:
+      - id
+    SM11_Response_200_Data_Pricing:
+      type: object
+      properties:
+        options:
+          type: array
+          description: Service model pricing options. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_Options'
+        price_per_unit_options:
+          type: array
+          description: Service model price per unit options. Always present if pricing is multi price.
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions'
+        type:
+          type: string
+          description: 'Pricing type<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+      required:
+      - type
+    SL01_Response_201_ShopOverriddenOpeningHours_Saturday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Request_Location:
+      type: object
+      description: Service location method. The location type must be equal to the location type in the Model configuration.
+      discriminator:
+        mapping:
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF26_Request_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF26_Request_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF26_Request_Location_NoLocation'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Location type. The location type must be equal to the location type in the Model configuration.
+
+
+            Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+      required:
+      - type
+    SL01_Request_Shop:
+      type: object
+      description: Shop which the location belong to. Leave it empty if you want to create an operator location.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Shop identifier
+      required:
+      - id
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Tuesday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Tuesday_OpeningHours'
+      required:
+      - availability
+    SOF26_Response_200_Location:
+      type: object
+      discriminator:
+        mapping:
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF26_Response_200_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF26_Response_200_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF26_Response_200_Location_NoLocation'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+    SOF26_Response_200:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SOF26_Response_200_Booking'
+          description: Service booking method
+        category:
+          $ref: '#/components/schemas/SOF26_Response_200_Category'
+          description: Service category
+        code:
+          type: string
+          description: Service code
+        consumption:
+          $ref: '#/components/schemas/SOF26_Response_200_Consumption'
+          description: 'Service consumption method: how will the service be consumed ?'
+        custom_attribute_values:
+          type: array
+          description: Service custom attributes values
+          items:
+            $ref: '#/components/schemas/SOF26_Response_200_CustomAttributeValues'
+        date_availability_end:
+          type: string
+          format: date-time
+          description: Date when the service ends being available
+        date_availability_start:
+          type: string
+          format: date-time
+          description: Date when the service starts being available
+        date_created:
+          type: string
+          format: date-time
+          description: Service creation date
+        date_updated:
+          type: string
+          format: date-time
+          description: Service update date
+        description:
+          type: string
+          description: Service description
+        inactive_reasons:
+          type: array
+          description: List of reasons why the service is inactive. If the service is active, this list is empty
+          items:
+            type: string
+            description: 'Enum: `"MANUALLY_DISABLED"`, `"ZERO_QUANTITY"`, `"ORDER_REFUSED"`, `"ORDER_ACCEPTANCE_TIMEOUT"`, `"NOT_IN_AVAILABILITY_PERIOD"`, `"SHOP_NOT_OPEN"`, `"SHOP_SUSPENDED"`, `"SHOP_CURRENCY_DISABLED"`, `"MISSING_REQUIRED_FIELDS"`, `"VALIDATION_NEEDED"`, `"NO_SESSION"`
+
+              '
+        location:
+          $ref: '#/components/schemas/SOF26_Response_200_Location'
+          description: 'Service location method: where the service will be provided ?'
+        medias:
+          type: array
+          description: All the medias associated to a service
+          items:
+            $ref: '#/components/schemas/SOF26_Response_200_Medias'
+        model:
+          $ref: '#/components/schemas/SOF26_Response_200_Model'
+          description: Service model
+        pricing:
+          $ref: '#/components/schemas/SOF26_Response_200_Pricing'
+          description: Service pricing method
+        quantity:
+          $ref: '#/components/schemas/SOF26_Response_200_Quantity'
+          description: Service quantity method
+        service_tax_code:
+          type: string
+          description: Service tax code
+        shop:
+          $ref: '#/components/schemas/SOF26_Response_200_Shop'
+          description: Shop which creates the service
+        title:
+          type: string
+          description: Service title
+      required:
+      - booking
+      - category
+      - code
+      - consumption
+      - custom_attribute_values
+      - date_created
+      - date_updated
+      - inactive_reasons
+      - location
+      - model
+      - pricing
+      - quantity
+      - shop
+      - title
+    SOF11_Response_200_Data_CustomAttributeValues:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Boolean'
+          DATE_TIME: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_DateTime'
+          DECIMAL: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Decimal'
+          INTEGER: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Integer'
+          LINK: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Link'
+          LONG_TEXT: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_LongText'
+          TEXT: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Text'
+          VALUE_LIST: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_ValueList'
+          VIDEO: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Video'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Custom attribute code
+        label:
+          type: string
+          description: Custom attribute label
+        type:
+          type: string
+          description: 'Custom attribute field type
+
+
+            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+        value:
+          type: object
+          description: Custom attribute field value
+      required:
+      - code
+      - label
+      - type
+    SOF26_Response_200_Pricing:
+      type: object
+      discriminator:
+        mapping:
+          ESTIMATED_PRICE: '#/components/schemas/SOF26_Response_200_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF26_Response_200_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF26_Response_200_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF26_Response_200_Pricing_FixedPriceMulti'
+        propertyName: type
+      properties:
+        max_price_per_unit:
+          type: number
+          format: with decimals
+          description: Maximum price at which the service will be provided. It's a price per unit.
+        min_price_per_unit:
+          type: number
+          format: with decimals
+          description: Minimum price at which the service will be provided. It's a price per unit.
+        options:
+          type: array
+          description: Service pricing options. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SOF26_Response_200_Pricing_Options'
+        type:
+          type: string
+          description: 'Price type of the service.<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+      required:
+      - max_price_per_unit
+      - min_price_per_unit
+      - type
+    SOF25_Request_Quantity:
+      type: object
+      description: Service quantity method. By default, <code>quantity</code> will be of type <code>NO_QUANTITY</code>.
+      discriminator:
+        mapping:
+          LIMITED: '#/components/schemas/SOF25_Request_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF25_Request_Quantity_NoQuantity'
+        propertyName: type
+      properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
+          maximum: 1000
+          minimum: 1
+        type:
+          type: string
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
+
+            '
+    SL01_Request_OpeningHours_Wednesday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF11_Response_200_Data:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Booking'
+          description: Service booking method
+        category:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Category'
+          description: Service category
+        code:
+          type: string
+          description: Service code
+        consumption:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Consumption'
+          description: 'Service consumption method: how will the service be consumed ?'
+        custom_attribute_values:
+          type: array
+          description: Service custom attributes values
+          items:
+            $ref: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues'
+        date_availability_end:
+          type: string
+          format: date-time
+          description: Date when the service ends being available
+        date_availability_start:
+          type: string
+          format: date-time
+          description: Date when the service starts being available
+        date_created:
+          type: string
+          format: date-time
+          description: Service creation date
+        date_updated:
+          type: string
+          format: date-time
+          description: Service update date
+        description:
+          type: string
+          description: Service description
+        inactive_reasons:
+          type: array
+          description: List of reasons why the service is inactive. If the service is active, this list is empty
+          items:
+            type: string
+            description: 'Enum: `"MANUALLY_DISABLED"`, `"ZERO_QUANTITY"`, `"ORDER_REFUSED"`, `"ORDER_ACCEPTANCE_TIMEOUT"`, `"NOT_IN_AVAILABILITY_PERIOD"`, `"SHOP_NOT_OPEN"`, `"SHOP_SUSPENDED"`, `"SHOP_CURRENCY_DISABLED"`, `"MISSING_REQUIRED_FIELDS"`, `"VALIDATION_NEEDED"`, `"NO_SESSION"`
+
+              '
+        location:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Location'
+          description: 'Service location method: where the service will be provided ?'
+        medias:
+          type: array
+          description: All the medias associated to a service
+          items:
+            $ref: '#/components/schemas/SOF11_Response_200_Data_Medias'
+        model:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Model'
+          description: Service model
+        pricing:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Pricing'
+          description: Service pricing method
+        quantity:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Quantity'
+          description: Service quantity method
+        service_tax_code:
+          type: string
+          description: Service tax code
+        title:
+          type: string
+          description: Service title
+      required:
+      - booking
+      - category
+      - code
+      - consumption
+      - custom_attribute_values
+      - date_created
+      - date_updated
+      - inactive_reasons
+      - location
+      - model
+      - pricing
+      - quantity
+      - title
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Sunday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OpeningHours_Sunday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_Geography:
+      type: object
+      discriminator:
+        mapping:
+          CIRCLE: '#/components/schemas/SL01_Response_201_Geography_Circle'
+          POINT: '#/components/schemas/SL01_Response_201_Geography_Point'
+          ZONE_REFERENCES: '#/components/schemas/SL01_Response_201_Geography_ZoneReferences'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
+
+            '
+    SL01_Request_OpeningHours_Tuesday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Monday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Monday_OpeningHours'
+      required:
+      - availability
+    SL01_Response_201_OpeningHours_Wednesday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Request_Shop:
+      type: object
+      description: Shop which the service belong to
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Shop identifier
+      required:
+      - id
+    SOF26_Request:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SOF26_Request_Booking'
+          description: Service booking method. The booking type must be equal to the booking type in the Model configuration.
+        category:
+          $ref: '#/components/schemas/SOF26_Request_Category'
+          description: Service category
+        custom_attribute_values:
+          type: array
+          description: Service custom attributes values
+          items:
+            $ref: '#/components/schemas/SOF26_Request_CustomAttributeValues'
+        date_availability_end:
+          type: string
+          format: date-time
+          description: Date when the service ends being available. Set value to <code>null</code> to remove the date.
+        date_availability_start:
+          type: string
+          format: date-time
+          description: Date when the service starts being available. Set value to <code>null</code> to remove the date.
+        description:
+          type: string
+          description: Service description. Set value to <code>null</code> to remove the description.
+          maxLength: 2000
+        inactive_reasons:
+          type: array
+          description: Reason why the service is inactive. If equals to [] or <code>null</code>, then remove all reasons that are manually removable.
+          items:
+            type: string
+            description: 'Enum: `"MANUALLY_DISABLED"`
+
+              '
+          maxItems: 1
+          minItems: 0
+        location:
+          $ref: '#/components/schemas/SOF26_Request_Location'
+          description: Service location method. The location type must be equal to the location type in the Model configuration.
+        model:
+          $ref: '#/components/schemas/SOF26_Request_Model'
+          description: Service model
+        pricing:
+          $ref: '#/components/schemas/SOF26_Request_Pricing'
+          description: Service pricing method
+        quantity:
+          $ref: '#/components/schemas/SOF26_Request_Quantity'
+          description: Service quantity method.
+        service_tax_code:
+          type: string
+          description: Service tax code
+        shop:
+          $ref: '#/components/schemas/SOF26_Request_Shop'
+          description: Shop which the service belong to
+        title:
+          type: string
+          description: Service title
+          maxLength: 150
+          minLength: 3
+      required:
+      - shop
+    SOF26_Request_Pricing_Options:
+      type: object
+      description: Service pricing options.
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF26_Request_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF26_Request_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Pricing option identifier
+        type:
+          type: string
+          description: ''
+      required:
+      - code
+      - type
+    SOF11_Response_200_Data_Model:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Service model code
+        title:
+          type: string
+          description: Service model title
+      required:
+      - code
+      - title
+    SL12_Response_200_Data_Shop:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Shop identifier
+      required:
+      - id
+    SL01_Response_201_ShopOverriddenOpeningHours_Thursday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Thursday_OpeningHours'
+      required:
+      - availability
+    SOF11_Response_200_Data_Consumption:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Type of consumption
+
+
+            Enum: `"VOUCHER"`, `"CONFIRMATION_BY_SHOP"`
+
+            '
+      required:
+      - type
+    SOF25_Response_201_Location:
+      type: object
+      discriminator:
+        mapping:
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF25_Response_201_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF25_Response_201_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF25_Response_201_Location_NoLocation'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+    SL01_Request_ContactInfo:
+      type: object
+      description: Location contact information
+      properties:
+        email:
+          type: string
+          description: Contact E-mail
+          maxLength: 255
+          minLength: 0
+        phone:
+          type: string
+          description: Contact phone number
+          maxLength: 50
+          minLength: 0
+    SOF25_Response_201_Shop:
+      type: object
+      properties:
+        currency_code:
+          type: string
+          description: Currency ISO code
+        id:
+          type: integer
+          format: int64
+          description: Required identifier of the shop
+        name:
+          type: string
+          description: Shop name
+      required:
+      - currency_code
+      - id
+      - name
+    SM11_Response_200_Data_Location:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Location type
+
+
+            Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+      required:
+      - type
+    SOF25_Request_CustomAttributeValues:
+      type: object
+      description: Service custom attributes values
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF25_Request_CustomAttributeValues_Boolean'
+          DATE_TIME: '#/components/schemas/SOF25_Request_CustomAttributeValues_DateTime'
+          DECIMAL: '#/components/schemas/SOF25_Request_CustomAttributeValues_Decimal'
+          INTEGER: '#/components/schemas/SOF25_Request_CustomAttributeValues_Integer'
+          LINK: '#/components/schemas/SOF25_Request_CustomAttributeValues_Link'
+          LONG_TEXT: '#/components/schemas/SOF25_Request_CustomAttributeValues_LongText'
+          TEXT: '#/components/schemas/SOF25_Request_CustomAttributeValues_Text'
+          VALUE_LIST: '#/components/schemas/SOF25_Request_CustomAttributeValues_ValueList'
+          VIDEO: '#/components/schemas/SOF25_Request_CustomAttributeValues_Video'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Custom attribute code. The attribute must exist in the configuration.
+        type:
+          type: string
+          description: 'Custom attribute type
+
+
+            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+        value:
+          type: object
+      required:
+      - code
+      - type
+      - value
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Tuesday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Response_201:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SOF25_Response_201_Booking'
+          description: Service booking method
+        category:
+          $ref: '#/components/schemas/SOF25_Response_201_Category'
+          description: Service category
+        code:
+          type: string
+          description: Service code
+        consumption:
+          $ref: '#/components/schemas/SOF25_Response_201_Consumption'
+          description: 'Service consumption method: how will the service be consumed ?'
+        custom_attribute_values:
+          type: array
+          description: Service custom attributes values
+          items:
+            $ref: '#/components/schemas/SOF25_Response_201_CustomAttributeValues'
+        date_availability_end:
+          type: string
+          format: date-time
+          description: Date when the service ends being available
+        date_availability_start:
+          type: string
+          format: date-time
+          description: Date when the service starts being available
+        date_created:
+          type: string
+          format: date-time
+          description: Service creation date
+        date_updated:
+          type: string
+          format: date-time
+          description: Service update date
+        description:
+          type: string
+          description: Service description
+        inactive_reasons:
+          type: array
+          description: List of reasons why the service is inactive. If the service is active, this list is empty
+          items:
+            type: string
+            description: 'Enum: `"MANUALLY_DISABLED"`, `"ZERO_QUANTITY"`, `"ORDER_REFUSED"`, `"ORDER_ACCEPTANCE_TIMEOUT"`, `"NOT_IN_AVAILABILITY_PERIOD"`, `"SHOP_NOT_OPEN"`, `"SHOP_SUSPENDED"`, `"SHOP_CURRENCY_DISABLED"`, `"MISSING_REQUIRED_FIELDS"`, `"VALIDATION_NEEDED"`, `"NO_SESSION"`
+
+              '
+        location:
+          $ref: '#/components/schemas/SOF25_Response_201_Location'
+          description: 'Service location method: where the service will be provided ?'
+        medias:
+          type: array
+          description: All the medias associated to a service
+          items:
+            $ref: '#/components/schemas/SOF25_Response_201_Medias'
+        model:
+          $ref: '#/components/schemas/SOF25_Response_201_Model'
+          description: Service model
+        pricing:
+          $ref: '#/components/schemas/SOF25_Response_201_Pricing'
+          description: Service pricing method
+        quantity:
+          $ref: '#/components/schemas/SOF25_Response_201_Quantity'
+          description: Service quantity method
+        service_tax_code:
+          type: string
+          description: Service tax code
+        shop:
+          $ref: '#/components/schemas/SOF25_Response_201_Shop'
+          description: Shop which creates the service
+        title:
+          type: string
+          description: Service title
+      required:
+      - booking
+      - category
+      - code
+      - consumption
+      - custom_attribute_values
+      - date_created
+      - date_updated
+      - inactive_reasons
+      - location
+      - model
+      - pricing
+      - quantity
+      - shop
+      - title
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Saturday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Saturday_OpeningHours'
+      required:
+      - availability
+    SM11_Response_200_Data_Booking:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Booking type
+
+
+            Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+      required:
+      - type
+    SL01_Response_201_ContactInfo:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Contact E-mail
+        phone:
+          type: string
+          description: Contact phone number
+    SL01_Response_201_ShopOverriddenOpeningHours_Saturday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Saturday_OpeningHours'
+      required:
+      - availability
+    SL01_Response_201_ShopOverriddenOpeningHours_Monday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Monday_OpeningHours'
+      required:
+      - availability
+    SL01_Response_201_ShopOverriddenOpeningHours_Tuesday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Request_Pricing_Options:
+      type: object
+      description: Service pricing options.
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF25_Request_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF25_Request_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Pricing option identifier
+        type:
+          type: string
+          description: ''
+      required:
+      - code
+      - type
+    SL12_Response_200_Data_OpeningHours_Tuesday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_ShopOverriddenOpeningHours_Friday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Request_OpeningHours_Sunday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Response_200_Category:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Category code
+        label:
+          type: string
+          description: Category label
+      required:
+      - code
+      - label
+    SOF26_Response_200_Quantity:
+      type: object
+      discriminator:
+        mapping:
+          LIMITED: '#/components/schemas/SOF26_Response_200_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF26_Response_200_Quantity_NoQuantity'
+        propertyName: type
+      properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
+        type:
+          type: string
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
+
+            '
+    SOF25_Request_Model:
+      type: object
+      description: Service model
+      properties:
+        code:
+          type: string
+          description: Service model code
+      required:
+      - code
+    SL12_Response_200_Data_ContactInfo:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Contact E-mail
+        phone:
+          type: string
+          description: Contact phone number
+    SL01_Response_201_OpeningHours_Tuesday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_ShopOverriddenOpeningHours:
+      type: object
+      properties:
+        friday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Friday'
+          description: Friday opening hours
+        monday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Monday'
+          description: Monday opening hours
+        saturday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Saturday'
+          description: Saturday opening hours
+        shop_id:
+          type: integer
+          format: int64
+          description: Shop id
+        sunday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Sunday'
+          description: Sunday opening hours
+        thursday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Thursday'
+          description: Thursday opening hours
+        tuesday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Tuesday'
+          description: Tuesday opening hours
+        wednesday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Wednesday'
+          description: Wednesday opening hours
+      required:
+      - friday
+      - monday
+      - saturday
+      - shop_id
+      - sunday
+      - thursday
+      - tuesday
+      - wednesday
+    SM11_Response_200_Data_CustomAttributes:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+          DATE_TIME: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+          DECIMAL: '#/components/schemas/SM11_Response_200_Data_CustomAttributes_Decimal'
+          INTEGER: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+          LINK: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+          LONG_TEXT: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+          TEXT: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+          VALUE_LIST: '#/components/schemas/SM11_Response_200_Data_CustomAttributes_ValueList'
+          VIDEO: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+        propertyName: type
+      example:
+        code: DISABLED_ACCESSIBILITY
+        label: Accessible to disabled
+        service_configuration:
+          minimum_number_of_elements: 1
+        type: BOOLEAN
+      properties:
+        code:
+          type: string
+          description: Custom attribute code
+        label:
+          type: string
+          description: Custom attribute label
+        order_configuration:
+          $ref: '#/components/schemas/SM11_Response_200_Data_CustomAttributes_OrderConfiguration'
+          description: Custom attribute order configuration. Absent when the attribute is not applicable to orders.
+        service_configuration:
+          $ref: '#/components/schemas/SM11_Response_200_Data_CustomAttributes_ServiceConfiguration'
+          description: Custom attribute service configuration. Absent when the attribute is not applicable to services.
+        type:
+          type: string
+          description: 'Custom attribute type
+
+
+            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+      required:
+      - code
+      - label
+      - type
+    SL12_Response_200_Data_OpeningHours_Thursday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Response_201_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
+    SOF26_Response_200_Shop:
+      type: object
+      properties:
+        currency_code:
+          type: string
+          description: Currency ISO code
+        id:
+          type: integer
+          format: int64
+          description: Required identifier of the shop
+        name:
+          type: string
+          description: Shop name
+      required:
+      - currency_code
+      - id
+      - name
+    SOF25_Response_201_Model:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Service model code
+        title:
+          type: string
+          description: Service model title
+      required:
+      - code
+      - title
+    SL01_Response_201_ShopOverriddenOpeningHours_Wednesday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Wednesday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SM11_Response_200_Data_CustomAttributes_ServiceConfiguration:
+      type: object
+      properties:
+        maximum_number_of_elements:
+          type: integer
+          format: int32
+          description: Maximum number of elements. Present only for ValueLists. Absent when no limit.
+        minimum_number_of_elements:
+          type: integer
+          format: int32
+          description: Minimum number of elements. Equals to 0 if element is optional.
+      required:
+      - minimum_number_of_elements
+    SL12_Response_200_Data_OpeningHours_Saturday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Response_201_Pricing:
+      type: object
+      discriminator:
+        mapping:
+          ESTIMATED_PRICE: '#/components/schemas/SOF25_Response_201_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF25_Response_201_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF25_Response_201_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF25_Response_201_Pricing_FixedPriceMulti'
+        propertyName: type
+      properties:
+        max_price_per_unit:
+          type: number
+          format: with decimals
+          description: Maximum price at which the service will be provided. It's a price per unit.
+        min_price_per_unit:
+          type: number
+          format: with decimals
+          description: Minimum price at which the service will be provided. It's a price per unit.
+        options:
+          type: array
+          description: Service pricing options. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SOF25_Response_201_Pricing_Options'
+        type:
+          type: string
+          description: 'Price type of the service.<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+      required:
+      - max_price_per_unit
+      - min_price_per_unit
+      - type
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Wednesday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Wednesday_OpeningHours'
+      required:
+      - availability
+    SM11_Response_200_Data_Pricing_Options_OrderConfiguration:
+      type: object
+      properties:
+        maximum_number_of_elements:
+          type: integer
+          format: int32
+          description: Maximum number of selectable elements. Present only for value lists. Absent when no limit.
+    SOF26_Response_200_Model:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Service model code
+        title:
+          type: string
+          description: Service model title
+      required:
+      - code
+      - title
+    SOF11_Response_200_Data_Pricing:
+      type: object
+      discriminator:
+        mapping:
+          ESTIMATED_PRICE: '#/components/schemas/SOF11_Response_200_Data_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF11_Response_200_Data_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF11_Response_200_Data_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF11_Response_200_Data_Pricing_FixedPriceMulti'
+        propertyName: type
+      properties:
+        max_price_per_unit:
+          type: number
+          format: with decimals
+          description: Maximum price at which the service will be provided. It's a price per unit.
+        min_price_per_unit:
+          type: number
+          format: with decimals
+          description: Minimum price at which the service will be provided. It's a price per unit.
+        options:
+          type: array
+          description: Service pricing options. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options'
+        type:
+          type: string
+          description: 'Price type of the service.<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+      required:
+      - max_price_per_unit
+      - min_price_per_unit
+      - type
+    SOF11_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/SOF11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Friday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Friday_OpeningHours'
+      required:
+      - availability
+    SOF26_Request_Booking:
+      type: object
+      description: Service booking method. The booking type must be equal to the booking type in the Model configuration.
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF26_Request_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF26_Request_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF26_Request_Booking_ScheduledEvents'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'The booking type must be equal to the booking type in the Model configuration.
+
+
+            Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+      required:
+      - type
+    SL01_Response_201_ShopOverriddenOpeningHours_Thursday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Response_201_Quantity:
+      type: object
+      discriminator:
+        mapping:
+          LIMITED: '#/components/schemas/SOF25_Response_201_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF25_Response_201_Quantity_NoQuantity'
+        propertyName: type
+      properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
+        type:
+          type: string
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
+
+            '
+    SOF25_Response_201_Booking:
+      type: object
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF25_Response_201_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF25_Response_201_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF25_Response_201_Booking_ScheduledEvents'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+    SOF26_Response_200_CustomAttributeValues:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_Boolean'
+          DATE_TIME: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_DateTime'
+          DECIMAL: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_Decimal'
+          INTEGER: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_Integer'
+          LINK: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_Link'
+          LONG_TEXT: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_LongText'
+          TEXT: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_Text'
+          VALUE_LIST: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_ValueList'
+          VIDEO: '#/components/schemas/SOF26_Response_200_CustomAttributeValues_Video'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Custom attribute code
+        label:
+          type: string
+          description: Custom attribute label
+        type:
+          type: string
+          description: 'Custom attribute field type
+
+
+            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+        value:
+          type: object
+          description: Custom attribute field value
+      required:
+      - code
+      - label
+      - type
+    SOF25_Response_201_Consumption:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Type of consumption
+
+
+            Enum: `"VOUCHER"`, `"CONFIRMATION_BY_SHOP"`
+
+            '
+      required:
+      - type
+    SL01_Response_201_ShopOverriddenOpeningHours:
+      type: object
+      properties:
+        friday:
+          $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Friday'
+          description: Friday opening hours
+        monday:
+          $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Monday'
+          description: Monday opening hours
+        saturday:
+          $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Saturday'
+          description: Saturday opening hours
+        shop_id:
+          type: integer
+          format: int64
+          description: Shop id
+        sunday:
+          $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Sunday'
+          description: Sunday opening hours
+        thursday:
+          $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Thursday'
+          description: Thursday opening hours
+        tuesday:
+          $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Tuesday'
+          description: Tuesday opening hours
+        wednesday:
+          $ref: '#/components/schemas/SL01_Response_201_ShopOverriddenOpeningHours_Wednesday'
+          description: Wednesday opening hours
+      required:
+      - friday
+      - monday
+      - saturday
+      - shop_id
+      - sunday
+      - thursday
+      - tuesday
+      - wednesday
+    SL01_Request:
+      type: object
+      properties:
+        contact_info:
+          $ref: '#/components/schemas/SL01_Request_ContactInfo'
+          description: Location contact information
+        description:
+          type: string
+          description: Location description
+          maxLength: 2000
+          minLength: 0
+        geography:
+          $ref: '#/components/schemas/SL01_Request_Geography'
+          description: Geographic information for this location
+        label:
+          type: string
+          description: Location label
+          maxLength: 150
+          minLength: 3
+        opening_hours:
+          $ref: '#/components/schemas/SL01_Request_OpeningHours'
+          description: Location opening hours
+        shop:
+          $ref: '#/components/schemas/SL01_Request_Shop'
+          description: Shop which the location belong to. Leave it empty if you want to create an operator location.
+      required:
+      - geography
+      - label
+    SL12_Response_200_Data_Geography:
+      type: object
+      discriminator:
+        mapping:
+          CIRCLE: '#/components/schemas/SL12_Response_200_Data_Geography_Circle'
+          POINT: '#/components/schemas/SL12_Response_200_Data_Geography_Point'
+          ZONE_REFERENCES: '#/components/schemas/SL12_Response_200_Data_Geography_ZoneReferences'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
+
+            '
+    SL12_Response_200_Data_OpeningHours:
+      type: object
+      properties:
+        friday:
+          type: array
+          description: Friday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Friday'
+        monday:
+          type: array
+          description: Monday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Monday'
+        saturday:
+          type: array
+          description: Saturday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Saturday'
+        sunday:
+          type: array
+          description: Sunday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Sunday'
+        thursday:
+          type: array
+          description: Thursday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Thursday'
+        tuesday:
+          type: array
+          description: Tuesday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Tuesday'
+        wednesday:
+          type: array
+          description: Wednesday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Wednesday'
+    SL12_Response_200_Data_ShopOverriddenOpeningHours_Sunday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_ShopOverriddenOpeningHours_Sunday_OpeningHours'
+      required:
+      - availability
+    SOF11_Response_200_Data_Category:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Category code
+        label:
+          type: string
+          description: Category label
+      required:
+      - code
+      - label
+    SOF26_Response_200_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
+    SM11_Response_200_Data_Pricing_PricePerUnitOptions_Values:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code
+        label:
+          type: string
+          description: Label
+      required:
+      - code
+      - label
+    SL01_Response_201_OpeningHours:
+      type: object
+      properties:
+        friday:
+          type: array
+          description: Friday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OpeningHours_Friday'
+        monday:
+          type: array
+          description: Monday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OpeningHours_Monday'
+        saturday:
+          type: array
+          description: Saturday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OpeningHours_Saturday'
+        sunday:
+          type: array
+          description: Sunday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OpeningHours_Sunday'
+        thursday:
+          type: array
+          description: Thursday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OpeningHours_Thursday'
+        tuesday:
+          type: array
+          description: Tuesday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OpeningHours_Tuesday'
+        wednesday:
+          type: array
+          description: Wednesday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OpeningHours_Wednesday'
+    SL01_Request_OpeningHours_Monday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Response_200_Booking:
+      type: object
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF26_Response_200_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF26_Response_200_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF26_Response_200_Booking_ScheduledEvents'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+    SM11_Response_200_Data_Pricing_Options:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SM11_Response_200_Data_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SM11_Response_200_Data_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Option code
+        label:
+          type: string
+          description: Option label
+        order_configuration:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_Options_OrderConfiguration'
+          description: Option order configuration
+        type:
+          type: string
+          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+      required:
+      - code
+      - label
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

@@ -1,0 +1,85 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers Users API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Users
+paths:
+  /api/users/shops/roles:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: On each user role view</div>
+
+        <div class="max-call-frequency">Maximum usage: On each user role view</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_user_and_rights/store_users/managing_store_users.html">More context</a></li></ul></div>'
+      operationId: RO02
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    roles:
+                    - code: GROUP_SHOP_ADMIN
+                      description: Access to "Dashboard Statistics", access to the "Settings", "Information", and "User Management" menus, ability to call Shop API.
+                    - code: GROUP_SHOP_ACCOUNTANCY
+                      description: Access to "Statements" and "Transaction History".
+                    - code: GROUP_SHOP_INVENTORY
+                      description: Access to "Inventory" dashboard, management and messages, and "Mapping Configuration".
+                    - code: GROUP_SHOP_SALES
+                      description: Access to "Message", "Order" and "Revenue" dashboards, and "Order Management".
+                    - code: GROUP_SHOP_SUPPORT
+                      description: Access to "Message" and "Order" dashboards, ability to upload order documents and edit seller order references.
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    roles:
+                    - code: string
+                      description: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/RO02_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: RO02 - List shop roles
+      tags:
+      - Users
+components:
+  schemas:
+    RO02_Response_200:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RO02_Response_200_Roles'
+    RO02_Response_200_Roles:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

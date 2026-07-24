@@ -1,0 +1,513 @@
+openapi: 3.1.0
+info:
+  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Channel Platform APIs Carriers Taxonomy API
+  version: ''
+servers:
+- description: Connect Channel Platform API
+  url: https://miraklconnect.com/api/channel-platform
+tags:
+- name: Taxonomy
+paths:
+  /v1/taxonomy/channels/{channel_id}/rules:
+    put:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: 5 per second</div>
+
+        <div class="max-call-frequency">Maximum usage: 10 per second</div>
+
+        </div>'
+      operationId: createTaxonomyRule
+      parameters:
+      - $ref: '#/components/parameters/channel_id_path'
+      requestBody:
+        content:
+          application/json; charset=UTF-8:
+            examples:
+              application/json; charset=UTF-8-0:
+                summary: Example of a taxonomy rule
+                value: "{\n    \"rules\": [\n        {\n            \"id\": \"rule-smartphones\",\n            \"when\": {\n                \"all\": [\n                    {\n                        \"equals\": {\n                            \"attribute\": \"model\",\n                            \"value\": \"samsung-galaxy-s21\"\n                        }\n                    },\n                    {\n                        \"not\": {\n                            \"isSet\": {\n                                \"attribute\": \"color\"\n                            }\n                        }\n                    }\n                ]\n            },\n            \"then\": {\n                \"all\": [\n                    {\n                        \"redefine\": {\n                            \"attribute\": \"samsung-special-color\",\n                            \"requirementLevel\": \"REQUIRED\"\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}\n"
+              application/json; charset=UTF-8-auto:
+                summary: Complete example with value types (application/json; charset=utf-8)
+                value:
+                  rules:
+                  - id: rule-1234
+                    when: object
+                    then:
+                      all:
+                      - redefine:
+                          attribute: COLOR
+                          requirementLevel: OPTIONAL
+            schema:
+              $ref: '#/components/schemas/TaxonomyRuleRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+      security:
+      - Bearer:
+        - connect-channel-platform:taxonomy-rule:create
+      summary: createTaxonomyRule - Create a Taxonomy Rule
+      tags:
+      - Taxonomy
+  /v1/taxonomy/channels/{channel_id}/product-types:
+    put:
+      description: '<div class="extension-title">Description</div>
+
+
+        Creates or fully replaces a Product Type for the specified channel.
+
+
+        **Behavior:**
+
+        - **Full replacement (PUT semantics):** the entire product type definition (including all embedded attributes, their value lists, and rule references) is replaced with the content of this request. Any attribute, value list entry, or rule reference not present in the request body will be removed.
+
+        - **Always provide the complete product type definition in every request**, even when only a subset of attributes or rules needs to change.
+
+        - This is an asynchronous operation - the request is accepted and processed in the background.
+
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: 5 per second</div>
+
+        <div class="max-call-frequency">Maximum usage: 10 per second</div>
+
+        </div>'
+      operationId: upsertProductType
+      parameters:
+      - $ref: '#/components/parameters/channel_id_path'
+      - description: The unique identifier of the product type, which may contain special characters like slashes.
+        explode: true
+        in: query
+        name: product_type_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProductTypeId'
+        style: form
+      - description: 'Store identifier scoping this product type to a specific store.
+
+
+          When provided, the product type is pushed at store-level granularity instead of channel-level.
+
+          **This granularity is not enabled by default: contact Mirakl technical teams beforehand.**
+
+          '
+        explode: true
+        in: query
+        name: store_id
+        required: false
+        schema:
+          $ref: '#/components/schemas/StoreId'
+        style: form
+      requestBody:
+        content:
+          application/json; charset=UTF-8:
+            examples:
+              application/json; charset=UTF-8-0:
+                summary: Product Type 'Smartphones' on a fake channel (dummy example)
+                value: "{\n    \"labels\": [\n        {\n            \"locale\": \"en\",\n            \"value\": \"Smartphones\"\n        },\n        {\n            \"locale\": \"fr\",\n            \"value\": \"Smartphones\"\n        }\n    ],\n    \"context\": {\n        \"labels\": [\n            {\n                \"locale\": \"en\",\n                \"value\": \"Electronics / Mobile Devices / Smartphones\"\n            },\n            {\n                \"locale\": \"fr\",\n                \"value\": \"Électronique / Appareils Mobiles / Smartphones\"\n            }\n        ]\n    },\n    \"embedded_attributes\": [\n        {\n            \"id\": \"recommended_browse_nodes\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Browse Nodes\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Catégories\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Classification / Browse Nodes\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Classification / Catégories\"\n                    }\n                ],\n                \"path\": \"$.recommended_browse_nodes\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"340320031\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Mobile Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones Mobiles\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"541546121\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Brand\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Brand\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Marque\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Product Information / Brand\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Information Produit / Marque\"\n                    }\n                ],\n                \"path\": \"$.brand\"\n            },\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ],\n            \"available_values\": [\n                {\n                    \"id\": \"APPLE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Apple\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Apple\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"SAMSUNG\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Samsung\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Samsung\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"XIAOMI\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Xiaomi\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Xiaomi\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"COLOR\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Color\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Couleur\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Physical Characteristics / Color\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Caractéristiques Physiques / Couleur\"\n                    }\n                ],\n                \"path\": \"$.color\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"BLACK\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Black\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Noir\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"WHITE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"White\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Blanc\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"GOLD\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Gold\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Or\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Mobile OS\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Système d'exploitation\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / Operating System\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Système d'exploitation\"\n                    }\n                ],\n                \"path\": \"$.mobile_os\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"ANDROID\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Android\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Android\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"IOS\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"iOS\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"iOS\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS_version\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"Text\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"OS Version\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Version OS\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / OS Version\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Version OS\"\n                    }\n                ],\n                \"path\": \"$.mobile_os_version\"\n            }\n        },\n        {\n            \"id\": \"main_image\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"Media\",\n            \"media_type\": \"IMAGE\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Main image\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Image principale\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Media / Product Images / Main Image\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Média / Images Produit / Image Principale\"\n                    }\n                ],\n                \"path\": \"$.main_image\"\n            },\n            \"descriptions\": [],\n            \"connect_standard_attributes\": [\n                \"IMAGE\"\n            ]\n        }\n    ],\n    \"rules\": [\n        {\n            \"ref\": \"rule-smartphones\"\n        }\n    ]\n}\n"
+              application/json; charset=UTF-8-1:
+                summary: Product Type 'Smartphones' on another fake channel (dummy example)
+                value: "{\n    \"labels\": [\n        {\n            \"locale\": \"en\",\n            \"value\": \"Smartphones\"\n        },\n        {\n            \"locale\": \"fr\",\n            \"value\": \"Smartphones\"\n        }\n    ],\n    \"context\": {\n        \"labels\": [\n            {\n                \"locale\": \"en\",\n                \"value\": \"Electronics / Mobile Devices / Smartphones\"\n            },\n            {\n                \"locale\": \"fr\",\n                \"value\": \"Électronique / Appareils Mobiles / Smartphones\"\n            }\n        ]\n    },\n    \"embedded_attributes\": [\n        {\n            \"id\": \"Brand\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Brand\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Marque\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Product Information / Brand\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Information Produit / Marque\"\n                    }\n                ],\n                \"path\": \"$.brand\"\n            },\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ],\n            \"available_values\": [\n                {\n                    \"id\": \"APPLE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Apple\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Apple\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"SAMSUNG\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Samsung\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Samsung\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"XIAOMI\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Xiaomi\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Xiaomi\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Mobile OS\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Système d'exploitation\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / Operating System\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Système d'exploitation\"\n                    }\n                ],\n                \"path\": \"$.mobile_os\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"ANDROID\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Android\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Android\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"IOS\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"iOS\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"iOS\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"main_video\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"Media\",\n            \"media_type\": \"OTHER\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Main video\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Vidéo principale\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Media / Product Videos / Main Video\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Média / Vidéos Produit / Vidéo Principale\"\n                    }\n                ],\n                \"path\": \"$.main_video\"\n            },\n            \"descriptions\": [],\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ]\n        }\n    ],\n    \"rules\": [\n        {\n            \"ref\": \"rule-smartphones\"\n        }\n    ]\n}\n"
+              application/json; charset=UTF-8-auto:
+                summary: Complete example with value types (application/json; charset=utf-8)
+                value:
+                  labels:
+                  - locale: en_US
+                    value: string
+                  context:
+                    labels:
+                    - locale: en_US
+                      value: string
+                  embedded_attributes:
+                  - id: COLOR
+                    requirement_level: OPTIONAL
+                    type: Text
+                    connect_standard_attributes:
+                    - PRODUCT_ID
+                    labels:
+                    - locale: en_US
+                      value: string
+                    context:
+                      path: string
+                      labels:
+                      - locale: en_US
+                        value: string
+                    descriptions:
+                    - locale: en_US
+                      value: string
+                  rules:
+                  - ref: rule-1234
+            schema:
+              $ref: '#/components/schemas/ProductType'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '401':
+          description: The channel is not configured to allow the requested taxonomy granularity (channel-level or store-level).
+        '404':
+          description: Channel not found, or store not found when `store_id` is provided.
+      security:
+      - Bearer:
+        - connect-channel-platform:taxonomy-product-type:upsert
+      summary: upsertProductType - Create or Update a Product Type
+      tags:
+      - Taxonomy
+components:
+  schemas:
+    ProductAttributeType:
+      type: string
+      description: 'Each type of attributes has a different set of properties
+
+
+        Enum: `"Text"`, `"Integer"`, `"Decimal"`, `"List"`, `"Media"`
+
+        '
+    Localized:
+      type: object
+      properties:
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: The localized value in this locale
+      required:
+      - locale
+      - value
+    ProductTypeRuleConditionIsSet:
+      type: object
+      description: A condition that checks if a specific attribute is set
+      properties:
+        isSet:
+          $ref: '#/components/schemas/IsSetRuleConditionPayload'
+      required:
+      - isSet
+      title: IsSet
+    InRuleConditionPayloadValue:
+      oneOf:
+      - type: string
+      - type: number
+      - type: boolean
+    ProductTypeRuleConditionNot:
+      type: object
+      description: A condition that must not be met to trigger the rule
+      properties:
+        not:
+          $ref: '#/components/schemas/ProductTypeRuleCondition'
+      required:
+      - not
+      title: Not
+    ProductTypeContext:
+      type: object
+      description: "Additional context information about where this product type label is located within \nthe marketplace's data structure. This helps with catalog transformation.\n"
+      properties:
+        labels:
+          type: array
+          description: List of labels context for the product type
+          items:
+            $ref: '#/components/schemas/Localized'
+    ProductAttributeId:
+      type: string
+      description: Anything that uniquely identifies the product attribute.
+      examples:
+      - COLOR
+      maxLength: 255
+      minLength: 1
+    RequirementLevel:
+      type: string
+      description: 'Requirement level of the attribute when creating or updating a product
+
+
+        Enum: `"OPTIONAL"`, `"RECOMMENDED"`, `"REQUIRED"`
+
+        '
+    IsSetRuleConditionPayload:
+      type: object
+      properties:
+        attribute:
+          $ref: '#/components/schemas/ProductAttributeId'
+      required:
+      - attribute
+    AttributeContext:
+      type: object
+      description: "Additional context information about where this attribute label is located within \nthe marketplace's data structure. This helps with catalog transformation.\n"
+      properties:
+        labels:
+          type: array
+          description: List of labels context for the attribute
+          items:
+            $ref: '#/components/schemas/Localized'
+        path:
+          type: string
+          description: 'The path indicating where this attribute label is located in the marketplace''s data structure.
+
+            Used for data mapping and transformation purposes.
+
+            '
+    ProductTypeRuleActionRedefineAttribute:
+      type: object
+      description: An action to redefine an attribute's properties
+      properties:
+        redefine:
+          $ref: '#/components/schemas/RedefineAttributeActionPayload'
+      required:
+      - redefine
+      title: Redefine attribute
+    InRuleConditionPayload:
+      type: object
+      properties:
+        attribute:
+          $ref: '#/components/schemas/ProductAttributeId'
+        values:
+          type: array
+          description: List of values to check against
+          items:
+            $ref: '#/components/schemas/InRuleConditionPayloadValue'
+      required:
+      - attribute
+      - values
+    Locale:
+      type: string
+      description: The language format can be ISO-639 or ISO-639_ISO-3166
+      examples:
+      - en_US
+    ProductTypeId:
+      type: string
+      description: Anything that uniquely identifies the product type.
+      examples:
+      - Smartphones
+      maxLength: 255
+      minLength: 1
+    ProductTypeRuleConditionAny:
+      type: object
+      description: A set of conditions where at least one must be met to trigger the rule
+      properties:
+        any:
+          type: array
+          description: List of conditions where at least one must be satisfied
+          items:
+            $ref: '#/components/schemas/ProductTypeRuleCondition'
+      required:
+      - any
+      title: Any
+    RedefineAttributeActionPayload:
+      type: object
+      properties:
+        attribute:
+          $ref: '#/components/schemas/ProductAttributeId'
+        requirementLevel:
+          $ref: '#/components/schemas/RequirementLevel'
+      required:
+      - attribute
+      - requirementLevel
+    ProductTypeRuleConditionAll:
+      type: object
+      description: A set of conditions that must all be met to trigger the rule
+      properties:
+        all:
+          type: array
+          description: List of conditions to satisfy
+          items:
+            $ref: '#/components/schemas/ProductTypeRuleCondition'
+      required:
+      - all
+      title: All
+    ConnectStandardAttribute:
+      type: string
+      description: 'Equivalent of the attribute in Connect standard taxonomy
+
+
+        Enum: `"PRODUCT_ID"`, `"CATEGORY"`, `"BRAND"`, `"TITLE"`, `"DESCRIPTION"`, `"IMAGE"`, `"GTIN"`, `"VARIANT_GROUP_CODE"`
+
+        '
+    ProductTypeRuleActionAll:
+      type: object
+      description: A set of actions to apply when the rule is triggered
+      properties:
+        all:
+          type: array
+          description: List of actions to apply
+          items:
+            $ref: '#/components/schemas/ProductTypeRuleActionRedefineAttribute'
+      required:
+      - all
+    ProductTypeRuleConditionEquals:
+      type: object
+      description: A condition that checks if a specific attribute equals a given value
+      properties:
+        equals:
+          $ref: '#/components/schemas/EqualsRuleConditionPayload'
+      required:
+      - equals
+      title: Equals
+    EmbeddedAttribute:
+      type: object
+      discriminator:
+        mapping:
+          Decimal: '#/components/schemas/EmbeddedDecimalAttribute'
+          Integer: '#/components/schemas/EmbeddedIntegerAttribute'
+          List: '#/components/schemas/EmbeddedListAttribute'
+          Media: '#/components/schemas/EmbeddedMediaAttribute'
+          Text: '#/components/schemas/EmbeddedTextAttribute'
+        propertyName: type
+      properties:
+        connect_standard_attributes:
+          type: array
+          description: "Map one attribute per standard type (e.g., your main image attribute to IMAGE). \nFor multi-lingual catalogs, multiple locale-specific attributes may map to TITLE and DESCRIPTION.\n"
+          items:
+            $ref: '#/components/schemas/ConnectStandardAttribute'
+        context:
+          $ref: '#/components/schemas/AttributeContext'
+        descriptions:
+          type: array
+          description: Additional attribute descriptions with their associated locale
+          items:
+            $ref: '#/components/schemas/Localized'
+        id:
+          $ref: '#/components/schemas/ProductAttributeId'
+        labels:
+          type: array
+          description: Labels for the attribute with their associated locale
+          items:
+            $ref: '#/components/schemas/Localized'
+          minItems: 1
+        requirement_level:
+          $ref: '#/components/schemas/RequirementLevel'
+        type:
+          $ref: '#/components/schemas/ProductAttributeType'
+      required:
+      - descriptions
+      - id
+      - labels
+      - requirement_level
+      - type
+    StoreId:
+      type: string
+      description: Store identifier in the channel
+      minLength: 1
+    ProductType:
+      type: object
+      properties:
+        context:
+          $ref: '#/components/schemas/ProductTypeContext'
+        embedded_attributes:
+          type: array
+          description: List of embedded attributes for the product type
+          items:
+            $ref: '#/components/schemas/EmbeddedAttribute'
+        labels:
+          type: array
+          description: List of labels for the product type
+          items:
+            $ref: '#/components/schemas/Localized'
+          minItems: 1
+        rules:
+          type: array
+          description: List of rules associated with the product type
+          items:
+            $ref: '#/components/schemas/ProductTypeRuleReference'
+      required:
+      - embedded_attributes
+      - labels
+    TaxonomyRuleRequest:
+      type: object
+      description: Request to create a taxonomy rule
+      properties:
+        rules:
+          type: array
+          description: List of rules to create
+          items:
+            $ref: '#/components/schemas/ProductTypeRule'
+          minItems: 1
+      required:
+      - rules
+    ProductTypeRuleConditionIn:
+      type: object
+      description: A condition that checks if a specific attribute's value is in a given list of
+      properties:
+        in:
+          $ref: '#/components/schemas/InRuleConditionPayload'
+      required:
+      - in
+      title: In
+    EqualsRuleConditionPayloadValue:
+      description: The value to compare against
+      oneOf:
+      - type: string
+      - type: number
+      - type: boolean
+    ProductTypeRuleReference:
+      type: object
+      description: A reference to a rule associated with the product type
+      properties:
+        ref:
+          type: string
+          description: The unique identifier of the referenced rule
+          examples:
+          - rule-1234
+      required:
+      - ref
+    ProductTypeRule:
+      type: object
+      description: A rule associated with the product type
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the rule
+          example: rule-1234
+        then:
+          $ref: '#/components/schemas/ProductTypeRuleActionAll'
+        when:
+          $ref: '#/components/schemas/ProductTypeRuleCondition'
+      required:
+      - id
+      - then
+      - when
+    ProductTypeRuleCondition:
+      description: Condition to trigger the rule
+      oneOf:
+      - $ref: '#/components/schemas/ProductTypeRuleConditionAll'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionAny'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionNot'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionIsSet'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionEquals'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionIn'
+    EqualsRuleConditionPayload:
+      type: object
+      properties:
+        attribute:
+          $ref: '#/components/schemas/ProductAttributeId'
+        value:
+          $ref: '#/components/schemas/EqualsRuleConditionPayloadValue'
+      required:
+      - attribute
+      - value
+  parameters:
+    channel_id_path:
+      description: Connect Channel identifier
+      explode: false
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: string
+        examples:
+        - '1234'
+        minLength: 1
+      style: simple
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true
