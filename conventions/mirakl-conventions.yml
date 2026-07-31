@@ -1,0 +1,54 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.mirakl.com/ + openapi/ (derived)
+summary: >-
+  Cross-cutting request/response conventions for the Mirakl marketplace, dropship,
+  catalog and services REST APIs. Mirakl runs one operator instance per customer
+  (https://<instance>.mirakl.net); seller (shop) calls authenticate with a shop API
+  key, operator/back-office calls use OAuth 2.0 or operator bearer tokens.
+authentication:
+  seller: API key in the Authorization header (Shop-API-Key)
+  operator: OAuth 2.0 authorization_code (auth.mirakl.net) or operator bearer token
+  multi_shop: >-
+    When a user is linked to multiple shops, pass the shop_id request parameter to
+    select the shop the API acts on.
+  docs: https://developer.mirakl.com/content/product/mmp
+idempotency:
+  supported: false
+  note: >-
+    Mirakl does not document a request idempotency key on its REST write operations.
+    Duplicate suppression exists on the webhook/notification side (Mirakl stores
+    received notifications and filters obsolete/duplicated ones), but that is
+    delivery-side dedup, not a client Idempotency-Key contract.
+pagination:
+  style: offset-limit
+  params: [offset, max]
+  note: >-
+    List endpoints page with offset/max; many large exports are asynchronous
+    (request an import/export, poll by import_id, then download the result file).
+  incremental_sync:
+    params: [updated_since, last_request_date, last_updated_from, date_created_from]
+    note: Poll-based delta sync via *_since / *_from date parameters is the primary change-feed mechanism.
+async_processing:
+  pattern: >-
+    Bulk create/update and export flows are asynchronous file jobs — submit
+    (CSV/JSON/NDJSON), receive an import_id, poll status, download the transformed
+    file or error report.
+  content_types: [application/json, text/csv, application/x-ndjson, application/octet-stream]
+versioning:
+  scheme: continuous-delivery
+  note: >-
+    Mirakl ships via continuous delivery; deployed versions are backward compatible.
+    Integrations MUST tolerate new response fields, unstable field ordering, and new
+    enumeration values (including new error codes).
+  docs: https://developer.mirakl.com/
+error_envelope:
+  format: json
+  see: errors/mirakl-problem-types.yml
+rate_limit_signaling:
+  documented: false
+cross_reference:
+  authentication: authentication/mirakl-authentication.yml
+  errors: errors/mirakl-problem-types.yml
+  lifecycle: lifecycle/mirakl-lifecycle.yml
+  webhooks: asyncapi/mirakl-webhooks.yml

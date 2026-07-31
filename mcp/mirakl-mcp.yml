@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: searched
+status: published
+server:
+  name: mirakl-developer-docs
+  kind: documentation-assistant
+  transport: http
+  url: https://developer.mirakl.com/_mcp
+  auth:
+    type: oauth2
+    metadata: https://developer.mirakl.com/.well-known/oauth-authorization-server
+    authorization_endpoint: https://developer.mirakl.com/_mcp/oauth2/auth
+    token_endpoint: https://developer.mirakl.com/_mcp/oauth2/token-portal
+    registration_endpoint: https://developer.mirakl.com/_mcp/register
+    scopes_supported: [openid, profile, email, offline_access]
+  note: >-
+    Mirakl's developer portal is served by Redocly Reunite, which exposes a hosted
+    MCP server over the documentation (confirmed via the live
+    /.well-known/oauth-authorization-server metadata, issuer auth.cloud.redocly.com).
+    This MCP answers questions and searches the API documentation; it is not a
+    per-operation execution server for the Mirakl product APIs.
+candidate_tools:
+  method: derived
+  source: openapi/ operations
+  note: Candidate tool surface an execution MCP could expose over the Mirakl product APIs.
+  tools:
+    - name: list_orders
+      description: List seller orders
+      source_operation: openapi/mirakl-mmp-seller-openapi.json#OR11
+    - name: list_offers
+      description: List a shop's offers
+      source_operation: openapi/mirakl-mmp-seller-openapi.json#OF21
+    - name: list_invoices
+      description: List operator invoices/accounting documents
+      source_operation: openapi/mirakl-mmp-operator-openapi.json#IV01
+    - name: list_messages
+      description: List inbox messages/threads
+      source_operation: openapi/mirakl-mmp-operator-openapi.json#M11

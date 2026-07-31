@@ -1,0 +1,28 @@
+generated: '2026-07-20'
+method: searched
+source: https://packagist.org + https://github.com/mirakl
+packages:
+  - language: php
+    registry: packagist
+    name: mirakl/sdk-php-shop
+    url: https://packagist.org/packages/mirakl/sdk-php-shop
+    repo: https://github.com/mirakl/sdk-php-shop
+    install: composer require mirakl/sdk-php-shop
+    version: 1.27.0
+    official: true
+    description: >-
+      Official Mirakl PHP SDK for the shop (seller) role — a lightweight wrapper over
+      the Mirakl REST APIs for building custom e-commerce integrations.
+  - language: php
+    registry: packagist
+    name: mirakl/magento2-seller-connector
+    url: https://packagist.org/packages/mirakl/magento2-seller-connector
+    install: composer require mirakl/magento2-seller-connector
+    official: true
+    description: Official Mirakl extension for sellers using Magento 2 / Adobe Commerce.
+notes: >-
+  Mirakl's clearly first-party client library is the PHP shop SDK (github.com/mirakl,
+  Packagist mirakl/sdk-php-shop). Numerous third-party Java/Python/PHP clients exist
+  (e.g. onetoweb/mirakl, pypi mirakl-api-client) but are community-maintained and are
+  not marked official here. A Java SDK is referenced in Mirakl docs but was not
+  found published on Maven Central under com.mirakl at enrichment time.

@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: searched
+source: probed /.well-known/ across Mirakl hosts
+hosts:
+  - host: https://developer.mirakl.com
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: mirakl-oauth-authorization-server.json
+        note: >-
+          Redocly Reunite MCP OAuth authorization-server metadata (issuer
+          auth.cloud.redocly.com) backing the developer-docs MCP server.
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://www.mirakl.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+  - host: https://miraklconnect.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: SPA catch-all (returns text/html app shell) — not a real security.txt; not saved.
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: SPA catch-all (text/html) — not a real OIDC document; not saved.

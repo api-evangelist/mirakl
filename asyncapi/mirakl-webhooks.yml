@@ -1,0 +1,28 @@
+generated: '2026-07-20'
+method: searched
+spec_type: OpenAPI-Webhooks
+source: https://developer.mirakl.com/_bundle/content/product/connect-channel-platform/webhooks/webhook.yaml
+spec_file: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+server: https://your-service.mirakl.net
+delivery: >-
+  Mirakl Connect Channel Platform pushes events to a third-party connector endpoint
+  (HTTP POST). Mirakl operates event delivery at scale (documented >1M webhooks/min)
+  and performs delivery-side dedup, storing received notifications and filtering
+  obsolete/duplicated ones.
+events:
+  - name: OfferUpsertEvent
+    method: post
+    summary: Information about a created or updated offer.
+  - name: PriceStockUpsertEvent
+    method: post
+    summary: Information about a price/stock upsert.
+  - name: ProductUpsertEvent
+    method: post
+    summary: Information about a created or updated product.
+  - name: OrderActionEvent
+    method: post
+    summary: Perform an action on an order.
+  - name: StoreManagementFeatureEvent
+    method: post
+    summary: Manage features for a given store.
+docs: https://developer.mirakl.com/content/product/connect-channel-platform/webhooks/webhook

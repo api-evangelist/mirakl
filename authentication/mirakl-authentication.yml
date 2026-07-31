@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mirakl-mcm-operator-openapi.json, openapi/mirakl-mcm-seller-openapi.json, openapi/mirakl-mmp-operator-openapi.json,
+  openapi/mirakl-mmp-seller-openapi.json, openapi/mirakl-mms-operator-openapi.json, openapi/mirakl-mms-seller-openapi.json
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: OAuth-2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.mirakl.net/authorize
+    tokenUrl: https://auth.mirakl.net/oauth/token
+    scopes: 0
+  description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+  sources:
+  - openapi/mirakl-mcm-operator-openapi.json
+  - openapi/mirakl-mmp-operator-openapi.json
+  - openapi/mirakl-mms-operator-openapi.json
+- name: Operator-Bearer-Token
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/mirakl-mcm-operator-openapi.json
+  - openapi/mirakl-mmp-operator-openapi.json
+  - openapi/mirakl-mms-operator-openapi.json
+- name: Shop-API-Key
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/mirakl-mcm-seller-openapi.json
+  - openapi/mirakl-mmp-seller-openapi.json
+  - openapi/mirakl-mms-operator-openapi.json
+  - openapi/mirakl-mms-seller-openapi.json

@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.mirakl.com/ + https://status.mirakl.com
+versioning:
+  scheme: continuous-delivery
+  current: null
+  policy: >-
+    Mirakl delivers updates via continuous delivery; newly deployed versions are
+    backward compatible. Integrations must allow new fields in responses, must not
+    depend on field ordering, and must tolerate new enumeration values (including
+    new error codes).
+  docs: https://developer.mirakl.com/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No formal dated deprecation/Sunset (RFC 8594) policy was found publicly; Mirakl's
+    backward-compatibility commitment is the stated stability guarantee.
+sla:
+  url: https://status.mirakl.com
+  uptime_observed: "99.96%+ over trailing 90 days (per public status page)"
+status_page: https://status.mirakl.com
+status_page_provider: Atlassian Statuspage
+status_feeds:
+  - https://status.mirakl.com/history.atom
+  - https://status.mirakl.com/history.rss
+deprecated_operations: []

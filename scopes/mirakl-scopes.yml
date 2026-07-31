@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mirakl-mcm-operator-openapi.json, openapi/mirakl-mmp-operator-openapi.json,
+  openapi/mirakl-mms-operator-openapi.json
+schemes:
+- name: OAuth-2
+  source: openapi/mirakl-mcm-operator-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.mirakl.net/authorize
+    tokenUrl: https://auth.mirakl.net/oauth/token
+  description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+- name: OAuth-2
+  source: openapi/mirakl-mmp-operator-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.mirakl.net/authorize
+    tokenUrl: https://auth.mirakl.net/oauth/token
+  description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+- name: OAuth-2
+  source: openapi/mirakl-mms-operator-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.mirakl.net/authorize
+    tokenUrl: https://auth.mirakl.net/oauth/token
+  description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+scopes: []

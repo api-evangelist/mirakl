@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/mirakl-mmp-seller-openapi.json (operationIds verified)
+skills:
+  - file: mirakl-fulfill-order.md
+    name: Fulfill a Mirakl marketplace order
+    api: openapi/mirakl-mmp-seller-openapi.json
+    operations: [OR11, OR21, OR23, OR24]
+  - file: mirakl-manage-offers.md
+    name: Manage Mirakl shop offers
+    api: openapi/mirakl-mmp-seller-openapi.json
+    operations: [OF21, OF24, OF01, OF26]

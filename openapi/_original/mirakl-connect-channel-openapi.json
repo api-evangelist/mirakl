@@ -1,0 +1,4100 @@
+{
+  "components": {
+    "parameters": {
+      "channel_id_path": {
+        "description": "Connect Channel identifier",
+        "explode": false,
+        "in": "path",
+        "name": "channel_id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "examples": [
+            "1234"
+          ],
+          "minLength": 1
+        },
+        "style": "simple"
+      },
+      "store_id_path": {
+        "deprecated": true,
+        "description": "Store identifier in the channel",
+        "explode": false,
+        "in": "path",
+        "name": "store_id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "style": "simple"
+      }
+    },
+    "schemas": {
+      "ActionError": {
+        "type": "object",
+        "description": "Detailed information about an error encountered during action processing",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code identifying the type of failure.\n\n\nEnum: `\"INVALID_INPUT\"`, `\"DATA_NOT_FOUND\"`, `\"UNEXPECTED\"`, `\"UNAVAILABLE\"`, `\"TOO_MANY_REQUEST\"`, `\"ACTION_NOT_SUPPORTED\"`, `\"ORDER_IN_WRONG_STATE\"`, `\"RETURN_IN_WRONG_STATE\"`, `\"CARRIER_NOT_SUPPORTED\"`, `\"MISSING_CARRIER\"`, `\"WAREHOUSE_ID_NOT_FOUND\"`, `\"WAREHOUSE_ID_REQUIRED\"`, `\"OTHER\"`\n"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description of the error.\n",
+            "examples": [
+              "Cannot process cancellation: order is already shipped"
+            ]
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "AddressRequest": {
+        "type": "object",
+        "properties": {
+          "additional_info": {
+            "type": "string",
+            "description": "Additional delivery instructions or notes."
+          },
+          "city": {
+            "type": "string",
+            "description": "City."
+          },
+          "company": {
+            "type": "string",
+            "description": "Company name, if applicable."
+          },
+          "country": {
+            "type": "string",
+            "description": "Country name."
+          },
+          "country_iso_code": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-3 country code (e.g. FRA, USA, DEU)."
+          },
+          "first_name": {
+            "type": "string",
+            "description": "Recipient's first name."
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Recipient's last name."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number of the recipient."
+          },
+          "state": {
+            "type": "string",
+            "description": "State or region."
+          },
+          "street": {
+            "type": "string",
+            "description": "Street name and number."
+          },
+          "street_additional_info": {
+            "type": "string",
+            "description": "Additional street information (apartment, floor, building, etc.)."
+          },
+          "zip_code": {
+            "type": "string",
+            "description": "Postal or ZIP code."
+          }
+        },
+        "required": [
+          "city",
+          "last_name",
+          "street"
+        ]
+      },
+      "AdjustmentRequest": {
+        "type": "object",
+        "properties": {
+          "channel_adjustment_id": {
+            "type": "string",
+            "description": "Unique identifier of the adjustment on the channel."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the adjustment was created on the channel."
+          },
+          "price": {
+            "$ref": "#/components/schemas/Money",
+            "description": "Refunded or cancelled amount, **tax excluded**. Taxes on the adjusted product amount are listed separately in `taxes`."
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Number of units affected by this adjustment. For a `CANCELATION`, this is the number of units cancelled. For a `REFUND`, this is the number of units for which the refund applies."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Business reason for the adjustment.\n\nEnum: `\"CUSTOMER_CANCELATION\"`, `\"OUT_OF_STOCK\"`, `\"RETURN\"`, `\"ITEM_NOT_RECEIVED\"`, `\"AGREEMENT\"`, `\"DEFECT\"`, `\"UNABLE_TO_DELIVER\"`, `\"CHANNEL_SPECIFIC\"`\n"
+          },
+          "shipping_price": {
+            "$ref": "#/components/schemas/Money",
+            "description": "Refunded or cancelled shipping amount, **tax excluded**. Shipping taxes are listed separately in `shipping_taxes`."
+          },
+          "shipping_taxes": {
+            "type": "array",
+            "description": "Taxes on the adjusted shipping amount. These amounts are **not** included in `shipping_price`.",
+            "items": {
+              "$ref": "#/components/schemas/TaxRequest"
+            }
+          },
+          "taxes": {
+            "type": "array",
+            "description": "Refunded or cancelled taxes. These amounts should **not** be included in `price`.",
+            "items": {
+              "$ref": "#/components/schemas/TaxRequest"
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "Nature of the adjustment.\n\n`CANCELATION` means units were removed from the line (quantity reduction); connect will release the corresponding stock reservation.\n\n`REFUND` means a monetary compensation was issued without changing the ordered quantity.\n\n\nEnum: `\"REFUND\"`, `\"CANCELATION\"`\n"
+          }
+        },
+        "required": [
+          "channel_adjustment_id",
+          "created_at",
+          "price",
+          "quantity",
+          "reason",
+          "shipping_price",
+          "type"
+        ]
+      },
+      "Attribute": {
+        "type": "object",
+        "discriminator": {
+          "mapping": {
+            "Boolean": "#/components/schemas/BooleanAttribute",
+            "List": "#/components/schemas/ListAttribute",
+            "Numeric": "#/components/schemas/NumericAttribute",
+            "Text": "#/components/schemas/TextAttribute"
+          },
+          "propertyName": "type"
+        },
+        "properties": {
+          "configuration_modes": {
+            "type": "array",
+            "description": "List of accepted configuration modes for providing the value",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationMode"
+            },
+            "minItems": 1
+          },
+          "descriptions": {
+            "type": "array",
+            "description": "Additional attribute descriptions",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "Id of the attribute",
+            "minLength": 1
+          },
+          "labels": {
+            "type": "array",
+            "description": "Labels of the attribute",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            },
+            "minItems": 1
+          },
+          "requirement_level": {
+            "type": "string",
+            "description": "Requirement level of the attribute\n\nEnum: `\"OPTIONAL\"`, `\"RECOMMENDED\"`, `\"REQUIRED\"`\n"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AttributeType"
+          }
+        },
+        "required": [
+          "configuration_modes",
+          "id",
+          "labels",
+          "requirement_level",
+          "type"
+        ]
+      },
+      "AttributeContext": {
+        "type": "object",
+        "description": "Additional context information about where this attribute label is located within \nthe marketplace's data structure. This helps with catalog transformation.\n",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "description": "List of labels context for the attribute",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            }
+          },
+          "path": {
+            "type": "string",
+            "description": "The path indicating where this attribute label is located in the marketplace's data structure.\nUsed for data mapping and transformation purposes.\n"
+          }
+        }
+      },
+      "AttributeType": {
+        "type": "string",
+        "description": "Enum: `\"Boolean\"`, `\"Numeric\"`, `\"Text\"`, `\"List\"`\n"
+      },
+      "BillingInfoRequest": {
+        "type": "object",
+        "description": "Billing information for invoice and payment purposes. Optional.",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/AddressRequest",
+            "description": "Billing address used for invoice and payment purposes."
+          }
+        }
+      },
+      "BooleanAttribute": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Attribute"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "default_value": {
+                "type": "boolean",
+                "description": "Default boolean value of the attribute, used for required attributes only"
+              }
+            }
+          }
+        ]
+      },
+      "BusinessInformationInput": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "Currency tag, expected in ISO 4217 format. Cannot be changed later.",
+            "example": "USD",
+            "maxLength": 3,
+            "minLength": 1,
+            "pattern": "^[A-Z]{3}$"
+          },
+          "kyc_status": {
+            "type": "string",
+            "description": "KYC (Know Your Customer) status of the configuration.\nIf KYC is not required, the status will be set to NOT_REQUIRED.\n\n\nEnum: `\"PENDING_SUBMISSION\"`, `\"PENDING_APPROVAL\"`, `\"REFUSED\"`, `\"APPROVED\"`, `\"NOT_REQUIRED\"`\n"
+          },
+          "kyc_status_reason": {
+            "type": "string",
+            "description": "Reason of a problem with the KYC configuration.\nThis information can be displayed to the seller if needed in Mirakl Connect\n"
+          },
+          "missing_configuration": {
+            "type": "boolean",
+            "description": "Indicates if the store is missing configuration to be properly functioning.\nThis can be either required information not filled or documents not sent.\nFalse indicates that there is no missing configuration for the store.\nTrue will raise a warning to the seller stating that they need to configure their store.\n"
+          },
+          "payment_information_configured": {
+            "type": "boolean",
+            "description": "Indicates if a payment method is configured for the store.\n"
+          },
+          "payment_information_warning": {
+            "type": "string",
+            "description": "Reason of a problem with the payment configuration.\nA null value indicates no problems encountered, payment configuration is valid.\nAny content will raise a warning in Mirakl Connect for the seller stating that there might be a problem \nwith how their payment method is configured in the Marketplace where their store is located.\n"
+          },
+          "quality_suspension_reasons": {
+            "type": "array",
+            "description": "List of reasons for the suspension of the store related to quality standard defined by the Marketplace.\nA null or empty value indicates no problems encountered, store is not suspended.\nAny content will raise a warning in Mirakl Connect for the seller stating that there might be \nquality issues with their store.\n",
+            "items": {
+              "$ref": "#/components/schemas/QualitySuspensionReason"
+            }
+          },
+          "shipping_warning": {
+            "type": "string",
+            "description": "Reason of a problem with the shipping configuration.\nA null value indicates no problems encountered, shipping configuration is valid.\n"
+          },
+          "sub_channels": {
+            "type": "array",
+            "description": "List of sales channels inside the Marketplace where the store is located.\nThis is useful for marketplaces where sellers have a global product catalog with multiple sales channels.\nOne store can be provided per seller with as many sub channels as the sales channels the store operates in.\nBy doing so, the store will receive offers, prices and stock updates per sub channel. Product events will come once for the store.\n\nSub channels are a critical part, it can impact the business of a seller. \nBy deleting one the seller participates in, all offers synchronization will stop for the marketplace sales channel it relates to. Orders should also not be sent anymore to Connect.\n\nBehavior for the sub channel field:\n- Can be null if it was never filled before.\n- Can be an empty array if it was never filled before.\n- Cannot be emptied if there was at least one item before.\nHow to:\n- Add a new sub channel: add it to the list.\n- Update an existing sub channel: update the item in the list with the same id.\n- Delete an existing sub channel: remove it from the list.\n",
+            "items": {
+              "$ref": "#/components/schemas/SubChannel"
+            }
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the last update of the store information.\nOlder event for a store will not be saved.\n"
+          }
+        },
+        "required": [
+          "currency",
+          "updated_at"
+        ]
+      },
+      "CarrierRequest": {
+        "type": "object",
+        "properties": {
+          "channel_carrier_id": {
+            "type": "string",
+            "description": "Unique identifier of the carrier on the channel"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the carrier"
+          }
+        },
+        "required": [
+          "channel_carrier_id",
+          "name"
+        ]
+      },
+      "ChannelCatalogCapabilities": {
+        "type": "object",
+        "properties": {
+          "offer_configuration": {
+            "$ref": "#/components/schemas/OfferConfiguration"
+          },
+          "use_case_configurations": {
+            "$ref": "#/components/schemas/UseCaseConfigurations"
+          }
+        }
+      },
+      "ConfigurationMode": {
+        "type": "string",
+        "description": "The user can configure an attribute via:\n- `CONSTANT`: a constant value for all the catalog\n- `VARIABLE`: a value that can be different for each item, based on an attribute\n\n\nEnum: `\"CONSTANT\"`, `\"VARIABLE\"`\n"
+      },
+      "ConnectStandardAttribute": {
+        "type": "string",
+        "description": "Equivalent of the attribute in Connect standard taxonomy\n\nEnum: `\"PRODUCT_ID\"`, `\"CATEGORY\"`, `\"BRAND\"`, `\"TITLE\"`, `\"DESCRIPTION\"`, `\"IMAGE\"`, `\"GTIN\"`, `\"VARIANT_GROUP_CODE\"`\n"
+      },
+      "CustomAttributeBooleanRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CustomAttributeRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Attribute's boolean value",
+                "examples": [
+                  "true"
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "type",
+          "value"
+        ]
+      },
+      "CustomAttributeDateRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CustomAttributeRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Attribute's date value",
+                "examples": [
+                  "2024-01-27T09:24:36.326Z"
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "type",
+          "value"
+        ]
+      },
+      "CustomAttributeListRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CustomAttributeRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "description": "Additional attribute values",
+                "items": {
+                  "type": "string",
+                  "maxLength": 10000
+                },
+                "maxItems": 1000,
+                "minItems": 1
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "type",
+          "value"
+        ]
+      },
+      "CustomAttributeNumericRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CustomAttributeRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "format": "with decimals",
+                "description": "Attribute's numeric value",
+                "examples": [
+                  "1234.56"
+                ],
+                "maximum": 1000000000,
+                "minimum": -1000000000
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "type",
+          "value"
+        ]
+      },
+      "CustomAttributeRequest": {
+        "type": "object",
+        "description": "A custom attribute.",
+        "discriminator": {
+          "mapping": {
+            "BOOLEAN": "#/components/schemas/CustomAttributeBooleanRequest",
+            "DATE": "#/components/schemas/CustomAttributeDateRequest",
+            "LIST": "#/components/schemas/CustomAttributeListRequest",
+            "NUMERIC": "#/components/schemas/CustomAttributeNumericRequest",
+            "STRING": "#/components/schemas/CustomAttributeStringRequest"
+          },
+          "propertyName": "type"
+        },
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Attribute's id",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "The attribute's type\n\nEnum: `\"STRING\"`, `\"NUMERIC\"`, `\"BOOLEAN\"`, `\"DATE\"`, `\"LIST\"`\n"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "CustomAttributeStringRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CustomAttributeRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Attribute's string value",
+                "examples": [
+                  "red"
+                ],
+                "maxLength": 100000
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "type",
+          "value"
+        ]
+      },
+      "CustomAttributesRequest": {
+        "type": "array",
+        "description": "Custom attributes",
+        "items": {
+          "$ref": "#/components/schemas/CustomAttributeRequest"
+        },
+        "maxItems": 1000,
+        "minItems": 0
+      },
+      "Diagnostic": {
+        "type": "object",
+        "description": "Represents a diagnostic message related to a catalog item.",
+        "properties": {
+          "channel_attribute_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The identifier of the channel attribute related to the diagnostic."
+          },
+          "channel_diagnostic_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The diagnostic identifier in the channel."
+          },
+          "connector_override_action": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "deprecated": true,
+            "description": "Enum: `\"REMOVED\"`, `null`\n"
+          },
+          "message": {
+            "type": "string",
+            "description": "The diagnostic message."
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "DiscountPricePeriod": {
+        "type": "object",
+        "description": "Configuration for discount price period.",
+        "properties": {
+          "end_date": {
+            "$ref": "#/components/schemas/PricingConfigurationField"
+          },
+          "start_date": {
+            "$ref": "#/components/schemas/PricingConfigurationField"
+          },
+          "support": {
+            "type": "string",
+            "description": "Support for the discount price period\n\nEnum: `\"SUPPORTED\"`, `\"UNSUPPORTED\"`\n"
+          }
+        },
+        "required": [
+          "end_date",
+          "start_date",
+          "support"
+        ]
+      },
+      "DocumentOriginRequest": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "description": "Unique identifier of the sales channel"
+          },
+          "channel_store_id": {
+            "type": "string",
+            "description": "Store identifier on the sales channel."
+          },
+          "sub_channel_code": {
+            "type": "string",
+            "description": "Code of the sub-channel on which the document was uploaded."
+          }
+        },
+        "required": [
+          "channel_id",
+          "channel_store_id"
+        ]
+      },
+      "EmbeddedAttribute": {
+        "type": "object",
+        "discriminator": {
+          "mapping": {
+            "Decimal": "#/components/schemas/EmbeddedDecimalAttribute",
+            "Integer": "#/components/schemas/EmbeddedIntegerAttribute",
+            "List": "#/components/schemas/EmbeddedListAttribute",
+            "Media": "#/components/schemas/EmbeddedMediaAttribute",
+            "Text": "#/components/schemas/EmbeddedTextAttribute"
+          },
+          "propertyName": "type"
+        },
+        "properties": {
+          "connect_standard_attributes": {
+            "type": "array",
+            "description": "Map one attribute per standard type (e.g., your main image attribute to IMAGE). \nFor multi-lingual catalogs, multiple locale-specific attributes may map to TITLE and DESCRIPTION.\n",
+            "items": {
+              "$ref": "#/components/schemas/ConnectStandardAttribute"
+            }
+          },
+          "context": {
+            "$ref": "#/components/schemas/AttributeContext"
+          },
+          "descriptions": {
+            "type": "array",
+            "description": "Additional attribute descriptions with their associated locale",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            }
+          },
+          "id": {
+            "$ref": "#/components/schemas/ProductAttributeId"
+          },
+          "labels": {
+            "type": "array",
+            "description": "Labels for the attribute with their associated locale",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            },
+            "minItems": 1
+          },
+          "requirement_level": {
+            "$ref": "#/components/schemas/RequirementLevel"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ProductAttributeType"
+          }
+        },
+        "required": [
+          "descriptions",
+          "id",
+          "labels",
+          "requirement_level",
+          "type"
+        ]
+      },
+      "EmbeddedDecimalAttribute": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EmbeddedAttribute"
+          }
+        ],
+        "examples": [
+          "42.3"
+        ],
+        "properties": {
+          "maximum": {
+            "type": "number",
+            "format": "double",
+            "description": "The maximum allowed value (inclusive)",
+            "example": 1000000
+          },
+          "minimum": {
+            "type": "number",
+            "format": "double",
+            "description": "The minimum number allowed (inclusive)",
+            "example": 0
+          },
+          "scale": {
+            "type": "integer",
+            "description": "Number of decimal places",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "scale"
+        ]
+      },
+      "EmbeddedIntegerAttribute": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EmbeddedAttribute"
+          }
+        ],
+        "examples": [
+          "42"
+        ],
+        "properties": {
+          "maximum": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum Number allowed",
+            "example": 9999
+          },
+          "minimum": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The minimum number allowed",
+            "example": -9999
+          }
+        }
+      },
+      "EmbeddedListAttribute": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EmbeddedAttribute"
+          }
+        ],
+        "properties": {
+          "available_values": {
+            "type": "array",
+            "description": "List of available values for the attribute",
+            "items": {
+              "$ref": "#/components/schemas/ProductListAttributeValue"
+            },
+            "maxItems": 1000,
+            "minItems": 1
+          },
+          "max_values": {
+            "type": "integer",
+            "description": "Maximum number of values a given product can have for this attribute",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "available_values"
+        ]
+      },
+      "EmbeddedMediaAttribute": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EmbeddedAttribute"
+          }
+        ],
+        "properties": {
+          "media_type": {
+            "type": "string",
+            "description": "Specifies the type of media associated with the attribute.\nWhen `media_type` is set to `IMAGE`, this attribute serves the role of an Image (e.g., for display or illustration purposes).\n\n\nEnum: `\"IMAGE\"`, `\"OTHER\"`\n"
+          }
+        }
+      },
+      "EmbeddedTextAttribute": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EmbeddedAttribute"
+          }
+        ],
+        "properties": {
+          "max_length": {
+            "type": "integer",
+            "description": "Maximum length for Text attributes",
+            "example": 255,
+            "minimum": 1
+          },
+          "min_length": {
+            "type": "integer",
+            "description": "Minimum length for Text attributes",
+            "example": 3,
+            "minimum": 0
+          }
+        }
+      },
+      "EqualsRuleConditionPayload": {
+        "type": "object",
+        "properties": {
+          "attribute": {
+            "$ref": "#/components/schemas/ProductAttributeId"
+          },
+          "value": {
+            "$ref": "#/components/schemas/EqualsRuleConditionPayloadValue"
+          }
+        },
+        "required": [
+          "attribute",
+          "value"
+        ]
+      },
+      "EqualsRuleConditionPayloadValue": {
+        "description": "The value to compare against",
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code (immutable)",
+            "examples": [
+              "DATA_NOT_FOUND"
+            ]
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorItem"
+            }
+          },
+          "extensions": {
+            "type": "object",
+            "description": "Free map where you find additional context data to better describe the error",
+            "examples": [
+              {
+                "maxLength": 255,
+                "minLength": 1
+              }
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "Literal string error description (Please do not base your error handling on this field since it is subject to change)",
+            "examples": [
+              "An error occurred while processing your request"
+            ]
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "ErrorItem": {
+        "type": "object",
+        "properties": {
+          "extensions": {
+            "type": "object",
+            "description": "Free map where you find additional context data to better describe the error",
+            "examples": [
+              {
+                "maxLength": 255,
+                "minLength": 1
+              }
+            ]
+          },
+          "field": {
+            "type": "string",
+            "description": "JsonPath to the field where the error occurred",
+            "examples": [
+              "input.account.id"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "Literal string error item description (Please do not base your error handling on this field since it is subject to change)",
+            "examples": [
+              "An error occurred while processing your request: id is null"
+            ]
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "FulfillmentRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Identifier of the fulfillment partner. Only meaningful when `type` is `FULFILLED_BY_PARTNER`. Ignored for `FULFILLED_BY_SELLER`."
+          },
+          "type": {
+            "type": "string",
+            "description": "Indicates who is responsible for physically fulfilling the order.\n\n\nEnum: `\"FULFILLED_BY_SELLER\"`, `\"FULFILLED_BY_PARTNER\"`\n"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "InRuleConditionPayload": {
+        "type": "object",
+        "properties": {
+          "attribute": {
+            "$ref": "#/components/schemas/ProductAttributeId"
+          },
+          "values": {
+            "type": "array",
+            "description": "List of values to check against",
+            "items": {
+              "$ref": "#/components/schemas/InRuleConditionPayloadValue"
+            }
+          }
+        },
+        "required": [
+          "attribute",
+          "values"
+        ]
+      },
+      "InRuleConditionPayloadValue": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "IsSetRuleConditionPayload": {
+        "type": "object",
+        "properties": {
+          "attribute": {
+            "$ref": "#/components/schemas/ProductAttributeId"
+          }
+        },
+        "required": [
+          "attribute"
+        ]
+      },
+      "ListAttribute": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Attribute"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "default_values": {
+                "type": "array",
+                "description": "Default values of the attribute (use the id in your attribute values), used for required attributes only",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "max_size": {
+                "type": "integer",
+                "description": "Max number of values to select. `1` means selection of a single value.",
+                "minimum": 1
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ListAttributeItem",
+                  "description": "List of available values"
+                },
+                "maxItems": 100
+              }
+            }
+          }
+        ],
+        "required": [
+          "max_size",
+          "values"
+        ]
+      },
+      "ListAttributeItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id",
+            "minLength": 1
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            }
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "Locale": {
+        "type": "string",
+        "description": "The language format can be ISO-639 or ISO-639_ISO-3166",
+        "examples": [
+          "en_US"
+        ]
+      },
+      "Localized": {
+        "type": "object",
+        "properties": {
+          "locale": {
+            "$ref": "#/components/schemas/Locale"
+          },
+          "value": {
+            "type": "string",
+            "description": "The localized value in this locale"
+          }
+        },
+        "required": [
+          "locale",
+          "value"
+        ]
+      },
+      "Money": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Monetary amount. Must be zero or positive.",
+            "minimum": 0
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code (e.g. EUR, USD, GBP)."
+          }
+        },
+        "required": [
+          "amount",
+          "currency"
+        ]
+      },
+      "NumericAttribute": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Attribute"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "default_value": {
+                "type": "number",
+                "description": "Default numeric value of the attribute, used for required attributes only"
+              }
+            }
+          }
+        ]
+      },
+      "OfferConfiguration": {
+        "type": "object",
+        "properties": {
+          "custom_attributes": {
+            "type": "array",
+            "description": "Attributes the sellers must configure for offer-related features",
+            "items": {
+              "$ref": "#/components/schemas/Attribute"
+            }
+          },
+          "pricing_configuration": {
+            "$ref": "#/components/schemas/PricingConfiguration"
+          }
+        }
+      },
+      "OrderLineRequest": {
+        "type": "object",
+        "properties": {
+          "adjustments": {
+            "type": "array",
+            "description": "Post-order modifications on this line, such as partial cancellations or refunds. Each adjustment represents a discrete event that occurred after the order was placed. Adjustments are append-only: send all past adjustments on every upsert.",
+            "items": {
+              "$ref": "#/components/schemas/AdjustmentRequest"
+            }
+          },
+          "can_cancel": {
+            "type": "boolean",
+            "description": "Whether the order line is currently eligible for cancellation."
+          },
+          "can_refund": {
+            "type": "boolean",
+            "description": "Whether the order line is currently eligible for refund."
+          },
+          "channel_order_line_id": {
+            "type": "string",
+            "description": "Unique identifier of the order line on the channel. Must be unique across **all** orders of the channel, not just within the current order."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the order line was created on the channel."
+          },
+          "custom_attributes": {
+            "$ref": "#/components/schemas/CustomAttributesRequest"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Money",
+            "description": "Total price of the order line, **tax excluded**. This is the price for the entire order line, i.e. `unit price × quantity`, not the unit price. Taxes are listed separately in the `taxes` array and should **not** be included in this amount."
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductRequest"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Number of units ordered for this product."
+          },
+          "shipping_taxes": {
+            "type": "array",
+            "description": "Taxes applied to the shipping price. These amounts are **not** included in `total_shipping_price`.",
+            "items": {
+              "$ref": "#/components/schemas/TaxRequest"
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Current lifecycle status of the order line. Lines within the same order can have different statuses (e.g. one line shipped while another is still awaiting shipment). See `order.status` for the meaning of each value.\n\nEnum: `\"AWAITING_ACCEPTANCE\"`, `\"AWAITING_FRAUD_CHECK\"`, `\"AWAITING_PAYMENT\"`, `\"AWAITING_SHIPMENT\"`, `\"CHANNEL_SPECIFIC\"`, `\"CLOSED\"`, `\"DELIVERED\"`, `\"SHIPPED\"`\n"
+          },
+          "status_reason": {
+            "type": "string",
+            "description": "Reason that explains why this order line reached its current status. See `order.status_reason` for the meaning of each value.\n\nEnum: `\"ACCEPTANCE_TIMEOUT\"`, `\"AUTOMATICALLY_CLOSED\"`, `\"CANCELED\"`, `\"FRAUD_CHECK_FAILED\"`, `\"FRAUD_CHECK_TIMEOUT\"`, `\"PAYMENT_TIMEOUT\"`, `\"REFUNDED\"`, `\"REFUSED\"`, `\"REFUSED_PAYMENT\"`\n"
+          },
+          "taxes": {
+            "type": "array",
+            "description": "Taxes applied to the product price. These amounts should **not** be included in `price`. Each entry represents a distinct tax type (e.g. VAT, GST).",
+            "items": {
+              "$ref": "#/components/schemas/TaxRequest"
+            }
+          },
+          "total_shipping_price": {
+            "$ref": "#/components/schemas/Money",
+            "description": "Total shipping price for this order line, **tax excluded**. This is the total amount (not per-unit) for the shipping of this line. Shipping taxes are listed separately in `shipping_taxes`."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time of the last update of this order line on the channel."
+          }
+        },
+        "required": [
+          "can_cancel",
+          "can_refund",
+          "channel_order_line_id",
+          "created_at",
+          "price",
+          "product",
+          "quantity",
+          "status",
+          "total_shipping_price",
+          "updated_at"
+        ]
+      },
+      "OrderRequest": {
+        "type": "object",
+        "properties": {
+          "billing_info": {
+            "$ref": "#/components/schemas/BillingInfoRequest"
+          },
+          "channel_order_id": {
+            "type": "string",
+            "description": "Unique identifier of the order on the channel. Must be unique across all orders of the channel. Combined with `origin.channel_id`, it forms the global Connect order identifier."
+          },
+          "channel_updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time of the last update on the channel. Connect uses this timestamp to handle updates versioning: an order is updated only if this value is greater or equal to the current stored value in Connect.  This means that an update whose `channel_updated_at` is older than the currently stored value will be silently ignored."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the order was placed on the channel."
+          },
+          "custom_attributes": {
+            "$ref": "#/components/schemas/CustomAttributesRequest"
+          },
+          "fulfillment": {
+            "$ref": "#/components/schemas/FulfillmentRequest"
+          },
+          "has_incident": {
+            "type": "boolean",
+            "description": "Indicates whether the order has an active incident or dispute."
+          },
+          "order_lines": {
+            "type": "array",
+            "description": "Lines composing the order. Each line corresponds to one distinct product in a given quantity.",
+            "items": {
+              "$ref": "#/components/schemas/OrderLineRequest"
+            },
+            "minItems": 1
+          },
+          "shipping_info": {
+            "$ref": "#/components/schemas/ShippingInfoRequest"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current lifecycle status of the order.\n\n- `AWAITING_FRAUD_CHECK`: Order is pending fraud verification before being confirmed.\n- `AWAITING_ACCEPTANCE`: Order has been placed and is waiting for the seller to accept or refuse it.\n- `AWAITING_PAYMENT`: Order has been accepted but payment has not yet been confirmed.\n- `AWAITING_SHIPMENT`: Order is paid and accepted, waiting for the seller to ship.\n- `SHIPPED`: Order has been handed to a carrier.\n- `DELIVERED`: Order has been delivered to the buyer.\n- `CLOSED`: Order lifecycle is complete (delivered, cancelled, or refunded).\n- `CHANNEL_SPECIFIC`: The order has a status specific to the channel that does not map to any standard Connect status. Use `status_reason` to carry additional context.\n\n\nEnum: `\"AWAITING_ACCEPTANCE\"`, `\"AWAITING_FRAUD_CHECK\"`, `\"AWAITING_PAYMENT\"`, `\"AWAITING_SHIPMENT\"`, `\"CHANNEL_SPECIFIC\"`, `\"CLOSED\"`, `\"DELIVERED\"`, `\"SHIPPED\"`\n"
+          },
+          "status_reason": {
+            "type": "string",
+            "description": "Reason that explains why the order reached its current status.\nTypically used for terminal or exceptional statuses (e.g. `CLOSED`, `CHANNEL_SPECIFIC`).\n\n- `ACCEPTANCE_TIMEOUT`: Seller did not accept the order within the acceptance deadline.\n- `AUTOMATICALLY_CLOSED`: Order was automatically closed by the channel.\n- `CANCELED`: Order was cancelled.\n- `FRAUD_CHECK_FAILED`: Order failed fraud verification.\n- `FRAUD_CHECK_TIMEOUT`: Fraud check was not completed within the deadline.\n- `PAYMENT_TIMEOUT`: Payment was not received within the deadline.\n- `REFUNDED`: Order was fully refunded.\n- `REFUSED`: Order was refused by the seller.\n- `REFUSED_PAYMENT`: Payment was refused.\n\n\nEnum: `\"ACCEPTANCE_TIMEOUT\"`, `\"AUTOMATICALLY_CLOSED\"`, `\"CANCELED\"`, `\"FRAUD_CHECK_FAILED\"`, `\"FRAUD_CHECK_TIMEOUT\"`, `\"PAYMENT_TIMEOUT\"`, `\"REFUNDED\"`, `\"REFUSED\"`, `\"REFUSED_PAYMENT\"`\n"
+          },
+          "sub_channel_code": {
+            "type": "string",
+            "description": "Code of the sub-channel"
+          }
+        },
+        "required": [
+          "channel_order_id",
+          "channel_updated_at",
+          "created_at",
+          "fulfillment",
+          "order_lines",
+          "shipping_info",
+          "status"
+        ]
+      },
+      "OriginRequest": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "description": "Unique identifier of the sales channel"
+          },
+          "channel_store_id": {
+            "type": "string",
+            "description": "Store identifier on the sales channel."
+          }
+        },
+        "required": [
+          "channel_id",
+          "channel_store_id"
+        ]
+      },
+      "PricingConfiguration": {
+        "type": "object",
+        "description": "Configuration for pricing capabilities.",
+        "properties": {
+          "discount_price_period": {
+            "$ref": "#/components/schemas/DiscountPricePeriod"
+          }
+        }
+      },
+      "PricingConfigurationField": {
+        "type": "object",
+        "description": "Pricing configuration field",
+        "properties": {
+          "requirement_level": {
+            "type": "string",
+            "description": "Requirement level of the attribute\n\nEnum: `\"OPTIONAL\"`, `\"REQUIRED\"`\n"
+          }
+        },
+        "required": [
+          "requirement_level"
+        ]
+      },
+      "ProductAttribute": {
+        "type": "object",
+        "description": "An attribute of a product",
+        "discriminator": {
+          "mapping": {
+            "List": "#/components/schemas/ProductListAttribute",
+            "Text": "#/components/schemas/ProductTextAttribute"
+          },
+          "propertyName": "type"
+        },
+        "properties": {
+          "descriptions": {
+            "type": "array",
+            "description": "Additional attribute descriptions with their associated locale",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            }
+          },
+          "id": {
+            "$ref": "#/components/schemas/ProductAttributeId"
+          },
+          "labels": {
+            "type": "array",
+            "description": "Labels for the attribute with their associated locale",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            },
+            "minItems": 1
+          },
+          "type": {
+            "$ref": "#/components/schemas/ProductAttributeType"
+          }
+        },
+        "required": [
+          "id",
+          "labels",
+          "type"
+        ]
+      },
+      "ProductAttributeId": {
+        "type": "string",
+        "description": "Anything that uniquely identifies the product attribute.",
+        "examples": [
+          "COLOR"
+        ],
+        "maxLength": 255,
+        "minLength": 1
+      },
+      "ProductAttributeType": {
+        "type": "string",
+        "description": "Each type of attributes has a different set of properties\n\nEnum: `\"Text\"`, `\"Integer\"`, `\"Decimal\"`, `\"List\"`, `\"Media\"`\n"
+      },
+      "ProductListAttribute": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProductAttribute"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "available_values": {
+                "type": "array",
+                "description": "List of available values for the attribute",
+                "items": {
+                  "$ref": "#/components/schemas/ProductListAttributeValue"
+                },
+                "maxItems": 1000,
+                "minItems": 1
+              },
+              "max_values": {
+                "type": "integer",
+                "description": "Maximum number of values a given product can have for this attribute",
+                "minimum": 1
+              }
+            }
+          }
+        ],
+        "required": [
+          "available_values"
+        ]
+      },
+      "ProductListAttributeValue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Value of the attribute"
+          },
+          "labels": {
+            "type": "array",
+            "description": "Labels for the attribute value with their associated locale",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ProductRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the product on the channel."
+          },
+          "thumbnail_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of a product image."
+          },
+          "title": {
+            "type": "string",
+            "description": "Display name of the product as shown to the buyer."
+          }
+        },
+        "required": [
+          "id",
+          "title"
+        ]
+      },
+      "ProductTextAttribute": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProductAttribute"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      },
+      "ProductType": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/ProductTypeContext"
+          },
+          "embedded_attributes": {
+            "type": "array",
+            "description": "List of embedded attributes for the product type",
+            "items": {
+              "$ref": "#/components/schemas/EmbeddedAttribute"
+            }
+          },
+          "labels": {
+            "type": "array",
+            "description": "List of labels for the product type",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            },
+            "minItems": 1
+          },
+          "rules": {
+            "type": "array",
+            "description": "List of rules associated with the product type",
+            "items": {
+              "$ref": "#/components/schemas/ProductTypeRuleReference"
+            }
+          }
+        },
+        "required": [
+          "embedded_attributes",
+          "labels"
+        ]
+      },
+      "ProductTypeContext": {
+        "type": "object",
+        "description": "Additional context information about where this product type label is located within \nthe marketplace's data structure. This helps with catalog transformation.\n",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "description": "List of labels context for the product type",
+            "items": {
+              "$ref": "#/components/schemas/Localized"
+            }
+          }
+        }
+      },
+      "ProductTypeId": {
+        "type": "string",
+        "description": "Anything that uniquely identifies the product type.",
+        "examples": [
+          "Smartphones"
+        ],
+        "maxLength": 255,
+        "minLength": 1
+      },
+      "ProductTypeRule": {
+        "type": "object",
+        "description": "A rule associated with the product type",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the rule",
+            "example": "rule-1234"
+          },
+          "then": {
+            "$ref": "#/components/schemas/ProductTypeRuleActionAll"
+          },
+          "when": {
+            "$ref": "#/components/schemas/ProductTypeRuleCondition"
+          }
+        },
+        "required": [
+          "id",
+          "then",
+          "when"
+        ]
+      },
+      "ProductTypeRuleActionAll": {
+        "type": "object",
+        "description": "A set of actions to apply when the rule is triggered",
+        "properties": {
+          "all": {
+            "type": "array",
+            "description": "List of actions to apply",
+            "items": {
+              "$ref": "#/components/schemas/ProductTypeRuleActionRedefineAttribute"
+            }
+          }
+        },
+        "required": [
+          "all"
+        ]
+      },
+      "ProductTypeRuleActionRedefineAttribute": {
+        "type": "object",
+        "description": "An action to redefine an attribute's properties",
+        "properties": {
+          "redefine": {
+            "$ref": "#/components/schemas/RedefineAttributeActionPayload"
+          }
+        },
+        "required": [
+          "redefine"
+        ],
+        "title": "Redefine attribute"
+      },
+      "ProductTypeRuleCondition": {
+        "description": "Condition to trigger the rule",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProductTypeRuleConditionAll"
+          },
+          {
+            "$ref": "#/components/schemas/ProductTypeRuleConditionAny"
+          },
+          {
+            "$ref": "#/components/schemas/ProductTypeRuleConditionNot"
+          },
+          {
+            "$ref": "#/components/schemas/ProductTypeRuleConditionIsSet"
+          },
+          {
+            "$ref": "#/components/schemas/ProductTypeRuleConditionEquals"
+          },
+          {
+            "$ref": "#/components/schemas/ProductTypeRuleConditionIn"
+          }
+        ]
+      },
+      "ProductTypeRuleConditionAll": {
+        "type": "object",
+        "description": "A set of conditions that must all be met to trigger the rule",
+        "properties": {
+          "all": {
+            "type": "array",
+            "description": "List of conditions to satisfy",
+            "items": {
+              "$ref": "#/components/schemas/ProductTypeRuleCondition"
+            }
+          }
+        },
+        "required": [
+          "all"
+        ],
+        "title": "All"
+      },
+      "ProductTypeRuleConditionAny": {
+        "type": "object",
+        "description": "A set of conditions where at least one must be met to trigger the rule",
+        "properties": {
+          "any": {
+            "type": "array",
+            "description": "List of conditions where at least one must be satisfied",
+            "items": {
+              "$ref": "#/components/schemas/ProductTypeRuleCondition"
+            }
+          }
+        },
+        "required": [
+          "any"
+        ],
+        "title": "Any"
+      },
+      "ProductTypeRuleConditionEquals": {
+        "type": "object",
+        "description": "A condition that checks if a specific attribute equals a given value",
+        "properties": {
+          "equals": {
+            "$ref": "#/components/schemas/EqualsRuleConditionPayload"
+          }
+        },
+        "required": [
+          "equals"
+        ],
+        "title": "Equals"
+      },
+      "ProductTypeRuleConditionIn": {
+        "type": "object",
+        "description": "A condition that checks if a specific attribute's value is in a given list of",
+        "properties": {
+          "in": {
+            "$ref": "#/components/schemas/InRuleConditionPayload"
+          }
+        },
+        "required": [
+          "in"
+        ],
+        "title": "In"
+      },
+      "ProductTypeRuleConditionIsSet": {
+        "type": "object",
+        "description": "A condition that checks if a specific attribute is set",
+        "properties": {
+          "isSet": {
+            "$ref": "#/components/schemas/IsSetRuleConditionPayload"
+          }
+        },
+        "required": [
+          "isSet"
+        ],
+        "title": "IsSet"
+      },
+      "ProductTypeRuleConditionNot": {
+        "type": "object",
+        "description": "A condition that must not be met to trigger the rule",
+        "properties": {
+          "not": {
+            "$ref": "#/components/schemas/ProductTypeRuleCondition"
+          }
+        },
+        "required": [
+          "not"
+        ],
+        "title": "Not"
+      },
+      "ProductTypeRuleReference": {
+        "type": "object",
+        "description": "A reference to a rule associated with the product type",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "The unique identifier of the referenced rule",
+            "examples": [
+              "rule-1234"
+            ]
+          }
+        },
+        "required": [
+          "ref"
+        ]
+      },
+      "QualitySuspensionReason": {
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "string",
+            "description": "Period considered by the Marketplace for the statistics related to the rule.\n",
+            "example": "Last month"
+          },
+          "rule": {
+            "type": "string",
+            "description": "Rule that triggered the suspension of the store.\nThis can be a rule related to quality, payment, shipping or any other rule defined by the Marketplace.\nBy assembling every parameters, we can build a human readable description of the rule.\n",
+            "example": "Evaluation Grade last month was lower than 3.5 expected to never be lower than 4.0"
+          },
+          "rule_comparison_method": {
+            "type": "string",
+            "description": "Comparison method used by the Marketplace to evaluate the rule.\n",
+            "example": "lower than"
+          },
+          "rule_type": {
+            "type": "string",
+            "description": "Type of the rule that triggered the suspension of the store such as DECIMAL or INTEGER.\n",
+            "example": "DECIMAL"
+          },
+          "stat_value": {
+            "type": "number",
+            "format": "with decimals",
+            "description": "Value of the statistic that triggered the rule.\nThis is the value that was compared to the threshold defined by the Marketplace.\n",
+            "example": 3.5
+          },
+          "threshold": {
+            "type": "number",
+            "format": "with decimals",
+            "description": "Threshold value defined by the Marketplace for the rule.\nIf the stat_value is lower than this threshold, the store is considered suspended.\n"
+          }
+        },
+        "required": [
+          "rule"
+        ]
+      },
+      "RedefineAttributeActionPayload": {
+        "type": "object",
+        "properties": {
+          "attribute": {
+            "$ref": "#/components/schemas/ProductAttributeId"
+          },
+          "requirementLevel": {
+            "$ref": "#/components/schemas/RequirementLevel"
+          }
+        },
+        "required": [
+          "attribute",
+          "requirementLevel"
+        ]
+      },
+      "RequirementLevel": {
+        "type": "string",
+        "description": "Requirement level of the attribute when creating or updating a product\n\nEnum: `\"OPTIONAL\"`, `\"RECOMMENDED\"`, `\"REQUIRED\"`\n"
+      },
+      "ReturnErrorDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable error code"
+          },
+          "field": {
+            "type": "string",
+            "description": "JsonPath to the field where the error occurred"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "ReturnLineRequest": {
+        "type": "object",
+        "properties": {
+          "channel_order_line_id": {
+            "type": "string",
+            "description": "Order line identifier on the sales channel"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Quantity of items being returned"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for the return\n\nEnum: `\"WRONG_ITEM\"`, `\"MISSING_ITEM\"`, `\"DEFECTIVE_ITEM\"`, `\"DAMAGED_ITEM\"`, `\"UNWANTED_ITEM\"`, `\"OTHER\"`\n"
+          }
+        },
+        "required": [
+          "channel_order_line_id",
+          "quantity",
+          "reason"
+        ]
+      },
+      "ReturnRequest": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string",
+                "description": "City"
+              },
+              "country": {
+                "type": "string",
+                "description": "Country"
+              },
+              "country_iso_code": {
+                "type": "string",
+                "format": "iso-3166-1 alpha-3",
+                "description": "Country ISO code"
+              },
+              "state": {
+                "type": "string",
+                "description": "State"
+              },
+              "street": {
+                "type": "string",
+                "description": "Street information"
+              },
+              "street_additional_info": {
+                "type": "string",
+                "description": "Additional street information"
+              },
+              "zip_code": {
+                "type": "string",
+                "description": "Postal code"
+              }
+            },
+            "required": [
+              "city",
+              "country_iso_code",
+              "street"
+            ]
+          },
+          "channel_order_id": {
+            "type": "string",
+            "description": "Order identifier on the sales channel"
+          },
+          "channel_return_id": {
+            "type": "string",
+            "description": "Return identifier on the sales channel"
+          },
+          "channel_updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date time the return was last updated on the sales channel"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date time the return was created on the sales channel"
+          },
+          "label_url": {
+            "type": "string",
+            "description": "URL for the return shipping label"
+          },
+          "method": {
+            "type": "string",
+            "description": "Shipping method name on the sales channel"
+          },
+          "rejection_reason": {
+            "type": "string",
+            "description": "Reason for the return rejection\n\nEnum: `\"RETURN_WINDOW_CLOSED\"`, `\"NOT_ELIGIBLE_FOR_RETURN\"`, `\"FINAL_SALES\"`, `\"OTHER\"`\n"
+          },
+          "return_lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReturnLineRequest"
+            },
+            "minItems": 1
+          },
+          "rma_id": {
+            "type": "string",
+            "description": "Return Merchandise Authorization ID"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current return status\n\nEnum: `\"REQUEST_INITIATED\"`, `\"REQUEST_DECLINED\"`, `\"OPENED\"`, `\"RECEIVED\"`, `\"CLOSED\"`, `\"CHANNEL_SPECIFIC\"`\n"
+          },
+          "sub_channel_code": {
+            "type": "string",
+            "description": "Code of the sub-channel"
+          },
+          "tracking": {
+            "type": "object",
+            "properties": {
+              "carrier_name": {
+                "type": "string",
+                "description": "Carrier company name"
+              },
+              "tracking_number": {
+                "type": "string",
+                "description": "Carrier tracking number"
+              },
+              "tracking_url": {
+                "type": "string",
+                "description": "URL to track the return"
+              }
+            }
+          }
+        },
+        "required": [
+          "channel_order_id",
+          "channel_return_id",
+          "channel_updated_at",
+          "created_at",
+          "return_lines",
+          "status"
+        ]
+      },
+      "ShippingInfoRequest": {
+        "type": "object",
+        "description": "Shipping destination and logistics information for the order.",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/AddressRequest",
+            "description": "Delivery address of the recipient."
+          },
+          "carrier": {
+            "type": "string",
+            "description": "Name of the carrier handling the shipment, as defined on the channel."
+          },
+          "delivery_date": {
+            "type": "object",
+            "description": "Estimated delivery window communicated to the buyer.",
+            "properties": {
+              "earliest": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Earliest expected delivery date."
+              },
+              "latest": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Latest expected delivery date."
+              }
+            },
+            "required": [
+              "earliest",
+              "latest"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address of the recipient."
+          },
+          "method": {
+            "type": "string",
+            "description": "Shipping service level or method name (e.g. standard, express, next-day)."
+          },
+          "pudo_id": {
+            "type": "string",
+            "description": "Identifier of the pick-up/drop-off point (PUDO) when the delivery targets a relay point, locker, or store rather than a home address."
+          },
+          "shipping_deadline": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Latest date and time by which the seller must ship the order."
+          }
+        }
+      },
+      "StoreId": {
+        "type": "string",
+        "description": "Store identifier in the channel",
+        "minLength": 1
+      },
+      "SubChannel": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "Currency tag of the sub-channel, expected in ISO 4217 format. Cannot be changed later.",
+            "example": "USD",
+            "maxLength": 3,
+            "minLength": 1,
+            "pattern": "^[A-Z]{3}$"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id of the sub-channel inside the Marketplace where the store is located.",
+            "example": 12345
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the sub-channel inside the Marketplace where the store is located.",
+            "example": "Premium Sellers"
+          }
+        },
+        "required": [
+          "currency",
+          "id",
+          "name"
+        ]
+      },
+      "TaxRequest": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Money",
+            "description": "Total amount for this tax entry."
+          },
+          "channel_collectible": {
+            "$ref": "#/components/schemas/Money",
+            "description": "Amount collected by the operator (marketplace facilitator)."
+          },
+          "code": {
+            "type": "string",
+            "description": "Identifier of the tax type, as defined by the channel (e.g. VAT, GST, HST)."
+          },
+          "rate": {
+            "type": "number",
+            "description": "Tax rate expressed as a decimal (e.g. `0.20` for 20%)."
+          },
+          "seller_collectible": {
+            "$ref": "#/components/schemas/Money",
+            "description": "Amount the seller must collect and declare to tax authorities."
+          }
+        },
+        "required": [
+          "amount",
+          "code"
+        ]
+      },
+      "TaxonomyRuleRequest": {
+        "type": "object",
+        "description": "Request to create a taxonomy rule",
+        "properties": {
+          "rules": {
+            "type": "array",
+            "description": "List of rules to create",
+            "items": {
+              "$ref": "#/components/schemas/ProductTypeRule"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "rules"
+        ]
+      },
+      "TextAttribute": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Attribute"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "default_value": {
+                "type": "string",
+                "description": "Default text value of the attribute, used for required attributes only"
+              },
+              "max_size": {
+                "type": "integer",
+                "description": "Max characters size"
+              }
+            }
+          }
+        ],
+        "required": [
+          "max_size"
+        ]
+      },
+      "UpdateActionRequest": {
+        "type": "object",
+        "description": "Request payload for updating an asynchronous action's status",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "description": "List of errors encountered during action processing.\nRequired when status is FAILED.\nMultiple errors can be included to provide comprehensive failure details.\n",
+            "items": {
+              "$ref": "#/components/schemas/ActionError"
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "The final status of the asynchronous action:\n* SUCCESS - The action completed successfully with no errors\n* FAILED - The action encountered errors and could not be completed\n  (requires error details in the errors array)\n\n\nEnum: `\"SUCCESS\"`, `\"FAILED\"`\n"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "UpdateAnonymizeAfterRequest": {
+        "type": "object",
+        "properties": {
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateAnonymizeAfterRequestItem"
+            },
+            "maxItems": 100,
+            "minItems": 1
+          }
+        },
+        "required": [
+          "orders"
+        ]
+      },
+      "UpdateAnonymizeAfterRequestItem": {
+        "type": "object",
+        "properties": {
+          "anonymize_after": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date after which the order should be anonymized. The date must be in ISO 8601 format (YYYY-MM-DDTHH:mm:ssZ) and in the futur relative to time of call (note: a tolerance of few minutes will be tolerated to prevent false positive errors)",
+            "examples": [
+              "2023-10-01T00:00:00Z"
+            ]
+          },
+          "channel_id": {
+            "type": "string",
+            "description": "The ID of the channel on which the order was placed.",
+            "examples": [
+              1234
+            ]
+          },
+          "channel_order_id": {
+            "type": "string",
+            "description": "The ID of the order on the channel.",
+            "examples": [
+              "COMMERCIAL_ID-A"
+            ]
+          },
+          "sub_channel_code": {
+            "type": "string",
+            "description": "Code of the sub-channel"
+          }
+        },
+        "required": [
+          "anonymize_after",
+          "channel_id",
+          "channel_order_id"
+        ]
+      },
+      "UpdateStoreCatalogItem": {
+        "type": "object",
+        "properties": {
+          "diagnostics": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "deprecated": true,
+            "description": "A list of general diagnostics related to the store catalog item (deprecated use offer_diagnostics instead).",
+            "items": {
+              "$ref": "#/components/schemas/Diagnostic"
+            },
+            "maxItems": 100,
+            "minItems": 0
+          },
+          "id": {
+            "type": "string",
+            "description": "The item identifier of the store catalog item."
+          },
+          "offer_diagnostics": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "A list of diagnostics related to the offer status of the store catalog item, this list should reflect all the current active diagnostics. Use an empty list to clear all the diagnostics.",
+            "items": {
+              "$ref": "#/components/schemas/Diagnostic"
+            },
+            "maxItems": 100,
+            "minItems": 0
+          },
+          "offer_status": {
+            "type": "string",
+            "description": "The status of the offer in the channel. Possible values are:\n- <b>OFFER_ACTIVE</b>: The offer is active and visible in the channel.\nOnly price, stock and offer specific information updates will be sent from now on.\n(no product or offer creation will be sent from connect once an offer is declared as active).\n- <b>OFFER_DOES_NOT_EXIST</b>: The offer is not found in the channel.\nAn offer creation attempt will be sent.\n- <b>ACTION_REQUIRED</b>: The offer requires an action, such as updates or fixes, before it can be active.\nAn offer creation will be retried after the action.\n\n\nEnum: `\"OFFER_ACTIVE\"`, `\"OFFER_DOES_NOT_EXIST\"`, `\"ACTION_REQUIRED\"`\n"
+          },
+          "product_diagnostics": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "A list of diagnostics related to the product status of the store catalog item, this list should reflect all the current active diagnostics. Use an empty list to clear all the diagnostics.",
+            "items": {
+              "$ref": "#/components/schemas/Diagnostic"
+            },
+            "maxItems": 100,
+            "minItems": 0
+          },
+          "product_status": {
+            "type": "string",
+            "description": "The status of the product in the channel. Possible values are:\n- <b>PRODUCT_DOES_NOT_EXIST</b>: The product is not found in the channel.\n- <b>PRODUCT_PENDING_APPROVAL</b>: The product has been submitted and is waiting for approval in the channel.\n- <b>PRODUCT_REFUSED</b>: The product was reviewed but rejected by the channel.\n- <b>PRODUCT_CREATED</b>: The product exists and has been successfully created in the channel.\n- <b>ACTION_REQUIRED</b>: The product requires an action, such as updates or fixes, before it can proceed.\n\n\nEnum: `\"PRODUCT_DOES_NOT_EXIST\"`, `\"PRODUCT_PENDING_APPROVAL\"`, `\"PRODUCT_REFUSED\"`, `\"PRODUCT_CREATED\"`, `\"ACTION_REQUIRED\"`\n"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "UpdateStoreCatalogItemsRequest": {
+        "type": "object",
+        "properties": {
+          "store_catalog_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateStoreCatalogItem"
+            },
+            "maxItems": 10000,
+            "minItems": 1
+          }
+        },
+        "required": [
+          "store_catalog_items"
+        ]
+      },
+      "UploadOrderDocumentMetadata": {
+        "type": "object",
+        "properties": {
+          "channel_document_id": {
+            "type": "string",
+            "description": "The channel document ID, it must be unique in the channel."
+          },
+          "channel_type": {
+            "type": "string",
+            "description": "Channel-specific document type.\n\nThis field is optional and should be provided when type is <code>CHANNEL_SPECIFIC</code>. It allows connectors to store the original document type from the marketplace.\n"
+          },
+          "entity": {
+            "type": "object",
+            "description": "Entity this document is associated with.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The id of the entity (e.g. <code>returnId</code> for type : <code>RETURN</code>) this document is associated with.\n",
+                "examples": [
+                  "caf30673-ea3d-4113-9a18-674850f6a290"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of entity this document is associated with.\n\nEnum: `\"RETURN\"`\n"
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          },
+          "filename": {
+            "type": "string",
+            "description": "Name of the document (only this field counts as the file name).\n",
+            "examples": [
+              "UPS_1Z999AA10123456784.pdf",
+              "DHL_JJD0000123456.jpg",
+              "中国邮政_774602727890.png"
+            ],
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the document\n\nEnum: `\"RETURN_LABEL\"`, `\"CUSTOMER_INVOICE\"`, `\"DELIVERY_SLIP\"`, `\"SHIPMENT_DELIVERY_SLIP\"`, `\"CHANNEL_SPECIFIC\"`\n"
+          }
+        },
+        "required": [
+          "channel_document_id",
+          "filename",
+          "type"
+        ]
+      },
+      "UpsertCarriersRequest": {
+        "type": "object",
+        "properties": {
+          "carriers": {
+            "type": "array",
+            "description": "List of carriers available on the channel",
+            "items": {
+              "$ref": "#/components/schemas/CarrierRequest"
+            },
+            "maxItems": 5000,
+            "minItems": 1
+          }
+        },
+        "required": [
+          "carriers"
+        ]
+      },
+      "UpsertOrdersRequest": {
+        "type": "object",
+        "properties": {
+          "orders": {
+            "type": "array",
+            "description": "List of orders to create or update.",
+            "items": {
+              "$ref": "#/components/schemas/OrderRequest"
+            },
+            "maxItems": 100,
+            "minItems": 1
+          },
+          "origin": {
+            "$ref": "#/components/schemas/OriginRequest"
+          }
+        },
+        "required": [
+          "orders",
+          "origin"
+        ]
+      },
+      "UpsertReturnsRequest": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "$ref": "#/components/schemas/OriginRequest"
+          },
+          "returns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReturnRequest"
+            },
+            "maxItems": 100,
+            "minItems": 1
+          }
+        },
+        "required": [
+          "origin",
+          "returns"
+        ]
+      },
+      "UpsertReturnsResponse": {
+        "type": "object",
+        "properties": {
+          "return_errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "channel_order_id": {
+                  "type": "string"
+                },
+                "channel_return_id": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReturnErrorDetail"
+                  }
+                }
+              }
+            }
+          },
+          "return_success": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "channel_order_id": {
+                  "type": "string"
+                },
+                "channel_return_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "UseCaseConfiguration": {
+        "type": "object",
+        "description": "Configuration for a specific use case. \nThis API provides the configuration of required offer fields by use cases\n",
+        "properties": {
+          "optional": {
+            "$ref": "#/components/schemas/UseCaseConfigurationAttributes",
+            "description": "Optional fields for the use case"
+          },
+          "required": {
+            "$ref": "#/components/schemas/UseCaseConfigurationAttributes",
+            "description": "Required fields for the use case"
+          },
+          "support": {
+            "type": "string",
+            "description": "Support for the use case\n\nEnum: `\"SUPPORTED\"`, `\"UNSUPPORTED\"`\n"
+          }
+        },
+        "required": [
+          "required",
+          "support"
+        ]
+      },
+      "UseCaseConfigurationAttributes": {
+        "type": "object",
+        "properties": {
+          "custom_attributes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "standard_attributes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Enum: `\"ID\"`, `\"STANDARD_PRICE\"`, `\"DISCOUNT_PRICE\"`, `\"STOCK\"`, `\"GTIN\"`\n"
+            }
+          }
+        }
+      },
+      "UseCaseConfigurations": {
+        "type": "object",
+        "description": "Configuration for offer related features by use case. \nThis API provides the configuration of required offer fields by use cases\n",
+        "properties": {
+          "offer_creation": {
+            "$ref": "#/components/schemas/UseCaseConfiguration",
+            "description": "Configuration for offer creation"
+          },
+          "offer_update": {
+            "$ref": "#/components/schemas/UseCaseConfiguration",
+            "description": "Configuration for offer update"
+          }
+        },
+        "required": [
+          "offer_creation",
+          "offer_update"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "description": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+    "title": "Mirakl Connect Channel Platform APIs",
+    "version": ""
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/v1/catalog-configuration/channels/{channel_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/channel_id_path"
+        }
+      ],
+      "post": {
+        "description": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: only once, at channel setup</div>\n<div class=\"max-call-frequency\">Maximum usage: 1 per minute</div>\n</div>",
+        "operationId": "configureChannelCatalog",
+        "requestBody": {
+          "content": {
+            "application/json; charset=UTF-8": {
+              "examples": {
+                "application/json; charset=UTF-8-0": {
+                  "summary": "Channel 1 - Catalog capabilities",
+                  "value": "{\n    \"offer_configuration\": {\n        \"custom_attributes\": [\n            {\n                \"id\": \"OFFER_STATE\",\n                \"type\": \"List\",\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Offer condition\"\n                    }\n                ],\n                \"configuration_modes\": [\n                    \"CONSTANT\",\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The condition of the offer.\"\n                    }\n                ],\n                \"max_size\": 1,\n                \"requirement_level\": \"REQUIRED\",\n                \"values\": [\n                    {\n                        \"id\": \"NEW\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"New\"\n                            }\n                        ]\n                    },\n                    {\n                        \"id\": \"REFURBISHED\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"Refurbished - as good as new\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            {\n                \"id\": \"ASIN\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"ASIN of the product. You are strongly encouraged to provide this value.\"\n                    }\n                ],\n                \"requirement_level\": \"RECOMMENDED\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Amazon Standard Identification Number\"\n                    }\n                ]\n            },\n            {\n                \"id\": \"productTaxCode\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The tax code for the product.\"\n                    }\n                ],\n                \"requirement_level\": \"OPTIONAL\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Product Tax Code\"\n                    }\n                ]\n            },\n            {\n                \"id\": \"length\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The length of the product.\"\n                    }\n                ],\n                \"requirement_level\": \"OPTIONAL\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Length\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"use_case_configurations\": {\n        \"offer_creation\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"GTIN\", \"ID\", \"STOCK\" ],\n                \"custom_attributes\": [ \"OFFER_STATE\" ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ \"STANDARD_PRICE\", \"DISCOUNT_PRICE\" ],\n                \"custom_attributes\": [ \"length\" ]\n            }\n        },\n\n        \"offer_update\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"ID\" ],\n                \"custom_attributes\": [ ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ ],\n                \"custom_attributes\": [ \"productTaxCode\" ]\n            }\n        }\n    }\n}\n"
+                },
+                "application/json; charset=UTF-8-1": {
+                  "summary": "Channel 2 - Catalog capabilities",
+                  "value": "{\n    \"offer_configuration\": {\n        \"custom_attributes\": [\n            {\n                \"id\": \"CONDITION\",\n                \"type\": \"List\",\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Offer condition\"\n                    }\n                ],\n                \"configuration_modes\": [\n                    \"CONSTANT\",\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The condition of the offer.\"\n                    }\n                ],\n                \"max_size\": 1,\n                \"requirement_level\": \"REQUIRED\",\n                \"values\": [\n                    {\n                        \"id\": \"NEW\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"New\"\n                            }\n                        ]\n                    },\n                    {\n                        \"id\": \"REFURBISHED\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"Refurbished - as good as new\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            {\n                \"id\": \"taxcode\",\n                \"type\": \"Text\",\n                \"max_size\": 255,\n                \"configuration_modes\": [\n                    \"CONSTANT\",\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The tax code\"\n                    }\n                ],\n                \"requirement_level\": \"RECOMMENDED\",\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Tax code\"\n                    }\n                ]\n            }\n        ]\n    },\n\n    \"use_case_configurations\": {\n        \"offer_creation\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"GTIN\", \"ID\", \"STOCK\" ],\n                \"custom_attributes\": [ ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ \"STANDARD_PRICE\", \"DISCOUNT_PRICE\" ],\n                \"custom_attributes\": [ ]\n            }\n        },\n\n        \"offer_update\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"ID\" ],\n                \"custom_attributes\": [ ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ ],\n                \"custom_attributes\": [ ]\n            }\n        }\n    }\n}\n"
+                },
+                "application/json; charset=UTF-8-auto": {
+                  "summary": "Complete example with value types (application/json; charset=utf-8)",
+                  "value": {
+                    "offer_configuration": {
+                      "custom_attributes": [
+                        {
+                          "id": "string",
+                          "type": "Boolean",
+                          "configuration_modes": [
+                            "CONSTANT"
+                          ],
+                          "requirement_level": "OPTIONAL",
+                          "labels": [
+                            {
+                              "locale": "en_US",
+                              "value": "string"
+                            }
+                          ],
+                          "descriptions": [
+                            {
+                              "locale": "en_US",
+                              "value": "string"
+                            }
+                          ]
+                        }
+                      ],
+                      "pricing_configuration": {
+                        "discount_price_period": {
+                          "support": "SUPPORTED",
+                          "start_date": {
+                            "requirement_level": "OPTIONAL"
+                          },
+                          "end_date": {
+                            "requirement_level": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "use_case_configurations": {
+                      "offer_creation": {
+                        "support": "SUPPORTED",
+                        "required": {
+                          "standard_attributes": [
+                            "ID"
+                          ],
+                          "custom_attributes": [
+                            "string"
+                          ]
+                        },
+                        "optional": {
+                          "standard_attributes": [
+                            "ID"
+                          ],
+                          "custom_attributes": [
+                            "string"
+                          ]
+                        }
+                      },
+                      "offer_update": {
+                        "support": "SUPPORTED",
+                        "required": {
+                          "standard_attributes": [
+                            "ID"
+                          ],
+                          "custom_attributes": [
+                            "string"
+                          ]
+                        },
+                        "optional": {
+                          "standard_attributes": [
+                            "ID"
+                          ],
+                          "custom_attributes": [
+                            "string"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/ChannelCatalogCapabilities"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:channel-catalog:configure"
+            ]
+          }
+        ],
+        "summary": "configureChannelCatalog - Configure Catalog capabilities for a channel",
+        "tags": [
+          "Catalog Configuration"
+        ]
+      }
+    },
+    "/v1/taxonomy/channels/{channel_id}/rules": {
+      "put": {
+        "description": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 5 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 10 per second</div>\n</div>",
+        "operationId": "createTaxonomyRule",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channel_id_path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=UTF-8": {
+              "examples": {
+                "application/json; charset=UTF-8-0": {
+                  "summary": "Example of a taxonomy rule",
+                  "value": "{\n    \"rules\": [\n        {\n            \"id\": \"rule-smartphones\",\n            \"when\": {\n                \"all\": [\n                    {\n                        \"equals\": {\n                            \"attribute\": \"model\",\n                            \"value\": \"samsung-galaxy-s21\"\n                        }\n                    },\n                    {\n                        \"not\": {\n                            \"isSet\": {\n                                \"attribute\": \"color\"\n                            }\n                        }\n                    }\n                ]\n            },\n            \"then\": {\n                \"all\": [\n                    {\n                        \"redefine\": {\n                            \"attribute\": \"samsung-special-color\",\n                            \"requirementLevel\": \"REQUIRED\"\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}\n"
+                },
+                "application/json; charset=UTF-8-auto": {
+                  "summary": "Complete example with value types (application/json; charset=utf-8)",
+                  "value": {
+                    "rules": [
+                      {
+                        "id": "rule-1234",
+                        "when": "object",
+                        "then": {
+                          "all": [
+                            {
+                              "redefine": {
+                                "attribute": "COLOR",
+                                "requirementLevel": "OPTIONAL"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/TaxonomyRuleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:taxonomy-rule:create"
+            ]
+          }
+        ],
+        "summary": "createTaxonomyRule - Create a Taxonomy Rule",
+        "tags": [
+          "Taxonomy"
+        ]
+      }
+    },
+    "/v1/orders/documents/{channel_document_id}": {
+      "delete": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUse this API to delete a document.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each document deletion on the order</div>\n<div class=\"max-call-frequency\">Maximum usage: On each document deletion on the order</div>\n</div>",
+        "operationId": "deleteOrderDocument",
+        "parameters": [
+          {
+            "description": "Document ID from the channel",
+            "example": "DOC-1234",
+            "explode": false,
+            "in": "path",
+            "name": "channel_document_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "application/json-auto": {
+                  "summary": "Complete example with value types (application/json)",
+                  "value": {
+                    "origin": {
+                      "channel_id": "string",
+                      "channel_store_id": "string",
+                      "sub_channel_code": "string"
+                    }
+                  }
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "$ref": "#/components/schemas/DocumentOriginRequest"
+                  }
+                },
+                "required": [
+                  "origin"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "The channel document ID does not exists. This may occur if the ID is incorrect or the document has already been deleted.\n"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:order-document:delete"
+            ]
+          }
+        ],
+        "summary": "deleteOrderDocument - Delete order document",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/actions/{action_id}": {
+      "put": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUpdates the final status of an asynchronous action previously initiated through a command event.\n\n## Overview\n- When an asynchronous action is requested via command event, an `action_id` is provided to track the action\n- Use this endpoint to report the final outcome (SUCCESS or FAILURE) of the action\n- For failed actions, detailed error information must be provided\n\n## Usage Notes\n- Update should be sent once the action is fully completed\n- Multiple errors can be provided for failed actions\n- The action ID must match the one provided in the original command event\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Send update as soon as the action is completed</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per action completion</div>\n</div>",
+        "operationId": "updateActionStatus",
+        "parameters": [
+          {
+            "description": "The unique identifier of the action. This ID was provided in the original command event that initiated the action.",
+            "example": "1ba5fc4b-c4fd-4251-880b-3052e301bbd4",
+            "explode": false,
+            "in": "path",
+            "name": "action_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "application/json-auto": {
+                  "summary": "Complete example with value types (application/json)",
+                  "value": {
+                    "status": "SUCCESS",
+                    "errors": [
+                      {
+                        "code": "INVALID_INPUT",
+                        "message": "Cannot process cancellation: order is already shipped"
+                      }
+                    ]
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActionRequest"
+              }
+            }
+          },
+          "description": "The updated status and any error details for the action",
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "The action status was successfully updated. No additional content is provided."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "The request was invalid. Common causes include: - Invalid action status : must be either SUCCESS or FAILED - Action is already in a final state (SUCCESS or FAILED). This error will have code `ACTION_ALREADY_FINAL`. - Invalid error format"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "The specified action ID was not found. This may occur if: - The ID is incorrect - The action has expired - The action was already completed"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:order-action:upsert"
+            ]
+          }
+        ],
+        "summary": "updateActionStatus - Update asynchronous action status",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/anonymize-after": {
+      "put": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUpdates the anonymization date for orders in the Mirakl Connect platform.\nUse this API to indicated after which date orders should be anonymized by Connect.\nThe anonymization process is irreversible and should be used with caution.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per order when the anonymization date is set</div>\n<div class=\"max-call-frequency\">Maximum usage: Every time the anonymization date needs to be changed</div>\n</div>",
+        "operationId": "updateAnonymizeAfterDate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "application/json-auto": {
+                  "summary": "Complete example with value types (application/json)",
+                  "value": {
+                    "orders": [
+                      {
+                        "channel_order_id": "COMMERCIAL_ID-A",
+                        "channel_id": 1234,
+                        "channel_store_id": "string",
+                        "sub_channel_code": "string",
+                        "anonymize_after": "2023-10-01T00:00:00Z"
+                      }
+                    ]
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAnonymizeAfterRequest"
+              }
+            }
+          },
+          "description": "The new anonymize_after date for the orders",
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully updated the anonymize_after date for all orders of the request. No additional content is provided."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "At least one the item of the payload is invalid. The entire request is canceled, none of the anonymize_after date have been updated. Common errors include: - referencing an order that does not exist - trying to set an anonymize_after date in the past\nPlease refer to the error message for more details."
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:order:update-anonymize-after"
+            ]
+          }
+        ],
+        "summary": "updateAnonymizeAfterDate - Update anonymization date for orders",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/channel-catalog/{channel_id}/store-catalog-items/{store_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/channel_id_path"
+        },
+        {
+          "$ref": "#/components/parameters/store_id_path"
+        }
+      ],
+      "post": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUpdates the store catalog items for a specific channel with the provided product IDs.\n\n**Behavior:**\n- If the specified store does not exist in Mirakl Connect, a 404 error is returned.\n- This is an asynchronous operation - the request is accepted and processed in the background.\n- Products that do not exist in Mirakl Connect are silently ignored (no error returned when the request is accepted).\n- Successfully matched products will be updated regardless of unmatched products in the same request.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 20 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 30 per second</div>\n</div>",
+        "operationId": "updateStoreCatalogItems",
+        "requestBody": {
+          "content": {
+            "application/json; charset=UTF-8": {
+              "examples": {
+                "application/json; charset=UTF-8-auto": {
+                  "summary": "Complete example with value types (application/json; charset=utf-8)",
+                  "value": {
+                    "store_catalog_items": [
+                      {
+                        "id": "string",
+                        "diagnostics": [
+                          {
+                            "message": "string",
+                            "channel_diagnostic_id": "string",
+                            "channel_attribute_id": "string",
+                            "connector_override_action": "REMOVED"
+                          }
+                        ],
+                        "offer_diagnostics": [
+                          {
+                            "message": "string",
+                            "channel_diagnostic_id": "string",
+                            "channel_attribute_id": "string",
+                            "connector_override_action": "REMOVED"
+                          }
+                        ],
+                        "product_diagnostics": [
+                          {
+                            "message": "string",
+                            "channel_diagnostic_id": "string",
+                            "channel_attribute_id": "string",
+                            "connector_override_action": "REMOVED"
+                          }
+                        ],
+                        "offer_status": "OFFER_ACTIVE",
+                        "product_status": "PRODUCT_DOES_NOT_EXIST"
+                      }
+                    ]
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStoreCatalogItemsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Request accepted for processing.\n\nThe store catalog items update has been queued and will be processed asynchronously.\nNon-existent products will be silently ignored during processing.\n"
+          },
+          "400": {
+            "description": "Bad Request - Invalid request format."
+          },
+          "404": {
+            "description": "Channel or Store not found in Mirakl Connect."
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:store-catalog-items:update"
+            ]
+          }
+        ],
+        "summary": "updateStoreCatalogItems - Update Store Catalog Items for a given channel",
+        "tags": [
+          "Product Feedback"
+        ]
+      }
+    },
+    "/v1/orders/{channel_order_id}/documents": {
+      "post": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUse this API to upload a document for an order or its related entities (e.g. returns).\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each new document on the order</div>\n<div class=\"max-call-frequency\">Maximum usage: On each new document on the order</div>\n</div>",
+        "operationId": "uploadOrderDocument",
+        "parameters": [
+          {
+            "description": "Order identifier from the channel",
+            "example": "COMMERCIAL_ID-A",
+            "explode": false,
+            "in": "path",
+            "name": "channel_order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "examples": {
+                "multipart/form-data-auto": {
+                  "summary": "Complete example with value types (multipart/form-data)",
+                  "value": {
+                    "file": "string",
+                    "origin": {
+                      "channel_id": "string",
+                      "channel_store_id": "string",
+                      "sub_channel_code": "string"
+                    },
+                    "metadata": {
+                      "channel_document_id": "string",
+                      "filename": "UPS_1Z999AA10123456784.pdf",
+                      "type": "RETURN_LABEL",
+                      "channel_type": "string",
+                      "entity": {
+                        "id": "caf30673-ea3d-4113-9a18-674850f6a290",
+                        "type": "RETURN"
+                      }
+                    }
+                  }
+                }
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The document file to upload.\n\nMaximum file size: <code>10 MB</code>.\n\nSupported formats are :\n                      - <code>PDF</code>\n                      - <code>JPEG</code>\n                      - <code>PNG</code>\n                      - <code>CSV</code>\n"
+                  },
+                  "metadata": {
+                    "$ref": "#/components/schemas/UploadOrderDocumentMetadata"
+                  },
+                  "origin": {
+                    "$ref": "#/components/schemas/DocumentOriginRequest"
+                  }
+                },
+                "required": [
+                  "file",
+                  "metadata",
+                  "origin"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:order-document:upload"
+            ]
+          }
+        ],
+        "summary": "uploadOrderDocument - Upload order document",
+        "tags": [
+          "Orders"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "cURL",
+            "source": "curl -i -X POST \\\n  https://miraklconnect.com/api/channel-platform/v1/orders/{channel_order_id}/documents \\\n  -H 'Content-Type: multipart/form-data' \\\n  -F 'file=@path/to/file' \\\n  -F 'origin=\"{\\\"channel_id\\\":\\\"string\\\",\\\"channel_store_id\\\":\\\"string\\\",\\\"sub_channel_code\\\":\\\"string\\\"}\";type=application/json' \\\n  -F 'metadata=\"{\\\"channel_document_id\\\":\\\"string\\\",\\\"filename\\\":\\\"UPS_1Z999AA10123456784.pdf\\\",\\\"type\\\":\\\"RETURN_LABEL\\\",\\\"channel_type\\\":\\\"string\\\",\\\"entity\\\":{\\\"id\\\":\\\"caf30673-ea3d-4113-9a18-674850f6a290\\\",\\\"type\\\":\\\"RETURN\\\"}}\";type=application/json'\n"
+          }
+        ]
+      }
+    },
+    "/v1/channels/{channel_id}/stores/{channel_store_id}": {
+      "put": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUpdate business information of a store.\nThose information will be displayed to the seller in Mirakl Connect.\nThey are mandatory to consider a store as usable in Mirakl Connect.\nThis API is replacing all data at once. Developer have to provide the complete state every time.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 1 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 5 per minute</div>\n</div>",
+        "operationId": "upsertBusinessInformation",
+        "parameters": [
+          {
+            "explode": false,
+            "in": "path",
+            "name": "channel_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "style": "simple"
+          },
+          {
+            "explode": false,
+            "in": "path",
+            "name": "channel_store_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Id of the store in channel",
+              "minLength": 1
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "application/json-auto": {
+                  "summary": "Complete example with value types (application/json)",
+                  "value": {
+                    "currency": "USD",
+                    "kyc_status": "PENDING_SUBMISSION",
+                    "kyc_status_reason": "string",
+                    "shipping_warning": "string",
+                    "payment_information_warning": "string",
+                    "payment_information_configured": true,
+                    "quality_suspension_reasons": [
+                      {
+                        "rule": "Evaluation Grade last month was lower than 3.5 expected to never be lower than 4.0",
+                        "period": "Last month",
+                        "rule_comparison_method": "lower than",
+                        "rule_type": "DECIMAL",
+                        "stat_value": 3.5,
+                        "threshold": 0
+                      }
+                    ],
+                    "sub_channels": [
+                      {
+                        "id": 12345,
+                        "name": "Premium Sellers",
+                        "currency": "USD"
+                      }
+                    ],
+                    "missing_configuration": true,
+                    "updated_at": "2023-03-28T09:34:42Z"
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/BusinessInformationInput"
+              }
+            }
+          },
+          "description": "Input to update business information of a store",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Store information updated"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized Error"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Not Found Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:store:write"
+            ]
+          }
+        ],
+        "summary": "upsertBusinessInformation - Update business information of a store\n",
+        "tags": [
+          "Store"
+        ]
+      }
+    },
+    "/v1/orders/channels/{channel_id}/carriers": {
+      "post": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUse this API to share the channel's allowed list of carriers with Mirakl Connect, and keep it synchronized over time.\n\n**Important:**\n- You must provide the complete list of carriers in a single request, any carriers not included will be deleted\n- If the marketplace allows it, you can add an \"Other\" carrier to cover unlisted carriers; otherwise, only include formally supported carriers\n- We recommend sharing the full list of carriers: Mirakl Connect automatically maps carriers with slight naming differences\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: When the channel's allowed list of carriers changes</div>\n<div class=\"max-call-frequency\">Maximum usage: 1 / hour</div>\n</div>",
+        "operationId": "upsertCarriers",
+        "parameters": [
+          {
+            "description": "Unique identifier of the sales channel",
+            "explode": false,
+            "in": "path",
+            "name": "channel_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "application/json-auto": {
+                  "summary": "Complete example with value types (application/json)",
+                  "value": {
+                    "carriers": [
+                      {
+                        "channel_carrier_id": "string",
+                        "name": "string"
+                      }
+                    ]
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCarriersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "The channel was not found. This may occur if: - The channel_id does not exist - The channel does not belong to the calling connector's technology"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:carrier:upsert"
+            ]
+          }
+        ],
+        "summary": "upsertCarriers - Upsert carriers",
+        "tags": [
+          "Carriers"
+        ]
+      }
+    },
+    "/v1/orders": {
+      "post": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUse this API to synchronize orders with Mirakl Connect.\n\n- The operation is **not partially successful**: if any order in the payload is invalid, the entire request is rejected.\n- This API does not support PATCH operations. All fields must be sent with each upsert request to ensure the complete update of the order data.\n- Updates whose `channel_updated_at` timestamp is older than the value already stored in Connect are silently ignored (anti-replay guard).\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 20 / sec</div>\n<div class=\"max-call-frequency\">Maximum usage: 30 / sec</div>\n</div>",
+        "operationId": "upsertOrders",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "application/json-auto": {
+                  "summary": "Complete example with value types (application/json)",
+                  "value": {
+                    "origin": {
+                      "channel_id": "string",
+                      "channel_store_id": "string"
+                    },
+                    "orders": [
+                      {
+                        "channel_order_id": "string",
+                        "created_at": "2023-03-28T09:34:42Z",
+                        "channel_updated_at": "2023-03-28T09:34:42Z",
+                        "status": "AWAITING_ACCEPTANCE",
+                        "shipping_info": {
+                          "email": "string",
+                          "address": {
+                            "last_name": "string",
+                            "street": "string",
+                            "city": "string",
+                            "first_name": "string",
+                            "company": "string",
+                            "street_additional_info": "string",
+                            "state": "string",
+                            "country": "string",
+                            "country_iso_code": "string",
+                            "zip_code": "string",
+                            "phone": "string",
+                            "additional_info": "string"
+                          },
+                          "carrier": "string",
+                          "method": "string",
+                          "pudo_id": "string",
+                          "shipping_deadline": "2023-03-28T09:34:42Z",
+                          "delivery_date": {
+                            "earliest": "2023-03-28T09:34:42Z",
+                            "latest": "2023-03-28T09:34:42Z"
+                          }
+                        },
+                        "order_lines": [
+                          {
+                            "channel_order_line_id": "string",
+                            "created_at": "2023-03-28T09:34:42Z",
+                            "updated_at": "2023-03-28T09:34:42Z",
+                            "quantity": 0,
+                            "can_cancel": true,
+                            "can_refund": true,
+                            "total_shipping_price": {
+                              "amount": 0,
+                              "currency": "string"
+                            },
+                            "price": {
+                              "amount": 0,
+                              "currency": "string"
+                            },
+                            "product": {
+                              "id": "string",
+                              "title": "string",
+                              "thumbnail_url": "string"
+                            },
+                            "taxes": [
+                              {
+                                "amount": {
+                                  "amount": 0,
+                                  "currency": "string"
+                                },
+                                "code": "string",
+                                "rate": 0,
+                                "seller_collectible": {
+                                  "amount": 0,
+                                  "currency": "string"
+                                },
+                                "channel_collectible": {
+                                  "amount": 0,
+                                  "currency": "string"
+                                }
+                              }
+                            ],
+                            "shipping_taxes": [
+                              {
+                                "amount": {
+                                  "amount": 0,
+                                  "currency": "string"
+                                },
+                                "code": "string",
+                                "rate": 0,
+                                "seller_collectible": {
+                                  "amount": 0,
+                                  "currency": "string"
+                                },
+                                "channel_collectible": {
+                                  "amount": 0,
+                                  "currency": "string"
+                                }
+                              }
+                            ],
+                            "status": "AWAITING_ACCEPTANCE",
+                            "status_reason": "ACCEPTANCE_TIMEOUT",
+                            "adjustments": [
+                              {
+                                "channel_adjustment_id": "string",
+                                "reason": "CUSTOMER_CANCELATION",
+                                "created_at": "2023-03-28T09:34:42Z",
+                                "type": "REFUND",
+                                "quantity": 0,
+                                "price": {
+                                  "amount": 0,
+                                  "currency": "string"
+                                },
+                                "taxes": [
+                                  {
+                                    "amount": {
+                                      "amount": 0,
+                                      "currency": "string"
+                                    },
+                                    "code": "string",
+                                    "rate": 0,
+                                    "seller_collectible": {
+                                      "amount": 0,
+                                      "currency": "string"
+                                    },
+                                    "channel_collectible": {
+                                      "amount": 0,
+                                      "currency": "string"
+                                    }
+                                  }
+                                ],
+                                "shipping_price": {
+                                  "amount": 0,
+                                  "currency": "string"
+                                },
+                                "shipping_taxes": [
+                                  {
+                                    "amount": {
+                                      "amount": 0,
+                                      "currency": "string"
+                                    },
+                                    "code": "string",
+                                    "rate": 0,
+                                    "seller_collectible": {
+                                      "amount": 0,
+                                      "currency": "string"
+                                    },
+                                    "channel_collectible": {
+                                      "amount": 0,
+                                      "currency": "string"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "custom_attributes": [
+                              {
+                                "id": "string",
+                                "type": "STRING"
+                              }
+                            ]
+                          }
+                        ],
+                        "status_reason": "ACCEPTANCE_TIMEOUT",
+                        "fulfillment": {
+                          "type": "FULFILLED_BY_SELLER",
+                          "code": "string"
+                        },
+                        "billing_info": {
+                          "address": {
+                            "last_name": "string",
+                            "street": "string",
+                            "city": "string",
+                            "first_name": "string",
+                            "company": "string",
+                            "street_additional_info": "string",
+                            "state": "string",
+                            "country": "string",
+                            "country_iso_code": "string",
+                            "zip_code": "string",
+                            "phone": "string",
+                            "additional_info": "string"
+                          }
+                        },
+                        "has_incident": true,
+                        "custom_attributes": [
+                          {
+                            "id": "string",
+                            "type": "STRING"
+                          }
+                        ],
+                        "sub_channel_code": "string"
+                      }
+                    ]
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpsertOrdersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "A critical resource was not found. This may occur if:\n\n- The channel or its technology is unknown to Connect\n- The store is unknown to Connect\n"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:orders:upsert"
+            ]
+          }
+        ],
+        "summary": "upsertOrders - Upsert orders",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/taxonomy/channels/{channel_id}/product-types": {
+      "put": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nCreates or fully replaces a Product Type for the specified channel.\n\n**Behavior:**\n- **Full replacement (PUT semantics):** the entire product type definition (including all embedded attributes, their value lists, and rule references) is replaced with the content of this request. Any attribute, value list entry, or rule reference not present in the request body will be removed.\n- **Always provide the complete product type definition in every request**, even when only a subset of attributes or rules needs to change.\n- This is an asynchronous operation - the request is accepted and processed in the background.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 5 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 10 per second</div>\n</div>",
+        "operationId": "upsertProductType",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/channel_id_path"
+          },
+          {
+            "description": "The unique identifier of the product type, which may contain special characters like slashes.",
+            "explode": true,
+            "in": "query",
+            "name": "product_type_id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ProductTypeId"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Store identifier scoping this product type to a specific store.\n\nWhen provided, the product type is pushed at store-level granularity instead of channel-level.\n**This granularity is not enabled by default: contact Mirakl technical teams beforehand.**\n",
+            "explode": true,
+            "in": "query",
+            "name": "store_id",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/StoreId"
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=UTF-8": {
+              "examples": {
+                "application/json; charset=UTF-8-0": {
+                  "summary": "Product Type 'Smartphones' on a fake channel (dummy example)",
+                  "value": "{\n    \"labels\": [\n        {\n            \"locale\": \"en\",\n            \"value\": \"Smartphones\"\n        },\n        {\n            \"locale\": \"fr\",\n            \"value\": \"Smartphones\"\n        }\n    ],\n    \"context\": {\n        \"labels\": [\n            {\n                \"locale\": \"en\",\n                \"value\": \"Electronics / Mobile Devices / Smartphones\"\n            },\n            {\n                \"locale\": \"fr\",\n                \"value\": \"Électronique / Appareils Mobiles / Smartphones\"\n            }\n        ]\n    },\n    \"embedded_attributes\": [\n        {\n            \"id\": \"recommended_browse_nodes\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Browse Nodes\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Catégories\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Classification / Browse Nodes\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Classification / Catégories\"\n                    }\n                ],\n                \"path\": \"$.recommended_browse_nodes\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"340320031\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Mobile Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones Mobiles\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"541546121\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Brand\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Brand\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Marque\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Product Information / Brand\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Information Produit / Marque\"\n                    }\n                ],\n                \"path\": \"$.brand\"\n            },\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ],\n            \"available_values\": [\n                {\n                    \"id\": \"APPLE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Apple\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Apple\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"SAMSUNG\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Samsung\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Samsung\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"XIAOMI\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Xiaomi\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Xiaomi\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"COLOR\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Color\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Couleur\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Physical Characteristics / Color\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Caractéristiques Physiques / Couleur\"\n                    }\n                ],\n                \"path\": \"$.color\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"BLACK\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Black\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Noir\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"WHITE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"White\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Blanc\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"GOLD\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Gold\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Or\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Mobile OS\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Système d'exploitation\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / Operating System\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Système d'exploitation\"\n                    }\n                ],\n                \"path\": \"$.mobile_os\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"ANDROID\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Android\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Android\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"IOS\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"iOS\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"iOS\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS_version\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"Text\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"OS Version\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Version OS\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / OS Version\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Version OS\"\n                    }\n                ],\n                \"path\": \"$.mobile_os_version\"\n            }\n        },\n        {\n            \"id\": \"main_image\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"Media\",\n            \"media_type\": \"IMAGE\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Main image\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Image principale\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Media / Product Images / Main Image\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Média / Images Produit / Image Principale\"\n                    }\n                ],\n                \"path\": \"$.main_image\"\n            },\n            \"descriptions\": [],\n            \"connect_standard_attributes\": [\n                \"IMAGE\"\n            ]\n        }\n    ],\n    \"rules\": [\n        {\n            \"ref\": \"rule-smartphones\"\n        }\n    ]\n}\n"
+                },
+                "application/json; charset=UTF-8-1": {
+                  "summary": "Product Type 'Smartphones' on another fake channel (dummy example)",
+                  "value": "{\n    \"labels\": [\n        {\n            \"locale\": \"en\",\n            \"value\": \"Smartphones\"\n        },\n        {\n            \"locale\": \"fr\",\n            \"value\": \"Smartphones\"\n        }\n    ],\n    \"context\": {\n        \"labels\": [\n            {\n                \"locale\": \"en\",\n                \"value\": \"Electronics / Mobile Devices / Smartphones\"\n            },\n            {\n                \"locale\": \"fr\",\n                \"value\": \"Électronique / Appareils Mobiles / Smartphones\"\n            }\n        ]\n    },\n    \"embedded_attributes\": [\n        {\n            \"id\": \"Brand\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Brand\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Marque\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Product Information / Brand\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Information Produit / Marque\"\n                    }\n                ],\n                \"path\": \"$.brand\"\n            },\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ],\n            \"available_values\": [\n                {\n                    \"id\": \"APPLE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Apple\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Apple\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"SAMSUNG\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Samsung\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Samsung\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"XIAOMI\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Xiaomi\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Xiaomi\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Mobile OS\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Système d'exploitation\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / Operating System\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Système d'exploitation\"\n                    }\n                ],\n                \"path\": \"$.mobile_os\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"ANDROID\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Android\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Android\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"IOS\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"iOS\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"iOS\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"main_video\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"Media\",\n            \"media_type\": \"OTHER\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Main video\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Vidéo principale\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Media / Product Videos / Main Video\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Média / Vidéos Produit / Vidéo Principale\"\n                    }\n                ],\n                \"path\": \"$.main_video\"\n            },\n            \"descriptions\": [],\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ]\n        }\n    ],\n    \"rules\": [\n        {\n            \"ref\": \"rule-smartphones\"\n        }\n    ]\n}\n"
+                },
+                "application/json; charset=UTF-8-auto": {
+                  "summary": "Complete example with value types (application/json; charset=utf-8)",
+                  "value": {
+                    "labels": [
+                      {
+                        "locale": "en_US",
+                        "value": "string"
+                      }
+                    ],
+                    "context": {
+                      "labels": [
+                        {
+                          "locale": "en_US",
+                          "value": "string"
+                        }
+                      ]
+                    },
+                    "embedded_attributes": [
+                      {
+                        "id": "COLOR",
+                        "requirement_level": "OPTIONAL",
+                        "type": "Text",
+                        "connect_standard_attributes": [
+                          "PRODUCT_ID"
+                        ],
+                        "labels": [
+                          {
+                            "locale": "en_US",
+                            "value": "string"
+                          }
+                        ],
+                        "context": {
+                          "path": "string",
+                          "labels": [
+                            {
+                              "locale": "en_US",
+                              "value": "string"
+                            }
+                          ]
+                        },
+                        "descriptions": [
+                          {
+                            "locale": "en_US",
+                            "value": "string"
+                          }
+                        ]
+                      }
+                    ],
+                    "rules": [
+                      {
+                        "ref": "rule-1234"
+                      }
+                    ]
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/ProductType"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "401": {
+            "description": "The channel is not configured to allow the requested taxonomy granularity (channel-level or store-level)."
+          },
+          "404": {
+            "description": "Channel not found, or store not found when `store_id` is provided."
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:taxonomy-product-type:upsert"
+            ]
+          }
+        ],
+        "summary": "upsertProductType - Create or Update a Product Type",
+        "tags": [
+          "Taxonomy"
+        ]
+      }
+    },
+    "/v1/orders/returns": {
+      "post": {
+        "description": "<div class=\"extension-title\">Description</div>\n\nUse this API to synchronize returns with Mirakl Connect.\n\n   ## Overview\n   - Returns are always associated to an order already known by Mirakl Connect\n   - Each return line must reference an order line already known by Mirakl Connect\n   - The API performs an upsert: existing returns are updated, new ones are created\n   - The operation is **partially successful**: some returns in the payload can succeed while others fail\n\n   ## Usage Notes\n   - The `channel_order_id` must reference an order previously synchronized through the orders API\n   - Each `channel_order_line_id` in `return_lines` must reference an order line previously synchronized through the orders API\n   - This API does not support PATCH operations. Always send all fields for each return.\n   - When the request is syntactically valid, HTTP status is `200` even if some or all returns failed\n   - Global failures are reported with standard HTTP errors: `400` for invalid payloads and `404` for unknown global resources (such as channel or store).\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>",
+        "operationId": "upsertReturns",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "application/json-auto": {
+                  "summary": "Complete example with value types (application/json)",
+                  "value": {
+                    "origin": {
+                      "channel_id": "string",
+                      "channel_store_id": "string"
+                    },
+                    "returns": [
+                      {
+                        "channel_return_id": "string",
+                        "channel_order_id": "string",
+                        "rma_id": "string",
+                        "status": "REQUEST_INITIATED",
+                        "tracking": {
+                          "tracking_number": "string",
+                          "carrier_name": "string",
+                          "tracking_url": "string"
+                        },
+                        "label_url": "string",
+                        "method": "string",
+                        "rejection_reason": "RETURN_WINDOW_CLOSED",
+                        "address": {
+                          "street": "string",
+                          "street_additional_info": "string",
+                          "city": "string",
+                          "state": "string",
+                          "country": "string",
+                          "country_iso_code": "string",
+                          "zip_code": "string"
+                        },
+                        "created_at": "2023-03-28T09:34:42Z",
+                        "channel_updated_at": "2023-03-28T09:34:42Z",
+                        "return_lines": [
+                          {
+                            "channel_order_line_id": "string",
+                            "quantity": 0,
+                            "reason": "WRONG_ITEM"
+                          }
+                        ],
+                        "sub_channel_code": "string"
+                      }
+                    ]
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/UpsertReturnsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "return_success": [
+                        {
+                          "channel_order_id": "string",
+                          "channel_return_id": "string"
+                        }
+                      ],
+                      "return_errors": [
+                        {
+                          "channel_order_id": "string",
+                          "channel_return_id": "string",
+                          "details": [
+                            {
+                              "code": "string",
+                              "message": "string",
+                              "field": "string"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertReturnsResponse"
+                }
+              }
+            },
+            "description": "Detailed per-return upsert result. Response body contains success and error details for each return."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "application/json-auto": {
+                    "summary": "Complete example with value types (application/json)",
+                    "value": {
+                      "code": "DATA_NOT_FOUND",
+                      "message": "An error occurred while processing your request",
+                      "errors": [
+                        {
+                          "message": "An error occurred while processing your request: id is null",
+                          "field": "input.account.id",
+                          "extensions": {
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        }
+                      ],
+                      "extensions": {
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "A critical resource was not found. This may occur if: - The channel or its technology is unknown to connect - The store is unknown to connect"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [
+              "connect-channel-platform:order-returns:upsert"
+            ]
+          }
+        ],
+        "summary": "upsertReturns - Upsert returns",
+        "tags": [
+          "Returns"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "Connect Channel Platform API",
+      "url": "https://miraklconnect.com/api/channel-platform"
+    }
+  ],
+  "x-group-parameters": true
+}

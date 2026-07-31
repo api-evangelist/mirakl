@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/ (4xx/5xx responses across all Mirakl product specs)
+envelope: Mirakl returns errors as a JSON body with a machine 'code'/'message'; enumeration values (including error codes) may be extended over time and integrations must tolerate new values.
+note: Mirakl specs model few explicit error responses (predominantly 400 Bad Request); consult the per-endpoint docs for full error listings.
+problems:
+  - status: 400
+    description: "Bad Request"
+    format: application/json
+    content_types: ["application/json"]
+    example_operation: "mirakl-connect-channel-openapi.json#deleteOrderDocument"
+  - status: 401
+    description: "Unauthorized Error"
+    format: application/json
+    content_types: ["application/json"]
+    example_operation: "mirakl-connect-channel-openapi.json#upsertBusinessInformation"
+  - status: 403
+    description: "Forbidden Error"
+    format: application/json
+    content_types: ["application/json"]
+    example_operation: "mirakl-connect-channel-openapi.json#upsertBusinessInformation"
+  - status: 404
+    description: "The channel document ID does not exists. This may occur if the ID is incorrect or the document has already been deleted."
+    format: application/json
+    content_types: ["application/json"]
+    example_operation: "mirakl-connect-channel-openapi.json#deleteOrderDocument"
+  - status: 500
+    description: "Internal Server Error"
+    format: application/json
+    content_types: ["application/json"]
+    example_operation: "mirakl-connect-channel-openapi.json#upsertBusinessInformation"

@@ -1,0 +1,56 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/ (path resources, id-reference parameters, operation tags across Mirakl product specs)
+note: Mirakl is multi-shop; nearly every seller operation is scoped by shop_id. Entities derived from resource paths + id parameters, not a published object-reference.
+entities:
+  - name: Shop
+  - name: Offer
+  - name: Order
+  - name: OrderLine
+  - name: Product
+  - name: Invoice
+  - name: Document
+  - name: Return
+  - name: Shipment
+  - name: Message
+  - name: Channel
+  - name: Promotion
+  - name: User
+  - name: Service
+relationships:
+  - from: Order
+    type: belongs_to
+    to: Shop
+    via: shop_id
+  - from: Order
+    type: has_many
+    to: OrderLine
+    via: order_line_id
+  - from: Offer
+    type: belongs_to
+    to: Shop
+    via: shop_id
+  - from: Offer
+    type: belongs_to
+    to: Product
+    via: product
+  - from: Invoice
+    type: belongs_to
+    to: Shop
+    via: shop_id
+  - from: Return
+    type: belongs_to
+    to: Order
+    via: order_id
+  - from: Shipment
+    type: belongs_to
+    to: Order
+    via: order_id
+  - from: Document
+    type: belongs_to
+    to: Shop
+    via: shop_id
+  - from: Message
+    type: belongs_to
+    to: Order
+    via: order_id

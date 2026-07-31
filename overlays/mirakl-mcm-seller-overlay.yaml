@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Mirakl Catalog Manager Seller API
+  version: 1.0.0
+extends: openapi/mirakl-mcm-seller-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: mirakl
+      x-apievangelist-product: mcm-seller
+      x-apievangelist-review: https://apis.io/providers/mirakl/
+      x-authentication: authentication/mirakl-authentication.yml
+      x-conventions: conventions/mirakl-conventions.yml
+      x-errors: errors/mirakl-problem-types.yml
+      x-agentic-access: agentic-access/mirakl-agentic-access.yml

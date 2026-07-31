@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
   title: Mirakl Connect Channel Platform APIs Carriers Product Feedback API
-  version: ''
+  version: "1.0"
 servers:
 - description: Connect Channel Platform API
   url: https://miraklconnect.com/api/channel-platform
