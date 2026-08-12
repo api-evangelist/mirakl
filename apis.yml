@@ -61,7 +61,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-carriers-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-catalog-configuration-api
   name: Mirakl Catalog Configuration API
   description: The Catalog Configuration API from Mirakl — 1 operation(s) for catalog configuration.
@@ -73,7 +73,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-catalog-configuration-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-incidents-api
   name: Mirakl Incidents API
   description: The Incidents API from Mirakl — 1 operation(s) for incidents.
@@ -85,7 +85,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-incidents-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-invoicing-and-accounting-api
   name: Mirakl Invoicing and Accounting API
   description: >-
@@ -98,7 +98,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-invoicing-and-accounting-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-messages-api
   name: Mirakl Messages API
   description: The Messages API from Mirakl — 9 operation(s) for messages.
@@ -110,7 +110,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-messages-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-multiple-shipments-api
   name: Mirakl Multiple shipments API
   description: The Multiple shipments API from Mirakl — 7 operation(s) for multiple shipments.
@@ -122,7 +122,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-multiple-shipments-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-offers-api
   name: Mirakl Offers API
   description: The Offers API from Mirakl — 16 operation(s) for offers.
@@ -134,7 +134,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-offers-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-orders-api
   name: Mirakl Orders API
   description: The Orders API from Mirakl — 34 operation(s) for orders.
@@ -146,7 +146,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-orders-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-picklists-api
   name: Mirakl Picklists API
   description: The Picklists API from Mirakl — 1 operation(s) for picklists.
@@ -158,7 +158,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-picklists-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-platform-settings-api
   name: Mirakl Platform Settings API
   description: The Platform Settings API from Mirakl — 19 operation(s) for platform settings.
@@ -170,7 +170,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-platform-settings-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-product-feedback-api
   name: Mirakl Product Feedback API
   description: The Product Feedback API from Mirakl — 1 operation(s) for product feedback.
@@ -182,7 +182,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-product-feedback-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-products-api
   name: Mirakl Products API
   description: The Products API from Mirakl — 11 operation(s) for products.
@@ -194,7 +194,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-products-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-promotions-api
   name: Mirakl Promotions API
   description: The Promotions API from Mirakl — 2 operation(s) for promotions.
@@ -206,7 +206,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-promotions-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-returns-api
   name: Mirakl Returns API
   description: The Returns API from Mirakl — 8 operation(s) for returns.
@@ -218,7 +218,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-returns-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-services-api
   name: Mirakl Services API
   description: The Services API from Mirakl — 5 operation(s) for services.
@@ -230,7 +230,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-services-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-store-api
   name: Mirakl Store API
   description: The Store API from Mirakl — 1 operation(s) for store.
@@ -242,7 +242,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-store-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-stores-api
   name: Mirakl Stores API
   description: The Stores API from Mirakl — 5 operation(s) for stores.
@@ -254,7 +254,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-stores-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-taxonomy-api
   name: Mirakl Taxonomy API
   description: The Taxonomy API from Mirakl — 2 operation(s) for taxonomy.
@@ -266,7 +266,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-taxonomy-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-users-api
   name: Mirakl Users API
   description: The Users API from Mirakl — 1 operation(s) for users.
@@ -278,7 +278,7 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-users-api-openapi.yml
   - type: Webhooks
-    url: openapi/mirakl-connect-channel-webhooks-openapi.yaml
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 common:
 - type: DeveloperPortal
   url: https://developer.mirakl.com/
