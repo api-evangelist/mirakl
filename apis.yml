@@ -32,7 +32,7 @@ x-tier: profiled
 x-tier-reason: enriched-from-developer-portal
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-13'
 tags:
 - Company
 - Commerce
@@ -279,6 +279,134 @@ apis:
     url: openapi/mirakl-users-api-openapi.yml
   - type: Webhooks
     url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
+- aid: mirakl:mirakl-connect-api
+  name: Mirakl Connect APIs
+  description: >-
+    The Mirakl Connect API — the seller-side network API behind Mirakl Connect, covering
+    stores, channels, catalog, offers, orders and business requests across 24 paths.
+    Bearer (JWT) authenticated against the Connect production endpoint.
+  humanURL: https://developer.mirakl.com/content/product/connect/rest/connect/openapi3
+  baseURL: https://miraklconnect.com/api
+  tags:
+  - Connect
+  - Marketplace
+  - Seller
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/mirakl-connect-openapi.yaml
+  - type: Overlay
+    url: overlays/mirakl-connect-overlay.yaml
+- aid: mirakl:mirakl-connect-channel-platform-api
+  name: Mirakl Connect Channel Platform APIs
+  description: >-
+    The Connect Channel Platform API used by channel partners integrating a sales
+    channel with Mirakl Connect — store business information, channel catalog
+    configuration, taxonomy upserts, product feedback and order upserts (12 paths),
+    paired with the push webhook catalog.
+  humanURL: https://developer.mirakl.com/content/product/connect-channel-platform/rest/connect/openapi3
+  baseURL: https://miraklconnect.com/api/channel-platform
+  tags:
+  - Connect Channel Platform
+  - Channels
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/mirakl-connect-channel-openapi.json
+  - type: Webhooks
+    url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
+  - type: Overlay
+    url: overlays/mirakl-connect-channel-overlay.yaml
+- aid: mirakl:mirakl-account-channel-platform-api
+  name: Mirakl Account Channel Platform APIs
+  description: >-
+    The Account Channel Platform API for creating and updating seller-account stores
+    and linking them to a Mirakl seller account (3 paths), OAuth 2.0 protected and
+    served from the dedicated Mirakl Account host.
+  humanURL: https://developer.mirakl.com/content/product/account-channel-platform/rest/connector/openapi3
+  baseURL: https://account.mirakl.net/api/channel-platform
+  tags:
+  - Accounts
+  - Stores
+  - Channels
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/mirakl-account-channel-platform-openapi.yaml
+  - type: Overlay
+    url: overlays/mirakl-account-channel-platform-overlay.yaml
+- aid: mirakl:mirakl-marketplace-front-api
+  name: Mirakl Marketplace Front APIs
+  description: >-
+    The MMP Front API surface — machine-to-machine operations designed for storefront
+    and CMS integration with a Mirakl marketplace instance (78 paths across orders,
+    offers, products, returns, messaging and platform settings). Front bearer token or
+    OAuth 2.0.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/front/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Marketplace
+  - Storefront
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/mirakl-mmp-front-openapi.yaml
+  - type: Overlay
+    url: overlays/mirakl-mmp-front-overlay.yaml
+  - type: Postman
+    url: https://developer.mirakl.com/specs/content/product/mmp/rest/front/postman-mmp-front.json?download
+- aid: mirakl:mirakl-catalog-manager-front-api
+  name: Mirakl Catalog Manager Front APIs
+  description: >-
+    The Mirakl Catalog Platform (MCM) Front API — 20 paths for storefront-facing catalog
+    reads and transformations against a Mirakl catalog instance. Front bearer token or
+    OAuth 2.0.
+  humanURL: https://developer.mirakl.com/content/product/mcm/rest/front/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Catalog
+  - Storefront
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/mirakl-mcm-front-openapi.yaml
+  - type: Overlay
+    url: overlays/mirakl-mcm-front-overlay.yaml
+- aid: mirakl:mirakl-services-front-api
+  name: Mirakl Platform for Services Front APIs
+  description: >-
+    The Mirakl Platform for Services (MPS) Front API — 22 paths for storefront-facing
+    service-offer discovery, ordering and post-sale flows. Front bearer token, front API
+    key or OAuth 2.0.
+  humanURL: https://developer.mirakl.com/content/product/mms/rest/front/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Services
+  - Storefront
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/mirakl-mms-front-openapi.yaml
+  - type: Overlay
+    url: overlays/mirakl-mms-front-overlay.yaml
+- aid: mirakl:mirakl-shopify-operator-connector-api
+  name: Mirakl Shopify Operator Connector APIs
+  description: >-
+    The public API of Mirakl's Shopify operator connector — 52 paths for settings,
+    product bindings, storefront orders and returns, and synchronization jobs between a
+    Shopify storefront and a Mirakl marketplace. The only Mirakl surface with a public
+    dated changelog.
+  humanURL: https://developer.mirakl.com/content/connector/operator/shopify/app-operator-shopify/rest/public/openapi3
+  baseURL: https://operator-shpy.mirakl.net
+  tags:
+  - Shopify
+  - Connectors
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/mirakl-shopify-operator-connector-openapi.yaml
+  - type: Overlay
+    url: overlays/mirakl-shopify-operator-connector-overlay.yaml
+  - type: ChangeLog
+    url: changelog/mirakl-changelog.yml
+  - type: Postman
+    url: https://developer.mirakl.com/specs/content/connector/operator/shopify/app-operator-shopify/rest/public/postman-app-operator-shopify-public.json?download
 common:
 - type: DeveloperPortal
   url: https://developer.mirakl.com/
@@ -344,8 +472,20 @@ common:
   url: skills/_index.yml
 - type: Website
   url: https://www.mirakl.com/
+- type: RateLimits
+  url: rate-limits/mirakl-rate-limits.yml
+- type: Plans
+  url: plans/mirakl-plans-pricing.yml
+- type: ChangeLog
+  url: changelog/mirakl-changelog.yml
+- type: Sandbox
+  url: sandbox/mirakl-sandbox.yml
+- type: Postman
+  url: https://developer.mirakl.com/specs/content/product/mmp/rest/seller/postman-mmp-seller.json?download
+- type: SignUp
+  url: https://www.mirakl.com/products/connect/pricing/
 x-enrichment:
-  date: '2026-07-20'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 38
+  artifacts_added: 18
   pass: local-v1
