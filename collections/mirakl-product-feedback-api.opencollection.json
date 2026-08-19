@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Product Feedback API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "updateStoreCatalogItems - Update Store Catalog Items for a given channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/channel-catalog/:channel_id/store-catalog-items/:store_id",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path",
+                "description": "Connect Channel identifier"
+              },
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path",
+                "description": "Store identifier in the channel"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUpdates the store catalog items for a specific channel with the provided product IDs.\n\n**Behavior:**\n- If the specified store does not exist in Mirakl Connect, a 404 error is returned.\n- This is an asynchronous operation - the request is accepted and processed in the background.\n- Products that do not exist in Mirakl Connect are silently ignored (no error returned when the request is accepted).\n- Successfully matched products will be updated regard"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

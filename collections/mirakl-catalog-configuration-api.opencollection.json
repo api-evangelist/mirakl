@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Catalog Configuration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "configureChannelCatalog - Configure Catalog capabilities for a channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/catalog-configuration/channels/:channel_id",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path",
+                "description": "Connect Channel identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: only once, at channel setup</div>\n<div class=\"max-call-frequency\">Maximum usage: 1 per minute</div>\n</div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Stores API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "S30 - List shop's documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shops/documents",
+            "params": [
+              {
+                "name": "shop_ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of shop identifiers"
+              },
+              {
+                "name": "include_deleted",
+                "value": "",
+                "type": "query",
+                "description": "True to include deleted documents, false to remove them"
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve shop documents modified at or after this date. The time period cannot exceed 90 days"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nYou must specify at least one of the following parameters: <code>shop_ids</code>, <code>updated_since</code>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each display of a page that includes documents from a store (for example: during the KYC process)</div>\n<div class=\"max-call-frequency\">Maximum usage: At each display of a page that include"
+        },
+        {
+          "info": {
+            "name": "S32 - Upload business documents to associate with a shop",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shops/documents",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "shop_documents",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "shop_id",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nDocument filenames must be distinct and there can be only one file per document type.<br/>Only documents of the following types are supported: csv, doc, docx, gif, html, jpeg, latex, mp4, odp, odc, odg, ods, odt, pdf, png, pps, ppsx, ppt, pptx, quicktime, rtf, text, tiff, xls, xlsx, xml, zip<br/><span class='red'>You can upload a maximum of 50 business documents for each shop. These documents are not order related documents.</span>\n\n<div class=\"api"
+        },
+        {
+          "info": {
+            "name": "S31 - Download documents for one or multiple shops",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shops/documents/download",
+            "params": [
+              {
+                "name": "shop_ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of shop identifiers (separated by a comma). It is mandatory to specify either the <code>shop_ids</code> or the <code>document_ids</code>"
+              },
+              {
+                "name": "document_ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of document identifiers (separated by a comma). It is mandatory to specify either the <code>shop_ids</code> or the <code>document_ids</code>"
+              },
+              {
+                "name": "type_codes",
+                "value": "",
+                "type": "query",
+                "description": "A list of document type codes (separated by a comma)"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n        <ul>  <li><span class='red'>It is mandatory to specify either the <code>shop_ids</code> or the <code>document_ids</code>.</span></li>  <li>If a list of document identifiers is specified only these documents are downloaded.    <ul>      <li>If more than one document id is specified, the documents will be wrapped in a ZIP archive</li>      <li>If only one document id is specified the document will not be zipped</li>    </ul>  </li>  <li>    I"
+        },
+        {
+          "info": {
+            "name": "S33 - Delete a shop document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shops/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Document identifier to delete"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each document deletion from one store</div>\n<div class=\"max-call-frequency\">Maximum usage: At each document deletion from one store</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/manage_order_and_seller_document"
+        },
+        {
+          "info": {
+            "name": "A01 - Get shop information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/account",
+            "params": [
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "A02 - Update shop information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/account",
+            "params": [
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nDepending on the operator's configuration, some fields might not be editable.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each information update</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "A21 - Get shop statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/account/statistics",
+            "params": [
+              {
+                "name": "periods",
+                "value": "",
+                "type": "query",
+                "description": "List of periods using a comma (,) as a separator. Accepted values are <code>ALL_SINCE_BEGINNING</code>, <code>LAST_MONTH</code>, <code>LAST_THREE_MONTHS</code>, <code>LAST_SIX_MONTHS</code>, <code>LAST_YEAR</code>. If specified, only statistics for the given periods will be returned. If not, all statistics will be returned."
+              },
+              {
+                "name": "channel_code",
+                "value": "",
+                "type": "query",
+                "description": "The code of the channel to filter statistics on. If not specified, the overall statistics will be returned."
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

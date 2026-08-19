@@ -1,0 +1,746 @@
+{
+  "item": [
+    {
+      "id": "40a8e622-d9d3-4fd9-9271-090253410591",
+      "name": "Stores",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3f946d09-b1a4-496e-9fb2-d81987d7b447",
+          "name": "S30 - List shop's documents",
+          "request": {
+            "name": "S30 - List shop's documents",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nYou must specify at least one of the following parameters: <code>shop_ids</code>, <code>updated_since</code>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each display of a page that includes documents from a store (for example: during the KYC process)</div>\n<div class=\"max-call-frequency\">Maximum usage: At each display of a page that includes documents from a store (for example: during the KYC process)</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shops",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_ids",
+                  "value": "<string>",
+                  "description": "A list of shop identifiers"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_deleted",
+                  "value": "false",
+                  "description": "True to include deleted documents, false to remove them"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Retrieve shop documents modified at or after this date. The time period cannot exceed 90 days"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "fba50906-847e-473b-93da-542450c75dfe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shops",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "false"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shop_documents\": [\n    {\n      \"date_deleted\": null,\n      \"date_uploaded\": \"2019-03-27T14:43:06Z\",\n      \"file_name\": \"legal.jpeg\",\n      \"id\": 2002,\n      \"shop_id\": 2000,\n      \"type\": \"LEGAL_DOC\"\n    },\n    {\n      \"date_deleted\": null,\n      \"date_uploaded\": \"2019-03-27T14:44:07Z\",\n      \"file_name\": \"card.jpeg\",\n      \"id\": 2004,\n      \"shop_id\": 2000,\n      \"type\": \"ID_CARD\"\n    }\n  ],\n  \"total_count\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ba4fb12-c52d-4e15-ae53-e594c2cdde42",
+          "name": "S32 - Upload business documents to associate with a shop",
+          "request": {
+            "name": "S32 - Upload business documents to associate with a shop",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nDocument filenames must be distinct and there can be only one file per document type.<br/>Only documents of the following types are supported: csv, doc, docx, gif, html, jpeg, latex, mp4, odp, odc, odg, ods, odt, pdf, png, pps, ppsx, ppt, pptx, quicktime, rtf, text, tiff, xls, xlsx, xml, zip<br/><span class='red'>You can upload a maximum of 50 business documents for each shop. These documents are not order related documents.</span>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each business document upload to a shop</div>\n<div class=\"max-call-frequency\">Maximum usage: 50 business documents per call</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/manage_order_and_seller_documents.html\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shops",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "files",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) Files to upload"
+                },
+                {
+                  "key": "shop_documents",
+                  "value": "{\"shop_documents\":[{\"file_name\":\"<string>\",\"type_code\":\"<string>\"},{\"file_name\":\"<string>\",\"type_code\":\"<string>\"}]}",
+                  "type": "text",
+                  "description": "(Required) A descriptor associated to the files"
+                },
+                {
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "(Required) the shop identifier to add the documents to"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "24f4a675-9588-47a4-b367-d7a8af566f8b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shops",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Files to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "[\"string\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) A descriptor associated to the files",
+                        "type": "text/plain"
+                      },
+                      "key": "shop_documents",
+                      "value": "{\"shop_documents\":[{\"file_name\":\"string\",\"type_code\":\"string\"}]}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) the shop identifier to add the documents to",
+                        "type": "text/plain"
+                      },
+                      "key": "shop_id",
+                      "value": "0",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors_count\": 1,\n  \"shop_documents\": [\n    {\n      \"errors\": [\n        {\n          \"code\": \"valid_shop_document.type\",\n          \"field\": \"type_code\",\n          \"message\": \"Unable to retrieve document's type from the given code\"\n        }\n      ],\n      \"input\": {\n        \"file_name\": \"proof-of-identity-38294.pdf\",\n        \"type_code\": \"IDENTIFICATION_DOCUMENTX\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2c7a0cd-70f5-4325-8bd0-9fe342cfd705",
+          "name": "S31 - Download documents for one or multiple shops",
+          "request": {
+            "name": "S31 - Download documents for one or multiple shops",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\n        <ul>  <li><span class='red'>It is mandatory to specify either the <code>shop_ids</code> or the <code>document_ids</code>.</span></li>  <li>If a list of document identifiers is specified only these documents are downloaded.    <ul>      <li>If more than one document id is specified, the documents will be wrapped in a ZIP archive</li>      <li>If only one document id is specified the document will not be zipped</li>    </ul>  </li>  <li>    If a list of shop identifiers is specified, all documents from those shops are downloaded.<br/>    Use a list of shop document type codes to retrieve specific types from those shops.<br/>    In this case, the output of the API will always be a ZIP archive even if there is only one document to retrieve.  </li></ul><p>When documents are retrieved, they're wrapped into a ZIP archive except when only one document id is specified. The tree structure of this archive is as follow:</p><pre>\ndocuments-timestamp.zip\n|\n|__ shop_id_x/\n|   |__ foo.txt\n|   |__ bar.txt\n|   |__ baz.pdf\n|\n|__ shop_id_y/\n|   |__ image.png\n|   |__ image(1).png\n</pre><p>Returns a <code>404</code> if at least one document id, one shop id or one document type code is invalid</p>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each S30 call, when you want to download documents from a store</div>\n<div class=\"max-call-frequency\">Maximum usage: After each S30 call, when you want to download documents from a store</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/manage_order_and_seller_documents.html\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shops",
+                "documents",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_ids",
+                  "value": "<string>",
+                  "description": "A list of shop identifiers (separated by a comma). It is mandatory to specify either the <code>shop_ids</code> or the <code>document_ids</code>"
+                },
+                {
+                  "disabled": false,
+                  "key": "document_ids",
+                  "value": "<string>",
+                  "description": "A list of document identifiers (separated by a comma). It is mandatory to specify either the <code>shop_ids</code> or the <code>document_ids</code>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type_codes",
+                  "value": "<string>",
+                  "description": "A list of document type codes (separated by a comma)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "094dbd09-ced9-4662-8010-5bc64651a649",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shops",
+                    "documents",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type_codes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3988c2a-28b5-45dc-872f-1a75dae30241",
+          "name": "S33 - Delete a shop document",
+          "request": {
+            "name": "S33 - Delete a shop document",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each document deletion from one store</div>\n<div class=\"max-call-frequency\">Maximum usage: At each document deletion from one store</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/manage_order_and_seller_documents.html\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shops",
+                "documents",
+                ":document_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "document_id",
+                  "description": "(Required) Document identifier to delete"
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "177a4bbe-adb0-4fa1-ba95-f973c1bb5a11",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shops",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "document_id",
+                      "description": "(Required) Document identifier to delete"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e09413d-8545-4815-af72-30830808b791",
+          "name": "A01 - Get shop information",
+          "request": {
+            "name": "A01 - Get shop information",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "d1820cf1-c3bc-44d6-9e4e-d6f44acfb793",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicable_taxes\": [\n    {\n      \"code\": \"TAXDEFAULT\",\n      \"fee_types\": [\n        \"COMMISSION\",\n        \"SUBSCRIPTION\",\n        \"ADDITIONAL_FEES\"\n      ],\n      \"label\": \"ShopTax.TAXDEFAULT.label\"\n    }\n  ],\n  \"approval_delay\": 33,\n  \"approval_rate\": 1,\n  \"banner\": \"https://url.mirakl.net/mmp/media/shop-banner/2000\",\n  \"channels\": [\n    \"US\"\n  ],\n  \"closed_from\": \"2019-07-31T22:00:00Z\",\n  \"closed_to\": \"2019-08-31T21:59:59Z\",\n  \"contact_informations\": {\n    \"city\": \"New York\",\n    \"civility\": \"Mr\",\n    \"country\": \"USA\",\n    \"email\": \"shop@mail.com\",\n    \"fax\": \"213-509-6997\",\n    \"firstname\": \"John\",\n    \"lastname\": \"Doe\",\n    \"phone\": \"213-509-6995\",\n    \"phone_secondary\": \"213-509-6996\",\n    \"state\": \"Manhattan\",\n    \"street1\": \"30, Prince Street\",\n    \"street2\": \"1st floor\",\n    \"web_site\": \"https://www.mirakl.com\",\n    \"zip_code\": \"NY 10012\"\n  },\n  \"currency_iso_code\": \"USD\",\n  \"date_created\": \"2019-03-25T14:34:03Z\",\n  \"default_billing_information\": {\n    \"corporate_information\": {\n      \"company_registration_name\": \"ACME SHOP\",\n      \"company_registration_number\": \"01234567\"\n    },\n    \"default_language\": \"en_US\",\n    \"fiscal_information\": {\n      \"tax_identification_country\": \"USA\",\n      \"tax_identification_number\": \"XXX-XX-XXXX\"\n    },\n    \"id\": \"a83c1170-f8cb-45a1-aa4a-affe809d6c64\",\n    \"registration_address\": {\n      \"city\": \"New York\",\n      \"country_iso_code\": \"USA\",\n      \"state\": \"New York\",\n      \"street_1\": \"30, Prince Street\",\n      \"street_2\": null,\n      \"zip_code\": \"NY 10012\"\n    }\n  },\n  \"description\": \"Games seller\",\n  \"domains\": [\n    \"PRODUCT\"\n  ],\n  \"evaluations_count\": 3,\n  \"free_shipping\": false,\n  \"grade\": 4,\n  \"is_professional\": true,\n  \"kyc\": {\n    \"reason\": \"Missing information\",\n    \"status\": \"REFUSED\"\n  },\n  \"last_updated_date\": \"2019-03-28T09:28:59Z\",\n  \"logo\": \"https://url.mirakl.net/mmp/media/shop-logo/2000\",\n  \"model\": \"MARKETPLACE\",\n  \"offers_count\": 234,\n  \"order_messages_response_delay\": 76,\n  \"orders_count\": 7,\n  \"payment_details\": {\n    \"paid_balance\": -170.06,\n    \"payable_balance\": -259.2,\n    \"pending_balance\": 512.84,\n    \"reserve_balance\": 0,\n    \"reserve_target\": 0,\n    \"sub_balances\": [\n      {\n        \"paid\": -170.06,\n        \"pay_out_psp_code\": \"NOT_SPECIFIED\",\n        \"payable\": -259.2,\n        \"pending\": 512.84\n      }\n    ]\n  },\n  \"payment_info\": {\n    \"@type\": \"ABA\",\n    \"bank_account_number\": 123456789123,\n    \"bank_city\": \"New York\",\n    \"bank_name\": \"Bank of America\",\n    \"bank_street\": \"115 W 42nd St\",\n    \"bank_zip\": \"NY 10036 US\",\n    \"bic\": \"BOFAUS3NXXX\",\n    \"owner\": \"John Doe\",\n    \"routing_number\": \"789456124\"\n  },\n  \"payment_method_mandatory\": true,\n  \"premium\": true,\n  \"pro_details\": {\n    \"corporate_name\": \"ACME SHOP\",\n    \"identification_number\": \"01234567\",\n    \"tax_identification_number\": \"XXX-XX-XXXX\"\n  },\n  \"producer_identifiers\": [\n    {\n      \"epr_category_code\": \"FR-DEA\",\n      \"producer_id\": \"FR123456_89ABCD\"\n    },\n    {\n      \"epr_category_code\": \"DE-WEEE\",\n      \"producer_id\": \"PRODUCERID1\"\n    }\n  ],\n  \"recycling_policy\": \"When we deliver your new item, we’ll take your old one away for you. Appliance recycling: this service is available through our home delivery service. Recycling electronic items in-store: if you have an old electronic item, we can safely recycle these items in-store, for free\",\n  \"return_policy\": \"Any product return must be the subject of a formal agreement between the Seller and Purchaser. Any product returned without this agreement shall be held on behalf of the Purchaser and shall not give rise to the granting of any credit note. Claims must be received by shop within 8 days of the delivery of the goods. Subsequently to this delay, no claims shall be accepted. Once this delay has expired, should the client not have addressed their claim in writing to shop, the client is deemed to have accepted the product.\\r\\nWarranties that cover the delivered goods only apply within the framework of their intended use. Defects and damage resulting from natural wear, faulty assembly or maintenance, as well as modification of the products that was not intended or specified by the Seller are excluded from the warranty. Goods must be returned in their original packaging and as new, the cost and risks of returning the goods being borne by the Purchaser. Once the returned goods have been received and inspected, shop shall send the Purchaser a credit note corresponding to the amount of the original invoice, after deduction of any compensation or expenses which arise from any reconditioning work deemed necessary. This sum is credited to the account that the Purchaser has opened with the shop.\",\n  \"shipping\": {\n    \"lead_time_to_ship\": 2\n  },\n  \"shipping_country\": \"USA\",\n  \"shippings\": [\n    {\n      \"additional_fields\": [\n        {\n          \"code\": \"productid\",\n          \"type\": \"STRING\",\n          \"value\": \"EAN123456789\"\n        }\n      ],\n      \"shipping_free_amount\": 550,\n      \"shipping_type_code\": \"EXP\",\n      \"shipping_type_label\": \"Express\",\n      \"shipping_type_standard_code\": \"CU_ADD-EXP\",\n      \"shipping_zone_code\": \"DOM2\",\n      \"shipping_zone_label\": \"Domestic 2\"\n    },\n    {\n      \"additional_fields\": [\n        {\n          \"code\": \"osi\",\n          \"type\": \"STRING\",\n          \"value\": \"5 articles per box\"\n        }\n      ],\n      \"shipping_free_amount\": 550,\n      \"shipping_type_code\": \"EXP\",\n      \"shipping_type_label\": \"Express\",\n      \"shipping_type_standard_code\": \"CU_ADD-EXP\",\n      \"shipping_zone_code\": \"INT1\",\n      \"shipping_zone_label\": \"International 1\"\n    },\n    {\n      \"additional_fields\": [\n        {\n          \"code\": \"osi\",\n          \"type\": \"STRING\",\n          \"value\": \"One article per box \"\n        },\n        {\n          \"code\": \"osi1\",\n          \"type\": \"STRING\",\n          \"value\": \"Five articles per box\"\n        },\n        {\n          \"code\": \"productid\",\n          \"type\": \"STRING\",\n          \"value\": \"EAN12345678\"\n        }\n      ],\n      \"shipping_free_amount\": 570,\n      \"shipping_type_code\": \"STD\",\n      \"shipping_type_label\": \"Standard\",\n      \"shipping_type_standard_code\": \"CU_ADD-STD\",\n      \"shipping_zone_code\": \"DOM1\",\n      \"shipping_zone_label\": \"Domestic 1\"\n    }\n  ],\n  \"shop_additional_fields\": [\n    {\n      \"code\": \"accounting-phone\",\n      \"type\": \"STRING\",\n      \"value\": \"213-509-6995\"\n    },\n    {\n      \"code\": \"customer-care-phone\",\n      \"type\": \"STRING\",\n      \"value\": \"213-509-6996\"\n    },\n    {\n      \"code\": \"recruitment\",\n      \"type\": \"LIST\",\n      \"value\": \"Opt-In\"\n    }\n  ],\n  \"shop_id\": 2000,\n  \"shop_name\": \"ACME SHOP\",\n  \"shop_state\": \"OPEN\",\n  \"suspension_type\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5a78e69-958d-4399-9782-8e7eeabceec8",
+          "name": "A02 - Update shop information",
+          "request": {
+            "name": "A02 - Update shop information",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nDepending on the operator's configuration, some fields might not be editable.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each information update</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"city\": \"<string>\",\n    \"civility\": \"<string>\",\n    \"country\": \"<string>\",\n    \"firstname\": \"<string>\",\n    \"lastname\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"phone_secondary\": \"<string>\",\n    \"state\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"street2\": \"<string>\",\n    \"zip_code\": \"<string>\"\n  },\n  \"channels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"closed_from\": \"<dateTime>\",\n  \"closed_to\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"email\": \"<string>\",\n  \"fax\": \"<string>\",\n  \"is_professional\": \"<boolean>\",\n  \"payment_info\": {\n    \"owner\": \"<string>\",\n    \"@type\": \"<string>\"\n  },\n  \"pro_details\": {\n    \"corporate_name\": \"<string>\",\n    \"identification_number\": \"<string>\",\n    \"tax_identification_number\": \"<string>\"\n  },\n  \"producer_identifiers\": [\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    },\n    {\n      \"epr_category_code\": \"<string>\",\n      \"producer_id\": \"<string>\"\n    }\n  ],\n  \"recycling_policy\": \"<string>\",\n  \"return_policy\": \"<string>\",\n  \"shipping_country\": \"<string>\",\n  \"shop_additional_fields\": [\n    {\n      \"code\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"shop_name\": \"<string>\",\n  \"web_site\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12518fbb-95af-4763-a10d-6cab2c500558",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"city\": \"New York\",\n    \"civility\": \"Mr\",\n    \"country\": \"USA\",\n    \"firstname\": \"Doe\",\n    \"lastname\": \"John\",\n    \"phone\": \"213-509-6996\",\n    \"phone_secondary\": \"213-509-6995\",\n    \"state\": \"Manhattan\",\n    \"street1\": \"30, Prince Street\",\n    \"street2\": \"1st floor\",\n    \"zip_code\": \"NY 10012\"\n  },\n  \"channels\": [\n    \"US\"\n  ],\n  \"closed_from\": \"2025-03-20T16:42:21Z\",\n  \"closed_to\": \"2026-03-20T16:42:21Z\",\n  \"description\": \"This is the description of this seller\",\n  \"email\": \"my-store@example.com\",\n  \"fax\": 245875499,\n  \"is_professional\": true,\n  \"payment_info\": {\n    \"@type\": \"IBAN\",\n    \"bank_name\": \"CACE\",\n    \"bic\": \"AGRIFRPPXX2\",\n    \"iban\": \"FR6031047696713027315572590\",\n    \"owner\": \"John Doe\"\n  },\n  \"pro_details\": {\n    \"corporate_name\": \"Mirakl Inc.\",\n    \"identification_number\": \"44268625900078\",\n    \"tax_identification_number\": \"FR939383\"\n  },\n  \"producer_identifiers\": [\n    {\n      \"epr_category_code\": \"FR-DEA\",\n      \"producer_id\": \"FR123456_89ABCD\"\n    },\n    {\n      \"epr_category_code\": \"DE-WEEE\",\n      \"producer_id\": \"PRODUCERID1\"\n    }\n  ],\n  \"recycling_policy\": \"When we deliver your new item,we’ll take your old one away for you.Appliance recycling:this service is available through our home delivery service.Recycling electronic items in-store:if you have an old electronic item,we can safely recycle these items in-store,for free\",\n  \"return_policy\": \"3 days return policy\",\n  \"shipping_country\": \"ITA\",\n  \"shop_additional_fields\": [\n    {\n      \"code\": \"segment\",\n      \"value\": \"1\"\n    },\n    {\n      \"code\": \"prio-level\",\n      \"value\": \"High\"\n    }\n  ],\n  \"shop_name\": \"My Super Seller\",\n  \"web_site\": \"https://example.fr\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [],\n  \"updated\": {\n    \"address\": {\n      \"city\": \"New York\",\n      \"civility\": \"Mr\",\n      \"country\": \"USA\",\n      \"firstname\": \"Doe\",\n      \"lastname\": \"John\",\n      \"phone\": \"213-509-6996\",\n      \"phone_secondary\": \"213-509-6995\",\n      \"state\": \"Manhattan\",\n      \"street1\": \"30, Prince Street\",\n      \"street2\": \"1st floor\",\n      \"zip_code\": \"NY 10012\"\n    },\n    \"channels\": [\n      \"US\"\n    ],\n    \"closed_from\": \"2022-03-20T16:42:21Z\",\n    \"closed_to\": \"2025-03-20T16:42:21Z\",\n    \"default_billing_information\": {\n      \"corporate_information\": {\n        \"company_registration_name\": \"Mirakl Inc.\",\n        \"company_registration_number\": \"44268625900078\"\n      },\n      \"default_language\": \"en_US\",\n      \"fiscal_information\": {\n        \"tax_identification_country\": \"FR\",\n        \"tax_identification_number\": \"FR939383\"\n      },\n      \"id\": \"a83c1170-f8cb-45a1-aa4a-affe809d6c64\",\n      \"registration_address\": {\n        \"city\": \"Paris\",\n        \"country_iso_code\": \"FRA\",\n        \"state\": null,\n        \"street_1\": \"1 avenue Victor Hugo\",\n        \"street_2\": null,\n        \"zip_code\": \"75016\"\n      }\n    },\n    \"description\": \"This is the description of this seller\",\n    \"email\": \"my-store@example.com\",\n    \"fax\": 245875499,\n    \"is_professional\": true,\n    \"model\": \"MARKETPLACE\",\n    \"payment_info\": {\n      \"@type\": \"IBAN\",\n      \"bank_name\": \"CACE\",\n      \"bic\": \"AGRIFRPPXX2\",\n      \"iban\": \"FR6031047696713027315572590\",\n      \"owner\": \"John Doe\"\n    },\n    \"payment_method_mandatory\": true,\n    \"pro_details\": {\n      \"corporate_name\": \"Mirakl Inc.\",\n      \"identification_number\": \"44268625900078\",\n      \"tax_identification_number\": \"FR939383\"\n    },\n    \"producer_identifiers\": [\n      {\n        \"epr_category_code\": \"FR-DEA\",\n        \"producer_id\": \"FR123456_89ABCD\"\n      },\n      {\n        \"epr_category_code\": \"DE-WEEE\",\n        \"producer_id\": \"PRODUCERID1\"\n      }\n    ],\n    \"recycling_policy\": \"When we deliver your new item,we’ll take your old one away for you.Appliance recycling:this service is available through our home delivery service.Recycling electronic items in-store:if you have an old electronic item,we can safely recycle these items in-store,for free\",\n    \"return_policy\": \"3 days return policy\",\n    \"shipping\": {\n      \"lead_time_to_ship\": 2\n    },\n    \"shipping_country\": \"ITA\",\n    \"shop_additional_fields\": [\n      {\n        \"code\": \"segment\",\n        \"type\": \"STRING\",\n        \"value\": \"1\"\n      },\n      {\n        \"code\": \"prio-level\",\n        \"type\": \"STRING\",\n        \"value\": \"High\"\n      }\n    ],\n    \"shop_name\": \"My Super Seller\",\n    \"web_site\": \"https://example.fr\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2adbb50a-b66c-4892-a5cf-a579bb300f1b",
+          "name": "A21 - Get shop statistics",
+          "request": {
+            "name": "A21 - Get shop statistics",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "account",
+                "statistics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periods",
+                  "value": "<string>",
+                  "description": "List of periods using a comma (,) as a separator. Accepted values are <code>ALL_SINCE_BEGINNING</code>, <code>LAST_MONTH</code>, <code>LAST_THREE_MONTHS</code>, <code>LAST_SIX_MONTHS</code>, <code>LAST_YEAR</code>. If specified, only statistics for the given periods will be returned. If not, all statistics will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "channel_code",
+                  "value": "<string>",
+                  "description": "The code of the channel to filter statistics on. If not specified, the overall statistics will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6f9e5c36-029d-405f-9075-3840557910c1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "account",
+                    "statistics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periods",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"approval_delay\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"approval_rate\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"auto_refused_rate\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"average_cart\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"average_cart_with_shipping\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"cancelation_rate\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"channel\": \"string\",\n  \"consecutive_refused_orders_count\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"evaluations_count\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"grade\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"incident_rate\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"last_updated_date\": \"2023-03-28T09:34:42Z\",\n  \"late_shipment_rate\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"offers_count\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"order_messages_response_delay\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"orders_count\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"refund_rate\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"return_rate\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"shipping_delay\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"shop_id\": 0,\n  \"total_revenue\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ],\n  \"valid_tracking_rate\": [\n    {\n      \"period\": \"ALL_SINCE_BEGINNING\",\n      \"value\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a7648004-3b8b-4667-a608-825cdaa8ccba",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Stores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

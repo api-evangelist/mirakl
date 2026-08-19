@@ -1,0 +1,1302 @@
+{
+  "item": [
+    {
+      "id": "035a3ef2-4ffc-4c97-98c2-937f1e612383",
+      "name": "Messages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "319389dc-b241-4f62-99be-9c7cccd27538",
+          "name": "M01 - List messages linked to orders and offers",
+          "request": {
+            "name": "M01 - List messages linked to orders and offers",
+            "description": {
+              "content": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in a future update, please use M10 and M11 instead\n\n<div class=\"extension-title\">Description</div>\n\nReturns messages received or sent to the operator. By default, returns only messages that are received by the operator.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - at each message list display</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - at each message list display</div>\n<div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports offset pagination (<a href=\"#section/Offset-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>dateCreated</b> (Default) - Sort by creation date (desc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customer_id",
+                  "value": "<string>",
+                  "description": "Returns messages concerned by this <code>customer_id</code>"
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Returns messages concerned by this <code>shop_id</code>"
+                },
+                {
+                  "disabled": false,
+                  "key": "received",
+                  "value": "TRUE",
+                  "description": "<ul><li> If <code>TRUE</code>: returns only messages received by operator.</li><li> If <code>FALSE</code>: returns only messages sent to the operator.</li><li> If <code>ALL</code>: returns all messages, even direct messages between customer and shop.</li></ul>"
+                },
+                {
+                  "disabled": false,
+                  "key": "read",
+                  "value": "<string>",
+                  "description": "Ignored, will be removed in a future version"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>",
+                  "description": "Order identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "offer_id",
+                  "value": "<long>",
+                  "description": "Offer identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "Start creation date for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "End creation date for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "<string>",
+                  "description": "Ignored, will be removed in a future version"
+                },
+                {
+                  "disabled": false,
+                  "key": "visible",
+                  "value": "TRUE",
+                  "description": "<ul><li> If <code>TRUE</code>: returns only the visible messages.</li><li> If <code>FALSE</code>: returns only the not visible messages.</li></ul>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "790ec431-9871-4577-87d9-9c750de6eb0c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "received",
+                      "value": "TRUE"
+                    },
+                    {
+                      "key": "read",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offer_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visible",
+                      "value": "TRUE"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    {\n      \"archived\": false,\n      \"body\": \"Hi,\\nI ordered a CD from you earlier this week, and I wanted to know if you used USPS or UPS to deliver, since UPS drivers have trouble finding my house (it is at the bottom of a cul-de-sac). The order number is N°0823623574.\\nThanks for your help,\\nYvan\",\n      \"commercial_id\": \"MIR-KQ1CI2U0\",\n      \"date_created\": \"2019-03-25T14:25:24Z\",\n      \"from_id\": \"356-30-5081\",\n      \"from_name\": \"Juan Cao\",\n      \"from_type\": \"CUSTOMER\",\n      \"id\": 2006,\n      \"order_id\": \"MIR-KQ1CI2U0-B\",\n      \"read\": false,\n      \"subject\": \"Question about delivery\",\n      \"to_operator\": true,\n      \"to_operator_archived\": false,\n      \"to_shop_archived\": false,\n      \"to_shop_id\": 136,\n      \"to_shop_name\": \"Rogersound Labs\"\n    }\n  ],\n  \"total_count\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c9fff1f-f7e0-4117-afdb-7d02fb7a0399",
+          "name": "M10 - Retrieve a thread",
+          "request": {
+            "name": "M10 - Retrieve a thread",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each page that includes a message thread display</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each page that includes a message thread display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_messages.htm\">More context (Products Marketplace)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More context (Services Marketplace)</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "inbox",
+                "threads",
+                ":thread_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "thread_id",
+                  "description": "(Required) The identifier of the thread to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "4530fda3-3817-412c-ad75-f266a865561d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "inbox",
+                    "threads",
+                    ":thread_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "thread_id",
+                      "description": "(Required) The identifier of the thread to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorized_participants\": [\n    {\n      \"display_name\": \"Shop display name\",\n      \"id\": \"Shop id\",\n      \"type\": \"SHOP\"\n    },\n    {\n      \"display_name\": \"Customer display name\",\n      \"id\": \"Customer id\",\n      \"type\": \"CUSTOMER\"\n    }\n  ],\n  \"current_participants\": [\n    {\n      \"display_name\": \"Shop display name\",\n      \"id\": \"Shop id\",\n      \"type\": \"SHOP\"\n    },\n    {\n      \"display_name\": \"Customer display name\",\n      \"id\": \"Customer id\",\n      \"type\": \"CUSTOMER\"\n    }\n  ],\n  \"customer_organization\": {\n    \"display_name\": \"Customer organization\",\n    \"id\": \"customer-org-id\"\n  },\n  \"date_created\": \"2018-10-02T08:36:36.479Z\",\n  \"date_updated\": \"2018-10-03T09:40:17.241Z\",\n  \"entities\": [\n    {\n      \"id\": \"Entity id\",\n      \"label\": \"Entity label\",\n      \"type\": \"Entity type\"\n    }\n  ],\n  \"id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\",\n  \"messages\": [\n    {\n      \"body\": \"Hello, I have recently order a service and I have a few questions ...\",\n      \"date_created\": \"2018-10-02T08:36:36.479Z\",\n      \"from\": {\n        \"display_name\": \"Customer display name\",\n        \"type\": \"CUSTOMER_USER\"\n      },\n      \"id\": \"df4a3163-a44b-4c5f-8380-faebfa43ca68\",\n      \"to\": [\n        {\n          \"display_name\": \"Shop display name\",\n          \"id\": \"Shop id\",\n          \"type\": \"SHOP\"\n        }\n      ]\n    },\n    {\n      \"attachments\": [\n        {\n          \"id\": \"fce1742e-8160-45ed-b88a-100023d9d97b\",\n          \"name\": \"Brochure du service\",\n          \"size\": 200\n        },\n        {\n          \"id\": \"983fd83f-0b39-4bdf-9932-bd774ab66ce4\",\n          \"name\": \"Tarif\",\n          \"size\": 10\n        }\n      ],\n      \"body\": \"Dear customer, ...\",\n      \"date_created\": \"2018-10-03T09:40:17.241Z\",\n      \"from\": {\n        \"display_name\": \"Shop user display name\",\n        \"organization_details\": {\n          \"display_name\": \"Shop display name\",\n          \"id\": \"Shop id\",\n          \"type\": \"SHOP\"\n        },\n        \"type\": \"SHOP_USER\"\n      },\n      \"id\": \"d752f26f-03eb-499c-8f4d-828fa9640055\",\n      \"to\": [\n        {\n          \"display_name\": \"Customer display name\",\n          \"id\": \"Customer id\",\n          \"type\": \"CUSTOMER\"\n        }\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"last_message_date\": \"2018-10-03T09:40:17.241Z\",\n    \"last_sender\": {\n      \"display_name\": \"Shop user display name\",\n      \"organization_details\": {\n        \"display_name\": \"Shop display name\",\n        \"id\": \"Shop id\",\n        \"type\": \"SHOP\"\n      },\n      \"type\": \"SHOP_USER\"\n    },\n    \"shop_reply_needed_since\": null,\n    \"total_count\": 2\n  },\n  \"no_store_reply_needed\": [],\n  \"topic\": {\n    \"type\": \"FREE_TEXT\",\n    \"value\": \"Questions about my order\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bcec9298-acde-4408-8b23-cf7e58aef4a6",
+          "name": "M11 - List all threads",
+          "request": {
+            "name": "M11 - List all threads",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nYou may want to retrieve the threads linked to a specific entity, using both <code>entity_type</code> and <code>entity_id</code>.\n<br>For example, to retrieve threads for an order, use <code>entity_type=MMP_ORDER&entity_id=my-order-1</code>.\n<br>\nAvailable values for <code>entity_type</code> are:\n<ul>\n<li><code>MMP_ORDER</code>: for threads on product orders</li>\n<li><code>MMP_OFFER</code>: for threads on offers</li>\n<li><code>MPS_ORDER</code>: for threads on service orders</li>\n<li><code>MPS_SERVICE</code>: for threads on services</li>\n<li><code>SELLER_OPERATOR</code>: for threads between sellers and operator</li>\n</ul>\n\nThis resource uses seek pagination. The default value for parameter <code>limit</code> is 50.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each page that includes an inbox display</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each page that includes an inbox display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_messages.htm\">More context (Products Marketplace)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More context (Services Marketplace)</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "inbox",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entity_type",
+                  "value": "<string>",
+                  "description": "Entity type to include in result (default: include all).<br/> Available values: MMP_ORDER, MMP_OFFER, MPS_ORDER, MPS_SERVICE, SELLER_OPERATOR"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "description": "Comma separated list of Entity id to include in result (default: include all).<br/> The entity_type must be specified to use this filter, otherwise an error 400 will be returned.<br/> Example of an entity_id query: entity_id=order1-A,order20-A,order13-A&entity_type=MMP_ORDER"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "description": "Comma separated list of Entity id to include in result (default: include all).<br/> The entity_type must be specified to use this filter, otherwise an error 400 will be returned.<br/> Example of an entity_id query: entity_id=order1-A,order20-A,order13-A&entity_type=MMP_ORDER"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Retrieve threads modified at or after this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "with_messages",
+                  "value": "false",
+                  "description": "True to include message details. Limited to the last 100 messages received on each thread."
+                },
+                {
+                  "disabled": false,
+                  "key": "channel_codes",
+                  "value": "<string>",
+                  "description": "List of the channel codes to filter with, using a comma (,) as a separator.\n<br/> If specified, only order messages linked to the given channels will be returned (Whatever the value of <code>entity_type</code>).\n<br/> Otherwise, messages will be returned regardless of their channels.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "channel_codes",
+                  "value": "<string>",
+                  "description": "List of the channel codes to filter with, using a comma (,) as a separator.\n<br/> If specified, only order messages linked to the given channels will be returned (Whatever the value of <code>entity_type</code>).\n<br/> Otherwise, messages will be returned regardless of their channels.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b2dbd3bc-8344-4e1e-8dab-eb8d1cd21c8f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "inbox",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "with_messages",
+                      "value": "false"
+                    },
+                    {
+                      "key": "channel_codes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"authorized_participants\": [\n        {\n          \"display_name\": \"Shop display name\",\n          \"id\": \"Shop id\",\n          \"type\": \"SHOP\"\n        },\n        {\n          \"display_name\": \"Customer display name\",\n          \"id\": \"Customer id\",\n          \"type\": \"CUSTOMER\"\n        }\n      ],\n      \"current_participants\": [\n        {\n          \"display_name\": \"Shop display name\",\n          \"id\": \"Shop id\",\n          \"type\": \"SHOP\"\n        },\n        {\n          \"display_name\": \"Customer display name\",\n          \"id\": \"Customer id\",\n          \"type\": \"CUSTOMER\"\n        }\n      ],\n      \"customer_organization\": {\n        \"display_name\": \"Customer organization\",\n        \"id\": \"customer-org-id\"\n      },\n      \"date_created\": \"2016-09-03T13:37:00Z\",\n      \"date_updated\": \"2018-09-03T13:37:00Z\",\n      \"entities\": [\n        {\n          \"id\": \"Entity id\",\n          \"label\": \"Entity label\",\n          \"type\": \"Entity type\"\n        }\n      ],\n      \"id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\",\n      \"metadata\": {\n        \"last_message_date\": \"2018-09-03T13:37:00Z\",\n        \"last_sender\": {\n          \"display_name\": \"Shop user display name\",\n          \"organization_details\": {\n            \"display_name\": \"Shop display name\",\n            \"id\": \"Shop id\",\n            \"type\": \"SHOP\"\n          },\n          \"type\": \"SHOP_USER\"\n        },\n        \"shop_reply_needed_since\": null,\n        \"total_count\": 2\n      },\n      \"no_store_reply_needed\": [],\n      \"topic\": {\n        \"type\": \"FREE_TEXT\",\n        \"value\": \"Topic value\"\n      }\n    }\n  ],\n  \"next_page_token\": \"bGltaXQ9NTAmYWZ0ZXI9MjA3NjYwNTAtZDc5Yy00YzUyLWEwODctZWI5YjY1MjFkNzA5JnNvcnQ9ZGF0ZSxERVND.jFoPX_GjfbaRV88hhNxWWEzeRSqPt1WNExsrcBTkuSY=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cddacf1f-0f03-4609-a3fb-652cc80dc2ee",
+          "name": "M14 - Create a thread with a seller",
+          "request": {
+            "name": "M14 - Create a thread with a seller",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nCreate a thread with a seller and send a first message\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each thread</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each thread answer</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_messages.htm\">More context (Products Marketplace)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More context (Services Marketplace)</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "inbox",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "thread_input",
+                  "value": "{\"body\":\"<string>\",\"entity\":{\"id\":\"<string>\",\"type\":\"<string>\"},\"topic\":{\"type\":\"<string>\",\"value\":\"<string>\"}}",
+                  "type": "text",
+                  "description": "(Required) Message and thread data"
+                },
+                {
+                  "key": "files",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "List of attachments for the message<br/>Maximum 1000 across all threads of the same entity.<br/>For example, for a given seller, you can not have more than 1000 attachments across all its threads."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "09b7a863-599c-43d0-bc75-dd9aa2c94e06",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "inbox",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "List of attachments for the message<br/>Maximum 1000 across all threads of the same entity.<br/>For example, for a given seller, you can not have more than 1000 attachments across all its threads.",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "[\"string\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Message and thread data",
+                        "type": "text/plain"
+                      },
+                      "key": "thread_input",
+                      "value": "{\"body\":\"string\",\"entity\":{\"id\":\"string\",\"type\":\"string\"},\"topic\":{\"type\":\"FREE_TEXT\",\"value\":\"string\"}}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message_id\": \"873f1cb5-a7a2-4e07-8e0e-12eb64e93ece\",\n  \"thread_id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76608e86-06b7-49c8-9427-f17a67e99e4b",
+          "name": "M12 - Reply to a thread",
+          "request": {
+            "name": "M12 - Reply to a thread",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nMaximum of 1000 messages on a thread\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each thread answer</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each thread answer</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_messages.htm\">More context (Products Marketplace)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More context (Services Marketplace)</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "inbox",
+                "threads",
+                ":thread_id",
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "thread_id",
+                  "description": "(Required) The ID of the thread to reply to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "message_input",
+                  "value": "{\"body\":\"<string>\",\"to\":[{\"type\":\"<string>\",\"id\":\"<string>\"},{\"type\":\"<string>\",\"id\":\"<string>\"}],\"topic\":{\"type\":\"<string>\",\"value\":\"<string>\"}}",
+                  "type": "text",
+                  "description": "(Required) The message data"
+                },
+                {
+                  "key": "files",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "List of attachments for the message<br/>Maximum 50 across all threads of the same entity.<br/>For example, for a given order, you can not have more than 50 attachments across all its threads."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9ceb8e3d-b345-4a6c-b776-0c8eeea166a9",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "inbox",
+                    "threads",
+                    ":thread_id",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "thread_id",
+                      "description": "(Required) The ID of the thread to reply to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "List of attachments for the message<br/>Maximum 50 across all threads of the same entity.<br/>For example, for a given order, you can not have more than 50 attachments across all its threads.",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "[\"string\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The message data",
+                        "type": "text/plain"
+                      },
+                      "key": "message_input",
+                      "value": "{\"body\":\"string\",\"to\":[{\"id\":\"string\",\"type\":\"OPERATOR\"}],\"topic\":{\"type\":\"FREE_TEXT\",\"value\":\"string\"}}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message_id\": \"873f1cb5-a7a2-4e07-8e0e-12eb64e93ece\",\n  \"thread_id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "342a4831-9f88-465c-8122-5a3fc16ff276",
+          "name": "M13 - Download an attachment",
+          "request": {
+            "name": "M13 - Download an attachment",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each message attachment download</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each message attachment download</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_messages.htm\">More context (Products Marketplace)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More context (Services Marketplace)</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "inbox",
+                "threads",
+                ":attachment_id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attachment_id",
+                  "description": "(Required) The identifier of the attachment to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6b842a72-066f-4818-b420-8fdc923174fd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "inbox",
+                    "threads",
+                    ":attachment_id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachment_id",
+                      "description": "(Required) The identifier of the attachment to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cb919ea-af1d-4921-b297-5cc33ca51b7e",
+          "name": "OR42 - Post a message on an order",
+          "request": {
+            "name": "OR42 - Post a message on an order",
+            "description": {
+              "content": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API will be removed in a future version. Use OR43 and M12 instead.\n\n<div class=\"extension-title\">Description</div>\n\nMaximum of 1000 messages on a thread\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each new message posted on an order</div>\n<div class=\"max-call-frequency\">Maximum usage: At each new message posted on an order</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_messages.htm\">More context (message integration)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/attach_documents_to_messages.html\">More context (message attachment)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Seller/manage_orders/answer_msg.html\">More context (sellers)</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "orders",
+                ":order_id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"<string>\",\n  \"customer_email\": \"<string>\",\n  \"customer_firstname\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"customer_lastname\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"to_customer\": \"<boolean>\",\n  \"to_operator\": \"<boolean>\",\n  \"to_shop\": \"<boolean>\",\n  \"customer_locale\": \"<string>\",\n  \"document_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbbcc4a1-d1c9-4ba6-9d34-2a2cff521e7a",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "orders",
+                    ":order_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": \"I don't receive my product! Could you please tell me when should i received it?\",\n  \"customer_email\": \"customer@mail.com\",\n  \"customer_firstname\": \"Smith\",\n  \"customer_id\": \"Customer_id_001\",\n  \"customer_lastname\": \"Taylor\",\n  \"customer_locale\": \"en_EN\",\n  \"document_ids\": [\n    \"2032\"\n  ],\n  \"subject\": \"Item not received\",\n  \"to_customer\": false,\n  \"to_operator\": false,\n  \"to_shop\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2038\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38f6ae5b-fee7-4d3c-a7c9-d403fb567678",
+          "name": "OR43 - Create a thread on an order",
+          "request": {
+            "name": "OR43 - Create a thread on an order",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\n<p>Each message has a 30 Megabyte size limit, regardless of the number of attachments in the message.</p>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each new thread posted on an order</div>\n<div class=\"max-call-frequency\">Maximum usage: At each new thread posted on an order</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "orders",
+                ":order_id",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Identifier of the order on which the thread is created"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "thread_input",
+                  "value": "{\"body\":\"<string>\",\"to\":[\"<string>\",\"<string>\"],\"topic\":{\"type\":\"<string>\",\"value\":\"<string>\"}}",
+                  "type": "text",
+                  "description": "(Required) Thread content: body, topic, participants..."
+                },
+                {
+                  "key": "files",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "List of attachments for the first message of the thread"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3037ea99-9f88-4945-8a67-d64c4b73d79e",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "orders",
+                    ":order_id",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Identifier of the order on which the thread is created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "List of attachments for the first message of the thread",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "[\"string\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Thread content: body, topic, participants...",
+                        "type": "text/plain"
+                      },
+                      "key": "thread_input",
+                      "value": "{\"body\":\"string\",\"to\":[\"OPERATOR\"],\"topic\":{\"type\":\"FREE_TEXT\",\"value\":\"string\"}}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message_id\": \"00617ff1-7449-4574-a3a1-6fc256bf4d9b\",\n  \"thread_id\": \"1f33b4f0-0cf8-4869-b148-e8e18b179770\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35fd985d-b791-4d14-945e-2190be6f81c0",
+          "name": "SOF43 - Create a thread on a service",
+          "request": {
+            "name": "SOF43 - Create a thread on a service",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At every message thread</div>\n<div class=\"max-call-frequency\">Maximum usage: At every message thread</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "services",
+                ":service_code",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service_code",
+                  "description": "(Required) Service code on which the thread is created."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "thread_input",
+                  "value": "{\"body\":\"<string>\",\"to\":[\"<string>\",\"<string>\"],\"topic\":{\"type\":\"<string>\",\"value\":\"<string>\"}}",
+                  "type": "text",
+                  "description": "(Required) The content of the thread: body, topic, participants..."
+                },
+                {
+                  "key": "files",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "List of attachments for the first message of the thread"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "285b8230-3708-430f-a80f-cf75cf070f5d",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "services",
+                    ":service_code",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_code",
+                      "description": "(Required) Service code on which the thread is created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "List of attachments for the first message of the thread",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "[\"string\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The content of the thread: body, topic, participants...",
+                        "type": "text/plain"
+                      },
+                      "key": "thread_input",
+                      "value": "{\"body\":\"string\",\"to\":[\"OPERATOR\"],\"topic\":{\"type\":\"FREE_TEXT\",\"value\":\"string\"}}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message_id\": \"fdf3a03a-9368-4db8-b318-a63f8fe49899\",\n  \"thread_id\": \"9f16bf63-68f8-4edc-a557-1b4e4b4659fe\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcd99208-6de5-442c-8a87-27737acf921d",
+          "name": "SOR43 - Create a thread on a service order",
+          "request": {
+            "name": "SOR43 - Create a thread on a service order",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each new message posted on a service order</div>\n<div class=\"max-call-frequency\">Maximum usage: At each new message posted on a service order</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "orders",
+                ":order_id",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) The identifier of the order on which the thread is created."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "thread_input",
+                  "value": "{\"body\":\"<string>\",\"to\":[\"<string>\",\"<string>\"],\"topic\":{\"type\":\"<string>\",\"value\":\"<string>\"}}",
+                  "type": "text",
+                  "description": "(Required) The content of the thread: body, topic, participants..."
+                },
+                {
+                  "key": "files",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "List of attachments for the first message of the thread"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2d85b82b-6f15-4f40-8048-185e679296e6",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "orders",
+                    ":order_id",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) The identifier of the order on which the thread is created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "List of attachments for the first message of the thread",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "[\"string\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The content of the thread: body, topic, participants...",
+                        "type": "text/plain"
+                      },
+                      "key": "thread_input",
+                      "value": "{\"body\":\"string\",\"to\":[\"OPERATOR\"],\"topic\":{\"type\":\"FREE_TEXT\",\"value\":\"string\"}}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message_id\": \"f3e8abe6-6966-42bd-9788-4531035d5d8f\",\n  \"thread_id\": \"a515927a-5720-4689-bf1f-b6e4ae5e12ea\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ee30fb68-6e1c-4b0c-9cf1-aff31bfafabe",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

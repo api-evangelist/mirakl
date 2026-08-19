@@ -1,6 +1,8 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://developer.mirakl.com/ + openapi/ (derived)
+source: >-
+  https://developer.mirakl.com/ (developer guide + product pages, re-read 2026-08-13)
+  + openapi/_original/ (14 documents, derived)
 summary: >-
   Cross-cutting request/response conventions for the Mirakl marketplace, dropship,
   catalog and services REST APIs. Mirakl runs one operator instance per customer
@@ -47,8 +49,41 @@ error_envelope:
   see: errors/mirakl-problem-types.yml
 rate_limit_signaling:
   documented: false
+  runtime_headers: []
+  exhaustion_status: null
+  design_time_contract: true
+  note: >-
+    There is no runtime rate-limit signal — no RateLimit-*/X-RateLimit-*/Retry-After
+    header, and not one 429 response across 580 operations in the 14 published specs.
+    Mirakl instead publishes a DESIGN-TIME ceiling: 478 operation descriptions carry a
+    "Call Frequency" block with Recommended usage and Maximum usage (e.g. "Once per
+    minute, 100 orders per call", "60 per hour, 100 order lines per call", "Once per
+    day"). An agent must read the spec to know its polling budget; it will get no
+    feedback from the wire. See rate-limits/mirakl-rate-limits.yml.
+graphql:
+  available: true
+  scope: MMP frontend integrations — orders, offers, threads, shops (queries + mutations)
+  reference: https://developer.mirakl.com/content/product/mmp/graphql
+  schema_captured: false
+  note: >-
+    The GraphQL reference 302s to auth.cloud.redocly.com OIDC login, so the SDL is
+    gated and no schema is stored. Introspection would require portal credentials.
+events:
+  http_webhooks: true
+  cloud_events: true
+  cloud_events_note: >-
+    MMP can publish messages to a customer-defined queue on AWS, GCP or Azure
+    ("Cloud Events"). Operator users only — not available to sellers.
+mcp:
+  endpoint: https://developer.mirakl.com/mcp
+  scope: documentation assistant (Redocly Reunite), not operation execution
+  see: mcp/mirakl-mcp.yml
 cross_reference:
   authentication: authentication/mirakl-authentication.yml
   errors: errors/mirakl-problem-types.yml
   lifecycle: lifecycle/mirakl-lifecycle.yml
   webhooks: asyncapi/mirakl-webhooks.yml
+  rate_limits: rate-limits/mirakl-rate-limits.yml
+  sandbox: sandbox/mirakl-sandbox.yml
+  changelog: changelog/mirakl-changelog.yml
+  plans: plans/mirakl-plans-pricing.yml

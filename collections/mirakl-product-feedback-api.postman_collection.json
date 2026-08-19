@@ -1,0 +1,301 @@
+{
+  "item": [
+    {
+      "id": "0418c6fa-0361-4101-b039-4fd9bbc79cf7",
+      "name": "Product Feedback",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aab20a39-b364-4456-9e65-92f4fbf3b996",
+          "name": "updateStoreCatalogItems - Update Store Catalog Items for a given channel",
+          "request": {
+            "name": "updateStoreCatalogItems - Update Store Catalog Items for a given channel",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nUpdates the store catalog items for a specific channel with the provided product IDs.\n\n**Behavior:**\n- If the specified store does not exist in Mirakl Connect, a 404 error is returned.\n- This is an asynchronous operation - the request is accepted and processed in the background.\n- Products that do not exist in Mirakl Connect are silently ignored (no error returned when the request is accepted).\n- Successfully matched products will be updated regardless of unmatched products in the same request.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 20 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 30 per second</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "channel-catalog",
+                ":channel_id",
+                "store-catalog-items",
+                ":store_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) Connect Channel identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "store_id",
+                  "description": "(Required) Store identifier in the channel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"store_catalog_items\": [\n    {\n      \"id\": \"<string>\",\n      \"diagnostics\": [\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        }\n      ],\n      \"offer_diagnostics\": [\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        }\n      ],\n      \"offer_status\": \"<string>\",\n      \"product_diagnostics\": [\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        },\n        {\n          \"message\": \"<string>\",\n          \"channel_attribute_id\": \"<string,null>\",\n          \"channel_diagnostic_id\": \"<string,null>\",\n          \"connector_override_action\": \"<string,null>\"\n        }\n      ],\n      \"product_status\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c0f19f0-02a2-4851-9961-be9693982ab4",
+              "name": "Request accepted for processing.\n\nThe store catalog items update has been queued and will be processed asynchronously.\nNon-existent products will be silently ignored during processing.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "channel-catalog",
+                    ":channel_id",
+                    "store-catalog-items",
+                    ":store_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Connect Channel identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "store_id",
+                      "description": "(Required) Store identifier in the channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"store_catalog_items\": [\n    {\n      \"id\": \"string\",\n      \"diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"offer_diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"product_diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"offer_status\": \"OFFER_ACTIVE\",\n      \"product_status\": \"PRODUCT_DOES_NOT_EXIST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ec11651a-526e-4c83-9eae-141e2410c005",
+              "name": "Bad Request - Invalid request format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "channel-catalog",
+                    ":channel_id",
+                    "store-catalog-items",
+                    ":store_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Connect Channel identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "store_id",
+                      "description": "(Required) Store identifier in the channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"store_catalog_items\": [\n    {\n      \"id\": \"string\",\n      \"diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"offer_diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"product_diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"offer_status\": \"OFFER_ACTIVE\",\n      \"product_status\": \"PRODUCT_DOES_NOT_EXIST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ec8f8769-46d7-405b-9eb9-6c83d2396909",
+              "name": "Channel or Store not found in Mirakl Connect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "channel-catalog",
+                    ":channel_id",
+                    "store-catalog-items",
+                    ":store_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Connect Channel identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "store_id",
+                      "description": "(Required) Store identifier in the channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"store_catalog_items\": [\n    {\n      \"id\": \"string\",\n      \"diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"offer_diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"product_diagnostics\": [\n        {\n          \"message\": \"string\",\n          \"channel_diagnostic_id\": \"string\",\n          \"channel_attribute_id\": \"string\",\n          \"connector_override_action\": \"REMOVED\"\n        }\n      ],\n      \"offer_status\": \"OFFER_ACTIVE\",\n      \"product_status\": \"PRODUCT_DOES_NOT_EXIST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b705a6c3-42da-4dc6-ae2f-de9aee76231d",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Product Feedback API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

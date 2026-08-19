@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Promotions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promotions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PR01 - List promotions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/promotions",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of identifiers for shop joined to an identifier for a promotion (structure: \"ids=&lt;shopId&gt;|&lt;promotionShopInternalId&gt;,&lt;shopId&gt;|&lt;promotionShopInternalId&gt;, ...\" Example: /api/promotion?ids=123|promo-dec-2016)"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of types for a promotion [AMOUNT_OFF|FREE_ITEMS|PERCENTAGE_OFF|REDUCED_UNIT_PRICE]"
+              },
+              {
+                "name": "states",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of states for a promotion [PENDING|ACTIVE|EXPIRED|PENDING_APPROVAL|REJECTED|ALL]"
+              },
+              {
+                "name": "shop_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of shop ids"
+              },
+              {
+                "name": "ending_after",
+                "value": "",
+                "type": "query",
+                "description": "Returns promotions which ended or will end after this date"
+              },
+              {
+                "name": "starting_before",
+                "value": "",
+                "type": "query",
+                "description": "Returns promotions which started or will start before this date"
+              },
+              {
+                "name": "date_created_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter promotion creation date lower limit"
+              },
+              {
+                "name": "date_created_to",
+                "value": "",
+                "type": "query",
+                "description": "Filter promotion creation date upper limit"
+              },
+              {
+                "name": "last_request_date",
+                "value": "",
+                "type": "query",
+                "description": "Last request date and time. We recommend using the differential mode along with the <code>states</code> parameter."
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale to filter the medias and the public descriptions with. If not specified, medias and public descriptions of all locales are returned.If specified, only the media and the public description matching the locale will be returned, or, if not exist, the one matching the platform default locale."
+              },
+              {
+                "name": "trigger_offer_ids",
+                "value": "",
+                "type": "query",
+                "description": "Promotion-triggering offer ids, separated by commas"
+              },
+              {
+                "name": "reward_offer_ids",
+                "value": "",
+                "type": "query",
+                "description": "Promotion reward offer ids, separated by commas"
+              },
+              {
+                "name": "channel_codes",
+                "value": "",
+                "type": "query",
+                "description": "Channel codes on which promotions apply, separated by commas"
+              },
+              {
+                "name": "campaign_identifiers",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of campaign identifiers"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each display of a promotions list page or on-promo offer detail page.</div>\n<div class=\"max-call-frequency\">Maximum usage: At each display of a promotions list page or on-promo offer detail page.</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/int"
+        },
+        {
+          "info": {
+            "name": "PR03 - Create a promotion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/promotions",
+            "params": [
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Shop Identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/docs/customers/creating-seller-promotions-via-api---api-pr03-7a31940e-dd10-b393-d8aa-78deb68966e8-47223884-dfd6-7a2f-89be-b55dd65b6dcb\">More context</a></li></ul></div>"
+        },
+        {
+          "info": {
+            "name": "PR04 - Update a promotion",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/promotions/:promotion_internal_id",
+            "params": [
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Shop Identifier"
+              },
+              {
+                "name": "promotion_internal_id",
+                "value": "",
+                "type": "path",
+                "description": "Promotion internal identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/docs/customers/updating-a-promotion-via-api-pr04-7a31940e-dd10-b393-d8aa-78deb68966e8-d73517ca-6de1-f7a2-703a-917f60f519be\">More context</a></li></ul></div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

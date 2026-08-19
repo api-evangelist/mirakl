@@ -1,0 +1,17 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Mirakl Marketplace Front API
+  version: 1.0.0
+extends: openapi/_original/mirakl-mmp-front-openapi.yaml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: mirakl
+      x-apievangelist-product: mmp-front
+      x-apievangelist-review: https://apis.io/providers/mirakl/
+      x-authentication: authentication/mirakl-authentication.yml
+      x-conventions: conventions/mirakl-conventions.yml
+      x-errors: errors/mirakl-problem-types.yml
+      x-rate-limits: rate-limits/mirakl-rate-limits.yml
+      x-sandbox: sandbox/mirakl-sandbox.yml
+      x-agentic-access: agentic-access/mirakl-agentic-access.yml

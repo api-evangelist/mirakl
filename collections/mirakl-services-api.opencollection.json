@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Services API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SL12 - List locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/locations",
+            "params": [
+              {
+                "name": "shop",
+                "value": "",
+                "type": "query",
+                "description": "Shop id to include in result. (default: include all)"
+              },
+              {
+                "name": "location_id",
+                "value": "",
+                "type": "query",
+                "description": "Service Location IDs to include in result. (default: include all)"
+              },
+              {
+                "name": "location_type",
+                "value": "",
+                "type": "query",
+                "description": "Service Location type to include in result. (default: include all)"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: <br/>- Asynchronous: once per day <br/>- Synchronous: each time you need to create a service</div>\n<div class=\"max-call-frequency\">Maximum usage: <br/>- Asynchronous: every hour <br/>- Synchronous: each time you need to create a service</div>\n<div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section"
+        },
+        {
+          "info": {
+            "name": "SL01 - Create a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/locations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 30 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 30 per minute</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "SL06 - Delete a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/locations/:location_id",
+            "params": [
+              {
+                "name": "location_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the location to delete."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 20 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 60 per second</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "SM11 - List service models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/models",
+            "params": [
+              {
+                "name": "category_code",
+                "value": "",
+                "type": "query",
+                "description": "Category codes to include in result. (default: include all)"
+              },
+              {
+                "name": "model_code",
+                "value": "",
+                "type": "query",
+                "description": "Model codes to include in result. (default: include all)"
+              },
+              {
+                "name": "location_type",
+                "value": "",
+                "type": "query",
+                "description": "Location types to include in result. (default: include all)"
+              },
+              {
+                "name": "booking_type",
+                "value": "",
+                "type": "query",
+                "description": "Booking types to include in result. (default: include all)"
+              },
+              {
+                "name": "consumption_type",
+                "value": "",
+                "type": "query",
+                "description": "Consumption types to include in result. (default: include all)"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: <br/>- Asynchronous: once per day <br/>- Synchronous: at each faceting display</div>\n<div class=\"max-call-frequency\">Maximum usage: <br/>- Asynchronous: every hour <br/>- Synchronous: at each faceting display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_feat"
+        },
+        {
+          "info": {
+            "name": "SOF11 - List services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/services",
+            "params": [
+              {
+                "name": "category_code",
+                "value": "",
+                "type": "query",
+                "description": "Category codes to include in result. Children categories of the specified codes are also included. (default: include all)"
+              },
+              {
+                "name": "service_code",
+                "value": "",
+                "type": "query",
+                "description": "Service codes to include in result. (default: include all)"
+              },
+              {
+                "name": "model_code",
+                "value": "",
+                "type": "query",
+                "description": "Model codes to include in result. (default: include all)"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Service state to include in result. (default: include all)"
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per hour</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per hour</div>\n<div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values"
+        },
+        {
+          "info": {
+            "name": "SOF25 - Create a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/services",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 60 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 60 per minute</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "SOF26 - Update a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/services/:service_code",
+            "params": [
+              {
+                "name": "service_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the service to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 60 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 60 per minute</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "SOF27 - Delete a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/services/:service_code",
+            "params": [
+              {
+                "name": "service_code",
+                "value": "",
+                "type": "path",
+                "description": "Code of the service to delete."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 30 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 30 per minute</div>\n</div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

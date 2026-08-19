@@ -1,0 +1,976 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Orders API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "deleteOrderDocument - Delete order document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/orders/documents/:channel_document_id",
+            "params": [
+              {
+                "name": "channel_document_id",
+                "value": "DOC-1234",
+                "type": "path",
+                "description": "Document ID from the channel"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUse this API to delete a document.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each document deletion on the order</div>\n<div class=\"max-call-frequency\">Maximum usage: On each document deletion on the order</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "updateActionStatus - Update asynchronous action status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/orders/actions/:action_id",
+            "params": [
+              {
+                "name": "action_id",
+                "value": "1ba5fc4b-c4fd-4251-880b-3052e301bbd4",
+                "type": "path",
+                "description": "The unique identifier of the action. This ID was provided in the original command event that initiated the action."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUpdates the final status of an asynchronous action previously initiated through a command event.\n\n## Overview\n- When an asynchronous action is requested via command event, an `action_id` is provided to track the action\n- Use this endpoint to report the final outcome (SUCCESS or FAILURE) of the action\n- For failed actions, detailed error information must be provided\n\n## Usage Notes\n- Update should be sent once the action is fully completed\n- Multipl"
+        },
+        {
+          "info": {
+            "name": "updateAnonymizeAfterDate - Update anonymization date for orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/orders/anonymize-after",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUpdates the anonymization date for orders in the Mirakl Connect platform.\nUse this API to indicated after which date orders should be anonymized by Connect.\nThe anonymization process is irreversible and should be used with caution.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per order when the anonymization date is set</div>\n<div class=\""
+        },
+        {
+          "info": {
+            "name": "uploadOrderDocument - Upload order document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/orders/:channel_order_id/documents",
+            "params": [
+              {
+                "name": "channel_order_id",
+                "value": "COMMERCIAL_ID-A",
+                "type": "path",
+                "description": "Order identifier from the channel"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "origin",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUse this API to upload a document for an order or its related entities (e.g. returns).\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each new document on the order</div>\n<div class=\"max-call-frequency\">Maximum usage: On each new document on the order</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "upsertOrders - Upsert orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUse this API to synchronize orders with Mirakl Connect.\n\n- The operation is **not partially successful**: if any order in the payload is invalid, the entire request is rejected.\n- This API does not support PATCH operations. All fields must be sent with each upsert request to ensure the complete update of the order data.\n- Updates whose `channel_updated_at` timestamp is older than the value already stored in Connect are silently ignored (anti-replay"
+        },
+        {
+          "info": {
+            "name": "OR11 - List orders with pagination",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders",
+            "params": [
+              {
+                "name": "commercial_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of order commercial's identifiers"
+              },
+              {
+                "name": "customer_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of customer's identifiers"
+              },
+              {
+                "name": "customer_organization_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of customer organization's identifiers"
+              },
+              {
+                "name": "offer_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of offer's identifiers"
+              },
+              {
+                "name": "order_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of order's identifiers"
+              },
+              {
+                "name": "shop_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of shop's identifiers"
+              },
+              {
+                "name": "order_references_for_customer",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of order references for customer"
+              },
+              {
+                "name": "order_references_for_seller",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of order references for seller"
+              },
+              {
+                "name": "product_skus",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of product's skus"
+              },
+              {
+                "name": "order_state_codes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of order state's codes"
+              },
+              {
+                "name": "channel_codes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of channel codes"
+              },
+              {
+                "name": "only_null_channel",
+                "value": "",
+                "type": "query",
+                "description": "Return only orders without channel. If <code>true</code>, ignore the <code>channel_codes</code>"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start creation date for filtering"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End creation date for filtering"
+              },
+              {
+                "name": "start_update_date",
+                "value": "",
+                "type": "query",
+                "description": "Start update date for filtering. Mirakl will subtract a time delta to ensure no orders are missed due to network and/or software latency."
+              },
+              {
+                "name": "end_update_date",
+                "value": "",
+                "type": "query",
+                "description": "End update date for filtering"
+              },
+              {
+                "name": "customer_debited",
+                "value": "",
+                "type": "query",
+                "description": "Order paid by customer"
+              },
+              {
+                "name": "payment_workflow",
+                "value": "",
+                "type": "query",
+                "description": "Payment workflow of an order"
+              },
+              {
+                "name": "has_incident",
+                "value": "",
+                "type": "query",
+                "description": "If <code>true</code> returns only orders with incidents in progress, if <code>false</code> returns orders without incidents in progress. If not provided, all orders with or without incident will be returned"
+              },
+              {
+                "name": "fulfillment_center_code",
+                "value": "",
+                "type": "query",
+                "description": "Code of the fulfillment center"
+              },
+              {
+                "name": "order_tax_mode",
+                "value": "",
+                "type": "query",
+                "description": "Please note: If the taxes are not specified, the prices with mode TAX_EXCLUDED and with mode TAX_INCLUDED will return the same amounts.<br>Possible values:<ul><li><code>TAX_EXCLUDED</code>: the price fields (price, unit price, shipping price, cancellation amount, refund amount and order total prices) do not include taxes.</li><li><code>TAX_INCLUDED</code>: the price fields include the tax amount. </li></ul><li>If this query parameter is not specified, the default order tax mode of the platform is used.</li>"
+              },
+              {
+                "name": "commissionable",
+                "value": "",
+                "type": "query",
+                "description": "If <code>true</code> returns only orders with commission, if <code>false</code> returns orders without commission. Please note that this filter is available only when the platform is in mixed commission model"
+              },
+              {
+                "name": "waiting_tax_confirmation",
+                "value": "",
+                "type": "query",
+                "description": "If <code>true</code> returns only orders awaiting a tax confirmation, When <code>false</code> it does not impact the result."
+              },
+              {
+                "name": "tax_recalculation_required_only",
+                "value": "",
+                "type": "query",
+                "description": "If <code>true</code> returns only orders for which taxes must be recalculated on at least one order line. When <code>false</code> it does not impact the result. Must be used with at least one date range filter: created or last updated date, of a maximum duration of one month."
+              },
+              {
+                "name": "waiting_funding_confirmation",
+                "value": "",
+                "type": "query",
+                "description": "If <code>true</code> returns only orders awaiting a funding update. When <code>false</code> it does not impact the result."
+              },
+              {
+                "name": "refund_state_codes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of refund state's codes.<br/>\nMust be used in combination with filters <code>start_update_date</code> and <code>end_update_date</code>, with a maximum of one month period.\n"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nReturns a 400 Bad Request response if the limit of commercialIds, customerIds, offerIds or productSkus is exceeded.<br/>Pagination is enabled by default. For large requests, use asynchronous order export APIs OR13, OR14 and OR15 instead.<br/>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div>Default:</div><div class=\"persona-specific-call-frequency\"><div class=\"recommended-call-frequency\">Recommended u"
+        },
+        {
+          "info": {
+            "name": "OR04 - Patch update orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>Update orders information field by field: unspecified fields will not be updated. To remove the value for a field, send it with the 'null' value (not allowed for the required fields).</p><p>You cannot use API OR04 to update customer-related information if the customer has been anonymized via API AN01.</p><p><span class='red'>A maximum of 100 orders can be sent at once.</span></p>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-tit"
+        },
+        {
+          "info": {
+            "name": "OR75 - List all the order taxes available on the platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/taxes"
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>"
+        },
+        {
+          "info": {
+            "name": "OR07 - Update order line shipping origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/shipping_from",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>Update shipping origin (<code>shipping_from</code>) information on order lines.</p> <p><span class='red'>A maximum of 100 order lines can be sent at once.</span></p>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each update of shipping origin on one or multiple order lines</div>\n<div class=\"max-call-frequency\">Maximum usage: 60 per hour, 1"
+        },
+        {
+          "info": {
+            "name": "OR12 - Get information about an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order's identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in a future update, please use OR11 with the query parameter 'order_ids' instead.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each order page view</div>\n<div class=\"max-call-frequency\">Maximum usage: On each order page view</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "OR13 - Export orders asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/async-export",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>The API returns a tracking id to be used to query API OR14.<br />Mirakl recommends to use API OR13 instead of API OR11 as it can handle very large volumes of data.<br />You must give at least one date range filter: created, last updated date or refunds created date.<br />API OR13 supports the chunk of the export file into multiple files in order to:</p><ul><li>respect a maximum megabyte weight using the <code>megabytes_per_chunk</code> parameter"
+        },
+        {
+          "info": {
+            "name": "OR14 - Get the status of an asynchronous order export.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/async-export/status/:tracking_id",
+            "params": [
+              {
+                "name": "tracking_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the previously created asynchronous order export"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>Use this API to query the order export status after an API OR13 call.<br />Until the export via API OR13 is complete, the status returned by API OR14 is <code>PENDING</code>.<br />You must call API OR14 until you get the <code>COMPLETED</code> status which correspond to a completed and successful export from API OR13.<br />The URLs in API OR14 response contain all the files from API OR13 export.<br />Browse those urls and query them using the GE"
+        },
+        {
+          "info": {
+            "name": "OR15 - Retrieve order export files once asynchronous export is complete (OR13).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/dynamic-url/The+URL+is+retrieved+from+OR14+output/OR15"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nRetrieve each chunk of an order export file via the URL generated once the asynchronous export is complete.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per file URL returned by OR14, after COMPLETED status</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per file URL returned by OR14, after COMPLETED status</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "OR21 - Accept or refuse order lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/accept",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order's identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nAccept or refuse order lines in the <code>WAITING_ACCEPTANCE</code> status\n\n<details>\n<summary>Error Codes</summary>\n\n| Code | Description |\n|------|-------------|\n| <code>ORDER_FULFILLED_UNAUTHORIZED</code> | An unauthorized action has been requested on a fulfilled order |\n| <code>ORDER_INVALID_STATE</code> | Order is not in the expected state for this operation |\n| <code>ORDER_LINE_ACCEPTANCE_DECISION_MISSING</code> | Some order lines are missing"
+        },
+        {
+          "info": {
+            "name": "OR23 - Update carrier tracking information for a specific order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/tracking",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nIf the carrier is not registered, the complete tracking url can be provided.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each order tracking information update (as soon as the seller gets the tracking number from the carrier)</div>\n<div class=\"max-call-frequency\">Maximum usage: At each order tracking information update (as soon as the selle"
+        },
+        {
+          "info": {
+            "name": "OR24 - Validate the shipment of an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/ship",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order's identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nValidate the shipment of an order in the <code>SHIPPING</code> status\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time the tracking number is entered (OR23)</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time the tracking number is entered (OR23)</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help."
+        },
+        {
+          "info": {
+            "name": "OR26 - Perform a refund of order lines of an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/refund",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order's identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in a future update, please use OR28 instead.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each new refund demand</div>\n<div class=\"max-call-frequency\">Maximum usage: On each new refund demand</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "OR28 - Perform refunds on order lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each refund request</div>\n<div class=\"max-call-frequency\">Maximum usage: At each refund request</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "OR29 - Perform a full cancelation of an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/cancel",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order's identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<ul>    <li>for <code>PAY_ON_DELIVERY</code>, <code>PAY_ON_DUE_DATE</code> or <code>PAY_ON_SHIPMENT</code>  workflows: shop can only cancel a non-debited order.</li>    <li>for <code>NO_CUSTOMER_PAYMENT_CONFIRMATION</code> workflow: shop can only cancel an unshipped order.</li></ul>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each order can"
+        },
+        {
+          "info": {
+            "name": "OR30 - Perform cancelations on order lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nIf the Shop partial cancelation feature is enabled by Mirakl Support Team:<ul>    <li>for <code>PAY_ON_DELIVERY</code>, <code>PAY_ON_DUE_DATE</code> or <code>PAY_ON_SHIPMENT</code>  workflows: shop can only cancel a non-debited order.</li>    <li>for <code>NO_CUSTOMER_PAYMENT_CONFIRMATION</code> workflow: shop can only cancel an unshipped order.</li></ul>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<d"
+        },
+        {
+          "info": {
+            "name": "OR31 - Update the custom fields of an order and its order lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/additional_fields",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nOnly specified custom field values will be updated.<br/>In order to delete an custom field's value, set it to null or an empty string. Note that you may not delete the value of a required custom field value.<br/>Output will return information on the status of the update attempt by giving:<ul>    <li>either all of the order and its order lines custom field values after the update</li>    <li>or in case of errors, the list of errors and the body of t"
+        },
+        {
+          "info": {
+            "name": "OR32 - Adjust order line",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/adjust",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>Update order line actual measurement either upwards or downwards, within the limit defined at the platform level.</p>\n\n<details>\n<summary>Error Codes</summary>\n\n| Code | Description |\n|------|-------------|\n| <code>ORDER_ADJUSTMENT_FEATURE_DISABLED</code> | The order adjustment feature is not enabled |\n| <code>ORDER_LINE_ADJUSTMENT_EQUAL_TO_ORDERED</code> | The actual measurement equals the ordered measurement |\n| <code>ORDER_LINE_ADJUSTMENT_EXC"
+        },
+        {
+          "info": {
+            "name": "OR41 - List messages of an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/messages",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier"
+              },
+              {
+                "name": "read",
+                "value": "",
+                "type": "query",
+                "description": "Ignored, will be removed in a future version"
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "Ignored, will be removed in a future version"
+              },
+              {
+                "name": "received",
+                "value": "",
+                "type": "query",
+                "description": "If \"TRUE\" (\"FALSE\") returns only messages received by (sent to) operator. If \"ALL\", returns all messages, even direct messages between customer and shop."
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in a future update, please use M10 and M11 instead\n\n<div class=\"extension-title\">Description</div>\n\nBy default, all sent, received and unarchived message are listed\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each message page view</div>\n<div class=\"max-call-frequency\">Maximum usage: On each message p"
+        },
+        {
+          "info": {
+            "name": "OR51 - Get the evaluation of an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/evaluation",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each evaluation page view</div>\n<div class=\"max-call-frequency\">Maximum usage: On each evaluation page view</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/eval_orders.html\">More context</a></li></ul><div class=\"extension-title\">Localization</div>"
+        },
+        {
+          "info": {
+            "name": "OR72 - Lists order's documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/documents",
+            "params": [
+              {
+                "name": "order_ids",
+                "value": "",
+                "type": "query",
+                "description": "the orders' identifiers, using comma as separator"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nReturns a list of all the documents available on the order\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each document list page display</div>\n<div class=\"max-call-frequency\">Maximum usage: At each document list page display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topi"
+        },
+        {
+          "info": {
+            "name": "OR73 - Download one or multiple documents attached to one or multiple orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/documents/download",
+            "params": [
+              {
+                "name": "order_ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of identifiers of the orders (separated by a comma)"
+              },
+              {
+                "name": "document_ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of document identifiers (separated by a comma)"
+              },
+              {
+                "name": "document_codes",
+                "value": "",
+                "type": "query",
+                "description": "A list of document type codes (separated by a comma)"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<ul>   <li>If a list of document identifiers is specified only these documents are downloaded.       <ul>           <li>If more than one document id is specified, the documents will be wrapped in a ZIP archive</li>           <li>If only one document id is specified the document will not be zipped</li>       </ul>   </li>   <li>If a list of order identifiers is specified, all documents from those orders are downloaded.<br/>   Use a list of order doc"
+        },
+        {
+          "info": {
+            "name": "OR74 - Upload documents to attach to an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/documents",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the order"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "order_documents",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>\n    Documents filenames must be distinct. Only documents of the following types are supported: csv, doc, xls, xlsx, ppt, pdf, odt, ods, odp, txt, rtf, png, jpg, gif, zpl, mov, mp4.</br>\n<span class='red'>An order can have a maximum of 50 documents.</span>\n    In the API output we include only documents with errors. All other documents are successfully uploaded.\n</p>\n<p>For system document types, there are specific restrictions :</p>\n<ul>\n    <l"
+        },
+        {
+          "info": {
+            "name": "OR76 - Delete an order document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the document to delete"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each order document deletion</div>\n<div class=\"max-call-frequency\">Maximum usage: At each order document deletion</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/manage_order_and_seller_documents.html\">More conte"
+        },
+        {
+          "info": {
+            "name": "SOR04 - Update an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the order to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nNote: closed or cancelled order cannot be updated.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/update_orders_api.htm\">More context</a></li></ul></div>"
+        },
+        {
+          "info": {
+            "name": "SOR21 - Accept an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/orders/:order_id/accept",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the order to be accepted."
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nAccept an order in <code>WAITING_ACCEPTANCE</code> state\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: For each new service order</div>\n<div class=\"max-call-frequency\">Maximum usage: For each new service order</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_"
+        },
+        {
+          "info": {
+            "name": "SOR22 - Refuse an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/orders/:order_id/refuse",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the order to be refused."
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nRefuse an order in <code>WAITING_ACCEPTANCE</code> state\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: For each new service order</div>\n<div class=\"max-call-frequency\">Maximum usage: For each new service order</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_"
+        },
+        {
+          "info": {
+            "name": "SOR25 - Consume an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/orders/:order_id/consume",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the order to be consumed."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nConsumer an order in <code>ORDER_PENDING</code> state\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each customer service consumption confirmation</div>\n<div class=\"max-call-frequency\">Maximum usage: At each customer service consumption confirmation</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/b"
+        },
+        {
+          "info": {
+            "name": "SOR28 - Request refund on order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/orders/:order_id/refund",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the order to be refunded."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each service refund request</div>\n<div class=\"max-call-frequency\">Maximum usage: At each service refund request</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/service_order_workflows/refund_workflow.html\">More context</a></li></ul></div>"
+        },
+        {
+          "info": {
+            "name": "SOR51 - Get the evaluation of an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/orders/:order_id/evaluation",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each order evaluation page display</div>\n<div class=\"max-call-frequency\">Maximum usage: At each order evaluation page display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/managing_MMS_BO/operator/manage_mps_ratings.htm\">More context</a></li></ul>"
+        },
+        {
+          "info": {
+            "name": "SOR11 - List orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/orders",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "query",
+                "description": "Order ids to include in result."
+              },
+              {
+                "name": "commercial_order_id",
+                "value": "",
+                "type": "query",
+                "description": "Order commercial ids to include in result."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Order states to include in result."
+              },
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "query",
+                "description": "Order customer ids to include in result."
+              },
+              {
+                "name": "service_code",
+                "value": "",
+                "type": "query",
+                "description": "Order services codes to include in result."
+              },
+              {
+                "name": "date_created_start",
+                "value": "",
+                "type": "query",
+                "description": "Creation date to start from."
+              },
+              {
+                "name": "date_created_end",
+                "value": "",
+                "type": "query",
+                "description": "Creation date to end with."
+              },
+              {
+                "name": "date_updated_start",
+                "value": "",
+                "type": "query",
+                "description": "Last modification date to start from."
+              },
+              {
+                "name": "date_updated_end",
+                "value": "",
+                "type": "query",
+                "description": "Last modification date to end with."
+              },
+              {
+                "name": "refunded",
+                "value": "",
+                "type": "query",
+                "description": "Refund completion."
+              },
+              {
+                "name": "refund_reason_code",
+                "value": "",
+                "type": "query",
+                "description": "Refund reason codes"
+              },
+              {
+                "name": "has_open_incident",
+                "value": "",
+                "type": "query",
+                "description": "If <code>true</code> returns only orders with open incidents, if <code>false</code> returns orders without open incidents. Default to <code>all</code>"
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each service order page display</div>\n<div class=\"max-call-frequency\">Maximum usage: At each service order page display</div>\n<div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n</div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

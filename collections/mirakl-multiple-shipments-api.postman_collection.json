@@ -1,0 +1,974 @@
+{
+  "item": [
+    {
+      "id": "60240e23-e353-433c-a4a8-a0a041ce100c",
+      "name": "Multiple shipments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "30576361-29a4-4105-9a35-e4cd076d1f1a",
+          "name": "ST01 - Create shipments",
+          "request": {
+            "name": "ST01 - Create shipments",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 1000 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each new shipment</div>\n<div class=\"max-call-frequency\">Maximum usage: On each new shipment</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use_cases/config_multi_shipments_api.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipments\": [\n    {\n      \"order_id\": \"<string>\",\n      \"shipment_lines\": [\n        {\n          \"quantity\": \"<integer>\",\n          \"offer_sku\": \"<string>\",\n          \"order_line_id\": \"<string>\",\n          \"package_reference\": \"<string>\"\n        }\n      ],\n      \"invoice_reference\": \"<string>\",\n      \"shipment_additional_information\": [\n        {\n          \"code\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<object>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<object>\"\n        }\n      ],\n      \"shipped\": false,\n      \"shipping_from\": {\n        \"warehouse\": {\n          \"code\": \"<string>\"\n        }\n      },\n      \"tracking\": {\n        \"carrier_code\": \"<string>\",\n        \"carrier_name\": \"<string>\",\n        \"carrier_standard_code\": \"<string>\",\n        \"tracking_number\": \"<string>\",\n        \"tracking_url\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0b7b27b-6c5a-4f70-ad23-9d43915007cf",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipments\": [\n    {\n      \"invoice_reference\": \"ABCDEF012345\",\n      \"order_id\": \"ORDER_01-A\",\n      \"shipment_additional_information\": [\n        {\n          \"code\": \"DELIVERY_BILL_ID\",\n          \"type\": \"STRING\",\n          \"value\": \"IUYHJ777-98\"\n        },\n        {\n          \"code\": \"DELIVERY_BILL_DATE\",\n          \"type\": \"DATE\",\n          \"value\": \"2024-01-01\"\n        }\n      ],\n      \"shipment_lines\": [\n        {\n          \"offer_sku\": \"OFFER_SKU_1\",\n          \"package_reference\": \"package_ref_1\",\n          \"quantity\": 1\n        },\n        {\n          \"offer_sku\": \"OFFER_SKU_2\",\n          \"package_reference\": \"package_ref_2\",\n          \"quantity\": 3\n        }\n      ],\n      \"shipped\": false,\n      \"shipping_from\": {\n        \"warehouse\": {\n          \"code\": \"DEFAULT_WAREHOUSE\"\n        }\n      },\n      \"tracking\": {\n        \"carrier_code\": \"UPS\",\n        \"carrier_name\": \"UPS\",\n        \"carrier_standard_code\": \"UPS\",\n        \"tracking_number\": \"1Z2356F1ZJ98L9733M5\",\n        \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={trackingId}\"\n      }\n    },\n    {\n      \"invoice_reference\": \"ABCDEF012345\",\n      \"order_id\": \"ORDER_01-A\",\n      \"shipment_additional_information\": null,\n      \"shipment_lines\": [\n        {\n          \"order_line_id\": \"ORDER_01-A-1\",\n          \"package_reference\": \"package_ref_1\",\n          \"quantity\": 1\n        },\n        {\n          \"order_line_id\": \"ORDER_01-A-2\",\n          \"package_reference\": \"package_ref_2\",\n          \"quantity\": 3\n        }\n      ],\n      \"shipped\": true,\n      \"tracking\": {\n        \"carrier_name\": \"Custom carrier\",\n        \"tracking_url\": \"http://www.customcarrier.com/tracking\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipment_errors\": [\n    {\n      \"message\": \"The order status must be 'SHIPPING' but it is 'SHIPPED'.\",\n      \"order_id\": \"leadtime-ship02-A\"\n    },\n    {\n      \"message\": \"Shipment quantity is invalid.\",\n      \"order_id\": \"7263625-A\"\n    }\n  ],\n  \"shipment_success\": [\n    {\n      \"created_date\": \"2021-07-06T08:07:22.326Z\",\n      \"id\": \"f40bf65e-a320-41d3-878c-36ce9e1144ce\",\n      \"invoice_reference\": \"ABCDEF012345\",\n      \"last_updated_date\": null,\n      \"order_id\": \"ORDER_01-A\",\n      \"payment_details\": null,\n      \"shipment_additional_information\": [\n        {\n          \"code\": \"DELIVERY_BILL_ID\",\n          \"type\": \"STRING\",\n          \"value\": \"IUYHJ777-98\"\n        }\n      ],\n      \"shipment_lines\": [\n        {\n          \"offer_sku\": \"OFFER_SKU_01\",\n          \"order_line_id\": \"ORDER_01-A-1\",\n          \"package_reference\": \"package_ref_1\",\n          \"quantity\": 1\n        },\n        {\n          \"offer_sku\": \"OFFER_SKU_02\",\n          \"order_line_id\": \"ORDER_01-A-2\",\n          \"package_reference\": \"package_ref_2\",\n          \"quantity\": 3\n        }\n      ],\n      \"shipped_date\": null,\n      \"shipping_from\": {\n        \"address\": {\n          \"city\": \"New York City\",\n          \"country_iso_code\": \"USA\",\n          \"state\": \"New York\",\n          \"street_1\": \"113 MacDougal Street\",\n          \"street_2\": \"1st floor\",\n          \"zip_code\": \"NY 10012\"\n        },\n        \"warehouse\": {\n          \"code\": \"DEFAULT_WAREHOUSE\"\n        }\n      },\n      \"status\": \"SHIPPING\",\n      \"status_customer_debit\": \"NO_DEBIT\",\n      \"tracking\": {\n        \"carrier_code\": \"UPS\",\n        \"carrier_name\": \"UPS\",\n        \"carrier_standard_code\": \"UPS\",\n        \"last_known_location\": null,\n        \"milestones\": [],\n        \"tracking_number\": \"1Z2356F1ZJ98L9733M5\",\n        \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={trackingId}\",\n        \"validity_status\": null\n      }\n    },\n    {\n      \"created_date\": \"2021-07-06T09:24:36.326Z\",\n      \"id\": \"41c1b9b3-820b-4493-ae7c-1b656377b52b\",\n      \"invoice_reference\": null,\n      \"last_updated_date\": null,\n      \"order_id\": \"ORDER_02-A\",\n      \"payment_details\": null,\n      \"shipment_lines\": [\n        {\n          \"offer_sku\": \"OFFER_SKU_01\",\n          \"order_line_id\": \"ORDER_02-A-1\",\n          \"package_reference\": \"package_ref_1\",\n          \"quantity\": 1\n        },\n        {\n          \"offer_sku\": \"OFFER_SKU_02\",\n          \"order_line_id\": \"ORDER_02-A-2\",\n          \"package_reference\": \"package_ref_2\",\n          \"quantity\": 3\n        }\n      ],\n      \"shipped_date\": \"2021-07-06T10:24:36.326Z\",\n      \"shipping_from\": {\n        \"address\": {\n          \"city\": \"New York City\",\n          \"country_iso_code\": \"USA\",\n          \"state\": \"New York\",\n          \"street_1\": \"113 MacDougal Street\",\n          \"street_2\": \"1st floor\",\n          \"zip_code\": \"NY 10012\"\n        },\n        \"warehouse\": null\n      },\n      \"status\": \"SHIPPED\",\n      \"status_customer_debit\": \"NO_DEBIT\",\n      \"tracking\": {\n        \"carrier_name\": \"Custom carrier\",\n        \"tracking_url\": \"http://www.customcarrier.com/tracking\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32d4d0de-d1ac-43d9-bb2f-fdd97a28ca26",
+          "name": "ST07 - Update shipment shipping origin",
+          "request": {
+            "name": "ST07 - Update shipment shipping origin",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each update of shipments for one or multiple shipment</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"<string>\",\n      \"shipping_from\": {\n        \"warehouse\": {\n          \"code\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a650028f-ebab-4dac-998b-7cbf08fcb197",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"5b2269b6-3918-43bc-9262-fddd815398f3\",\n      \"shipping_from\": {\n        \"warehouse\": {\n          \"code\": \"WHC1\"\n        }\n      }\n    },\n    {\n      \"id\": \"0e450a4c-704f-4e2c-845a-71b65b4ff16a\",\n      \"shipping_from\": {\n        \"warehouse\": {\n          \"code\": \"WHC2\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipment_errors\": [\n    {\n      \"id\": \"0e450a4c-704f-4e2c-845a-71b65b4ff16a\",\n      \"message\": \"Warehouse with code WHC2 does not exist\"\n    }\n  ],\n  \"shipment_success\": [\n    {\n      \"id\": \"5b2269b6-3918-43bc-9262-fddd815398f3\",\n      \"shipping_from\": {\n        \"address\": {\n          \"city\": \"Paris\",\n          \"country_iso_code\": \"FRA\",\n          \"state\": \"Ile de France\",\n          \"street_1\": \"12 rue de Lubeck\",\n          \"street_2\": null,\n          \"zip_code\": \"75016\"\n        },\n        \"warehouse\": {\n          \"code\": \"WHC1\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "097aa815-509d-4102-99cc-63d45bd08ca7",
+          "name": "ST11 - List shipments",
+          "request": {
+            "name": "ST11 - List shipments",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: at each shipment page display</div>\n<div class=\"max-call-frequency\">Maximum usage: at each shipment page display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use_cases/config_multi_shipments_api.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>dateCreated</b> (Default) - Sort by creation date (asc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>",
+                  "description": "Order id for filtering. This parameter can be supplied multiple times (order_id=OR01-A&order_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>",
+                  "description": "Order id for filtering. This parameter can be supplied multiple times (order_id=OR01-A&order_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipment_state_code",
+                  "value": "<string>",
+                  "description": "Shipment state code for filtering. This parameter can be supplied multiple times (shipment_state_code=SHIPPING&shipment_state_code=SHIPPED...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipment_state_code",
+                  "value": "<string>",
+                  "description": "Shipment state code for filtering. This parameter can be supplied multiple times (shipment_state_code=SHIPPING&shipment_state_code=SHIPPED...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipment_customer_debit_state_code",
+                  "value": "<string>",
+                  "description": "Shipment customer debit state code for filtering. This parameter can be supplied multiple times (shipment_customer_debit_state_code=WAITING_TAX_CONFIRMATION&shipment_customer_debit_state_code=DEBIT_OK...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipment_customer_debit_state_code",
+                  "value": "<string>",
+                  "description": "Shipment customer debit state code for filtering. This parameter can be supplied multiple times (shipment_customer_debit_state_code=WAITING_TAX_CONFIRMATION&shipment_customer_debit_state_code=DEBIT_OK...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_updated_from",
+                  "value": "<dateTime>",
+                  "description": "Filter shipments updated after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_updated_to",
+                  "value": "<dateTime>",
+                  "description": "Filter shipments updated before the given date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "5aee526c-d830-4971-8a36-4f1350d49734",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipment_state_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipment_state_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipment_customer_debit_state_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipment_customer_debit_state_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_updated_from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "last_updated_to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"created_date\": \"2021-06-25T15:28:00.336Z\",\n      \"id\": \"4dd549d5-3b5b-4237-a77c-a084359f93fc\",\n      \"invoice_reference\": \"ABCDEF012345\",\n      \"last_updated_date\": \"2021-07-06T09:24:36.326Z\",\n      \"order_id\": \"ORDER_01-A\",\n      \"payment_details\": null,\n      \"shipment_lines\": [\n        {\n          \"offer_sku\": \"OFFER_SKU_01\",\n          \"order_line_id\": \"ORDER_01-A-1\",\n          \"package_reference\": \"package_ref_1\",\n          \"quantity\": 1\n        },\n        {\n          \"offer_sku\": \"OFFER_SKU_02\",\n          \"order_line_id\": \"ORDER_01-A-2\",\n          \"package_reference\": \"package_ref_2\",\n          \"quantity\": 3\n        }\n      ],\n      \"shipped_date\": \"2021-07-06T10:24:36.326Z\",\n      \"shipping_from\": {\n        \"address\": {\n          \"city\": \"New York City\",\n          \"country_iso_code\": \"USA\",\n          \"state\": \"New York\",\n          \"street_1\": \"113 MacDougal Street\",\n          \"street_2\": \"1st floor\",\n          \"zip_code\": \"NY 10012\"\n        },\n        \"warehouse\": {\n          \"code\": \"DEFAULT_WAREHOUSE\"\n        }\n      },\n      \"status\": \"SHIPPED\",\n      \"status_customer_debit\": \"NO_DEBIT\",\n      \"tracking\": {\n        \"carrier_code\": \"UPS\",\n        \"carrier_estimated_delivery_date\": {\n          \"earliest\": {\n            \"date\": \"2024-02-12\",\n            \"offset\": \"Z\",\n            \"time\": \"16:30:00\"\n          },\n          \"latest\": {\n            \"date\": \"2024-02-14\",\n            \"offset\": \"Z\",\n            \"time\": \"18:19:42\"\n          }\n        },\n        \"carrier_name\": \"UPS\",\n        \"carrier_standard_code\": \"UPS\",\n        \"last_known_location\": {\n          \"location\": \"PARIS\",\n          \"occurrence_date\": {\n            \"date\": \"2024-02-08\",\n            \"offset\": null,\n            \"time\": null\n          }\n        },\n        \"milestones\": [\n          {\n            \"additional_info\": {\n              \"occurrence_date\": {\n                \"date\": \"2023-12-22\",\n                \"offset\": null,\n                \"time\": \"14:25:00\"\n              },\n              \"type\": \"DELIVERY_ATTEMPTED\"\n            },\n            \"occurrence_date\": {\n              \"date\": \"2024-02-08\",\n              \"offset\": \"+02:00\",\n              \"time\": \"12:50:00\"\n            },\n            \"type\": \"IN_TRANSIT\"\n          },\n          {\n            \"additional_info\": {\n              \"occurrence_date\": {\n                \"date\": \"2023-12-22\",\n                \"offset\": null,\n                \"time\": \"14:25:00\"\n              },\n              \"type\": \"DESTINATION_ARRIVAL\"\n            },\n            \"occurrence_date\": {\n              \"date\": \"2024-02-08\",\n              \"offset\": null,\n              \"time\": null\n            },\n            \"type\": \"OUT_FOR_DELIVERY\"\n          },\n          {\n            \"additional_info\": null,\n            \"occurrence_date\": {\n              \"date\": \"2024-02-08\",\n              \"offset\": null,\n              \"time\": \"16:45:10\"\n            },\n            \"type\": \"DELIVERED\"\n          }\n        ],\n        \"tracking_number\": \"1315A26\",\n        \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=1315A26\",\n        \"validity_status\": \"VERIFIED\"\n      }\n    },\n    {\n      \"created_date\": \"2021-07-01T10:30:00.000Z\",\n      \"id\": \"297bf287-37d7-4490-8849-58356602e800\",\n      \"invoice_reference\": \"ABCDEF012345\",\n      \"last_updated_date\": \"2021-07-06T09:24:36.326Z\",\n      \"order_id\": \"ORDER_02-A\",\n      \"payment_details\": null,\n      \"shipment_additional_information\": [\n        {\n          \"code\": \"DELIVERY_BILL_ID\",\n          \"type\": \"STRING\",\n          \"value\": \"IUYHJ777-98\"\n        }\n      ],\n      \"shipment_lines\": [\n        {\n          \"offer_sku\": \"OFFER_SKU_03\",\n          \"order_line_id\": \"ORDER_02-A-1\",\n          \"package_reference\": \"package_ref_1\",\n          \"quantity\": 10\n        },\n        {\n          \"offer_sku\": \"OFFER_SKU_04\",\n          \"order_line_id\": \"ORDER_02-A-2\",\n          \"package_reference\": \"package_ref_2\",\n          \"quantity\": 2\n        }\n      ],\n      \"shipped_date\": \"2021-07-06T10:24:36.326Z\",\n      \"shipping_from\": {\n        \"address\": {\n          \"city\": \"New York City\",\n          \"country_iso_code\": \"USA\",\n          \"state\": \"New York\",\n          \"street_1\": \"113 MacDougal Street\",\n          \"street_2\": \"1st floor\",\n          \"zip_code\": \"NY 10012\"\n        },\n        \"warehouse\": null\n      },\n      \"status\": \"CLOSED\",\n      \"status_customer_debit\": \"NO_DEBIT\",\n      \"tracking\": {\n        \"carrier_code\": null,\n        \"carrier_estimated_delivery_date\": {\n          \"earliest\": {\n            \"date\": \"2024-03-10\",\n            \"offset\": null,\n            \"time\": null\n          },\n          \"latest\": {\n            \"date\": \"2024-03-14\",\n            \"offset\": null,\n            \"time\": \"18:19:42\"\n          }\n        },\n        \"carrier_name\": \"La Poste\",\n        \"carrier_standard_code\": null,\n        \"last_known_location\": {\n          \"location\": \"PARIS\",\n          \"occurrence_date\": {\n            \"date\": \"2024-03-06\",\n            \"offset\": \"-02:00\",\n            \"time\": \"12:00:02\"\n          }\n        },\n        \"milestones\": [],\n        \"tracking_number\": \"0AAC590\",\n        \"tracking_url\": \"http://www.laposte.com/suivi/0AAC590\",\n        \"validity_status\": \"UNVERIFIED\"\n      }\n    },\n    {\n      \"created_date\": \"2021-07-01T10:30:00.000Z\",\n      \"id\": \"e47cef257-37d7-4490-8849-58356bc02ea07\",\n      \"invoice_reference\": null,\n      \"last_updated_date\": \"2021-07-06T09:24:36.326Z\",\n      \"order_id\": \"ORDER_03-A\",\n      \"payment_details\": null,\n      \"shipment_lines\": [\n        {\n          \"offer_sku\": \"OFFER_SKU_03\",\n          \"order_line_id\": \"ORDER_03-A-1\",\n          \"quantity\": 10\n        },\n        {\n          \"offer_sku\": \"OFFER_SKU_04\",\n          \"order_line_id\": \"ORDER_03-A-2\",\n          \"quantity\": 2\n        }\n      ],\n      \"shipped_date\": null,\n      \"status\": \"SHIPPING\",\n      \"status_customer_debit\": \"NO_DEBIT\",\n      \"tracking\": {\n        \"carrier_code\": null,\n        \"carrier_estimated_delivery_date\": null,\n        \"carrier_name\": \"La Poste\",\n        \"carrier_standard_code\": null,\n        \"last_known_location\": {\n          \"location\": \"LONDON\",\n          \"occurrence_date\": {\n            \"date\": \"2024-02-08\",\n            \"offset\": \"+01:00\",\n            \"time\": \"06:07:08\"\n          }\n        },\n        \"milestones\": [],\n        \"tracking_number\": \"0AAC590\",\n        \"tracking_url\": \"http://www.laposte.com/suivi/0AAC590\",\n        \"validity_status\": \"UNCOVERED\"\n      }\n    },\n    {\n      \"created_date\": \"2022-07-25T15:28:00.336Z\",\n      \"id\": \"d6ce3a1d-6c21-4535-bce7-bd44777823d4\",\n      \"invoice_reference\": null,\n      \"last_updated_date\": \"2022-08-06T09:24:36.326Z\",\n      \"order_id\": \"ORDER_04-A\",\n      \"payment_details\": {\n        \"customer_debited_date\": \"2022-07-25T15:28:00.336Z\",\n        \"transaction_date\": \"2022-07-25T15:28:00.336Z\",\n        \"transaction_number\": \"tx-123456\"\n      },\n      \"shipment_lines\": [\n        {\n          \"offer_sku\": \"OFFER_SKU_01\",\n          \"order_line_id\": \"ORDER_04-A-1\",\n          \"quantity\": 1\n        }\n      ],\n      \"shipped_date\": \"2022-08-06T10:24:36.326Z\",\n      \"status\": \"SHIPPED\",\n      \"status_customer_debit\": \"DEBIT_OK\",\n      \"tracking\": {\n        \"carrier_code\": \"UPS\",\n        \"carrier_estimated_delivery_date\": null,\n        \"carrier_name\": \"UPS\",\n        \"carrier_standard_code\": \"UPS\",\n        \"last_known_location\": {\n          \"location\": \"LONDON\",\n          \"occurrence_date\": {\n            \"date\": \"2024-02-08\",\n            \"offset\": null,\n            \"time\": null\n          }\n        },\n        \"milestones\": [],\n        \"tracking_number\": \"1315A32\",\n        \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=1315A32\",\n        \"validity_status\": null\n      }\n    }\n  ],\n  \"next_page_token\": \"bGltaXQ9MTAmYWZ0ZXI9MjAxOS0wOC0xMlQxMDowMzoyMy43NzNaJmFmdGVyPU1JUi1RTDNXVE1DSi1BJmFmdGVyPTEmc29ydD1kYXRlQ3JlYXRlZCxBU0M=\",\n  \"previous_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e1db198-4ebe-4034-b876-8a65e54333d0",
+          "name": "ST06 - Delete shipments",
+          "request": {
+            "name": "ST06 - Delete shipments",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 1000 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shipment deletion</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shipment deletion</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use_cases/config_multi_shipments_api.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "40edae37-7895-4c5e-8caa-ea5bf191ce3b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"e2055970-dd6c-4d66-b005-096d6e6e0f30\"\n    },\n    {\n      \"id\": \"89174558-2845-44ef-bd57-78db027947f7\"\n    },\n    {\n      \"id\": \"14d134a1-eb3a-442c-b16c-05a35486d1bf\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deletion_errors\": [\n    {\n      \"id\": \"89174558-2845-44ef-bd57-78db027947f7\",\n      \"message\": \"Shipment with id '89174558-2845-44ef-bd57-78db027947f7' is not in SHIPPING status and cannot be deleted.\"\n    },\n    {\n      \"id\": \"14d134a1-eb3a-442c-b16c-05a35486d1bf\",\n      \"message\": \"No shipment with id '14d134a1-eb3a-442c-b16c-05a35486d1bf'\"\n    }\n  ],\n  \"deletion_success\": [\n    {\n      \"id\": \"e2055970-dd6c-4d66-b005-096d6e6e0f30\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "187a0f48-0a12-447d-9e9e-55cc1644f4e4",
+          "name": "ST12 - List items to ship",
+          "request": {
+            "name": "ST12 - List items to ship",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 15 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 5 minutes</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use_cases/config_multi_shipments_api.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>shippingDate</b> (Default) - Sort by shipping date (asc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments",
+                "items_to_ship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>",
+                  "description": "Order id for filtering. This parameter can be supplied multiple times (order_id=OR01-A&order_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>",
+                  "description": "Order id for filtering. This parameter can be supplied multiple times (order_id=OR01-A&order_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_center_code",
+                  "value": "<string>",
+                  "description": "Fulfillment center code for filtering. This parameter can be supplied multiple times (fulfillment_center_code=ABC&fulfillment_center_code=DEF...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_center_code",
+                  "value": "<string>",
+                  "description": "Fulfillment center code for filtering. This parameter can be supplied multiple times (fulfillment_center_code=ABC&fulfillment_center_code=DEF...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_date_from",
+                  "value": "<dateTime>",
+                  "description": "Filter items that moved to shipping status after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_date_to",
+                  "value": "<dateTime>",
+                  "description": "Filter items that moved to shipping status before the given date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8a1ac29a-0194-4e7f-a8dd-5746b7a6ed2c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments",
+                    "items_to_ship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fulfillment_center_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fulfillment_center_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipping_date_from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "shipping_date_to",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"fulfillment\": {\n        \"center\": {\n          \"code\": \"DEFAULT\"\n        }\n      },\n      \"order_id\": \"MIR-YQMLSYUI-B\",\n      \"references\": {\n        \"order_reference_for_customer\": \"ref_customer\",\n        \"order_reference_for_seller\": \"ref_seller\"\n      },\n      \"shipment_lines\": [\n        {\n          \"offer_sku\": \"4114\",\n          \"order_line_id\": \"MIR-YQMLSYUI-B-2\",\n          \"package_reference\": \"package_ref_1\",\n          \"product_title\": \"Capture Coloured Court Shoe - 11\",\n          \"quantity\": 4\n        },\n        {\n          \"offer_sku\": \"4114\",\n          \"order_line_id\": \"MIR-YQMLSYUI-B-2\",\n          \"package_reference\": \"package_ref_2\",\n          \"product_title\": \"Capture Coloured Court Shoe - 11\",\n          \"quantity\": 4\n        }\n      ],\n      \"shipping_address\": {\n        \"additional_info\": null,\n        \"city\": \"New York City\",\n        \"civility\": \"M\",\n        \"company\": \"LIMARK Company\",\n        \"company_2\": \"Other Inf. Company\",\n        \"country\": \"USA\",\n        \"country_iso_code\": \"USA\",\n        \"firstname\": \"smith\",\n        \"lastname\": \"Taylor\",\n        \"state\": \"Manhattan\",\n        \"street_1\": \"113 MacDougal Street\",\n        \"street_2\": \"1st floor\",\n        \"zip_code\": \"NY 10012\"\n      },\n      \"shipping_date\": \"2022-02-10T08:46:34.353Z\",\n      \"shipping_deadline\": \"2022-02-15T23:59:59.999Z\",\n      \"shipping_type_code\": \"CLC\",\n      \"shipping_type_standard_code\": \"CLC_OPERATOR-STD\"\n    }\n  ],\n  \"next_page_token\": null,\n  \"previous_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c22626d2-4b29-4cdc-8a65-cd971bf5be6e",
+          "name": "ST23 - Update carrier tracking information for shipments",
+          "request": {
+            "name": "ST23 - Update carrier tracking information for shipments",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nIf the carrier is not registered, the complete tracking url can be provided. Limited to 1000 shipments at a time.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shipment tracking info update</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shipment tracking info update</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use_cases/config_multi_shipments_api.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments",
+                "tracking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"<string>\",\n      \"tracking\": {\n        \"carrier_code\": \"<string>\",\n        \"carrier_name\": \"<string>\",\n        \"carrier_standard_code\": \"<string>\",\n        \"tracking_number\": \"<string>\",\n        \"tracking_url\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "411ccb4e-3bc0-4279-9324-b323e393cae1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"f40bf65e-a320-41d3-878c-36ce9e1144ce\",\n      \"tracking\": {\n        \"carrier_code\": \"UPS\",\n        \"carrier_name\": \"UPS\",\n        \"carrier_standard_code\": \"UPS\",\n        \"tracking_number\": \"1Z2356F1ZJ98L9733M5\",\n        \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={trackingId}\"\n      }\n    },\n    {\n      \"id\": \"ff341bfe-ebeb-4211-848b-77fcbcd91723\",\n      \"tracking\": {\n        \"carrier_code\": \"UPS\",\n        \"carrier_name\": \"UPS\",\n        \"carrier_standard_code\": \"UPS\",\n        \"tracking_number\": \"1Z2356F1ZJ98L9733M5\",\n        \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={trackingId}\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipment_errors\": [\n    {\n      \"id\": \"f40bf65e-a320-41d3-878c-36ce9e1144ce\",\n      \"message\": \"No shipment with id 'f40bf65e-a320-41d3-878c-36ce9e1144ce'.\"\n    }\n  ],\n  \"shipment_success\": [\n    {\n      \"id\": \"ff341bfe-ebeb-4211-848b-77fcbcd91723\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e156c75d-d636-45aa-b397-2916638b6fd8",
+          "name": "ST24 - Validate shipments as shipped",
+          "request": {
+            "name": "ST24 - Validate shipments as shipped",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 1000 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shipment shipping</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shipment shipping</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use_cases/config_multi_shipments_api.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments",
+                "ship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94d46498-b35a-4000-b160-dcdff9ff05e7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments",
+                    "ship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"f40bf65e-a320-41d3-878c-36ce9e1144ce\"\n    },\n    {\n      \"id\": \"c8ca3759-a81b-4abe-afd0-93a418e83ae8\"\n    },\n    {\n      \"id\": \"ff341bfe-ebeb-4211-848b-77fcbcd91723\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipment_errors\": [\n    {\n      \"id\": \"ff341bfe-ebeb-4211-848b-77fcbcd91723\",\n      \"message\": \"No shipment with id 'ff341bfe-ebeb-4211-848b-77fcbcd91723'.\"\n    }\n  ],\n  \"shipment_success\": [\n    {\n      \"id\": \"f40bf65e-a320-41d3-878c-36ce9e1144ce\"\n    },\n    {\n      \"id\": \"c8ca3759-a81b-4abe-afd0-93a418e83ae8\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb28167e-86d8-4ece-b7d2-b972af490f2b",
+          "name": "ST26 - Validate shipments as ready to pick up",
+          "request": {
+            "name": "ST26 - Validate shipments as ready to pick up",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 1000 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shipment ready to pick up</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shipment ready to pick up</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments",
+                "ready_for_pick_up"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44ad2942-f4c9-4320-bb63-a2baee607882",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments",
+                    "ready_for_pick_up"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"f40bf65e-a320-41d3-878c-36ce9e1144ce\"\n    },\n    {\n      \"id\": \"c8ca3759-a81b-4abe-afd0-93a418e83ae8\"\n    },\n    {\n      \"id\": \"ff341bfe-ebeb-4211-848b-77fcbcd91723\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipment_errors\": [\n    {\n      \"id\": \"ff341bfe-ebeb-4211-848b-77fcbcd91723\",\n      \"message\": \"No shipment with id 'ff341bfe-ebeb-4211-848b-77fcbcd91723'.\"\n    }\n  ],\n  \"shipment_success\": [\n    {\n      \"id\": \"f40bf65e-a320-41d3-878c-36ce9e1144ce\"\n    },\n    {\n      \"id\": \"c8ca3759-a81b-4abe-afd0-93a418e83ae8\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f7d0f85-bc1d-4a34-b745-e3a45c9ddb13",
+          "name": "ST31 - Update shipment additional information",
+          "request": {
+            "name": "ST31 - Update shipment additional information",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each update of shipments for one or multiple shipments</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipments",
+                "additional_information"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"<string>\",\n      \"shipment_additional_information\": [\n        {\n          \"code\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<object>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<object>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "43650036-c90d-4410-b5d4-975593d21efa",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipments",
+                    "additional_information"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipments\": [\n    {\n      \"id\": \"4dd549d5-3b5b-4237-a77c-a084359f93z\",\n      \"shipment_additional_information\": [\n        {\n          \"code\": \"IMEI\",\n          \"type\": \"STRING\",\n          \"value\": \"38021999921000\"\n        },\n        {\n          \"code\": \"DELIVERY_BILL_ID\",\n          \"type\": \"STRING\",\n          \"value\": \"invalid value with spaces\"\n        }\n      ]\n    },\n    {\n      \"id\": \"245365B0-D003-4DB7-B23F-5C0A48E93E53\",\n      \"shipment_additional_information\": [\n        {\n          \"code\": \"DELIVERY_BILL_DATE\",\n          \"type\": \"DATE\",\n          \"value\": \"2024-01-01\"\n        },\n        {\n          \"code\": \"DELIVERY_BILL_ID\",\n          \"type\": \"STRING\",\n          \"value\": \"IUYHJ777-98\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipment_update_errors\": [\n    {\n      \"errors\": [\n        {\n          \"code\": \"invalid.value\",\n          \"field\": \"shipmentAdditionalInfoCommands[1].value\",\n          \"message\": \"The shipment additional info ''DELIVERY_BILL_ID'' does not match the expected format\"\n        }\n      ],\n      \"shipment_id\": \"4dd549d5-3b5b-4237-a77c-a084359f93z\"\n    }\n  ],\n  \"shipment_update_success\": [\n    {\n      \"shipment_additional_information\": [\n        {\n          \"code\": \"DELIVERY_BILL_DATE\",\n          \"type\": \"DATE\",\n          \"value\": \"2024-01-01\"\n        },\n        {\n          \"code\": \"DELIVERY_BILL_ID\",\n          \"type\": \"STRING\",\n          \"value\": \"IUYHJ777-98\"\n        }\n      ],\n      \"shipment_id\": \"245365B0-D003-4DB7-B23F-5C0A48E93E5\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f8b2429d-a449-425e-8cac-32d2ef460213",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Multiple shipments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

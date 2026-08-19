@@ -1,0 +1,2287 @@
+{
+  "item": [
+    {
+      "id": "00a4cb6c-a798-4d05-bbe1-e1623f79253f",
+      "name": "Offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f70d1439-706c-4513-938f-3739c2f9a176",
+          "name": "OF01 - Import a file to create, update or delete offers",
+          "request": {
+            "name": "OF01 - Import a file to create, update or delete offers",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nReturns the import identifier to track the status of the import.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes with offers only, every hour with offers and products, for each seller</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute with offers only, once every 15 minutes with offers and products, for each seller</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Import file (CSV or XML or XLSX) to upload. Use <code>multipart/form-data</code> with name <code>file</code>.<br/> Csv format:<br/><pre>\"sku\";\"product-id\";\"product-id-type\";\"description\";\"internal-description\";\"price\";\"price-additional-info\";\"quantity\";\"min-quantity-alert\";\"state\";\"available-start-date\";\"available-end-date\";\"discount-price\";\"discount-start-date\";\"discount-end-date\";\"discount-ranges\";\"allow-quote-requests\";\"leadtime-to-ship\";\"min-order-quantity\";\"max-order-quantity\";\"package-quantity\";\"update-delete\";\"price-ranges\";\"ecotax\";\"gift-wrap\";\"min-quantity-ordered\"</pre><br/><br/>If you use specific sales channels, use: <pre>\"price[channel=channel code]\";\"discount-price[channel=channel code]\";\"discount-start-date[channel=channel code]\";\"discount-end-date[channel=channel code]\";\"discount-ranges[channel=channel code]\";\"price-ranges[channel=channel code]\"</pre><br/>If you use the price per measurement unit feature, use <code>pricing-unit</code> to specify the unit corresponding to the submitted <code>price</code>.<br/><br/>If US Tax options are activated on the platform, use: <code>product-tax-code</code> to facilitate tax calculations.<br/><br/>If <i>Data collection related to circular economy regulations</i> is enabled, use:<br/><pre>\"producer-id[EPR category code]\"; \"eco-contribution-amount[EPR category code]\"</pre>EPR category code must be one of: <pre>FR-AGROPACK, FR-ASL, FR-DASRIPAT, FR-DBPS, FR-DDS, FR-DEA, FR-DEEE, FR-DISPMED, FR-DIY, FR-EMBM, FR-GF, FR-JOUETS, FR-LUB, FR-MH, FR-MNU, FR-PA, FR-PAP, FR-PCHIM, FR-PMCB, FR-PNEU, FR-TABAC, FR-TLC, FR-VEHICULE, FR-VHU, DE-BATTG, DE-PACK, DE-WEEE, ES-PACK, ES-GPACK, ES-WEEE</pre><br/>"
+                },
+                {
+                  "key": "import_mode",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Enum: `\"NORMAL\"`, `\"REPLACE\"`\n\n<details>\n  <summary>See deprecated values</summary>\n\n  Deprecated values: `\"PARTIAL_UPDATE\"`\n</details>\n"
+                },
+                {
+                  "key": "shop",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "(Required) Shop Identifier"
+                },
+                {
+                  "key": "operator_format",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Force the use of the operator product format"
+                },
+                {
+                  "key": "with_products",
+                  "value": "false",
+                  "type": "text",
+                  "description": "This file also contains product information"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "188e4ce8-6da1-4041-9816-ad81fb747acf",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Import file (CSV or XML or XLSX) to upload. Use <code>multipart/form-data</code> with name <code>file</code>.<br/> Csv format:<br/><pre>\"sku\";\"product-id\";\"product-id-type\";\"description\";\"internal-description\";\"price\";\"price-additional-info\";\"quantity\";\"min-quantity-alert\";\"state\";\"available-start-date\";\"available-end-date\";\"discount-price\";\"discount-start-date\";\"discount-end-date\";\"discount-ranges\";\"allow-quote-requests\";\"leadtime-to-ship\";\"min-order-quantity\";\"max-order-quantity\";\"package-quantity\";\"update-delete\";\"price-ranges\";\"ecotax\";\"gift-wrap\";\"min-quantity-ordered\"</pre><br/><br/>If you use specific sales channels, use: <pre>\"price[channel=channel code]\";\"discount-price[channel=channel code]\";\"discount-start-date[channel=channel code]\";\"discount-end-date[channel=channel code]\";\"discount-ranges[channel=channel code]\";\"price-ranges[channel=channel code]\"</pre><br/>If you use the price per measurement unit feature, use <code>pricing-unit</code> to specify the unit corresponding to the submitted <code>price</code>.<br/><br/>If US Tax options are activated on the platform, use: <code>product-tax-code</code> to facilitate tax calculations.<br/><br/>If <i>Data collection related to circular economy regulations</i> is enabled, use:<br/><pre>\"producer-id[EPR category code]\"; \"eco-contribution-amount[EPR category code]\"</pre>EPR category code must be one of: <pre>FR-AGROPACK, FR-ASL, FR-DASRIPAT, FR-DBPS, FR-DDS, FR-DEA, FR-DEEE, FR-DISPMED, FR-DIY, FR-EMBM, FR-GF, FR-JOUETS, FR-LUB, FR-MH, FR-MNU, FR-PA, FR-PAP, FR-PCHIM, FR-PMCB, FR-PNEU, FR-TABAC, FR-TLC, FR-VEHICULE, FR-VHU, DE-BATTG, DE-PACK, DE-WEEE, ES-PACK, ES-GPACK, ES-WEEE</pre><br/>",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Enum: `\"NORMAL\"`, `\"REPLACE\"`\n\n<details>\n  <summary>See deprecated values</summary>\n\n  Deprecated values: `\"PARTIAL_UPDATE\"`\n</details>\n",
+                        "type": "text/plain"
+                      },
+                      "key": "import_mode",
+                      "value": "NORMAL",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Force the use of the operator product format",
+                        "type": "text/plain"
+                      },
+                      "key": "operator_format",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Shop Identifier",
+                        "type": "text/plain"
+                      },
+                      "key": "shop",
+                      "value": "0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "This file also contains product information",
+                        "type": "text/plain"
+                      },
+                      "key": "with_products",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Pre-calculated URL to call to get the import status",
+                  "key": "Location",
+                  "value": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"import_id\": 2035,\n  \"product_import_id\": 2036\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a51ee27d-5d58-41d7-8db9-e707a414248c",
+          "name": "OF04 - Get information and statistics about offer imports",
+          "request": {
+            "name": "OF04 - Get information and statistics about offer imports",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>dateCreated</b> (Default) - Sort by creation date (desc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Shop identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "Start creation date for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "End creation date for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Offer import status"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Offer import mode"
+                },
+                {
+                  "disabled": false,
+                  "key": "origins",
+                  "value": "<string>",
+                  "description": "List of offer import origins for filtering. This parameter can be supplied multiple times (origins=API&origins=FTP...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "origins",
+                  "value": "<string>",
+                  "description": "List of offer import origins for filtering. This parameter can be supplied multiple times (origins=API&origins=FTP...)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2f928cf3-4e56-4634-955e-cef9062120e3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"date_created\": \"2021-05-11T14:50:25Z\",\n      \"has_error_report\": false,\n      \"import_id\": 2029,\n      \"lines_in_error\": 0,\n      \"lines_in_pending\": 0,\n      \"lines_in_success\": 8,\n      \"lines_read\": 8,\n      \"mode\": \"NORMAL\",\n      \"offer_deleted\": 3,\n      \"offer_inserted\": 3,\n      \"offer_updated\": 2,\n      \"origin\": \"FRONT\",\n      \"shop_id\": 123,\n      \"status\": \"COMPLETE\"\n    },\n    {\n      \"date_created\": \"2021-05-11T14:50:25Z\",\n      \"has_error_report\": true,\n      \"import_id\": 2028,\n      \"lines_in_error\": 1,\n      \"lines_in_pending\": 0,\n      \"lines_in_success\": 9,\n      \"lines_read\": 10,\n      \"mode\": \"NORMAL\",\n      \"offer_deleted\": 3,\n      \"offer_inserted\": 3,\n      \"offer_updated\": 3,\n      \"origin\": \"API\",\n      \"reason_status\": \"A parsing error has occurred at line 10\",\n      \"shop_id\": 456,\n      \"status\": \"WAITING\"\n    }\n  ],\n  \"next_page_token\": \"bGltaXQ9MiZhZnRlcj0yMDIxLTA1LTExJTIwMTY6NTA6MjUuNDczJnNvcnQ9ZGF0ZUNyZWF0ZWQsREVTQw==\",\n  \"previous_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acf77c19-1616-4530-a1de-90b8581eb998",
+          "name": "OF02 - Get information and statistics about an offer import",
+          "request": {
+            "name": "OF02 - Get information and statistics about an offer import",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each OF01 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "imports",
+                ":import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "import",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "cc4522dd-908d-49d6-8676-8a35fb9d1eff",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "imports",
+                    ":import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "import",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_created\": \"2019-04-01T15:16:31Z\",\n  \"has_error_report\": false,\n  \"import_id\": 2035,\n  \"lines_in_error\": 0,\n  \"lines_in_pending\": 0,\n  \"lines_in_success\": 1,\n  \"lines_read\": 1,\n  \"mode\": \"NORMAL\",\n  \"offer_deleted\": 0,\n  \"offer_inserted\": 1,\n  \"offer_updated\": 0,\n  \"status\": \"COMPLETE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4f7098c-22f1-435f-9c26-a31ccb257499",
+          "name": "OF03 - Get the error report file for an offer import",
+          "request": {
+            "name": "OF03 - Get the error report file for an offer import",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nThis API returns a CSV, XLSX or XML file, depending on the file format provided by the seller.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each OF02 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "imports",
+                ":import",
+                "error_report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "import",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "a742a919-15cc-4c49-90d9-a68940393704",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "imports",
+                    ":import",
+                    "error_report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "import",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "\"sku\";\"product-id\";\"product-id-type\";\"description\";\"internal-description\";\"price-additional-info\";\"quantity\";\"min-quantity-alert\";\"state\";\"available-start-date\";\"available-end-date\";\"logistic-class\";\"update-delete\";\"discount-start-date\";\"discount-end-date\";\"price\";\"discount-price\";\"discount-ranges\";\"price-ranges\";\"discount-start-date[channel=FR]\";\"discount-end-date[channel=FR]\";\"price[channel=FR]\";\"discount-price[channel=FR]\";\"discount-ranges[channel=FR]\";\"prices-ranges[channel=FR]\";\"discount-start-date[channel=CA]\";\"discount-end-date[channel=CA]\";\"price[channel=CA]\";\"discount-price[channel=CA]\";\"discount-ranges[channel=CA]\";\"prices-ranges[channel=CA]\";\"leadtime-to-ship\";\"error-line\";\"error-message\"\n\"OFFER_SKU_004\";\"MKP100000000195360\";\"SKU\";\"My Offer Description n°1\";\"My Internal description 1\";\"My price Additional innformations\";\"1000000\";\"20\";\"11\";\"2017-02-20T10:45:53+01\";\"2017-04-30T10:45:53+01\";\"S\";\"update\";\"2017-02-22T10:45:53+01\";\"2017-04-30T10:45:53+01\";\"110.52\";\"108,56\";\"\";\"5|109.20,10|108.736\";\"2017-02-22T10:45:53+01\";\"2017-03-31T10:45:53+01\";\"105.56\";\"102,36\";\"\";\"5|104.56,10|103.27\";\"2017-02-22T10:45:53+01\";\"2017-03-31T10:45:53+01\";\"190.23\";\"175,36\";\"\";\"5|182.58,10|181.27\";\"15\";\"2\";\"The product does not exist\"\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "891c3f42-6c89-4d17-86b6-98e055e23493",
+          "name": "OF22 - Get information about an offer",
+          "request": {
+            "name": "OF22 - Get information about an offer",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each offer page display</div>\n<div class=\"max-call-frequency\">Maximum usage: At each offer page display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_price_approval.htm\">If the \"Price approval\" option is activated, read this page</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/adv_pricing_offer_apis.htm#Aboutprioritizationrulesforpricefields\">Price prioritization for Advanced Pricing</a></li></ul><div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                ":offer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pricing_channel_code",
+                  "value": "<string>",
+                  "description": "Filter used to pick prices on a specific channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "pricing_customer_organization_id",
+                  "value": "<string>",
+                  "description": "For Customer Pricing users only. Customer identifier code the API will use to return all prices and applicable price for this organization. Ignored if value does not exist."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "offer",
+                  "description": "(Required) Offer identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "46a61983-d049-4c97-a3b5-11f41bee3c2b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    ":offer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pricing_channel_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pricing_customer_organization_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "offer",
+                      "description": "(Required) Offer identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"all_prices\": [\n    {\n      \"channel_code\": null,\n      \"discount_end_date\": \"2019-04-29T22:00:00Z\",\n      \"discount_start_date\": \"2019-03-31T22:00:00Z\",\n      \"price\": 49,\n      \"unit_discount_price\": 49,\n      \"unit_origin_price\": 50,\n      \"volume_prices\": [\n        {\n          \"price\": 49,\n          \"quantity_threshold\": 1,\n          \"unit_discount_price\": 49,\n          \"unit_origin_price\": 50\n        },\n        {\n          \"price\": 44,\n          \"quantity_threshold\": 50,\n          \"unit_discount_price\": 44,\n          \"unit_origin_price\": 45\n        },\n        {\n          \"price\": 39,\n          \"quantity_threshold\": 100,\n          \"unit_discount_price\": 39,\n          \"unit_origin_price\": 40\n        }\n      ]\n    },\n    {\n      \"channel_code\": \"US\",\n      \"context\": {\n        \"channel_codes\": [\n          \"US\"\n        ]\n      },\n      \"discount_end_date\": \"2019-04-29T22:00:00Z\",\n      \"discount_start_date\": \"2019-03-31T22:00:00Z\",\n      \"price\": 59,\n      \"unit_discount_price\": 59,\n      \"unit_origin_price\": 60,\n      \"volume_prices\": [\n        {\n          \"price\": 59,\n          \"quantity_threshold\": 1,\n          \"unit_discount_price\": 59,\n          \"unit_origin_price\": 60\n        },\n        {\n          \"price\": 49,\n          \"quantity_threshold\": 50,\n          \"unit_discount_price\": 49,\n          \"unit_origin_price\": 50\n        },\n        {\n          \"price\": 44,\n          \"quantity_threshold\": 100,\n          \"unit_discount_price\": 44,\n          \"unit_origin_price\": 45\n        }\n      ]\n    },\n    {\n      \"channel_code\": \"US\",\n      \"context\": {\n        \"channel_codes\": [\n          \"US\"\n        ],\n        \"customer_group_ids\": [\n          \"Group2\",\n          \"Group3\"\n        ],\n        \"customer_organization_ids\": [\n          \"Org1\"\n        ],\n        \"end_date\": \"2023-12-31T23:59:59Z\",\n        \"start_date\": \"2023-01-01T00:00:00Z\"\n      },\n      \"discount_end_date\": \"2023-01-31T22:00:00Z\",\n      \"discount_start_date\": \"2023-03-31T22:00:00Z\",\n      \"price\": 29,\n      \"unit_discount_price\": 29,\n      \"unit_origin_price\": 30,\n      \"volume_prices\": [\n        {\n          \"price\": 29,\n          \"quantity_threshold\": 1,\n          \"unit_discount_price\": 29,\n          \"unit_origin_price\": 30\n        },\n        {\n          \"price\": 19,\n          \"quantity_threshold\": 20,\n          \"unit_discount_price\": 19,\n          \"unit_origin_price\": 20\n        },\n        {\n          \"price\": 14,\n          \"quantity_threshold\": 100,\n          \"unit_discount_price\": 14,\n          \"unit_origin_price\": 15\n        }\n      ]\n    }\n  ],\n  \"allow_quote_requests\": false,\n  \"applicable_pricing\": {\n    \"channel_code\": \"US\",\n    \"context\": {\n      \"channel_codes\": [\n        \"US\"\n      ],\n      \"customer_group_ids\": [\n        \"Group2\",\n        \"Group3\"\n      ],\n      \"customer_organization_ids\": [\n        \"Org1\"\n      ],\n      \"end_date\": \"2023-12-31T23:59:59Z\",\n      \"start_date\": \"2023-01-01T00:00:00Z\"\n    },\n    \"discount_end_date\": \"2023-01-31T22:00:00Z\",\n    \"discount_start_date\": \"2023-03-31T22:00:00Z\",\n    \"price\": 29,\n    \"unit_discount_price\": 29,\n    \"unit_origin_price\": 30,\n    \"volume_prices\": [\n      {\n        \"price\": 29,\n        \"quantity_threshold\": 1,\n        \"unit_discount_price\": 29,\n        \"unit_origin_price\": 30\n      },\n      {\n        \"price\": 19,\n        \"quantity_threshold\": 20,\n        \"unit_discount_price\": 19,\n        \"unit_origin_price\": 20\n      },\n      {\n        \"price\": 14,\n        \"quantity_threshold\": 100,\n        \"unit_discount_price\": 14,\n        \"unit_origin_price\": 15\n      }\n    ]\n  },\n  \"available_end_date\": \"2019-09-29T22:00:00Z\",\n  \"available_start_date\": \"2019-03-31T22:00:00Z\",\n  \"category_code\": \"3016100\",\n  \"category_label\": \"Shoes\",\n  \"channels\": [\n    \"FR\",\n    \"US\"\n  ],\n  \"currency_iso_code\": \"USD\",\n  \"description\": \"Offer for product MKP100000000154824\",\n  \"discount\": {\n    \"discount_price\": null,\n    \"end_date\": \"2019-04-29T22:00:00Z\",\n    \"origin_price\": 50,\n    \"ranges\": [\n      {\n        \"price\": 49,\n        \"quantity_threshold\": 1\n      },\n      {\n        \"price\": 44,\n        \"quantity_threshold\": 50\n      },\n      {\n        \"price\": 39,\n        \"quantity_threshold\": 100\n      }\n    ],\n    \"start_date\": \"2019-03-31T22:00:00Z\"\n  },\n  \"eco_contributions\": [\n    {\n      \"eco_contribution_amount\": 3.59,\n      \"epr_category_code\": \"FR-DEA\",\n      \"producer_id\": \"FR123456_89ABCD\"\n    },\n    {\n      \"eco_contribution_amount\": 0.99,\n      \"epr_category_code\": \"DE-WEEE\",\n      \"producer_id\": \"ProducerID1\"\n    }\n  ],\n  \"fulfillment\": {\n    \"center\": {\n      \"code\": \"DEFAULT\"\n    }\n  },\n  \"inactivity_reasons\": [\n    \"SHOP_NOT_OPEN\",\n    \"ZERO_QUANTITY\"\n  ],\n  \"leadtime_to_ship\": 10,\n  \"logistic_class\": {\n    \"code\": \"M\",\n    \"label\": \"Medium\"\n  },\n  \"max_order_quantity\": 5,\n  \"min_order_quantity\": 1,\n  \"min_quantity_alert\": 1,\n  \"min_shipping_price\": 0,\n  \"min_shipping_price_additional\": 0,\n  \"min_shipping_type\": \"CLC\",\n  \"min_shipping_zone\": \"DOM1\",\n  \"model\": \"MARKETPLACE\",\n  \"offer_additional_fields\": [\n    {\n      \"code\": \"ecotax\",\n      \"type\": \"NUMERIC\",\n      \"value\": \"20\"\n    },\n    {\n      \"code\": \"gift-wrap\",\n      \"type\": \"BOOLEAN\",\n      \"value\": \"true\"\n    },\n    {\n      \"code\": \"min-quantity-ordered\",\n      \"type\": \"NUMERIC\",\n      \"value\": \"5\"\n    }\n  ],\n  \"offer_id\": 2135,\n  \"package_quantity\": 1,\n  \"price\": 49,\n  \"price_additional_info\": \"Apply Discount prices\",\n  \"product_brand\": \"Capture\",\n  \"product_description\": \"Cobalt, fuchsia, leopard print: imitation suede upper. Synthetic lining, upper and sole. Almond toe court with cushioned sole. Heel height 9cm.\",\n  \"product_references\": [\n    {\n      \"reference\": \"9400016774345\",\n      \"reference_type\": \"EAN\"\n    }\n  ],\n  \"product_sku\": \"MKP100000000154824\",\n  \"product_title\": \"Capture Coloured Court Shoe - 10\",\n  \"quantity\": 1000000,\n  \"shipping_deadline\": \"2019-09-01T23:59:59.999Z\",\n  \"shop_grade\": 4,\n  \"shop_id\": 2000,\n  \"shop_name\": \"ACME SHOP\",\n  \"shop_sku\": \"S2002\",\n  \"state_code\": \"11\",\n  \"total_price\": 49,\n  \"warehouses\": [\n    {\n      \"code\": \"WAREHOUSE_001\",\n      \"quantity\": 750000\n    },\n    {\n      \"code\": \"WAREHOUSE_002\",\n      \"quantity\": 250000\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5521ac58-8806-44ba-8af8-23be1ef3981b",
+          "name": "OF24 - Create, update, or delete offers",
+          "request": {
+            "name": "OF24 - Create, update, or delete offers",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\n<p>Returns the import identifier to track the status of the update.</p><p>You must send all offer fields. Offer fields that are not sent are reset to their default value.</p>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop",
+                  "value": "<long>",
+                  "description": "(Required) Shop ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offers\": [\n    {\n      \"price\": \"<with decimals>\",\n      \"product_id\": \"<string>\",\n      \"product_id_type\": \"<string>\",\n      \"shop_sku\": \"<string>\",\n      \"state_code\": \"<string>\",\n      \"update_delete\": \"<string>\",\n      \"all_prices\": [\n        {\n          \"channel_code\": \"<string>\",\n          \"discount_end_date\": \"<string>\",\n          \"discount_start_date\": \"<string>\",\n          \"unit_discount_price\": \"<with decimals>\",\n          \"unit_origin_price\": \"<with decimals>\",\n          \"volume_prices\": [\n            {\n              \"quantity_threshold\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_origin_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_discount_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"quantity_threshold\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_origin_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_discount_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"channel_code\": \"<string>\",\n          \"discount_end_date\": \"<string>\",\n          \"discount_start_date\": \"<string>\",\n          \"unit_discount_price\": \"<with decimals>\",\n          \"unit_origin_price\": \"<with decimals>\",\n          \"volume_prices\": [\n            {\n              \"quantity_threshold\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_origin_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_discount_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"quantity_threshold\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_origin_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_discount_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"allow_quote_requests\": \"<boolean>\",\n      \"available_ended\": \"<string>\",\n      \"available_started\": \"<string>\",\n      \"description\": \"<string>\",\n      \"discount\": {\n        \"end_date\": \"<string>\",\n        \"price\": \"<with decimals>\",\n        \"ranges\": [\n          {\n            \"price\": \"<with decimals>\",\n            \"quantity_threshold\": \"<integer>\"\n          },\n          {\n            \"price\": \"<with decimals>\",\n            \"quantity_threshold\": \"<integer>\"\n          }\n        ],\n        \"start_date\": \"<string>\"\n      },\n      \"eco_contributions\": [\n        {\n          \"epr_category_code\": \"<string>\",\n          \"eco_contribution_amount\": \"<with decimals>\",\n          \"producer_id\": \"<string>\"\n        },\n        {\n          \"epr_category_code\": \"<string>\",\n          \"eco_contribution_amount\": \"<with decimals>\",\n          \"producer_id\": \"<string>\"\n        }\n      ],\n      \"internal_description\": \"<string>\",\n      \"leadtime_to_ship\": \"<integer>\",\n      \"logistic_class\": \"<string>\",\n      \"max_order_quantity\": \"<integer>\",\n      \"min_order_quantity\": \"<integer>\",\n      \"min_quantity_alert\": \"<integer>\",\n      \"msrp\": \"<with decimals>\",\n      \"offer_additional_fields\": [\n        {\n          \"code\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"package_quantity\": \"<integer>\",\n      \"price_additional_info\": \"<string>\",\n      \"pricing_unit\": \"<string>\",\n      \"product_tax_code\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"retail_prices\": [\n        {\n          \"discount_end_date\": \"<string>\",\n          \"discount_start_date\": \"<string>\",\n          \"unit_discount_price\": \"<with decimals>\",\n          \"unit_origin_price\": \"<with decimals>\"\n        },\n        {\n          \"discount_end_date\": \"<string>\",\n          \"discount_start_date\": \"<string>\",\n          \"unit_discount_price\": \"<with decimals>\",\n          \"unit_origin_price\": \"<with decimals>\"\n        }\n      ]\n    },\n    {\n      \"price\": \"<with decimals>\",\n      \"product_id\": \"<string>\",\n      \"product_id_type\": \"<string>\",\n      \"shop_sku\": \"<string>\",\n      \"state_code\": \"<string>\",\n      \"update_delete\": \"<string>\",\n      \"all_prices\": [\n        {\n          \"channel_code\": \"<string>\",\n          \"discount_end_date\": \"<string>\",\n          \"discount_start_date\": \"<string>\",\n          \"unit_discount_price\": \"<with decimals>\",\n          \"unit_origin_price\": \"<with decimals>\",\n          \"volume_prices\": [\n            {\n              \"quantity_threshold\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_origin_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_discount_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"quantity_threshold\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_origin_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_discount_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"channel_code\": \"<string>\",\n          \"discount_end_date\": \"<string>\",\n          \"discount_start_date\": \"<string>\",\n          \"unit_discount_price\": \"<with decimals>\",\n          \"unit_origin_price\": \"<with decimals>\",\n          \"volume_prices\": [\n            {\n              \"quantity_threshold\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_origin_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_discount_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"quantity_threshold\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_origin_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit_discount_price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"allow_quote_requests\": \"<boolean>\",\n      \"available_ended\": \"<string>\",\n      \"available_started\": \"<string>\",\n      \"description\": \"<string>\",\n      \"discount\": {\n        \"end_date\": \"<string>\",\n        \"price\": \"<with decimals>\",\n        \"ranges\": [\n          {\n            \"price\": \"<with decimals>\",\n            \"quantity_threshold\": \"<integer>\"\n          },\n          {\n            \"price\": \"<with decimals>\",\n            \"quantity_threshold\": \"<integer>\"\n          }\n        ],\n        \"start_date\": \"<string>\"\n      },\n      \"eco_contributions\": [\n        {\n          \"epr_category_code\": \"<string>\",\n          \"eco_contribution_amount\": \"<with decimals>\",\n          \"producer_id\": \"<string>\"\n        },\n        {\n          \"epr_category_code\": \"<string>\",\n          \"eco_contribution_amount\": \"<with decimals>\",\n          \"producer_id\": \"<string>\"\n        }\n      ],\n      \"internal_description\": \"<string>\",\n      \"leadtime_to_ship\": \"<integer>\",\n      \"logistic_class\": \"<string>\",\n      \"max_order_quantity\": \"<integer>\",\n      \"min_order_quantity\": \"<integer>\",\n      \"min_quantity_alert\": \"<integer>\",\n      \"msrp\": \"<with decimals>\",\n      \"offer_additional_fields\": [\n        {\n          \"code\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"package_quantity\": \"<integer>\",\n      \"price_additional_info\": \"<string>\",\n      \"pricing_unit\": \"<string>\",\n      \"product_tax_code\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"retail_prices\": [\n        {\n          \"discount_end_date\": \"<string>\",\n          \"discount_start_date\": \"<string>\",\n          \"unit_discount_price\": \"<with decimals>\",\n          \"unit_origin_price\": \"<with decimals>\"\n        },\n        {\n          \"discount_end_date\": \"<string>\",\n          \"discount_start_date\": \"<string>\",\n          \"unit_discount_price\": \"<with decimals>\",\n          \"unit_origin_price\": \"<with decimals>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "428f98f0-a3fc-485c-9ba0-3bfc3a8b0115",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offers\": [\n    {\n      \"all_prices\": [\n        {\n          \"channel_code\": \"US\",\n          \"discount_end_date\": \"2019-04-29T22:00:00Z\",\n          \"discount_start_date\": \"2019-04-01T22:00:00Z\",\n          \"unit_discount_price\": \"49\",\n          \"unit_origin_price\": 50,\n          \"volume_prices\": [\n            {\n              \"quantity_threshold\": 5,\n              \"unit_discount_price\": 45,\n              \"unit_origin_price\": 48\n            }\n          ]\n        }\n      ],\n      \"allow_quote_requests\": false,\n      \"available_ended\": \"2019-05-29T22:00:00Z\",\n      \"available_started\": \"2019-03-01T22:00:00Z\",\n      \"description\": \"Offer for product MKP100000000154824\",\n      \"discount\": {\n        \"end_date\": \"2019-05-31T22:00:00Z\",\n        \"price\": 49,\n        \"ranges\": [\n          {\n            \"price\": 45,\n            \"quantity_threshold\": 5\n          }\n        ],\n        \"start_date\": \"2019-03-31T22:00:00Z\"\n      },\n      \"eco_contributions\": [\n        {\n          \"eco_contribution_amount\": 3.59,\n          \"epr_category_code\": \"FR-DEA\",\n          \"producer_id\": \"FR123456_89ABCD\"\n        },\n        {\n          \"eco_contribution_amount\": 0.99,\n          \"epr_category_code\": \"DE-WEEE\",\n          \"producer_id\": \"ProducerID1\"\n        }\n      ],\n      \"internal_description\": \"Offer for product MKP100000000154824\",\n      \"leadtime_to_ship\": 5,\n      \"logistic_class\": \"M\",\n      \"max_order_quantity\": 3,\n      \"min_order_quantity\": 1,\n      \"min_quantity_alert\": 2,\n      \"offer_additional_fields\": [\n        {\n          \"code\": \"ecotax\",\n          \"value\": \"20\"\n        }\n      ],\n      \"package_quantity\": \"2\",\n      \"price\": 50,\n      \"price_additional_info\": \"Apply Discount prices\",\n      \"product_id\": \"9400016774345\",\n      \"product_id_type\": \"EAN\",\n      \"product_tax_code\": \"tax\",\n      \"quantity\": \"5000\",\n      \"shop_sku\": \"Offer_SKU_001\",\n      \"state_code\": \"11\",\n      \"update_delete\": \"update\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Pre-calculated URL to call to get the import status",
+                  "key": "Location",
+                  "value": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"import_id\": 2044\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f76e0f3d-e069-4882-800b-dd1993d67ac2",
+          "name": "OF21 - List offers of a shop",
+          "request": {
+            "name": "OF21 - List offers of a shop",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shop's offers page view</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shop's offers page view</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/sellers/page/topics/Mirakl/mmp/Seller/sellers_doc/integrate_price_approval_api.htm\">If the \"Price approval\" option is activated, read this page</a></li><li><a href=\"https://help.mirakl.com/bundle/sellers/page/topics/Mirakl/mmp/Seller/seller_api/adv_pricing_offer_apis_seller.html#Aboutprioritizationrulesforpricefields\">Price prioritization for Advanced Pricing</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports offset pagination (<a href=\"#section/Offset-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>totalPrice</b> (Default) - Sort by total price (asc by default)</li><li><b>price</b> - Sort by price, total price (asc by default)</li><li><b>productTitle</b> - Sort by product title, total price (asc by default)</li></ul>\n\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offer_state_codes",
+                  "value": "<string>",
+                  "description": "List of offer state codes"
+                },
+                {
+                  "disabled": false,
+                  "key": "sku",
+                  "value": "<string>",
+                  "description": "Offer's sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_id",
+                  "value": "<string>",
+                  "description": "Product's sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "favorite",
+                  "value": "false",
+                  "description": "Filter only favorite offers"
+                },
+                {
+                  "disabled": false,
+                  "key": "pricing_channel_code",
+                  "value": "<string>",
+                  "description": "Filter used to pick prices on a specific channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "pricing_customer_organization_id",
+                  "value": "<string>",
+                  "description": "For Customer Pricing users only. Customer identifier code the API will use to return all prices and applicable price for this organization. Ignored if value does not exist."
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "243e70ec-a7f7-4af4-ab26-a2017f0cfd82",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offer_state_codes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "favorite",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pricing_channel_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pricing_customer_organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"offers\": [\n    {\n      \"active\": true,\n      \"all_prices\": [\n        {\n          \"channel_code\": null,\n          \"discount_end_date\": \"2019-04-29T22:00:00Z\",\n          \"discount_start_date\": \"2019-03-31T22:00:00Z\",\n          \"price\": 49,\n          \"unit_discount_price\": 49,\n          \"unit_origin_price\": 50,\n          \"volume_prices\": [\n            {\n              \"price\": 49,\n              \"quantity_threshold\": 1,\n              \"unit_discount_price\": 49,\n              \"unit_origin_price\": 50\n            },\n            {\n              \"price\": 44,\n              \"quantity_threshold\": 50,\n              \"unit_discount_price\": 44,\n              \"unit_origin_price\": 45\n            },\n            {\n              \"price\": 39,\n              \"quantity_threshold\": 100,\n              \"unit_discount_price\": 39,\n              \"unit_origin_price\": 40\n            }\n          ]\n        },\n        {\n          \"channel_code\": \"US\",\n          \"context\": {\n            \"channel_codes\": [\n              \"US\"\n            ]\n          },\n          \"discount_end_date\": \"2019-04-29T22:00:00Z\",\n          \"discount_start_date\": \"2019-03-31T22:00:00Z\",\n          \"price\": 59,\n          \"unit_discount_price\": 59,\n          \"unit_origin_price\": 60,\n          \"volume_prices\": [\n            {\n              \"price\": 59,\n              \"quantity_threshold\": 1,\n              \"unit_discount_price\": 59,\n              \"unit_origin_price\": 60\n            },\n            {\n              \"price\": 49,\n              \"quantity_threshold\": 50,\n              \"unit_discount_price\": 49,\n              \"unit_origin_price\": 50\n            },\n            {\n              \"price\": 44,\n              \"quantity_threshold\": 100,\n              \"unit_discount_price\": 44,\n              \"unit_origin_price\": 45\n            }\n          ]\n        },\n        {\n          \"channel_code\": \"US\",\n          \"context\": {\n            \"channel_codes\": [\n              \"US\"\n            ],\n            \"customer_group_ids\": [\n              \"Group2\",\n              \"Group3\"\n            ],\n            \"customer_organization_ids\": [\n              \"Org1\"\n            ],\n            \"end_date\": \"2023-12-31T23:59:59Z\",\n            \"start_date\": \"2023-01-01T00:00:00Z\"\n          },\n          \"discount_end_date\": \"2023-01-31T22:00:00Z\",\n          \"discount_start_date\": \"2023-03-31T22:00:00Z\",\n          \"price\": 29,\n          \"unit_discount_price\": 29,\n          \"unit_origin_price\": 30,\n          \"volume_prices\": [\n            {\n              \"price\": 29,\n              \"quantity_threshold\": 1,\n              \"unit_discount_price\": 29,\n              \"unit_origin_price\": 30\n            },\n            {\n              \"price\": 19,\n              \"quantity_threshold\": 20,\n              \"unit_discount_price\": 19,\n              \"unit_origin_price\": 20\n            },\n            {\n              \"price\": 14,\n              \"quantity_threshold\": 100,\n              \"unit_discount_price\": 14,\n              \"unit_origin_price\": 15\n            }\n          ]\n        }\n      ],\n      \"allow_quote_requests\": false,\n      \"applicable_pricing\": {\n        \"channel_code\": \"US\",\n        \"context\": {\n          \"channel_codes\": [\n            \"US\"\n          ],\n          \"customer_group_ids\": [\n            \"Group2\",\n            \"Group3\"\n          ],\n          \"customer_organization_ids\": [\n            \"Org1\"\n          ],\n          \"end_date\": \"2023-12-31T23:59:59Z\",\n          \"start_date\": \"2023-01-01T00:00:00Z\"\n        },\n        \"discount_end_date\": \"2023-01-31T22:00:00Z\",\n        \"discount_start_date\": \"2023-03-31T22:00:00Z\",\n        \"price\": 29,\n        \"unit_discount_price\": 29,\n        \"unit_origin_price\": 30,\n        \"volume_prices\": [\n          {\n            \"price\": 29,\n            \"quantity_threshold\": 1,\n            \"unit_discount_price\": 29,\n            \"unit_origin_price\": 30\n          },\n          {\n            \"price\": 19,\n            \"quantity_threshold\": 20,\n            \"unit_discount_price\": 19,\n            \"unit_origin_price\": 20\n          },\n          {\n            \"price\": 14,\n            \"quantity_threshold\": 100,\n            \"unit_discount_price\": 14,\n            \"unit_origin_price\": 15\n          }\n        ]\n      },\n      \"available_end_date\": \"2019-09-29T22:00:00Z\",\n      \"available_start_date\": \"2019-03-31T22:00:00Z\",\n      \"category_code\": \"3016100\",\n      \"category_label\": \"Shoes\",\n      \"channels\": [\n        \"FR\",\n        \"US\"\n      ],\n      \"currency_iso_code\": \"USD\",\n      \"description\": \"Offer description\",\n      \"discount\": {\n        \"discount_price\": null,\n        \"end_date\": \"2019-04-29T22:00:00Z\",\n        \"origin_price\": 50,\n        \"ranges\": [\n          {\n            \"price\": 49,\n            \"quantity_threshold\": 1\n          },\n          {\n            \"price\": 44,\n            \"quantity_threshold\": 50\n          },\n          {\n            \"price\": 39,\n            \"quantity_threshold\": 100\n          }\n        ],\n        \"start_date\": \"2019-03-31T22:00:00Z\"\n      },\n      \"eco_contributions\": [\n        {\n          \"eco_contribution_amount\": 3.59,\n          \"epr_category_code\": \"FR-DEA\",\n          \"producer_id\": \"FR123456_89ABCD\"\n        },\n        {\n          \"eco_contribution_amount\": 0.99,\n          \"epr_category_code\": \"DE-WEEE\",\n          \"producer_id\": \"ProducerID1\"\n        }\n      ],\n      \"fulfillment\": {\n        \"center\": {\n          \"code\": \"FULFILLMENT_CENTER_CODE\"\n        }\n      },\n      \"inactivity_reasons\": [\n        \"SHOP_NOT_OPEN\",\n        \"ZERO_QUANTITY\"\n      ],\n      \"leadtime_to_ship\": 10,\n      \"logistic_class\": {\n        \"code\": \"M\",\n        \"label\": \"Medium\"\n      },\n      \"min_order_quantity\": 1,\n      \"min_shipping_price\": 0,\n      \"min_shipping_price_additional\": 0,\n      \"min_shipping_type\": \"CLC\",\n      \"min_shipping_zone\": \"DOM1\",\n      \"offer_additional_fields\": [\n        {\n          \"code\": \"ecotax\",\n          \"type\": \"NUMERIC\",\n          \"value\": \"20\"\n        },\n        {\n          \"code\": \"gift-wrap\",\n          \"type\": \"BOOLEAN\",\n          \"value\": \"true\"\n        },\n        {\n          \"code\": \"min-quantity-ordered\",\n          \"type\": \"NUMERIC\",\n          \"value\": \"5\"\n        }\n      ],\n      \"offer_id\": 2135,\n      \"package_quantity\": 1,\n      \"price\": 49,\n      \"price_additional_info\": \"Apply Discount prices\",\n      \"product_brand\": \"Capture\",\n      \"product_description\": \"Cobalt, fuchsia, leopard print: imitation suede upper. Synthetic lining, upper and sole. Almond toe court with cushioned sole. Heel height 9cm.\",\n      \"product_references\": [\n        {\n          \"reference\": \"9400016774345\",\n          \"reference_type\": \"EAN\"\n        }\n      ],\n      \"product_sku\": \"MKP100000000154824\",\n      \"product_title\": \"Capture Coloured Court Shoe - 10\",\n      \"quantity\": 1000000,\n      \"shipping_deadline\": \"2019-09-01T23:59:59.999Z\",\n      \"shop_sku\": \"S2002\",\n      \"state_code\": \"11\",\n      \"total_price\": 49,\n      \"warehouses\": [\n        {\n          \"code\": \"WAREHOUSE_001\",\n          \"quantity\": 750000\n        },\n        {\n          \"code\": \"WAREHOUSE_002\",\n          \"quantity\": 250000\n        }\n      ]\n    }\n  ],\n  \"total_count\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8032f358-13d9-4e03-bcf4-32604eed7ad0",
+          "name": "OF26 - Get the quantity of stock available for an offer.",
+          "request": {
+            "name": "OF26 - Get the quantity of stock available for an offer.",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\n<p>Quantity return rules:<ul><li> 0: if quantity = 0 or the offer is not available</li><li> x: quantity available</li></ul></p>\n\n<div class=\"api-description-extension\">\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                ":offer",
+                "quantity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "offer",
+                  "description": "(Required) Offer ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "02190dad-624f-4a17-b39e-ce126478e124",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    ":offer",
+                    "quantity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "offer",
+                      "description": "(Required) Offer ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"offer_id\": 2087,\n  \"quantity\": 7\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65843f0a-c45f-448a-b8f1-674feb5ed0c4",
+          "name": "OF51 - Get offers CSV file",
+          "request": {
+            "name": "OF51 - Get offers CSV file",
+            "description": {
+              "content": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in a future update, please use APIs OF52, OF53, and OF54 instead.\n\n<div class=\"extension-title\">Description</div>\n\nGet a CSV file that includes the offers updated and deleted since the last request date.<br/>For deleted offers, only offer-id, product-sku, shop-id, shop-sku, active and deleted columns are returned. <br/>If the last_request_date param is not set the api returns all the active offers (inactive offers can be included with include_inactive_offers parameter).<br/>If offers have custom fields, a column is added for each existing custom field with as header the code of the custom field.<br/><br/>Results are sorted by offer identifier.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: <br/>- Differential: every 5 minutes <br/>- Full: once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: <br/>- Differential: once per minute <br/>- Full: once per day</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/export_offers.html\">More context about exporting offers (synchronous)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/integrate_offers_from_sellers_in_system.html\">More context about integrating offers from sellers</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "last_request_date",
+                  "value": "<dateTime>",
+                  "description": "Date and time of your last request.<br/>If provided, retrieves all offers updated since this date and time, including deleted and inactive offers.<br/>If not provided, retrieves all active offers only, unless otherwise specified in the <i>include_inactive_offers</i> field."
+                },
+                {
+                  "disabled": false,
+                  "key": "channel_codes",
+                  "value": "<string>",
+                  "description": "List of the channel codes to filter with, using a comma (,) as a separator. If specified, only offers that can be sold on the specified channel(s) will be returned. If not, offers will be returned regardless of their channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_zones",
+                  "value": "<string>",
+                  "description": "List of the shipping zones codes to filter with, URL-encoded and using a comma (,) as a separator. If specified, only shipping information linked to the given zones will be returned. Otherwise, all shipping information for all zones will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_inactive_offers",
+                  "value": "false",
+                  "description": "When calling the API in full mode (i.e. when no <i>last_request_date</i> is provided), inactive offers are not returned. To retrieve both active and inactive offers, set this field to true.<br />When calling the API in differential mode (i.e. when the <i>last_request_date</i> is provided), both active and inactive offers are returned. This field cannot be used in differential mode otherwise the call fails."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_fields",
+                  "value": "<string>",
+                  "description": "List of the fields to include, URL-encoded and using a comma (,) as a separator. If specified, only listed fields will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "models",
+                  "value": "<string>",
+                  "description": "A comma separated list of platform models to filter with. Accepted values are <code>MARKETPLACE</code>, <code>DROPSHIP</code>, <code>ONE_CREDITOR</code>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "fdf12142-d545-4209-9a94-65c18e0ff444",
+              "name": "OK\n\n> **text/csv**\n>\n> <div class=\"alert alert-primary\" role=\"alert\">\n> The offer custom fields are not listed here. Each custom field will have its own column in the CSV file, with the custom field code as the column name.</div>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "last_request_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "channel_codes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipping_zones",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_inactive_offers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "models",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "offer-id;product-sku;min-shipping-price;min-shipping-price-additional;min-shipping-zone;min-shipping-type;price;total-price;price-additional-info;quantity;description;state-code;shop-id;shop-name;professional;premium;logistic-class;active;favorite-rank;channels;deleted;origin-price;discount-start-date;discount-end-date;available-start-date;available-end-date;discount-price;currency-iso-code;discount-ranges;leadtime-to-ship;allow-quote-requests;price-ranges;fulfillment-center-code;shop-sku;date-created;last-updated;model;min-order-quantity;max-order-quantity;package-quantity;price[channel=CA];origin-price[channel=CA];discount-start-date[channel=CA];discount-end-date[channel=CA];discount-price[channel=CA];discount-ranges[channel=CA];price-ranges[channel=CA];price[channel=FR];origin-price[channel=FR];discount-start-date[channel=FR];discount-end-date[channel=FR];discount-price[channel=FR];discount-ranges[channel=FR];price-ranges[channel=FR];price[channel=BFR];origin-price[channel=BFR];discount-start-date[channel=BFR];discount-end-date[channel=BFR];discount-price[channel=BFR];discount-ranges[channel=BFR];price-ranges[channel=BFR];price[channel=CHR];origin-price[channel=CHR];discount-start-date[channel=CHR];discount-end-date[channel=CHR];discount-price[channel=CHR];discount-ranges[channel=CHR];price-ranges[channel=CHR];price[channel=US];origin-price[channel=US];discount-start-date[channel=US];discount-end-date[channel=US];discount-price[channel=US];discount-ranges[channel=US];price-ranges[channel=US];ecotax;gift-wrap;min-quantity-ordered;measurement-units;producer-id[FR-DEA];eco-contribution-amount[FR-DEA];producer-id[DE-WEEE];eco-contribution-amount[DE-WEEE]\n2130;MKP100000000037254;0.00;0.00;DOM1;CLC;50.00;50.00;;40;;11;2000;ACME SHOP;true;true;M;true;;FR|US;false;50.00;;;;;;USD;;;false;1|50.00;DEFAULT;sku-2130;2019-01-31T22:00:00Z;2024-01-07T08:52:10Z;MARKETPLACE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;kg|1.00000000,L|1.00000000;FR123456_89ABCD;3.59;ProducerID1;0.99\n2131;MKP100000000025008;0.00;0.00;DOM1;CLC;50.00;50.00;;20;;11;2000;ACME SHOP;true;true;M;true;;FR|US;false;50.00;;;;;;USD;;;false;1|50.00;DEFAULT;sku-2130;2019-03-31T22:00:00Z;2024-01-07T08:52:10Z;MARKETPLACE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;FR123456_89ABCD;3.59;ProducerID1;0.99\n2135;MKP100000000154824;0.00;0.00;DOM1;CLC;49.00;49.00;Apply Discount prices;1000000;Offer description;11;2000;ACME SHOP;true;true;M;true;;FR|US;false;50.00;2019-03-31T22:00:00Z;2019-04-29T22:00:00Z;2019-03-31T22:00:00Z;2019-09-29T22:00:00Z;;USD;1|49.00,50|44.00,100|39.00;10;false;1|50.00,50|45.00,100|40.00;DEFAULT;sku-2130;2019-03-31T22:00:00Z;2024-01-07T08:52:10Z;DROPSHIP;1;5;1;;;;;;;;59.00;60.00;2019-03-31T22:00:00Z;2019-04-29T22:00:00Z;;1|59.00,50|49.00,100|44.00;1|60.00,50|50.00,100|45.00;;;;;;;;;;;;;;;;;;;;;;20;true;5;;FR123456_89ABCD;3.59;ProducerID1;0.99\n2136;MKP100000000154824;0.00;0.00;DOM1;CLC;49.00;49.00;Apply Discount prices;5000;Offer for product MKP100000000154824;11;2000;ACME SHOP;true;true;M;true;;FR|US;false;50.00;2019-03-31T22:00:00Z;2019-05-31T22:00:00Z;2019-03-01T22:00:00Z;2019-05-29T22:00:00Z;;USD;1|49.00,5|45.00;5;true;1|50.00;DEFAULT;sku-2130;2019-03-31T22:00:00Z;2024-01-07T08:52:10Z;DROPSHIP;2;3;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;49.00;49.00;2019-04-01T22:00:00Z;2019-04-29T22:00:00Z;;50|45.00;1|49.00,50|48.00;20;;;;FR123456_89ABCD;3.59;ProducerID1;0.99\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13b35be1-06bd-441a-b766-766520b838bf",
+          "name": "OF52 - Export offers CSV or JSON file asynchronously",
+          "request": {
+            "name": "OF52 - Export offers CSV or JSON file asynchronously",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nExport status and files links can be retrieved by calling OF53.<br/>Get a CSV or JSON file that includes the offers updated and deleted since the last request date.<br/><br/>\n<div class=\"alert alert-warning\" role=\"alert\">\nTo ease testing processes, the minimum values for \"megabytes_per_chunk\" and \"items_per_chunk\" have been lowered on TEST and DEV environments.<br/>\nPlease adapt these values on PROD environments.\n</div>\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: <br/>- Differential: every 5 minutes <br/>- Full: once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: <br/>- Differential: once per minute <br/>- Full: once per day</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/adv_pricing_of52.htm\">Exporting offers with advanced prices</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/export_offers_async.html\">Exporting offers asynchronously - APIs OF52/53</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "export",
+                "async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude_customer_specific_prices\": \"<boolean>\",\n  \"export_type\": \"<string>\",\n  \"include_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include_inactive_offers\": false,\n  \"items_per_chunk\": \"<long>\",\n  \"last_request_date\": \"<dateTime>\",\n  \"megabytes_per_chunk\": \"<long>\",\n  \"models\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ongoing_discount_campaign_identifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rename_fields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"shipping_zones\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6cc7f2ce-eba6-40d0-b290-2f1b258a637d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "export",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel_codes\": [\n    \"B2B\"\n  ],\n  \"export_type\": \"text/csv\",\n  \"include_fields\": [\n    \"active\",\n    \"allow-quote-requests\",\n    \"available-end-date\",\n    \"available-start-date\",\n    \"channels\",\n    \"currency-iso-code\",\n    \"date-created\",\n    \"deleted\",\n    \"description\",\n    \"discount-end-date\",\n    \"discount-price\",\n    \"discount-ranges\",\n    \"discount-start-date\",\n    \"favorite-rank\",\n    \"fulfillment-center-code\",\n    \"leadtime-to-ship\",\n    \"logistic-class\",\n    \"measurement-units\",\n    \"min-shipping-price\",\n    \"min-shipping-price-additional\",\n    \"min-shipping-type\",\n    \"min-shipping-zone\",\n    \"offer-id\",\n    \"ongoing-discount-campaigns\",\n    \"origin-price\",\n    \"premium\",\n    \"price\",\n    \"price[channel=B2B]\",\n    \"price-additional-info\",\n    \"price-ranges\",\n    \"product-sku\",\n    \"professional\",\n    \"quantity\",\n    \"shop-id\",\n    \"shop-name\",\n    \"shop-sku\",\n    \"state-code\",\n    \"total-price\",\n    \"model\"\n  ],\n  \"items_per_chunk\": 10000,\n  \"last_request_date\": \"2021-11-12T02:34:00Z\",\n  \"megabytes_per_chunk\": 100,\n  \"ongoing_discount_campaign_identifiers\": [\n    \"1_JANUARY_PROMOTION_CAMPAIGN\",\n    \"2_FEBRUARY_PROMOTION_CAMPAIGN\"\n  ],\n  \"rename_fields\": {\n    \"active\": \"active\",\n    \"allow-quote-requests\": \"allowQuoteRequests\",\n    \"available-end-date\": \"availableEndDate\",\n    \"available-start-date\": \"availableStartDate\",\n    \"channels\": \"channels\",\n    \"currency-iso-code\": \"currencyIsoCode\",\n    \"date-created\": \"dateCreated\",\n    \"deleted\": \"deleted\",\n    \"description\": \"description\",\n    \"discount-end-date\": \"discountEndDate\",\n    \"discount-price\": \"discountPrice\",\n    \"discount-ranges\": \"discountRanges\",\n    \"discount-start-date\": \"discountStartDate\",\n    \"favorite-rank\": \"favoriteRank\",\n    \"fulfillment-center-code\": \"fulfillmentCenterCode\",\n    \"leadtime-to-ship\": \"leadtimeToShip\",\n    \"logistic-class\": \"logisticClass\",\n    \"measurement-units\": \"measurementUnits\",\n    \"min-shipping-price\": \"minShippingPrice\",\n    \"min-shipping-price-additional\": \"minShippingPriceAdditional\",\n    \"min-shipping-type\": \"minShippingType\",\n    \"min-shipping-zone\": \"minShippingZone\",\n    \"model\": \"model\",\n    \"offer-id\": \"offerId\",\n    \"ongoing-discount-campaigns\": \"ongoingDiscountCampaigns\",\n    \"origin-price\": \"originPrice\",\n    \"premium\": \"premium\",\n    \"price\": \"price\",\n    \"price-additional-info\": \"priceAdditionalinfo\",\n    \"price-ranges\": \"priceRanges\",\n    \"product-sku\": \"productSku\",\n    \"professional\": \"professional\",\n    \"quantity\": \"quantity\",\n    \"shop-id\": \"shopId\",\n    \"shop-name\": \"shopName\",\n    \"state-code\": \"stateCode\",\n    \"total-price\": \"totalPrice\"\n  },\n  \"shipping_zones\": [\n    \"DOM1\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tracking_id\": \"760a9a3a-1a3a-4f0d-93a5-cef772c7c3e5\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce653d61-006d-42da-bb28-abaef5656825",
+          "name": "OF53 - Poll the status of an asynchronous offer export (OF52)",
+          "request": {
+            "name": "OF53 - Poll the status of an asynchronous offer export (OF52)",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nRetrieve the status for an OF52 offer export.<br/>\nWhen the export is complete, the URLs to retrieve the files are returned.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per minute until you get an error or a success</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 10 seconds</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/adv_pricing_of52.htm\">Exporting offers with advanced prices</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/export_offers_async.html\">Exporting offers asynchronously - APIs OF52/53</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "export",
+                "async",
+                "status",
+                ":tracking_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tracking_id",
+                  "description": "(Required) The asynchronous offer export id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "03fc674a-b39d-4262-a6e1-ff6b0aee5fd4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "export",
+                    "async",
+                    "status",
+                    ":tracking_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tracking_id",
+                      "description": "(Required) The asynchronous offer export id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"last_updated\": \"2021-09-23T08:14:06.095Z\",\n  \"status\": \"PENDING\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9e2d65b-da13-4737-b6b2-5d1490d3ec77",
+          "name": "OF54 - Retrieve offer files once asynchronous offer export is complete (OF52)",
+          "request": {
+            "name": "OF54 - Retrieve offer files once asynchronous offer export is complete (OF52)",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nRetrieve each chunk of an offer export file via the URL generated once the asynchronous offer export is complete\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/adv_pricing_of52.htm\">Exporting offers with advanced prices</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/export_offers_async.html\">Exporting offers asynchronously - APIs OF52/53</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dynamic-url",
+                "The+URL+is+retrieved+from+OF53+output",
+                "OF54"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tracking_id",
+                  "description": "(Required) The asynchronous offer export id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8252b120-0323-45e7-9e80-89b612497d6a",
+              "name": "OK\n\n> **text/csv**\n>\n> <div class=\"alert alert-primary\" role=\"alert\">\n> The offer custom fields are not listed in this list.Each custom field will have its own column, with the custom field code as the column name</div>",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dynamic-url",
+                    "The+URL+is+retrieved+from+OF53+output",
+                    "OF54"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tracking_id",
+                      "description": "(Required) The asynchronous offer export id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"active\": true,\n    \"allow_quote_requests\": true,\n    \"channels\": [\n      \"BFR\",\n      \"CA\",\n      \"CHR\",\n      \"FR\",\n      \"US\"\n    ],\n    \"currency_iso_code\": \"EUR\",\n    \"date_created\": \"2022-01-01T07:52:10Z\",\n    \"deleted\": false,\n    \"description\": \"This is description of the offer 1200: \\n Cotton flannelette, brushed both sides for extra comfort and warmth. 165gsm. Includes one flat sheet, one fitted sheet, one pillowcase in single and king single sets, and two pillowcases in all other sets.\",\n    \"eco_contributions\": [\n      {\n        \"eco_contribution_amount\": 3.59,\n        \"epr_category_code\": \"FR-DEA\",\n        \"producer_id\": \"FR123456_89ABCD\"\n      },\n      {\n        \"eco_contribution_amount\": 0.99,\n        \"epr_category_code\": \"DE-WEEE\",\n        \"producer_id\": \"ProducerID1\"\n      }\n    ],\n    \"fulfillment\": {\n      \"center\": {\n        \"code\": \"DEFAULT\"\n      }\n    },\n    \"is_professional\": false,\n    \"last_updated\": \"2022-03-03T08:52:10Z\",\n    \"leadtime_to_ship\": 10,\n    \"logistic_class\": {\n      \"code\": \"M\"\n    },\n    \"min_shipping_price\": 0,\n    \"min_shipping_price_additional\": 0,\n    \"min_shipping_type\": \"CLC\",\n    \"min_shipping_zone\": \"DOM1\",\n    \"model\": \"DROPSHIP\",\n    \"no_commission\": false,\n    \"offer_id\": 2003,\n    \"ongoing_discount_campaigns\": [\n      {\n        \"identifier\": \"discount_campaign_1\"\n      }\n    ],\n    \"premium\": false,\n    \"prices\": [\n      {\n        \"origin_price\": 69.99,\n        \"volume_prices\": [\n          {\n            \"quantity_threshold\": 1,\n            \"unit_origin_price\": 69.99\n          }\n        ]\n      },\n      {\n        \"context\": {\n          \"channel_codes\": [\n            \"FR\",\n            \"CA\"\n          ],\n          \"end_date\": \"2022-07-31T23:59:59Z\",\n          \"start_date\": \"2022-07-01T00:00:00Z\"\n        },\n        \"discount_price\": 59,\n        \"origin_price\": 64.99,\n        \"volume_prices\": [\n          {\n            \"quantity_threshold\": 1,\n            \"unit_discount_price\": 59,\n            \"unit_origin_price\": 64.99\n          }\n        ]\n      },\n      {\n        \"context\": {\n          \"customer_organization_ids\": [\n            \"Organization1\",\n            \"Organization2\",\n            \"Organization5\"\n          ]\n        },\n        \"origin_price\": 55,\n        \"volume_prices\": [\n          {\n            \"quantity_threshold\": 1,\n            \"unit_origin_price\": 55\n          }\n        ]\n      },\n      {\n        \"context\": {\n          \"channel_codes\": [\n            \"CA\"\n          ],\n          \"customer_organization_ids\": [\n            \"Organization3\"\n          ],\n          \"end_date\": \"2023-12-31T23:59:59Z\",\n          \"start_date\": \"2023-01-01T00:00:00Z\"\n        },\n        \"origin_price\": 56,\n        \"volume_prices\": [\n          {\n            \"quantity_threshold\": 1,\n            \"unit_origin_price\": 56\n          }\n        ]\n      },\n      {\n        \"context\": {\n          \"channel_codes\": [\n            \"FR\",\n            \"CA\"\n          ]\n        },\n        \"origin_price\": 64.99,\n        \"volume_prices\": [\n          {\n            \"quantity_threshold\": 1,\n            \"unit_origin_price\": 64.99\n          }\n        ]\n      },\n      {\n        \"context\": {\n          \"customer_group_ids\": [\n            \"Group1\"\n          ]\n        },\n        \"origin_price\": 58,\n        \"volume_prices\": [\n          {\n            \"quantity_threshold\": 1,\n            \"unit_origin_price\": 58\n          }\n        ]\n      },\n      {\n        \"context\": {\n          \"channel_codes\": [\n            \"FR\"\n          ],\n          \"customer_group_ids\": [\n            \"Group2\",\n            \"Group3\"\n          ],\n          \"end_date\": \"2023-12-31T23:59:59Z\",\n          \"start_date\": \"2023-01-01T00:00:00Z\"\n        },\n        \"origin_price\": 60,\n        \"volume_prices\": [\n          {\n            \"quantity_threshold\": 1,\n            \"unit_origin_price\": 60\n          }\n        ]\n      }\n    ],\n    \"product_sku\": \"MKP100000000193522\",\n    \"quantity\": 56,\n    \"shop_id\": 3,\n    \"shop_name\": \"* Super Shop\",\n    \"shop_sku\": \"sku-2003\",\n    \"state_code\": \"4\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95d0bd92-3579-4db0-9ee0-a7f2395ec394",
+          "name": "P11 - List offers for each given product",
+          "request": {
+            "name": "P11 - List offers for each given product",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nList offers for each given product\n\n<div class=\"alert alert-info\" role=\"alert\">\nBy default, users calling this API with a Seller API key can retrieve both their own offers and some of their competitors’ data. If you want to prevent them from accessing competitors’ data, please contact the Mirakl Support Team.\n</div>\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each product page display</div>\n<div class=\"max-call-frequency\">Maximum usage: At each product page display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/display_different_prices_per_channel.html\">More context (Displaying different prices per channel)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_quotes/listing_offers_eligible_quotes.html\">More context (Listing offers eligible for quotes)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_price_approval.htm\">If the \"Price approval\" option is activated, read this page</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/adv_pricing_offer_apis.htm#Aboutprioritizationrulesforpricefields\">Price prioritization for Advanced Pricing</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/adv_pricing_offer_apis.htm#AboutpricesinAPIP11\">Advanced Pricing in P11</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports offset pagination (<a href=\"#section/Offset-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>bestPrice</b> (Default) - Sorts by product sku and then by total price, premium information, shop grade (asc by default)</li><li><b>bestEvaluation</b> - Sorts by product sku and then by shop grade, total price, premium information (asc by default)</li></ul>\n\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product_ids",
+                  "value": "<string>",
+                  "description": "List of product's skus separated with comma. Limited to 100 values.\n\nOne of the two is required `product_ids` or `product_references`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_references",
+                  "value": "<string>",
+                  "description": "List of the product's identifiers with type _(structure: \"`product_references=<productIdType>|<productId>,<productIdType>|<productId>, ...`\")_.<br/>\nLimited to 100 values.  One of the two is required product_ids or product_references.\n\nExample: /api/products/offers?product_references=EAN|3120201243238\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "offer_state_codes",
+                  "value": "<string>",
+                  "description": "List of offer state codes"
+                },
+                {
+                  "disabled": false,
+                  "key": "premium",
+                  "value": "ALL",
+                  "description": "If `true`, returns only offers of premium shops.<br/>\nIf `false`, returns only offers of shops that are not premium.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_offers",
+                  "value": "false",
+                  "description": "If <code>false</code> returns only active offers. If <code>true</code> return all offers."
+                },
+                {
+                  "disabled": false,
+                  "key": "channel_codes",
+                  "value": "<string>",
+                  "description": "List of the channel codes to filter with, using a comma (,) as a separator. If specified, only offers that can be sold on the specified channel(s) will be returned. If not, offers will be returned regardless of their channels."
+                },
+                {
+                  "disabled": false,
+                  "key": "all_channels",
+                  "value": "false",
+                  "description": "If `false`, filters the offers with the given `channel_codes` or the default channel if no `channel_codes` are given.<br/>\nIf `true`, does not filter the offers on channels and ignore the `channel_codes`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "pricing_channel_code",
+                  "value": "<string>",
+                  "description": "Filter used to pick prices on a specific channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "pricing_customer_organization_id",
+                  "value": "<string>",
+                  "description": "For Customer Pricing users only. Customer identifier code the API will use to return all prices and applicable price for this organization. Ignored if value does not exist."
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_ids",
+                  "value": "<string>",
+                  "description": "List of shop IDs separated with comma. Limited to 100 values.\n\nFilter used to return only the offers of the listed shops.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_zones",
+                  "value": "<string>",
+                  "description": "List of shipping zones. Filter used to pick shipping prices on one or multiple shipping zones"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_shipping_zones",
+                  "value": "false",
+                  "description": "If `false`, filters the offers with the given shipping zones.<br/>\nIf `true`, selects all shop shipping zones and ignores the provided `shipping_zones`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "models",
+                  "value": "<string>",
+                  "description": "A comma separated list of platform models to filter with.<br/>\nAccepted values are `MARKETPLACE`, `DROPSHIP`, `ONE_CREDITOR`\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "be3f949c-0172-4fde-8e5b-0804634f8142",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_references",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offer_state_codes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "premium",
+                      "value": "ALL"
+                    },
+                    {
+                      "key": "all_offers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "channel_codes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all_channels",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pricing_channel_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pricing_customer_organization_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shop_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipping_zones",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all_shipping_zones",
+                      "value": "false"
+                    },
+                    {
+                      "key": "models",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"category_code\": \"5110114\",\n      \"category_label\": \"Coffee Machines\",\n      \"offers\": [\n        {\n          \"active\": true,\n          \"all_prices\": [\n            {\n              \"channel_code\": null,\n              \"discount_end_date\": \"2019-04-29T22:00:00Z\",\n              \"discount_start_date\": \"2019-04-02T22:00:00Z\",\n              \"price\": 49,\n              \"unit_discount_price\": 49,\n              \"unit_origin_price\": 50,\n              \"volume_prices\": [\n                {\n                  \"price\": 49,\n                  \"quantity_threshold\": 1,\n                  \"unit_discount_price\": 49,\n                  \"unit_origin_price\": 50\n                },\n                {\n                  \"price\": 43,\n                  \"quantity_threshold\": 5,\n                  \"unit_discount_price\": 43,\n                  \"unit_origin_price\": 45\n                },\n                {\n                  \"price\": 39,\n                  \"quantity_threshold\": 10,\n                  \"unit_discount_price\": 39,\n                  \"unit_origin_price\": 40\n                }\n              ]\n            },\n            {\n              \"channel_code\": \"US\",\n              \"context\": {\n                \"channel_codes\": [\n                  \"US\"\n                ]\n              },\n              \"discount_end_date\": \"2019-05-30T22:00:00Z\",\n              \"discount_start_date\": \"2019-04-02T22:00:00Z\",\n              \"price\": 24,\n              \"unit_discount_price\": 24,\n              \"unit_origin_price\": 25,\n              \"volume_prices\": [\n                {\n                  \"price\": 24,\n                  \"quantity_threshold\": 1,\n                  \"unit_discount_price\": 24,\n                  \"unit_origin_price\": 25\n                },\n                {\n                  \"price\": 22,\n                  \"quantity_threshold\": 10,\n                  \"unit_discount_price\": 22,\n                  \"unit_origin_price\": 23\n                },\n                {\n                  \"price\": 20,\n                  \"quantity_threshold\": 50,\n                  \"unit_discount_price\": 20,\n                  \"unit_origin_price\": 21\n                }\n              ]\n            },\n            {\n              \"channel_code\": \"US\",\n              \"context\": {\n                \"channel_codes\": [\n                  \"US\"\n                ],\n                \"customer_group_ids\": [\n                  \"Group2\",\n                  \"Group3\"\n                ],\n                \"customer_organization_ids\": [\n                  \"Org1\"\n                ],\n                \"end_date\": \"2023-12-31T23:59:59Z\",\n                \"start_date\": \"2023-01-01T00:00:00Z\"\n              },\n              \"discount_end_date\": \"2023-01-31T22:00:00Z\",\n              \"discount_start_date\": \"2023-03-31T22:00:00Z\",\n              \"price\": 29,\n              \"unit_discount_price\": 29,\n              \"unit_origin_price\": 30,\n              \"volume_prices\": [\n                {\n                  \"price\": 29,\n                  \"quantity_threshold\": 1,\n                  \"unit_discount_price\": 29,\n                  \"unit_origin_price\": 30\n                },\n                {\n                  \"price\": 19,\n                  \"quantity_threshold\": 20,\n                  \"unit_discount_price\": 19,\n                  \"unit_origin_price\": 20\n                },\n                {\n                  \"price\": 14,\n                  \"quantity_threshold\": 100,\n                  \"unit_discount_price\": 14,\n                  \"unit_origin_price\": 15\n                }\n              ]\n            }\n          ],\n          \"allow_quote_requests\": true,\n          \"applicable_pricing\": {\n            \"channel_code\": \"US\",\n            \"context\": {\n              \"channel_codes\": [\n                \"US\"\n              ],\n              \"customer_group_ids\": [\n                \"Group2\",\n                \"Group3\"\n              ],\n              \"customer_organization_ids\": [\n                \"Org1\"\n              ],\n              \"end_date\": \"2023-12-31T23:59:59Z\",\n              \"start_date\": \"2023-01-01T00:00:00Z\"\n            },\n            \"discount_end_date\": \"2023-01-31T22:00:00Z\",\n            \"discount_start_date\": \"2023-03-31T22:00:00Z\",\n            \"price\": 29,\n            \"unit_discount_price\": 29,\n            \"unit_origin_price\": 30,\n            \"volume_prices\": [\n              {\n                \"price\": 29,\n                \"quantity_threshold\": 1,\n                \"unit_discount_price\": 29,\n                \"unit_origin_price\": 30\n              },\n              {\n                \"price\": 19,\n                \"quantity_threshold\": 20,\n                \"unit_discount_price\": 19,\n                \"unit_origin_price\": 20\n              },\n              {\n                \"price\": 14,\n                \"quantity_threshold\": 100,\n                \"unit_discount_price\": 14,\n                \"unit_origin_price\": 15\n              }\n            ]\n          },\n          \"channels\": [\n            \"FR\",\n            \"US\"\n          ],\n          \"currency_iso_code\": \"USD\",\n          \"description\": \"Offer for Product MKP100000000037254\",\n          \"discount\": {\n            \"discount_price\": null,\n            \"end_date\": \"2019-05-30T22:00:00Z\",\n            \"origin_price\": 25,\n            \"ranges\": [\n              {\n                \"price\": 24,\n                \"quantity_threshold\": 1\n              },\n              {\n                \"price\": 22,\n                \"quantity_threshold\": 10\n              },\n              {\n                \"price\": 20,\n                \"quantity_threshold\": 50\n              }\n            ],\n            \"start_date\": \"2019-04-02T22:00:00Z\"\n          },\n          \"eco_contributions\": [\n            {\n              \"eco_contribution_amount\": 3.59,\n              \"epr_category_code\": \"FR-DEA\",\n              \"producer_id\": \"FR123456_89ABCD\"\n            },\n            {\n              \"eco_contribution_amount\": 0.99,\n              \"epr_category_code\": \"DE-WEEE\",\n              \"producer_id\": \"ProducerID1\"\n            }\n          ],\n          \"fulfillment\": {\n            \"center\": {\n              \"code\": \"DEFAULT\"\n            }\n          },\n          \"inactivity_reasons\": [\n            \"SHOP_NOT_OPEN\",\n            \"ZERO_QUANTITY\"\n          ],\n          \"is_professional\": true,\n          \"leadtime_to_ship\": 10,\n          \"logistic_class\": {\n            \"code\": \"M\",\n            \"label\": \"Medium\"\n          },\n          \"max_order_quantity\": 5,\n          \"min_order_quantity\": 1,\n          \"min_quantity_alert\": 2,\n          \"min_shipping_price\": 0,\n          \"min_shipping_price_additional\": 0,\n          \"min_shipping_type\": \"CLC\",\n          \"min_shipping_zone\": \"DOM1\",\n          \"model\": \"MARKETPLACE\",\n          \"nb_evaluation\": 3,\n          \"offer_additional_fields\": [\n            {\n              \"code\": \"ecotax\",\n              \"type\": \"NUMERIC\",\n              \"value\": \"2\"\n            },\n            {\n              \"code\": \"gift-wrap\",\n              \"type\": \"BOOLEAN\",\n              \"value\": \"true\"\n            },\n            {\n              \"code\": \"min-quantity-ordered\",\n              \"type\": \"NUMERIC\",\n              \"value\": \"2\"\n            }\n          ],\n          \"offer_id\": 2130,\n          \"package_quantity\": 1,\n          \"premium\": true,\n          \"price\": 24,\n          \"price_additional_info\": \"Apply Discount prices\",\n          \"quantity\": 16,\n          \"shipping_deadline\": \"2019-09-01T23:59:59.999Z\",\n          \"shipping_types\": [\n            {\n              \"code\": \"STD\",\n              \"cut_off_next_date\": \"2024-02-17T15:00:00.000Z\",\n              \"cut_off_time\": \"17:00+02:00\",\n              \"delivery_time\": {\n                \"earliest_days\": 1,\n                \"earliest_delivery_date\": \"2019-09-02T08:07:22.326Z\",\n                \"latest_days\": 2,\n                \"latest_delivery_date\": \"2019-09-03T08:07:22.326Z\"\n              },\n              \"label\": \"Standard\",\n              \"shipping_deadline\": \"2019-09-01T23:59:59.999Z\",\n              \"shipping_price_type\": \"ORDER_PRICE_RANGE\",\n              \"shipping_price_unit\": 8,\n              \"shipping_zone_code\": \"DOM1\",\n              \"shipping_zone_label\": \"Domestic 1\",\n              \"standard_code\": \"CU_ADD-STD\"\n            },\n            {\n              \"code\": \"EXP\",\n              \"cut_off_next_date\": \"2024-02-17T15:00:00.000Z\",\n              \"cut_off_time\": \"17:00+02:00\",\n              \"delivery_time\": {\n                \"earliest_days\": 2,\n                \"earliest_delivery_date\": \"2019-09-04T08:07:22.326Z\",\n                \"latest_days\": 4,\n                \"latest_delivery_date\": \"2019-09-07T08:07:22.326Z\"\n              },\n              \"label\": \"Express\",\n              \"shipping_deadline\": \"2019-09-01T23:59:59.999Z\",\n              \"shipping_price_type\": \"FIXED_PRICE\",\n              \"shipping_price_unit\": 18,\n              \"shipping_zone_code\": \"DOM1\",\n              \"shipping_zone_label\": \"Domestic 1\",\n              \"standard_code\": \"CU_ADD-EXP\"\n            },\n            {\n              \"code\": \"STD\",\n              \"cut_off_next_date\": \"2024-02-17T15:00:00.000Z\",\n              \"cut_off_time\": \"17:00+02:00\",\n              \"delivery_time\": {\n                \"earliest_days\": 1,\n                \"earliest_delivery_date\": \"2019-09-02T08:07:22.326Z\",\n                \"latest_days\": 2,\n                \"latest_delivery_date\": \"2019-09-03T08:07:22.326Z\"\n              },\n              \"label\": \"Standard\",\n              \"shipping_deadline\": \"2019-09-01T23:59:59.999Z\",\n              \"shipping_price_type\": \"FREE_SHIPPING\",\n              \"shipping_price_unit\": 0,\n              \"shipping_zone_code\": \"DOM2\",\n              \"shipping_zone_label\": \"Domestic 2\",\n              \"standard_code\": \"CU_ADD-STD\"\n            },\n            {\n              \"code\": \"EXP\",\n              \"cut_off_next_date\": \"2024-02-17T15:00:00.000Z\",\n              \"cut_off_time\": \"17:00+02:00\",\n              \"delivery_time\": {\n                \"earliest_days\": 2,\n                \"earliest_delivery_date\": \"2019-09-04T08:07:22.326Z\",\n                \"latest_days\": 4,\n                \"latest_delivery_date\": \"2019-09-07T08:07:22.326Z\"\n              },\n              \"label\": \"Express\",\n              \"shipping_deadline\": \"2019-09-01T23:59:59.999Z\",\n              \"shipping_price_type\": \"FIXED_PRICE\",\n              \"shipping_price_unit\": 18,\n              \"shipping_zone_code\": \"DOM2\",\n              \"shipping_zone_label\": \"Domestic 2\",\n              \"standard_code\": \"CU_ADD-EXP\"\n            }\n          ],\n          \"shop_grade\": 4,\n          \"shop_id\": 2000,\n          \"shop_name\": \"ACME SHOP\",\n          \"shop_sku\": \"SKU-001\",\n          \"state_code\": \"11\",\n          \"total_price\": 24,\n          \"warehouses\": [\n            {\n              \"code\": \"WAREHOUSE_001\",\n              \"quantity\": 10\n            },\n            {\n              \"code\": \"WAREHOUSE_002\",\n              \"quantity\": 6\n            }\n          ]\n        }\n      ],\n      \"product_brand\": \"Breville\",\n      \"product_description\": \"The Breville ESP8C Cafe Roma Stainless Espresso/Cappuccino Machine is a compact 1.2 litre espresso machine which features an advanced crema system and a 15-bar Italian made pump.\",\n      \"product_media\": {\n        \"media_url\": \"https://media-eu-1.mirakl.net/MEDIA/82f18041623746469c02bbd086abc0c3\",\n        \"type\": \"LARGE\"\n      },\n      \"product_references\": [\n        {\n          \"reference\": \"9312432012041\",\n          \"reference_type\": \"EAN\"\n        }\n      ],\n      \"product_sku\": \"MKP100000000037254\",\n      \"product_title\": \"Breville Cafe Roma Stainless Espresso/Cappuccino Machine - ESP8C\",\n      \"total_count\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77e4fe87-f3dd-4c0c-a860-93b0dbff06a7",
+          "name": "PRI01 - Import a price file",
+          "request": {
+            "name": "PRI01 - Import a price file",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nImport a .csv file to submit all applicable prices for an offer.<br/>\nThe import mode is delete and replace: any existing price that is not submitted will be deleted.<br/>\nIf Price Approval is enabled, this API creates and updates pending prices; ongoing prices will remain.<br/>\nReturns an import identifier to track the status of the import and retrieve an error report if applicable.<br/>\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/import_prices.htm\">Importing prices</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/price_file.htm\">About the price file format</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "pricing",
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Import CSV file to upload. Use <code>multipart/form-data</code> with name <code>file</code>.<br/>\nCsv format:<br/>\n<ul>\n<li><code>\"offer-sku\";\"price\";\"discount-price\";\"discount-start-date\";\"discount-end-date\"</code></li>\n<ul>\n    <li>1 line = 1 offer price</li>\n    <li>List prices for the same offer together</li>\n    <li>Limits: 50 prices can be created for an offer</li>\n</ul>\n<li><b>Volume Pricing users</b>: use additional columns <code>price-ranges</code> and <code>discount-ranges</code></li>\n<li><b>Channel Pricing users</b>: use additional column <code>channels</code></li>\n<li><b>Scheduled Pricing users</b>: use additional columns <code>start-date</code> and <code>end-date</code></li>\n<li><b>Customer Pricing users</b>: use additional columns <code>customer-organization-ids</code> and <code>customer-group-ids</code></li>\n<li><b>Retail pricing users (only for Dropship offers, with appropriate settings)</b>: use additional column <code>price-type</code> to define if you are providing a price or a retail price value\n</ul>\n"
+                },
+                {
+                  "key": "shop",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "(Required) Shop Identifier"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "418931de-1acb-4f3a-9f7e-4b7b3c0a4977",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "pricing",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Import CSV file to upload. Use <code>multipart/form-data</code> with name <code>file</code>.<br/>\nCsv format:<br/>\n<ul>\n<li><code>\"offer-sku\";\"price\";\"discount-price\";\"discount-start-date\";\"discount-end-date\"</code></li>\n<ul>\n    <li>1 line = 1 offer price</li>\n    <li>List prices for the same offer together</li>\n    <li>Limits: 50 prices can be created for an offer</li>\n</ul>\n<li><b>Volume Pricing users</b>: use additional columns <code>price-ranges</code> and <code>discount-ranges</code></li>\n<li><b>Channel Pricing users</b>: use additional column <code>channels</code></li>\n<li><b>Scheduled Pricing users</b>: use additional columns <code>start-date</code> and <code>end-date</code></li>\n<li><b>Customer Pricing users</b>: use additional columns <code>customer-organization-ids</code> and <code>customer-group-ids</code></li>\n<li><b>Retail pricing users (only for Dropship offers, with appropriate settings)</b>: use additional column <code>price-type</code> to define if you are providing a price or a retail price value\n</ul>\n",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Shop Identifier",
+                        "type": "text/plain"
+                      },
+                      "key": "shop",
+                      "value": "0",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Pre-calculated URL to call to get the import status",
+                  "key": "Location",
+                  "value": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"import_id\": \"7d98c3c0-81fe-407d-9721-d4b01951c8d8\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "474dd910-50ed-4999-ba52-a436e1e6b14d",
+          "name": "PRI02 - Get information and statistics about an offer pricing import",
+          "request": {
+            "name": "PRI02 - Get information and statistics about an offer pricing import",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each PRI01 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/import_prices.htm\">Importing prices</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>dateCreated</b> (Default) - Sort by creation date (desc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "pricing",
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "import_id",
+                  "value": "<string>",
+                  "description": "Import identifiers"
+                },
+                {
+                  "disabled": false,
+                  "key": "import_id",
+                  "value": "<string>",
+                  "description": "Import identifiers"
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Shop identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "Start creation date for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "End creation date for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Offer import status"
+                },
+                {
+                  "disabled": false,
+                  "key": "origins",
+                  "value": "<string>",
+                  "description": "List of offer pricing import origins for filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "origins",
+                  "value": "<string>",
+                  "description": "List of offer pricing import origins for filtering."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "1ad3a36d-14c5-4e00-a3dc-925b4e063915",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "pricing",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "import_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "import_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"date_created\": \"2023-03-28T09:34:42Z\",\n      \"has_error_report\": true,\n      \"import_id\": \"string\",\n      \"lines_in_error\": 0,\n      \"lines_in_success\": 0,\n      \"offers_in_error\": 0,\n      \"offers_updated\": 0,\n      \"origin\": \"API\",\n      \"reason_status\": \"string\",\n      \"shop_id\": 0,\n      \"status\": \"WAITING\"\n    }\n  ],\n  \"next_page_token\": \"string\",\n  \"previous_page_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f378b3ea-c922-4079-8b32-8a66759a7900",
+          "name": "PRI03 - Get the error report for a price import in CSV format",
+          "request": {
+            "name": "PRI03 - Get the error report for a price import in CSV format",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nOnly returns lines of offers with at least one offer price in error.<br/>\nThe first column contains the line number in error. The second column contains the error reason.<br/>\nThe returned file is ready to be reimported after the values have been fixed.<br/>\nOffer prices that were submitted in the price import but don't appear in the error report were successfully imported.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each PRI02 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/import_prices.htm\">Importing prices</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "pricing",
+                "imports",
+                ":import_id",
+                "error_report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "import_id",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "03b4b48a-58c9-43de-af2a-b5ace7289207",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "pricing",
+                    "imports",
+                    ":import_id",
+                    "error_report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "import_id",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90695d70-dd7c-4ec1-90a2-b1c10a8d1f98",
+          "name": "STO01 - Import a stock file",
+          "request": {
+            "name": "STO01 - Import a stock file",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nImport a .csv file to update stock for offers, either globally or per warehouse.<br/>\nReturns an import identifier to track the status of the import and retrieve an error report if applicable.<br/>\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes when stock needs updating</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Seller/sellers_doc/seller_onboarding/managing_stock_offers.htm\">More context</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Seller/sellers_doc/seller_onboarding/import_stock_file_format.htm\">About the stock import file format</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "stock",
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Import CSV file to upload. Use <code>multipart/form-data</code> with name <code>file</code>.<br/>\nCsv format:<br/>\n<ul>\n<li><code>\"offer-sku\";\"quantity\";\"warehouse-code\";\"update-delete\"</code></li>\n<ul>\n    <li>1 line = 1 offer quantity</li>\n    <li>List quantities per warehouse for the same offer together</li>\n    <li>If warehouse-code is not provided, the quantity provided for the offer-sku will be considered as a global one</li>\n</ul>\n</ul>\n"
+                },
+                {
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "(Required) Shop Identifier"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0e6848c7-cdf2-4074-99a0-77662e654aed",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "stock",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Import CSV file to upload. Use <code>multipart/form-data</code> with name <code>file</code>.<br/>\nCsv format:<br/>\n<ul>\n<li><code>\"offer-sku\";\"quantity\";\"warehouse-code\";\"update-delete\"</code></li>\n<ul>\n    <li>1 line = 1 offer quantity</li>\n    <li>List quantities per warehouse for the same offer together</li>\n    <li>If warehouse-code is not provided, the quantity provided for the offer-sku will be considered as a global one</li>\n</ul>\n</ul>\n",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Shop Identifier",
+                        "type": "text/plain"
+                      },
+                      "key": "shop_id",
+                      "value": "0",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Pre-calculated URL to call to get the import status",
+                  "key": "Location",
+                  "value": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"import_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5096790-ada4-4d87-84b5-2446d499b283",
+          "name": "STO02 - Get information and statistics about an offer stock import",
+          "request": {
+            "name": "STO02 - Get information and statistics about an offer stock import",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each STO01 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once every 15 seconds</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Seller/sellers_doc/seller_onboarding/managing_stock_offers.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "stock",
+                "imports",
+                ":import_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "import_id",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "04d6ce58-4e72-492e-9e92-5e808450ee56",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "stock",
+                    "imports",
+                    ":import_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "import_id",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_created\": \"2023-03-28T09:34:42Z\",\n  \"has_error_report\": true,\n  \"import_id\": \"string\",\n  \"lines_in_error\": 0,\n  \"lines_in_success\": 0,\n  \"shop_id\": 0,\n  \"status\": \"WAITING\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "654e1538-6ebd-4a81-b612-3e17f73e2c79",
+          "name": "STO03 - Get the error report for a stock import in CSV format",
+          "request": {
+            "name": "STO03 - Get the error report for a stock import in CSV format",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nOnly returns lines of offers with at least one offer price in error.<br/>\nThe first column contains the line number in error. The second column contains the error reason.<br/>\nThe returned file is ready to be reimported after the values have been fixed.<br/>\nOffer prices that were submitted in the price import but don't appear in the error report were successfully imported.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each STO02 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Seller/sellers_doc/seller_onboarding/managing_stock_offers.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "stock",
+                "imports",
+                ":import_id",
+                "error_report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "import_id",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "4e3ae530-6b04-421a-a861-7d3bf8fd8391",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "stock",
+                    "imports",
+                    ":import_id",
+                    "error_report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "import_id",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8d24a3cc-cfda-43ad-89ce-3389cbc65337",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

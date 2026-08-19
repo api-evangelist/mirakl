@@ -1,0 +1,85 @@
+generated: '2026-08-13'
+method: searched
+source: https://developer.mirakl.com/content/connector/operator/shopify/changelog
+summary: >-
+  Mirakl publishes exactly one dated, public API changelog on its developer portal:
+  the Shopify Operator Connector changelog. The core platform products (MMP, MCM/
+  Catalog Platform, MPS, Connect, Connect Channel Platform) ship under a continuous-
+  delivery, backward-compatible policy and their release notes live behind the
+  customer help centre (help.mirakl.com), not on the public developer portal, so no
+  public dated changelog exists for them.
+scheme: dated
+format: keep-a-changelog-style (## <Month DD, YYYY> / ### Added)
+current_version: null
+current_version_note: >-
+  Mirakl does not version its REST APIs. There is no /v1 path segment, no version
+  header, and no version string in info.version of any published OpenAPI (all 14
+  documents omit info.version). Change is communicated by date, not by version.
+covered_surfaces:
+  - name: Shopify Operator Connector APIs
+    url: https://developer.mirakl.com/content/connector/operator/shopify/changelog
+    spec: openapi/_original/mirakl-shopify-operator-connector-openapi.yaml
+uncovered_surfaces:
+  - Mirakl Marketplace APIs (MMP) — seller, operator, front
+  - Mirakl Catalog Manager APIs (MCM) — seller, operator, front
+  - Mirakl Platform for Services APIs (MPS) — seller, operator, front
+  - Mirakl Connect APIs
+  - Mirakl Connect Channel Platform APIs
+  - Mirakl Account Channel Platform APIs
+entries:
+  - date: '2026-04-07'
+    breaking: false
+    additions: true
+    highlights:
+      - >-
+        Platform Settings: GET /platform-settings/operator-return-configurations
+        (GetOperatorReturnConfigurations) exposes operator-level return
+        configuration — enablement, platform model, handler, return address,
+        return window, methods, reasons, rejection reasons and policy.
+      - >-
+        Product Bindings: three endpoints for mapping Shopify products to Mirakl
+        products — POST /api/product-bindings (ImportProductBindings),
+        POST /api/product-bindings/delete (DeleteProductBindings),
+        GET /api/product-bindings (ListProductBindings). Batch ceiling of 2,048
+        variants/entries per request; partial success without rollback.
+      - >-
+        Storefront returns: POST /api/storefront/return (CreateReturn),
+        GET /api/storefront/returns (GetReturns) and
+        GET /api/storefront/returns/items-to-return (GetItemsToReturn). Return
+        listing results are capped at 100 items — pagination not yet supported.
+      - >-
+        Synchronization: POST /api/sync/returns (SyncReturns) triggers an
+        asynchronous, unidirectional Mirakl-to-Shopify return-state sync with an
+        optional sinceDate.
+  - date: '2026-02-26'
+    breaking: false
+    additions: true
+    highlights:
+      - >-
+        Settings: GET /api/settings (ListSettings) and PATCH /api/settings
+        (UpdateSettings) gain a product.skuGenerations node — an ordered list of
+        SKU fallback strategies (UNIQUE_IDENTIFIER_BASED, MIRAKL_PRODUCT_ID_BASED),
+        the latter being the default.
+  - date: '2025-12-09'
+    breaking: false
+    additions: true
+    highlights:
+      - >-
+        Storefront: GET /api/storefront/orders/accounting-documents
+        (GetAccountingOrdersDocuments) proxying Mirakl Platform DR73.
+      - >-
+        Storefront: GET /api/storefront/orders/documents (GetOrdersDocuments)
+        proxying Mirakl Platform OR73.
+  - date: '2025-12-05'
+    breaking: false
+    additions: true
+    highlights:
+      - >-
+        Storefront: GET /api/storefront/evaluations/assessments
+        (GetEvaluationsAssessments) proxying Mirakl Platform EV01.
+notes: >-
+  The changelog page also states that the published Postman collection is
+  continuously regenerated from the API, and links the download directly —
+  a useful staleness signal for consumers.
+cross_reference:
+  lifecycle: lifecycle/mirakl-lifecycle.yml

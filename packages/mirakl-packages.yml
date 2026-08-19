@@ -1,6 +1,9 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://packagist.org + https://github.com/mirakl
+source: >-
+  https://repo.packagist.org/p2/ (registry metadata) + https://packagist.org/packages/list.json?vendor=mirakl
+  + https://github.com/mirakl + https://registry.npmjs.org + https://search.maven.org
+  + https://help.mirakl.com/docs/customers/page/topics/Connectors/SDK/sdk_home.html
 packages:
   - language: php
     registry: packagist
@@ -9,6 +12,8 @@ packages:
     repo: https://github.com/mirakl/sdk-php-shop
     install: composer require mirakl/sdk-php-shop
     version: 1.27.0
+    published: '2026-06-24'
+    releases: 45
     official: true
     description: >-
       Official Mirakl PHP SDK for the shop (seller) role — a lightweight wrapper over
@@ -18,11 +23,61 @@ packages:
     name: mirakl/magento2-seller-connector
     url: https://packagist.org/packages/mirakl/magento2-seller-connector
     install: composer require mirakl/magento2-seller-connector
+    version: 1.7.11
+    published: '2024-03-18'
     official: true
-    description: Official Mirakl extension for sellers using Magento 2 / Adobe Commerce.
+    description: >-
+      Official Mirakl extension for sellers using Magento 2 / Adobe Commerce.
+      Last release predates the current API surface by more than two years.
+  - language: php
+    registry: packagist
+    name: mirakl/magento-seller-connector
+    url: https://packagist.org/packages/mirakl/magento-seller-connector
+    install: composer require mirakl/magento-seller-connector
+    version: 1.3.1
+    published: '2021-07-27'
+    official: true
+    status: dormant
+    description: >-
+      Official Mirakl extension for sellers on Magento 1. No release since
+      July 2021; Magento 1 itself is end-of-life.
+  - language: java
+    registry: null
+    name: Mirakl Java SDK
+    url: https://help.mirakl.com/docs/customers/page/topics/Connectors/SDK/sdk_home.html
+    version: null
+    published: null
+    official: true
+    description: >-
+      Mirakl's product documentation states SDKs are provided "in both Java and PHP".
+      The Java SDK is not published to Maven Central — a search for g:com.mirakl
+      returns 0 artifacts — and the SDK home page sits behind help.mirakl.com, whose
+      content is JS-rendered and customer-scoped. Recorded with version: null because
+      the registry was checked and there is nothing to read, not because it was skipped.
+registries_checked:
+  - registry: packagist
+    result: 3 first-party packages (vendor mirakl)
+  - registry: npm
+    result: >-
+      No first-party package. Search for "mirakl" returns only community clients —
+      mirakl@3.0.3 (2022, publisher ioanbeilic), @e2y/mirakl-client@2.1.8 (2024),
+      mirakl-connector@1.0.22 (2021), @moum/mirakl-connect-seller-client@0.2.0 (2026).
+      None are published by Mirakl.
+  - registry: maven-central
+    result: '0 artifacts under groupId com.mirakl'
+  - registry: pypi
+    result: >-
+      No first-party package; community mirakl-api-client only.
+  - registry: nuget
+    result: no first-party package
+  - registry: rubygems
+    result: no first-party package
+  - registry: crates.io
+    result: no first-party package
 notes: >-
-  Mirakl's clearly first-party client library is the PHP shop SDK (github.com/mirakl,
-  Packagist mirakl/sdk-php-shop). Numerous third-party Java/Python/PHP clients exist
-  (e.g. onetoweb/mirakl, pypi mirakl-api-client) but are community-maintained and are
-  not marked official here. A Java SDK is referenced in Mirakl docs but was not
-  found published on Maven Central under com.mirakl at enrichment time.
+  Mirakl's only registry-published, first-party, currently-maintained client library
+  is the PHP shop SDK (mirakl/sdk-php-shop, 1.27.0, June 2026 — actively released).
+  The two Magento connectors are official but stale (2024 and 2021). The documented
+  Java SDK has no public registry distribution at all. Mirakl compensates with
+  provider-generated Postman collections regenerated from each OpenAPI — see the
+  Postman pointer in apis.yml.

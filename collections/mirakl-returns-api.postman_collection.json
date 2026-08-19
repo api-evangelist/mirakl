@@ -1,0 +1,1251 @@
+{
+  "item": [
+    {
+      "id": "65509fcd-accd-40cb-83d0-aba8c598ba9c",
+      "name": "Returns",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7683ebd-1a22-4758-a10f-4313474f7667",
+          "name": "upsertReturns - Upsert returns",
+          "request": {
+            "name": "upsertReturns - Upsert returns",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nUse this API to synchronize returns with Mirakl Connect.\n\n   ## Overview\n   - Returns are always associated to an order already known by Mirakl Connect\n   - Each return line must reference an order line already known by Mirakl Connect\n   - The API performs an upsert: existing returns are updated, new ones are created\n   - The operation is **partially successful**: some returns in the payload can succeed while others fail\n\n   ## Usage Notes\n   - The `channel_order_id` must reference an order previously synchronized through the orders API\n   - Each `channel_order_line_id` in `return_lines` must reference an order line previously synchronized through the orders API\n   - This API does not support PATCH operations. Always send all fields for each return.\n   - When the request is syntactically valid, HTTP status is `200` even if some or all returns failed\n   - Global failures are reported with standard HTTP errors: `400` for invalid payloads and `404` for unknown global resources (such as channel or store).\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": {\n    \"channel_id\": \"<string>\",\n    \"channel_store_id\": \"<string>\"\n  },\n  \"returns\": [\n    {\n      \"channel_order_id\": \"<string>\",\n      \"channel_return_id\": \"<string>\",\n      \"channel_updated_at\": \"<dateTime>\",\n      \"created_at\": \"<dateTime>\",\n      \"return_lines\": [\n        {\n          \"channel_order_line_id\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"reason\": \"<string>\"\n        }\n      ],\n      \"status\": \"<string>\",\n      \"address\": {\n        \"city\": \"<string>\",\n        \"country_iso_code\": \"<iso-3166-1 alpha-3>\",\n        \"street\": \"<string>\",\n        \"country\": \"<string>\",\n        \"state\": \"<string>\",\n        \"street_additional_info\": \"<string>\",\n        \"zip_code\": \"<string>\"\n      },\n      \"label_url\": \"<string>\",\n      \"method\": \"<string>\",\n      \"rejection_reason\": \"<string>\",\n      \"rma_id\": \"<string>\",\n      \"sub_channel_code\": \"<string>\",\n      \"tracking\": {\n        \"carrier_name\": \"<string>\",\n        \"tracking_number\": \"<string>\",\n        \"tracking_url\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12eb34f6-624e-4950-9f40-db6bce12140b",
+              "name": "Detailed per-return upsert result. Response body contains success and error details for each return.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": {\n    \"channel_id\": \"string\",\n    \"channel_store_id\": \"string\"\n  },\n  \"returns\": [\n    {\n      \"channel_return_id\": \"string\",\n      \"channel_order_id\": \"string\",\n      \"rma_id\": \"string\",\n      \"status\": \"REQUEST_INITIATED\",\n      \"tracking\": {\n        \"tracking_number\": \"string\",\n        \"carrier_name\": \"string\",\n        \"tracking_url\": \"string\"\n      },\n      \"label_url\": \"string\",\n      \"method\": \"string\",\n      \"rejection_reason\": \"RETURN_WINDOW_CLOSED\",\n      \"address\": {\n        \"street\": \"string\",\n        \"street_additional_info\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"country_iso_code\": \"string\",\n        \"zip_code\": \"string\"\n      },\n      \"created_at\": \"2023-03-28T09:34:42Z\",\n      \"channel_updated_at\": \"2023-03-28T09:34:42Z\",\n      \"return_lines\": [\n        {\n          \"channel_order_line_id\": \"string\",\n          \"quantity\": 0,\n          \"reason\": \"WRONG_ITEM\"\n        }\n      ],\n      \"sub_channel_code\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_success\": [\n    {\n      \"channel_order_id\": \"string\",\n      \"channel_return_id\": \"string\"\n    }\n  ],\n  \"return_errors\": [\n    {\n      \"channel_order_id\": \"string\",\n      \"channel_return_id\": \"string\",\n      \"details\": [\n        {\n          \"code\": \"string\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e99cfa6-c764-4a26-8129-d60d9b2ad331",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": {\n    \"channel_id\": \"string\",\n    \"channel_store_id\": \"string\"\n  },\n  \"returns\": [\n    {\n      \"channel_return_id\": \"string\",\n      \"channel_order_id\": \"string\",\n      \"rma_id\": \"string\",\n      \"status\": \"REQUEST_INITIATED\",\n      \"tracking\": {\n        \"tracking_number\": \"string\",\n        \"carrier_name\": \"string\",\n        \"tracking_url\": \"string\"\n      },\n      \"label_url\": \"string\",\n      \"method\": \"string\",\n      \"rejection_reason\": \"RETURN_WINDOW_CLOSED\",\n      \"address\": {\n        \"street\": \"string\",\n        \"street_additional_info\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"country_iso_code\": \"string\",\n        \"zip_code\": \"string\"\n      },\n      \"created_at\": \"2023-03-28T09:34:42Z\",\n      \"channel_updated_at\": \"2023-03-28T09:34:42Z\",\n      \"return_lines\": [\n        {\n          \"channel_order_line_id\": \"string\",\n          \"quantity\": 0,\n          \"reason\": \"WRONG_ITEM\"\n        }\n      ],\n      \"sub_channel_code\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"DATA_NOT_FOUND\",\n  \"message\": \"An error occurred while processing your request\",\n  \"errors\": [\n    {\n      \"message\": \"An error occurred while processing your request: id is null\",\n      \"field\": \"input.account.id\",\n      \"extensions\": {\n        \"minLength\": 1,\n        \"maxLength\": 255\n      }\n    }\n  ],\n  \"extensions\": {\n    \"minLength\": 1,\n    \"maxLength\": 255\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "298578b3-7335-4423-848f-8c27405927a3",
+              "name": "A critical resource was not found. This may occur if: - The channel or its technology is unknown to connect - The store is unknown to connect",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": {\n    \"channel_id\": \"string\",\n    \"channel_store_id\": \"string\"\n  },\n  \"returns\": [\n    {\n      \"channel_return_id\": \"string\",\n      \"channel_order_id\": \"string\",\n      \"rma_id\": \"string\",\n      \"status\": \"REQUEST_INITIATED\",\n      \"tracking\": {\n        \"tracking_number\": \"string\",\n        \"carrier_name\": \"string\",\n        \"tracking_url\": \"string\"\n      },\n      \"label_url\": \"string\",\n      \"method\": \"string\",\n      \"rejection_reason\": \"RETURN_WINDOW_CLOSED\",\n      \"address\": {\n        \"street\": \"string\",\n        \"street_additional_info\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"country_iso_code\": \"string\",\n        \"zip_code\": \"string\"\n      },\n      \"created_at\": \"2023-03-28T09:34:42Z\",\n      \"channel_updated_at\": \"2023-03-28T09:34:42Z\",\n      \"return_lines\": [\n        {\n          \"channel_order_line_id\": \"string\",\n          \"quantity\": 0,\n          \"reason\": \"WRONG_ITEM\"\n        }\n      ],\n      \"sub_channel_code\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"DATA_NOT_FOUND\",\n  \"message\": \"An error occurred while processing your request\",\n  \"errors\": [\n    {\n      \"message\": \"An error occurred while processing your request: id is null\",\n      \"field\": \"input.account.id\",\n      \"extensions\": {\n        \"minLength\": 1,\n        \"maxLength\": 255\n      }\n    }\n  ],\n  \"extensions\": {\n    \"minLength\": 1,\n    \"maxLength\": 255\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "508da294-4820-4b27-8c8a-bc932ab008fa",
+          "name": "RT01 - Create returns",
+          "request": {
+            "name": "RT01 - Create returns",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 200 returns at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each customer return request</div>\n<div class=\"max-call-frequency\">Maximum usage: At each customer return request</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returns\": [\n    {\n      \"method_code\": \"<string>\",\n      \"order_commercial_id\": \"<string>\",\n      \"return_lines\": [\n        {\n          \"order_line_id\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"reason_code\": \"<string>\"\n        }\n      ],\n      \"accepted\": \"<boolean>\",\n      \"description\": \"<string>\",\n      \"label_url\": \"<string>\",\n      \"reason_code\": \"<string>\",\n      \"rma\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a3fc386-eab3-41e0-86f1-28e0a059b4a7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"accepted\": null,\n      \"label_url\": \"https://www.label-url.com\",\n      \"method_code\": \"RETURN_METHOD_BY_MAIL\",\n      \"order_commercial_id\": \"ORDER-001\",\n      \"reason_code\": \"RETURN_CHANGED_MIND\",\n      \"return_lines\": [\n        {\n          \"order_line_id\": \"ORDER-001-A-1\",\n          \"quantity\": 1\n        },\n        {\n          \"order_line_id\": \"ORDER-001-B-2\",\n          \"quantity\": 2\n        }\n      ],\n      \"rma\": \"RETURN_RMA\"\n    },\n    {\n      \"accepted\": true,\n      \"description\": \"Description of return\",\n      \"label_url\": null,\n      \"method_code\": \"RETURN_METHOD_DROP_OFF_POINT\",\n      \"order_commercial_id\": \"ORDER-DROPSHIP-1\",\n      \"reason_code\": \"RETURN_CHANGED_MIND\",\n      \"return_lines\": [\n        {\n          \"order_line_id\": \"ORDER-DROPSHIP-1-A-1\",\n          \"quantity\": 1\n        }\n      ],\n      \"rma\": null\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_errors\": [\n    {\n      \"message\": \"The returns are not enabled for the platform model of the order line ORDER-DROPSHIP-1-A-1\",\n      \"order_commercial_id\": \"ORDER-DROPSHIP-1\"\n    }\n  ],\n  \"return_success\": [\n    {\n      \"date_created\": \"2022-09-28T13:37:00Z\",\n      \"description\": \"Description of return\",\n      \"documents\": [],\n      \"id\": \"ef0e41b6-35ed-4103-86a1-0e33d50a6b05\",\n      \"label_url\": \"https://www.label-url.com\",\n      \"last_updated\": \"2022-09-28T13:37:00Z\",\n      \"method_code\": \"RETURN_METHOD_BY_MAIL\",\n      \"order_commercial_id\": \"ORDER-001\",\n      \"order_id\": \"ORDER-001-A\",\n      \"reason_code\": \"RETURN_CHANGED_MIND\",\n      \"rejection_reason_code\": null,\n      \"return_address\": {\n        \"city\": \"New York\",\n        \"country_iso_code\": \"USA\",\n        \"state\": \"Manhattan\",\n        \"street1\": \"30, Prince Street\",\n        \"street2\": \"1st floor\",\n        \"zip_code\": \"NY 10012\"\n      },\n      \"return_lines\": [\n        {\n          \"compliance\": null,\n          \"order_line_id\": \"ORDER-001-A-1\",\n          \"quantity\": 1\n        }\n      ],\n      \"rma\": \"RETURN_RMA\",\n      \"status\": \"WAITING_ACCEPTANCE\",\n      \"tracking\": null\n    },\n    {\n      \"date_created\": \"2022-09-28T13:37:00Z\",\n      \"documents\": [],\n      \"id\": \"ef0e41b6-35ed-4103-86a1-0e33d50a6b05\",\n      \"label_url\": null,\n      \"last_updated\": \"2022-09-28T13:37:00Z\",\n      \"method_code\": \"RETURN_METHOD_BY_MAIL\",\n      \"order_commercial_id\": \"ORDER-001\",\n      \"order_id\": \"ORDER-001-B\",\n      \"reason_code\": \"RETURN_CHANGED_MIND\",\n      \"rejection_reason_code\": null,\n      \"return_address\": {\n        \"city\": \"New York\",\n        \"country_iso_code\": \"USA\",\n        \"state\": \"Manhattan\",\n        \"street1\": \"30, Prince Street\",\n        \"street2\": \"1st floor\",\n        \"zip_code\": \"NY 10012\"\n      },\n      \"return_lines\": [\n        {\n          \"compliance\": null,\n          \"order_line_id\": \"ORDER-001-B-2\",\n          \"quantity\": 2\n        }\n      ],\n      \"rma\": null,\n      \"status\": \"WAITING_ACCEPTANCE\",\n      \"tracking\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36df9073-e57b-4d63-a5ae-5f6b40aa2bc0",
+          "name": "RT04 - Patch update returns",
+          "request": {
+            "name": "RT04 - Patch update returns",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"<string>\",\n      \"label_url\": \"<string>\",\n      \"method_code\": \"<string>\",\n      \"return_address\": {\n        \"address\": {\n          \"city\": \"<string>\",\n          \"country_iso_code\": \"<string>\",\n          \"street1\": \"<string>\",\n          \"state\": \"<string>\",\n          \"street2\": \"<string>\",\n          \"zip_code\": \"<string>\"\n        }\n      },\n      \"rma\": \"<string>\",\n      \"tracking\": {\n        \"carrier_code\": \"<string>\",\n        \"carrier_name\": \"<string>\",\n        \"carrier_standard_code\": \"<string>\",\n        \"tracking_number\": \"<string>\",\n        \"tracking_url\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e02d1e8e-8562-4bca-92f8-286d2c9b683d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"f61b5db8-d8f5-4715-b05f-aa4432c0e9e2\",\n      \"tracking\": {\n        \"tracking_url\": \"https://www.tracking.com\"\n      }\n    },\n    {\n      \"id\": \"c91b5db8-d8f5-4715-b05f-aa4432c0e989\",\n      \"tracking\": {\n        \"tracking_url\": \"https://invalid_url\"\n      }\n    },\n    {\n      \"id\": \"2dc4f7d7\",\n      \"tracking\": {\n        \"tracking_url\": \"https://www.tracking.com\"\n      }\n    },\n    {\n      \"id\": \"21456f96-19ef-4f34-97be-6cf937755f01\",\n      \"rma\": \"RETURN_RMA\"\n    },\n    {\n      \"id\": \"2dc4f7d7-da59-4588-bec7-ce62daab2f93\",\n      \"label_url\": \"https://www.label-url.com\",\n      \"rma\": \"RETURN_RMA\",\n      \"tracking\": {\n        \"carrier_name\": \"customCarrier\",\n        \"tracking_number\": \"1H79D0K76\",\n        \"tracking_url\": \"https://www.tracking.com\"\n      }\n    },\n    {\n      \"id\": \"1716be7a-93f0-4242-b55b-fff05a76d168\",\n      \"label_url\": \"https://www.label-url.com\",\n      \"rma\": \"RETURN_RMA\",\n      \"tracking\": {\n        \"carrier_code\": \"UPS\",\n        \"tracking_number\": \"6HD869420\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_errors\": [\n    {\n      \"id\": \"f61b5db8-d8f5-4715-b05f-aa4432c0e9e2\",\n      \"message\": \"Return is in invalid state\"\n    },\n    {\n      \"id\": \"c91b5db8-d8f5-4715-b05f-aa4432c0e989\",\n      \"message\": \"Invalid return tracking URL format\"\n    },\n    {\n      \"id\": \"21456f96-19ef-4f34-97be-6cf937755f01\",\n      \"message\": \"Order is in invalid state\"\n    },\n    {\n      \"id\": \"2dc4f7d7\",\n      \"message\": \"The return id is incorrect.\"\n    }\n  ],\n  \"return_success\": [\n    {\n      \"date_created\": \"2023-02-27T16:32:52Z\",\n      \"description\": \"Description of return\",\n      \"documents\": [],\n      \"id\": \"2dc4f7d7-da59-4588-bec7-ce62daab2f93\",\n      \"label_url\": \"https://www.label-url.com\",\n      \"last_updated\": \"2023-02-27T16:37:19Z\",\n      \"method_code\": \"RETURN_METHOD_DROP_OFF\",\n      \"order_commercial_id\": \"ORDER-2\",\n      \"order_id\": \"ORDER-2-A\",\n      \"reason_code\": \"RETURN_COUNTERFEIT_ITEM\",\n      \"rejection_reason_code\": \"RETURN_REJECTION_NOT_ELIGIBLE\",\n      \"return_address\": {\n        \"city\": \"New York\",\n        \"country_iso_code\": \"USA\",\n        \"state\": \"Manhattan\",\n        \"street1\": \"30, Prince Street\",\n        \"street2\": \"1st floor\",\n        \"zip_code\": \"NY 10012\"\n      },\n      \"return_lines\": [\n        {\n          \"compliance\": [\n            {\n              \"compliant\": false,\n              \"non_compliance_additional_info\": \"There is a missing item\",\n              \"non_compliance_reason_code\": \"RETURN_NON_COMPLIANT_MISSING_ITEM\"\n            }\n          ],\n          \"order_line_id\": \"ORDER-2-A-1\",\n          \"quantity\": 1\n        }\n      ],\n      \"rma\": \"RETURN_RMA\",\n      \"state\": \"REFUSED\",\n      \"tracking\": {\n        \"carrier_code\": null,\n        \"carrier_name\": \"newCarrier\",\n        \"carrier_standard_code\": null,\n        \"tracking_number\": \"1H79D0K76\",\n        \"tracking_url\": \"https://www.tracking.com\"\n      }\n    },\n    {\n      \"date_created\": \"2023-04-18T15:24:51Z\",\n      \"documents\": [],\n      \"id\": \"1716be7a-93f0-4242-b55b-fff05a76d168\",\n      \"label_url\": \"https://www.label-url.com\",\n      \"last_updated\": \"2023-05-27T16:37:19Z\",\n      \"method_code\": \"RETURN_METHOD_DROP_OFF\",\n      \"order_commercial_id\": \"ORDER-2\",\n      \"order_id\": \"ORDER-2-A\",\n      \"reason_code\": \"RETURN_COUNTERFEIT_ITEM\",\n      \"rejection_reason_code\": \"RETURN_REJECTION_NOT_ELIGIBLE\",\n      \"return_address\": {\n        \"city\": \"New York\",\n        \"country_iso_code\": \"USA\",\n        \"state\": \"Manhattan\",\n        \"street1\": \"30, Prince Street\",\n        \"street2\": \"1st floor\",\n        \"zip_code\": \"NY 10012\"\n      },\n      \"return_lines\": [\n        {\n          \"compliance\": [\n            {\n              \"compliant\": false,\n              \"non_compliance_additional_info\": \"There is a missing item\",\n              \"non_compliance_reason_code\": \"RETURN_NON_COMPLIANT_MISSING_ITEM\"\n            }\n          ],\n          \"order_line_id\": \"ORDER-2-A-1\",\n          \"quantity\": 1\n        }\n      ],\n      \"rma\": \"RETURN_RMA\",\n      \"state\": \"REFUSED\",\n      \"tracking\": {\n        \"carrier_code\": \"UPS\",\n        \"carrier_name\": \"UPS\",\n        \"carrier_standard_code\": \"ups\",\n        \"tracking_number\": \"6HD869420\",\n        \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=6HD869420\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95ea3304-0693-4a12-8b10-264c35c2ea21",
+          "name": "RT11 - List returns",
+          "request": {
+            "name": "RT11 - List returns",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 15 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 5 minutes</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>date_created</b> (Default) - Sort by return date creation (asc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "return_id",
+                  "value": "<string>",
+                  "description": "Return id for filtering. This parameter can be supplied multiple times (return_id=58fd00d1-4ea4-453e-9a56-ec28c5c156ea&return_id=3071c162-dcd9-414b-a39d-ac3165f29453...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_id",
+                  "value": "<string>",
+                  "description": "Return id for filtering. This parameter can be supplied multiple times (return_id=58fd00d1-4ea4-453e-9a56-ec28c5c156ea&return_id=3071c162-dcd9-414b-a39d-ac3165f29453...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_state",
+                  "value": "<string>",
+                  "description": "Return state for filtering. This parameter can be supplied multiple times (return_state=WAITING_ACCEPTANCE&return_state=IN_PROGRESS...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_state",
+                  "value": "<string>",
+                  "description": "Return state for filtering. This parameter can be supplied multiple times (return_state=WAITING_ACCEPTANCE&return_state=IN_PROGRESS...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_creation_date_from",
+                  "value": "<dateTime>",
+                  "description": "Filter returns with a creation date after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_creation_date_to",
+                  "value": "<dateTime>",
+                  "description": "Filter returns with a creation date before the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_last_updated_from",
+                  "value": "<dateTime>",
+                  "description": "Filter returns updated after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_last_updated_to",
+                  "value": "<dateTime>",
+                  "description": "Filter returns updated before the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_commercial_id",
+                  "value": "<string>",
+                  "description": "Order commercial id for filtering. This parameter can be supplied multiple times (order_commercial_id=OR01-A&order_commercial_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_commercial_id",
+                  "value": "<string>",
+                  "description": "Order commercial id for filtering. This parameter can be supplied multiple times (order_commercial_id=OR01-A&order_commercial_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_line_id",
+                  "value": "<string>",
+                  "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_line_id",
+                  "value": "<string>",
+                  "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_rma",
+                  "value": "<string>",
+                  "description": "Return RMA for filtering. This parameter can be supplied multiple times (return_rma=RMA-1&return_rma=RMA-2...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_rma",
+                  "value": "<string>",
+                  "description": "Return RMA for filtering. This parameter can be supplied multiple times (return_rma=RMA-1&return_rma=RMA-2...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "customer_id",
+                  "value": "<string>",
+                  "description": "Customer id for filtering. This parameter can be supplied multiple times (customer_id=id1&customer_id=id2...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "customer_id",
+                  "value": "<string>",
+                  "description": "Customer id for filtering. This parameter can be supplied multiple times (customer_id=id1&customer_id=id2...)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "3e5cee01-ba8b-4a89-b6fb-75b9f7afd43a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "return_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_creation_date_from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "return_creation_date_to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "return_last_updated_from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "return_last_updated_to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order_commercial_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_commercial_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_line_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_line_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_rma",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_rma",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"date_created\": \"2023-02-27T16:14:52Z\",\n      \"description\": \"Description of return\",\n      \"documents\": [\n        {\n          \"id\": 1337,\n          \"type\": \"SYSTEM_RETURN_LABEL\"\n        }\n      ],\n      \"id\": \"f61b5db8-d8f5-4715-b05f-aa4432c0e9e2\",\n      \"label_url\": null,\n      \"last_updated\": \"2023-02-27T16:14:52Z\",\n      \"method_code\": \"RETURN_METHOD_BY_MAIL\",\n      \"order_commercial_id\": \"ORDER-1\",\n      \"order_id\": \"ORDER-1-A\",\n      \"reason_code\": \"RETURN_CHANGED_MIND\",\n      \"rejection_reason_code\": null,\n      \"return_address\": {\n        \"city\": \"New York\",\n        \"country_iso_code\": \"USA\",\n        \"state\": \"Manhattan\",\n        \"street1\": \"30, Prince Street\",\n        \"street2\": \"1st floor\",\n        \"zip_code\": \"NY 10012\"\n      },\n      \"return_lines\": [\n        {\n          \"compliance\": [\n            {\n              \"compliant\": false,\n              \"non_compliance_additional_info\": \"There is a missing item\",\n              \"non_compliance_reason_code\": \"RETURN_NON_COMPLIANT_MISSING_ITEM\"\n            }\n          ],\n          \"order_line_id\": \"ORDER-1-A-1\",\n          \"quantity\": 2\n        },\n        {\n          \"compliance\": null,\n          \"order_line_id\": \"ORDER-1-A-2\",\n          \"quantity\": 3\n        }\n      ],\n      \"rma\": \"RETURN_RMA\",\n      \"state\": \"WAITING_ACCEPTANCE\",\n      \"tracking\": {\n        \"carrierCode\": \"UPS\",\n        \"carrierName\": \"UPS\",\n        \"carrier_standard_code\": \"ups\",\n        \"tracking_number\": \"35H8O95K\",\n        \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=35H8O95K\"\n      }\n    },\n    {\n      \"date_created\": \"2023-02-27T16:32:52Z\",\n      \"documents\": [],\n      \"id\": \"2dc4f7d7-da59-4588-bec7-ce62daab2f93\",\n      \"label_url\": \"https://www.label-url.com\",\n      \"last_updated\": \"2023-02-27T16:37:19Z\",\n      \"method_code\": \"RETURN_METHOD_DROP_OFF\",\n      \"order_commercial_id\": \"ORDER-2\",\n      \"order_id\": \"ORDER-2-A\",\n      \"reason_code\": \"RETURN_COUNTERFEIT_ITEM\",\n      \"rejection_reason_code\": \"RETURN_REJECTION_NOT_ELIGIBLE\",\n      \"return_address\": {\n        \"city\": \"New York\",\n        \"country_iso_code\": \"USA\",\n        \"state\": \"Manhattan\",\n        \"street1\": \"30, Prince Street\",\n        \"street2\": \"1st floor\",\n        \"zip_code\": \"NY 10012\"\n      },\n      \"return_lines\": [\n        {\n          \"compliance\": [\n            {\n              \"compliant\": true,\n              \"non_compliance_additional_info\": null,\n              \"non_compliance_reason_code\": null\n            }\n          ],\n          \"order_line_id\": \"ORDER-2-A-1\",\n          \"quantity\": 1\n        }\n      ],\n      \"rma\": null,\n      \"state\": \"REFUSED\",\n      \"tracking\": null\n    }\n  ],\n  \"next_page_token\": \"dGhpcy1pcy1hLWZha2UtcGFnZS10b2tlbi1wbGVhc2UtcmVseS1vbi10aGUtdG9rZW4tcHJvdmlkZWQtYnktdGhlLWFwaS1yZXNwb25zZQo=\",\n  \"previous_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7855c41-b1ef-4694-9fe8-013010f5b2c6",
+          "name": "RT12 - List items to return",
+          "request": {
+            "name": "RT12 - List items to return",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each customer return request</div>\n<div class=\"max-call-frequency\">Maximum usage: At each customer return request</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>order_line_id</b> (Default) - Sort by order line id (asc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns",
+                "items_to_return"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order_commercial_id",
+                  "value": "<string>",
+                  "description": "Order commercial id for filtering. This parameter can be supplied multiple times (order_commercial_id=OR01-A&order_commercial_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_commercial_id",
+                  "value": "<string>",
+                  "description": "Order commercial id for filtering. This parameter can be supplied multiple times (order_commercial_id=OR01-A&order_commercial_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_line_id",
+                  "value": "<string>",
+                  "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_line_id",
+                  "value": "<string>",
+                  "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "3828defe-a7fd-4cbf-8d32-6047142fca40",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns",
+                    "items_to_return"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order_commercial_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_commercial_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_line_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_line_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"available_return_methods\": null,\n      \"available_return_reasons\": null,\n      \"order_commercial_id\": \"test\",\n      \"order_line_id\": \"test-A-1\",\n      \"return_window\": null,\n      \"returnable_quantity\": 0\n    },\n    {\n      \"available_return_methods\": [\n        \"RETURN_METHOD_BY_MAIL\",\n        \"RETURN_METHOD_DROP_OFF\"\n      ],\n      \"available_return_reasons\": [\n        \"RETURN_CHANGED_MIND\",\n        \"RETURN_COUNTERFEIT_ITEM\"\n      ],\n      \"order_commercial_id\": \"test\",\n      \"order_line_id\": \"test-B-1\",\n      \"return_window\": 14,\n      \"returnable_quantity\": 1\n    }\n  ],\n  \"next_page_token\": \"dGhpcy1pcy1hLWZha2UtcGFnZS10b2tlbi1wbGVhc2UtcmVseS1vbi10aGUtdG9rZW4tcHJvdmlkZWQtYnktdGhlLWFwaS1yZXNwb25zZQo=\",\n  \"previous_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "521397d7-58f9-476e-ba45-2324a1e64f8c",
+          "name": "RT21 - Accept or refuse a return request",
+          "request": {
+            "name": "RT21 - Accept or refuse a return request",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns",
+                "accept"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returns\": [\n    {\n      \"accepted\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"rejection_reason_code\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bff07e6-caf7-4503-9ad0-17e70ef0e4ae",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"accepted\": true,\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\"\n    },\n    {\n      \"accepted\": false,\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\",\n      \"rejection_reason_code\": \"RETURN_REJECTION_NOT_ELIGIBLE\"\n    },\n    {\n      \"accepted\": true,\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_errors\": [\n    {\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\",\n      \"message\": \"Return is in invalid state\"\n    },\n    {\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\",\n      \"message\": \"The return does not exist.\"\n    }\n  ],\n  \"return_success\": [\n    {\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "626e15a6-744a-4f05-83b2-fe1aeb5c9e9d",
+          "name": "RT25 - Validate returns as received",
+          "request": {
+            "name": "RT25 - Validate returns as received",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns",
+                "receive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a06b4bc0-41e9-4259-8022-689110914ce8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns",
+                    "receive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\"\n    },\n    {\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\"\n    },\n    {\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_errors\": [\n    {\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\",\n      \"message\": \"Return is in invalid state\"\n    },\n    {\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\",\n      \"message\": \"The return does not exist.\"\n    }\n  ],\n  \"return_success\": [\n    {\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a5fc30f-2b03-449c-94d0-5c1267036c6b",
+          "name": "RT26 - Mark a return as compliant or non compliant",
+          "request": {
+            "name": "RT26 - Mark a return as compliant or non compliant",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns",
+                "compliance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"<string>\",\n      \"return_lines\": [\n        {\n          \"compliant\": \"<boolean>\",\n          \"order_line_id\": \"<string>\",\n          \"non_compliance_additional_info\": \"<string>\",\n          \"non_compliance_reason_code\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c95432d-9fba-4c11-ad8a-698c205203e5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns",
+                    "compliance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"f61b5db8-d8f5-4715-b05f-aa4432c0e9e2\",\n      \"return_lines\": [\n        {\n          \"compliant\": true,\n          \"order_line_id\": \"OR01-A-1\"\n        },\n        {\n          \"compliant\": false,\n          \"non_compliance_additional_info\": \"There is a missing item\",\n          \"non_compliance_reason_code\": \"RETURN_NON_COMPLIANT_MISSING_ITEM\",\n          \"order_line_id\": \"OR01-A-2\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_errors\": [\n    {\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\",\n      \"message\": \"Return is in invalid state\"\n    },\n    {\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\",\n      \"message\": \"The compliance has not been specified on the following order lines: OL-46\"\n    }\n  ],\n  \"return_success\": [\n    {\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af0e3205-7546-4f6e-8487-8208a9adc4a5",
+          "name": "RT27 - Mark a return as closed",
+          "request": {
+            "name": "RT27 - Mark a return as closed",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns",
+                "close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "05b7b843-18e7-47cf-9ba7-ef2143799c6a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\"\n    },\n    {\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\"\n    },\n    {\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_errors\": [\n    {\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\",\n      \"message\": \"Return is in invalid state\"\n    },\n    {\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\",\n      \"message\": \"The return does not exist.\"\n    }\n  ],\n  \"return_success\": [\n    {\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f7b0ef1-173a-44b7-b669-3f2168f179e8",
+          "name": "RT29 - Mark a return as canceled",
+          "request": {
+            "name": "RT29 - Mark a return as canceled",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19834f70-4df7-4730-96c1-26bd01955d6c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\"\n    },\n    {\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\"\n    },\n    {\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_errors\": [\n    {\n      \"id\": \"af1a537d-3f8a-4bb4-a69c-08df8395ece6\",\n      \"message\": \"Return is in invalid state\"\n    },\n    {\n      \"id\": \"df7b1144-0789-46f9-a0db-bb79c2c7de3a\",\n      \"message\": \"The return does not exist.\"\n    }\n  ],\n  \"return_success\": [\n    {\n      \"id\": \"b77907cb-f72e-4f69-aac3-14df566311de\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aa9be85d-f4f9-4300-9c12-f3880cd5c8d1",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Returns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

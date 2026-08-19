@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Store API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Store",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "upsertBusinessInformation - Update business information of a store\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/channels/:channel_id/stores/:channel_store_id",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "channel_store_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUpdate business information of a store.\nThose information will be displayed to the seller in Mirakl Connect.\nThey are mandatory to consider a store as usable in Mirakl Connect.\nThis API is replacing all data at once. Developer have to provide the complete state every time.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 1 per minute</div>\n<div cl"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "992e12c7-621a-4d27-b08f-b0085c72223a",
+      "name": "Carriers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3530aae0-2378-494c-9d4e-93c0fea3fcc0",
+          "name": "upsertCarriers - Upsert carriers",
+          "request": {
+            "name": "upsertCarriers - Upsert carriers",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nUse this API to share the channel's allowed list of carriers with Mirakl Connect, and keep it synchronized over time.\n\n**Important:**\n- You must provide the complete list of carriers in a single request, any carriers not included will be deleted\n- If the marketplace allows it, you can add an \"Other\" carrier to cover unlisted carriers; otherwise, only include formally supported carriers\n- We recommend sharing the full list of carriers: Mirakl Connect automatically maps carriers with slight naming differences\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: When the channel's allowed list of carriers changes</div>\n<div class=\"max-call-frequency\">Maximum usage: 1 / hour</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                "channels",
+                ":channel_id",
+                "carriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) Unique identifier of the sales channel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carriers\": [\n    {\n      \"channel_carrier_id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60ec7ef6-b700-4d03-bdc0-8d0bb7045160",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "channels",
+                    ":channel_id",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Unique identifier of the sales channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    {\n      \"channel_carrier_id\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84aba50f-56cd-4e24-acb1-ae77496d3b4c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "channels",
+                    ":channel_id",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Unique identifier of the sales channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    {\n      \"channel_carrier_id\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"DATA_NOT_FOUND\",\n  \"message\": \"An error occurred while processing your request\",\n  \"errors\": [\n    {\n      \"message\": \"An error occurred while processing your request: id is null\",\n      \"field\": \"input.account.id\",\n      \"extensions\": {\n        \"minLength\": 1,\n        \"maxLength\": 255\n      }\n    }\n  ],\n  \"extensions\": {\n    \"minLength\": 1,\n    \"maxLength\": 255\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "409ce5bc-68c4-43d6-af71-14ff3a1b1878",
+              "name": "The channel was not found. This may occur if: - The channel_id does not exist - The channel does not belong to the calling connector's technology",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "channels",
+                    ":channel_id",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Unique identifier of the sales channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    {\n      \"channel_carrier_id\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"DATA_NOT_FOUND\",\n  \"message\": \"An error occurred while processing your request\",\n  \"errors\": [\n    {\n      \"message\": \"An error occurred while processing your request: id is null\",\n      \"field\": \"input.account.id\",\n      \"extensions\": {\n        \"minLength\": 1,\n        \"maxLength\": 255\n      }\n    }\n  ],\n  \"extensions\": {\n    \"minLength\": 1,\n    \"maxLength\": 255\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d94c8744-a054-4cc9-a8d1-faf6106abb72",
+    "name": "Mirakl Connect Channel Platform APIs Carriers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

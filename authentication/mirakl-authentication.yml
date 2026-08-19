@@ -1,43 +1,120 @@
-generated: '2026-07-20'
-method: derived
-source: openapi/mirakl-mcm-operator-openapi.json, openapi/mirakl-mcm-seller-openapi.json, openapi/mirakl-mmp-operator-openapi.json,
-  openapi/mirakl-mmp-seller-openapi.json, openapi/mirakl-mms-operator-openapi.json, openapi/mirakl-mms-seller-openapi.json
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://developer.mirakl.com/content/product/connect-channel-platform/developer-guide/authentication
+  (read 2026-08-13) + openapi/_original/*.json|yaml securitySchemes
+docs: https://developer.mirakl.com/content/product/connect-channel-platform/developer-guide/authentication
 summary:
   types:
-  - apiKey
-  - http
-  - oauth2
+    - apiKey
+    - http
+    - oauth2
   api_key_in:
-  - header
+    - header
   oauth2_flows:
-  - authorizationCode
+    - authorizationCode
+    - clientCredentials
+  roles:
+    - seller (shop)
+    - operator
+    - front (machine-to-machine storefront)
+    - channel connector (Mirakl Connect partner)
+overview: >-
+  Mirakl authenticates by ROLE, and the role decides the mechanism. Sellers present a
+  Shop API key in the Authorization header. Operators use OAuth 2.0 against the Mirakl
+  Authentication System (auth.mirakl.net) or an operator bearer token. Front APIs use a
+  Front bearer token. Channel connectors integrating with Mirakl Connect use OAuth 2.0
+  client_credentials, with the client_id/client_secret pair issued by the Mirakl partner
+  team — not self-serve. Environment is selected by HOST (auth-test.mirakl.net vs
+  auth.mirakl.net), not by a key prefix.
+token_flow:
+  documented: true
+  grant_type: client_credentials
+  endpoint: https://auth.mirakl.net/oauth/token
+  test_endpoint: https://auth-test.mirakl.net/oauth/token
+  content_type: application/x-www-form-urlencoded
+  parameters: [grant_type, client_id, client_secret]
+  response_fields: [token_type, access_token, expires_in, target_app, resource_owner]
+  token_type: Bearer
+  ttl_seconds: 3599
+  usage: 'Authorization: Bearer <access-token>'
+  credential_issuance: >-
+    client_id and client_secret are requested from a Mirakl Partner team contact.
+    There is no self-serve developer console that mints API credentials.
+  refresh_guidance: >-
+    Mirakl's documented best practice is to re-run the client_credentials exchange a
+    few minutes before expires_in elapses.
 schemes:
-- name: OAuth-2
-  type: oauth2
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://auth.mirakl.net/authorize
-    tokenUrl: https://auth.mirakl.net/oauth/token
-    scopes: 0
-  description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
-  sources:
-  - openapi/mirakl-mcm-operator-openapi.json
-  - openapi/mirakl-mmp-operator-openapi.json
-  - openapi/mirakl-mms-operator-openapi.json
-- name: Operator-Bearer-Token
-  type: http
-  scheme: bearer
-  bearerFormat: JWT
-  sources:
-  - openapi/mirakl-mcm-operator-openapi.json
-  - openapi/mirakl-mmp-operator-openapi.json
-  - openapi/mirakl-mms-operator-openapi.json
-- name: Shop-API-Key
-  type: apiKey
-  in: header
-  parameter: Authorization
-  sources:
-  - openapi/mirakl-mcm-seller-openapi.json
-  - openapi/mirakl-mmp-seller-openapi.json
-  - openapi/mirakl-mms-operator-openapi.json
-  - openapi/mirakl-mms-seller-openapi.json
+  - name: OAuth-2
+    type: oauth2
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://auth.mirakl.net/authorize
+        tokenUrl: https://auth.mirakl.net/oauth/token
+        scopes: 0
+      - flow: clientCredentials
+        tokenUrl: https://auth.mirakl.net/oauth/token
+        scopes: 0
+        source: developer-portal authentication guide (not declared in the OpenAPI)
+    description: >-
+      For more information, see the Mirakl Authentication System documentation
+      (https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+    sources:
+      - openapi/_original/mirakl-mcm-operator-openapi.json
+      - openapi/_original/mirakl-mcm-front-openapi.yaml
+      - openapi/_original/mirakl-mmp-operator-openapi.json
+      - openapi/_original/mirakl-mmp-front-openapi.yaml
+      - openapi/_original/mirakl-mms-operator-openapi.json
+      - openapi/_original/mirakl-mms-front-openapi.yaml
+      - openapi/_original/mirakl-account-channel-platform-openapi.yaml
+  - name: Operator-Bearer-Token
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    sources:
+      - openapi/_original/mirakl-mcm-operator-openapi.json
+      - openapi/_original/mirakl-mmp-operator-openapi.json
+      - openapi/_original/mirakl-mms-operator-openapi.json
+  - name: Front-Bearer-Token
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    sources:
+      - openapi/_original/mirakl-mcm-front-openapi.yaml
+      - openapi/_original/mirakl-mmp-front-openapi.yaml
+      - openapi/_original/mirakl-mms-front-openapi.yaml
+  - name: Bearer
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    note: Mirakl Connect, Connect Channel Platform and the Shopify operator connector
+    sources:
+      - openapi/_original/mirakl-connect-openapi.yaml
+      - openapi/_original/mirakl-connect-channel-openapi.json
+      - openapi/_original/mirakl-shopify-operator-connector-openapi.yaml
+  - name: Shop-API-Key
+    type: apiKey
+    in: header
+    parameter: Authorization
+    sources:
+      - openapi/_original/mirakl-mcm-seller-openapi.json
+      - openapi/_original/mirakl-mmp-seller-openapi.json
+      - openapi/_original/mirakl-mms-seller-openapi.json
+  - name: front_api_key
+    type: apiKey
+    in: header
+    parameter: Authorization
+    sources:
+      - openapi/_original/mirakl-mms-front-openapi.yaml
+multi_shop:
+  note: >-
+    When a user is linked to multiple shops, the shop_id request parameter selects the
+    shop the call acts on.
+mcp:
+  endpoint: https://developer.mirakl.com/mcp
+  auth: OAuth 2.0 (RFC 9728 protected resource, dynamic client registration, PKCE S256)
+  see: mcp/mirakl-mcp.yml
+cross_reference:
+  scopes: scopes/mirakl-scopes.yml
+  sandbox: sandbox/mirakl-sandbox.yml
+  conventions: conventions/mirakl-conventions.yml

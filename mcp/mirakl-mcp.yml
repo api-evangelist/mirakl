@@ -1,38 +1,76 @@
-generated: '2026-07-20'
-method: searched
+generated: '2026-08-13'
+method: probed
+source: https://developer.mirakl.com/mcp
 status: published
 server:
   name: mirakl-developer-docs
   kind: documentation-assistant
-  transport: http
-  url: https://developer.mirakl.com/_mcp
+  transport: streamable-http
+  url: https://developer.mirakl.com/mcp
   auth:
     type: oauth2
+    protected_resource_metadata: https://developer.mirakl.com/.well-known/oauth-protected-resource/mcp
     metadata: https://developer.mirakl.com/.well-known/oauth-authorization-server
+    issuer: https://auth.cloud.redocly.com
     authorization_endpoint: https://developer.mirakl.com/_mcp/oauth2/auth
     token_endpoint: https://developer.mirakl.com/_mcp/oauth2/token-portal
     registration_endpoint: https://developer.mirakl.com/_mcp/register
+    dynamic_client_registration: true
+    grant_types: [authorization_code, refresh_token, client_credentials]
+    pkce: [S256]
     scopes_supported: [openid, profile, email, offline_access]
   note: >-
-    Mirakl's developer portal is served by Redocly Reunite, which exposes a hosted
-    MCP server over the documentation (confirmed via the live
-    /.well-known/oauth-authorization-server metadata, issuer auth.cloud.redocly.com).
-    This MCP answers questions and searches the API documentation; it is not a
-    per-operation execution server for the Mirakl product APIs.
+    Mirakl's developer portal runs on Redocly Reunite, which serves a hosted MCP
+    server over the documentation. It answers questions and searches the API docs;
+    it is NOT a per-operation execution server for the Mirakl product APIs.
+probe:
+  checked: '2026-08-13'
+  endpoint: https://developer.mirakl.com/mcp
+  method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 401
+  body: '{"error":"unauthorized","message":"Authentication required"}'
+  www_authenticate: >-
+    Bearer resource_metadata="https://developer.mirakl.com/.well-known/oauth-protected-resource/mcp"
+  verdict: >-
+    LIVE but auth-gated. This corrects the 2026-08-12 catalog MCP census, which
+    recorded this server as dead — that census probed https://developer.mirakl.com/_mcp,
+    the OAuth console prefix, which returns the SPA 404 shell. The MCP endpoint
+    itself is /mcp and answers a correct RFC 9728 challenge.
+tools:
+  known: false
+  note: >-
+    tools/list requires a bearer token, so the real tool names and inputSchemas
+    could not be enumerated anonymously. Mirakl publishes no llms.txt tool list
+    either, so nothing is recorded rather than guessed. Authenticated
+    introspection is required to capture the tool surface.
 candidate_tools:
   method: derived
   source: openapi/ operations
-  note: Candidate tool surface an execution MCP could expose over the Mirakl product APIs.
+  note: >-
+    Candidate tool surface an EXECUTION MCP could expose over the Mirakl product
+    APIs. Not shipped by Mirakl — a design sketch only.
   tools:
     - name: list_orders
       description: List seller orders
-      source_operation: openapi/mirakl-mmp-seller-openapi.json#OR11
+      source_operation: openapi/_original/mirakl-mmp-seller-openapi.json#OR11
     - name: list_offers
       description: List a shop's offers
-      source_operation: openapi/mirakl-mmp-seller-openapi.json#OF21
+      source_operation: openapi/_original/mirakl-mmp-seller-openapi.json#OF21
     - name: list_invoices
       description: List operator invoices/accounting documents
-      source_operation: openapi/mirakl-mmp-operator-openapi.json#IV01
+      source_operation: openapi/_original/mirakl-mmp-operator-openapi.json#IV01
     - name: list_messages
       description: List inbox messages/threads
-      source_operation: openapi/mirakl-mmp-operator-openapi.json#M11
+      source_operation: openapi/_original/mirakl-mmp-operator-openapi.json#M11
+deployment:
+  mode: remote
+  endpoint: https://developer.mirakl.com/mcp
+  auth: oauth
+  verified: probed
+  checked: '2026-08-13'
+  note: >-
+    Remote HTTP endpoint an MCP client POSTs to directly. No stdio package, no npx
+    installer — Mirakl ships no local MCP server.
+cross_reference:
+  well_known: well-known/mirakl-well-known.yml
+  authentication: authentication/mirakl-authentication.yml

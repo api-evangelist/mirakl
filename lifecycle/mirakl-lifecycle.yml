@@ -1,9 +1,16 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://developer.mirakl.com/ + https://status.mirakl.com
+source: >-
+  https://developer.mirakl.com/ + https://status.mirakl.com +
+  https://developer.mirakl.com/content/connector/operator/shopify/changelog
 versioning:
   scheme: continuous-delivery
   current: null
+  version_in_url: false
+  version_in_spec: false
+  version_evidence: >-
+    None of the 14 published OpenAPI documents declares info.version, no path carries a
+    /v1 segment, and no version header is documented. Change is announced by date.
   policy: >-
     Mirakl delivers updates via continuous delivery; newly deployed versions are
     backward compatible. Integrations must allow new fields in responses, must not
@@ -25,3 +32,15 @@ status_feeds:
   - https://status.mirakl.com/history.atom
   - https://status.mirakl.com/history.rss
 deprecated_operations: []
+changelog:
+  public: partial
+  url: https://developer.mirakl.com/content/connector/operator/shopify/changelog
+  artifact: changelog/mirakl-changelog.yml
+  note: >-
+    The Shopify Operator Connector is the only Mirakl surface with a public dated
+    changelog (4 entries, Dec 2025 – Apr 2026). Core-platform release notes are behind
+    help.mirakl.com.
+cross_reference:
+  changelog: changelog/mirakl-changelog.yml
+  conventions: conventions/mirakl-conventions.yml
+  rate_limits: rate-limits/mirakl-rate-limits.yml

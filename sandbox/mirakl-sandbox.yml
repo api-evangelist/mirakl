@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://developer.mirakl.com/content/product/connect-channel-platform/getting-started/environments
+  + https://developer.mirakl.com/content/product/connect-channel-platform/getting-started/prerequisite-resources
+summary: >-
+  Mirakl runs a two-environment model — TEST and PROD — on separate hosts. There is
+  no self-serve sandbox: the test environment and its credentials are provisioned by
+  the Mirakl partner team on request, so a developer cannot open a test tenant
+  without a Mirakl contact. There are no test-mode key prefixes, no published test
+  cards or fixtures, and no time-simulation tooling; the test environment is a full
+  parallel instance of the platform rather than a mode toggle on the live one.
+self_serve: false
+provisioning: >-
+  "The partner team sets up and provides the testing environment." A Mirakl Connect
+  test account and the channel API client_id/client_secret are both requested from
+  the Mirakl partner team contact.
+environments:
+  - product: Mirakl Connect
+    stage: test
+    url: https://connectpartner-test.mirakl.net/
+  - product: Mirakl Connect
+    stage: production
+    url: https://miraklconnect.com/
+  - product: Mirakl Account
+    stage: test
+    url: https://account-test.mirakl.net/
+  - product: Mirakl Account
+    stage: production
+    url: https://account.mirakl.net/
+  - product: Mirakl Authentication System
+    stage: test
+    url: https://auth-test.mirakl.net/
+  - product: Mirakl Authentication System
+    stage: production
+    url: https://auth.mirakl.net/
+  - product: Mirakl Platform (MMP / MCM / MPS)
+    stage: production
+    url: https://your-instance.mirakl.net
+    note: >-
+      Operator instances are per-customer subdomains of mirakl.net. Non-production
+      instances exist per customer but no naming convention is published.
+key_modes:
+  test_live_prefixes: false
+  note: >-
+    Credentials are not prefixed by mode. Sellers authenticate with a Shop API key
+    (Authorization header), operators with an OAuth 2.0 client_credentials token
+    from the environment-matched auth host (auth-test vs auth). Environment is
+    selected by HOST, not by key.
+test_data:
+  test_cards: []
+  test_accounts: []
+  fixtures: []
+  note: >-
+    No published test cards, test bank accounts, hosted test tokens, seeded fixtures
+    or trigger endpoints. Mirakl does not process card payments directly in the
+    documented API surface; Payout settlement is a separate product.
+time_simulation:
+  supported: false
+cross_reference:
+  authentication: authentication/mirakl-authentication.yml
+  conventions: conventions/mirakl-conventions.yml

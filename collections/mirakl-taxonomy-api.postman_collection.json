@@ -1,0 +1,436 @@
+{
+  "item": [
+    {
+      "id": "644918c0-5988-43c7-b9b2-09eaea929152",
+      "name": "Taxonomy",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68ab987f-60af-4b73-8f8e-6dd45661fc7b",
+          "name": "createTaxonomyRule - Create a Taxonomy Rule",
+          "request": {
+            "name": "createTaxonomyRule - Create a Taxonomy Rule",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 5 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 10 per second</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "taxonomy",
+                "channels",
+                ":channel_id",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) Connect Channel identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rules\": [\n    {\n      \"id\": \"<string>\",\n      \"then\": {\n        \"all\": [\n          {\n            \"redefine\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"redefine\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"when\": {\n        \"all\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/ProductTypeRuleCondition detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/ProductTypeRuleCondition detected>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad6bbd15-5373-465f-815d-717a9762a0e2",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxonomy",
+                    "channels",
+                    ":channel_id",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Connect Channel identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"rules\": [\n        {\n            \"id\": \"rule-smartphones\",\n            \"when\": {\n                \"all\": [\n                    {\n                        \"equals\": {\n                            \"attribute\": \"model\",\n                            \"value\": \"samsung-galaxy-s21\"\n                        }\n                    },\n                    {\n                        \"not\": {\n                            \"isSet\": {\n                                \"attribute\": \"color\"\n                            }\n                        }\n                    }\n                ]\n            },\n            \"then\": {\n                \"all\": [\n                    {\n                        \"redefine\": {\n                            \"attribute\": \"samsung-special-color\",\n                            \"requirementLevel\": \"REQUIRED\"\n                        }\n                    }\n                ]\n            }\n        }\n    ]\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6547a814-0f2a-43a7-a9f5-0a664ec0b151",
+          "name": "upsertProductType - Create or Update a Product Type",
+          "request": {
+            "name": "upsertProductType - Create or Update a Product Type",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nCreates or fully replaces a Product Type for the specified channel.\n\n**Behavior:**\n- **Full replacement (PUT semantics):** the entire product type definition (including all embedded attributes, their value lists, and rule references) is replaced with the content of this request. Any attribute, value list entry, or rule reference not present in the request body will be removed.\n- **Always provide the complete product type definition in every request**, even when only a subset of attributes or rules needs to change.\n- This is an asynchronous operation - the request is accepted and processed in the background.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 5 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 10 per second</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "taxonomy",
+                "channels",
+                ":channel_id",
+                "product-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product_type_id",
+                  "value": "<string>",
+                  "description": "(Required) The unique identifier of the product type, which may contain special characters like slashes."
+                },
+                {
+                  "disabled": false,
+                  "key": "store_id",
+                  "value": "<string>",
+                  "description": "Store identifier scoping this product type to a specific store.\n\nWhen provided, the product type is pushed at store-level granularity instead of channel-level.\n**This granularity is not enabled by default: contact Mirakl technical teams beforehand.**\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) Connect Channel identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"embedded_attributes\": [\n    {\n      \"descriptions\": [\n        {\n          \"locale\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"locale\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"labels\": [\n        {\n          \"locale\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"requirement_level\": \"<string>\",\n      \"type\": \"<string>\",\n      \"connect_standard_attributes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"context\": {\n        \"labels\": [\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          },\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ],\n        \"path\": \"<string>\"\n      }\n    },\n    {\n      \"descriptions\": [\n        {\n          \"locale\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"locale\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"labels\": [\n        {\n          \"locale\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"requirement_level\": \"<string>\",\n      \"type\": \"<string>\",\n      \"connect_standard_attributes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"context\": {\n        \"labels\": [\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          },\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ],\n        \"path\": \"<string>\"\n      }\n    }\n  ],\n  \"labels\": [\n    {\n      \"locale\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"context\": {\n    \"labels\": [\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"rules\": [\n    {\n      \"ref\": \"<string>\"\n    },\n    {\n      \"ref\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc779c47-6496-4260-9543-9730a480fee7",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxonomy",
+                    "channels",
+                    ":channel_id",
+                    "product-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_type_id",
+                      "value": "Smartphones"
+                    },
+                    {
+                      "key": "store_id",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Connect Channel identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"labels\": [\n        {\n            \"locale\": \"en\",\n            \"value\": \"Smartphones\"\n        },\n        {\n            \"locale\": \"fr\",\n            \"value\": \"Smartphones\"\n        }\n    ],\n    \"context\": {\n        \"labels\": [\n            {\n                \"locale\": \"en\",\n                \"value\": \"Electronics / Mobile Devices / Smartphones\"\n            },\n            {\n                \"locale\": \"fr\",\n                \"value\": \"Électronique / Appareils Mobiles / Smartphones\"\n            }\n        ]\n    },\n    \"embedded_attributes\": [\n        {\n            \"id\": \"recommended_browse_nodes\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Browse Nodes\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Catégories\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Classification / Browse Nodes\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Classification / Catégories\"\n                    }\n                ],\n                \"path\": \"$.recommended_browse_nodes\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"340320031\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Mobile Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones Mobiles\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"541546121\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Brand\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Brand\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Marque\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Product Information / Brand\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Information Produit / Marque\"\n                    }\n                ],\n                \"path\": \"$.brand\"\n            },\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ],\n            \"available_values\": [\n                {\n                    \"id\": \"APPLE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Apple\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Apple\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"SAMSUNG\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Samsung\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Samsung\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"XIAOMI\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Xiaomi\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Xiaomi\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"COLOR\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Color\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Couleur\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Physical Characteristics / Color\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Caractéristiques Physiques / Couleur\"\n                    }\n                ],\n                \"path\": \"$.color\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"BLACK\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Black\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Noir\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"WHITE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"White\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Blanc\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"GOLD\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Gold\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Or\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Mobile OS\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Système d'exploitation\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / Operating System\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Système d'exploitation\"\n                    }\n                ],\n                \"path\": \"$.mobile_os\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"ANDROID\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Android\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Android\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"IOS\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"iOS\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"iOS\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS_version\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"Text\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"OS Version\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Version OS\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / OS Version\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Version OS\"\n                    }\n                ],\n                \"path\": \"$.mobile_os_version\"\n            }\n        },\n        {\n            \"id\": \"main_image\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"Media\",\n            \"media_type\": \"IMAGE\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Main image\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Image principale\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Media / Product Images / Main Image\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Média / Images Produit / Image Principale\"\n                    }\n                ],\n                \"path\": \"$.main_image\"\n            },\n            \"descriptions\": [],\n            \"connect_standard_attributes\": [\n                \"IMAGE\"\n            ]\n        }\n    ],\n    \"rules\": [\n        {\n            \"ref\": \"rule-smartphones\"\n        }\n    ]\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6efa460b-6288-42fd-a3b2-4aaab964eaa6",
+              "name": "The channel is not configured to allow the requested taxonomy granularity (channel-level or store-level).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxonomy",
+                    "channels",
+                    ":channel_id",
+                    "product-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_type_id",
+                      "value": "Smartphones"
+                    },
+                    {
+                      "key": "store_id",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Connect Channel identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"labels\": [\n        {\n            \"locale\": \"en\",\n            \"value\": \"Smartphones\"\n        },\n        {\n            \"locale\": \"fr\",\n            \"value\": \"Smartphones\"\n        }\n    ],\n    \"context\": {\n        \"labels\": [\n            {\n                \"locale\": \"en\",\n                \"value\": \"Electronics / Mobile Devices / Smartphones\"\n            },\n            {\n                \"locale\": \"fr\",\n                \"value\": \"Électronique / Appareils Mobiles / Smartphones\"\n            }\n        ]\n    },\n    \"embedded_attributes\": [\n        {\n            \"id\": \"recommended_browse_nodes\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Browse Nodes\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Catégories\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Classification / Browse Nodes\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Classification / Catégories\"\n                    }\n                ],\n                \"path\": \"$.recommended_browse_nodes\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"340320031\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Mobile Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones Mobiles\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"541546121\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Brand\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Brand\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Marque\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Product Information / Brand\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Information Produit / Marque\"\n                    }\n                ],\n                \"path\": \"$.brand\"\n            },\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ],\n            \"available_values\": [\n                {\n                    \"id\": \"APPLE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Apple\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Apple\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"SAMSUNG\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Samsung\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Samsung\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"XIAOMI\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Xiaomi\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Xiaomi\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"COLOR\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Color\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Couleur\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Physical Characteristics / Color\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Caractéristiques Physiques / Couleur\"\n                    }\n                ],\n                \"path\": \"$.color\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"BLACK\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Black\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Noir\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"WHITE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"White\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Blanc\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"GOLD\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Gold\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Or\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Mobile OS\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Système d'exploitation\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / Operating System\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Système d'exploitation\"\n                    }\n                ],\n                \"path\": \"$.mobile_os\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"ANDROID\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Android\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Android\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"IOS\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"iOS\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"iOS\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS_version\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"Text\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"OS Version\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Version OS\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / OS Version\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Version OS\"\n                    }\n                ],\n                \"path\": \"$.mobile_os_version\"\n            }\n        },\n        {\n            \"id\": \"main_image\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"Media\",\n            \"media_type\": \"IMAGE\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Main image\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Image principale\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Media / Product Images / Main Image\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Média / Images Produit / Image Principale\"\n                    }\n                ],\n                \"path\": \"$.main_image\"\n            },\n            \"descriptions\": [],\n            \"connect_standard_attributes\": [\n                \"IMAGE\"\n            ]\n        }\n    ],\n    \"rules\": [\n        {\n            \"ref\": \"rule-smartphones\"\n        }\n    ]\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "136a119e-1d5f-4b6a-8456-a4806e7cdd2c",
+              "name": "Channel not found, or store not found when `store_id` is provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxonomy",
+                    "channels",
+                    ":channel_id",
+                    "product-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_type_id",
+                      "value": "Smartphones"
+                    },
+                    {
+                      "key": "store_id",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Connect Channel identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"labels\": [\n        {\n            \"locale\": \"en\",\n            \"value\": \"Smartphones\"\n        },\n        {\n            \"locale\": \"fr\",\n            \"value\": \"Smartphones\"\n        }\n    ],\n    \"context\": {\n        \"labels\": [\n            {\n                \"locale\": \"en\",\n                \"value\": \"Electronics / Mobile Devices / Smartphones\"\n            },\n            {\n                \"locale\": \"fr\",\n                \"value\": \"Électronique / Appareils Mobiles / Smartphones\"\n            }\n        ]\n    },\n    \"embedded_attributes\": [\n        {\n            \"id\": \"recommended_browse_nodes\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Browse Nodes\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Catégories\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Classification / Browse Nodes\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Classification / Catégories\"\n                    }\n                ],\n                \"path\": \"$.recommended_browse_nodes\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"340320031\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Mobile Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones Mobiles\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"541546121\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Phones\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Téléphones\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Brand\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Brand\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Marque\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Product Information / Brand\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Information Produit / Marque\"\n                    }\n                ],\n                \"path\": \"$.brand\"\n            },\n            \"connect_standard_attributes\": [\n                \"BRAND\"\n            ],\n            \"available_values\": [\n                {\n                    \"id\": \"APPLE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Apple\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Apple\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"SAMSUNG\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Samsung\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Samsung\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"XIAOMI\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Xiaomi\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Xiaomi\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"COLOR\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Color\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Couleur\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Physical Characteristics / Color\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Caractéristiques Physiques / Couleur\"\n                    }\n                ],\n                \"path\": \"$.color\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"BLACK\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Black\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Noir\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"WHITE\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"White\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Blanc\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"GOLD\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Gold\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Or\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"List\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Mobile OS\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Système d'exploitation\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / Operating System\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Système d'exploitation\"\n                    }\n                ],\n                \"path\": \"$.mobile_os\"\n            },\n            \"available_values\": [\n                {\n                    \"id\": \"ANDROID\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"Android\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"Android\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"IOS\",\n                    \"labels\": [\n                        {\n                            \"locale\": \"en\",\n                            \"value\": \"iOS\"\n                        },\n                        {\n                            \"locale\": \"fr\",\n                            \"value\": \"iOS\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"Mobile_OS_version\",\n            \"requirement_level\": \"RECOMMENDED\",\n            \"type\": \"Text\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"OS Version\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Version OS\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Technical Specifications / OS Version\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Spécifications Techniques / Version OS\"\n                    }\n                ],\n                \"path\": \"$.mobile_os_version\"\n            }\n        },\n        {\n            \"id\": \"main_image\",\n            \"requirement_level\": \"REQUIRED\",\n            \"type\": \"Media\",\n            \"media_type\": \"IMAGE\",\n            \"labels\": [\n                {\n                    \"locale\": \"en\",\n                    \"value\": \"Main image\"\n                },\n                {\n                    \"locale\": \"fr\",\n                    \"value\": \"Image principale\"\n                }\n            ],\n            \"context\": {\n                \"labels\": [\n                    {\n                        \"locale\": \"en\",\n                        \"value\": \"Media / Product Images / Main Image\"\n                    },\n                    {\n                        \"locale\": \"fr\",\n                        \"value\": \"Média / Images Produit / Image Principale\"\n                    }\n                ],\n                \"path\": \"$.main_image\"\n            },\n            \"descriptions\": [],\n            \"connect_standard_attributes\": [\n                \"IMAGE\"\n            ]\n        }\n    ],\n    \"rules\": [\n        {\n            \"ref\": \"rule-smartphones\"\n        }\n    ]\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "76432e03-bdb1-45da-8a63-12496f298da8",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Taxonomy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

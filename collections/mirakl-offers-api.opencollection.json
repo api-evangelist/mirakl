@@ -1,0 +1,625 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Offers API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OF04 - Get information and statistics about offer imports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/imports",
+            "params": [
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Shop identifier"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start creation date for filtering"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End creation date for filtering"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Offer import status"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Offer import mode"
+              },
+              {
+                "name": "origins",
+                "value": "",
+                "type": "query",
+                "description": "List of offer import origins for filtering. This parameter can be supplied multiple times (origins=API&origins=FTP...)."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following va"
+        },
+        {
+          "info": {
+            "name": "OF01 - Import a file to create, update or delete offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/imports",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "import_mode",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "operator_format",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "shop",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "with_products",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nReturns the import identifier to track the status of the import.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes with offers only, every hour with offers and products, for each seller</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute with offers only, once every 15 minutes with offers and products, for each selle"
+        },
+        {
+          "info": {
+            "name": "OF02 - Get information and statistics about an offer import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/imports/:import",
+            "params": [
+              {
+                "name": "import",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each OF01 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "OF03 - Get the error report file for an offer import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/imports/:import/error_report",
+            "params": [
+              {
+                "name": "import",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nThis API returns a CSV, XLSX or XML file, depending on the file format provided by the seller.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each OF02 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "OF22 - Get information about an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/:offer",
+            "params": [
+              {
+                "name": "offer",
+                "value": "",
+                "type": "path",
+                "description": "Offer identifier"
+              },
+              {
+                "name": "pricing_channel_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter used to pick prices on a specific channel"
+              },
+              {
+                "name": "pricing_customer_organization_id",
+                "value": "",
+                "type": "query",
+                "description": "For Customer Pricing users only. Customer identifier code the API will use to return all prices and applicable price for this organization. Ignored if value does not exist."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each offer page display</div>\n<div class=\"max-call-frequency\">Maximum usage: At each offer page display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_price_approval.htm\">If the \"Price approval\" option is activated, read this page</a></"
+        },
+        {
+          "info": {
+            "name": "OF21 - List offers of a shop",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers",
+            "params": [
+              {
+                "name": "offer_state_codes",
+                "value": "",
+                "type": "query",
+                "description": "List of offer state codes"
+              },
+              {
+                "name": "sku",
+                "value": "",
+                "type": "query",
+                "description": "Offer's sku"
+              },
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "query",
+                "description": "Product's sku"
+              },
+              {
+                "name": "favorite",
+                "value": "",
+                "type": "query",
+                "description": "Filter only favorite offers"
+              },
+              {
+                "name": "pricing_channel_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter used to pick prices on a specific channel"
+              },
+              {
+                "name": "pricing_customer_organization_id",
+                "value": "",
+                "type": "query",
+                "description": "For Customer Pricing users only. Customer identifier code the API will use to return all prices and applicable price for this organization. Ignored if value does not exist."
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shop's offers page view</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shop's offers page view</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/sellers/page/topics/Mirakl/mmp/Seller/sellers_doc/integrate_price_approval_api.htm\">If the \"Price approval\" option is activated, read"
+        },
+        {
+          "info": {
+            "name": "OF24 - Create, update, or delete offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers",
+            "params": [
+              {
+                "name": "shop",
+                "value": "",
+                "type": "query",
+                "description": "Shop ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>Returns the import identifier to track the status of the update.</p><p>You must send all offer fields. Offer fields that are not sent are reset to their default value.</p>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "OF26 - Get the quantity of stock available for an offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/:offer/quantity",
+            "params": [
+              {
+                "name": "offer",
+                "value": "",
+                "type": "path",
+                "description": "Offer ID"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>Quantity return rules:<ul><li> 0: if quantity = 0 or the offer is not available</li><li> x: quantity available</li></ul></p>\n\n<div class=\"api-description-extension\">\n</div>"
+        },
+        {
+          "info": {
+            "name": "OF51 - Get offers CSV file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/export",
+            "params": [
+              {
+                "name": "last_request_date",
+                "value": "",
+                "type": "query",
+                "description": "Date and time of your last request.<br/>If provided, retrieves all offers updated since this date and time, including deleted and inactive offers.<br/>If not provided, retrieves all active offers only, unless otherwise specified in the <i>include_inactive_offers</i> field."
+              },
+              {
+                "name": "channel_codes",
+                "value": "",
+                "type": "query",
+                "description": "List of the channel codes to filter with, using a comma (,) as a separator. If specified, only offers that can be sold on the specified channel(s) will be returned. If not, offers will be returned regardless of their channels."
+              },
+              {
+                "name": "shipping_zones",
+                "value": "",
+                "type": "query",
+                "description": "List of the shipping zones codes to filter with, URL-encoded and using a comma (,) as a separator. If specified, only shipping information linked to the given zones will be returned. Otherwise, all shipping information for all zones will be returned."
+              },
+              {
+                "name": "include_inactive_offers",
+                "value": "",
+                "type": "query",
+                "description": "When calling the API in full mode (i.e. when no <i>last_request_date</i> is provided), inactive offers are not returned. To retrieve both active and inactive offers, set this field to true.<br />When calling the API in differential mode (i.e. when the <i>last_request_date</i> is provided), both active and inactive offers are returned. This field cannot be used in differential mode otherwise the call fails."
+              },
+              {
+                "name": "include_fields",
+                "value": "",
+                "type": "query",
+                "description": "List of the fields to include, URL-encoded and using a comma (,) as a separator. If specified, only listed fields will be returned."
+              },
+              {
+                "name": "models",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of platform models to filter with. Accepted values are <code>MARKETPLACE</code>, <code>DROPSHIP</code>, <code>ONE_CREDITOR</code>"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in a future update, please use APIs OF52, OF53, and OF54 instead.\n\n<div class=\"extension-title\">Description</div>\n\nGet a CSV file that includes the offers updated and deleted since the last request date.<br/>For deleted offers, only offer-id, product-sku, shop-id, shop-sku, active and deleted columns are returned. <br/>If the last_request_date param is not set the api returns all the active offers (inactive o"
+        },
+        {
+          "info": {
+            "name": "OF52 - Export offers CSV or JSON file asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/export/async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nExport status and files links can be retrieved by calling OF53.<br/>Get a CSV or JSON file that includes the offers updated and deleted since the last request date.<br/><br/>\n<div class=\"alert alert-warning\" role=\"alert\">\nTo ease testing processes, the minimum values for \"megabytes_per_chunk\" and \"items_per_chunk\" have been lowered on TEST and DEV environments.<br/>\nPlease adapt these values on PROD environments.\n</div>\n\n\n<div class=\"api-descriptio"
+        },
+        {
+          "info": {
+            "name": "OF53 - Poll the status of an asynchronous offer export (OF52)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/export/async/status/:tracking_id",
+            "params": [
+              {
+                "name": "tracking_id",
+                "value": "",
+                "type": "path",
+                "description": "The asynchronous offer export id"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nRetrieve the status for an OF52 offer export.<br/>\nWhen the export is complete, the URLs to retrieve the files are returned.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per minute until you get an error or a success</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 10 seconds</div>\n<div class=\"extension-title\">Read More</div>\n\n<"
+        },
+        {
+          "info": {
+            "name": "OF54 - Retrieve offer files once asynchronous offer export is complete (OF52)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/dynamic-url/The+URL+is+retrieved+from+OF53+output/OF54",
+            "params": [
+              {
+                "name": "tracking_id",
+                "value": "",
+                "type": "path",
+                "description": "The asynchronous offer export id"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nRetrieve each chunk of an offer export file via the URL generated once the asynchronous offer export is complete\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/adv_pricing_of52.htm\">Exporting offers with advanced prices</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl"
+        },
+        {
+          "info": {
+            "name": "P11 - List offers for each given product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/offers",
+            "params": [
+              {
+                "name": "product_ids",
+                "value": "",
+                "type": "query",
+                "description": "List of product's skus separated with comma. Limited to 100 values.\n\nOne of the two is required `product_ids` or `product_references`.\n"
+              },
+              {
+                "name": "product_references",
+                "value": "",
+                "type": "query",
+                "description": "List of the product's identifiers with type _(structure: \"`product_references=<productIdType>|<productId>,<productIdType>|<productId>, ...`\")_.<br/>\nLimited to 100 values.  One of the two is required product_ids or product_references.\n\nExample: /api/products/offers?product_references=EAN|3120201243238\n"
+              },
+              {
+                "name": "offer_state_codes",
+                "value": "",
+                "type": "query",
+                "description": "List of offer state codes"
+              },
+              {
+                "name": "premium",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, returns only offers of premium shops.<br/>\nIf `false`, returns only offers of shops that are not premium.\n"
+              },
+              {
+                "name": "all_offers",
+                "value": "",
+                "type": "query",
+                "description": "If <code>false</code> returns only active offers. If <code>true</code> return all offers."
+              },
+              {
+                "name": "channel_codes",
+                "value": "",
+                "type": "query",
+                "description": "List of the channel codes to filter with, using a comma (,) as a separator. If specified, only offers that can be sold on the specified channel(s) will be returned. If not, offers will be returned regardless of their channels."
+              },
+              {
+                "name": "all_channels",
+                "value": "",
+                "type": "query",
+                "description": "If `false`, filters the offers with the given `channel_codes` or the default channel if no `channel_codes` are given.<br/>\nIf `true`, does not filter the offers on channels and ignore the `channel_codes`.\n"
+              },
+              {
+                "name": "pricing_channel_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter used to pick prices on a specific channel"
+              },
+              {
+                "name": "pricing_customer_organization_id",
+                "value": "",
+                "type": "query",
+                "description": "For Customer Pricing users only. Customer identifier code the API will use to return all prices and applicable price for this organization. Ignored if value does not exist."
+              },
+              {
+                "name": "shop_ids",
+                "value": "",
+                "type": "query",
+                "description": "List of shop IDs separated with comma. Limited to 100 values.\n\nFilter used to return only the offers of the listed shops.\n"
+              },
+              {
+                "name": "shipping_zones",
+                "value": "",
+                "type": "query",
+                "description": "List of shipping zones. Filter used to pick shipping prices on one or multiple shipping zones"
+              },
+              {
+                "name": "all_shipping_zones",
+                "value": "",
+                "type": "query",
+                "description": "If `false`, filters the offers with the given shipping zones.<br/>\nIf `true`, selects all shop shipping zones and ignores the provided `shipping_zones`.\n"
+              },
+              {
+                "name": "models",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of platform models to filter with.<br/>\nAccepted values are `MARKETPLACE`, `DROPSHIP`, `ONE_CREDITOR`\n"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nList offers for each given product\n\n<div class=\"alert alert-info\" role=\"alert\">\nBy default, users calling this API with a Seller API key can retrieve both their own offers and some of their competitors’ data. If you want to prevent them from accessing competitors’ data, please contact the Mirakl Support Team.\n</div>\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">R"
+        },
+        {
+          "info": {
+            "name": "PRI02 - Get information and statistics about an offer pricing import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/pricing/imports",
+            "params": [
+              {
+                "name": "import_id",
+                "value": "",
+                "type": "query",
+                "description": "Import identifiers"
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Shop identifier"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start creation date for filtering"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End creation date for filtering"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Offer import status"
+              },
+              {
+                "name": "origins",
+                "value": "",
+                "type": "query",
+                "description": "List of offer pricing import origins for filtering."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each PRI01 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/adv_pricing_inte/import_prices.htm\">Importing prices</a></li></ul><div class=\"extension-title\">"
+        },
+        {
+          "info": {
+            "name": "PRI01 - Import a price file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/pricing/imports",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "shop",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nImport a .csv file to submit all applicable prices for an offer.<br/>\nThe import mode is delete and replace: any existing price that is not submitted will be deleted.<br/>\nIf Price Approval is enabled, this API creates and updates pending prices; ongoing prices will remain.<br/>\nReturns an import identifier to track the status of the import and retrieve an error report if applicable.<br/>\n\n\n<div class=\"api-description-extension\">\n<div class=\"extens"
+        },
+        {
+          "info": {
+            "name": "PRI03 - Get the error report for a price import in CSV format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/pricing/imports/:import_id/error_report",
+            "params": [
+              {
+                "name": "import_id",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nOnly returns lines of offers with at least one offer price in error.<br/>\nThe first column contains the line number in error. The second column contains the error reason.<br/>\nThe returned file is ready to be reimported after the values have been fixed.<br/>\nOffer prices that were submitted in the price import but don't appear in the error report were successfully imported.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call"
+        },
+        {
+          "info": {
+            "name": "STO01 - Import a stock file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/stock/imports",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "shop_id",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nImport a .csv file to update stock for offers, either globally or per warehouse.<br/>\nReturns an import identifier to track the status of the import and retrieve an error report if applicable.<br/>\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes when stock needs updating</div>\n<div class=\"max-call-frequency\">Maximum usage: Once pe"
+        },
+        {
+          "info": {
+            "name": "STO02 - Get information and statistics about an offer stock import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/stock/imports/:import_id/status",
+            "params": [
+              {
+                "name": "import_id",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: After each STO01 call, every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once every 15 seconds</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Seller/sellers_doc/seller_onboarding/managing_stock_offers.htm\">More context</a></li></ul></div>"
+        },
+        {
+          "info": {
+            "name": "STO03 - Get the error report for a stock import in CSV format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/stock/imports/:import_id/error_report",
+            "params": [
+              {
+                "name": "import_id",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nOnly returns lines of offers with at least one offer price in error.<br/>\nThe first column contains the line number in error. The second column contains the error reason.<br/>\nThe returned file is ready to be reimported after the values have been fixed.<br/>\nOffer prices that were submitted in the price import but don't appear in the error report were successfully imported.\n\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,107 @@
+{
+  "item": [
+    {
+      "id": "496811f0-0751-4518-b819-24aecabf8598",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b38795e-3178-43b6-bdac-954caff7f1d0",
+          "name": "RO02 - List shop roles",
+          "request": {
+            "name": "RO02 - List shop roles",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each user role view</div>\n<div class=\"max-call-frequency\">Maximum usage: On each user role view</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_user_and_rights/store_users/managing_store_users.html\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "users",
+                "shops",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "9b80e28f-395d-4086-8f4a-4f945dce8645",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "users",
+                    "shops",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"roles\": [\n    {\n      \"code\": \"GROUP_SHOP_ADMIN\",\n      \"description\": \"Access to \\\"Dashboard Statistics\\\", access to the \\\"Settings\\\", \\\"Information\\\", and \\\"User Management\\\" menus, ability to call Shop API.\"\n    },\n    {\n      \"code\": \"GROUP_SHOP_ACCOUNTANCY\",\n      \"description\": \"Access to \\\"Statements\\\" and \\\"Transaction History\\\".\"\n    },\n    {\n      \"code\": \"GROUP_SHOP_INVENTORY\",\n      \"description\": \"Access to \\\"Inventory\\\" dashboard, management and messages, and \\\"Mapping Configuration\\\".\"\n    },\n    {\n      \"code\": \"GROUP_SHOP_SALES\",\n      \"description\": \"Access to \\\"Message\\\", \\\"Order\\\" and \\\"Revenue\\\" dashboards, and \\\"Order Management\\\".\"\n    },\n    {\n      \"code\": \"GROUP_SHOP_SUPPORT\",\n      \"description\": \"Access to \\\"Message\\\" and \\\"Order\\\" dashboards, ability to upload order documents and edit seller order references.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b2862f1c-82c2-4c47-b063-dccf46ed5180",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

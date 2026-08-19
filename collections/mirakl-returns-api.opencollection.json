@@ -1,0 +1,240 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Returns API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Returns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "upsertReturns - Upsert returns",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/orders/returns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUse this API to synchronize returns with Mirakl Connect.\n\n   ## Overview\n   - Returns are always associated to an order already known by Mirakl Connect\n   - Each return line must reference an order line already known by Mirakl Connect\n   - The API performs an upsert: existing returns are updated, new ones are created\n   - The operation is **partially successful**: some returns in the payload can succeed while others fail\n\n   ## Usage Notes\n   - The"
+        },
+        {
+          "info": {
+            "name": "RT11 - List returns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns",
+            "params": [
+              {
+                "name": "return_id",
+                "value": "",
+                "type": "query",
+                "description": "Return id for filtering. This parameter can be supplied multiple times (return_id=58fd00d1-4ea4-453e-9a56-ec28c5c156ea&return_id=3071c162-dcd9-414b-a39d-ac3165f29453...)."
+              },
+              {
+                "name": "return_state",
+                "value": "",
+                "type": "query",
+                "description": "Return state for filtering. This parameter can be supplied multiple times (return_state=WAITING_ACCEPTANCE&return_state=IN_PROGRESS...)."
+              },
+              {
+                "name": "return_creation_date_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter returns with a creation date after the given date."
+              },
+              {
+                "name": "return_creation_date_to",
+                "value": "",
+                "type": "query",
+                "description": "Filter returns with a creation date before the given date."
+              },
+              {
+                "name": "return_last_updated_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter returns updated after the given date."
+              },
+              {
+                "name": "return_last_updated_to",
+                "value": "",
+                "type": "query",
+                "description": "Filter returns updated before the given date."
+              },
+              {
+                "name": "order_commercial_id",
+                "value": "",
+                "type": "query",
+                "description": "Order commercial id for filtering. This parameter can be supplied multiple times (order_commercial_id=OR01-A&order_commercial_id=OR02-A...)."
+              },
+              {
+                "name": "order_line_id",
+                "value": "",
+                "type": "query",
+                "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+              },
+              {
+                "name": "return_rma",
+                "value": "",
+                "type": "query",
+                "description": "Return RMA for filtering. This parameter can be supplied multiple times (return_rma=RMA-1&return_rma=RMA-2...)."
+              },
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "query",
+                "description": "Customer id for filtering. This parameter can be supplied multiple times (customer_id=id1&customer_id=id2...)."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 15 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 5 minutes</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports s"
+        },
+        {
+          "info": {
+            "name": "RT01 - Create returns",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 200 returns at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each customer return request</div>\n<div class=\"max-call-frequency\">Maximum usage: At each customer return request</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-"
+        },
+        {
+          "info": {
+            "name": "RT04 - Patch update returns",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul></div>"
+        },
+        {
+          "info": {
+            "name": "RT12 - List items to return",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns/items_to_return",
+            "params": [
+              {
+                "name": "order_commercial_id",
+                "value": "",
+                "type": "query",
+                "description": "Order commercial id for filtering. This parameter can be supplied multiple times (order_commercial_id=OR01-A&order_commercial_id=OR02-A...)."
+              },
+              {
+                "name": "order_line_id",
+                "value": "",
+                "type": "query",
+                "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each customer return request</div>\n<div class=\"max-call-frequency\">Maximum usage: At each customer return request</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</di"
+        },
+        {
+          "info": {
+            "name": "RT21 - Accept or refuse a return request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns/accept",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul></div>"
+        },
+        {
+          "info": {
+            "name": "RT25 - Validate returns as received",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns/receive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/concepts/Order/return-concept.htm\">More context</a></li></ul></div>"
+        },
+        {
+          "info": {
+            "name": "RT26 - Mark a return as compliant or non compliant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns/compliance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n</div>"
+        },
+        {
+          "info": {
+            "name": "RT27 - Mark a return as closed",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns/close",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n</div>"
+        },
+        {
+          "info": {
+            "name": "RT29 - Mark a return as canceled",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/returns/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 returns at a time\n\n<div class=\"api-description-extension\">\n</div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

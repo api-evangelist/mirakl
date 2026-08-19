@@ -1,0 +1,1593 @@
+{
+  "item": [
+    {
+      "id": "d3de7511-396b-45cc-acee-103779a6c17d",
+      "name": "Products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4a2ab43-3b59-40a8-8469-eb1550b2cd2d",
+          "name": "CM11 - Export Source Product Data Sheet status",
+          "request": {
+            "name": "CM11 - Export Source Product Data Sheet status",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nDelta export of the source product data sheet status in JSON format.\n\nDefine a cron job in your system that periodically calls this API and sets the previous\nrequest date as the `updated_since` query parameter.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: <br/>- Differential: every 15 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: <br/>- Differential: every 5 minutes <br/>- Full: every 4 hours</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/mcm/page/topics/Mirakl/mcm/integration_mcm/cm11.htm\">More context</a></li><li><a href=\"https://help.mirakl.com/bundle/mcm/page/topics/Mirakl/mcm/troubleshooting_mcm.htm\">Error troubleshooting</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mcm",
+                "products",
+                "sources",
+                "status",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Export start date. Given date must respect ISO-8601 format and must be URL encoded"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_to",
+                  "value": "<dateTime>",
+                  "description": "Export end date. Given date must respect ISO-8601 format and must be URL encoded"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of the product : LIVE / NOT_LIVE"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_unique_identifier",
+                  "value": "<string>",
+                  "description": "The provider unique identifier of the product"
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_identifier",
+                  "value": "<string>",
+                  "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_id",
+                  "value": "<string>",
+                  "description": "(Required) The provider id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "030ce007-0962-446a-85a2-055530eda4a3",
+              "name": "Export success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mcm",
+                    "products",
+                    "sources",
+                    "status",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_unique_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errors\": [\n      {\n        \"channels\": [\n          \"BE\",\n          \"FR\"\n        ],\n        \"code\": \"MCM-04012\",\n        \"message\": \"The product has been rejected by the operator temporarily.\",\n        \"rejection_details\": {\n          \"message\": \"This product is obsolete\",\n          \"reason_code\": \"2\",\n          \"reason_label\": \"The product does not fit the targeted audience\"\n        }\n      },\n      {\n        \"channels\": [\n          \"US\",\n          \"CA\"\n        ],\n        \"code\": \"MCM-04012\",\n        \"message\": \"The operator has requested changes to your product data.\",\n        \"rejection_details\": {\n          \"message\": \"The description in English is not detailed enough.\",\n          \"reason_code\": \"5\",\n          \"reason_label\": \"A better description is required\"\n        }\n      },\n      {\n        \"code\": \"MCM-0L000\",\n        \"message\": \"The product has not been synchronized yet.\"\n      },\n      {\n        \"code\": \"MCM-04000\",\n        \"integration_details\": [\n          {\n            \"attribute_code\": \"color\",\n            \"code\": \"WARNING\",\n            \"message\": \"is not mapped\"\n          }\n        ],\n        \"message\": \"The product integration contains errors.\"\n      }\n    ],\n    \"provider_unique_identifier\": \"shopSku1\",\n    \"status\": \"NOT_LIVE\",\n    \"unique_identifiers\": [\n      {\n        \"code\": \"EAN\",\n        \"value\": \"EAN1\"\n      },\n      {\n        \"code\": \"EAN\",\n        \"value\": \"EAN2\"\n      },\n      {\n        \"code\": \"ISBN\",\n        \"value\": \"ISBN1\"\n      }\n    ],\n    \"warnings\": [\n      {\n        \"attribute_code\": \"mainImageLarge\",\n        \"code\": \"MCM-05000\",\n        \"message\": \"The 'mainImageLarge' attribute is required.\"\n      }\n    ]\n  },\n  {\n    \"provider_unique_identifier\": \"shopSku2\",\n    \"status\": \"LIVE\",\n    \"warnings\": [\n      {\n        \"attribute_code\": \"productTitle_fr\",\n        \"code\": \"MCM-05000\",\n        \"message\": \"The 'productTitle_fr' attribute is required.\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63a8c1e6-0b37-49ad-8fd4-5b38af48bc46",
+              "name": "No source product data sheet status to export",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mcm",
+                    "products",
+                    "sources",
+                    "status",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_unique_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1ddcb3e-8f61-4707-ad03-93dd015a1eda",
+          "name": "H11 - List Catalog categories (parents and children) related to a Catalog category",
+          "request": {
+            "name": "H11 - List Catalog categories (parents and children) related to a Catalog category",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every hour</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "hierarchies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hierarchy",
+                  "value": "<string>",
+                  "description": "Catalog category code"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_level",
+                  "value": "<integer>",
+                  "description": "Number of children catalog category levels to retrieve. If not specified, all child catalog categories are retrieved"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2aa114e1-83a3-4eb1-9e2b-88fc7b9a8a40",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "hierarchies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_level",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hierarchies\": [\n    {\n      \"code\": \"5911111\",\n      \"label\": \"Suncare\",\n      \"label_translations\": [\n        {\n          \"locale\": \"en\",\n          \"value\": \"Suncare\"\n        },\n        {\n          \"locale\": \"fr\",\n          \"value\": \"Protection solaire\"\n        }\n      ],\n      \"level\": 2,\n      \"parent_code\": \"59\"\n    },\n    {\n      \"code\": \"5911112\",\n      \"label\": \"Toiletries\",\n      \"label_translations\": [\n        {\n          \"locale\": \"en\",\n          \"value\": \"Toiletries\"\n        },\n        {\n          \"locale\": \"fr\",\n          \"value\": \"Articles de toilette\"\n        }\n      ],\n      \"level\": 2,\n      \"parent_code\": \"59\"\n    },\n    {\n      \"code\": \"5911113\",\n      \"label\": \"Womens Hair Removal\",\n      \"label_translations\": [\n        {\n          \"locale\": \"en\",\n          \"value\": \"Womens Hair Removal\"\n        },\n        {\n          \"locale\": \"fr\",\n          \"value\": \"Épilation Femmes\"\n        }\n      ],\n      \"level\": 2,\n      \"parent_code\": \"59\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cebe5516-549f-4de6-a077-98ddd9869f04",
+          "name": "P41 - Import products to the operator information system",
+          "request": {
+            "name": "P41 - Import products to the operator information system",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nReturns the import identifier to track the status of the import\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every hour, for each seller</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 15 minutes, for each seller</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mci/Operator/sync_pim.html\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Import file (CSV or XML or XLSX) to upload. Use <code>multipart/form-data</code> with name <code>file</code>"
+                },
+                {
+                  "key": "shop",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "(Required) Shop identifier"
+                },
+                {
+                  "key": "conversion_options",
+                  "value": "{\"ai_enrichment\":{\"status\":\"<string>\"},\"ai_rewrite\":{\"status\":\"<string>\"},\"ai_translation\":{\"status\":\"<string>\"}}",
+                  "type": "text",
+                  "description": "Options used for product file conversion when conversion_type is <code>AI_CONVERTER</code>"
+                },
+                {
+                  "key": "conversion_type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Product file conversion type. If Catalog Transformer is enabled but the conversionType is not specified, then the default configuration from the shop settings will be used\n\nEnum: `\"AI_CONVERTER\"`, `\"STANDARD\"`\n"
+                },
+                {
+                  "key": "operator_format",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Force the use of the operator product format"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1866d599-e83f-4b99-9408-33acd443e472",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Options used for product file conversion when conversion_type is <code>AI_CONVERTER</code>",
+                        "type": "text/plain"
+                      },
+                      "key": "conversion_options",
+                      "value": "{\"ai_enrichment\":{\"status\":\"ENABLED\"},\"ai_rewrite\":{\"status\":\"ENABLED\"},\"ai_translation\":{\"status\":\"ENABLED\"}}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Product file conversion type. If Catalog Transformer is enabled but the conversionType is not specified, then the default configuration from the shop settings will be used\n\nEnum: `\"AI_CONVERTER\"`, `\"STANDARD\"`\n",
+                        "type": "text/plain"
+                      },
+                      "key": "conversion_type",
+                      "value": "AI_CONVERTER",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Import file (CSV or XML or XLSX) to upload. Use <code>multipart/form-data</code> with name <code>file</code>",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "Force the use of the operator product format",
+                        "type": "text/plain"
+                      },
+                      "key": "operator_format",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Shop identifier",
+                        "type": "text/plain"
+                      },
+                      "key": "shop",
+                      "value": "0",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Pre-calculated URL to call to get the import status",
+                  "key": "Location",
+                  "value": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"import_id\": 2035\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6808f58-6760-4780-8fed-98000e88aabf",
+          "name": "P51 - Get information about product import statuses",
+          "request": {
+            "name": "P51 - Get information about product import statuses",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nIf the last_request_date param is not set the api returns all product imports.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mci/Operator/sync_pim.html\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports offset pagination (<a href=\"#section/Offset-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>dateCreated</b> (Default) - Sort by creation date (asc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "last_request_date",
+                  "value": "<dateTime>",
+                  "description": "Return only product imports that have changed since this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Product import status. One of <code>CANCELLED</code>, <code>WAITING</code>, <code>RUNNING</code>, <code>SENT</code>, <code>COMPLETE</code>, <code>FAILED</code>"
+                },
+                {
+                  "disabled": false,
+                  "key": "has_transformed_file",
+                  "value": "<boolean>",
+                  "description": "If <code>true</code> returns only product import trackings with transformed file"
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Shop identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "393f6d73-e411-437a-94ff-e5016ab668bd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "last_request_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_transformed_file",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"product_import_trackings\": [\n    {\n      \"date_created\": \"2019-04-05T13:13:06Z\",\n      \"has_error_report\": true,\n      \"has_new_product_report\": true,\n      \"has_transformation_error_report\": true,\n      \"has_transformed_file\": false,\n      \"import_id\": 2008,\n      \"import_status\": \"COMPLETE\",\n      \"shop_id\": 2000,\n      \"transform_lines_in_error\": 5,\n      \"transform_lines_in_success\": 0,\n      \"transform_lines_read\": 5,\n      \"transform_lines_with_warning\": 0\n    },\n    {\n      \"date_created\": \"2019-04-05T13:13:25Z\",\n      \"has_error_report\": false,\n      \"has_new_product_report\": false,\n      \"has_transformation_error_report\": false,\n      \"has_transformed_file\": true,\n      \"import_id\": 2009,\n      \"import_status\": \"SENT\",\n      \"shop_id\": 2000,\n      \"transform_lines_in_error\": 0,\n      \"transform_lines_in_success\": 1,\n      \"transform_lines_read\": 1,\n      \"transform_lines_with_warning\": 0\n    }\n  ],\n  \"total_count\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cf512b8-4980-4f63-a942-901cba08b565",
+          "name": "P42 - Get the import status for a product import",
+          "request": {
+            "name": "P42 - Get the import status for a product import",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per minute until getting the import final status</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "imports",
+                ":import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "import",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "bbe2c31b-d670-49a2-9c8c-23d839ff873c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "imports",
+                    ":import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "import",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_created\": \"2019-04-05T12:56:21Z\",\n  \"has_error_report\": false,\n  \"has_new_product_report\": false,\n  \"has_transformation_error_report\": false,\n  \"has_transformed_file\": true,\n  \"import_id\": 2005,\n  \"import_status\": \"SENT\",\n  \"shop_id\": 2000,\n  \"transform_lines_in_error\": 0,\n  \"transform_lines_in_success\": 1,\n  \"transform_lines_read\": 1,\n  \"transform_lines_with_warning\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ce90fec-1ea5-41be-9d43-1cf0ad7392c0",
+          "name": "P44 - Get the error report file for a product import (\"Non-integrated products report\")",
+          "request": {
+            "name": "P44 - Get the error report file for a product import (\"Non-integrated products report\")",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nThis API returns either a CSV file (MCM enabled) or a file in a format defined by the operator (MCM disabled).\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time an error report is needed</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time an error report is needed</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mci/Operator/catalog_integration_process_using_api.html\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "imports",
+                ":import",
+                "error_report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "import",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7ce9907b-d8d5-43de-b574-bfa9ab1b15f3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "imports",
+                    ":import",
+                    "error_report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "import",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61bcb736-7be3-47ab-82c4-2a7acaa6cfc5",
+          "name": "P45 - Get the product integration report file for a product import (\"Added products report\")",
+          "request": {
+            "name": "P45 - Get the product integration report file for a product import (\"Added products report\")",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nThis API returns either a CSV file (MCM enabled) or a file in a format defined by the operator (MCM disabled).\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time an integration report is needed</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time an integration report is needed</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "imports",
+                ":import",
+                "new_product_report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "import",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7719164e-f4c6-4fe8-817d-3e1d11448a26",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "imports",
+                    ":import",
+                    "new_product_report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "import",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05a7d5f2-8fb0-4b4d-9958-835322a99c11",
+          "name": "P46 - Get the transformed file for a product import (\"File in operator format\")",
+          "request": {
+            "name": "P46 - Get the transformed file for a product import (\"File in operator format\")",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nThis API returns a CSV file.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time a transformed file is available</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time a transformed file is available</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "imports",
+                ":import",
+                "transformed_file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "import",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "3d17e27f-2dfb-431c-8110-9c1d52db36ca",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "imports",
+                    ":import",
+                    "transformed_file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "import",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa77c739-bce4-4b14-9825-318ba922cb8c",
+          "name": "P47 - Get the transformation error report file for a product import (\"Source file error report\")",
+          "request": {
+            "name": "P47 - Get the transformation error report file for a product import (\"Source file error report\")",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nThis API returns a CSV, XLSX or XML file, depending on the file format provided by the seller.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time an error report is needed</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time an error report is needed</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "imports",
+                ":import",
+                "transformation_error_report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "import",
+                  "description": "(Required) Import identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "82a1d704-9cd2-472b-8aa5-93ee9ca61fd6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "imports",
+                    ":import",
+                    "transformation_error_report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "import",
+                      "description": "(Required) Import identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28135526-e7c5-4f1c-a080-cccaebce2674",
+          "name": "PM11 - Get the product attribute configuration",
+          "request": {
+            "name": "PM11 - Get the product attribute configuration",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nRetrieves all attributes for parents and children of the requested hierarchy\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every hour</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hierarchy",
+                  "value": "<string>",
+                  "description": "Code of the hierarchy (category) for which to retrieve the attributes. If not specified, all attributes are retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_level",
+                  "value": "<integer>",
+                  "description": "Number of children hierarchy (category) levels to retrieve. If not specified, attributes from all children hierarchies are retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "List of channel codes"
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "<string>",
+                  "description": "List of channel codes"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_roles",
+                  "value": "false",
+                  "description": "Set to \"<code>true</code>\" to get only the attributes that have roles."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "d4c9318a-0127-4abf-b3be-ed332013798d",
+              "name": "Export success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_level",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "with_roles",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"attributes\": [\n    {\n      \"channels\": [\n        {\n          \"code\": \"WEBSITE_EN\"\n        }\n      ],\n      \"code\": \"washingInstructions3\",\n      \"default_value\": null,\n      \"description\": \"How do you wash the product\",\n      \"description_translations\": [\n        {\n          \"locale\": \"en\",\n          \"value\": \"How do you wash the product\"\n        }\n      ],\n      \"example\": null,\n      \"hierarchy_code\": \"3012\",\n      \"label\": \"Washing Instructions\",\n      \"label_translations\": [\n        {\n          \"locale\": \"en\",\n          \"value\": \"Washing Instructions\"\n        }\n      ],\n      \"locale\": \"en_US\",\n      \"requirement_level\": \"OPTIONAL\",\n      \"roles\": [],\n      \"transformations\": \"CAMEL_CASE\",\n      \"type\": \"TEXT\",\n      \"type_parameter\": null,\n      \"validations\": \"MIN_LENGTH|10\",\n      \"variant\": false\n    },\n    {\n      \"channels\": [\n        {\n          \"code\": \"WEBSITE_FR\"\n        },\n        {\n          \"code\": \"WEBSITE_EN\"\n        }\n      ],\n      \"code\": \"toolsIncluded3\",\n      \"default_value\": null,\n      \"description\": \"Are tools included for the assembly of this product\",\n      \"description_translations\": [\n        {\n          \"locale\": \"en\",\n          \"value\": \"Are tools included for the assembly of this product\"\n        }\n      ],\n      \"example\": null,\n      \"hierarchy_code\": \"5610102\",\n      \"label\": \"Tools Included\",\n      \"label_translations\": [\n        {\n          \"locale\": \"en\",\n          \"value\": \"Tools Included\"\n        }\n      ],\n      \"requirement_level\": \"OPTIONAL\",\n      \"roles\": [],\n      \"type\": \"LIST\",\n      \"type_parameter\": \"Boolean\",\n      \"variant\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a18a987-0849-456c-b22c-d532c1d2a15d",
+          "name": "VL11 - Get information about operator's value lists",
+          "request": {
+            "name": "VL11 - Get information about operator's value lists",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every hour</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "values_lists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "The operator's values list code. If not specified, all values lists are retrieved"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "31386035-83d7-4481-a590-09afe5cff7e4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "values_lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"values_lists\": [\n    {\n      \"code\": \"Jewellery\",\n      \"label\": \"Bijoux\",\n      \"label_translations\": [\n        {\n          \"locale\": \"en\",\n          \"value\": \"Jewellery\"\n        },\n        {\n          \"locale\": \"fr\",\n          \"value\": \"Bijoux\"\n        }\n      ],\n      \"values\": [\n        {\n          \"code\": \"Accessories\",\n          \"label\": \"Accessoires\",\n          \"label_translations\": [\n            {\n              \"locale\": \"en\",\n              \"value\": \"Accessories\"\n            },\n            {\n              \"locale\": \"fr\",\n              \"value\": \"Accessoires\"\n            }\n          ]\n        },\n        {\n          \"code\": \"Bracelets\",\n          \"label\": \"Bracelets\",\n          \"label_translations\": [\n            {\n              \"locale\": \"en\",\n              \"value\": \"Bracelets\"\n            },\n            {\n              \"locale\": \"fr\",\n              \"value\": \"Bracelets\"\n            }\n          ]\n        },\n        {\n          \"code\": \"Necklaces\",\n          \"label\": \"Colliers\",\n          \"label_translations\": [\n            {\n              \"locale\": \"en\",\n              \"value\": \"Necklaces\"\n            },\n            {\n              \"locale\": \"fr\",\n              \"value\": \"Colliers\"\n            }\n          ]\n        },\n        {\n          \"code\": \"Rings\",\n          \"label\": \"Anneaux\",\n          \"label_translations\": [\n            {\n              \"locale\": \"en\",\n              \"value\": \"Rings\"\n            },\n            {\n              \"locale\": \"fr\",\n              \"value\": \"Anneaux\"\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1542c0d2-a753-4e2f-a4f3-83787c4d0608",
+          "name": "P31 - Get products for a list of product references",
+          "request": {
+            "name": "P31 - Get products for a list of product references",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nNote: this resource returns 100 products maximum <br/> Results are sorted by product sku asc, then by product identifier type asc and then by product identifier asc\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each product page display</div>\n<div class=\"max-call-frequency\">Maximum usage: At each product page display</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product_references",
+                  "value": "<string>",
+                  "description": "(Required) List of the product's identifiers with type, _(structure: \"`product_references=<productIdType>|<productId>,<productIdType>|<productId>, ...`\")_\nwhere accepted `<productIdType>` are operator’s product references, like `EAN` or `UPC` for example.\n\nNote that `SHOP_SKU` or `SKU` are invalid `<productIdType>` for this API.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "products",
+                  "value": "<string>",
+                  "description": "List of the product's identifiers with type, _(structure: \"`products=<productId>|<productIdType>,<productId>|<productIdType>, ...`\")_\nwhere accepted `<productIdType>` are operator’s product references, like `EAN` or `UPC` for example.\n\nNote that `SHOP_SKU` or `SKU` are invalid `<productIdType>` for this API.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ad9872ad-8d76-497c-b6fe-273a890ff2f9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_references",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "products",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"authorized_shop_ids\": [],\n      \"category_code\": \"5110114\",\n      \"category_label\": \"Coffee Machines\",\n      \"product_id\": \"9312432012041\",\n      \"product_id_type\": \"EAN\",\n      \"product_sku\": \"MKP100000000037254\",\n      \"product_title\": \"Breville Cafe Roma Stainless Espresso/Cappuccino Machine - ESP8C\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "85c00c27-b351-4436-8cab-a5b83d5a6fe5",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

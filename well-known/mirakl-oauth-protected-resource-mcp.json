@@ -1,0 +1,1 @@
+{"resource":"https://developer.mirakl.com/mcp","authorization_servers":["https://developer.mirakl.com","https://auth.cloud.redocly.com"],"bearer_methods_supported":["header"],"resource_documentation":"https://developer.mirakl.com/.well-known/oauth-authorization-server","scopes_supported":["openid","profile","email","offline_access"],"bearer_token_types_supported":["Bearer"]}

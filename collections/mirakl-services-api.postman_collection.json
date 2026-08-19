@@ -1,0 +1,943 @@
+{
+  "item": [
+    {
+      "id": "be77770f-ce27-448b-bd19-e4bd2cf3c015",
+      "name": "Services",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69dec014-fb00-412a-9a1b-fb80098df4b6",
+          "name": "SL01 - Create a location",
+          "request": {
+            "name": "SL01 - Create a location",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 30 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 30 per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"geography\": {\n    \"type\": \"<string>\"\n  },\n  \"label\": \"<string>\",\n  \"contact_info\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"opening_hours\": {\n    \"friday\": [\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      },\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      }\n    ],\n    \"monday\": [\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      },\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      }\n    ],\n    \"saturday\": [\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      },\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      }\n    ],\n    \"sunday\": [\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      },\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      }\n    ],\n    \"thursday\": [\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      },\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      }\n    ],\n    \"tuesday\": [\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      },\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      }\n    ],\n    \"wednesday\": [\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      },\n      {\n        \"closing_time\": \"<string>\",\n        \"opening_time\": \"<string>\"\n      }\n    ]\n  },\n  \"shop\": {\n    \"id\": \"<long>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d030de24-8f3e-481a-a33a-88616e8453fd",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact_info\": {\n    \"email\": \"urna@elit.edu\",\n    \"phone\": \"1-919-506-3035\"\n  },\n  \"description\": \"Open every day except on monday\",\n  \"geography\": {\n    \"address\": {\n      \"formatted_address\": \"2466 White Ave, Chico, CA 95973, États-Unis\"\n    },\n    \"radius\": 2000,\n    \"type\": \"CIRCLE\"\n  },\n  \"label\": \"2466 White Avenue\",\n  \"opening_hours\": {\n    \"friday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"09:00\"\n      },\n      {\n        \"closing_time\": \"18:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"monday\": [],\n    \"saturday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"08:00\"\n      },\n      {\n        \"closing_time\": \"19:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"sunday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"08:00\"\n      },\n      {\n        \"closing_time\": \"18:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"thursday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"08:00\"\n      },\n      {\n        \"closing_time\": \"18:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"tuesday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"09:00\"\n      },\n      {\n        \"closing_time\": \"18:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"wednesday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"08:00\"\n      },\n      {\n        \"closing_time\": \"19:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ]\n  },\n  \"shop\": {\n    \"id\": 152\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contact_info\": {\n    \"email\": \"urna@elit.edu\",\n    \"phone\": \"1-919-506-3035\"\n  },\n  \"description\": \"Open every day except on monday\",\n  \"geography\": {\n    \"address\": {\n      \"city\": \"Chico\",\n      \"company\": \"2466 White Avenue\",\n      \"country_code\": \"US\",\n      \"formatted_address\": \"2466 White Ave, Chico, CA 95973, États-Unis\",\n      \"state\": \"CA\",\n      \"street1\": \"2466 White Avenue\",\n      \"zip_code\": \"95973\"\n    },\n    \"center\": {\n      \"latitude\": 39.7613779,\n      \"longitude\": -121.8500737\n    },\n    \"radius\": 2000,\n    \"type\": \"CIRCLE\"\n  },\n  \"id\": \"30ef2a4c-0ee1-4afe-ac0a-3ef30df43c70\",\n  \"label\": \"2466 White Avenue\",\n  \"opening_hours\": {\n    \"friday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"09:00\"\n      },\n      {\n        \"closing_time\": \"18:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"monday\": [],\n    \"saturday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"08:00\"\n      },\n      {\n        \"closing_time\": \"19:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"sunday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"08:00\"\n      },\n      {\n        \"closing_time\": \"18:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"thursday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"08:00\"\n      },\n      {\n        \"closing_time\": \"18:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"tuesday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"09:00\"\n      },\n      {\n        \"closing_time\": \"18:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ],\n    \"wednesday\": [\n      {\n        \"closing_time\": \"12:00\",\n        \"opening_time\": \"08:00\"\n      },\n      {\n        \"closing_time\": \"19:00\",\n        \"opening_time\": \"14:00\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65bc6ab8-372a-435c-be45-9711ffb05f42",
+          "name": "SL12 - List locations",
+          "request": {
+            "name": "SL12 - List locations",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: <br/>- Asynchronous: once per day <br/>- Synchronous: each time you need to create a service</div>\n<div class=\"max-call-frequency\">Maximum usage: <br/>- Asynchronous: every hour <br/>- Synchronous: each time you need to create a service</div>\n<div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop",
+                  "value": "<long>",
+                  "description": "Shop id to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>",
+                  "description": "Service Location IDs to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<string>",
+                  "description": "Service Location IDs to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "location_type",
+                  "value": "<string>",
+                  "description": "Service Location type to include in result. (default: include all)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de74b6ea-b8f4-40e3-86de-0f7205d6617f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"contact_info\": {\n        \"email\": \"urna@elit.edu\",\n        \"phone\": \"1-919-506-3035\"\n      },\n      \"geography\": {\n        \"address\": {\n          \"city\": \"Chico\",\n          \"company\": \"2466 White Avenue\",\n          \"country_code\": \"US\",\n          \"formatted_address\": \"2466 White Ave, Chico, CA 95973, États-Unis\",\n          \"state\": \"CA\",\n          \"street1\": \"2466 White Avenue\",\n          \"zip_code\": \"95973\"\n        },\n        \"center\": {\n          \"latitude\": 39.7613779,\n          \"longitude\": -121.8500737\n        },\n        \"radius\": 2000,\n        \"type\": \"CIRCLE\"\n      },\n      \"id\": \"30ef2a4c-0ee1-4afe-ac0a-3ef30df43c70\",\n      \"label\": \"2466 White Avenue\",\n      \"medias\": [\n        {\n          \"mime_type\": \"image/jpeg\",\n          \"url\": \"/api/mms/location-medias/b2b321a7-c5ea-4694-bac3-2cc74de9e2e0\"\n        }\n      ],\n      \"opening_hours\": {\n        \"friday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"09:00\"\n          },\n          {\n            \"closing_time\": \"18:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ],\n        \"monday\": [],\n        \"saturday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"08:00\"\n          },\n          {\n            \"closing_time\": \"19:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ],\n        \"sunday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"08:00\"\n          },\n          {\n            \"closing_time\": \"18:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ],\n        \"thursday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"08:00\"\n          },\n          {\n            \"closing_time\": \"18:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ],\n        \"tuesday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"09:00\"\n          },\n          {\n            \"closing_time\": \"18:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ],\n        \"wednesday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"08:00\"\n          },\n          {\n            \"closing_time\": \"19:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ]\n      },\n      \"shop\": {\n        \"id\": 152\n      },\n      \"shop_overridden_opening_hours\": [\n        {\n          \"friday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"09:00\"\n              },\n              {\n                \"closing_time\": \"18:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          },\n          \"monday\": {\n            \"availability\": \"NOT_AVAILABLE\"\n          },\n          \"saturday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"08:00\"\n              },\n              {\n                \"closing_time\": \"19:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          },\n          \"shop_id\": 42,\n          \"sunday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"08:00\"\n              },\n              {\n                \"closing_time\": \"18:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          },\n          \"thursday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"08:00\"\n              },\n              {\n                \"closing_time\": \"18:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          },\n          \"tuesday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"09:00\"\n              },\n              {\n                \"closing_time\": \"18:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          },\n          \"wednesday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"08:00\"\n              },\n              {\n                \"closing_time\": \"19:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    {\n      \"contact_info\": {\n        \"email\": \"nonummy@vulputatelacusCras.co.uk\",\n        \"phone\": \"1-919-656-6541\"\n      },\n      \"geography\": {\n        \"address\": {\n          \"city\": \"Roscoe\",\n          \"company\": \"2467 Bend River Road\",\n          \"country_code\": \"US\",\n          \"formatted_address\": \"Bend River Rd, Roscoe, IL 61073, États-Unis\",\n          \"state\": \"IL\",\n          \"street1\": \"2467 Bend River Road\",\n          \"zip_code\": \"61073\"\n        },\n        \"geocode\": {\n          \"latitude\": 42.431015,\n          \"longitude\": -89.0403527\n        },\n        \"type\": \"POINT\"\n      },\n      \"id\": \"87ac4bd2-48d6-4afe-a1bf-4a82b663aed4\",\n      \"label\": \"2467 Bend River Road\",\n      \"opening_hours\": {\n        \"friday\": [],\n        \"monday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"09:00\"\n          },\n          {\n            \"closing_time\": \"18:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ],\n        \"saturday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"08:00\"\n          },\n          {\n            \"closing_time\": \"19:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ],\n        \"sunday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"09:00\"\n          },\n          {\n            \"closing_time\": \"18:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ],\n        \"thursday\": [],\n        \"tuesday\": [],\n        \"wednesday\": [\n          {\n            \"closing_time\": \"12:00\",\n            \"opening_time\": \"08:00\"\n          },\n          {\n            \"closing_time\": \"19:00\",\n            \"opening_time\": \"14:00\"\n          }\n        ]\n      },\n      \"shop\": {\n        \"id\": 153\n      },\n      \"shop_overridden_opening_hours\": [\n        {\n          \"friday\": {\n            \"availability\": \"NOT_AVAILABLE\"\n          },\n          \"monday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"09:00\"\n              },\n              {\n                \"closing_time\": \"18:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          },\n          \"saturday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"08:00\"\n              },\n              {\n                \"closing_time\": \"19:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          },\n          \"shop_id\": 42,\n          \"sunday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"09:00\"\n              },\n              {\n                \"closing_time\": \"18:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          },\n          \"thursday\": {\n            \"availability\": \"NOT_AVAILABLE\"\n          },\n          \"tuesday\": {\n            \"availability\": \"NOT_AVAILABLE\"\n          },\n          \"wednesday\": {\n            \"availability\": \"OVERRIDDEN_HOURS\",\n            \"opening_hours\": [\n              {\n                \"closing_time\": \"12:00\",\n                \"opening_time\": \"08:00\"\n              },\n              {\n                \"closing_time\": \"19:00\",\n                \"opening_time\": \"14:00\"\n              }\n            ]\n          }\n        }\n      ]\n    }\n  ],\n  \"next_page_token\": \"bGltaXQ9MiZhZnRlcj04N2FjNGJkMi00OGQ2LTRhZmUtYTFiZi00YTgyYjY2M2FlZDQmc29ydD1sYWJlbCxBU0M=.CFpfMq4SqojszIok6kfjG9yjnHAjku5bbfX4AXqRC3s=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c544b3d-de91-452c-81d0-2138e9df971c",
+          "name": "SL06 - Delete a location",
+          "request": {
+            "name": "SL06 - Delete a location",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 20 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 60 per second</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "locations",
+                ":location_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "location_id",
+                  "description": "(Required) Id of the location to delete."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88d5d66f-9479-43da-ba44-89c2095ab60f",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "locations",
+                    ":location_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "location_id",
+                      "description": "(Required) Id of the location to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8f2725e-59fa-494b-b859-d299a89d21f1",
+          "name": "SM11 - List service models",
+          "request": {
+            "name": "SM11 - List service models",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: <br/>- Asynchronous: once per day <br/>- Synchronous: at each faceting display</div>\n<div class=\"max-call-frequency\">Maximum usage: <br/>- Asynchronous: every hour <br/>- Synchronous: at each faceting display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/displaying_services.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>title</b> - Sort by title (asc by default)</li><li><b>code</b> (Default) - Sort by code (asc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category_code",
+                  "value": "<string>",
+                  "description": "Category codes to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "category_code",
+                  "value": "<string>",
+                  "description": "Category codes to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "model_code",
+                  "value": "<string>",
+                  "description": "Model codes to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "model_code",
+                  "value": "<string>",
+                  "description": "Model codes to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "location_type",
+                  "value": "<string>",
+                  "description": "Location types to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "location_type",
+                  "value": "<string>",
+                  "description": "Location types to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "booking_type",
+                  "value": "<string>",
+                  "description": "Booking types to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "booking_type",
+                  "value": "<string>",
+                  "description": "Booking types to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "consumption_type",
+                  "value": "<string>",
+                  "description": "Consumption types to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "consumption_type",
+                  "value": "<string>",
+                  "description": "Consumption types to include in result. (default: include all)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54a1b78f-0730-47bf-8e38-f756e851afea",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "model_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "model_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "booking_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "booking_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "consumption_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "consumption_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"booking\": {\n        \"type\": \"DATETIME_REQUEST\"\n      },\n      \"categories\": [\n        {\n          \"code\": \"LOGO_DESIGN\",\n          \"label\": \"Logo Design\"\n        }\n      ],\n      \"code\": \"LOGO\",\n      \"consumption\": {\n        \"type\": \"VOUCHER\"\n      },\n      \"custom_attributes\": [\n        {\n          \"code\": \"DISABLED_ACCESSIBILITY\",\n          \"label\": \"Accessible to disabled\",\n          \"service_configuration\": {\n            \"minimum_number_of_elements\": 1\n          },\n          \"type\": \"BOOLEAN\"\n        },\n        {\n          \"code\": \"HEIGHT_DIFF\",\n          \"label\": \"Height difference\",\n          \"precision\": 2,\n          \"service_configuration\": {\n            \"minimum_number_of_elements\": 0\n          },\n          \"type\": \"DECIMAL\"\n        },\n        {\n          \"code\": \"AGE_MIN\",\n          \"label\": \"Age minimum\",\n          \"service_configuration\": {\n            \"minimum_number_of_elements\": 1\n          },\n          \"type\": \"INTEGER\"\n        },\n        {\n          \"available_values\": [\n            {\n              \"code\": \"HIKING_STICKS\",\n              \"label\": \"hiking sticks\"\n            },\n            {\n              \"code\": \"ADAPTED_OUTFIT\",\n              \"label\": \"adapted outfit\"\n            },\n            {\n              \"code\": \"BOOTS\",\n              \"label\": \"boots\"\n            }\n          ],\n          \"code\": \"EQUIPT_TO_BRING\",\n          \"label\": \"Equipment & gear to bring\",\n          \"service_configuration\": {\n            \"minimum_number_of_elements\": 0\n          },\n          \"type\": \"VALUE_LIST\"\n        },\n        {\n          \"code\": \"PREMIUM_PACKAGE\",\n          \"label\": \"Premium package\",\n          \"order_configuration\": {\n            \"maximum_number_of_elements\": 1,\n            \"shop_permission\": \"READ_WRITE\"\n          },\n          \"service_configuration\": {\n            \"minimum_number_of_elements\": 0\n          },\n          \"type\": \"BOOLEAN\"\n        }\n      ],\n      \"location\": {\n        \"type\": \"NO_LOCATION\"\n      },\n      \"pricing\": {\n        \"options\": [\n          {\n            \"code\": \"BRING_YOUR_OWN_MATERIAL\",\n            \"label\": \"Bring your own material\",\n            \"service_configuration\": {\n              \"minimum_number_of_elements\": 1\n            },\n            \"type\": \"BOOLEAN\"\n          },\n          {\n            \"available_values\": [\n              {\n                \"code\": \"ONE_HOUR\",\n                \"label\": \"1 hour\"\n              },\n              {\n                \"code\": \"TWO_HOURS\",\n                \"label\": \"2 hours\"\n              },\n              {\n                \"code\": \"THREE_HOURS\",\n                \"label\": \"3 hours\"\n              }\n            ],\n            \"code\": \"WORK_DURATION\",\n            \"label\": \"Work duration\",\n            \"order_configuration\": {\n              \"maximum_number_of_elements\": 1\n            },\n            \"service_configuration\": {\n              \"description_allowed\": true,\n              \"maximum_number_of_elements\": 1,\n              \"minimum_number_of_elements\": 0\n            },\n            \"type\": \"VALUE_LIST\"\n          }\n        ],\n        \"type\": \"FIXED_PRICE\"\n      },\n      \"quantity\": {\n        \"on_marketplace\": [\n          \"ALLOW_UNLIMITED\"\n        ],\n        \"per_order\": [\n          \"ALLOW_FIXED\"\n        ]\n      },\n      \"title\": \"What do you need to ask for a logo design ?\"\n    },\n    {\n      \"booking\": {\n        \"type\": \"NO_BOOKING\"\n      },\n      \"categories\": [\n        {\n          \"code\": \"ATM_REPAIR\",\n          \"label\": \"ATM Repair\"\n        },\n        {\n          \"code\": \"DISHWASHER\",\n          \"label\": \"Dishwasher\"\n        },\n        {\n          \"code\": \"COPIER_REPAIR\",\n          \"label\": \"Copier Repair\"\n        }\n      ],\n      \"code\": \"OTHER_REPAIR\",\n      \"consumption\": {\n        \"type\": \"VOUCHER\"\n      },\n      \"custom_attributes\": [],\n      \"location\": {\n        \"type\": \"AT_CUSTOMER_LOCATION\"\n      },\n      \"pricing\": {\n        \"type\": \"FIXED_PRICE\"\n      },\n      \"quantity\": {\n        \"on_marketplace\": [\n          \"ALLOW_FIXED\"\n        ],\n        \"per_order\": [\n          \"ALLOW_UNLIMITED\"\n        ]\n      },\n      \"title\": \"Other reparation services\"\n    }\n  ],\n  \"next_page_token\": \"bGltaXQ9MiZhZnRlcj1PVEhFUl9SRVBBSVImc29ydD1jb2RlLEFTQw==.xbaxi4cZXKhHIqhuSR6Afp3xoKiW-RBAUEiSVQ3B9C0=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e86d11b-fb0e-4557-acc7-0292d6b18f8c",
+          "name": "SOF25 - Create a service",
+          "request": {
+            "name": "SOF25 - Create a service",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 60 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 60 per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": {\n    \"code\": \"<string>\"\n  },\n  \"model\": {\n    \"code\": \"<string>\"\n  },\n  \"pricing\": {\n    \"type\": \"<string>\",\n    \"options\": [\n      {\n        \"code\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"code\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ]\n  },\n  \"shop\": {\n    \"id\": \"<long>\"\n  },\n  \"title\": \"<string>\",\n  \"booking\": {\n    \"type\": \"<string>\"\n  },\n  \"custom_attribute_values\": [\n    {\n      \"code\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"date_availability_end\": \"<dateTime>\",\n  \"date_availability_start\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"inactive_reasons\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"type\": \"<string>\"\n  },\n  \"quantity\": {\n    \"max_per_order\": \"<integer>\",\n    \"type\": \"<string>\"\n  },\n  \"service_tax_code\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "750c2de6-1535-4274-901b-b569d8d2d01e",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"booking\": {\n    \"type\": \"NO_BOOKING\"\n  },\n  \"category\": {\n    \"code\": \"MEALS_AND_DINNERS\"\n  },\n  \"custom_attribute_values\": [\n    {\n      \"code\": \"DISABLED_ACCESSIBILITY\",\n      \"type\": \"BOOLEAN\",\n      \"value\": true\n    },\n    {\n      \"code\": \"AGE_MIN\",\n      \"type\": \"INTEGER\",\n      \"value\": 18\n    },\n    {\n      \"code\": \"FOOD_SPECIALITY\",\n      \"type\": \"VALUE_LIST\",\n      \"value\": [\n        {\n          \"code\": \"FRENCH\"\n        },\n        {\n          \"code\": \"CHINESE\"\n        }\n      ]\n    }\n  ],\n  \"date_availability_end\": \"2022-05-31T10:15:00Z\",\n  \"date_availability_start\": \"2017-03-15T10:15:00Z\",\n  \"description\": \"You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.\",\n  \"inactive_reasons\": [\n    \"MANUALLY_DISABLED\"\n  ],\n  \"location\": {\n    \"shop_locations\": [\n      {\n        \"id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\"\n      },\n      {\n        \"id\": \"98a6f82d-2408-4609-b182-d1b80b8a9b55\"\n      }\n    ],\n    \"type\": \"AT_SHOP_LOCATION\"\n  },\n  \"model\": {\n    \"code\": \"FOOD\"\n  },\n  \"pricing\": {\n    \"options\": [\n      {\n        \"code\": \"BRING_YOUR_OWN_MATERIAL\",\n        \"type\": \"BOOLEAN\",\n        \"values\": [\n          {\n            \"amount\": 45.8,\n            \"value\": true\n          },\n          {\n            \"amount\": 0,\n            \"value\": false\n          }\n        ]\n      },\n      {\n        \"code\": \"EQUIPT_TO_BRING\",\n        \"type\": \"VALUE_LIST\",\n        \"values\": [\n          {\n            \"amount\": 45.8,\n            \"code\": \"HIKING_STICKS\"\n          },\n          {\n            \"amount\": 12,\n            \"code\": \"ADAPTED_OUTFIT\"\n          },\n          {\n            \"amount\": 22,\n            \"code\": \"BOOTS\"\n          }\n        ]\n      }\n    ],\n    \"price_per_unit\": 77,\n    \"type\": \"FIXED_PRICE\"\n  },\n  \"quantity\": {\n    \"available\": 12,\n    \"max_per_order\": 1,\n    \"type\": \"LIMITED\"\n  },\n  \"service_tax_code\": \"SERVICE_TAX_CODE\",\n  \"shop\": {\n    \"id\": 122\n  },\n  \"title\": \"Alliance Royal Package Diner\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"booking\": {\n    \"type\": \"NO_BOOKING\"\n  },\n  \"category\": {\n    \"code\": \"MEALS_AND_DINNERS\",\n    \"label\": \"Meals & Dinners\"\n  },\n  \"code\": \"UEVT44VJXD\",\n  \"consumption\": {\n    \"type\": \"VOUCHER\"\n  },\n  \"custom_attribute_values\": [\n    {\n      \"code\": \"DISABLED_ACCESSIBILITY\",\n      \"label\": \"Accessible to disabled\",\n      \"type\": \"BOOLEAN\",\n      \"value\": true\n    },\n    {\n      \"code\": \"AGE_MIN\",\n      \"label\": \"Age minimum\",\n      \"type\": \"INTEGER\",\n      \"value\": 18\n    },\n    {\n      \"code\": \"FOOD_SPECIALITY\",\n      \"label\": \"Food specialty\",\n      \"type\": \"VALUE_LIST\",\n      \"value\": [\n        {\n          \"code\": \"FRENCH\",\n          \"label\": \"French food\"\n        },\n        {\n          \"code\": \"CHINESE\",\n          \"label\": \"Chinese\"\n        }\n      ]\n    }\n  ],\n  \"date_availability_start\": \"2017-03-15T10:15:00Z\",\n  \"date_created\": \"2017-03-29T13:52:37Z\",\n  \"date_updated\": \"2017-03-29T13:52:37Z\",\n  \"description\": \"You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.\",\n  \"inactive_reasons\": [\n    \"MANUALLY_DISABLED\"\n  ],\n  \"location\": {\n    \"shop_locations\": [\n      {\n        \"geography\": {\n          \"distance\": 5000,\n          \"geocode\": {\n            \"latitude\": 48.8501395,\n            \"longitude\": 2.3522323\n          },\n          \"type\": \"POINT\"\n        },\n        \"id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\",\n        \"label\": \"Restaurant\"\n      },\n      {\n        \"geography\": {\n          \"distance\": 10000,\n          \"geocode\": {\n            \"latitude\": 48.8604325,\n            \"longitude\": 2.3508443\n          },\n          \"type\": \"POINT\"\n        },\n        \"id\": \"98a6f82d-2408-4609-b182-d1b80b8a9b55\",\n        \"label\": \"Delivery\"\n      }\n    ],\n    \"type\": \"AT_SHOP_LOCATION\"\n  },\n  \"model\": {\n    \"code\": \"FOOD\",\n    \"title\": \"All services related to food\"\n  },\n  \"pricing\": {\n    \"max_price_per_unit\": 202.6,\n    \"min_price_per_unit\": 77,\n    \"options\": [\n      {\n        \"code\": \"BRING_YOUR_OWN_MATERIAL\",\n        \"label\": \"Bring your own material\",\n        \"type\": \"BOOLEAN\",\n        \"values\": [\n          {\n            \"amount\": 45.8,\n            \"value\": true\n          },\n          {\n            \"amount\": 0,\n            \"value\": false\n          }\n        ]\n      },\n      {\n        \"code\": \"EQUIPT_TO_BRING\",\n        \"label\": \"Equipment & gear to bring\",\n        \"type\": \"VALUE_LIST\",\n        \"values\": [\n          {\n            \"amount\": 45.8,\n            \"code\": \"HIKING_STICKS\",\n            \"label\": \"hiking sticks\"\n          },\n          {\n            \"amount\": 12,\n            \"code\": \"ADAPTED_OUTFIT\",\n            \"label\": \"adapted outfit\"\n          },\n          {\n            \"amount\": 22,\n            \"code\": \"BOOTS\",\n            \"label\": \"boots\"\n          }\n        ]\n      }\n    ],\n    \"price_per_unit\": 77,\n    \"type\": \"FIXED_PRICE\"\n  },\n  \"quantity\": {\n    \"available\": 12,\n    \"max_per_order\": 1,\n    \"type\": \"LIMITED\"\n  },\n  \"shop\": {\n    \"currency_code\": \"EUR\",\n    \"id\": 122,\n    \"name\": \"Advansed Teksyztems\"\n  },\n  \"title\": \"Alliance Royal Package Diner\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79707d64-22c8-4280-b4c8-271c2cd4b438",
+          "name": "SOF11 - List services",
+          "request": {
+            "name": "SOF11 - List services",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per hour</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per hour</div>\n<div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>date_created</b> - Sort by last created date (asc by default)</li><li><b>date_updated</b> - Sort by last updated date (asc by default)</li><li><b>title</b> (Default) - Sort by title (asc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category_code",
+                  "value": "<string>",
+                  "description": "Category codes to include in result. Children categories of the specified codes are also included. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "category_code",
+                  "value": "<string>",
+                  "description": "Category codes to include in result. Children categories of the specified codes are also included. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_code",
+                  "value": "<string>",
+                  "description": "Service codes to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_code",
+                  "value": "<string>",
+                  "description": "Service codes to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "model_code",
+                  "value": "<string>",
+                  "description": "Model codes to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "model_code",
+                  "value": "<string>",
+                  "description": "Model codes to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Service state to include in result. (default: include all)"
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05d96c0f-0cfd-41a4-9a9b-712c6028af10",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "model_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "model_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"booking\": {\n        \"type\": \"NO_BOOKING\"\n      },\n      \"category\": {\n        \"code\": \"MEALS_AND_DINNERS\",\n        \"label\": \"Meals & Dinners\"\n      },\n      \"code\": \"UEVT44VJXD\",\n      \"consumption\": {\n        \"type\": \"VOUCHER\"\n      },\n      \"custom_attribute_values\": [\n        {\n          \"code\": \"DISABLED_ACCESSIBILITY\",\n          \"label\": \"Accessible to disabled\",\n          \"type\": \"BOOLEAN\",\n          \"value\": true\n        },\n        {\n          \"code\": \"AGE_MIN\",\n          \"label\": \"Age minimum\",\n          \"type\": \"INTEGER\",\n          \"value\": 18\n        },\n        {\n          \"code\": \"FOOD_SPECIALITY\",\n          \"label\": \"Food specialty\",\n          \"type\": \"VALUE_LIST\",\n          \"value\": [\n            {\n              \"code\": \"FRENCH\",\n              \"label\": \"French food\"\n            },\n            {\n              \"code\": \"CHINESE\",\n              \"label\": \"Chinese\"\n            }\n          ]\n        }\n      ],\n      \"date_availability_start\": \"2017-03-15T10:15:00Z\",\n      \"date_created\": \"2017-03-29T13:52:37Z\",\n      \"date_updated\": \"2017-03-29T13:52:37Z\",\n      \"description\": \"You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.\",\n      \"inactive_reasons\": [\n        \"MANUALLY_DISABLED\"\n      ],\n      \"location\": {\n        \"shop_locations\": [\n          {\n            \"geography\": {\n              \"distance\": 5000,\n              \"geocode\": {\n                \"latitude\": 48.8501395,\n                \"longitude\": 2.3522323\n              },\n              \"type\": \"POINT\"\n            },\n            \"id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\",\n            \"label\": \"Restaurant\"\n          },\n          {\n            \"geography\": {\n              \"distance\": 10000,\n              \"geocode\": {\n                \"latitude\": 48.8604325,\n                \"longitude\": 2.3508443\n              },\n              \"type\": \"POINT\"\n            },\n            \"id\": \"98a6f82d-2408-4609-b182-d1b80b8a9b55\",\n            \"label\": \"Delivery\"\n          }\n        ],\n        \"type\": \"AT_SHOP_LOCATION\"\n      },\n      \"medias\": [\n        {\n          \"mime_type\": \"image/jpeg\",\n          \"url\": \"/images/service-01.jpg\"\n        }\n      ],\n      \"model\": {\n        \"code\": \"FOOD\",\n        \"title\": \"All services related to food\"\n      },\n      \"pricing\": {\n        \"max_price_per_unit\": 202.6,\n        \"min_price_per_unit\": 77,\n        \"options\": [\n          {\n            \"code\": \"BRING_YOUR_OWN_MATERIAL\",\n            \"label\": \"Bring your own material\",\n            \"type\": \"BOOLEAN\",\n            \"values\": [\n              {\n                \"amount\": 45.8,\n                \"value\": true\n              },\n              {\n                \"amount\": 0,\n                \"value\": false\n              }\n            ]\n          },\n          {\n            \"code\": \"EQUIPT_TO_BRING\",\n            \"label\": \"Equipment & gear to bring\",\n            \"type\": \"VALUE_LIST\",\n            \"values\": [\n              {\n                \"amount\": 45.8,\n                \"code\": \"HIKING_STICKS\",\n                \"label\": \"hiking sticks\"\n              },\n              {\n                \"amount\": 12,\n                \"code\": \"ADAPTED_OUTFIT\",\n                \"label\": \"adapted outfit\"\n              },\n              {\n                \"amount\": 22,\n                \"code\": \"BOOTS\",\n                \"label\": \"boots\"\n              }\n            ]\n          }\n        ],\n        \"price_per_unit\": 77,\n        \"type\": \"FIXED_PRICE\"\n      },\n      \"quantity\": {\n        \"available\": 12,\n        \"max_per_order\": 1,\n        \"type\": \"LIMITED\"\n      },\n      \"title\": \"Alliance Royal Package Diner\"\n    }\n  ],\n  \"previous_page_token\": \"YmVmb3JlPVVFVlQ0NFZKWEQmbGltaXQ9MSZzb3J0PXByb3ZpZGVyX3JhdGluZyxERVND.SB48uOZTJdHkoM-ebma4VxB7SUtpwmswT-tbw-lnkJw=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e76a3158-93f9-4bff-9ef5-be4cc87e3b38",
+          "name": "SOF26 - Update a service",
+          "request": {
+            "name": "SOF26 - Update a service",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 60 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 60 per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "services",
+                ":service_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service_code",
+                  "description": "(Required) Code of the service to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shop\": {\n    \"id\": \"<long>\"\n  },\n  \"booking\": {\n    \"type\": \"<string>\"\n  },\n  \"category\": {\n    \"code\": \"<string>\"\n  },\n  \"custom_attribute_values\": [\n    {\n      \"code\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"date_availability_end\": \"<dateTime>\",\n  \"date_availability_start\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"inactive_reasons\": [\n    \"<string>\"\n  ],\n  \"location\": {\n    \"type\": \"<string>\"\n  },\n  \"model\": {\n    \"code\": \"<string>\"\n  },\n  \"pricing\": {\n    \"options\": [\n      {\n        \"code\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"code\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\"\n  },\n  \"quantity\": {\n    \"type\": \"<string>\",\n    \"max_per_order\": \"<integer>\"\n  },\n  \"service_tax_code\": \"<string>\",\n  \"title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c8eeb21-5968-44e1-987a-5312f854a86c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "services",
+                    ":service_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_code",
+                      "description": "(Required) Code of the service to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"booking\": {\n    \"type\": \"NO_BOOKING\"\n  },\n  \"category\": {\n    \"code\": \"MEALS_AND_DINNERS\"\n  },\n  \"custom_attribute_values\": [\n    {\n      \"code\": \"DISABLED_ACCESSIBILITY\",\n      \"type\": \"BOOLEAN\",\n      \"value\": true\n    },\n    {\n      \"code\": \"AGE_MIN\",\n      \"type\": \"INTEGER\",\n      \"value\": 18\n    },\n    {\n      \"code\": \"FOOD_SPECIALITY\",\n      \"type\": \"VALUE_LIST\",\n      \"value\": [\n        {\n          \"code\": \"FRENCH\"\n        },\n        {\n          \"code\": \"CHINESE\"\n        }\n      ]\n    }\n  ],\n  \"date_availability_end\": \"2022-05-31T10:15:00Z\",\n  \"date_availability_start\": \"2017-03-15T10:15:00Z\",\n  \"description\": \"You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.\",\n  \"location\": {\n    \"shop_locations\": [\n      {\n        \"id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\"\n      },\n      {\n        \"id\": \"98a6f82d-2408-4609-b182-d1b80b8a9b55\"\n      }\n    ],\n    \"type\": \"AT_SHOP_LOCATION\"\n  },\n  \"model\": {\n    \"code\": \"FOOD\"\n  },\n  \"pricing\": {\n    \"options\": [\n      {\n        \"code\": \"BRING_YOUR_OWN_MATERIAL\",\n        \"type\": \"BOOLEAN\",\n        \"values\": [\n          {\n            \"amount\": 45.8,\n            \"value\": true\n          },\n          {\n            \"amount\": 0,\n            \"value\": false\n          }\n        ]\n      },\n      {\n        \"code\": \"EQUIPT_TO_BRING\",\n        \"type\": \"VALUE_LIST\",\n        \"values\": [\n          {\n            \"amount\": 45.8,\n            \"code\": \"HIKING_STICKS\"\n          },\n          {\n            \"amount\": 12,\n            \"code\": \"ADAPTED_OUTFIT\"\n          },\n          {\n            \"amount\": 22,\n            \"code\": \"BOOTS\"\n          }\n        ]\n      }\n    ],\n    \"price_per_unit\": 77,\n    \"type\": \"FIXED_PRICE\"\n  },\n  \"quantity\": {\n    \"available\": 12,\n    \"max_per_order\": 1,\n    \"type\": \"LIMITED\"\n  },\n  \"service_tax_code\": \"SERVICE_TAX_CODE\",\n  \"shop\": {\n    \"id\": 122\n  },\n  \"title\": \"Alliance Royal Package Diner\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"booking\": {\n    \"type\": \"NO_BOOKING\"\n  },\n  \"category\": {\n    \"code\": \"MEALS_AND_DINNERS\",\n    \"label\": \"Meals & Dinners\"\n  },\n  \"code\": \"UEVT44VJXD\",\n  \"consumption\": {\n    \"type\": \"VOUCHER\"\n  },\n  \"custom_attribute_values\": [\n    {\n      \"code\": \"DISABLED_ACCESSIBILITY\",\n      \"label\": \"Accessible to disabled\",\n      \"type\": \"BOOLEAN\",\n      \"value\": true\n    },\n    {\n      \"code\": \"AGE_MIN\",\n      \"label\": \"Age minimum\",\n      \"type\": \"INTEGER\",\n      \"value\": 18\n    },\n    {\n      \"code\": \"FOOD_SPECIALITY\",\n      \"label\": \"Food specialty\",\n      \"type\": \"VALUE_LIST\",\n      \"value\": [\n        {\n          \"code\": \"FRENCH\",\n          \"label\": \"French food\"\n        },\n        {\n          \"code\": \"CHINESE\",\n          \"label\": \"Chinese\"\n        }\n      ]\n    }\n  ],\n  \"date_availability_start\": \"2017-03-15T10:15:00Z\",\n  \"date_created\": \"2017-03-29T13:52:37Z\",\n  \"date_updated\": \"2017-03-29T13:52:37Z\",\n  \"description\": \"You will be served a glass of Ruinart Brut champagne, a gastronomic four course dinner, four accompanying wines and coffee service with sweet delicacies.\",\n  \"inactive_reasons\": [\n    \"MANUALLY_DISABLED\"\n  ],\n  \"location\": {\n    \"shop_locations\": [\n      {\n        \"geography\": {\n          \"distance\": 5000,\n          \"geocode\": {\n            \"latitude\": 48.8501395,\n            \"longitude\": 2.3522323\n          },\n          \"type\": \"POINT\"\n        },\n        \"id\": \"702c3e56-dcca-41e2-b6bd-72ba3fa809be\",\n        \"label\": \"Restaurant\"\n      },\n      {\n        \"geography\": {\n          \"distance\": 10000,\n          \"geocode\": {\n            \"latitude\": 48.8604325,\n            \"longitude\": 2.3508443\n          },\n          \"type\": \"POINT\"\n        },\n        \"id\": \"98a6f82d-2408-4609-b182-d1b80b8a9b55\",\n        \"label\": \"Delivery\"\n      }\n    ],\n    \"type\": \"AT_SHOP_LOCATION\"\n  },\n  \"medias\": [\n    {\n      \"mime_type\": \"image/jpeg\",\n      \"url\": \"/images/service-01.jpg\"\n    }\n  ],\n  \"model\": {\n    \"code\": \"FOOD\",\n    \"title\": \"All services related to food\"\n  },\n  \"pricing\": {\n    \"max_price_per_unit\": 202.6,\n    \"min_price_per_unit\": 77,\n    \"options\": [\n      {\n        \"code\": \"BRING_YOUR_OWN_MATERIAL\",\n        \"label\": \"Bring your own material\",\n        \"type\": \"BOOLEAN\",\n        \"values\": [\n          {\n            \"amount\": 45.8,\n            \"value\": true\n          },\n          {\n            \"amount\": 0,\n            \"value\": false\n          }\n        ]\n      },\n      {\n        \"code\": \"EQUIPT_TO_BRING\",\n        \"label\": \"Equipment & gear to bring\",\n        \"type\": \"VALUE_LIST\",\n        \"values\": [\n          {\n            \"amount\": 45.8,\n            \"code\": \"HIKING_STICKS\",\n            \"label\": \"hiking sticks\"\n          },\n          {\n            \"amount\": 12,\n            \"code\": \"ADAPTED_OUTFIT\",\n            \"label\": \"adapted outfit\"\n          },\n          {\n            \"amount\": 22,\n            \"code\": \"BOOTS\",\n            \"label\": \"boots\"\n          }\n        ]\n      }\n    ],\n    \"price_per_unit\": 77,\n    \"type\": \"FIXED_PRICE\"\n  },\n  \"quantity\": {\n    \"available\": 12,\n    \"max_per_order\": 1,\n    \"type\": \"LIMITED\"\n  },\n  \"shop\": {\n    \"currency_code\": \"EUR\",\n    \"id\": 122,\n    \"name\": \"Advansed Teksyztems\"\n  },\n  \"title\": \"Alliance Royal Package Diner\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23704c2f-0e0f-460d-add6-1bb0ed4b8701",
+          "name": "SOF27 - Delete a service",
+          "request": {
+            "name": "SOF27 - Delete a service",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 30 per minute</div>\n<div class=\"max-call-frequency\">Maximum usage: 30 per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "mms",
+                "services",
+                ":service_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service_code",
+                  "description": "(Required) Code of the service to delete."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0392a28e-bec5-4623-94ba-6db01c39f6cb",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "mms",
+                    "services",
+                    ":service_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_code",
+                      "description": "(Required) Code of the service to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "13d6629f-e936-454f-9170-3e3357b6dbdc",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Services API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

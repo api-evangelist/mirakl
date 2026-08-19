@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Incidents API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OR64 - Mark an incident as resolved",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/lines/:line/resolve_incident",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier"
+              },
+              {
+                "name": "line",
+                "value": "",
+                "type": "path",
+                "description": "Order line identifier"
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each incident resolution on an order line</div>\n<div class=\"max-call-frequency\">Maximum usage: At each incident resolution on an order line</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/sellers/page/topics/Mirakl/mmp/Seller/manage_orders/view_orders_incidents/solve_incidents.html\">More contex"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

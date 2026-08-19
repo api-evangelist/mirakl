@@ -1,0 +1,357 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Messages API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "M01 - List messages linked to orders and offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/messages",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns messages concerned by this <code>customer_id</code>"
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns messages concerned by this <code>shop_id</code>"
+              },
+              {
+                "name": "received",
+                "value": "",
+                "type": "query",
+                "description": "<ul><li> If <code>TRUE</code>: returns only messages received by operator.</li><li> If <code>FALSE</code>: returns only messages sent to the operator.</li><li> If <code>ALL</code>: returns all messages, even direct messages between customer and shop.</li></ul>"
+              },
+              {
+                "name": "read",
+                "value": "",
+                "type": "query",
+                "description": "Ignored, will be removed in a future version"
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "query",
+                "description": "Order identifier"
+              },
+              {
+                "name": "offer_id",
+                "value": "",
+                "type": "query",
+                "description": "Offer identifier"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start creation date for filtering"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End creation date for filtering"
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "Ignored, will be removed in a future version"
+              },
+              {
+                "name": "visible",
+                "value": "",
+                "type": "query",
+                "description": "<ul><li> If <code>TRUE</code>: returns only the visible messages.</li><li> If <code>FALSE</code>: returns only the not visible messages.</li></ul>"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in a future update, please use M10 and M11 instead\n\n<div class=\"extension-title\">Description</div>\n\nReturns messages received or sent to the operator. By default, returns only messages that are received by the operator.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - at each message list d"
+        },
+        {
+          "info": {
+            "name": "M10 - Retrieve a thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/inbox/threads/:thread_id",
+            "params": [
+              {
+                "name": "thread_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the thread to retrieve."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each page that includes a message thread display</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each page that includes a message thread display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integra"
+        },
+        {
+          "info": {
+            "name": "M11 - List all threads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/inbox/threads",
+            "params": [
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type to include in result (default: include all).<br/> Available values: MMP_ORDER, MMP_OFFER, MPS_ORDER, MPS_SERVICE, SELLER_OPERATOR"
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Entity id to include in result (default: include all).<br/> The entity_type must be specified to use this filter, otherwise an error 400 will be returned.<br/> Example of an entity_id query: entity_id=order1-A,order20-A,order13-A&entity_type=MMP_ORDER"
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve threads modified at or after this date."
+              },
+              {
+                "name": "with_messages",
+                "value": "",
+                "type": "query",
+                "description": "True to include message details. Limited to the last 100 messages received on each thread."
+              },
+              {
+                "name": "channel_codes",
+                "value": "",
+                "type": "query",
+                "description": "List of the channel codes to filter with, using a comma (,) as a separator.\n<br/> If specified, only order messages linked to the given channels will be returned (Whatever the value of <code>entity_type</code>).\n<br/> Otherwise, messages will be returned regardless of their channels.\n"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nYou may want to retrieve the threads linked to a specific entity, using both <code>entity_type</code> and <code>entity_id</code>.\n<br>For example, to retrieve threads for an order, use <code>entity_type=MMP_ORDER&entity_id=my-order-1</code>.\n<br>\nAvailable values for <code>entity_type</code> are:\n<ul>\n<li><code>MMP_ORDER</code>: for threads on product orders</li>\n<li><code>MMP_OFFER</code>: for threads on offers</li>\n<li><code>MPS_ORDER</code>: for"
+        },
+        {
+          "info": {
+            "name": "M14 - Create a thread with a seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/inbox/threads",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "thread_input",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nCreate a thread with a seller and send a first message\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each thread</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each thread answer</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/top"
+        },
+        {
+          "info": {
+            "name": "M12 - Reply to a thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/inbox/threads/:thread_id/message",
+            "params": [
+              {
+                "name": "thread_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the thread to reply to."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "message_input",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nMaximum of 1000 messages on a thread\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each thread answer</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each thread answer</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/"
+        },
+        {
+          "info": {
+            "name": "M13 - Download an attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/inbox/threads/:attachment_id/download",
+            "params": [
+              {
+                "name": "attachment_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the attachment to retrieve."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Synchronous only - At each message attachment download</div>\n<div class=\"max-call-frequency\">Maximum usage: Synchronous only - At each message attachment download</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_messages.htm\">More context (P"
+        },
+        {
+          "info": {
+            "name": "OR42 - Post a message on an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/messages",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API will be removed in a future version. Use OR43 and M12 instead.\n\n<div class=\"extension-title\">Description</div>\n\nMaximum of 1000 messages on a thread\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each new message posted on an order</div>\n<div class=\"max-call-frequency\">Maximum usage: At each new message posted on an order</div"
+        },
+        {
+          "info": {
+            "name": "OR43 - Create a thread on an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/orders/:order_id/threads",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the order on which the thread is created"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "thread_input",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\n<p>Each message has a 30 Megabyte size limit, regardless of the number of attachments in the message.</p>\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each new thread posted on an order</div>\n<div class=\"max-call-frequency\">Maximum usage: At each new thread posted on an order</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "SOF43 - Create a thread on a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/services/:service_code/threads",
+            "params": [
+              {
+                "name": "service_code",
+                "value": "",
+                "type": "path",
+                "description": "Service code on which the thread is created."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "thread_input",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At every message thread</div>\n<div class=\"max-call-frequency\">Maximum usage: At every message thread</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More context</a></li></ul></div>"
+        },
+        {
+          "info": {
+            "name": "SOR43 - Create a thread on a service order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mms/orders/:order_id/threads",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the order on which the thread is created."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "thread_input",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each new message posted on a service order</div>\n<div class=\"max-call-frequency\">Maximum usage: At each new message posted on a service order</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/service_features/integrating_services/sending_service_messages.htm\">More con"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

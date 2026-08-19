@@ -1,0 +1,153 @@
+{
+  "item": [
+    {
+      "id": "6ca49880-2bed-4846-bbb9-2474a626e425",
+      "name": "Catalog Configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "265930a1-1184-464f-a8bf-2cc8bdbdabbb",
+          "name": "configureChannelCatalog - Configure Catalog capabilities for a channel",
+          "request": {
+            "name": "configureChannelCatalog - Configure Catalog capabilities for a channel",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: only once, at channel setup</div>\n<div class=\"max-call-frequency\">Maximum usage: 1 per minute</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog-configuration",
+                "channels",
+                ":channel_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) Connect Channel identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offer_configuration\": {\n    \"custom_attributes\": [\n      {\n        \"configuration_modes\": [\n          \"<string>\"\n        ],\n        \"id\": \"<string>\",\n        \"labels\": [\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ],\n        \"requirement_level\": \"<string>\",\n        \"type\": \"<string>\",\n        \"descriptions\": [\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          },\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"configuration_modes\": [\n          \"<string>\"\n        ],\n        \"id\": \"<string>\",\n        \"labels\": [\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ],\n        \"requirement_level\": \"<string>\",\n        \"type\": \"<string>\",\n        \"descriptions\": [\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          },\n          {\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"pricing_configuration\": {\n      \"discount_price_period\": {\n        \"end_date\": {\n          \"requirement_level\": \"<string>\"\n        },\n        \"start_date\": {\n          \"requirement_level\": \"<string>\"\n        },\n        \"support\": \"<string>\"\n      }\n    }\n  },\n  \"use_case_configurations\": {\n    \"offer_creation\": {\n      \"required\": {\n        \"custom_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"standard_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"support\": \"<string>\",\n      \"optional\": {\n        \"custom_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"standard_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"offer_update\": {\n      \"required\": {\n        \"custom_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"standard_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"support\": \"<string>\",\n      \"optional\": {\n        \"custom_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"standard_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b0fe708e-49ca-4f19-a344-6c833fcade26",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog-configuration",
+                    "channels",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Connect Channel identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"offer_configuration\": {\n        \"custom_attributes\": [\n            {\n                \"id\": \"OFFER_STATE\",\n                \"type\": \"List\",\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Offer condition\"\n                    }\n                ],\n                \"configuration_modes\": [\n                    \"CONSTANT\",\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The condition of the offer.\"\n                    }\n                ],\n                \"max_size\": 1,\n                \"requirement_level\": \"REQUIRED\",\n                \"values\": [\n                    {\n                        \"id\": \"NEW\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"New\"\n                            }\n                        ]\n                    },\n                    {\n                        \"id\": \"REFURBISHED\",\n                        \"labels\": [\n                            {\n                                \"locale\": \"en_US\",\n                                \"value\": \"Refurbished - as good as new\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            {\n                \"id\": \"ASIN\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"ASIN of the product. You are strongly encouraged to provide this value.\"\n                    }\n                ],\n                \"requirement_level\": \"RECOMMENDED\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Amazon Standard Identification Number\"\n                    }\n                ]\n            },\n            {\n                \"id\": \"productTaxCode\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The tax code for the product.\"\n                    }\n                ],\n                \"requirement_level\": \"OPTIONAL\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Product Tax Code\"\n                    }\n                ]\n            },\n            {\n                \"id\": \"length\",\n                \"type\": \"Text\",\n                \"configuration_modes\": [\n                    \"VARIABLE\"\n                ],\n                \"descriptions\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"The length of the product.\"\n                    }\n                ],\n                \"requirement_level\": \"OPTIONAL\",\n                \"max_size\" : 255,\n                \"labels\": [\n                    {\n                        \"locale\": \"en_US\",\n                        \"value\": \"Length\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"use_case_configurations\": {\n        \"offer_creation\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"GTIN\", \"ID\", \"STOCK\" ],\n                \"custom_attributes\": [ \"OFFER_STATE\" ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ \"STANDARD_PRICE\", \"DISCOUNT_PRICE\" ],\n                \"custom_attributes\": [ \"length\" ]\n            }\n        },\n\n        \"offer_update\": {\n            \"support\": \"SUPPORTED\",\n\n            \"required\": {\n                \"standard_attributes\": [ \"ID\" ],\n                \"custom_attributes\": [ ]\n            },\n\n            \"optional\": {\n                \"standard_attributes\": [ ],\n                \"custom_attributes\": [ \"productTaxCode\" ]\n            }\n        }\n    }\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "560a335f-17dd-4eb1-ab02-82e420cc9205",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Catalog Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Carriers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "upsertCarriers - Upsert carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/orders/channels/:channel_id/carriers",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the sales channel"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUse this API to share the channel's allowed list of carriers with Mirakl Connect, and keep it synchronized over time.\n\n**Important:**\n- You must provide the complete list of carriers in a single request, any carriers not included will be deleted\n- If the marketplace allows it, you can add an \"Other\" carrier to cover unlisted carriers; otherwise, only include formally supported carriers\n- We recommend sharing the full list of carriers: Mirakl Connec"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

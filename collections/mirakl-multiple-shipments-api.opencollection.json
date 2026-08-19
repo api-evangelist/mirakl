@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Multiple shipments API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Multiple shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ST11 - List shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "query",
+                "description": "Order id for filtering. This parameter can be supplied multiple times (order_id=OR01-A&order_id=OR02-A...)."
+              },
+              {
+                "name": "shipment_state_code",
+                "value": "",
+                "type": "query",
+                "description": "Shipment state code for filtering. This parameter can be supplied multiple times (shipment_state_code=SHIPPING&shipment_state_code=SHIPPED...)."
+              },
+              {
+                "name": "shipment_customer_debit_state_code",
+                "value": "",
+                "type": "query",
+                "description": "Shipment customer debit state code for filtering. This parameter can be supplied multiple times (shipment_customer_debit_state_code=WAITING_TAX_CONFIRMATION&shipment_customer_debit_state_code=DEBIT_OK...)."
+              },
+              {
+                "name": "last_updated_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter shipments updated after the given date."
+              },
+              {
+                "name": "last_updated_to",
+                "value": "",
+                "type": "query",
+                "description": "Filter shipments updated before the given date."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: at each shipment page display</div>\n<div class=\"max-call-frequency\">Maximum usage: at each shipment page display</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use_cases/config_multi_shipments_api.htm\">More context</a></li></ul><d"
+        },
+        {
+          "info": {
+            "name": "ST01 - Create shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 1000 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each new shipment</div>\n<div class=\"max-call-frequency\">Maximum usage: On each new shipment</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use"
+        },
+        {
+          "info": {
+            "name": "ST07 - Update shipment shipping origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each update of shipments for one or multiple shipment</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "ST06 - Delete shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 1000 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shipment deletion</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shipment deletion</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_sp"
+        },
+        {
+          "info": {
+            "name": "ST12 - List items to ship",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments/items_to_ship",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "query",
+                "description": "Order id for filtering. This parameter can be supplied multiple times (order_id=OR01-A&order_id=OR02-A...)."
+              },
+              {
+                "name": "fulfillment_center_code",
+                "value": "",
+                "type": "query",
+                "description": "Fulfillment center code for filtering. This parameter can be supplied multiple times (fulfillment_center_code=ABC&fulfillment_center_code=DEF...)."
+              },
+              {
+                "name": "shipping_date_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter items that moved to shipping status after the given date."
+              },
+              {
+                "name": "shipping_date_to",
+                "value": "",
+                "type": "query",
+                "description": "Filter items that moved to shipping status before the given date."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 15 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 5 minutes</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_specific_use_cases/config_multi_shipments_api.htm\">More context</a></li></ul><div class=\"extension-title\">"
+        },
+        {
+          "info": {
+            "name": "ST23 - Update carrier tracking information for shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments/tracking",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nIf the carrier is not registered, the complete tracking url can be provided. Limited to 1000 shipments at a time.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shipment tracking info update</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shipment tracking info update</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><l"
+        },
+        {
+          "info": {
+            "name": "ST24 - Validate shipments as shipped",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments/ship",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 1000 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shipment shipping</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shipment shipping</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_sp"
+        },
+        {
+          "info": {
+            "name": "ST26 - Validate shipments as ready to pick up",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments/ready_for_pick_up",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 1000 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: On each shipment ready to pick up</div>\n<div class=\"max-call-frequency\">Maximum usage: On each shipment ready to pick up</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "ST31 - Update shipment additional information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipments/additional_information",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nLimited to 100 shipments at a time\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each update of shipments for one or multiple shipments</div>\n</div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

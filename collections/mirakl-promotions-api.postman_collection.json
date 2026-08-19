@@ -1,0 +1,457 @@
+{
+  "item": [
+    {
+      "id": "98404e7f-45a1-4bb3-95ad-2828e95f75e5",
+      "name": "Promotions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "acd83d66-e6ce-405d-b48a-7b0cf4562b0e",
+          "name": "PR01 - List promotions",
+          "request": {
+            "name": "PR01 - List promotions",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each display of a promotions list page or on-promo offer detail page.</div>\n<div class=\"max-call-frequency\">Maximum usage: At each display of a promotions list page or on-promo offer detail page.</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_promo/promo_website.html\">More context (Advertising promotions on the front end)</a></li><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integrating_mirakl/integrate_promo/list_offers_eligible_for_promo.html\">More context (Product page: listing offers eligible for promotions)</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports offset pagination (<a href=\"#section/Offset-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>startDate</b> (Default) - Sort by promotion activity start date (Newest first) (desc by default)</li><li><b>endDate</b> - Sort by promotion activity end date (Newest first) (desc by default)</li><li><b>dateCreated</b> - Sort by promotion creation date (Newest first) (desc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "promotions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "A comma separated list of identifiers for shop joined to an identifier for a promotion (structure: \"ids=&lt;shopId&gt;|&lt;promotionShopInternalId&gt;,&lt;shopId&gt;|&lt;promotionShopInternalId&gt;, ...\" Example: /api/promotion?ids=123|promo-dec-2016)"
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "A comma separated list of types for a promotion [AMOUNT_OFF|FREE_ITEMS|PERCENTAGE_OFF|REDUCED_UNIT_PRICE]"
+                },
+                {
+                  "disabled": false,
+                  "key": "states",
+                  "value": "ACTIVE",
+                  "description": "A comma separated list of states for a promotion [PENDING|ACTIVE|EXPIRED|PENDING_APPROVAL|REJECTED|ALL]"
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_ids",
+                  "value": "<string>",
+                  "description": "A comma separated list of shop ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_after",
+                  "value": "<dateTime>",
+                  "description": "Returns promotions which ended or will end after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_before",
+                  "value": "<dateTime>",
+                  "description": "Returns promotions which started or will start before this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_created_from",
+                  "value": "<dateTime>",
+                  "description": "Filter promotion creation date lower limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_created_to",
+                  "value": "<dateTime>",
+                  "description": "Filter promotion creation date upper limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_request_date",
+                  "value": "<dateTime>",
+                  "description": "Last request date and time. We recommend using the differential mode along with the <code>states</code> parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "The locale to filter the medias and the public descriptions with. If not specified, medias and public descriptions of all locales are returned.If specified, only the media and the public description matching the locale will be returned, or, if not exist, the one matching the platform default locale."
+                },
+                {
+                  "disabled": false,
+                  "key": "trigger_offer_ids",
+                  "value": "<string>",
+                  "description": "Promotion-triggering offer ids, separated by commas"
+                },
+                {
+                  "disabled": false,
+                  "key": "reward_offer_ids",
+                  "value": "<string>",
+                  "description": "Promotion reward offer ids, separated by commas"
+                },
+                {
+                  "disabled": false,
+                  "key": "channel_codes",
+                  "value": "<string>",
+                  "description": "Channel codes on which promotions apply, separated by commas"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_identifiers",
+                  "value": "<string>",
+                  "description": "A comma separated list of campaign identifiers"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7fe40c0b-dc3d-48ec-bffd-cb0c19b0c120",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "promotions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "shop_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "starting_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "date_created_from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "date_created_to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "last_request_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trigger_offer_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reward_offer_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel_codes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "campaign_identifiers",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"promotions\": [\n    {\n      \"application_to_cart\": [\n        {\n          \"promo_code\": \"SUMMER20\"\n        }\n      ],\n      \"campaign\": {\n        \"identifier\": \"SUMMERSALE\"\n      },\n      \"date_created\": \"2023-04-03T16:18:59.924Z\",\n      \"end_date\": \"2023-08-30T22:00:00.000Z\",\n      \"internal_description\": \"Summer sale event\",\n      \"internal_id\": \"SUMMERSALE_3\",\n      \"last_updated\": \"2023-07-20T14:21:57.532Z\",\n      \"medias\": [\n        {\n          \"locale\": \"en_US\",\n          \"url\": \"https://xxxx-xxxx.mirakl.net/mmp/media/promotion-media/ac63d67a-62c5-4c9a-8483-b704494abc45\"\n        },\n        {\n          \"locale\": \"fr_FR\",\n          \"url\": \"https://xxxx-xxxx.mirakl.net/mmp/media/promotion-media/ac63d67a-62c5-4c9a-8483-b704494abc45\"\n        }\n      ],\n      \"percentage_off\": 10,\n      \"public_descriptions\": [\n        {\n          \"locale\": \"en_US\",\n          \"value\": \"Summer promotions\"\n        },\n        {\n          \"locale\": \"fr_FR\",\n          \"value\": \"Promotions d'été\"\n        }\n      ],\n      \"reward_offer_ids\": [\n        2131\n      ],\n      \"reward_on_purchased_items\": false,\n      \"shop_id\": 3,\n      \"start_date\": \"2023-04-03T16:18:59.922Z\",\n      \"state\": \"ACTIVE\",\n      \"trigger_offer_ids\": [\n        2130\n      ],\n      \"triggers\": [\n        {\n          \"quantity_purchased\": 1,\n          \"same_item_purchased\": false,\n          \"type\": \"every_quantity\"\n        }\n      ],\n      \"type\": \"PERCENTAGE_OFF\"\n    }\n  ],\n  \"total_count\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92911951-a8a1-4f3b-9ac7-ba59e0c79015",
+          "name": "PR03 - Create a promotion",
+          "request": {
+            "name": "PR03 - Create a promotion",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/docs/customers/creating-seller-promotions-via-api---api-pr03-7a31940e-dd10-b393-d8aa-78deb68966e8-47223884-dfd6-7a2f-89be-b55dd65b6dcb\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "promotions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "(Required) Shop Identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"internal_description\": \"<string>\",\n  \"internal_id\": \"<string>\",\n  \"reward\": {\n    \"selection\": {\n      \"type\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"start_date\": \"<dateTime>\",\n  \"trigger\": {\n    \"type\": \"<string>\",\n    \"selection\": {\n      \"type\": \"<string>\"\n    }\n  },\n  \"application_to_cart\": [\n    {\n      \"promo_code\": \"<string>\"\n    },\n    {\n      \"promo_code\": \"<string>\"\n    }\n  ],\n  \"channel_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer_group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer_organization_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"end_date\": \"<dateTime>\",\n  \"public_descriptions\": [\n    {\n      \"locale\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60207bd6-a1af-4096-b765-899783e1d82b",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "promotions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"application_to_cart\": [\n    {\n      \"promo_code\": \"SUMMER20\"\n    }\n  ],\n  \"channel_codes\": [\n    \"US\"\n  ],\n  \"customer_group_ids\": [\n    \"Group2\"\n  ],\n  \"customer_organization_ids\": [\n    \"Org1\"\n  ],\n  \"end_date\": \"2023-08-30T22:00:00.000Z\",\n  \"internal_description\": \"Summer sale event\",\n  \"internal_id\": \"SUMMERSALE_3\",\n  \"public_descriptions\": [\n    {\n      \"locale\": \"en_US\",\n      \"value\": \"Summer promotions\"\n    },\n    {\n      \"locale\": \"fr_FR\",\n      \"value\": \"Promotions d'été\"\n    }\n  ],\n  \"reward\": {\n    \"max_quantity_to_discount\": 1,\n    \"percentage_off\": 10,\n    \"selection\": {\n      \"type\": \"BRAND\",\n      \"values\": [\n        \"Samsung\",\n        \"Belkin\"\n      ]\n    },\n    \"type\": \"PERCENTAGE_OFF\"\n  },\n  \"start_date\": \"2023-04-03T16:18:59.922Z\",\n  \"trigger\": {\n    \"quantity_purchased\": 1,\n    \"same_item_purchased\": false,\n    \"selection\": {\n      \"type\": \"ALL\"\n    },\n    \"type\": \"EVERY_QUANTITY\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URI of the created promotion",
+                  "key": "Location",
+                  "value": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f8d400e-0d9f-4b46-8564-ed62714cb5e8",
+          "name": "PR04 - Update a promotion",
+          "request": {
+            "name": "PR04 - Update a promotion",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/docs/customers/updating-a-promotion-via-api-pr04-7a31940e-dd10-b393-d8aa-78deb68966e8-d73517ca-6de1-f7a2-703a-917f60f519be\">More context</a></li></ul></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "promotions",
+                ":promotion_internal_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "(Required) Shop Identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promotion_internal_id",
+                  "description": "(Required) Promotion internal identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"internal_description\": \"<string>\",\n  \"reward\": {\n    \"selection\": {\n      \"type\": \"<string>\"\n    }\n  },\n  \"start_date\": \"<dateTime>\",\n  \"trigger\": {\n    \"selection\": {\n      \"type\": \"<string>\"\n    }\n  },\n  \"application_to_cart\": [\n    {\n      \"promo_code\": \"<string>\"\n    },\n    {\n      \"promo_code\": \"<string>\"\n    }\n  ],\n  \"channel_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer_group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer_organization_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"end_date\": \"<dateTime>\",\n  \"public_descriptions\": [\n    {\n      \"locale\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92f35398-ede5-4848-ac5f-e8b6541e6d11",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "promotions",
+                    ":promotion_internal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promotion_internal_id",
+                      "description": "(Required) Promotion internal identifier"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"application_to_cart\": [\n    {\n      \"promo_code\": \"SUMMER20\"\n    }\n  ],\n  \"channel_codes\": [\n    \"US\"\n  ],\n  \"customer_group_ids\": [\n    \"Group2\"\n  ],\n  \"customer_organization_ids\": [\n    \"Org1\"\n  ],\n  \"end_date\": \"2023-08-30T22:00:00.000Z\",\n  \"internal_description\": \"Summer sale event\",\n  \"public_descriptions\": [\n    {\n      \"locale\": \"en_US\",\n      \"value\": \"Summer promotions\"\n    },\n    {\n      \"locale\": \"fr_FR\",\n      \"value\": \"Promotions d'été\"\n    }\n  ],\n  \"reward\": {\n    \"selection\": {\n      \"type\": \"BRAND\",\n      \"values\": [\n        \"Samsung\",\n        \"Belkin\"\n      ]\n    }\n  },\n  \"start_date\": \"2023-04-03T16:18:59.922Z\",\n  \"trigger\": {\n    \"selection\": {\n      \"type\": \"ALL\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8c25fb8a-9961-41f2-bcb9-7da709a03982",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Promotions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

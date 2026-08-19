@@ -1,0 +1,289 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Platform Settings API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Platform Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AF01 - List all custom fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/additional_fields",
+            "params": [
+              {
+                "name": "entities",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of entities on which the additional fields must apply. Accepted values are <code>OFFER</code>, <code>SHOP</code>, <code>ORDER</code> and <code>ORDER_LINE</code>. Ex: <code>OFFER,SHOP</code>."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/config_custom_fields/config_custom_fields.html\">More context</a></li></ul><div class=\"extension-title\">Localization</div>\n\n<p>Thi"
+        },
+        {
+          "info": {
+            "name": "CH11 - List all enabled channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/channels"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nResults are sorted by code\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will"
+        },
+        {
+          "info": {
+            "name": "CUR01 - List currency codes and labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/currencies"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nList currency codes and labels activated on the platform\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><"
+        },
+        {
+          "info": {
+            "name": "DO01 - List all document types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/documents",
+            "params": [
+              {
+                "name": "entities",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of values, representing the type of entities the document type should be related to. Accepted values are <code>ORDER</code>, <code>SHOP</code>. Ex: <code>ORDER,SHOP</code>"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/display_order_documents_on_front.html\">More context</a></li></ul><div class=\"extension-t"
+        },
+        {
+          "info": {
+            "name": "L01 - List locale codes and labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/locales"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nList locale codes and labels from your platform to automate product format exports (API H01, PM01, VL01) from your PIM system\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "PC01 - List platform configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/platform/configuration"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nList platform configurations such as general information, modules and features activated.<br/>\n<br/>\nNote: This configuration represents modules and major features enabled during platform setup. This differs from the PC02 API which export the platform business settings configurable by the operator in the back office.\n\n\n<div class=\"api-description-extension\">\n</div>"
+        },
+        {
+          "info": {
+            "name": "V01 - Health Check endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/version",
+            "params": [
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nUse this endpoint to check that Mirakl Platform is up.<br/>You can ignore the response body that is subject to change, checking the response code is enough.\n\n<div class=\"api-description-extension\">\n</div>"
+        },
+        {
+          "info": {
+            "name": "OF61 - List offer conditions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/offers/states",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter offer condition on their active status. If true, only active offer conditions are returned. If false, only inactive offer conditions are returned. If not specified, all offer conditions are returned."
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nSorted by sort index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized "
+        },
+        {
+          "info": {
+            "name": "RE01 - List reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/reasons"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nThis API returns cancellation, refund, incident, and message reasons.<br>Reasons are sorted by type then sort index (set in the back-office)\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time a page must display a list of reasons</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time a page must display a list of reasons</div>\n<div "
+        },
+        {
+          "info": {
+            "name": "RE02 - List reasons by type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/reasons/:reason_type",
+            "params": [
+              {
+                "name": "reason_type",
+                "value": "",
+                "type": "path",
+                "description": "Reason type"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in future update. Consider using RE01.\n\n<div class=\"extension-title\">Description</div>\n\nThis API returns cancellation, refund, incident, and message reasons.<br>Reasons are sorted by sort index (set in the back-office)\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time a page must display a list of re"
+        },
+        {
+          "info": {
+            "name": "RE11 - List of reasons with type: incident open",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/reasons/incident_open"
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in future update, use RE02 with parameter <code>reason_type='INCIDENT_OPEN'</code>\n\n<div class=\"extension-title\">Description</div>\n\nNote: Result returns only reasons where the user's role have the right <br>Note: Reasons are sorted by sort index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommende"
+        },
+        {
+          "info": {
+            "name": "RE12 - List of reasons with type: incident close",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/reasons/incident_close"
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in future update, use RE02 with parameter <code>reason_type='INCIDENT_CLOSE'</code>\n\n<div class=\"extension-title\">Description</div>\n\nNote: Result returns only reasons where the user's role have the right <br>Note: Reasons are sorted by sort index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommend"
+        },
+        {
+          "info": {
+            "name": "RE14 - List of reasons with type: messaging",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/reasons/messaging"
+          },
+          "docs": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in future update, use RE02 with parameter <code>reason_type='MESSAGING'</code>\n\n<div class=\"extension-title\">Description</div>\n\nNote: Result returns only reasons where the user's role have the right <br>Note: Reasons are sorted by sort index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended us"
+        },
+        {
+          "info": {
+            "name": "SH11 - List all active shipping zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipping/zones"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nResults are sorted by index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Loc"
+        },
+        {
+          "info": {
+            "name": "SH12 -  List all active shipping methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipping/types"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nResults are sorted by index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Loc"
+        },
+        {
+          "info": {
+            "name": "SH21 - List all carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipping/carriers"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nResults are sorted alphabetically by carrier label\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "SH31 - List all logistic classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipping/logistic_classes"
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nResults are sorted by index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Loc"
+        },
+        {
+          "info": {
+            "name": "SH42 - Get shop shipping configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipping/configuration/shop",
+            "params": [
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every week</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "SH52 - Get shipping charges configured for a shop account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/shipping/charges/shop",
+            "params": [
+              {
+                "name": "overridden_by_shop",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve only the shipping charge configurations customized by the seller"
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nGet shipping charges and their configuration\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every week</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,111 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.mirakl.com/products/connect/pricing/
+currency: USD
+billing_period: month
+summary: >-
+  Mirakl publishes public list pricing only for Mirakl Connect, the seller-side
+  product (one integration, many channels). The operator-side products — Mirakl
+  Marketplace Platform (MMP), Dropship, Catalog Platform (MCP), Platform for
+  Services (MPS), Ads and Payout — carry no public price and are sold
+  enterprise-direct. API access is not sold as a separate metered plan; it comes
+  with the platform subscription, and the throttling contract is per-operation
+  call frequency rather than a request quota (see rate-limits/).
+plan_count: 3
+plans:
+  - name: Growth
+    price: 699
+    currency: USD
+    period: month
+    audience: growing sellers scaling across multiple channels
+    quotas:
+      channels: unlimited
+      products_stored: 10000
+      gmv_per_month: 50000
+      gmv_currency: USD
+    included:
+      - Order management
+      - Stock & price sync
+      - Oversell protection
+      - Advanced connectors (native Shopify and Magento)
+      - Product creation with AI
+      - Customer messages
+      - Quick store setup
+      - Marketplace discovery
+      - Knowledge base
+      - Email support
+      - Professional services (Standard)
+    not_included:
+      - Insights dashboards
+      - Dedicated account manager
+    add_ons:
+      - name: AI image optimization
+        price: 399
+        period: month
+      - name: Agentic channels
+        price: 399
+        period: month
+    overage: null
+    overage_note: >-
+      No published overage rate; the page presents GMV and stored-product ceilings
+      as plan limits with an upgrade path rather than a metered overage price.
+  - name: Pro
+    price: 2299
+    currency: USD
+    period: month
+    audience: high-volume brands needing advanced automation and deep analytics
+    most_popular: true
+    quotas:
+      channels: unlimited
+      products_stored: 20000
+      gmv_per_month: 200000
+      gmv_currency: USD
+    included:
+      - Everything in Growth
+      - Insights dashboards
+    not_included:
+      - Dedicated account manager
+    add_ons:
+      - name: AI image optimization
+        price: 699
+        period: month
+      - name: Agentic channels
+        price: 699
+        period: month
+    overage: null
+  - name: Enterprise
+    price: null
+    price_model: contact-sales
+    audience: operations processing more than $200k GMV per month
+    quotas:
+      channels: unlimited
+      products_stored: custom
+      gmv_per_month: custom
+    included:
+      - Everything in Pro
+      - Dedicated account manager
+      - Professional services (Tailored)
+    add_ons:
+      - name: AI image optimization
+        price: custom
+      - name: Agentic channels
+        price: custom
+    overage: null
+    note: >-
+      "We will build a plan around your actual volume, growth stage and billing
+      preferences." Priced by negotiation.
+not_publicly_priced:
+  - Mirakl Marketplace Platform (MMP)
+  - Mirakl Dropship Platform
+  - Mirakl Catalog Platform (MCP)
+  - Mirakl Platform for Services (MPS)
+  - Mirakl Ads
+  - Mirakl Payout
+api_pricing:
+  metered: false
+  note: >-
+    No per-call or per-API pricing is published. API entitlement follows the
+    product subscription; per-operation call ceilings are published in the
+    OpenAPI descriptions and captured in rate-limits/mirakl-rate-limits.yml.
+cross_reference:
+  rate_limits: rate-limits/mirakl-rate-limits.yml

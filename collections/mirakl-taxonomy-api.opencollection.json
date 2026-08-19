@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Taxonomy API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Taxonomy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "createTaxonomyRule - Create a Taxonomy Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/taxonomy/channels/:channel_id/rules",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path",
+                "description": "Connect Channel identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: 5 per second</div>\n<div class=\"max-call-frequency\">Maximum usage: 10 per second</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "upsertProductType - Create or Update a Product Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://miraklconnect.com/api/channel-platform/v1/taxonomy/channels/:channel_id/product-types",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path",
+                "description": "Connect Channel identifier"
+              },
+              {
+                "name": "product_type_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the product type, which may contain special characters like slashes."
+              },
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "query",
+                "description": "Store identifier scoping this product type to a specific store.\n\nWhen provided, the product type is pushed at store-level granularity instead of channel-level.\n**This granularity is not enabled by default: contact Mirakl technical teams beforehand.**\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nCreates or fully replaces a Product Type for the specified channel.\n\n**Behavior:**\n- **Full replacement (PUT semantics):** the entire product type definition (including all embedded attributes, their value lists, and rule references) is replaced with the content of this request. Any attribute, value list entry, or rule reference not present in the request body will be removed.\n- **Always provide the complete product type definition in every request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

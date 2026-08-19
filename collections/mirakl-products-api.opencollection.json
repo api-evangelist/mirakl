@@ -1,0 +1,346 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Products API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "CM11 - Export Source Product Data Sheet status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/mcm/products/sources/status/export",
+            "params": [
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Export start date. Given date must respect ISO-8601 format and must be URL encoded"
+              },
+              {
+                "name": "updated_to",
+                "value": "",
+                "type": "query",
+                "description": "Export end date. Given date must respect ISO-8601 format and must be URL encoded"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of the product : LIVE / NOT_LIVE"
+              },
+              {
+                "name": "provider_unique_identifier",
+                "value": "",
+                "type": "query",
+                "description": "The provider unique identifier of the product"
+              },
+              {
+                "name": "unique_identifier",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the product with type (structure: \\\"unique_identifier=&UniqueIdentifierType1|UniqueIdentifierID1,UniqueIdentifierType2|UniqueIdentifierID2, ...\\\")."
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "The provider id"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nDelta export of the source product data sheet status in JSON format.\n\nDefine a cron job in your system that periodically calls this API and sets the previous\nrequest date as the `updated_since` query parameter.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: <br/>- Differential: every 15 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage:"
+        },
+        {
+          "info": {
+            "name": "H11 - List Catalog categories (parents and children) related to a Catalog category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/hierarchies",
+            "params": [
+              {
+                "name": "hierarchy",
+                "value": "",
+                "type": "query",
+                "description": "Catalog category code"
+              },
+              {
+                "name": "max_level",
+                "value": "",
+                "type": "query",
+                "description": "Number of children catalog category levels to retrieve. If not specified, all child catalog categories are retrieved"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every hour</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "P51 - Get information about product import statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/imports",
+            "params": [
+              {
+                "name": "last_request_date",
+                "value": "",
+                "type": "query",
+                "description": "Return only product imports that have changed since this date"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Product import status. One of <code>CANCELLED</code>, <code>WAITING</code>, <code>RUNNING</code>, <code>SENT</code>, <code>COMPLETE</code>, <code>FAILED</code>"
+              },
+              {
+                "name": "has_transformed_file",
+                "value": "",
+                "type": "query",
+                "description": "If <code>true</code> returns only product import trackings with transformed file"
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Shop identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nIf the last_request_date param is not set the api returns all product imports.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 5 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mci/Oper"
+        },
+        {
+          "info": {
+            "name": "P41 - Import products to the operator information system",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/imports",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "conversion_options",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "conversion_type",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "operator_format",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "shop",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nReturns the import identifier to track the status of the import\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every hour, for each seller</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 15 minutes, for each seller</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/"
+        },
+        {
+          "info": {
+            "name": "P42 - Get the import status for a product import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/imports/:import",
+            "params": [
+              {
+                "name": "import",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per minute until getting the import final status</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per minute</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "P44 - Get the error report file for a product import (\"Non-integrated products report\")",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/imports/:import/error_report",
+            "params": [
+              {
+                "name": "import",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nThis API returns either a CSV file (MCM enabled) or a file in a format defined by the operator (MCM disabled).\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time an error report is needed</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time an error report is needed</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a hr"
+        },
+        {
+          "info": {
+            "name": "P45 - Get the product integration report file for a product import (\"Added products report\")",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/imports/:import/new_product_report",
+            "params": [
+              {
+                "name": "import",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nThis API returns either a CSV file (MCM enabled) or a file in a format defined by the operator (MCM disabled).\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time an integration report is needed</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time an integration report is needed</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "P46 - Get the transformed file for a product import (\"File in operator format\")",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/imports/:import/transformed_file",
+            "params": [
+              {
+                "name": "import",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nThis API returns a CSV file.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time a transformed file is available</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time a transformed file is available</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "P47 - Get the transformation error report file for a product import (\"Source file error report\")",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/imports/:import/transformation_error_report",
+            "params": [
+              {
+                "name": "import",
+                "value": "",
+                "type": "path",
+                "description": "Import identifier"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nThis API returns a CSV, XLSX or XML file, depending on the file format provided by the seller.\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time an error report is needed</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time an error report is needed</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "PM11 - Get the product attribute configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products/attributes",
+            "params": [
+              {
+                "name": "hierarchy",
+                "value": "",
+                "type": "query",
+                "description": "Code of the hierarchy (category) for which to retrieve the attributes. If not specified, all attributes are retrieved."
+              },
+              {
+                "name": "max_level",
+                "value": "",
+                "type": "query",
+                "description": "Number of children hierarchy (category) levels to retrieve. If not specified, attributes from all children hierarchies are retrieved."
+              },
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query",
+                "description": "List of channel codes"
+              },
+              {
+                "name": "with_roles",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"<code>true</code>\" to get only the attributes that have roles."
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nRetrieves all attributes for parents and children of the requested hierarchy\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every hour</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "VL11 - Get information about operator's value lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/values_lists",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "The operator's values list code. If not specified, all values lists are retrieved"
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every hour</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>"
+        },
+        {
+          "info": {
+            "name": "P31 - Get products for a list of product references",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/products",
+            "params": [
+              {
+                "name": "product_references",
+                "value": "",
+                "type": "query",
+                "description": "List of the product's identifiers with type, _(structure: \"`product_references=<productIdType>|<productId>,<productIdType>|<productId>, ...`\")_\nwhere accepted `<productIdType>` are operator’s product references, like `EAN` or `UPC` for example.\n\nNote that `SHOP_SKU` or `SKU` are invalid `<productIdType>` for this API.\n"
+              },
+              {
+                "name": "products",
+                "value": "",
+                "type": "query",
+                "description": "List of the product's identifiers with type, _(structure: \"`products=<productId>|<productIdType>,<productId>|<productIdType>, ...`\")_\nwhere accepted `<productIdType>` are operator’s product references, like `EAN` or `UPC` for example.\n\nNote that `SHOP_SKU` or `SKU` are invalid `<productIdType>` for this API.\n"
+              }
+            ]
+          },
+          "docs": "<div class=\"extension-title\">Description</div>\n\nNote: this resource returns 100 products maximum <br/> Results are sorted by product sku asc, then by product identifier type asc and then by product identifier asc\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: At each product page display</div>\n<div class=\"max-call-frequency\">Maximum usage: At each product page display</div>\n<div class=\"extensi"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

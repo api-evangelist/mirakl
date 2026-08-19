@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mirakl Connect Channel Platform APIs Carriers Picklists API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Picklists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PL11 - List picklists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://miraklconnect.com/api/channel-platform/api/picklists",
+            "params": [
+              {
+                "name": "pickrun_code",
+                "value": "",
+                "type": "query",
+                "description": "Pick run code for filtering."
+              },
+              {
+                "name": "pickup_date_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter picklists with a pick-up date after the given date."
+              },
+              {
+                "name": "pickup_date_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter picklists with a pick-up date before the given date."
+              },
+              {
+                "name": "picklist_id",
+                "value": "",
+                "type": "query",
+                "description": "Picklist id for filtering. This parameter can be supplied multiple times (picklist_id=OR01-A&picklist_id=OR02-A...)."
+              },
+              {
+                "name": "shop_id",
+                "value": "",
+                "type": "query",
+                "description": "Shop id for filtering."
+              },
+              {
+                "name": "picklist_state",
+                "value": "",
+                "type": "query",
+                "description": "Picklist state for filtering. This parameter can be supplied multiple times (picklist_state=WAITING_PREPARATION&picklist_state=IN_PREPARATION...)."
+              },
+              {
+                "name": "order_line_id",
+                "value": "",
+                "type": "query",
+                "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+              }
+            ]
+          },
+          "docs": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 15 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 5 minutes</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage-picklists.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports s"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

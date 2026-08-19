@@ -1,0 +1,205 @@
+{
+  "item": [
+    {
+      "id": "470d186e-739a-4f8c-afbe-d12c9a8ef83a",
+      "name": "Picklists",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64594f98-03d5-4491-80a5-88aa7aa14b4b",
+          "name": "PL11 - List picklists",
+          "request": {
+            "name": "PL11 - List picklists",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every 15 minutes</div>\n<div class=\"max-call-frequency\">Maximum usage: Every 5 minutes</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage-picklists.htm\">More context</a></li></ul><div class=\"extension-title\">Pagination</div>\n\n<p>This resource supports seek pagination (<a href=\"#section/Seek-pagination-and-sort\">see documentation</a>)</p>\n\n<div class=\"extension-title\">Sort fields</div>\n\n<code>sort</code> field can have the following values:<ul><li><b>pickupDate</b> (Default) - Sort by pickup date (asc by default)</li></ul>\n\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "picklists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pickrun_code",
+                  "value": "<string>",
+                  "description": "Pick run code for filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "pickup_date_min",
+                  "value": "<dateTime>",
+                  "description": "Filter picklists with a pick-up date after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "pickup_date_max",
+                  "value": "<dateTime>",
+                  "description": "Filter picklists with a pick-up date before the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "picklist_id",
+                  "value": "<string>",
+                  "description": "Picklist id for filtering. This parameter can be supplied multiple times (picklist_id=OR01-A&picklist_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "picklist_id",
+                  "value": "<string>",
+                  "description": "Picklist id for filtering. This parameter can be supplied multiple times (picklist_id=OR01-A&picklist_id=OR02-A...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Shop id for filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "picklist_state",
+                  "value": "<string>",
+                  "description": "Picklist state for filtering. This parameter can be supplied multiple times (picklist_state=WAITING_PREPARATION&picklist_state=IN_PREPARATION...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "picklist_state",
+                  "value": "<string>",
+                  "description": "Picklist state for filtering. This parameter can be supplied multiple times (picklist_state=WAITING_PREPARATION&picklist_state=IN_PREPARATION...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_line_id",
+                  "value": "<string>",
+                  "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_line_id",
+                  "value": "<string>",
+                  "description": "Order line id for filtering. This parameter can be supplied multiple times (order_line_id=OR01-A-1&order_line_id=OR02-A-1...)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "389533f4-3a23-4467-b205-7cf038525da1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "picklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pickrun_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pickup_date_min",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pickup_date_max",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "picklist_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "picklist_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "picklist_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "picklist_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_line_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_line_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"date_created\": \"2022-09-28T13:37:00Z\",\n      \"id\": \"picklist01\",\n      \"last_updated\": \"2022-09-28T13:37:00Z\",\n      \"order_lines\": [\n        {\n          \"id\": \"ORDER-001-A-1\"\n        },\n        {\n          \"id\": \"ORDER-001-A-2\"\n        },\n        {\n          \"id\": \"ORDER-002-A-1\"\n        },\n        {\n          \"id\": \"ORDER-003-A-1\"\n        }\n      ],\n      \"picklist_lines\": [\n        {\n          \"offer_id\": 2135,\n          \"quantity\": 3\n        },\n        {\n          \"offer_id\": 2136,\n          \"quantity\": 1\n        }\n      ],\n      \"pickrun_code\": \"pickrun1\",\n      \"pickup_date\": \"2022-10-01T00:00:00Z\",\n      \"shop_id\": 2000,\n      \"state\": \"WAITING_PREPARATION\"\n    },\n    {\n      \"date_created\": \"2022-09-28T15:00:00Z\",\n      \"id\": \"picklist02\",\n      \"last_updated\": \"2022-09-28T15:00:00Z\",\n      \"order_lines\": [\n        {\n          \"id\": \"ORDER-004-A-1\"\n        }\n      ],\n      \"picklist_lines\": [\n        {\n          \"offer_id\": 2201,\n          \"quantity\": 15\n        }\n      ],\n      \"pickrun_code\": null,\n      \"pickup_date\": \"2022-10-24T00:00:00Z\",\n      \"shop_id\": 2000,\n      \"state\": \"WAITING_PREPARATION\"\n    }\n  ],\n  \"next_page_token\": \"bGltaXQ9MSZhZnRlcj0yMDIyLTEyLTI0VDAwOjAwOjAwWiZhZnRlcj04Y2ViNWQxZi05MjQ4LTQyYjEtYTdkNS05NzYwNzAxOGQzNGEmc29ydD1waWNrdXBEYXRlLEFTQw==\",\n  \"previous_page_token\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7de277ef-e875-4ec1-b33b-c1608062e835",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Picklists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1496 @@
+{
+  "item": [
+    {
+      "id": "f74ef50e-1506-4766-8925-65b285a7fb4a",
+      "name": "Platform Settings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1acd1e23-d526-41ed-900c-55b6f2c8463d",
+          "name": "AF01 - List all custom fields",
+          "request": {
+            "name": "AF01 - List all custom fields",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/config_custom_fields/config_custom_fields.html\">More context</a></li></ul><div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "additional_fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entities",
+                  "value": "<string>",
+                  "description": "A comma separated list of entities on which the additional fields must apply. Accepted values are <code>OFFER</code>, <code>SHOP</code>, <code>ORDER</code> and <code>ORDER_LINE</code>. Ex: <code>OFFER,SHOP</code>."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f39884f5-3629-4198-be34-412bc9c35d56",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "additional_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entities",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additional_fields\": [\n    {\n      \"code\": \"ecotax\",\n      \"description\": \"The amount of the price to be collected as Eco tax.\",\n      \"entity\": \"OFFER\",\n      \"label\": \"Eco tax\",\n      \"required\": false,\n      \"type\": \"NUMERIC\"\n    },\n    {\n      \"code\": \"gift-message\",\n      \"description\": \"Message to send with the order.\",\n      \"entity\": \"ORDER_LINE\",\n      \"label\": \"Gift Message\",\n      \"required\": false,\n      \"shop_permission\": \"READ_WRITE\",\n      \"type\": \"STRING\"\n    },\n    {\n      \"channels\": [\n        \"US\",\n        \"FR\"\n      ],\n      \"code\": \"customer-care-phone\",\n      \"description\": \"Phone number to contact customer care service.\",\n      \"entity\": \"SHOP\",\n      \"label\": \"Customer care phone number\",\n      \"models\": [\n        \"MARKETPLACE\"\n      ],\n      \"required\": false,\n      \"shop_permission\": \"READ_WRITE\",\n      \"type\": \"STRING\"\n    },\n    {\n      \"accepted_values\": [\n        \"Opt-In\",\n        \"Headhunted\",\n        \"Contact-Form\"\n      ],\n      \"code\": \"recruitment\",\n      \"description\": \"How the shop has been recruited on the platform.\",\n      \"entity\": \"SHOP\",\n      \"label\": \"Recruitment Method\",\n      \"required\": false,\n      \"shop_permission\": \"READ_WRITE\",\n      \"type\": \"LIST\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6212890e-d6b5-4a35-9b56-12fb9ea2e5ef",
+          "name": "CH11 - List all enabled channels",
+          "request": {
+            "name": "CH11 - List all enabled channels",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nResults are sorted by code\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "channels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "a1d95fb9-dc36-435e-9e99-30b0f9be3208",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channels\": [\n    {\n      \"code\": \"BFR\",\n      \"description\": \"Black Friday\",\n      \"label\": \"Black Friday\"\n    },\n    {\n      \"code\": \"CA\",\n      \"description\": \"Website CA\",\n      \"label\": \"Website CA\"\n    },\n    {\n      \"code\": \"CHR\",\n      \"description\": \"Christmas\",\n      \"label\": \"Christmas\"\n    },\n    {\n      \"code\": \"FR\",\n      \"description\": \"Website FR\",\n      \"label\": \"Website FR\"\n    },\n    {\n      \"code\": \"US\",\n      \"description\": \"Website US\",\n      \"label\": \"Website US\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18fc8761-d304-471b-b46c-52dffa161dad",
+          "name": "CUR01 - List currency codes and labels",
+          "request": {
+            "name": "CUR01 - List currency codes and labels",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nList currency codes and labels activated on the platform\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "bdd7a9d5-03c3-4984-a3eb-927444f2407f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currencies\": [\n    {\n      \"code\": \"EUR\",\n      \"label\": \"Euro\",\n      \"platform_default\": true\n    },\n    {\n      \"code\": \"JPY\",\n      \"label\": \"Japanese Yen\"\n    },\n    {\n      \"code\": \"USD\",\n      \"label\": \"US Dollar\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb8f4570-3fdb-466f-9d8f-e05366b9d307",
+          "name": "DO01 - List all document types",
+          "request": {
+            "name": "DO01 - List all document types",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_docs/manage_order_and_seller_docs/display_order_documents_on_front.html\">More context</a></li></ul><div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entities",
+                  "value": "<string>",
+                  "description": "A comma separated list of values, representing the type of entities the document type should be related to. Accepted values are <code>ORDER</code>, <code>SHOP</code>. Ex: <code>ORDER,SHOP</code>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0a5f7a83-a6b2-4edb-806e-3aea8213ae00",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entities",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"code\": \"SYSTEM_DELIVERY_BILL\",\n      \"description\": \"Delivery slip\",\n      \"entity\": \"ORDER\",\n      \"label\": \"Delivery slip\"\n    },\n    {\n      \"code\": \"CUSTOMER_INVOICE\",\n      \"description\": \"Invoice\",\n      \"entity\": \"ORDER\",\n      \"label\": \"Invoice\"\n    },\n    {\n      \"code\": \"LEGAL_DOC\",\n      \"description\": \"Legal documents\",\n      \"entity\": \"SHOP\",\n      \"label\": \"Legal documents\",\n      \"models\": [\n        \"MARKETPLACE\"\n      ]\n    },\n    {\n      \"code\": \"ID_CARD\",\n      \"description\": \"General Manager ID card\",\n      \"entity\": \"SHOP\",\n      \"label\": \"General Manager ID card\",\n      \"models\": [\n        \"MARKETPLACE\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2039153b-5cae-409e-8571-a96232f7800a",
+          "name": "L01 - List locale codes and labels",
+          "request": {
+            "name": "L01 - List locale codes and labels",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nList locale codes and labels from your platform to automate product format exports (API H01, PM01, VL01) from your PIM system\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "locales"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7272c36b-3f29-45a1-9ac5-3f0e067c460a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "locales"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"locales\": [\n    {\n      \"code\": \"de_DE\",\n      \"label\": \"Deutsch\"\n    },\n    {\n      \"code\": \"en_US\",\n      \"label\": \"English - US\",\n      \"platform_default\": true\n    },\n    {\n      \"code\": \"es_ES\",\n      \"label\": \"Español\"\n    },\n    {\n      \"code\": \"fr_FR\",\n      \"label\": \"Français\"\n    },\n    {\n      \"code\": \"it_IT\",\n      \"label\": \"Italiano\"\n    },\n    {\n      \"code\": \"nl_NL\",\n      \"label\": \"Nederlands\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ef4b566-26a7-4d06-99c3-2326d90bc9a6",
+          "name": "PC01 - List platform configurations",
+          "request": {
+            "name": "PC01 - List platform configurations",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nList platform configurations such as general information, modules and features activated.<br/>\n<br/>\nNote: This configuration represents modules and major features enabled during platform setup. This differs from the PC02 API which export the platform business settings configurable by the operator in the back office.\n\n\n<div class=\"api-description-extension\">\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "configuration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "18de059c-8a1f-431d-ad16-a56fdb98b0c6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "configuration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"features\": {\n    \"catalog\": {\n      \"allow_shop_contribution_to_all_channels\": true,\n      \"exclude_invalid_products\": true,\n      \"list_of_multiple_values_separator\": \"|\",\n      \"product_acceptance_by_channel\": true,\n      \"product_data_validation_by_channel\": true,\n      \"product_import_only_on_leaf\": true\n    },\n    \"circular_economy_data_collection\": false,\n    \"competitive_pricing_tool\": false,\n    \"direct_payment_customer_store\": {\n      \"activated\": false,\n      \"refund_cancel_authorized\": false\n    },\n    \"disable_seller_alternative_carrier\": false,\n    \"lead_time_to_ship_by_sellers_enabled\": \"YES\",\n    \"multi_currency\": true,\n    \"no_reply_needed\": true,\n    \"offer_prices_decimals\": \"2\",\n    \"operator_csv_delimiter\": \"SEMICOLON\",\n    \"order_conditions\": {\n      \"lead_time_to_ship\": true,\n      \"maximum_order_quantity\": false,\n      \"minimum_order_quantity\": false,\n      \"package_order_quantity\": false\n    },\n    \"order_tax_mode\": \"TAX_EXCLUDED\",\n    \"order_workflows\": {\n      \"no_customer_payment_confirmation\": true,\n      \"order_acceptance\": \"NOT_AUTOMATIC\",\n      \"pause_debit_workflow\": false,\n      \"pay_on_due_date\": true,\n      \"pay_on_shipment\": true,\n      \"sellers_edit_shipping_origin\": false,\n      \"shipping_and_billing_details_before_acceptance\": false\n    },\n    \"pricing\": {\n      \"channel_pricing\": \"DISABLED\",\n      \"scheduled_pricing\": false,\n      \"volume_discount\": true,\n      \"volume_pricing\": false\n    },\n    \"product_data_validation_by_channel\": true,\n    \"shipment\": {\n      \"multi_part_item_shipment\": true,\n      \"multi_shipment\": true\n    },\n    \"shop_tax_options\": {\n      \"local_tax_number\": {\n        \"mandatory\": true,\n        \"validation_regex\": \"regex_local_tax_number\"\n      },\n      \"tax_identification_number\": {\n        \"mandatory\": true,\n        \"validation_regex\": \"regex_tax_identification_number\"\n      }\n    },\n    \"tax_collection\": {\n      \"activated\": \"NO\",\n      \"product_tax_code_mandatory\": true,\n      \"tax_collection_by_operator\": false\n    },\n    \"tax_id_number\": {\n      \"mandatory\": false\n    },\n    \"warehouses\": {\n      \"geolocation\": true,\n      \"restricted_countries\": [\n        \"FRA\",\n        \"USA\"\n      ]\n    }\n  },\n  \"modules\": {\n    \"mirakl_catalog_integrator\": true,\n    \"mirakl_catalog_manager\": false,\n    \"mirakl_catalog_transformer\": true,\n    \"mirakl_platform_services\": false,\n    \"offer_management\": true,\n    \"order_management\": true,\n    \"promotions\": true,\n    \"quotes\": true,\n    \"tax_manager\": {\n      \"activated\": false,\n      \"tax_provider\": {\n        \"avalara\": false,\n        \"vertex\": false\n      }\n    }\n  },\n  \"platform_configuration\": {\n    \"customer_model\": {\n      \"b2b\": false,\n      \"b2c\": true\n    },\n    \"platform_model\": {\n      \"drop_ship\": true,\n      \"marketplace\": true,\n      \"one_creditor\": true\n    }\n  },\n  \"platform_name\": \"\",\n  \"tenant_name\": \"tenantname-prod\",\n  \"timezone\": \"Europe/Paris\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b243c5f-26f0-413b-914a-dfb9ff927547",
+          "name": "V01 - Health Check endpoint",
+          "request": {
+            "name": "V01 - Health Check endpoint",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nUse this endpoint to check that Mirakl Platform is up.<br/>You can ignore the response body that is subject to change, checking the response code is enough.\n\n<div class=\"api-description-extension\">\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "129f8d89-8ff5-4cb5-a2e4-df3fdd1663b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b76b84c-7e33-409b-96d0-a93da6a53239",
+          "name": "OF61 - List offer conditions",
+          "request": {
+            "name": "OF61 - List offer conditions",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nSorted by sort index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "offers",
+                "states"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter offer condition on their active status. If true, only active offer conditions are returned. If false, only inactive offer conditions are returned. If not specified, all offer conditions are returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "31547b45-84ff-4f9b-bad5-e9c98b572717",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "offers",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"offer_states\": [\n    {\n      \"active\": false,\n      \"code\": \"8\",\n      \"label\": \"Collectors - Acceptable Condition\"\n    },\n    {\n      \"active\": true,\n      \"code\": \"10\",\n      \"label\": \"Refurbished\"\n    }\n  ],\n  \"total_count\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "945e02aa-c2ca-42cc-b102-cac1c5467442",
+          "name": "RE01 - List reasons",
+          "request": {
+            "name": "RE01 - List reasons",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nThis API returns cancellation, refund, incident, and message reasons.<br>Reasons are sorted by type then sort index (set in the back-office)\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time a page must display a list of reasons</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time a page must display a list of reasons</div>\n<div class=\"extension-title\">Read More</div>\n\n<ul><li><a href=\"https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/display_order_details_and_features.html\">More context</a></li></ul><div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reasons"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "132b40de-15c5-452c-8c30-5b03611c1a21",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reasons\": [\n    {\n      \"code\": \"1\",\n      \"is_customer_right\": true,\n      \"is_operator_right\": true,\n      \"is_shop_right\": false,\n      \"label\": \"Item not received\",\n      \"type\": \"INCIDENT_OPEN\"\n    },\n    {\n      \"code\": \"10\",\n      \"is_customer_right\": true,\n      \"is_operator_right\": true,\n      \"is_shop_right\": false,\n      \"label\": \"Replacement item received\",\n      \"type\": \"INCIDENT_CLOSE\"\n    },\n    {\n      \"code\": \"15\",\n      \"is_customer_right\": false,\n      \"is_operator_right\": true,\n      \"is_shop_right\": true,\n      \"label\": \"Out of stock\",\n      \"type\": \"REFUND\"\n    },\n    {\n      \"code\": \"26\",\n      \"is_customer_right\": true,\n      \"is_operator_right\": true,\n      \"is_shop_right\": true,\n      \"label\": \"Other question\",\n      \"type\": \"ORDER_MESSAGING\"\n    },\n    {\n      \"code\": \"33\",\n      \"is_customer_right\": true,\n      \"is_operator_right\": false,\n      \"is_shop_right\": true,\n      \"label\": \"Other question\",\n      \"type\": \"OFFER_MESSAGING\"\n    },\n    {\n      \"code\": \"34\",\n      \"is_customer_right\": true,\n      \"is_operator_right\": true,\n      \"is_shop_right\": true,\n      \"label\": \"Cancelled by the client prior to shipping\",\n      \"type\": \"CANCELATION\"\n    },\n    {\n      \"code\": \"MMP_SELLER_MESSAGING_ONBOARDING\",\n      \"is_customer_right\": false,\n      \"is_operator_right\": true,\n      \"is_shop_right\": true,\n      \"label\": \"Onboarding\",\n      \"type\": \"MMP_SELLER_MESSAGING\"\n    },\n    {\n      \"code\": \"MPS_SELLER_MESSAGING_ONBOARDING\",\n      \"is_customer_right\": false,\n      \"is_operator_right\": true,\n      \"is_shop_right\": true,\n      \"label\": \"Onboarding\",\n      \"type\": \"MPS_SELLER_MESSAGING\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b79ceae3-af36-4833-ac6b-3201e7e85ff7",
+          "name": "RE02 - List reasons by type",
+          "request": {
+            "name": "RE02 - List reasons by type",
+            "description": {
+              "content": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in future update. Consider using RE01.\n\n<div class=\"extension-title\">Description</div>\n\nThis API returns cancellation, refund, incident, and message reasons.<br>Reasons are sorted by sort index (set in the back-office)\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Each time a page must display a list of reasons</div>\n<div class=\"max-call-frequency\">Maximum usage: Each time a page must display a list of reasons</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reasons",
+                ":reason_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reason_type",
+                  "description": "(Required) Reason type"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0a55f481-1413-4add-854f-4b34dc7734ba",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reasons",
+                    ":reason_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reason_type",
+                      "description": "(Required) Reason type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reasons\": [\n    {\n      \"code\": \"14\",\n      \"label\": \"No response from the shop\"\n    },\n    {\n      \"code\": \"15\",\n      \"label\": \"Out of stock\"\n    },\n    {\n      \"code\": \"16\",\n      \"label\": \"Cancelled by the client prior to shipping\"\n    },\n    {\n      \"code\": \"17\",\n      \"label\": \"Item returned\"\n    },\n    {\n      \"code\": \"18\",\n      \"label\": \"Item not received\"\n    },\n    {\n      \"code\": \"19\",\n      \"label\": \"Agreement found with the vendor\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7c75168-9797-4d4b-a64a-0a6d66e4f5e2",
+          "name": "RE11 - List of reasons with type: incident open",
+          "request": {
+            "name": "RE11 - List of reasons with type: incident open",
+            "description": {
+              "content": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in future update, use RE02 with parameter <code>reason_type='INCIDENT_OPEN'</code>\n\n<div class=\"extension-title\">Description</div>\n\nNote: Result returns only reasons where the user's role have the right <br>Note: Reasons are sorted by sort index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once on incident creation page view</div>\n<div class=\"max-call-frequency\">Maximum usage: Once on incident creation page view</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reasons",
+                "incident_open"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "d09cfe96-891e-4db9-84aa-549302c70740",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reasons",
+                    "incident_open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reasons\": [\n    {\n      \"code\": \"1\",\n      \"label\": \"Item not received\"\n    },\n    {\n      \"code\": \"2\",\n      \"label\": \"Item not as ordered\"\n    },\n    {\n      \"code\": \"3\",\n      \"label\": \"Defective item\"\n    },\n    {\n      \"code\": \"4\",\n      \"label\": \"Right to retract order\"\n    },\n    {\n      \"code\": \"5\",\n      \"label\": \"Counterfeit item\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "322c7350-839e-4c4f-aec4-6e72dd82dd6e",
+          "name": "RE12 - List of reasons with type: incident close",
+          "request": {
+            "name": "RE12 - List of reasons with type: incident close",
+            "description": {
+              "content": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in future update, use RE02 with parameter <code>reason_type='INCIDENT_CLOSE'</code>\n\n<div class=\"extension-title\">Description</div>\n\nNote: Result returns only reasons where the user's role have the right <br>Note: Reasons are sorted by sort index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once on incident closing page view</div>\n<div class=\"max-call-frequency\">Maximum usage: Once on incident closing page view</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reasons",
+                "incident_close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "5c910418-86b9-47b6-a96b-f59a564c135d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reasons",
+                    "incident_close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reasons\": [\n    {\n      \"code\": \"8\",\n      \"label\": \"I finally received my order\"\n    },\n    {\n      \"code\": \"9\",\n      \"label\": \"Item fit the description after all\"\n    },\n    {\n      \"code\": \"10\",\n      \"label\": \"Replacement item received\"\n    },\n    {\n      \"code\": \"11\",\n      \"label\": \"Agreement made with the vendor\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11605beb-ce90-44a7-b9cb-3d724361e05f",
+          "name": "RE14 - List of reasons with type: messaging",
+          "request": {
+            "name": "RE14 - List of reasons with type: messaging",
+            "description": {
+              "content": "<div class=\"extension-title\">Deprecated endpoint</div>\n\nThis API is going to be removed in future update, use RE02 with parameter <code>reason_type='MESSAGING'</code>\n\n<div class=\"extension-title\">Description</div>\n\nNote: Result returns only reasons where the user's role have the right <br>Note: Reasons are sorted by sort index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once on message creation page view</div>\n<div class=\"max-call-frequency\">Maximum usage: Once on message creation page view</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reasons",
+                "messaging"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "5223a604-bf62-4e2b-99c7-8852176cf0a5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reasons",
+                    "messaging"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reasons\": [\n    {\n      \"code\": \"20\",\n      \"label\": \"Question about delivery\"\n    },\n    {\n      \"code\": \"21\",\n      \"label\": \"Cancel the order\"\n    },\n    {\n      \"code\": \"22\",\n      \"label\": \"Issue with item received\"\n    },\n    {\n      \"code\": \"23\",\n      \"label\": \"Item not received\"\n    },\n    {\n      \"code\": \"24\",\n      \"label\": \"Request an invoice\"\n    },\n    {\n      \"code\": \"25\",\n      \"label\": \"Information on the product\"\n    },\n    {\n      \"code\": \"26\",\n      \"label\": \"Other question\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f502fbe3-c65f-472d-8d34-ceaeafd80f76",
+          "name": "SH11 - List all active shipping zones",
+          "request": {
+            "name": "SH11 - List all active shipping zones",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nResults are sorted by index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipping",
+                "zones"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7484d789-2869-483c-8b23-93f9478ae402",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipping",
+                    "zones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_zones\": [\n    {\n      \"code\": \"DOM1\",\n      \"description\": \"Domestic 1\",\n      \"label\": \"Domestic 1\"\n    },\n    {\n      \"code\": \"DOM2\",\n      \"description\": \"Domestic 2\",\n      \"label\": \"Domestic 2\"\n    },\n    {\n      \"code\": \"INT1\",\n      \"description\": \"International 1\",\n      \"label\": \"International 1\"\n    },\n    {\n      \"code\": \"INT2\",\n      \"description\": \"International 2\",\n      \"label\": \"International 2\"\n    },\n    {\n      \"code\": \"INT3\",\n      \"description\": \"International 3\",\n      \"label\": \"International 3\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72338c71-0b6e-451b-9858-c982a2f6c7cf",
+          "name": "SH12 -  List all active shipping methods",
+          "request": {
+            "name": "SH12 -  List all active shipping methods",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nResults are sorted by index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipping",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f8e15401-2a25-421b-ac82-78f2d7945c4b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipping",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_types\": [\n    {\n      \"click_and_collect\": false,\n      \"code\": \"STD\",\n      \"delivery_by_operator\": false,\n      \"description\": \"Standard Delivery (3-5 days)\",\n      \"ignore_lead_time_to_ship\": true,\n      \"label\": \"Standard\",\n      \"mandatory_tracking\": true,\n      \"standard_code\": \"CU_ADD-STD\"\n    },\n    {\n      \"click_and_collect\": false,\n      \"code\": \"EXP\",\n      \"delivery_by_operator\": false,\n      \"description\": \"Express Delivery (1-2 days)\",\n      \"label\": \"Express\",\n      \"mandatory_tracking\": true,\n      \"standard_code\": \"CU_ADD-EXP\"\n    },\n    {\n      \"click_and_collect\": false,\n      \"code\": \"NEX\",\n      \"delivery_by_operator\": true,\n      \"description\": \"Next day delivery (ordered before 5 pm)\",\n      \"label\": \"Next day delivery\",\n      \"mandatory_tracking\": true,\n      \"standard_code\": \"CU_ADD-NEXT_DAY\"\n    },\n    {\n      \"click_and_collect\": true,\n      \"code\": \"CLC\",\n      \"delivery_by_operator\": false,\n      \"description\": \"Collect In Store\",\n      \"label\": \"Click & collect\",\n      \"mandatory_tracking\": false,\n      \"standard_code\": \"CLC_OPERATOR-STD\"\n    },\n    {\n      \"click_and_collect\": false,\n      \"code\": \"PIP\",\n      \"delivery_by_operator\": false,\n      \"description\": \"Pickup Point\",\n      \"label\": \"Pickup Point\",\n      \"mandatory_tracking\": false,\n      \"standard_code\": \"PICK_UP_POINT-STD\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b666401-8792-480d-ac5d-f8670a299f63",
+          "name": "SH21 - List all carriers",
+          "request": {
+            "name": "SH21 - List all carriers",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nResults are sorted alphabetically by carrier label\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipping",
+                "carriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "38dd7dae-9971-4535-af0f-1a484bfc61fb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipping",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carriers\": [\n    {\n      \"code\": \"FED\",\n      \"label\": \"Fed Ex\",\n      \"standard_code\": \"FED\",\n      \"tracking_url\": \"http://www.fedex.com/Tracking?action=track&tracknumbers={trackingId}\"\n    },\n    {\n      \"code\": \"UPS\",\n      \"label\": \"UPS\",\n      \"standard_code\": \"UPS\",\n      \"tracking_url\": \"https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={trackingId}\"\n    },\n    {\n      \"code\": \"DHL\",\n      \"label\": \"DHL\",\n      \"standard_code\": \"DHL\",\n      \"tracking_url\": \"http://www.dhl.co.uk/en/express/tracking.html?AWB={trackingId}&brand=DHL\"\n    },\n    {\n      \"code\": \"DPD\",\n      \"label\": \"DPD\",\n      \"standard_code\": \"DPD\",\n      \"tracking_url\": \"http://www.dpd.co.uk/apps/tracking/?parcel={trackingId}\"\n    },\n    {\n      \"code\": \"TNT\",\n      \"label\": \"TNT\",\n      \"standard_code\": \"TNT\",\n      \"tracking_url\": \"http://www.tnt.com/webtracker/tracking.do?navigation=1&searchType=CON&respLang=en&genericSiteIdent=.&cons={trackingId}\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1b3d61e-44c9-4125-bedd-00864afc6e4a",
+          "name": "SH31 - List all logistic classes",
+          "request": {
+            "name": "SH31 - List all logistic classes",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nResults are sorted by index, set in the back-office\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Once per day</div>\n<div class=\"max-call-frequency\">Maximum usage: Once per day</div>\n<div class=\"extension-title\">Localization</div>\n\n<p>This resource supports <code>locale</code> parameter (<a href=\"#section/Locale\">see documentation</a>)</p><p>Localized output fields will be highlighted with an icon: <span class=\"flag\"></span></p></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipping",
+                "logistic_classes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "db6d330f-0611-483c-85a7-37ee26af2a35",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipping",
+                    "logistic_classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logistic_classes\": [\n    {\n      \"code\": \"S\",\n      \"description\": \"Small\",\n      \"label\": \"Small\"\n    },\n    {\n      \"code\": \"M\",\n      \"description\": \"Medium\",\n      \"label\": \"Medium\"\n    },\n    {\n      \"code\": \"L\",\n      \"description\": \"Large\",\n      \"label\": \"Large\"\n    },\n    {\n      \"code\": \"OV1\",\n      \"description\": \"Oversize 1\",\n      \"label\": \"Oversize 1\"\n    },\n    {\n      \"code\": \"OV2\",\n      \"description\": \"Oversize 2\",\n      \"label\": \"Oversize 2\"\n    },\n    {\n      \"code\": \"FREE\",\n      \"description\": \"Free Shipping\",\n      \"label\": \"Free Shipping\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0a76930-2417-4909-8748-bc05b61b2046",
+          "name": "SH42 - Get shop shipping configuration",
+          "request": {
+            "name": "SH42 - Get shop shipping configuration",
+            "description": {
+              "content": "<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every week</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipping",
+                "configuration",
+                "shop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "9a09ba88-ae7b-45bc-9de9-d35684cf5e09",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipping",
+                    "configuration",
+                    "shop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"delivery_times\": [\n    {\n      \"delivery_time\": {\n        \"earliest_days\": 1,\n        \"latest_days\": 2\n      },\n      \"set_by\": \"SHOP\",\n      \"shipping_type_code\": \"NEX\",\n      \"shipping_zone_code\": \"DOM1\"\n    },\n    {\n      \"delivery_time\": {\n        \"earliest_days\": 2,\n        \"latest_days\": 4\n      },\n      \"set_by\": \"OPERATOR\",\n      \"shipping_type_code\": \"STD\",\n      \"shipping_zone_code\": \"DOM1\"\n    }\n  ],\n  \"last_updated_date\": \"2026-02-24T17:09:09.920Z\",\n  \"lead_time_to_ship\": {\n    \"default_value\": 3,\n    \"shop_value\": 1\n  },\n  \"order_cut_off_times\": [\n    {\n      \"cut_off_time\": \"07:30:00Z\",\n      \"set_by\": \"SHOP\",\n      \"shipping_type_code\": \"NEX\"\n    },\n    {\n      \"cut_off_time\": \"02:00:00Z\",\n      \"set_by\": \"OPERATOR\",\n      \"shipping_type_code\": \"STD\"\n    }\n  ],\n  \"order_free_shipping\": false,\n  \"shop_id\": \"3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e765692a-9146-4674-8515-0d251dce874d",
+          "name": "SH52 - Get shipping charges configured for a shop account",
+          "request": {
+            "name": "SH52 - Get shipping charges configured for a shop account",
+            "description": {
+              "content": "<div class=\"extension-title\">Description</div>\n\nGet shipping charges and their configuration\n\n<div class=\"api-description-extension\">\n<div class=\"extension-title\">Call Frequency</div>\n\n<div class=\"recommended-call-frequency\">Recommended usage: Every week</div>\n<div class=\"max-call-frequency\">Maximum usage: Every hour</div>\n</div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shipping",
+                "charges",
+                "shop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "overridden_by_shop",
+                  "value": "<boolean>",
+                  "description": "Retrieve only the shipping charge configurations customized by the seller"
+                },
+                {
+                  "disabled": false,
+                  "key": "shop_id",
+                  "value": "<long>",
+                  "description": "Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b9232a49-e51d-4b82-9f46-3be314f7cd65",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shipping",
+                    "charges",
+                    "shop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "overridden_by_shop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "shop_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"configuration\": [\n    {\n      \"logistic_class_code\": \"S\",\n      \"overridden_by_shop\": true,\n      \"prices\": {\n        \"additional_price\": 2,\n        \"free_shipping_threshold\": null,\n        \"initial_price\": 3,\n        \"type\": \"FIXED_PRICE\"\n      },\n      \"shipping_method_code\": \"STD\",\n      \"shipping_zone_code\": \"DOM1\"\n    },\n    {\n      \"logistic_class_code\": \"M\",\n      \"overridden_by_shop\": true,\n      \"prices\": {\n        \"ranges\": [\n          {\n            \"price\": 5,\n            \"threshold\": 0\n          },\n          {\n            \"price\": 7,\n            \"threshold\": 50\n          },\n          {\n            \"price\": 8,\n            \"threshold\": 100\n          }\n        ],\n        \"type\": \"ORDER_RANGE\"\n      },\n      \"shipping_method_code\": \"STD\",\n      \"shipping_zone_code\": \"DOM1\"\n    },\n    {\n      \"logistic_class_code\": \"L\",\n      \"overridden_by_shop\": true,\n      \"prices\": {\n        \"type\": \"FREE_SHIPPING\"\n      },\n      \"shipping_method_code\": \"STD\",\n      \"shipping_zone_code\": \"DOM1\"\n    }\n  ],\n  \"currency_iso_code\": \"EUR\",\n  \"last_updated_date\": \"2022-03-03T08:52:10Z\",\n  \"shop_id\": 123\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://miraklconnect.com/api/channel-platform",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c492fbd0-ee39-471b-bb52-bd7fb12407cc",
+    "name": "Mirakl Connect Channel Platform APIs Carriers Platform Settings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{% partial file=\"/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md\" /%}",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,5 +1,5 @@
-generated: '2026-07-20'
-method: searched
+generated: '2026-08-13'
+method: probed
 source: probed /.well-known/ across Mirakl hosts
 hosts:
   - host: https://developer.mirakl.com
@@ -10,6 +10,17 @@ hosts:
         note: >-
           Redocly Reunite MCP OAuth authorization-server metadata (issuer
           auth.cloud.redocly.com) backing the developer-docs MCP server.
+          Advertises dynamic client registration and PKCE S256.
+      - path: /.well-known/oauth-protected-resource/mcp
+        status: 200
+        file: mirakl-oauth-protected-resource-mcp.json
+        checked: '2026-08-13'
+        note: >-
+          RFC 9728 protected-resource metadata for https://developer.mirakl.com/mcp,
+          discovered from the WWW-Authenticate challenge the MCP endpoint returns.
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        checked: '2026-08-13'
       - path: /.well-known/security.txt
         status: 404
       - path: /.well-known/openid-configuration
@@ -18,12 +29,21 @@ hosts:
         status: 404
       - path: /.well-known/ai-plugin.json
         status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+        checked: '2026-08-13'
+      - path: /.well-known/agent.json
+        status: 404
+        checked: '2026-08-13'
   - host: https://www.mirakl.com
     documents:
       - path: /.well-known/security.txt
         status: 404
       - path: /.well-known/openid-configuration
         status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+        checked: '2026-08-13'
   - host: https://miraklconnect.com
     documents:
       - path: /.well-known/security.txt
@@ -32,3 +52,16 @@ hosts:
       - path: /.well-known/openid-configuration
         status: 200
         note: SPA catch-all (text/html) — not a real OIDC document; not saved.
+      - path: /.well-known/agent-card.json
+        status: 200
+        checked: '2026-08-13'
+        note: >-
+          SPA catch-all — 200 with the miraklconnect.com HTML app shell (3,277 bytes,
+          identical body for every /.well-known/* path). NOT an agent card; no A2A
+          artifact written.
+summary:
+  real_documents: 2
+  note: >-
+    Two genuine documents, both OAuth metadata for the developer-portal MCP server.
+    No security.txt, no OIDC discovery, no api-catalog, no agent card anywhere on
+    the Mirakl estate.

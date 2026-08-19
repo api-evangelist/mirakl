@@ -1,28 +1,121 @@
-generated: '2026-07-20'
-method: derived
-source: openapi/ + https://www.mirakl.com/why-mirakl/technology
+generated: '2026-08-13'
+method: searched
+source: >-
+  openapi/_original/ (14 documents) + https://developer.mirakl.com/content/product/mmp
+  + https://developer.mirakl.com/content/product/connect-channel-platform/developer-guide/authentication
+  + https://developer.mirakl.com/.well-known/oauth-protected-resource/mcp
+  + https://www.mirakl.com/why-mirakl/technology
 standards:
   - id: oauth2
     conforms: true
-    evidence: operator APIs declare an oauth2 securityScheme (authorizationCode flow, auth.mirakl.net)
+    evidence: >-
+      Operator, front and Account Channel Platform APIs declare an oauth2 securityScheme
+      (authorizationCode, auth.mirakl.net). The developer guide additionally documents a
+      client_credentials grant at https://auth.mirakl.net/oauth/token for channel connectors.
   - id: oidc
     conforms: false
-    evidence: no openIdConnect securityScheme declared
+    evidence: >-
+      No openIdConnect securityScheme and no /.well-known/openid-configuration on any
+      Mirakl host (developer.mirakl.com and www.mirakl.com both 404; miraklconnect.com
+      returns an SPA HTML shell, not a discovery document).
+  - id: rfc9728-oauth-protected-resource
+    conforms: true
+    evidence: >-
+      https://developer.mirakl.com/mcp answers 401 with
+      WWW-Authenticate: Bearer resource_metadata="…/.well-known/oauth-protected-resource/mcp",
+      and that document resolves 200 with resource, authorization_servers and
+      bearer_methods_supported. Probed 2026-08-13.
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: true
+    evidence: >-
+      https://developer.mirakl.com/.well-known/oauth-authorization-server returns 200 with
+      issuer, authorization/token/registration endpoints, S256 PKCE and grant types.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      A hosted MCP server is served at https://developer.mirakl.com/mcp (Redocly Reunite
+      documentation assistant). Live but OAuth-gated; the tool list could not be
+      enumerated anonymously. See mcp/mirakl-mcp.yml.
+  - id: a2a
+    conforms: false
+    evidence: >-
+      No agent card. /.well-known/agent-card.json and /.well-known/agent.json 404 on
+      developer.mirakl.com and www.mirakl.com; miraklconnect.com answers 200 with its SPA
+      catch-all HTML for every /.well-known/* path, which is not a card.
   - id: rest-openapi-3.1
     conforms: true
-    evidence: all published product specs are OpenAPI 3.1.0
+    evidence: All 14 published product/connector specs are OpenAPI 3.1.0.
   - id: openapi-webhooks
     conforms: true
-    evidence: Connect Channel Platform publishes an OpenAPI 3.1 webhooks document (5 events)
+    evidence: >-
+      Connect Channel Platform publishes an OpenAPI 3.1 webhooks document (5 events);
+      MMP additionally documents operator HTTP webhooks.
+  - id: cloudevents
+    conforms: partial
+    evidence: >-
+      Mirakl's MMP documentation describes a "Cloud Events" feature that publishes
+      messages to a customer-defined queue on AWS, GCP or Azure. The reference page
+      (/content/product/mmp/webhooks/webhook) is behind the portal login, so conformance
+      to the CNCF CloudEvents 1.0 envelope could not be verified from a public document.
+  - id: graphql
+    conforms: true
+    evidence: >-
+      MMP publishes a GraphQL endpoint for frontend integrations covering orders, offers,
+      threads and shops, with queries and mutations. The GraphQL reference at
+      /content/product/mmp/graphql 302s to auth.cloud.redocly.com OIDC login, so the SDL
+      could not be captured and no schema is stored.
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      No AsyncAPI document is published. The event surface is described with OpenAPI
+      webhooks instead.
   - id: rfc9457-problem-details
     conforms: false
-    evidence: error responses use application/json, not application/problem+json
+    evidence: >-
+      Error responses use application/json with a Mirakl-specific envelope, not
+      application/problem+json.
+  - id: rfc6585-429-rate-limiting
+    conforms: false
+    evidence: >-
+      No operation in any of the 14 specs declares a 429 response, and no RateLimit-*,
+      X-RateLimit-* or Retry-After header is documented. Throttling is expressed as a
+      per-operation "Maximum usage" call frequency in prose inside 478 operation
+      descriptions instead. See rate-limits/mirakl-rate-limits.yml.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: >-
+      No Sunset/Deprecation header and no dated deprecation policy published; the stated
+      guarantee is backward compatibility under continuous delivery.
+  - id: pagination
+    conforms: true
+    evidence: Offset/limit paging via offset and max query parameters on list operations.
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      No Idempotency-Key contract on write operations; the string "idempoten" does not
+      appear in any of the 14 published specs. Dedup exists only on the webhook delivery
+      side.
   - id: api-key-auth
     conforms: true
-    evidence: seller (shop) APIs authenticate with an Authorization header API key
+    evidence: Seller (shop) APIs authenticate with an Authorization-header API key.
+  - id: postman-collection
+    conforms: true
+    evidence: >-
+      Mirakl generates and publishes a Postman v2.1 collection alongside every OpenAPI,
+      regenerated continuously from the API — e.g.
+      https://developer.mirakl.com/specs/content/product/mmp/rest/seller/postman-mmp-seller.json?download
+      (200, verified 2026-08-13).
+  - id: llmstxt
+    conforms: true
+    evidence: >-
+      /llms.txt served on both developer.mirakl.com (portal index, 5,465 bytes) and
+      www.mirakl.com (corporate, 2,282 bytes). No llms-full.txt (404).
   - id: soc2-type2
     conforms: true
     evidence: SOC 2 Type II attestation (AICPA Trust Services Criteria)
+  - id: soc1-type2
+    conforms: true
+    evidence: SOC 1 Type II report
   - id: iso-27001
     conforms: true
     evidence: ISO/IEC 27001 certified
@@ -32,9 +125,6 @@ standards:
   - id: iso-22301
     conforms: true
     evidence: ISO 22301 (business continuity) certified
-  - id: soc1-type2
-    conforms: true
-    evidence: SOC 1 Type II report
 compliance_program:
   url: https://www.mirakl.com/why-mirakl/technology
   certifications: [SOC 1 Type II, SOC 2 Type II, ISO/IEC 27001, ISO/IEC 27018, ISO 22301]

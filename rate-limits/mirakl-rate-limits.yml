@@ -1,0 +1,2466 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/_original/*.json|yaml (per-operation "Call Frequency / Maximum usage"
+  blocks published by Mirakl in every operation description) + docs read at
+  https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+docs: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+summary: >-
+  Mirakl does not publish a conventional token-bucket rate limit, HTTP 429 response
+  or RateLimit-* response headers. Instead it publishes a PER-OPERATION call-frequency
+  contract inside the OpenAPI itself: every operation description carries a
+  "Call Frequency" block with a Recommended usage and a Maximum usage. This is the
+  provider's real, machine-readable throttling guidance and is captured here.
+  Enforcement is by integration review/agreement rather than by a documented HTTP
+  error, so an agent should treat Maximum usage as the polling ceiling.
+response_headers:
+  documented: false
+  ratelimit_headers: []
+  retry_after: false
+  exhaustion_status: null
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header is documented anywhere in the
+    Mirakl developer portal or in any of the 14 published OpenAPI documents, and no
+    operation declares a 429 response (0 of 580 operations across all specs).
+coverage:
+  operations_total: 580
+  operations_with_published_maximum_usage: 478
+  specs_checked: 12
+limit_count: 478
+scope: per-operation
+common_ceilings:
+  - maximum_usage: "Once per day"
+    operations: 72
+  - maximum_usage: "Once per minute"
+    operations: 36
+  - maximum_usage: "Every hour"
+    operations: 20
+  - maximum_usage: "Each time an error report is needed"
+    operations: 12
+  - maximum_usage: "Each time a page must display a list of reasons"
+    operations: 12
+  - maximum_usage: "On each user role view"
+    operations: 9
+  - maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+    operations: 9
+  - maximum_usage: "50 business documents per call"
+    operations: 9
+  - maximum_usage: "After each S30 call, when you want to download documents from a store"
+    operations: 9
+  - maximum_usage: "At each document deletion from one store"
+    operations: 9
+  - maximum_usage: "Every 5 minutes"
+    operations: 9
+  - maximum_usage: "Every 15 minutes, for each seller"
+    operations: 6
+  - maximum_usage: "Each time an integration report is needed"
+    operations: 6
+  - maximum_usage: "Each time a transformed file is available"
+    operations: 6
+  - maximum_usage: "Once per day and as many times as there are invoice pages returned"
+    operations: 6
+  - maximum_usage: "- Differential: once per minute - Full: once per day"
+    operations: 6
+  - maximum_usage: "At each product page display"
+    operations: 6
+  - maximum_usage: "At each customer return request"
+    operations: 6
+  - maximum_usage: "Once per day and as many times as there are billing cycle pages returned"
+    operations: 6
+  - maximum_usage: "For each new service order"
+    operations: 6
+limits:
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "configureChannelCatalog"
+    operation: POST "/v1/catalog-configuration/channels/{channel_id}"
+    scope: per-operation
+    maximum_usage: "1 per minute"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "updateStoreCatalogItems"
+    operation: POST "/v1/channel-catalog/{channel_id}/store-catalog-items/{store_id}"
+    scope: per-operation
+    maximum_usage: "30 per second"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "upsertBusinessInformation"
+    operation: PUT "/v1/channels/{channel_id}/stores/{channel_store_id}"
+    scope: per-operation
+    maximum_usage: "5 per minute"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "upsertOrders"
+    operation: POST "/v1/orders"
+    scope: per-operation
+    maximum_usage: "30 / sec"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "updateActionStatus"
+    operation: PUT "/v1/orders/actions/{action_id}"
+    scope: per-operation
+    maximum_usage: "Once per action completion"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "updateAnonymizeAfterDate"
+    operation: PUT "/v1/orders/anonymize-after"
+    scope: per-operation
+    maximum_usage: "Every time the anonymization date needs to be changed"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "upsertCarriers"
+    operation: POST "/v1/orders/channels/{channel_id}/carriers"
+    scope: per-operation
+    maximum_usage: "1 / hour"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "deleteOrderDocument"
+    operation: DELETE "/v1/orders/documents/{channel_document_id}"
+    scope: per-operation
+    maximum_usage: "On each document deletion on the order"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "upsertReturns"
+    operation: POST "/v1/orders/returns"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "uploadOrderDocument"
+    operation: POST "/v1/orders/{channel_order_id}/documents"
+    scope: per-operation
+    maximum_usage: "On each new document on the order"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "upsertProductType"
+    operation: PUT "/v1/taxonomy/channels/{channel_id}/product-types"
+    scope: per-operation
+    maximum_usage: "10 per second"
+  - spec: mirakl-connect-channel-openapi.json
+    operationId: "createTaxonomyRule"
+    operation: PUT "/v1/taxonomy/channels/{channel_id}/rules"
+    scope: per-operation
+    maximum_usage: "10 per second"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "listOrders"
+    operation: GET "/orders"
+    scope: per-operation
+    maximum_usage: "Asynchronous: once per minute"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "acceptOrderLines"
+    operation: PUT "/orders/{order_id}/accept"
+    scope: per-operation
+    maximum_usage: "On each new order"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "createShipment"
+    operation: POST "/orders/{order_id}/shipments"
+    scope: per-operation
+    maximum_usage: "On each new shipment"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "deleteProducts"
+    operation: DELETE "/products"
+    scope: per-operation
+    maximum_usage: "Asynchronous: once per minute"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "listProducts"
+    operation: GET "/products"
+    scope: per-operation
+    maximum_usage: "Synchronous: once per minute"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "upsertProducts"
+    operation: POST "/products"
+    scope: per-operation
+    maximum_usage: "Asynchronous: once per minute"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-listOrders"
+    operation: GET "/v2/orders"
+    scope: per-operation
+    maximum_usage: "Asynchronous: once per minute"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-reportOrderActions"
+    operation: POST "/v2/orders/actions"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-getActionStatus"
+    operation: GET "/v2/orders/actions/{action_id}"
+    scope: per-operation
+    maximum_usage: "Asynchronous: once per minute per action ID"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-listOrderDocuments"
+    operation: GET "/v2/orders/documents"
+    scope: per-operation
+    maximum_usage: "When you need to retrieve documents for orders"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-listReturns"
+    operation: GET "/v2/orders/returns"
+    scope: per-operation
+    maximum_usage: "Asynchronous: once per minute"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-acceptReturn"
+    operation: PUT "/v2/orders/returns/{return_id}/accept"
+    scope: per-operation
+    maximum_usage: "On each new return"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-closeReturn"
+    operation: PUT "/v2/orders/returns/{return_id}/close"
+    scope: per-operation
+    maximum_usage: "On each new return"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-acknowledgeReturnReception"
+    operation: PUT "/v2/orders/returns/{return_id}/receive"
+    scope: per-operation
+    maximum_usage: "On each new return"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-updateReturnTrackingInformation"
+    operation: PUT "/v2/orders/returns/{return_id}/trackings"
+    scope: per-operation
+    maximum_usage: "On each new return"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-getOrderTracking"
+    operation: GET "/v2/orders/tracking/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Uses the new `v2-getActionStatus` API"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-acceptOrderLines"
+    operation: PUT "/v2/orders/{order_id}/accept"
+    scope: per-operation
+    maximum_usage: "On each new order"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-cancelOrderLines"
+    operation: POST "/v2/orders/{order_id}/cancel"
+    scope: per-operation
+    maximum_usage: "At each cancel request"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-downloadOrderDocuments"
+    operation: GET "/v2/orders/{order_id}/documents"
+    scope: per-operation
+    maximum_usage: "On each order where we want to retrieve its documents"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-uploadOrderDocument"
+    operation: POST "/v2/orders/{order_id}/documents"
+    scope: per-operation
+    maximum_usage: "On each document upload"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-refundOrderLines"
+    operation: POST "/v2/orders/{order_id}/refund"
+    scope: per-operation
+    maximum_usage: "At each refund request"
+  - spec: mirakl-connect-openapi.yaml
+    operationId: "v2-createShipment"
+    operation: POST "/v2/orders/{order_id}/shipments"
+    scope: per-operation
+    maximum_usage: "On each new shipment"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "H11"
+    operation: GET "/api/hierarchies"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "CM11"
+    operation: GET "/api/mcm/products/sources/status/export"
+    scope: per-operation
+    maximum_usage: "- Differential: every 5 minutes - Full: every 4 hours"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "PM11"
+    operation: GET "/api/products/attributes"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "P51"
+    operation: GET "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "P41"
+    operation: POST "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Every 15 minutes, for each seller"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "P42"
+    operation: GET "/api/products/imports/{import}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "P44"
+    operation: GET "/api/products/imports/{import}/error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "P45"
+    operation: GET "/api/products/imports/{import}/new_product_report"
+    scope: per-operation
+    maximum_usage: "Each time an integration report is needed"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "P47"
+    operation: GET "/api/products/imports/{import}/transformation_error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "P46"
+    operation: GET "/api/products/imports/{import}/transformed_file"
+    scope: per-operation
+    maximum_usage: "Each time a transformed file is available"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-mcm-front-openapi.yaml
+    operationId: "VL11"
+    operation: GET "/api/values_lists"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "H11"
+    operation: GET "/api/hierarchies"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "CM11"
+    operation: GET "/api/mcm/products/sources/status/export"
+    scope: per-operation
+    maximum_usage: "- Differential: every 5 minutes - Full: every 4 hours"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "PM11"
+    operation: GET "/api/products/attributes"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "P51"
+    operation: GET "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "P41"
+    operation: POST "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Every 15 minutes, for each seller"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "P42"
+    operation: GET "/api/products/imports/{import}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "P44"
+    operation: GET "/api/products/imports/{import}/error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "P45"
+    operation: GET "/api/products/imports/{import}/new_product_report"
+    scope: per-operation
+    maximum_usage: "Each time an integration report is needed"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "P47"
+    operation: GET "/api/products/imports/{import}/transformation_error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "P46"
+    operation: GET "/api/products/imports/{import}/transformed_file"
+    scope: per-operation
+    maximum_usage: "Each time a transformed file is available"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-mcm-operator-openapi.json
+    operationId: "VL11"
+    operation: GET "/api/values_lists"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "A01"
+    operation: GET "/api/account"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "A02"
+    operation: PUT "/api/account"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "A21"
+    operation: GET "/api/account/statistics"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "H11"
+    operation: GET "/api/hierarchies"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "CM11"
+    operation: GET "/api/mcm/products/sources/status/export"
+    scope: per-operation
+    maximum_usage: "- Differential: every 5 minutes - Full: every 4 hours"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "PM11"
+    operation: GET "/api/products/attributes"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "P51"
+    operation: GET "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "P41"
+    operation: POST "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Every 15 minutes, for each seller"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "P42"
+    operation: GET "/api/products/imports/{import}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "P44"
+    operation: GET "/api/products/imports/{import}/error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "P45"
+    operation: GET "/api/products/imports/{import}/new_product_report"
+    scope: per-operation
+    maximum_usage: "Each time an integration report is needed"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "P47"
+    operation: GET "/api/products/imports/{import}/transformation_error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "P46"
+    operation: GET "/api/products/imports/{import}/transformed_file"
+    scope: per-operation
+    maximum_usage: "Each time a transformed file is available"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-mcm-seller-openapi.json
+    operationId: "VL11"
+    operation: GET "/api/values_lists"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "H11"
+    operation: GET "/api/hierarchies"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "M11"
+    operation: GET "/api/inbox/threads"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each page that includes an inbox display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "M13"
+    operation: GET "/api/inbox/threads/{attachment_id}/download"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each message attachment download"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "M10"
+    operation: GET "/api/inbox/threads/{thread_id}"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each page that includes a message thread display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "M12"
+    operation: POST "/api/inbox/threads/{thread_id}/message"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each thread answer"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "IV01"
+    operation: GET "/api/invoices"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are invoice pages returned"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "M01"
+    operation: GET "/api/messages"
+    scope: per-operation
+    maximum_usage: "Synchronous only - at each message list display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OF51"
+    operation: GET "/api/offers/export"
+    scope: per-operation
+    maximum_usage: "- Differential: once per minute - Full: once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OF52"
+    operation: POST "/api/offers/export/async"
+    scope: per-operation
+    maximum_usage: "- Differential: once per minute - Full: once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OF53"
+    operation: GET "/api/offers/export/async/status/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Every 10 seconds"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OF61"
+    operation: GET "/api/offers/states"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OF22"
+    operation: GET "/api/offers/{offer}"
+    scope: per-operation
+    maximum_usage: "At each offer page display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR11"
+    operation: GET "/api/orders"
+    scope: per-operation
+    maximum_usage: "- Asynchronous: once per minute - Synchronous: at each order page display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR04"
+    operation: PUT "/api/orders"
+    scope: per-operation
+    maximum_usage: "Once per minute, 100 orders per call"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR13"
+    operation: POST "/api/orders/async-export"
+    scope: per-operation
+    maximum_usage: "- Differential: every 5 minutes - Full: every 24 hours"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR14"
+    operation: GET "/api/orders/async-export/status/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Every 2 seconds per OR13 call, until COMPLETED status is received"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR30"
+    operation: PUT "/api/orders/cancel"
+    scope: per-operation
+    maximum_usage: "At each order (or order line) cancelation"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR72"
+    operation: GET "/api/orders/documents"
+    scope: per-operation
+    maximum_usage: "At each document list page display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR73"
+    operation: GET "/api/orders/documents/download"
+    scope: per-operation
+    maximum_usage: "At each document download"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR76"
+    operation: DELETE "/api/orders/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each order document deletion"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR07"
+    operation: PUT "/api/orders/shipping_from"
+    scope: per-operation
+    maximum_usage: "60 per hour, 100 order lines per call"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR75"
+    operation: GET "/api/orders/taxes"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR12"
+    operation: GET "/api/orders/{order_id}"
+    scope: per-operation
+    maximum_usage: "On each order page view"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR21"
+    operation: PUT "/api/orders/{order_id}/accept"
+    scope: per-operation
+    maximum_usage: "At each new order on the Marketplace"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR31"
+    operation: PUT "/api/orders/{order_id}/additional_fields"
+    scope: per-operation
+    maximum_usage: "5 calls per second"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR29"
+    operation: PUT "/api/orders/{order_id}/cancel"
+    scope: per-operation
+    maximum_usage: "At each order cancelation"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR74"
+    operation: POST "/api/orders/{order_id}/documents"
+    scope: per-operation
+    maximum_usage: "At each document upload on an order"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR51"
+    operation: GET "/api/orders/{order_id}/evaluation"
+    scope: per-operation
+    maximum_usage: "On each evaluation page view"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR41"
+    operation: GET "/api/orders/{order_id}/messages"
+    scope: per-operation
+    maximum_usage: "On each message page view"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR42"
+    operation: POST "/api/orders/{order_id}/messages"
+    scope: per-operation
+    maximum_usage: "At each new message posted on an order"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR24"
+    operation: PUT "/api/orders/{order_id}/ship"
+    scope: per-operation
+    maximum_usage: "Each time the tracking number is entered (OR23)"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR43"
+    operation: POST "/api/orders/{order_id}/threads"
+    scope: per-operation
+    maximum_usage: "At each new thread posted on an order"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR23"
+    operation: PUT "/api/orders/{order_id}/tracking"
+    scope: per-operation
+    maximum_usage: "At each order tracking information update (as soon as the seller gets the tracking number from the carrier)"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "PL11"
+    operation: GET "/api/picklists"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P31"
+    operation: GET "/api/products"
+    scope: per-operation
+    maximum_usage: "At each product page display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "PM11"
+    operation: GET "/api/products/attributes"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P51"
+    operation: GET "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P41"
+    operation: POST "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Every 15 minutes, for each seller"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P42"
+    operation: GET "/api/products/imports/{import}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P44"
+    operation: GET "/api/products/imports/{import}/error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P45"
+    operation: GET "/api/products/imports/{import}/new_product_report"
+    scope: per-operation
+    maximum_usage: "Each time an integration report is needed"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P47"
+    operation: GET "/api/products/imports/{import}/transformation_error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P46"
+    operation: GET "/api/products/imports/{import}/transformed_file"
+    scope: per-operation
+    maximum_usage: "Each time a transformed file is available"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "P11"
+    operation: GET "/api/products/offers"
+    scope: per-operation
+    maximum_usage: "At each product page display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "PR01"
+    operation: GET "/api/promotions"
+    scope: per-operation
+    maximum_usage: "At each display of a promotions list page or on-promo offer detail page."
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RE01"
+    operation: GET "/api/reasons"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RE12"
+    operation: GET "/api/reasons/incident_close"
+    scope: per-operation
+    maximum_usage: "Once on incident closing page view"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RE11"
+    operation: GET "/api/reasons/incident_open"
+    scope: per-operation
+    maximum_usage: "Once on incident creation page view"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RE14"
+    operation: GET "/api/reasons/messaging"
+    scope: per-operation
+    maximum_usage: "Once on message creation page view"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RE02"
+    operation: GET "/api/reasons/{reason_type}"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RT11"
+    operation: GET "/api/returns"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RT01"
+    operation: POST "/api/returns"
+    scope: per-operation
+    maximum_usage: "At each customer return request"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RT12"
+    operation: GET "/api/returns/items_to_return"
+    scope: per-operation
+    maximum_usage: "At each customer return request"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RT52"
+    operation: GET "/api/returns/return-labels"
+    scope: per-operation
+    maximum_usage: "At each customer return label request"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RT51"
+    operation: POST "/api/returns/return-labels"
+    scope: per-operation
+    maximum_usage: "At each customer return label request"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "SBC11"
+    operation: GET "/api/seller-billing-cycles"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are billing cycle pages returned"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "ST11"
+    operation: GET "/api/shipments"
+    scope: per-operation
+    maximum_usage: "at each shipment page display"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "ST01"
+    operation: POST "/api/shipments"
+    scope: per-operation
+    maximum_usage: "On each new shipment"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "ST06"
+    operation: PUT "/api/shipments/delete"
+    scope: per-operation
+    maximum_usage: "On each shipment deletion"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "ST12"
+    operation: GET "/api/shipments/items_to_ship"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "ST26"
+    operation: PUT "/api/shipments/ready_for_pick_up"
+    scope: per-operation
+    maximum_usage: "On each shipment ready to pick up"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "ST24"
+    operation: PUT "/api/shipments/ship"
+    scope: per-operation
+    maximum_usage: "On each shipment shipping"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "ST23"
+    operation: POST "/api/shipments/tracking"
+    scope: per-operation
+    maximum_usage: "On each shipment tracking info update"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "SH21"
+    operation: GET "/api/shipping/carriers"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "SH31"
+    operation: GET "/api/shipping/logistic_classes"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "SH12"
+    operation: GET "/api/shipping/types"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "SH11"
+    operation: GET "/api/shipping/zones"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "VL11"
+    operation: GET "/api/values_lists"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-front-openapi.yaml
+    operationId: "OR15"
+    operation: GET "/dynamic-url/The+URL+is+retrieved+from+OR14+output/OR15"
+    scope: per-operation
+    maximum_usage: "Once per file URL returned by OR14, after COMPLETED status"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "H11"
+    operation: GET "/api/hierarchies"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "M11"
+    operation: GET "/api/inbox/threads"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each page that includes an inbox display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "M14"
+    operation: POST "/api/inbox/threads"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each thread answer"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "M13"
+    operation: GET "/api/inbox/threads/{attachment_id}/download"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each message attachment download"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "M10"
+    operation: GET "/api/inbox/threads/{thread_id}"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each page that includes a message thread display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "M12"
+    operation: POST "/api/inbox/threads/{thread_id}/message"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each thread answer"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "IV01"
+    operation: GET "/api/invoices"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are invoice pages returned"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "IV02"
+    operation: GET "/api/invoices/{accounting_document_id}"
+    scope: per-operation
+    maximum_usage: "At each invoice download"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "M01"
+    operation: GET "/api/messages"
+    scope: per-operation
+    maximum_usage: "Synchronous only - at each message list display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF24"
+    operation: POST "/api/offers"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF51"
+    operation: GET "/api/offers/export"
+    scope: per-operation
+    maximum_usage: "- Differential: once per minute - Full: once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF52"
+    operation: POST "/api/offers/export/async"
+    scope: per-operation
+    maximum_usage: "- Differential: once per minute - Full: once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF53"
+    operation: GET "/api/offers/export/async/status/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Every 10 seconds"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF04"
+    operation: GET "/api/offers/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF01"
+    operation: POST "/api/offers/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute with offers only, once every 15 minutes with offers and products, for each seller"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF02"
+    operation: GET "/api/offers/imports/{import}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF03"
+    operation: GET "/api/offers/imports/{import}/error_report"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "PRI02"
+    operation: GET "/api/offers/pricing/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "PRI01"
+    operation: POST "/api/offers/pricing/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "PRI03"
+    operation: GET "/api/offers/pricing/imports/{import_id}/error_report"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF61"
+    operation: GET "/api/offers/states"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "STO01"
+    operation: POST "/api/offers/stock/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "STO03"
+    operation: GET "/api/offers/stock/imports/{import_id}/error_report"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "STO02"
+    operation: GET "/api/offers/stock/imports/{import_id}/status"
+    scope: per-operation
+    maximum_usage: "Once every 15 seconds"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OF22"
+    operation: GET "/api/offers/{offer}"
+    scope: per-operation
+    maximum_usage: "At each offer page display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR11"
+    operation: GET "/api/orders"
+    scope: per-operation
+    maximum_usage: "- Asynchronous: once per minute - Synchronous: at each order page display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR04"
+    operation: PUT "/api/orders"
+    scope: per-operation
+    maximum_usage: "Once per minute, 100 orders per call"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR32"
+    operation: PUT "/api/orders/adjust"
+    scope: per-operation
+    maximum_usage: "Once per minute, 100 order lines per call"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR13"
+    operation: POST "/api/orders/async-export"
+    scope: per-operation
+    maximum_usage: "- Differential: every 5 minutes - Full: every 24 hours"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR14"
+    operation: GET "/api/orders/async-export/status/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Every 2 seconds per OR13 call, until COMPLETED status is received"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR30"
+    operation: PUT "/api/orders/cancel"
+    scope: per-operation
+    maximum_usage: "At each order (or order line) cancelation"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR72"
+    operation: GET "/api/orders/documents"
+    scope: per-operation
+    maximum_usage: "At each document list page display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR73"
+    operation: GET "/api/orders/documents/download"
+    scope: per-operation
+    maximum_usage: "At each document download"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR76"
+    operation: DELETE "/api/orders/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each order document deletion"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR28"
+    operation: PUT "/api/orders/refund"
+    scope: per-operation
+    maximum_usage: "At each refund request"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR07"
+    operation: PUT "/api/orders/shipping_from"
+    scope: per-operation
+    maximum_usage: "60 per hour, 100 order lines per call"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR75"
+    operation: GET "/api/orders/taxes"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR12"
+    operation: GET "/api/orders/{order_id}"
+    scope: per-operation
+    maximum_usage: "On each order page view"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR21"
+    operation: PUT "/api/orders/{order_id}/accept"
+    scope: per-operation
+    maximum_usage: "At each new order on the Marketplace"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR31"
+    operation: PUT "/api/orders/{order_id}/additional_fields"
+    scope: per-operation
+    maximum_usage: "5 calls per second"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR29"
+    operation: PUT "/api/orders/{order_id}/cancel"
+    scope: per-operation
+    maximum_usage: "At each order cancelation"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR74"
+    operation: POST "/api/orders/{order_id}/documents"
+    scope: per-operation
+    maximum_usage: "At each document upload on an order"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR51"
+    operation: GET "/api/orders/{order_id}/evaluation"
+    scope: per-operation
+    maximum_usage: "On each evaluation page view"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR41"
+    operation: GET "/api/orders/{order_id}/messages"
+    scope: per-operation
+    maximum_usage: "On each message page view"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR42"
+    operation: POST "/api/orders/{order_id}/messages"
+    scope: per-operation
+    maximum_usage: "At each new message posted on an order"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR26"
+    operation: PUT "/api/orders/{order_id}/refund"
+    scope: per-operation
+    maximum_usage: "On each new refund demand"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR24"
+    operation: PUT "/api/orders/{order_id}/ship"
+    scope: per-operation
+    maximum_usage: "Each time the tracking number is entered (OR23)"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR43"
+    operation: POST "/api/orders/{order_id}/threads"
+    scope: per-operation
+    maximum_usage: "At each new thread posted on an order"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR23"
+    operation: PUT "/api/orders/{order_id}/tracking"
+    scope: per-operation
+    maximum_usage: "At each order tracking information update (as soon as the seller gets the tracking number from the carrier)"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "PL11"
+    operation: GET "/api/picklists"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P31"
+    operation: GET "/api/products"
+    scope: per-operation
+    maximum_usage: "At each product page display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "PM11"
+    operation: GET "/api/products/attributes"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P51"
+    operation: GET "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P41"
+    operation: POST "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Every 15 minutes, for each seller"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P42"
+    operation: GET "/api/products/imports/{import}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P44"
+    operation: GET "/api/products/imports/{import}/error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P45"
+    operation: GET "/api/products/imports/{import}/new_product_report"
+    scope: per-operation
+    maximum_usage: "Each time an integration report is needed"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P47"
+    operation: GET "/api/products/imports/{import}/transformation_error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P46"
+    operation: GET "/api/products/imports/{import}/transformed_file"
+    scope: per-operation
+    maximum_usage: "Each time a transformed file is available"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "P11"
+    operation: GET "/api/products/offers"
+    scope: per-operation
+    maximum_usage: "At each product page display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "PR01"
+    operation: GET "/api/promotions"
+    scope: per-operation
+    maximum_usage: "At each display of a promotions list page or on-promo offer detail page."
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "PR03"
+    operation: POST "/api/promotions"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "PR04"
+    operation: PUT "/api/promotions/{promotion_internal_id}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RE01"
+    operation: GET "/api/reasons"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RE12"
+    operation: GET "/api/reasons/incident_close"
+    scope: per-operation
+    maximum_usage: "Once on incident closing page view"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RE11"
+    operation: GET "/api/reasons/incident_open"
+    scope: per-operation
+    maximum_usage: "Once on incident creation page view"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RE14"
+    operation: GET "/api/reasons/messaging"
+    scope: per-operation
+    maximum_usage: "Once on message creation page view"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RE02"
+    operation: GET "/api/reasons/{reason_type}"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RT11"
+    operation: GET "/api/returns"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RT01"
+    operation: POST "/api/returns"
+    scope: per-operation
+    maximum_usage: "At each customer return request"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RT12"
+    operation: GET "/api/returns/items_to_return"
+    scope: per-operation
+    maximum_usage: "At each customer return request"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "SBC11"
+    operation: GET "/api/seller-billing-cycles"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are billing cycle pages returned"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "ST11"
+    operation: GET "/api/shipments"
+    scope: per-operation
+    maximum_usage: "at each shipment page display"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "ST01"
+    operation: POST "/api/shipments"
+    scope: per-operation
+    maximum_usage: "On each new shipment"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "ST06"
+    operation: PUT "/api/shipments/delete"
+    scope: per-operation
+    maximum_usage: "On each shipment deletion"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "ST12"
+    operation: GET "/api/shipments/items_to_ship"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "ST26"
+    operation: PUT "/api/shipments/ready_for_pick_up"
+    scope: per-operation
+    maximum_usage: "On each shipment ready to pick up"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "ST24"
+    operation: PUT "/api/shipments/ship"
+    scope: per-operation
+    maximum_usage: "On each shipment shipping"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "ST23"
+    operation: POST "/api/shipments/tracking"
+    scope: per-operation
+    maximum_usage: "On each shipment tracking info update"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "SH21"
+    operation: GET "/api/shipping/carriers"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "SH31"
+    operation: GET "/api/shipping/logistic_classes"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "SH12"
+    operation: GET "/api/shipping/types"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "SH11"
+    operation: GET "/api/shipping/zones"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "VL11"
+    operation: GET "/api/values_lists"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-operator-openapi.json
+    operationId: "OR15"
+    operation: GET "/dynamic-url/The+URL+is+retrieved+from+OR14+output/OR15"
+    scope: per-operation
+    maximum_usage: "Once per file URL returned by OR14, after COMPLETED status"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "A01"
+    operation: GET "/api/account"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "A02"
+    operation: PUT "/api/account"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "A21"
+    operation: GET "/api/account/statistics"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "H11"
+    operation: GET "/api/hierarchies"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "M11"
+    operation: GET "/api/inbox/threads"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each page that includes an inbox display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "M14"
+    operation: POST "/api/inbox/threads"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each thread answer"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "M13"
+    operation: GET "/api/inbox/threads/{attachment_id}/download"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each message attachment download"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "M10"
+    operation: GET "/api/inbox/threads/{thread_id}"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each page that includes a message thread display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "M12"
+    operation: POST "/api/inbox/threads/{thread_id}/message"
+    scope: per-operation
+    maximum_usage: "Synchronous only - At each thread answer"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "IV01"
+    operation: GET "/api/invoices"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are invoice pages returned"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "IV02"
+    operation: GET "/api/invoices/{accounting_document_id}"
+    scope: per-operation
+    maximum_usage: "At each invoice download"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "M01"
+    operation: GET "/api/messages"
+    scope: per-operation
+    maximum_usage: "Synchronous only - at each message list display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF21"
+    operation: GET "/api/offers"
+    scope: per-operation
+    maximum_usage: "On each shop's offers page view"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF24"
+    operation: POST "/api/offers"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF51"
+    operation: GET "/api/offers/export"
+    scope: per-operation
+    maximum_usage: "- Differential: once per minute - Full: once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF52"
+    operation: POST "/api/offers/export/async"
+    scope: per-operation
+    maximum_usage: "- Differential: once per minute - Full: once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF53"
+    operation: GET "/api/offers/export/async/status/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Every 10 seconds"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF04"
+    operation: GET "/api/offers/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF01"
+    operation: POST "/api/offers/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute with offers only, once every 15 minutes with offers and products, for each seller"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF02"
+    operation: GET "/api/offers/imports/{import}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF03"
+    operation: GET "/api/offers/imports/{import}/error_report"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "PRI02"
+    operation: GET "/api/offers/pricing/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "PRI01"
+    operation: POST "/api/offers/pricing/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "PRI03"
+    operation: GET "/api/offers/pricing/imports/{import_id}/error_report"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF61"
+    operation: GET "/api/offers/states"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "STO01"
+    operation: POST "/api/offers/stock/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "STO03"
+    operation: GET "/api/offers/stock/imports/{import_id}/error_report"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "STO02"
+    operation: GET "/api/offers/stock/imports/{import_id}/status"
+    scope: per-operation
+    maximum_usage: "Once every 15 seconds"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OF22"
+    operation: GET "/api/offers/{offer}"
+    scope: per-operation
+    maximum_usage: "At each offer page display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR11"
+    operation: GET "/api/orders"
+    scope: per-operation
+    maximum_usage: "- Asynchronous: once per minute - Synchronous: at each order page display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR04"
+    operation: PUT "/api/orders"
+    scope: per-operation
+    maximum_usage: "Once per minute, 100 orders per call"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR32"
+    operation: PUT "/api/orders/adjust"
+    scope: per-operation
+    maximum_usage: "Once per minute, 100 order lines per call"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR13"
+    operation: POST "/api/orders/async-export"
+    scope: per-operation
+    maximum_usage: "- Differential: every 5 minutes - Full: every 24 hours"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR14"
+    operation: GET "/api/orders/async-export/status/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Every 2 seconds per OR13 call, until COMPLETED status is received"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR30"
+    operation: PUT "/api/orders/cancel"
+    scope: per-operation
+    maximum_usage: "At each order (or order line) cancelation"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR72"
+    operation: GET "/api/orders/documents"
+    scope: per-operation
+    maximum_usage: "At each document list page display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR73"
+    operation: GET "/api/orders/documents/download"
+    scope: per-operation
+    maximum_usage: "At each document download"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR76"
+    operation: DELETE "/api/orders/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each order document deletion"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR28"
+    operation: PUT "/api/orders/refund"
+    scope: per-operation
+    maximum_usage: "At each refund request"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR07"
+    operation: PUT "/api/orders/shipping_from"
+    scope: per-operation
+    maximum_usage: "60 per hour, 100 order lines per call"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR75"
+    operation: GET "/api/orders/taxes"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR12"
+    operation: GET "/api/orders/{order_id}"
+    scope: per-operation
+    maximum_usage: "On each order page view"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR21"
+    operation: PUT "/api/orders/{order_id}/accept"
+    scope: per-operation
+    maximum_usage: "At each new order on the Marketplace"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR31"
+    operation: PUT "/api/orders/{order_id}/additional_fields"
+    scope: per-operation
+    maximum_usage: "5 calls per second"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR29"
+    operation: PUT "/api/orders/{order_id}/cancel"
+    scope: per-operation
+    maximum_usage: "At each order cancelation"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR74"
+    operation: POST "/api/orders/{order_id}/documents"
+    scope: per-operation
+    maximum_usage: "At each document upload on an order"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR51"
+    operation: GET "/api/orders/{order_id}/evaluation"
+    scope: per-operation
+    maximum_usage: "On each evaluation page view"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR64"
+    operation: PUT "/api/orders/{order_id}/lines/{line}/resolve_incident"
+    scope: per-operation
+    maximum_usage: "At each incident resolution on an order line"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR41"
+    operation: GET "/api/orders/{order_id}/messages"
+    scope: per-operation
+    maximum_usage: "On each message page view"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR42"
+    operation: POST "/api/orders/{order_id}/messages"
+    scope: per-operation
+    maximum_usage: "At each new message posted on an order"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR26"
+    operation: PUT "/api/orders/{order_id}/refund"
+    scope: per-operation
+    maximum_usage: "On each new refund demand"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR24"
+    operation: PUT "/api/orders/{order_id}/ship"
+    scope: per-operation
+    maximum_usage: "Each time the tracking number is entered (OR23)"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR43"
+    operation: POST "/api/orders/{order_id}/threads"
+    scope: per-operation
+    maximum_usage: "At each new thread posted on an order"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR23"
+    operation: PUT "/api/orders/{order_id}/tracking"
+    scope: per-operation
+    maximum_usage: "At each order tracking information update (as soon as the seller gets the tracking number from the carrier)"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "PL11"
+    operation: GET "/api/picklists"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P31"
+    operation: GET "/api/products"
+    scope: per-operation
+    maximum_usage: "At each product page display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "PM11"
+    operation: GET "/api/products/attributes"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P51"
+    operation: GET "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P41"
+    operation: POST "/api/products/imports"
+    scope: per-operation
+    maximum_usage: "Every 15 minutes, for each seller"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P42"
+    operation: GET "/api/products/imports/{import}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P44"
+    operation: GET "/api/products/imports/{import}/error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P45"
+    operation: GET "/api/products/imports/{import}/new_product_report"
+    scope: per-operation
+    maximum_usage: "Each time an integration report is needed"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P47"
+    operation: GET "/api/products/imports/{import}/transformation_error_report"
+    scope: per-operation
+    maximum_usage: "Each time an error report is needed"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P46"
+    operation: GET "/api/products/imports/{import}/transformed_file"
+    scope: per-operation
+    maximum_usage: "Each time a transformed file is available"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "P11"
+    operation: GET "/api/products/offers"
+    scope: per-operation
+    maximum_usage: "At each product page display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "PR01"
+    operation: GET "/api/promotions"
+    scope: per-operation
+    maximum_usage: "At each display of a promotions list page or on-promo offer detail page."
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "PR03"
+    operation: POST "/api/promotions"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "PR04"
+    operation: PUT "/api/promotions/{promotion_internal_id}"
+    scope: per-operation
+    maximum_usage: "Once per minute"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RE01"
+    operation: GET "/api/reasons"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RE12"
+    operation: GET "/api/reasons/incident_close"
+    scope: per-operation
+    maximum_usage: "Once on incident closing page view"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RE11"
+    operation: GET "/api/reasons/incident_open"
+    scope: per-operation
+    maximum_usage: "Once on incident creation page view"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RE14"
+    operation: GET "/api/reasons/messaging"
+    scope: per-operation
+    maximum_usage: "Once on message creation page view"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RE02"
+    operation: GET "/api/reasons/{reason_type}"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RT11"
+    operation: GET "/api/returns"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RT01"
+    operation: POST "/api/returns"
+    scope: per-operation
+    maximum_usage: "At each customer return request"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RT12"
+    operation: GET "/api/returns/items_to_return"
+    scope: per-operation
+    maximum_usage: "At each customer return request"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "SBC11"
+    operation: GET "/api/seller-billing-cycles"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are billing cycle pages returned"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "TL02"
+    operation: GET "/api/sellerpayment/transactions_logs"
+    scope: per-operation
+    maximum_usage: "20 times per min, 60 times per hour"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "TL03"
+    operation: POST "/api/sellerpayment/transactions_logs/async"
+    scope: per-operation
+    maximum_usage: "once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "TL04"
+    operation: GET "/api/sellerpayment/transactions_logs/async/status/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Every 10 seconds"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "ST11"
+    operation: GET "/api/shipments"
+    scope: per-operation
+    maximum_usage: "at each shipment page display"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "ST01"
+    operation: POST "/api/shipments"
+    scope: per-operation
+    maximum_usage: "On each new shipment"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "ST06"
+    operation: PUT "/api/shipments/delete"
+    scope: per-operation
+    maximum_usage: "On each shipment deletion"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "ST12"
+    operation: GET "/api/shipments/items_to_ship"
+    scope: per-operation
+    maximum_usage: "Every 5 minutes"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "ST26"
+    operation: PUT "/api/shipments/ready_for_pick_up"
+    scope: per-operation
+    maximum_usage: "On each shipment ready to pick up"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "ST24"
+    operation: PUT "/api/shipments/ship"
+    scope: per-operation
+    maximum_usage: "On each shipment shipping"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "ST23"
+    operation: POST "/api/shipments/tracking"
+    scope: per-operation
+    maximum_usage: "On each shipment tracking info update"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "SH21"
+    operation: GET "/api/shipping/carriers"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "SH52"
+    operation: GET "/api/shipping/charges/shop"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "SH42"
+    operation: GET "/api/shipping/configuration/shop"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "SH31"
+    operation: GET "/api/shipping/logistic_classes"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "SH12"
+    operation: GET "/api/shipping/types"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "SH11"
+    operation: GET "/api/shipping/zones"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "VL11"
+    operation: GET "/api/values_lists"
+    scope: per-operation
+    maximum_usage: "Every hour"
+  - spec: mirakl-mmp-seller-openapi.json
+    operationId: "OR15"
+    operation: GET "/dynamic-url/The+URL+is+retrieved+from+OR14+output/OR15"
+    scope: per-operation
+    maximum_usage: "Once per file URL returned by OR14, after COMPLETED status"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "IV01"
+    operation: GET "/api/invoices"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are invoice pages returned"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "SM11"
+    operation: GET "/api/mms/models"
+    scope: per-operation
+    maximum_usage: "- Asynchronous: every hour - Synchronous: at each faceting display"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "SOR21"
+    operation: PUT "/api/mms/orders/{order_id}/accept"
+    scope: per-operation
+    maximum_usage: "For each new service order"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "SOR25"
+    operation: PUT "/api/mms/orders/{order_id}/consume"
+    scope: per-operation
+    maximum_usage: "At each customer service consumption confirmation"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "SOR51"
+    operation: GET "/api/mms/orders/{order_id}/evaluation"
+    scope: per-operation
+    maximum_usage: "At each order evaluation page display"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "SOR22"
+    operation: PUT "/api/mms/orders/{order_id}/refuse"
+    scope: per-operation
+    maximum_usage: "For each new service order"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "SOR43"
+    operation: POST "/api/mms/orders/{order_id}/threads"
+    scope: per-operation
+    maximum_usage: "At each new message posted on a service order"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "SOF43"
+    operation: POST "/api/mms/services/{service_code}/threads"
+    scope: per-operation
+    maximum_usage: "At every message thread"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "RE01"
+    operation: GET "/api/reasons"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "RE02"
+    operation: GET "/api/reasons/{reason_type}"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "SBC11"
+    operation: GET "/api/seller-billing-cycles"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are billing cycle pages returned"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mms-front-openapi.yaml
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "IV01"
+    operation: GET "/api/invoices"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are invoice pages returned"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "IV02"
+    operation: GET "/api/invoices/{accounting_document_id}"
+    scope: per-operation
+    maximum_usage: "At each invoice download"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SL12"
+    operation: GET "/api/mms/locations"
+    scope: per-operation
+    maximum_usage: "- Asynchronous: every hour - Synchronous: each time you need to create a service"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SL01"
+    operation: POST "/api/mms/locations"
+    scope: per-operation
+    maximum_usage: "30 per minute"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SL06"
+    operation: DELETE "/api/mms/locations/{location_id}"
+    scope: per-operation
+    maximum_usage: "60 per second"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SM11"
+    operation: GET "/api/mms/models"
+    scope: per-operation
+    maximum_usage: "- Asynchronous: every hour - Synchronous: at each faceting display"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOR21"
+    operation: PUT "/api/mms/orders/{order_id}/accept"
+    scope: per-operation
+    maximum_usage: "For each new service order"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOR25"
+    operation: PUT "/api/mms/orders/{order_id}/consume"
+    scope: per-operation
+    maximum_usage: "At each customer service consumption confirmation"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOR51"
+    operation: GET "/api/mms/orders/{order_id}/evaluation"
+    scope: per-operation
+    maximum_usage: "At each order evaluation page display"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOR28"
+    operation: PUT "/api/mms/orders/{order_id}/refund"
+    scope: per-operation
+    maximum_usage: "At each service refund request"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOR22"
+    operation: PUT "/api/mms/orders/{order_id}/refuse"
+    scope: per-operation
+    maximum_usage: "For each new service order"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOR43"
+    operation: POST "/api/mms/orders/{order_id}/threads"
+    scope: per-operation
+    maximum_usage: "At each new message posted on a service order"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOF25"
+    operation: POST "/api/mms/services"
+    scope: per-operation
+    maximum_usage: "60 per minute"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOF27"
+    operation: DELETE "/api/mms/services/{service_code}"
+    scope: per-operation
+    maximum_usage: "30 per minute"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOF26"
+    operation: PUT "/api/mms/services/{service_code}"
+    scope: per-operation
+    maximum_usage: "60 per minute"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SOF43"
+    operation: POST "/api/mms/services/{service_code}/threads"
+    scope: per-operation
+    maximum_usage: "At every message thread"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "RE01"
+    operation: GET "/api/reasons"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "RE02"
+    operation: GET "/api/reasons/{reason_type}"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "SBC11"
+    operation: GET "/api/seller-billing-cycles"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are billing cycle pages returned"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mms-operator-openapi.json
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "A01"
+    operation: GET "/api/account"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "A02"
+    operation: PUT "/api/account"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "A21"
+    operation: GET "/api/account/statistics"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "AF01"
+    operation: GET "/api/additional_fields"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "CH11"
+    operation: GET "/api/channels"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "CUR01"
+    operation: GET "/api/currencies"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "DO01"
+    operation: GET "/api/documents"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "IV01"
+    operation: GET "/api/invoices"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are invoice pages returned"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "IV02"
+    operation: GET "/api/invoices/{accounting_document_id}"
+    scope: per-operation
+    maximum_usage: "At each invoice download"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "L01"
+    operation: GET "/api/locales"
+    scope: per-operation
+    maximum_usage: "Once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SL12"
+    operation: GET "/api/mms/locations"
+    scope: per-operation
+    maximum_usage: "- Asynchronous: every hour - Synchronous: each time you need to create a service"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SL01"
+    operation: POST "/api/mms/locations"
+    scope: per-operation
+    maximum_usage: "30 per minute"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SL06"
+    operation: DELETE "/api/mms/locations/{location_id}"
+    scope: per-operation
+    maximum_usage: "60 per second"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SM11"
+    operation: GET "/api/mms/models"
+    scope: per-operation
+    maximum_usage: "Once per hour"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOR11"
+    operation: GET "/api/mms/orders"
+    scope: per-operation
+    maximum_usage: "At each service order page display"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOR21"
+    operation: PUT "/api/mms/orders/{order_id}/accept"
+    scope: per-operation
+    maximum_usage: "For each new service order"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOR25"
+    operation: PUT "/api/mms/orders/{order_id}/consume"
+    scope: per-operation
+    maximum_usage: "At each customer service consumption confirmation"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOR51"
+    operation: GET "/api/mms/orders/{order_id}/evaluation"
+    scope: per-operation
+    maximum_usage: "At each order evaluation page display"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOR28"
+    operation: PUT "/api/mms/orders/{order_id}/refund"
+    scope: per-operation
+    maximum_usage: "At each service refund request"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOR22"
+    operation: PUT "/api/mms/orders/{order_id}/refuse"
+    scope: per-operation
+    maximum_usage: "For each new service order"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOR43"
+    operation: POST "/api/mms/orders/{order_id}/threads"
+    scope: per-operation
+    maximum_usage: "At each new message posted on a service order"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOF11"
+    operation: GET "/api/mms/services"
+    scope: per-operation
+    maximum_usage: "Once per hour"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOF25"
+    operation: POST "/api/mms/services"
+    scope: per-operation
+    maximum_usage: "60 per minute"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOF27"
+    operation: DELETE "/api/mms/services/{service_code}"
+    scope: per-operation
+    maximum_usage: "30 per minute"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOF26"
+    operation: PUT "/api/mms/services/{service_code}"
+    scope: per-operation
+    maximum_usage: "60 per minute"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SOF43"
+    operation: POST "/api/mms/services/{service_code}/threads"
+    scope: per-operation
+    maximum_usage: "At every message thread"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "RE01"
+    operation: GET "/api/reasons"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "RE02"
+    operation: GET "/api/reasons/{reason_type}"
+    scope: per-operation
+    maximum_usage: "Each time a page must display a list of reasons"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "SBC11"
+    operation: GET "/api/seller-billing-cycles"
+    scope: per-operation
+    maximum_usage: "Once per day and as many times as there are billing cycle pages returned"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "TL02"
+    operation: GET "/api/sellerpayment/transactions_logs"
+    scope: per-operation
+    maximum_usage: "20 times per min, 60 times per hour"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "TL03"
+    operation: POST "/api/sellerpayment/transactions_logs/async"
+    scope: per-operation
+    maximum_usage: "once per day"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "TL04"
+    operation: GET "/api/sellerpayment/transactions_logs/async/status/{tracking_id}"
+    scope: per-operation
+    maximum_usage: "Every 10 seconds"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "S30"
+    operation: GET "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "At each display of a page that includes documents from a store (for example: during the KYC process)"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "S32"
+    operation: POST "/api/shops/documents"
+    scope: per-operation
+    maximum_usage: "50 business documents per call"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "S31"
+    operation: GET "/api/shops/documents/download"
+    scope: per-operation
+    maximum_usage: "After each S30 call, when you want to download documents from a store"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "S33"
+    operation: DELETE "/api/shops/documents/{document_id}"
+    scope: per-operation
+    maximum_usage: "At each document deletion from one store"
+  - spec: mirakl-mms-seller-openapi.json
+    operationId: "RO02"
+    operation: GET "/api/users/shops/roles"
+    scope: per-operation
+    maximum_usage: "On each user role view"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "ListProductOffers"
+    operation: GET "/api/storefront/products/offers"
+    scope: per-operation
+    maximum_usage: "- At each product page display"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "GetItemsToReturn"
+    operation: GET "/api/storefront/returns/items-to-return"
+    scope: per-operation
+    maximum_usage: "- At each customer return request"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncDeletedMiraklProducts"
+    operation: POST "/api/sync/deleted-mirakl-products"
+    scope: per-operation
+    maximum_usage: "- You can run only one Mirakl deleted products synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncOffers"
+    operation: POST "/api/sync/offers"
+    scope: per-operation
+    maximum_usage: "- You can run only one offer synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncOrders"
+    operation: POST "/api/sync/orders"
+    scope: per-operation
+    maximum_usage: "- You can run only one order synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncThirdPartyProducts"
+    operation: POST "/api/sync/product-mirakl-to-shopify"
+    scope: per-operation
+    maximum_usage: "- You can run only one product synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncFirstPartyProducts"
+    operation: POST "/api/sync/product-shopify-to-mirakl"
+    scope: per-operation
+    maximum_usage: "- You can run only one synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncPromotions"
+    operation: POST "/api/sync/promotions"
+    scope: per-operation
+    maximum_usage: "- You can run only one promotion synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncReturns"
+    operation: POST "/api/sync/returns"
+    scope: per-operation
+    maximum_usage: "- You can run only one return synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncShipments"
+    operation: POST "/api/sync/shipment-mirakl-to-shopify"
+    scope: per-operation
+    maximum_usage: "- You can run only one shipment synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncShops"
+    operation: POST "/api/sync/shops"
+    scope: per-operation
+    maximum_usage: "- You can run only one shop synchronization at a time"
+  - spec: mirakl-shopify-operator-connector-openapi.yaml
+    operationId: "SyncCatalogStructure"
+    operation: POST "/api/sync/taxonomy"
+    scope: per-operation
+    maximum_usage: "- You can run only one taxonomy synchronization at a time"
+cross_reference:
+  conventions: conventions/mirakl-conventions.yml
+  errors: errors/mirakl-problem-types.yml
+  plans: plans/mirakl-plans-pricing.yml
