@@ -36,6 +36,17 @@ modified: '2026-08-13'
 tags:
 - Company
 - Commerce
+- E-Commerce
+- Marketplace
+- Dropship
+- Retail
+- Catalog
+- Order
+- Retail Media
+- B2B
+tags_raw:
+- Company
+- Commerce
 - eCommerce
 - Marketplace
 - Dropship
@@ -105,6 +116,8 @@ apis:
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -141,6 +154,8 @@ apis:
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -189,6 +204,8 @@ apis:
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -273,6 +290,8 @@ apis:
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -308,6 +327,10 @@ apis:
   tags:
   - Connect Channel Platform
   - Channels
+  - Webhook
+  tags_raw:
+  - Connect Channel Platform
+  - Channels
   - Webhooks
   properties:
   - type: OpenAPI
@@ -325,6 +348,10 @@ apis:
   humanURL: https://developer.mirakl.com/content/product/account-channel-platform/rest/connector/openapi3
   baseURL: https://account.mirakl.net/api/channel-platform
   tags:
+  - Account
+  - Stores
+  - Channels
+  tags_raw:
   - Accounts
   - Stores
   - Channels
@@ -343,6 +370,10 @@ apis:
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/front/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
+  - Marketplace
+  - Storefront
+  - Order
+  tags_raw:
   - Marketplace
   - Storefront
   - Orders
@@ -395,6 +426,10 @@ apis:
   humanURL: https://developer.mirakl.com/content/connector/operator/shopify/app-operator-shopify/rest/public/openapi3
   baseURL: https://operator-shpy.mirakl.net
   tags:
+  - Shopify
+  - Connectors
+  - Order
+  tags_raw:
   - Shopify
   - Connectors
   - Orders
