@@ -10,6 +10,18 @@ description: >-
   3.1) for sellers/shops and operators covering orders, offers, products, catalog,
   invoicing, messaging, returns, and shipments, plus a Connect Channel Platform with
   push webhooks for offer, price/stock, product, order-action, and store events.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -298,6 +310,158 @@ apis:
     url: openapi/mirakl-users-api-openapi.yml
   - type: Webhooks
     url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
+- aid: mirakl:mirakl-catalog-api
+  name: Mirakl Catalog API
+  description: The Catalog API from Mirakl — 1 operation(s) for catalog.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-catalog-api-openapi.yml
+- aid: mirakl:mirakl-channel-api
+  name: Mirakl Channel API
+  description: The Channel API from Mirakl — 1 operation(s) for channel.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Channel
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-channel-api-openapi.yml
+- aid: mirakl:mirakl-checkout-api
+  name: Mirakl Checkout API
+  description: The Checkout API from Mirakl — 1 operation(s) for checkout.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Checkout
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-checkout-api-openapi.yml
+- aid: mirakl:mirakl-connection-api
+  name: Mirakl Connection API
+  description: The Connection API from Mirakl — 2 operation(s) for connection.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Connection
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-connection-api-openapi.yml
+- aid: mirakl:mirakl-conversations-api
+  name: Mirakl Conversations API
+  description: The Conversations API from Mirakl — 5 operation(s) for conversations.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-conversations-api-openapi.yml
+- aid: mirakl:mirakl-mapping-api
+  name: Mirakl Mapping API
+  description: The Mapping API from Mirakl — 2 operation(s) for mapping.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Mapping
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-mapping-api-openapi.yml
+- aid: mirakl:mirakl-mirakl-connect-channel-platform-webhooks-api
+  name: Mirakl Mirakl Connect Channel Platform Webhooks API
+  description: >-
+    The Mirakl Connect Channel Platform Webhooks API from Mirakl — 0 operation(s) for mirakl connect channel
+    platform webhooks.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Mirakl Connect Channel Platform Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-mirakl-connect-channel-platform-webhooks-api-openapi.yml
+- aid: mirakl:mirakl-product-bindings-api
+  name: Mirakl Product Bindings API
+  description: The Product Bindings API from Mirakl — 2 operation(s) for product bindings.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Product Bindings
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-product-bindings-api-openapi.yml
+- aid: mirakl:mirakl-public-api
+  name: Mirakl Public API
+  description: The Public API from Mirakl — 2 operation(s) for public.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Public
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-public-api-openapi.yml
+- aid: mirakl:mirakl-settings-api
+  name: Mirakl Settings API
+  description: The Settings API from Mirakl — 1 operation(s) for settings.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-settings-api-openapi.yml
+- aid: mirakl:mirakl-setup-api
+  name: Mirakl Setup API
+  description: The Setup API from Mirakl — 3 operation(s) for setup.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Setup
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-setup-api-openapi.yml
+- aid: mirakl:mirakl-shipments-api
+  name: Mirakl Shipments API
+  description: The Shipments API from Mirakl — 2 operation(s) for shipments.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Shipments
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-shipments-api-openapi.yml
+- aid: mirakl:mirakl-storefront-api
+  name: Mirakl Storefront API
+  description: The Storefront API from Mirakl — 13 operation(s) for storefront.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Storefront
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-storefront-api-openapi.yml
+- aid: mirakl:mirakl-synchronization-api
+  name: Mirakl Synchronization API
+  description: The Synchronization API from Mirakl — 11 operation(s) for synchronization.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Synchronization
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-synchronization-api-openapi.yml
+- aid: mirakl:mirakl-synchronization-errors-api
+  name: Mirakl Synchronization Errors API
+  description: The Synchronization Errors API from Mirakl — 14 operation(s) for synchronization errors.
+  humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
+  baseURL: https://your-instance.mirakl.net
+  tags:
+  - Synchronization Errors
+  properties:
+  - type: OpenAPI
+    url: openapi/mirakl-synchronization-errors-api-openapi.yml
 common:
 - type: Overlay
   url: overlays/mirakl-connect-overlay.yaml
