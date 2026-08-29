@@ -463,6 +463,9 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-synchronization-errors-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/mirakl-capability-edges.yml
+  name: Mirakl Business Capability Map
 - type: Overlay
   url: overlays/mirakl-connect-overlay.yaml
 - type: Overlay

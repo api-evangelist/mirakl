@@ -1,0 +1,86 @@
+slug: mirakl
+provider: Mirakl
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Retail & Consumer Goods
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 7
+edges:
+- tag: Products
+  spec_file: mirakl-products-api-openapi.yml
+  capability_id: BC-2370.10
+  capability_id_l1: BC-2370
+  capability_name: Item Master Data Management
+  confidence: 0.82
+  evidence: P41 - Import products to the operator information system; PM11 - Get the product attribute
+    configuration; H11 - List Catalog categories (parents and children)
+  reason: Operations import product records, expose product attribute configuration, catalog category
+    hierarchies and value lists — authoritative item/catalog master data, i.e. item master data management
+    within product information management.
+- tag: Taxonomy
+  spec_file: mirakl-taxonomy-api-openapi.yml
+  capability_id: BC-2370.10
+  capability_id_l1: BC-2370
+  capability_name: Item Master Data Management
+  confidence: 0.8
+  evidence: upsertProductType - Create or Update a Product Type; schemas ProductType, ConnectStandardAttribute,
+    ProductAttributeId
+  reason: Operations define product types and attribute rules for a channel taxonomy — canonical item
+    taxonomy/attribute management, i.e. Item Master Data Management within Product Information Management.
+- tag: Promotions
+  spec_file: mirakl-promotions-api-openapi.yml
+  capability_id: BC-440.30
+  capability_id_l1: BC-440
+  capability_name: Discount & Promotion Management
+  confidence: 0.78
+  evidence: PR03 - Create a promotion; PR01_Response_200_Promotions_Triggers, PR03_Request_Reward, PR03_Request_ApplicationToCart
+  reason: CRUD over consumer promotions with triggers, rewards and cart application is promotional offer/discount
+    management, not CPG trade-spend investment planning.
+- tag: Catalog
+  spec_file: mirakl-catalog-api-openapi.yml
+  capability_id: BC-2370
+  capability_id_l1: BC-2370
+  capability_name: Product Information Management
+  confidence: 0.7
+  evidence: POST /products 'upsertProducts - Create or Update your Mirakl Connect Catalog'; GET /products
+    'listProducts'; schemas Gtin, Brand, Attribute, StandardPrices, AvailableQuantity
+  reason: Maintains the seller's product catalogue records (GTIN, brand, attributes, titles) in Mirakl
+    Connect for distribution to channels — product information management. Presence of price and quantity
+    schemas adds offer semantics, so no single L2 is asserted.
+- tag: Invoicing and Accounting
+  spec_file: mirakl-invoicing-and-accounting-api-openapi.yml
+  capability_id: BC-200
+  capability_id_l1: BC-200
+  capability_name: Financial Management
+  confidence: 0.7
+  evidence: '"IV01 - List accounting documents", "SBC11 - List seller billing cycles", "TL02 - List transaction
+    lines", schema SBC11_Response_200_Data_PayOut'
+  reason: Accounting documents, invoices, seller billing cycles, payouts and transaction ledgers — clearly
+    financial accounting for marketplace settlement. Mixed receivable/payable and document-management
+    character, so held at the L1.
+- tag: Multiple shipments
+  spec_file: mirakl-multiple-shipments-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.7
+  evidence: '"ST01 - Create shipments", "ST23 - Update carrier tracking information for shipments", "ST24
+    - Validate shipments as shipped", "ST26 - Validate shipments as ready to pick up"'
+  reason: Outbound shipment creation, carrier tracking and ship/pickup confirmation — transport and shipping
+    execution within the supply chain.
+- tag: Shipments
+  spec_file: mirakl-shipments-api-openapi.yml
+  capability_id: BC-520.40
+  capability_id_l1: BC-520
+  capability_name: Order Fulfilment Management
+  confidence: 0.7
+  evidence: createShipment - Ship items of a Connect order
+  reason: Recording shipment of order items by a seller is execution of order fulfilment; no evidence
+    of store-based or distributed-node routing logic to justify a retail-specific sub-capability.
