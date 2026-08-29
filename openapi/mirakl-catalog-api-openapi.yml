@@ -1,0 +1,1022 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/product/connect/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Catalog API
+  version: ''
+servers:
+- description: Connect Production endpoint
+  url: https://miraklconnect.com/api
+tags:
+- name: Catalog
+paths:
+  /products:
+    delete:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to delete one or more products using the product identifiers.
+
+
+        **Limitations:**
+
+        - Maximum 1000 products per request
+
+        - For larger deletions, split into multiple requests
+
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Asynchronous: every 5 minutes</div>
+
+        <div class="max-call-frequency">Maximum usage: Asynchronous: once per minute</div>
+
+        </div>'
+      operationId: deleteProducts
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Delete product
+                value:
+                  products:
+                  - id: iphone12
+              application/json-1:
+                summary: Delete products in bulk
+                value:
+                  products:
+                  - id: iphone12
+                  - id: playStation4
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  products:
+                  - id: string
+            schema:
+              $ref: '#/components/schemas/DeleteProductsRequest'
+        required: true
+      responses:
+        '202':
+          description: The request has been accepted
+      security:
+      - Bearer:
+        - connect:product:delete
+      summary: deleteProducts - Delete products in bulk from your Mirakl Connect Catalog
+      tags:
+      - Catalog
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to retrieve products imported in your Mirakl Connect catalog. Items are sorted by product identifiers.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Synchronous: every 5 minutes</div>
+
+        <div class="max-call-frequency">Maximum usage: Synchronous: once per minute</div>
+
+        <div class="extension-title">Pagination</div>
+
+
+        <p>This resource supports seek pagination (<a href="#section/Seek-pagination-and-sort">see documentation</a>)</p>
+
+
+        </div>'
+      operationId: listProducts
+      parameters:
+      - description: Token to access the next or previous page
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Maximum number of listed products
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: A page of products
+                  value:
+                    data:
+                    - attributes:
+                      - id: color
+                        name: color
+                        type: STRING
+                        value: Intense Purple
+                      - id: storage
+                        name: storage
+                        type: NUMERIC
+                        value: 256
+                      brand: APPLE
+                      category:
+                        id: Smartphone
+                        labels:
+                        - locale: en_US
+                          value: Smartphone
+                      descriptions:
+                      - locale: en_US
+                        value: Smartphone Apple iPhone 14 Pro 128GB Intense Purple
+                      discount_prices:
+                      - end_date: '2025-02-01T10:00:00Z'
+                        price:
+                          amount: 1299.99
+                          currency: EUR
+                        start_date: '2025-01-01T10:00:00Z'
+                      gtins:
+                      - value: 0194252034279
+                      id: iphone14pro
+                      images:
+                      - url: https://picsum.photos/200
+                      quantities:
+                      - available_quantity: 65
+                      standard_prices:
+                      - price:
+                          amount: 1329
+                          currency: EUR
+                      titles:
+                      - locale: en_US
+                        value: iPhone 14 pro
+                    - attributes:
+                      - id: color
+                        name: color
+                        type: STRING
+                        value: White
+                      - id: storage
+                        name: storage
+                        type: NUMERIC
+                        value: 1000
+                      brand: Sony
+                      category:
+                        id: Electronics
+                        labels:
+                        - locale: en_US
+                          value: Electronics
+                      descriptions:
+                      - locale: en_US
+                        value: PlayStation 5 Game Console Digital Edition C SONY
+                      discount_prices:
+                      - end_date: '2025-05-01T14:00:00Z'
+                        price:
+                          amount: 349.99
+                          currency: EUR
+                        start_date: '2025-01-01T14:00:00Z'
+                      gtins:
+                      - value: '711719521112'
+                      id: playStation5
+                      images:
+                      - url: https://picsum.photos/200
+                      quantities:
+                      - available_quantity: 12
+                      standard_prices:
+                      - price:
+                          amount: 499
+                          currency: EUR
+                      titles:
+                      - locale: en_US
+                        value: Playstation 5
+                    next_page_token: c29tZXBhcmFtPXNvbWV2YWx1ZSZzb21lb3RoZXJwYXJhbT1zb21lb3RoZXJ2YWx1ZQ==
+                    previous_page_token: YXBhcmFtbT1hdmFsdWUmYW5vdGhlcnBhcmFtPWFub3RoZXJ2YWx1ZQ==
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    previous_page_token: string
+                    next_page_token: string
+                    data:
+                    - id: string
+                      gtins:
+                      - value: '9780050666319'
+                      standard_prices:
+                      - scope: string
+                        price:
+                          amount: '1234.56'
+                          currency: EUR
+                      discount_prices:
+                      - scope: string
+                        price:
+                          amount: '1234.56'
+                          currency: EUR
+                        start_date: '2025-02-19T16:46:00Z'
+                        end_date: '2025-02-19T16:46:00Z'
+                      quantities:
+                      - available_quantity: 0
+                        warehouse_code: string
+                      partner_quantities:
+                      - available_quantity: 0
+                        partner_id: string
+                      images:
+                      - url: http://my_image.png
+                      brand: My awesome brand
+                      titles:
+                      - value: My awesome product
+                        locale: en_US
+                      descriptions:
+                      - value: My awesome product's description
+                        locale: en_US
+                      category: object
+                      attributes:
+                      - id: string
+                        name: string
+                        type: STRING
+                        value: object
+              schema:
+                $ref: '#/components/schemas/ListProductsResponse'
+          description: List of products
+      security:
+      - Bearer:
+        - connect:product:read
+      summary: listProducts - List products from your Mirakl Connect catalog
+      tags:
+      - Catalog
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Products are created if they do not already exist. The missing fields in the request remain unchanged on the Mirakl Connect catalog (behaves like a PATCH).
+
+
+        Omitted top-elements in the API will remain unchanged.
+
+
+        Any nullable field can be explicitly set to null in order to remove its value.
+
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: Asynchronous: every 5 minutes</div>
+
+        <div class="max-call-frequency">Maximum usage: Asynchronous: once per minute</div>
+
+        </div>'
+      operationId: upsertProducts
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Upsert a product
+                value:
+                  products:
+                  - attributes:
+                    - id: color
+                      name: color
+                      type: STRING
+                      value: Intense Purple
+                    - id: storage
+                      name: storage
+                      type: NUMERIC
+                      value: 256
+                    - id: limitedEdition
+                      name: limited edition
+                      type: BOOLEAN
+                      value: true
+                    brand: APPLE
+                    category:
+                      id: Smartphone
+                      labels:
+                      - locale: en_US
+                        value: Smartphone
+                    descriptions:
+                    - locale: en_US
+                      value: Smartphone Apple iPhone 14 Pro 128GB Intense Purple
+                    discount_prices:
+                    - end_date: '2025-02-01T10:00:00Z'
+                      price:
+                        amount: 1249.99
+                        currency: EUR
+                      scope: PriceEUR_FR
+                      start_date: '2025-01-01T10:00:00Z'
+                    - end_date: '2025-05-01T14:00:00Z'
+                      price:
+                        amount: 1149.99
+                        currency: EUR
+                      scope: PriceEUR_BE
+                      start_date: '2025-01-01T14:00:00Z'
+                    gtins:
+                    - value: 0194252034279
+                    id: iphone14pro
+                    images:
+                    - url: https://picsum.photos/200
+                    quantities:
+                    - available_quantity: 65
+                    standard_prices:
+                    - price:
+                        amount: 1349
+                        currency: EUR
+                      scope: PriceEUR_FR
+                    - end_date: '2025-02-01T10:00:00Z'
+                      price:
+                        amount: 1249
+                        currency: EUR
+                      scope: PriceEUR_BE
+                      start_date: '2025-01-01T10:00:00Z'
+                    titles:
+                    - locale: en_US
+                      value: iPhone 14 pro
+              application/json-1:
+                summary: Upsert a product with several quantities per warehouse
+                value:
+                  products:
+                  - id: iphone14pro
+                    quantities:
+                    - available_quantity: 65
+                      warehouse_code: paris-warehouse
+                    - available_quantity: 12
+                      warehouse_code: new-york-warehouse
+              application/json-10:
+                summary: Remove discount prices
+                value:
+                  products:
+                  - discount_prices: null
+                    id: iphone14pro
+              application/json-11:
+                summary: Add custom attributes of different types
+                value:
+                  products:
+                  - attributes:
+                    - id: background_color
+                      name: background color
+                      type: STRING
+                      value: RED
+                    - id: screen-size
+                      name: screen size
+                      type: NUMERIC
+                      value: 6.01
+                    - id: including_headphones
+                      name: including_headphones
+                      type: BOOLEAN
+                      value: true
+                    id: iphone14pro
+              application/json-2:
+                summary: Upsert products in bulk
+                value:
+                  products:
+                  - attributes:
+                    - id: color
+                      name: color
+                      type: STRING
+                      value: Intense Purple
+                    - id: storage
+                      name: storage
+                      type: NUMERIC
+                      value: 256
+                    - id: limitedEdition
+                      name: limited edition
+                      type: BOOLEAN
+                      value: false
+                    brand: APPLE
+                    category:
+                      id: Smartphone
+                      labels:
+                      - locale: en_US
+                        value: Smartphone
+                    descriptions:
+                    - locale: en_US
+                      value: Smartphone Apple iPhone 14 Pro 128GB Intense Purple
+                    discount_prices:
+                    - end_date: '2025-02-01T10:00:00Z'
+                      price:
+                        amount: 1249.99
+                        currency: EUR
+                      scope: PriceEUR_FR
+                      start_date: '2025-01-01T10:00:00Z'
+                    - end_date: '2025-05-01T14:00:00Z'
+                      price:
+                        amount: 1149.99
+                        currency: EUR
+                      scope: PriceEUR_BE
+                      start_date: '2025-01-01T14:00:00Z'
+                    gtins:
+                    - value: 0194252034279
+                    id: iphone14pro
+                    images:
+                    - url: https://picsum.photos/200
+                    quantities:
+                    - available_quantity: 65
+                    standard_prices:
+                    - price:
+                        amount: 1349
+                        currency: EUR
+                      scope: PriceEUR_FR
+                    - price:
+                        amount: 1249
+                        currency: EUR
+                      scope: PriceEUR_BE
+                    titles:
+                    - locale: en_US
+                      value: iPhone 14 pro
+                  - attributes:
+                    - id: color
+                      name: color
+                      type: STRING
+                      value: White
+                    - id: storage
+                      name: storage
+                      type: NUMERIC
+                      value: 1000
+                    - id: limitedEdition
+                      name: limited edition
+                      type: BOOLEAN
+                      value: true
+                    brand: Sony
+                    category:
+                      id: Electronics
+                      labels:
+                      - locale: en_US
+                        value: Electronics
+                    descriptions:
+                    - locale: en_US
+                      value: PlayStation 5 Game Console Digital Edition C SONY
+                    discount_prices:
+                    - end_date: '2025-05-01T14:00:00Z'
+                      price:
+                        amount: 349.99
+                        currency: EUR
+                      start_date: '2025-01-01T14:00:00Z'
+                    gtins:
+                    - value: '711719521112'
+                    id: playStation5
+                    images:
+                    - url: https://picsum.photos/200
+                    quantities:
+                    - available_quantity: 12
+                    standard_prices:
+                    - price:
+                        amount: 499
+                        currency: EUR
+                    titles:
+                    - locale: en_US
+                      value: Playstation 5
+              application/json-3:
+                summary: Modify only the price and quantity of a product
+                value:
+                  products:
+                  - id: iphone14pro
+                    quantities:
+                    - available_quantity: 200
+                    standard_prices:
+                    - price:
+                        amount: 1299
+                        currency: EUR
+              application/json-4:
+                summary: Add standard prices in different currencies without scope
+                value:
+                  products:
+                  - id: iphone14pro
+                    standard_prices:
+                    - price:
+                        amount: 1239
+                        currency: GBP
+                    - price:
+                        amount: 1297
+                        currency: USD
+              application/json-5:
+                summary: Add standard prices in the same currency with different scopes
+                value:
+                  products:
+                  - id: iphone14pro
+                    standard_prices:
+                    - price:
+                        amount: 1239
+                        currency: EUR
+                      scope: PriceEUR_FR
+                    - price:
+                        amount: 1297
+                        currency: EUR
+                      scope: PriceEUR_BE
+              application/json-6:
+                summary: Add discount prices with date interval
+                value:
+                  products:
+                  - discount_prices:
+                    - end_date: '2025-02-01T10:00:00Z'
+                      price:
+                        amount: 1200
+                        currency: USD
+                      start_date: '2025-01-01T10:00:00Z'
+                    id: iphone14pro
+              application/json-7:
+                summary: Add discount prices without date interval
+                value:
+                  products:
+                  - discount_prices:
+                    - price:
+                        amount: 1200
+                        currency: USD
+                    id: iphone14pro
+              application/json-8:
+                summary: Add discount prices in different currencies without scope
+                value:
+                  products:
+                  - discount_prices:
+                    - end_date: '2025-02-01T10:00:00Z'
+                      price:
+                        amount: 1150
+                        currency: GBP
+                      start_date: '2025-01-01T10:00:00Z'
+                    - end_date: '2025-02-01T10:00:00Z'
+                      price:
+                        amount: 1200
+                        currency: USD
+                      start_date: '2025-01-01T10:00:00Z'
+                    id: iphone14pro
+              application/json-9:
+                summary: Add discount prices in the same currency with different scopes
+                value:
+                  products:
+                  - discount_prices:
+                    - end_date: '2025-02-01T10:00:00Z'
+                      price:
+                        amount: 1139
+                        currency: EUR
+                      scope: PriceEUR_FR
+                      start_date: '2025-01-01T10:00:00Z'
+                    - end_date: '2025-02-01T10:00:00Z'
+                      price:
+                        amount: 1197
+                        currency: EUR
+                      scope: PriceEUR_BE
+                      start_date: '2025-01-01T10:00:00Z'
+                    id: iphone14pro
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  products:
+                  - id: string
+                    gtins:
+                    - value: '9780050666319'
+                    standard_prices:
+                    - scope: string
+                      price:
+                        amount: '1234.56'
+                        currency: EUR
+                    discount_prices:
+                    - scope: string
+                      price:
+                        amount: '1234.56'
+                        currency: EUR
+                      start_date: '2025-02-19T16:46:00Z'
+                      end_date: '2025-02-19T16:46:00Z'
+                    quantities:
+                    - available_quantity: 0
+                      warehouse_code: string
+                    partner_quantities:
+                    - available_quantity: 0
+                      partner_id: string
+                    images:
+                    - url: http://my_image.png
+                    brand: My awesome brand
+                    titles:
+                    - value: My awesome product
+                      locale: en_US
+                    descriptions:
+                    - value: My awesome product's description
+                      locale: en_US
+                    category: object
+                    attributes:
+                    - id: string
+                      name: string
+                      type: STRING
+                      value: object
+            schema:
+              $ref: '#/components/schemas/UpsertProductsRequest'
+        required: true
+      responses:
+        '202':
+          description: The request has been accepted
+      security:
+      - Bearer:
+        - connect:product:write
+      summary: upsertProducts - Create or Update your Mirakl Connect Catalog
+      tags:
+      - Catalog
+components:
+  schemas:
+    Quantity:
+      type: object
+      properties:
+        available_quantity:
+          $ref: '#/components/schemas/AvailableQuantity'
+        warehouse_code:
+          type: string
+          description: Warehouse code defined in your Mirakl account
+          minLength: 1
+      required:
+      - available_quantity
+    ProductIdentifier:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ProductId'
+      required:
+      - id
+    StandardPrices:
+      type: array
+      description: Standard prices
+      items:
+        $ref: '#/components/schemas/StandardPrice'
+      maxItems: 10
+      minItems: 1
+    ResourcesPage:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+          minLength: 1
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+          minLength: 1
+    CategoryLabel:
+      type: object
+      description: A label for the category with its associated locale
+      properties:
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: A label for the category
+          examples:
+          - Fridge
+          maxLength: 255
+      required:
+      - locale
+      - value
+    Gtin:
+      type: object
+      properties:
+        value:
+          type: string
+          description: GTIN value on 8, 12 or 13 digits
+          examples:
+          - '9780050666319'
+          pattern: ^([0-9]{8}|[0-9]{12,13})$
+      required:
+      - value
+    Attribute:
+      type: object
+      description: An attribute of this product.
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/AttributeBoolean'
+          NUMERIC: '#/components/schemas/AttributeNumeric'
+          STRING: '#/components/schemas/AttributeString'
+        propertyName: type
+      properties:
+        id:
+          type: string
+          description: Attribute's id
+          maxLength: 255
+          minLength: 1
+        name:
+          type: string
+          description: Attribute's name
+          maxLength: 255
+          minLength: 1
+        type:
+          type: string
+          description: 'The attribute''s type
+
+
+            Enum: `"STRING"`, `"NUMERIC"`, `"BOOLEAN"`
+
+            '
+          examples:
+          - STRING
+        value:
+          type: object
+          description: The attribute's value
+      required:
+      - id
+      - name
+      - type
+      - value
+    Brand:
+      type:
+      - string
+      - 'null'
+      description: Brand
+      examples:
+      - My awesome brand
+      maxLength: 255
+    Titles:
+      type:
+      - array
+      - 'null'
+      description: Titles with their associated locale
+      items:
+        $ref: '#/components/schemas/Title'
+      maxItems: 10
+    DiscountPrices:
+      type:
+      - array
+      - 'null'
+      description: Discount prices
+      items:
+        $ref: '#/components/schemas/DiscountPrice'
+      maxItems: 10
+    ListProductsResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResourcesPage'
+      - type: object
+        properties:
+          data:
+            type: array
+            description: Page of products
+            items:
+              $ref: '#/components/schemas/Product'
+        required:
+        - data
+    Title:
+      type: object
+      description: Title with its associated locale
+      properties:
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: Title
+          examples:
+          - My awesome product
+          maxLength: 255
+      required:
+      - locale
+      - value
+    Locale:
+      type: string
+      description: The language format can be ISO-639 or ISO-639_ISO-3166
+      examples:
+      - en_US
+    ProductId:
+      type: string
+      description: Product identifier
+      maxLength: 256
+      minLength: 1
+    Money:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Price amount
+          examples:
+          - '1234.56'
+          minimum: 0
+        currency:
+          type: string
+          format: iso-4217
+          description: Currency ISO code
+          examples:
+          - EUR
+          minLength: 1
+      required:
+      - amount
+      - currency
+    StandardPrice:
+      type: object
+      properties:
+        price:
+          $ref: '#/components/schemas/Money'
+        scope:
+          $ref: '#/components/schemas/PriceScope'
+      required:
+      - price
+    PartnerQuantity:
+      type: object
+      properties:
+        available_quantity:
+          $ref: '#/components/schemas/AvailableQuantity'
+        partner_id:
+          type: string
+      required:
+      - available_quantity
+      - partner_id
+    AvailableQuantity:
+      type: integer
+      format: int32
+      description: Available quantity of a product
+      maximum: 1000000000
+      minimum: 0
+    UpsertProductsRequest:
+      type: object
+      description: 'Update any of the top-elements of all given products.
+
+
+        Omitted top-elements in the API will remain unchanged.
+
+
+        Any nullable field can be explicitly set to null in order to remove its value.
+
+        '
+      properties:
+        products:
+          type: array
+          description: Products to create or to update
+          items:
+            $ref: '#/components/schemas/Product'
+          maxItems: 1000
+          minItems: 1
+    DeleteProductsRequest:
+      type: object
+      description: 'Delete any of corresponding products.
+
+        Unknown or no longer present products won''t generate error.
+
+        '
+      properties:
+        products:
+          type: array
+          description: Identifier of products to delete
+          items:
+            $ref: '#/components/schemas/ProductIdentifier'
+          maxItems: 1000
+          minItems: 1
+      required:
+      - products
+    Description:
+      type: object
+      description: Description with its associated locale
+      properties:
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: Description
+          examples:
+          - My awesome product's description
+          maxLength: 6000
+      required:
+      - locale
+      - value
+    Image:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Image URL
+          examples:
+          - http://my_image.png
+          pattern: ^(http|https):\/\/.*$
+      required:
+      - url
+    PriceScope:
+      type:
+      - string
+      - 'null'
+      description: Price scope
+      maxLength: 255
+    Quantities:
+      type: array
+      description: Product quantities
+      items:
+        $ref: '#/components/schemas/Quantity'
+      maxItems: 20
+      minItems: 1
+    Gtins:
+      type: array
+      description: GTIN (EAN, GENCOD, UPC, ISBN, etc.) used to map the product with one of the marketplace’s catalog
+      items:
+        $ref: '#/components/schemas/Gtin'
+      maxItems: 10
+      minItems: 0
+    Attributes:
+      type:
+      - array
+      - 'null'
+      description: Additional product attributes
+      items:
+        $ref: '#/components/schemas/Attribute'
+      maxItems: 1000
+      minItems: 0
+    PartnerQuantities:
+      type: array
+      description: Product quantities from partners
+      items:
+        $ref: '#/components/schemas/PartnerQuantity'
+      maxItems: 20
+      minItems: 1
+    Images:
+      type:
+      - array
+      - 'null'
+      description: Images
+      items:
+        $ref: '#/components/schemas/Image'
+      maxItems: 15
+      minItems: 0
+    Descriptions:
+      type:
+      - array
+      - 'null'
+      description: Descriptions with their associated locale
+      items:
+        $ref: '#/components/schemas/Description'
+      maxItems: 10
+    Category:
+      type: object
+      description: Category
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: The id of the category
+          examples:
+          - '123654789'
+          maxLength: 255
+          minLength: 1
+        labels:
+          type: array
+          description: Labels for the category with their associated locale
+          items:
+            $ref: '#/components/schemas/CategoryLabel'
+      required:
+      - labels
+    DiscountPrice:
+      type: object
+      properties:
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: datetime
+          description: The end date of the discount interval in ISO 8601 format (UTC/Zulu time)
+          examples:
+          - '2025-02-19T16:46:00Z'
+        price:
+          $ref: '#/components/schemas/Money'
+        scope:
+          $ref: '#/components/schemas/PriceScope'
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: datetime
+          description: The start date of the discount interval in ISO 8601 format (UTC/Zulu time)
+          examples:
+          - '2025-02-19T16:46:00Z'
+      required:
+      - price
+    Product:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+        brand:
+          $ref: '#/components/schemas/Brand'
+        category:
+          oneOf:
+          - $ref: '#/components/schemas/Category'
+          - type: 'null'
+        descriptions:
+          $ref: '#/components/schemas/Descriptions'
+        discount_prices:
+          $ref: '#/components/schemas/DiscountPrices'
+        gtins:
+          $ref: '#/components/schemas/Gtins'
+        id:
+          $ref: '#/components/schemas/ProductId'
+        images:
+          $ref: '#/components/schemas/Images'
+        partner_quantities:
+          $ref: '#/components/schemas/PartnerQuantities'
+        quantities:
+          $ref: '#/components/schemas/Quantities'
+        standard_prices:
+          $ref: '#/components/schemas/StandardPrices'
+        titles:
+          $ref: '#/components/schemas/Titles'
+      required:
+      - id
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

@@ -1,0 +1,1888 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/connector/operator/shopify/app-operator-shopify/rest/public/openapi-description.md" /%}'
+  title: Shopify Operator Connector Settings API
+  version: ''
+servers:
+- description: Shopify production endpoint.
+  url: https://operator-shpy.mirakl.net
+tags:
+- name: Settings
+paths:
+  /api/settings:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to read your environment settings</div>
+
+        <div class="extension-title">Read More</div>
+
+
+        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/integration_guide/shopify_setting.html">More context (shopify middleware setting)</a></li></ul></div>'
+      operationId: ListSettings
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    additionalLocales: []
+                    categories:
+                      excludes: []
+                      includes: []
+                    customAppClientSecret: 79●●●●●●●●●●●●●●●●●●●●●●●●●●●●36
+                    customCarrierDescription: For convenience, your marketplace orders are grouped
+                    customCarrierTitle: Marketplace orders
+                    fraudCheck:
+                      analysisFactDescription: null
+                      strategy: NO_CHECK
+                    imageAttributes:
+                    - code: image_1
+                      isMainImage: true
+                      label: Main Image
+                    jobs:
+                      SyncFirstPartyProducts:
+                        scheduled: false
+                      SyncOffers:
+                        scheduled: false
+                      SyncOrders:
+                        scheduled: false
+                      SyncPromotions:
+                        scheduled: false
+                      SyncReturns:
+                        scheduled: false
+                      SyncShipments:
+                        scheduled: false
+                      SyncShops:
+                        scheduled: false
+                      SyncThirdPartyProducts:
+                        scheduled: false
+                    lastDeletedMiraklProductSync: '2025-08-01T22:04:00Z'
+                    lastMiraklToShopifyProductSync: '2024-09-20T10:00:00Z'
+                    lastMiraklToShopifyShipmentSync: '2025-07-16T15:45:23Z'
+                    lastOfferSync: '2024-09-01T10:20:30Z'
+                    lastOrderSync: '2024-11-01T10:20:30Z'
+                    lastPromotionSync: '2026-06-19T09:00:00Z'
+                    lastReturnSync: '2025-12-10T14:30:00Z'
+                    lastShopSync: '2024-09-01T10:20:30Z'
+                    lastShopifyToMiraklProductSync: '2024-09-20T10:00:00Z'
+                    miraklMasterMode:
+                      enabled: false
+                      useShopifyCategories: false
+                    miraklPayout:
+                      payinPspId: null
+                    offer:
+                      synchronizeAdditionalFields: false
+                      synchronizeAdvancedPricing: false
+                      synchronizeShippingTypes: false
+                    order:
+                      miraklExportCustomerOrganization:
+                        mode: INACTIVE
+                      orderMetafields:
+                      - miraklCustomFieldCode: mirakl_vat_code
+                        shopifyKey: vat_code
+                        shopifyNamespace: custom
+                      - miraklCustomFieldCode: mirakl_tax_id
+                        shopifyKey: tax_id
+                        shopifyNamespace: billing
+                    payment:
+                      confirmCaptureToMirakl: false
+                      confirmRefundToMirakl: false
+                      create3PCaptureInShopify: false
+                      create3PRefundInShopify: false
+                      miraklPaymentWorkflow: PAY_ON_ACCEPTANCE
+                      pspTransactionReferenceSource: null
+                      useMiraklPayout: false
+                      useTransactionNumberForCaptureFromMetafield: false
+                      useTransactionNumberForRefundFromMetafield: false
+                    product:
+                      skuGenerations:
+                      - attributeCode: barcode
+                        strategy: UNIQUE_IDENTIFIER_BASED
+                      - attributeCode: ean
+                        strategy: UNIQUE_IDENTIFIER_BASED
+                      - prefix: mp-
+                        strategy: MIRAKL_PRODUCT_ID_BASED
+                    publicationIds:
+                    - gid://shopify/Publication/220528771398
+                    rootAttributes:
+                      BARCODE:
+                        code: barcode
+                      CATEGORY:
+                        code: category
+                      DESCRIPTION:
+                        code: description
+                      SHOP_SKU:
+                        code: shop_sku
+                      TITLE:
+                        code: title
+                      VARIANT_GROUP_CODE:
+                        code: variant_group_code
+                      VENDOR:
+                        code: vendor
+                      WEIGHT:
+                        code: weight
+                    shippingZoneMapping:
+                      countries:
+                      - iso2Code: CA
+                        provinces: null
+                        shippingZone: CANADA
+                        zips: null
+                      shippingZone: INT
+                    shop:
+                      shopMiraklCustomFields:
+                      - code: customer-care-phone
+                      - code: shipping-policy
+                    syncMiraklToShopifyProductWithTags:
+                    - from_mirakl
+                    syncShopifyToMiraklProductWithTags:
+                    - mirakl_sync
+                    taxonomyMetafields:
+                    - key: materials
+                      localizable: false
+                      namespace: custom
+                      ownerType: PRODUCT
+                    vendorAsValueList: false
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    additionalLocales:
+                    - locale: fr
+                    categories:
+                      excludes:
+                      - string
+                      includes:
+                      - string
+                    customAppClientSecret: string
+                    customCarrierDescription: string
+                    customCarrierTitle: string
+                    fraudCheck:
+                      analysisFactDescription: string
+                      strategy: CUSTOM_ASSESSMENT
+                    imageAttributes:
+                    - code: string
+                      isMainImage: true
+                      label: string
+                    jobs: object
+                    lastDeletedMiraklProductSync: '2023-03-28T09:34:42Z'
+                    lastMiraklToShopifyProductSync: '2023-03-28T09:34:42Z'
+                    lastMiraklToShopifyShipmentSync: '2023-03-28T09:34:42Z'
+                    lastOfferSync: '2023-03-28T09:34:42Z'
+                    lastOrderSync: '2023-03-28T09:34:42Z'
+                    lastPromotionSync: '2023-03-28T09:34:42Z'
+                    lastReturnSync: '2023-03-28T09:34:42Z'
+                    lastShopSync: '2023-03-28T09:34:42Z'
+                    lastShopifyToMiraklProductSync: '2023-03-28T09:34:42Z'
+                    miraklMasterMode:
+                      enabled: true
+                      useShopifyCategories: true
+                    miraklPayout:
+                      payinPspId: string
+                    offer:
+                      synchronizeAdditionalFields: true
+                      synchronizeAdvancedPricing: true
+                      synchronizeShippingTypes: true
+                    order:
+                      miraklExportCustomerOrganization:
+                        mode: INACTIVE
+                      orderMetafields:
+                      - miraklCustomFieldCode: string
+                        shopifyKey: string
+                        shopifyNamespace: string
+                    payment:
+                      confirmCaptureToMirakl: true
+                      confirmRefundToMirakl: true
+                      create3PCaptureInShopify: true
+                      create3PRefundInShopify: true
+                      miraklPaymentWorkflow: PAY_ON_ACCEPTANCE
+                      pspTransactionReferenceSource: string
+                      useMiraklPayout: true
+                      useTransactionNumberForCaptureFromMetafield: true
+                      useTransactionNumberForRefundFromMetafield: true
+                    product:
+                      skuGenerations:
+                      - strategy: MIRAKL_PRODUCT_ID_BASED
+                    publicationIds:
+                    - string
+                    rootAttributes: object
+                    shippingZoneMapping:
+                      countries:
+                      - iso2Code: string
+                        provinces:
+                        - code: string
+                          shippingZone: string
+                        shippingZone: string
+                        zips:
+                        - code: string
+                          shippingZone: string
+                      shippingZone: string
+                    shop:
+                      shopMiraklCustomFields:
+                      - code: string
+                    syncMiraklToShopifyProductWithTags:
+                    - string
+                    syncShopifyToMiraklProductWithTags:
+                    - string
+                    taxonomyMetafields:
+                    - key: string
+                      localizable: true
+                      namespace: string
+                      ownerType: string
+                    vendorAsValueList: true
+              schema:
+                type: object
+                $ref: '#/components/schemas/ListSettings_Response_200'
+          description: OK
+      summary: ListSettings - List connector settings
+      tags:
+      - Settings
+    patch:
+      description: '<div class="extension-title">Description</div>
+
+
+        Update your environment settings information field by field: unspecified fields will not be updated.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to update the settings</div>
+
+        </div>'
+      operationId: UpdateSettings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  additionalLocales:
+                  - locale: fr
+                  - locale: it
+                  - locale: zh-CN
+                  categories:
+                    excludes:
+                    - gid://shopify/TaxonomyCategory/sg-4-17-3
+                    includes:
+                    - gid://shopify/TaxonomyCategory/sg-4-17
+                  customAppClientSecret: 0123456789abcdef0123456789abcdef0123
+                  customCarrierDescription: My custom carrier description
+                  customCarrierTitle: My custom carrier title
+                  fraudCheck:
+                    analysisFactDescription: validated
+                    strategy: CUSTOM_ASSESSMENT
+                  imageAttributes:
+                  - code: main_image_1
+                    isMainImage: true
+                    label: Main Image
+                  - code: swatch
+                    isMainImage: false
+                    label: Swatch
+                  jobs:
+                    SyncFirstPartyProducts:
+                      scheduled: false
+                    SyncOffers:
+                      scheduled: true
+                    SyncOrders:
+                      scheduled: true
+                    SyncPromotions:
+                      scheduled: false
+                    SyncShipments:
+                      scheduled: true
+                    SyncShops:
+                      scheduled: true
+                    SyncThirdPartyProducts:
+                      scheduled: true
+                  lastDeletedMiraklProductSync: '2025-08-01T22:04:00Z'
+                  lastMiraklToShopifyProductSync: '2024-09-01T12:00:00Z'
+                  lastMiraklToShopifyShipmentSync: '2025-07-16T15:45:23Z'
+                  lastOfferSync: '2024-09-01T09:20:30Z'
+                  lastOrderSync: '2024-11-01T10:20:30Z'
+                  lastShopifyToMiraklProductSync: '2024-09-01T12:00:00Z'
+                  miraklMasterMode:
+                    enabled: true
+                    useShopifyCategories: false
+                  miraklPayout:
+                    payinPspId: PAYIN-EUR
+                  offer:
+                    synchronizeAdditionalFields: true
+                    synchronizeAdvancedPricing: true
+                    synchronizeShippingTypes: true
+                  order:
+                    miraklExportCustomerOrganization:
+                      mode: FULL
+                    orderMetafields:
+                    - miraklCustomFieldCode: mirakl_customer_type
+                      shopifyKey: customer_type
+                      shopifyNamespace: custom
+                  payment:
+                    confirmCaptureToMirakl: true
+                    confirmRefundToMirakl: true
+                    create3PCaptureInShopify: true
+                    create3PRefundInShopify: true
+                    miraklPaymentWorkflow: PAY_ON_SHIPMENT
+                    useMiraklPayout: true
+                    useTransactionNumberForCaptureFromMetafield: true
+                    useTransactionNumberForRefundFromMetafield: true
+                  product:
+                    skuGenerations:
+                    - attributeCode: barcode
+                      strategy: UNIQUE_IDENTIFIER_BASED
+                    - attributeCode: ean
+                      strategy: UNIQUE_IDENTIFIER_BASED
+                    - prefix: mp-
+                      strategy: MIRAKL_PRODUCT_ID_BASED
+                  publicationIds:
+                  - gid://shopify/Publication/220528771398
+                  rootAttributes:
+                    BARCODE:
+                      code: barcode
+                    CATEGORY:
+                      code: category
+                    DESCRIPTION:
+                      code: description
+                    SHOP_SKU:
+                      code: shop_sku
+                    TITLE:
+                      code: title
+                    VARIANT_GROUP_CODE:
+                      code: variant_group_code
+                    VENDOR:
+                      code: vendor
+                    WEIGHT:
+                      code: weight
+                  shippingZoneMapping:
+                    countries:
+                    - iso2Code: US
+                      provinces:
+                      - code: MA
+                        shippingZone: MASSACHUSETTS
+                      shippingZone: USA
+                      zips: null
+                    - iso2Code: FR
+                      provinces: null
+                      shippingZone: FRANCE
+                      zips:
+                      - code: '75'
+                        shippingZone: PARIS
+                    shippingZone: INT
+                  shop:
+                    shopMiraklCustomFields:
+                    - code: customer-care-phone
+                    - code: customer-care-email
+                    - code: shipping-policy
+                  taxonomyMetafields:
+                  - key: materials
+                    localizable: false
+                    namespace: custom
+                    ownerType: PRODUCT
+                  - key: boolean
+                    localizable: false
+                    namespace: test
+                    ownerType: PRODUCTVARIANT
+                  vendorAsValueList: true
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  additionalLocales:
+                  - locale: fr
+                  categories:
+                    excludes:
+                    - string
+                    includes:
+                    - string
+                  customAppClientSecret: string
+                  customCarrierDescription: string
+                  customCarrierTitle: string
+                  fraudCheck:
+                    analysisFactDescription: string
+                    strategy: CUSTOM_ASSESSMENT
+                  imageAttributes:
+                  - code: string
+                    isMainImage: true
+                    label: string
+                  jobs: object
+                  lastDeletedMiraklProductSync: '2023-03-28T09:34:42Z'
+                  lastMiraklToShopifyProductSync: '2023-03-28T09:34:42Z'
+                  lastMiraklToShopifyShipmentSync: '2023-03-28T09:34:42Z'
+                  lastOfferSync: '2023-03-28T09:34:42Z'
+                  lastOrderSync: '2023-03-28T09:34:42Z'
+                  lastPromotionSync: '2023-03-28T09:34:42Z'
+                  lastReturnSync: '2023-03-28T09:34:42Z'
+                  lastShopSync: '2023-03-28T09:34:42Z'
+                  lastShopifyToMiraklProductSync: '2023-03-28T09:34:42Z'
+                  miraklMasterMode: object
+                  miraklPayout:
+                    payinPspId: string
+                  offer:
+                    synchronizeAdditionalFields: true
+                    synchronizeAdvancedPricing: true
+                    synchronizeShippingTypes: true
+                  order:
+                    miraklExportCustomerOrganization:
+                      mode: INACTIVE
+                    orderMetafields:
+                    - miraklCustomFieldCode: string
+                      shopifyKey: string
+                      shopifyNamespace: string
+                  payment:
+                    confirmCaptureToMirakl: true
+                    confirmRefundToMirakl: true
+                    create3PCaptureInShopify: true
+                    create3PRefundInShopify: true
+                    miraklPaymentWorkflow: PAY_ON_ACCEPTANCE
+                    pspTransactionReferenceSource: string
+                    useMiraklPayout: true
+                    useTransactionNumberForCaptureFromMetafield: true
+                    useTransactionNumberForRefundFromMetafield: true
+                  product:
+                    skuGenerations:
+                    - strategy: MIRAKL_PRODUCT_ID_BASED
+                  publicationIds:
+                  - string
+                  rootAttributes: object
+                  shippingZoneMapping:
+                    countries:
+                    - iso2Code: string
+                      provinces:
+                      - code: string
+                        shippingZone: string
+                      shippingZone: string
+                      zips:
+                      - code: string
+                        shippingZone: string
+                    shippingZone: string
+                  shop:
+                    shopMiraklCustomFields:
+                    - code: string
+                  syncMiraklToShopifyProductWithTags:
+                  - string
+                  syncShopifyToMiraklProductWithTags:
+                  - string
+                  taxonomyMetafields:
+                  - key: string
+                    localizable: true
+                    namespace: string
+                    ownerType: string
+                  vendorAsValueList: true
+            schema:
+              $ref: '#/components/schemas/UpdateSettings_Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    additionalLocales:
+                    - locale: it
+                    - locale: fr
+                    - locale: zh-CN
+                    categories:
+                      excludes:
+                      - gid://shopify/TaxonomyCategory/sg-4-17-3
+                      includes:
+                      - gid://shopify/TaxonomyCategory/sg-4-17
+                    customAppClientSecret: 01●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●23
+                    customCarrierDescription: My custom carrier description
+                    customCarrierTitle: My custom carrier title
+                    fraudCheck:
+                      analysisFactDescription: validated
+                      strategy: CUSTOM_ASSESSMENT
+                    imageAttributes:
+                    - code: main_image_1
+                      isMainImage: true
+                      label: Main Image
+                    - code: swatch
+                      isMainImage: false
+                      label: Swatch
+                    jobs:
+                      SyncFirstPartyProducts:
+                        scheduled: false
+                      SyncOffers:
+                        scheduled: true
+                      SyncOrders:
+                        scheduled: true
+                      SyncPromotions:
+                        scheduled: false
+                      SyncShipments:
+                        scheduled: true
+                      SyncShops:
+                        scheduled: true
+                      SyncThirdPartyProducts:
+                        scheduled: true
+                    lastDeletedMiraklProductSync: '2025-08-01T22:04:00Z'
+                    lastMiraklToShopifyProductSync: '2024-09-01T12:00:00Z'
+                    lastMiraklToShopifyShipmentSync: '2025-07-16T15:45:23Z'
+                    lastOfferSync: '2024-09-01T09:20:30Z'
+                    lastOrderSync: '2024-11-01T10:20:30Z'
+                    lastPromotionSync: '2026-06-19T09:00:00Z'
+                    lastReturnSync: '2025-12-10T14:30:00Z'
+                    lastShopSync: '2024-09-01T10:20:30Z'
+                    lastShopifyToMiraklProductSync: '2024-09-01T12:00:00Z'
+                    miraklMasterMode:
+                      enabled: true
+                      useShopifyCategories: false
+                    miraklPayout:
+                      payinPspId: PAYIN-EUR
+                    offer:
+                      synchronizeAdditionalFields: true
+                      synchronizeAdvancedPricing: true
+                      synchronizeShippingTypes: true
+                    order:
+                      miraklExportCustomerOrganization:
+                        mode: FULL
+                      orderMetafields:
+                      - miraklCustomFieldCode: mirakl_customer_type
+                        shopifyKey: customer_type
+                        shopifyNamespace: custom
+                    payment:
+                      confirmCaptureToMirakl: true
+                      confirmRefundToMirakl: true
+                      create3PCaptureInShopify: true
+                      create3PRefundInShopify: true
+                      miraklPaymentWorkflow: PAY_ON_SHIPMENT
+                      pspTransactionReferenceSource: null
+                      useMiraklPayout: true
+                      useTransactionNumberForCaptureFromMetafield: true
+                      useTransactionNumberForRefundFromMetafield: true
+                    product:
+                      skuGenerations:
+                      - attributeCode: barcode
+                        strategy: UNIQUE_IDENTIFIER_BASED
+                      - attributeCode: ean
+                        strategy: UNIQUE_IDENTIFIER_BASED
+                      - prefix: mp-
+                        strategy: MIRAKL_PRODUCT_ID_BASED
+                    publicationIds:
+                    - gid://shopify/Publication/220528771398
+                    rootAttributes:
+                      BARCODE:
+                        code: barcode
+                      CATEGORY:
+                        code: category
+                      DESCRIPTION:
+                        code: description
+                      SHOP_SKU:
+                        code: shop_sku
+                      TITLE:
+                        code: title
+                      VARIANT_GROUP_CODE:
+                        code: variant_group_code
+                      VENDOR:
+                        code: vendor
+                      WEIGHT:
+                        code: weight
+                    shippingZoneMapping:
+                      countries:
+                      - iso2Code: US
+                        provinces:
+                        - code: MA
+                          shippingZone: MASSACHUSETTS
+                        shippingZone: USA
+                        zips: null
+                      - iso2Code: FR
+                        provinces: null
+                        shippingZone: FRANCE
+                        zips:
+                        - code: '75'
+                          shippingZone: PARIS
+                      shippingZone: INT
+                    shop:
+                      shopMiraklCustomFields:
+                      - code: customer-care-phone
+                      - code: customer-care-email
+                      - code: shipping-policy
+                    syncMiraklToShopifyProductWithTags:
+                    - from_mirakl
+                    syncShopifyToMiraklProductWithTags:
+                    - mirakl_sync
+                    taxonomyMetafields:
+                    - key: materials
+                      localizable: false
+                      namespace: custom
+                      ownerType: PRODUCT
+                    - key: boolean
+                      localizable: false
+                      namespace: test
+                      ownerType: PRODUCTVARIANT
+                    vendorAsValueList: true
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    additionalLocales:
+                    - locale: fr
+                    categories:
+                      excludes:
+                      - string
+                      includes:
+                      - string
+                    customAppClientSecret: string
+                    customCarrierDescription: string
+                    customCarrierTitle: string
+                    fraudCheck:
+                      analysisFactDescription: string
+                      strategy: CUSTOM_ASSESSMENT
+                    imageAttributes:
+                    - code: string
+                      isMainImage: true
+                      label: string
+                    jobs: object
+                    lastDeletedMiraklProductSync: '2023-03-28T09:34:42Z'
+                    lastMiraklToShopifyProductSync: '2023-03-28T09:34:42Z'
+                    lastMiraklToShopifyShipmentSync: '2023-03-28T09:34:42Z'
+                    lastOfferSync: '2023-03-28T09:34:42Z'
+                    lastOrderSync: '2023-03-28T09:34:42Z'
+                    lastPromotionSync: '2023-03-28T09:34:42Z'
+                    lastReturnSync: '2023-03-28T09:34:42Z'
+                    lastShopSync: '2023-03-28T09:34:42Z'
+                    lastShopifyToMiraklProductSync: '2023-03-28T09:34:42Z'
+                    miraklMasterMode:
+                      enabled: true
+                      useShopifyCategories: true
+                    miraklPayout:
+                      payinPspId: string
+                    offer:
+                      synchronizeAdditionalFields: true
+                      synchronizeAdvancedPricing: true
+                      synchronizeShippingTypes: true
+                    order:
+                      miraklExportCustomerOrganization:
+                        mode: INACTIVE
+                      orderMetafields:
+                      - miraklCustomFieldCode: string
+                        shopifyKey: string
+                        shopifyNamespace: string
+                    payment:
+                      confirmCaptureToMirakl: true
+                      confirmRefundToMirakl: true
+                      create3PCaptureInShopify: true
+                      create3PRefundInShopify: true
+                      miraklPaymentWorkflow: PAY_ON_ACCEPTANCE
+                      pspTransactionReferenceSource: string
+                      useMiraklPayout: true
+                      useTransactionNumberForCaptureFromMetafield: true
+                      useTransactionNumberForRefundFromMetafield: true
+                    product:
+                      skuGenerations:
+                      - strategy: MIRAKL_PRODUCT_ID_BASED
+                    publicationIds:
+                    - string
+                    rootAttributes: object
+                    shippingZoneMapping:
+                      countries:
+                      - iso2Code: string
+                        provinces:
+                        - code: string
+                          shippingZone: string
+                        shippingZone: string
+                        zips:
+                        - code: string
+                          shippingZone: string
+                      shippingZone: string
+                    shop:
+                      shopMiraklCustomFields:
+                      - code: string
+                    syncMiraklToShopifyProductWithTags:
+                    - string
+                    syncShopifyToMiraklProductWithTags:
+                    - string
+                    taxonomyMetafields:
+                    - key: string
+                      localizable: true
+                      namespace: string
+                      ownerType: string
+                    vendorAsValueList: true
+              schema:
+                type: object
+                $ref: '#/components/schemas/UpdateSettings_Response_200'
+          description: OK
+      summary: UpdateSettings - Update connector settings
+      tags:
+      - Settings
+components:
+  schemas:
+    UpdateSettings_Response_200_ShippingZoneMapping_Countries_Zips:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code
+        shippingZone:
+          type: string
+          description: The shipping zone code
+    UpdateSettings_Request_Jobs:
+      type: object
+      description: The job settings
+      properties:
+        scheduled:
+          type: boolean
+          description: Indicates if the job is scheduled
+    ListSettings_Response_200_Order:
+      type: object
+      description: Order sync settings response
+      properties:
+        miraklExportCustomerOrganization:
+          $ref: '#/components/schemas/ListSettings_Response_200_Order_MiraklExportCustomerOrganization'
+          description: Settings for exporting customer organization data to Mirakl
+        orderMetafields:
+          type: array
+          description: List of order metafield mappings
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_Order_OrderMetafields'
+    UpdateSettings_Response_200_Shop:
+      type: object
+      description: Shop settings response
+      properties:
+        shopMiraklCustomFields:
+          type: array
+          description: List of Mirakl shop custom attributes to map
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_Shop_ShopMiraklCustomFields'
+    UpdateSettings_Request_Offer:
+      type: object
+      description: Request object to update offer sync settings
+      properties:
+        synchronizeAdditionalFields:
+          type: boolean
+          description: Enabled status of the additional fields synchronization
+        synchronizeAdvancedPricing:
+          type: boolean
+          description: Enabled status of the advanced pricing synchronization
+        synchronizeShippingTypes:
+          type: boolean
+          description: Enabled status of the shipping types synchronization
+    ListSettings_Response_200_Shop:
+      type: object
+      description: Shop settings response
+      properties:
+        shopMiraklCustomFields:
+          type: array
+          description: List of Mirakl shop custom attributes to map
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_Shop_ShopMiraklCustomFields'
+    ListSettings_Response_200_Offer:
+      type: object
+      description: Offer metafield mapping response
+      properties:
+        synchronizeAdditionalFields:
+          type: boolean
+          description: Enabled status of the additional fields synchronization
+        synchronizeAdvancedPricing:
+          type: boolean
+          description: Enabled status of the advanced pricing synchronization
+        synchronizeShippingTypes:
+          type: boolean
+          description: Enabled status of the shipping types synchronization
+    UpdateSettings_Request_ImageAttributes:
+      type: object
+      description: Request object to update image attribute
+      properties:
+        code:
+          type: string
+          description: The unique code for the image attribute
+        isMainImage:
+          type: boolean
+          description: Indicates if this is the main image
+        label:
+          type: string
+          description: The label describing the image attribute
+    ListSettings_Response_200_ShippingZoneMapping_Countries:
+      type: object
+      properties:
+        iso2Code:
+          type: string
+          description: The ISO 2 code for the country
+        provinces:
+          type: array
+          description: List of province who override the shipping zone code (not checked if override is found in zips list)
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_ShippingZoneMapping_Countries_Provinces'
+        shippingZone:
+          type: string
+          description: The shipping zone for the country
+        zips:
+          type: array
+          description: 'List of zip who override the shipping zone code. The code must match the beginning of customer the zip code (ex: `K2` and `K2P` will match the customer zip code `K2P-2L8` but `K2P` will be prioritized)'
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_ShippingZoneMapping_Countries_Zips'
+    UpdateSettings_Request_MiraklMasterMode:
+      type: object
+      description: Request object to update Mirakl master mode settings
+    UpdateSettings_Request_Shop:
+      type: object
+      description: Request object to update shop settings
+      properties:
+        shopMiraklCustomFields:
+          type: array
+          description: List of Mirakl shop custom attributes to map
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_Shop_ShopMiraklCustomFields'
+    UpdateSettings_Request_ShippingZoneMapping_Countries_Provinces:
+      type: object
+      description: 'List of zip who override the shipping zone code. The code must match the beginning of customer the zip code (ex: `K2` and `K2P` will match the customer zip code `K2P-2L8` but `K2P` will be prioritized)'
+      properties:
+        code:
+          type: string
+          description: The code
+        shippingZone:
+          type: string
+          description: The shipping zone code
+    UpdateSettings_Response_200_Categories:
+      type: object
+      description: Response object for category configuration during taxonomy export
+      properties:
+        excludes:
+          type: array
+          description: List of category IDs to exclude from the export (excludes all subcategories automatically)
+          items:
+            type: string
+        includes:
+          type: array
+          description: List of category IDs to include in the export (includes all subcategories automatically)
+          items:
+            type: string
+    UpdateSettings_Request_FraudCheck:
+      type: object
+      description: Fraud check
+      properties:
+        analysisFactDescription:
+          type: string
+        strategy:
+          type: string
+          description: 'Enum: `"CUSTOM_ASSESSMENT"`, `"NO_CHECK"`, `"SHOPIFY_RECOMMENDATION"`
+
+            '
+    ListSettings_Response_200_MiraklPayout:
+      type: object
+      description: Payment settings response
+      properties:
+        payinPspId:
+          type: string
+          description: Pay-in PSP to use to process payments
+    ListSettings_Response_200_Payment:
+      type: object
+      description: Payment settings response
+      properties:
+        confirmCaptureToMirakl:
+          type: boolean
+          description: Whether to confirm captures to Mirakl
+        confirmRefundToMirakl:
+          type: boolean
+          description: Whether to confirm refunds to Mirakl
+        create3PCaptureInShopify:
+          type: boolean
+          description: Whether to create third-party captures in Shopify
+        create3PRefundInShopify:
+          type: boolean
+          description: Whether to create third-party refunds in Shopify
+        miraklPaymentWorkflow:
+          type: string
+          description: 'Workflow for handling order payments
+
+
+            Enum: `"PAY_ON_ACCEPTANCE"`, `"PAY_ON_DELIVERY"`, `"PAY_ON_DUE_DATE"`, `"PAY_ON_SHIPMENT"`, `"NO_CUSTOMER_PAYMENT_CONFIRMATION"`
+
+            '
+        pspTransactionReferenceSource:
+          type: string
+          description: Metafield value path to write as imprint number in Mirakl
+        useMiraklPayout:
+          type: boolean
+          description: Whether to use Mirakl payout
+        useTransactionNumberForCaptureFromMetafield:
+          type: boolean
+          description: Whether to use transaction number from order metafield for capture
+        useTransactionNumberForRefundFromMetafield:
+          type: boolean
+          description: Whether to use transaction number from order metafield for refund
+    UpdateSettings_Request_AdditionalLocales:
+      type: object
+      description: Configuration of an additional locale, aside the primary language of the store
+      properties:
+        locale:
+          type: string
+          description: Locale code, language without region (e.g., 'fr', 'de', 'es')
+          example: fr
+    UpdateSettings_Response_200_Product_SkuGenerations:
+      type: object
+      description: SKU generation settings response
+      discriminator:
+        mapping:
+          MIRAKL_PRODUCT_ID_BASED: '#/components/schemas/UpdateSettings_Response_200_Product_SkuGenerations_MiraklProductIdBased'
+          UNIQUE_IDENTIFIER_BASED: '#/components/schemas/UpdateSettings_Response_200_Product_SkuGenerations_UniqueIdentifierBased'
+        propertyName: strategy
+      properties:
+        strategy:
+          type: string
+          description: 'Enum: `"MIRAKL_PRODUCT_ID_BASED"`, `"UNIQUE_IDENTIFIER_BASED"`
+
+            '
+    UpdateSettings_Response_200_ImageAttributes:
+      type: object
+      description: Image attribute response
+      properties:
+        code:
+          type: string
+          description: The unique code for the image attribute
+        isMainImage:
+          type: boolean
+          description: Indicates if this is the main image
+        label:
+          type: string
+          description: The label describing the image attribute
+    ListSettings_Response_200:
+      type: object
+      description: Environment settings response
+      properties:
+        additionalLocales:
+          type: array
+          description: Additional locales configuration, aside the primary language of the store
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_AdditionalLocales'
+          uniqueItems: true
+        categories:
+          $ref: '#/components/schemas/ListSettings_Response_200_Categories'
+          description: Configuration for category filtering during taxonomy export
+        customAppClientSecret:
+          type: string
+          description: Client secret used to verify the signature of JWT tokens send in CustomerUI API call
+        customCarrierDescription:
+          type: string
+          description: Description for the custom carrier
+        customCarrierTitle:
+          type: string
+          description: Title for the custom carrier
+        fraudCheck:
+          $ref: '#/components/schemas/ListSettings_Response_200_FraudCheck'
+          description: Fraud check
+        imageAttributes:
+          type: array
+          description: List of image attributes exported when taxonomy is synchronized in Mirakl
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_ImageAttributes'
+        jobs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ListSettings_Response_200_Jobs'
+          description: The job settings
+        lastDeletedMiraklProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last synchronization of Mirakl deleted products to Shopify
+        lastMiraklToShopifyProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Mirakl to Shopify product synchronization
+        lastMiraklToShopifyShipmentSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Mirakl to Shopify shipment synchronization
+        lastOfferSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last offer synchronization
+        lastOrderSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last order synchronization
+        lastPromotionSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last promotion synchronization
+        lastReturnSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last return synchronization
+        lastShopSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last shop synchronization
+        lastShopifyToMiraklProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Shopify to Mirakl product synchronization
+        miraklMasterMode:
+          $ref: '#/components/schemas/ListSettings_Response_200_MiraklMasterMode'
+          description: Mirakl Master Mode settings
+        miraklPayout:
+          $ref: '#/components/schemas/ListSettings_Response_200_MiraklPayout'
+          description: Mirakl payout settings
+        offer:
+          $ref: '#/components/schemas/ListSettings_Response_200_Offer'
+          description: Offer settings
+        order:
+          $ref: '#/components/schemas/ListSettings_Response_200_Order'
+          description: Order settings
+        payment:
+          $ref: '#/components/schemas/ListSettings_Response_200_Payment'
+          description: Payment settings
+        product:
+          $ref: '#/components/schemas/ListSettings_Response_200_Product'
+          description: Product settings
+        publicationIds:
+          type: array
+          description: The Shopify publication ids in which the third-party products and collections will be published
+          items:
+            type: string
+          uniqueItems: true
+        rootAttributes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ListSettings_Response_200_RootAttributes'
+          description: Settings of the root attributes and their Mirakl attribute codes. Only relevant when miraklMasterMode is enabled. If empty, defaults to preset values.
+        shippingZoneMapping:
+          $ref: '#/components/schemas/ListSettings_Response_200_ShippingZoneMapping'
+          description: Mapping to compute Mirakl shipping zone code from customer address
+        shop:
+          $ref: '#/components/schemas/ListSettings_Response_200_Shop'
+          description: Shop settings
+        syncMiraklToShopifyProductWithTags:
+          type: array
+          description: List of all tags used to mark Mirakl products imported into Shopify.
+          items:
+            type: string
+        syncShopifyToMiraklProductWithTags:
+          type: array
+          description: List of all tags used to synchronize Shopify products to Mirakl. No product are exported if null or empty
+          items:
+            type: string
+        taxonomyMetafields:
+          type: array
+          description: List of all Shopify Metafields exported when taxonomy is synchronized in Mirakl
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_TaxonomyMetafields'
+        vendorAsValueList:
+          type: boolean
+          description: Export Shopify vendor attribute as a LIST attribute instead of TEXT
+    UpdateSettings_Response_200_Order_MiraklExportCustomerOrganization:
+      type: object
+      description: Mirakl export customer organization response
+      properties:
+        mode:
+          type: string
+          description: 'The mode for exporting customer organization data to Mirakl (Default: INACTIVE)
+
+
+            Enum: `"INACTIVE"`, `"ID"`, `"FULL"`
+
+            '
+    UpdateSettings_Request_Categories:
+      type: object
+      description: Configuration for category filtering during taxonomy export
+      properties:
+        excludes:
+          type: array
+          description: List of category IDs to exclude from the export (excludes all subcategories automatically)
+          items:
+            type: string
+        includes:
+          type: array
+          description: List of category IDs to include in the export (includes all subcategories automatically)
+          items:
+            type: string
+    UpdateSettings_Response_200_Payment:
+      type: object
+      description: Payment settings response
+      properties:
+        confirmCaptureToMirakl:
+          type: boolean
+          description: Whether to confirm captures to Mirakl
+        confirmRefundToMirakl:
+          type: boolean
+          description: Whether to confirm refunds to Mirakl
+        create3PCaptureInShopify:
+          type: boolean
+          description: Whether to create third-party captures in Shopify
+        create3PRefundInShopify:
+          type: boolean
+          description: Whether to create third-party refunds in Shopify
+        miraklPaymentWorkflow:
+          type: string
+          description: 'Workflow for handling order payments
+
+
+            Enum: `"PAY_ON_ACCEPTANCE"`, `"PAY_ON_DELIVERY"`, `"PAY_ON_DUE_DATE"`, `"PAY_ON_SHIPMENT"`, `"NO_CUSTOMER_PAYMENT_CONFIRMATION"`
+
+            '
+        pspTransactionReferenceSource:
+          type: string
+          description: Metafield value path to write as imprint number in Mirakl
+        useMiraklPayout:
+          type: boolean
+          description: Whether to use Mirakl payout
+        useTransactionNumberForCaptureFromMetafield:
+          type: boolean
+          description: Whether to use transaction number from order metafield for capture
+        useTransactionNumberForRefundFromMetafield:
+          type: boolean
+          description: Whether to use transaction number from order metafield for refund
+    UpdateSettings_Request_Shop_ShopMiraklCustomFields:
+      type: object
+      description: Request object to update Mirakl shop custom field
+      properties:
+        code:
+          type: string
+          description: The Mirakl custom field code
+    UpdateSettings_Request:
+      type: object
+      description: Request object to update environment settings
+      properties:
+        additionalLocales:
+          type: array
+          description: Additional locales configuration, aside the primary language of the store
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_AdditionalLocales'
+          uniqueItems: true
+        categories:
+          $ref: '#/components/schemas/UpdateSettings_Request_Categories'
+          description: Configuration for category filtering during taxonomy export
+        customAppClientSecret:
+          type: string
+          description: Client secret used to verify the signature of JWT tokens send in CustomerUI API call
+        customCarrierDescription:
+          type: string
+          description: Description for the custom carrier
+        customCarrierTitle:
+          type: string
+          description: Title for the custom carrier
+        fraudCheck:
+          $ref: '#/components/schemas/UpdateSettings_Request_FraudCheck'
+          description: Fraud check
+        imageAttributes:
+          type: array
+          description: List of image attributes exported when taxonomy is synchronized in Mirakl
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_ImageAttributes'
+        jobs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UpdateSettings_Request_Jobs'
+          description: The job settings
+        lastDeletedMiraklProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last synchronization of Mirakl deleted products to Shopify
+        lastMiraklToShopifyProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Mirakl to Shopify product synchronization
+        lastMiraklToShopifyShipmentSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Mirakl to Shopify shipment synchronization
+        lastOfferSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last offer synchronization
+        lastOrderSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last order synchronization
+        lastPromotionSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last promotion synchronization
+        lastReturnSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last return synchronization
+        lastShopSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last shop synchronization
+        lastShopifyToMiraklProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Shopify to Mirakl product synchronization
+        miraklMasterMode:
+          $ref: '#/components/schemas/UpdateSettings_Request_MiraklMasterMode'
+          description: Mirakl Master Mode settings
+        miraklPayout:
+          $ref: '#/components/schemas/UpdateSettings_Request_MiraklPayout'
+          description: Mirakl payout settings
+        offer:
+          $ref: '#/components/schemas/UpdateSettings_Request_Offer'
+          description: Offer settings
+        order:
+          $ref: '#/components/schemas/UpdateSettings_Request_Order'
+          description: Order settings
+        payment:
+          $ref: '#/components/schemas/UpdateSettings_Request_Payment'
+          description: Payment settings
+        product:
+          $ref: '#/components/schemas/UpdateSettings_Request_Product'
+          description: Product settings
+        publicationIds:
+          type: array
+          description: The Shopify publication ids in which the third-party products and collections will be published
+          items:
+            type: string
+          uniqueItems: true
+        rootAttributes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UpdateSettings_Request_RootAttributes'
+          description: Settings of the root attributes and their Mirakl attribute codes. Only relevant when miraklMasterMode is enabled. If not provided, defaults to preset values.
+        shippingZoneMapping:
+          $ref: '#/components/schemas/UpdateSettings_Request_ShippingZoneMapping'
+          description: Mapping to compute Mirakl shipping zone code from customer address
+        shop:
+          $ref: '#/components/schemas/UpdateSettings_Request_Shop'
+          description: Shop settings
+        syncMiraklToShopifyProductWithTags:
+          type: array
+          description: List of all tags used to mark Mirakl products imported into Shopify.
+          items:
+            type: string
+        syncShopifyToMiraklProductWithTags:
+          type: array
+          description: List of all tags used to synchronize Shopify products to Mirakl. No product are exported if null or empty
+          items:
+            type: string
+        taxonomyMetafields:
+          type: array
+          description: List of all Shopify Metafields exported when taxonomy is synchronized in Mirakl
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_TaxonomyMetafields'
+        vendorAsValueList:
+          type: boolean
+          description: Export Shopify vendor attribute as a LIST attribute instead of TEXT
+    ListSettings_Response_200_AdditionalLocales:
+      type: object
+      description: Configuration of an additional locale, aside the primary language of the store
+      properties:
+        locale:
+          type: string
+          description: Locale code, language without region (e.g., 'fr', 'de', 'es')
+          example: fr
+    UpdateSettings_Response_200_Product:
+      type: object
+      description: Product settings response
+      properties:
+        skuGenerations:
+          type: array
+          description: Ordered list of SKU generation strategies
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_Product_SkuGenerations'
+    UpdateSettings_Response_200_ShippingZoneMapping:
+      type: object
+      description: Shipping zone mapping response
+      properties:
+        countries:
+          type: array
+          description: List of countries who override the default shipping zone code
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_ShippingZoneMapping_Countries'
+        shippingZone:
+          type: string
+          description: The default shipping zone code
+    UpdateSettings_Response_200_Shop_ShopMiraklCustomFields:
+      type: object
+      description: Mirakl shop custom field response
+      properties:
+        code:
+          type: string
+          description: The Mirakl custom field code
+    UpdateSettings_Response_200_ShippingZoneMapping_Countries:
+      type: object
+      properties:
+        iso2Code:
+          type: string
+          description: The ISO 2 code for the country
+        provinces:
+          type: array
+          description: List of province who override the shipping zone code (not checked if override is found in zips list)
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_ShippingZoneMapping_Countries_Provinces'
+        shippingZone:
+          type: string
+          description: The shipping zone for the country
+        zips:
+          type: array
+          description: 'List of zip who override the shipping zone code. The code must match the beginning of customer the zip code (ex: `K2` and `K2P` will match the customer zip code `K2P-2L8` but `K2P` will be prioritized)'
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_ShippingZoneMapping_Countries_Zips'
+    ListSettings_Response_200_ShippingZoneMapping:
+      type: object
+      description: Shipping zone mapping response
+      properties:
+        countries:
+          type: array
+          description: List of countries who override the default shipping zone code
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_ShippingZoneMapping_Countries'
+        shippingZone:
+          type: string
+          description: The default shipping zone code
+    UpdateSettings_Request_Product:
+      type: object
+      description: Request object to update product settings
+      properties:
+        skuGenerations:
+          type: array
+          description: Ordered list of SKU generation strategies
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_Product_SkuGenerations'
+    ListSettings_Response_200_Order_OrderMetafields:
+      type: object
+      description: Order metafield mapping response
+      properties:
+        miraklCustomFieldCode:
+          type: string
+          description: The Mirakl custom field code
+        shopifyKey:
+          type: string
+          description: The Shopify metafield key
+        shopifyNamespace:
+          type: string
+          description: The Shopify metafield namespace
+    ListSettings_Response_200_RootAttributes:
+      type: object
+      description: Response object for Shopify root attribute
+      properties:
+        code:
+          type: string
+          description: The Shopify root attribute code
+    UpdateSettings_Request_MiraklPayout:
+      type: object
+      description: Mirakl Payout settings
+      properties:
+        payinPspId:
+          type: string
+          description: Pay-in PSP to use to process payments
+    UpdateSettings_Response_200:
+      type: object
+      description: Environment settings response
+      properties:
+        additionalLocales:
+          type: array
+          description: Additional locales configuration, aside the primary language of the store
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_AdditionalLocales'
+          uniqueItems: true
+        categories:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_Categories'
+          description: Configuration for category filtering during taxonomy export
+        customAppClientSecret:
+          type: string
+          description: Client secret used to verify the signature of JWT tokens send in CustomerUI API call
+        customCarrierDescription:
+          type: string
+          description: Description for the custom carrier
+        customCarrierTitle:
+          type: string
+          description: Title for the custom carrier
+        fraudCheck:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_FraudCheck'
+          description: Fraud check
+        imageAttributes:
+          type: array
+          description: List of image attributes exported when taxonomy is synchronized in Mirakl
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_ImageAttributes'
+        jobs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_Jobs'
+          description: The job settings
+        lastDeletedMiraklProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last synchronization of Mirakl deleted products to Shopify
+        lastMiraklToShopifyProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Mirakl to Shopify product synchronization
+        lastMiraklToShopifyShipmentSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Mirakl to Shopify shipment synchronization
+        lastOfferSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last offer synchronization
+        lastOrderSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last order synchronization
+        lastPromotionSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last promotion synchronization
+        lastReturnSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last return synchronization
+        lastShopSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last shop synchronization
+        lastShopifyToMiraklProductSync:
+          type: string
+          format: date-time
+          description: Timestamp of the last Shopify to Mirakl product synchronization
+        miraklMasterMode:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_MiraklMasterMode'
+          description: Mirakl Master Mode settings
+        miraklPayout:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_MiraklPayout'
+          description: Mirakl payout settings
+        offer:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_Offer'
+          description: Offer settings
+        order:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_Order'
+          description: Order settings
+        payment:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_Payment'
+          description: Payment settings
+        product:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_Product'
+          description: Product settings
+        publicationIds:
+          type: array
+          description: The Shopify publication ids in which the third-party products and collections will be published
+          items:
+            type: string
+          uniqueItems: true
+        rootAttributes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_RootAttributes'
+          description: Settings of the root attributes and their Mirakl attribute codes. Only relevant when miraklMasterMode is enabled. If empty, defaults to preset values.
+        shippingZoneMapping:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_ShippingZoneMapping'
+          description: Mapping to compute Mirakl shipping zone code from customer address
+        shop:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_Shop'
+          description: Shop settings
+        syncMiraklToShopifyProductWithTags:
+          type: array
+          description: List of all tags used to mark Mirakl products imported into Shopify.
+          items:
+            type: string
+        syncShopifyToMiraklProductWithTags:
+          type: array
+          description: List of all tags used to synchronize Shopify products to Mirakl. No product are exported if null or empty
+          items:
+            type: string
+        taxonomyMetafields:
+          type: array
+          description: List of all Shopify Metafields exported when taxonomy is synchronized in Mirakl
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_TaxonomyMetafields'
+        vendorAsValueList:
+          type: boolean
+          description: Export Shopify vendor attribute as a LIST attribute instead of TEXT
+    UpdateSettings_Response_200_ShippingZoneMapping_Countries_Provinces:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code
+        shippingZone:
+          type: string
+          description: The shipping zone code
+    UpdateSettings_Response_200_Order_OrderMetafields:
+      type: object
+      description: Order metafield mapping response
+      properties:
+        miraklCustomFieldCode:
+          type: string
+          description: The Mirakl custom field code
+        shopifyKey:
+          type: string
+          description: The Shopify metafield key
+        shopifyNamespace:
+          type: string
+          description: The Shopify metafield namespace
+    UpdateSettings_Response_200_TaxonomyMetafields:
+      type: object
+      description: Taxonomy metafield response
+      properties:
+        key:
+          type: string
+          description: The unique identifier for the metafield definition within its namespace
+        localizable:
+          type: boolean
+          description: Whether this metafield can be translated
+        namespace:
+          type: string
+          description: The namespace for the metafield definition
+        ownerType:
+          type: string
+          description: The resource type that the metafield definition is attached to (PRODUCT or PRODUCTVARIANT)
+    UpdateSettings_Response_200_Order:
+      type: object
+      description: Order sync settings response
+      properties:
+        miraklExportCustomerOrganization:
+          $ref: '#/components/schemas/UpdateSettings_Response_200_Order_MiraklExportCustomerOrganization'
+          description: Settings for exporting customer organization data to Mirakl
+        orderMetafields:
+          type: array
+          description: List of order metafield mappings
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Response_200_Order_OrderMetafields'
+    UpdateSettings_Response_200_MiraklMasterMode:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates if Mirakl is master on the taxonomy.
+        useShopifyCategories:
+          type: boolean
+          description: Indicates if Shopify categories should be used when Mirakl is master on the taxonomy.
+    UpdateSettings_Request_Order:
+      type: object
+      description: Request object to update order sync settings
+      properties:
+        miraklExportCustomerOrganization:
+          $ref: '#/components/schemas/UpdateSettings_Request_Order_MiraklExportCustomerOrganization'
+          description: Settings for exporting customer organization data to Mirakl
+        orderMetafields:
+          type: array
+          description: List of order metafield mappings
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_Order_OrderMetafields'
+    UpdateSettings_Request_ShippingZoneMapping:
+      type: object
+      description: Request object to update shipping zone mapping
+      properties:
+        countries:
+          type: array
+          description: List of countries who override the default shipping zone code
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_ShippingZoneMapping_Countries'
+        shippingZone:
+          type: string
+          description: The default shipping zone code
+    UpdateSettings_Response_200_Offer:
+      type: object
+      description: Offer metafield mapping response
+      properties:
+        synchronizeAdditionalFields:
+          type: boolean
+          description: Enabled status of the additional fields synchronization
+        synchronizeAdvancedPricing:
+          type: boolean
+          description: Enabled status of the advanced pricing synchronization
+        synchronizeShippingTypes:
+          type: boolean
+          description: Enabled status of the shipping types synchronization
+    ListSettings_Response_200_TaxonomyMetafields:
+      type: object
+      description: Taxonomy metafield response
+      properties:
+        key:
+          type: string
+          description: The unique identifier for the metafield definition within its namespace
+        localizable:
+          type: boolean
+          description: Whether this metafield can be translated
+        namespace:
+          type: string
+          description: The namespace for the metafield definition
+        ownerType:
+          type: string
+          description: The resource type that the metafield definition is attached to (PRODUCT or PRODUCTVARIANT)
+    UpdateSettings_Response_200_FraudCheck:
+      type: object
+      properties:
+        analysisFactDescription:
+          type: string
+        strategy:
+          type: string
+          description: 'Enum: `"CUSTOM_ASSESSMENT"`, `"NO_CHECK"`, `"SHOPIFY_RECOMMENDATION"`
+
+            '
+    UpdateSettings_Request_Order_MiraklExportCustomerOrganization:
+      type: object
+      description: Request object to exporting customer organization data to Mirakl
+      properties:
+        mode:
+          type: string
+          description: 'The mode for exporting customer organization data to Mirakl (Default: INACTIVE)
+
+
+            Enum: `"INACTIVE"`, `"ID"`, `"FULL"`
+
+            '
+    UpdateSettings_Request_Product_SkuGenerations:
+      type: object
+      description: Request object to define a SKU generation strategy
+      discriminator:
+        mapping:
+          MIRAKL_PRODUCT_ID_BASED: '#/components/schemas/UpdateSettings_Request_Product_SkuGenerations_MiraklProductIdBased'
+          UNIQUE_IDENTIFIER_BASED: '#/components/schemas/UpdateSettings_Request_Product_SkuGenerations_UniqueIdentifierBased'
+        propertyName: strategy
+      properties:
+        strategy:
+          type: string
+          description: 'Enum: `"MIRAKL_PRODUCT_ID_BASED"`, `"UNIQUE_IDENTIFIER_BASED"`
+
+            '
+    ListSettings_Response_200_ShippingZoneMapping_Countries_Zips:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code
+        shippingZone:
+          type: string
+          description: The shipping zone code
+    ListSettings_Response_200_Order_MiraklExportCustomerOrganization:
+      type: object
+      description: Mirakl export customer organization response
+      properties:
+        mode:
+          type: string
+          description: 'The mode for exporting customer organization data to Mirakl (Default: INACTIVE)
+
+
+            Enum: `"INACTIVE"`, `"ID"`, `"FULL"`
+
+            '
+    ListSettings_Response_200_FraudCheck:
+      type: object
+      properties:
+        analysisFactDescription:
+          type: string
+        strategy:
+          type: string
+          description: 'Enum: `"CUSTOM_ASSESSMENT"`, `"NO_CHECK"`, `"SHOPIFY_RECOMMENDATION"`
+
+            '
+    UpdateSettings_Request_TaxonomyMetafields:
+      type: object
+      description: Request object to update taxonomy metafield
+      properties:
+        key:
+          type: string
+          description: The unique identifier for the metafield definition within its namespace
+        localizable:
+          type: boolean
+          description: Whether this metafield can be translated
+        namespace:
+          type: string
+          description: The namespace for the metafield definition
+        ownerType:
+          type: string
+          description: The resource type that the metafield definition is attached to (PRODUCT or PRODUCTVARIANT)
+    UpdateSettings_Response_200_MiraklPayout:
+      type: object
+      description: Payment settings response
+      properties:
+        payinPspId:
+          type: string
+          description: Pay-in PSP to use to process payments
+    UpdateSettings_Response_200_AdditionalLocales:
+      type: object
+      description: Configuration of an additional locale, aside the primary language of the store
+      properties:
+        locale:
+          type: string
+          description: Locale code, language without region (e.g., 'fr', 'de', 'es')
+          example: fr
+    UpdateSettings_Response_200_RootAttributes:
+      type: object
+      description: Response object for Shopify root attribute
+      properties:
+        code:
+          type: string
+          description: The Shopify root attribute code
+    UpdateSettings_Request_Payment:
+      type: object
+      description: Payment settings request
+      properties:
+        confirmCaptureToMirakl:
+          type: boolean
+          description: Whether to confirm captures to Mirakl
+        confirmRefundToMirakl:
+          type: boolean
+          description: Whether to confirm refunds to Mirakl
+        create3PCaptureInShopify:
+          type: boolean
+          description: Whether to create third-party captures in Shopify
+        create3PRefundInShopify:
+          type: boolean
+          description: Whether to create third-party refunds in Shopify
+        miraklPaymentWorkflow:
+          type: string
+          description: 'Workflow for handling order payments
+
+
+            Enum: `"PAY_ON_ACCEPTANCE"`, `"PAY_ON_DELIVERY"`, `"PAY_ON_DUE_DATE"`, `"PAY_ON_SHIPMENT"`, `"NO_CUSTOMER_PAYMENT_CONFIRMATION"`
+
+            '
+        pspTransactionReferenceSource:
+          type: string
+          description: Metafield value path to write as imprint number in Mirakl
+        useMiraklPayout:
+          type: boolean
+          description: Whether to use Mirakl payout
+        useTransactionNumberForCaptureFromMetafield:
+          type: boolean
+          description: Whether to use transaction number from order metafield for capture
+        useTransactionNumberForRefundFromMetafield:
+          type: boolean
+          description: Whether to use transaction number from order metafield for refund
+    UpdateSettings_Request_ShippingZoneMapping_Countries_Zips:
+      type: object
+      description: 'List of zip who override the shipping zone code. The code must match the beginning of customer the zip code (ex: `K2` and `K2P` will match the customer zip code `K2P-2L8` but `K2P` will be prioritized)'
+      properties:
+        code:
+          type: string
+          description: The code
+        shippingZone:
+          type: string
+          description: The shipping zone code
+    ListSettings_Response_200_Jobs:
+      type: object
+      properties:
+        scheduled:
+          type: boolean
+          description: Indicates if the job is scheduled
+    UpdateSettings_Request_Order_OrderMetafields:
+      type: object
+      description: Request object to update order metafield mapping
+      properties:
+        miraklCustomFieldCode:
+          type: string
+          description: The Mirakl custom field code
+        shopifyKey:
+          type: string
+          description: The Shopify metafield key
+        shopifyNamespace:
+          type: string
+          description: The Shopify metafield namespace
+      required:
+      - miraklCustomFieldCode
+      - shopifyKey
+      - shopifyNamespace
+    ListSettings_Response_200_Shop_ShopMiraklCustomFields:
+      type: object
+      description: Mirakl shop custom field response
+      properties:
+        code:
+          type: string
+          description: The Mirakl custom field code
+    ListSettings_Response_200_Product_SkuGenerations:
+      type: object
+      description: SKU generation settings response
+      discriminator:
+        mapping:
+          MIRAKL_PRODUCT_ID_BASED: '#/components/schemas/ListSettings_Response_200_Product_SkuGenerations_MiraklProductIdBased'
+          UNIQUE_IDENTIFIER_BASED: '#/components/schemas/ListSettings_Response_200_Product_SkuGenerations_UniqueIdentifierBased'
+        propertyName: strategy
+      properties:
+        strategy:
+          type: string
+          description: 'Enum: `"MIRAKL_PRODUCT_ID_BASED"`, `"UNIQUE_IDENTIFIER_BASED"`
+
+            '
+    ListSettings_Response_200_ShippingZoneMapping_Countries_Provinces:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code
+        shippingZone:
+          type: string
+          description: The shipping zone code
+    UpdateSettings_Response_200_Jobs:
+      type: object
+      properties:
+        scheduled:
+          type: boolean
+          description: Indicates if the job is scheduled
+    UpdateSettings_Request_RootAttributes:
+      type: object
+      description: Request object to update Shopify root attribute
+      properties:
+        code:
+          type: string
+          description: The Shopify root attribute code
+    ListSettings_Response_200_ImageAttributes:
+      type: object
+      description: Image attribute response
+      properties:
+        code:
+          type: string
+          description: The unique code for the image attribute
+        isMainImage:
+          type: boolean
+          description: Indicates if this is the main image
+        label:
+          type: string
+          description: The label describing the image attribute
+    ListSettings_Response_200_Categories:
+      type: object
+      description: Response object for category configuration during taxonomy export
+      properties:
+        excludes:
+          type: array
+          description: List of category IDs to exclude from the export (excludes all subcategories automatically)
+          items:
+            type: string
+        includes:
+          type: array
+          description: List of category IDs to include in the export (includes all subcategories automatically)
+          items:
+            type: string
+    ListSettings_Response_200_Product:
+      type: object
+      description: Product settings response
+      properties:
+        skuGenerations:
+          type: array
+          description: Ordered list of SKU generation strategies
+          items:
+            $ref: '#/components/schemas/ListSettings_Response_200_Product_SkuGenerations'
+    ListSettings_Response_200_MiraklMasterMode:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates if Mirakl is master on the taxonomy.
+        useShopifyCategories:
+          type: boolean
+          description: Indicates if Shopify categories should be used when Mirakl is master on the taxonomy.
+    UpdateSettings_Request_ShippingZoneMapping_Countries:
+      type: object
+      description: List of countries who override the default shipping zone code
+      properties:
+        iso2Code:
+          type: string
+          description: The ISO 2 code for the country
+        provinces:
+          type: array
+          description: List of province who override the shipping zone code (not checked if override is found in zips list)
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_ShippingZoneMapping_Countries_Provinces'
+        shippingZone:
+          type: string
+          description: The shipping zone for the country
+        zips:
+          type: array
+          description: 'List of zip who override the shipping zone code. The code must match the beginning of customer the zip code (ex: `K2` and `K2P` will match the customer zip code `K2P-2L8` but `K2P` will be prioritized)'
+          items:
+            $ref: '#/components/schemas/UpdateSettings_Request_ShippingZoneMapping_Countries_Zips'
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

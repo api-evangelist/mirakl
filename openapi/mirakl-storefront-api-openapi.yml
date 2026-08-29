@@ -1,0 +1,1869 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/connector/operator/shopify/app-operator-shopify/rest/public/openapi-description.md" /%}'
+  title: Shopify Operator Connector Storefront API
+  version: ''
+servers:
+- description: Shopify production endpoint.
+  url: https://operator-shpy.mirakl.net
+tags:
+- name: Storefront
+paths:
+  /api/storefront/return:
+    post:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to create a return for an order</div>
+
+        </div>'
+      operationId: CreateReturn
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples:
+              multipart/form-data-auto:
+                summary: Complete example with value types (multipart/form-data)
+                value:
+                  files:
+                  - string
+                  returnRequest:
+                    description: string
+                    methodCode: RETURN_METHOD_BY_MAIL
+                    orderLogisticId: string
+                    reasonCode: RETURN_BROKEN_ITEM
+                    returnLines:
+                    - orderLineId: string
+                      quantity: 0
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  description: List of attachments for the return
+                  items:
+                    type: string
+                    format: binary
+                returnRequest:
+                  $ref: '#/components/schemas/CreateReturn_Request_MultipartFormData_Returnrequest'
+                  description: The return data
+              required:
+              - returnRequest
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    miraklReturnId: 550e8400-e29b-41d4-a716-446655440000
+                    shopifyReturnId: gid://shopify/Return/5551234567890
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    miraklReturnId: string
+                    shopifyReturnId: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/CreateReturn_Response_200'
+          description: OK
+      summary: CreateReturn - Create a return for an order
+      tags:
+      - Storefront
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -i -X POST \\\n  https://operator-shpy.mirakl.net/api/storefront/return \\\n  -H 'Content-Type: multipart/form-data' \\\n  -F 'files=@path/to/file' \\\n  -F 'returnRequest=\"{\\\"description\\\":\\\"string\\\",\\\"methodCode\\\":\\\"RETURN_METHOD_BY_MAIL\\\",\\\"orderLogisticId\\\":\\\"string\\\",\\\"reasonCode\\\":\\\"RETURN_BROKEN_ITEM\\\",\\\"returnLines\\\":[{\\\"orderLineId\\\":\\\"string\\\",\\\"quantity\\\":0}]}\";type=application/json'\n"
+  /api/storefront/evaluations/assessments:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to retrieve the evaluations assessments</div>
+
+        </div>'
+      operationId: GetEvaluationsAssessments
+      parameters:
+      - description: Locale tag used to translate assessment labels (e.g. en_US, fr_FR). Optional — defaults to the operator's primary locale when omitted.
+        explode: true
+        in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                  - code: string
+                    label: string
+                    type: string
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetEvaluationsAssessments_Response_200'
+          description: OK
+      summary: GetEvaluationsAssessments - Get evaluations assessments
+      tags:
+      - Storefront
+  /api/storefront/returns/items-to-return:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        When you want to retrieve items to return for a list of orders
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- At each customer return request</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- At each customer return request</div>
+
+        </div>'
+      operationId: GetItemsToReturn
+      parameters:
+      - description: Mirakl order commercial identifiers separated by comma (e.g. order1,order2,...)
+        explode: true
+        in: query
+        name: orderCommercialIds
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    itemsToReturn:
+                    - availableReturnMethods: null
+                      availableReturnReasons: null
+                      orderCommercialId: test
+                      orderLineId: test-A-1
+                      returnWindow: null
+                      returnableQuantity: 0
+                    - availableReturnMethods:
+                      - RETURN_METHOD_BY_MAIL
+                      - RETURN_METHOD_DROP_OFF
+                      availableReturnReasons:
+                      - RETURN_CHANGED_MIND
+                      - RETURN_COUNTERFEIT_ITEM
+                      orderCommercialId: test
+                      orderLineId: test-B-1
+                      returnWindow: 14
+                      returnableQuantity: 1
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    itemsToReturn:
+                    - availableReturnMethods:
+                      - string
+                      availableReturnReasons:
+                      - string
+                      orderCommercialId: string
+                      orderLineId: string
+                      returnWindow: 0
+                      returnableQuantity: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetItemsToReturn_Response_200'
+          description: OK
+      summary: GetItemsToReturn - Get items to return for a list of orders
+      tags:
+      - Storefront
+  /api/storefront/promotions:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Returns Mirakl promotions for the given trigger offer IDs.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Each display of the PDP for products with 3P offers</div>
+
+        </div>'
+      operationId: GetPromotions
+      parameters:
+      - description: Promotion-triggering offer ids, separated by commas
+        explode: true
+        in: query
+        name: triggerOfferIds
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    promotions:
+                    - amountOff: null
+                      campaign:
+                        identifier: SUMMERSALE
+                      endDate: '2023-08-30T22:00:00Z'
+                      freeItemsQuantity: null
+                      internalDescription: Summer sale event
+                      maxQuantityToDiscount: null
+                      medias:
+                      - locale: en_US
+                        url: https://xxxx-xxxx.mirakl.net/mmp/media/promotion-media/ac63d67a-62c5-4c9a-8483-b704494abc45
+                      - locale: fr_FR
+                        url: https://xxxx-xxxx.mirakl.net/mmp/media/promotion-media/ac63d67a-62c5-4c9a-8483-b704494abc45
+                      percentageOff: 10
+                      publicDescriptions:
+                      - locale: en_US
+                        value: Summer promotions
+                      - locale: fr_FR
+                        value: Promotions d'été
+                      reducedUnitPrice: null
+                      rewardOnPurchasedItems: false
+                      shopId: '3'
+                      startDate: '2023-04-03T16:18:59.922Z'
+                      state: ACTIVE
+                      triggerOfferIds: []
+                      triggers:
+                      - amountPurchased: null
+                        quantityPurchased: 1
+                        sameItemPurchased: false
+                        type: every_quantity
+                      type: PERCENTAGE_OFF
+                      withPromoCode: true
+                    - amountOff: null
+                      campaign: null
+                      endDate: null
+                      freeItemsQuantity: 1
+                      internalDescription: Buy 5, Get 1 Free
+                      maxQuantityToDiscount: null
+                      medias: []
+                      percentageOff: null
+                      publicDescriptions: []
+                      reducedUnitPrice: null
+                      rewardOnPurchasedItems: true
+                      shopId: '137'
+                      startDate: '2026-05-28T08:57:15.642Z'
+                      state: PENDING
+                      triggerOfferIds: []
+                      triggers:
+                      - amountPurchased: null
+                        quantityPurchased: 5
+                        sameItemPurchased: true
+                        type: minimum_quantity
+                      type: FREE_ITEMS
+                      withPromoCode: false
+                    - amountOff: null
+                      campaign:
+                        identifier: 50_OFF
+                      endDate: '2030-10-31T23:00:00Z'
+                      freeItemsQuantity: null
+                      internalDescription: 50% Off
+                      maxQuantityToDiscount: 1
+                      medias: []
+                      percentageOff: 50
+                      publicDescriptions: []
+                      reducedUnitPrice: null
+                      rewardOnPurchasedItems: true
+                      shopId: '151'
+                      startDate: '2025-09-30T22:00:00Z'
+                      state: ACTIVE
+                      triggerOfferIds: []
+                      triggers:
+                      - amountPurchased: 100
+                        quantityPurchased: null
+                        sameItemPurchased: null
+                        type: minimum_amount
+                      type: PERCENTAGE_OFF
+                      withPromoCode: false
+                    totalCount: 3
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    promotions:
+                    - amountOff: 0
+                      campaign:
+                        identifier: string
+                      endDate: '2023-03-28T09:34:42Z'
+                      freeItemsQuantity: 0
+                      internalDescription: string
+                      maxQuantityToDiscount: 0
+                      medias:
+                      - locale: string
+                        url: string
+                      percentageOff: 0
+                      publicDescriptions:
+                      - locale: string
+                        value: string
+                      reducedUnitPrice: 0
+                      rewardOnPurchasedItems: true
+                      shopId: string
+                      startDate: '2023-03-28T09:34:42Z'
+                      state: string
+                      triggerOfferIds:
+                      - string
+                      triggers:
+                      - amountPurchased: 0
+                        quantityPurchased: 0
+                        sameItemPurchased: true
+                        type: string
+                      type: string
+                      withPromoCode: true
+                    totalCount: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetPromotions_Response_200'
+          description: OK
+      summary: GetPromotions - Get promotions
+      tags:
+      - Storefront
+  /api/storefront/returns:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- At each page display</div>
+
+        </div>'
+      operationId: GetReturns
+      parameters:
+      - description: Mirakl order commercial identifiers separated by comma (e.g. order1,order2,...)
+        explode: true
+        in: query
+        name: orderCommercialIds
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    returns:
+                    - dateCreated: '2023-02-27T16:14:52Z'
+                      description: Description of return
+                      documents:
+                      - id: 1337
+                        type: SYSTEM_RETURN_LABEL
+                      id: f61b5db8-d8f5-4715-b05f-aa4432c0e9e2
+                      labelUrl: null
+                      lastUpdated: null
+                      methodCode: RETURN_METHOD_BY_MAIL
+                      orderCommercialId: ORDER-1
+                      orderId: ORDER-1-A
+                      reasonCode: RETURN_CHANGED_MIND
+                      rejectionReasonCode: null
+                      returnAddress:
+                        city: New York
+                        countryIsoCode: USA
+                        state: Manhattan
+                        street1: 30, Prince Street
+                        street2: 1st floor
+                        zipCode: NY 10012
+                      returnLines:
+                      - compliance: null
+                        orderLineId: ORDER-1-A-1
+                        quantity: 2
+                      - compliance: null
+                        orderLineId: ORDER-1-A-2
+                        quantity: 3
+                      rma: null
+                      state: WAITING_ACCEPTANCE
+                      tracking:
+                        carrierCode: null
+                        carrierName: null
+                        carrierStandardCode: ups
+                        trackingNumber: 35H8O95K
+                        trackingUrl: https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=35H8O95K
+                    - dateCreated: '2023-02-27T16:32:52Z'
+                      description: null
+                      documents: []
+                      id: 2dc4f7d7-da59-4588-bec7-ce62daab2f93
+                      labelUrl: https://www.label-url.com
+                      lastUpdated: null
+                      methodCode: RETURN_METHOD_DROP_OFF_POINT
+                      orderCommercialId: ORDER-2
+                      orderId: ORDER-2-A
+                      reasonCode: RETURN_COUNTERFEIT_ITEM
+                      rejectionReasonCode: null
+                      returnAddress:
+                        city: New York
+                        countryIsoCode: USA
+                        state: Manhattan
+                        street1: 30, Prince Street
+                        street2: 1st floor
+                        zipCode: NY 10012
+                      returnLines:
+                      - compliance: null
+                        orderLineId: ORDER-2-A-1
+                        quantity: 1
+                      rma: null
+                      state: REFUSED
+                      tracking: null
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    returns:
+                    - dateCreated: '2023-03-28T09:34:42Z'
+                      description: string
+                      documents:
+                      - id: 0
+                        type: string
+                      id: string
+                      labelUrl: string
+                      lastUpdated: '2023-03-28T09:34:42Z'
+                      methodCode: RETURN_METHOD_BY_MAIL
+                      orderCommercialId: string
+                      orderId: string
+                      reasonCode: RETURN_BROKEN_ITEM
+                      rejectionReasonCode: RETURN_REJECTION_NOT_ELIGIBLE
+                      returnAddress:
+                        city: string
+                        countryIsoCode: string
+                        state: string
+                        street1: string
+                        street2: string
+                        zipCode: string
+                      returnLines:
+                      - compliance:
+                        - compliant: true
+                          nonCompliantAdditionalInfo: string
+                          nonCompliantReasonCode: string
+                        orderLineId: string
+                        quantity: 0
+                      rma: string
+                      state: CANCELED
+                      tracking:
+                        carrierCode: string
+                        carrierName: string
+                        carrierStandardCode: string
+                        trackingNumber: string
+                        trackingUrl: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetReturns_Response_200'
+          description: OK
+      summary: GetReturns - List returns
+      tags:
+      - Storefront
+  /api/storefront/shipment:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        When you want to retrieve shipment details
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to retrieve shipment details</div>
+
+        </div>'
+      operationId: GetShipment
+      parameters:
+      - description: Shopify fulfillment identifier
+        explode: true
+        in: query
+        name: fulfillmentId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    canMarkAsReceived: true
+                    logisticOrderId: order-456
+                    miraklShipmentId: 00000000-0000-0000-0000-000000000123
+                    shopifyFulfillmentId: gid://shopify/Fulfillment/7175245005126
+                    status: SHIPPED
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    canMarkAsReceived: true
+                    logisticOrderId: string
+                    miraklShipmentId: string
+                    shopifyFulfillmentId: string
+                    status: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetShipment_Response_200'
+          description: OK
+      summary: GetShipment - Get shipment details by Shopify fulfillment ID
+      tags:
+      - Storefront
+  /api/storefront/orders/accounting-documents:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Retrieves a list of accounting documents for specified Mirakl orders, with secure URLs for downloading each document.
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: ListAccountingOrdersDocuments
+      parameters:
+      - description: Mirakl orders identifier
+        explode: true
+        in: query
+        name: orderIds
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    documents:
+                    - fileName: string
+                      id: string
+                      type: string
+                      uploadedDate: '2023-03-28T09:34:42Z'
+                      url: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/ListAccountingOrdersDocuments_Response_200'
+          description: OK
+      summary: ListAccountingOrdersDocuments - List accounting orders documents
+      tags:
+      - Storefront
+  /api/storefront/orders/documents:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Retrieves a list of general order documents for specified Mirakl orders, with secure URLs for downloading each document.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to get documents for orders</div>
+
+        </div>'
+      operationId: ListOrdersDocuments
+      parameters:
+      - description: Mirakl orders identifier
+        explode: true
+        in: query
+        name: orderIds
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    documents:
+                    - fileName: string
+                      id: string
+                      type: string
+                      uploadedDate: '2023-03-28T09:34:42Z'
+                      url: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/ListOrdersDocuments_Response_200'
+          description: OK
+      summary: ListOrdersDocuments - List orders documents
+      tags:
+      - Storefront
+  /api/storefront/products/offers:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Calls the Mirakl P11 API and returns a trimmed payload tailored to the PDP.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- At each product page display</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- At each product page display</div>
+
+        </div>'
+      operationId: ListProductOffers
+      parameters:
+      - description: Mirakl product SKUs separated by comma (max 100)
+        explode: true
+        in: query
+        name: productIds
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 100
+          minItems: 0
+        style: form
+      - description: Locale tag used to translate localized fields (e.g. en_US, fr_FR). Optional - defaults to the operator's primary locale when omitted.
+        explode: true
+        in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: List of shipping zones. Filter used to pick shipping prices on one or multiple shipping zones
+        explode: true
+        in: query
+        name: shippingZones
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    products: []
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    products:
+                    - offers:
+                      - allowQuoteRequests: true
+                        currencyIsoCode: string
+                        description: string
+                        ecoContributions:
+                        - ecoContributionAmount: 0
+                          eprCategoryCode: string
+                          producerId: string
+                        favoriteRank: 0
+                        fulfillment:
+                          center:
+                            code: string
+                        maxOrderQuantity: 0
+                        minOrderQuantity: 0
+                        minQuantityAlert: 0
+                        minShippingPrice: 0
+                        minShippingPriceAdditional: 0
+                        minShippingType: string
+                        minShippingZone: string
+                        model: MARKETPLACE
+                        nbEvaluation: 0
+                        offerId: string
+                        packageQuantity: 0
+                        price: 0
+                        quantity: 0
+                        shippingDeadline: '2023-03-28T09:34:42Z'
+                        shippingTypes:
+                        - code: string
+                          cutOffNextDate: '2023-03-28T09:34:42Z'
+                          cutOffTime: string
+                          deliveryTime:
+                            earliestDays: 0
+                            earliestDeliveryDate: '2023-03-28T09:34:42Z'
+                            latestDays: 0
+                            latestDeliveryDate: '2023-03-28T09:34:42Z'
+                          label: string
+                          shippingDeadline: '2023-03-28T09:34:42Z'
+                          shippingPriceType: FIXED_PRICE
+                          shippingPriceUnit: 0
+                          shippingZoneCode: string
+                          shippingZoneLabel: string
+                          standardCode: string
+                        shopGrade: 0
+                        shopId: string
+                        shopName: string
+                        stateCode: string
+                        totalPrice: 0
+                      productSku: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/ListProductOffers_Response_200'
+          description: OK
+      summary: ListProductOffers - List offers for each given product
+      tags:
+      - Storefront
+  /api/storefront/shop-ratings/{shopId}:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to display shop ratings</div>
+
+        <div class="extension-title">Pagination</div>
+
+
+        <p>This resource supports offset pagination (<a href="#section/Offset-pagination-and-sort">see documentation</a>)</p>
+
+
+        </div>'
+      operationId: ListShopEvaluations
+      parameters:
+      - description: Mirakl shop identifier
+        explode: false
+        in: path
+        name: shopId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    evaluations:
+                    - assessments:
+                      - code: '1'
+                        label: Shipping method as expected
+                        response: '4'
+                      - code: '2'
+                        label: Product condition matched description
+                        response: 'true'
+                      - code: '3'
+                        label: Delivery deadline respected
+                        response: 'true'
+                      - code: '4'
+                        label: Product well packaged
+                        response: '4'
+                      comment: Perfect..
+                      createdAt: '2020-07-21T13:32:47.000+00:00'
+                      customerId: 449-75-7939
+                      entity:
+                        createdAt: '2020-07-21T13:32:31.000+00:00'
+                        id: MIR-VMO2X94U-A
+                        type: MMP_ORDER
+                      firstname: Debi
+                      grade: 4
+                      lastname: Russell
+                      reply: null
+                      updatedAt: '2020-07-21T13:32:47.000+00:00'
+                    - assessments:
+                      - code: '1'
+                        label: Shipping method as expected
+                        response: '3'
+                      - code: '2'
+                        label: Product condition matched description
+                        response: 'true'
+                      - code: '3'
+                        label: Delivery deadline respected
+                        response: 'false'
+                      - code: '4'
+                        label: Product well packaged
+                        response: '5'
+                      comment: Great seller, I recommend!
+                      createdAt: '2024-10-04T14:44:17.000+00:00'
+                      customerId: 689-07-6514
+                      entity:
+                        createdAt: '2020-07-21T13:32:33.000+00:00'
+                        id: MIR-F7IXKO1W-A
+                        type: MMP_ORDER
+                      firstname: Robin
+                      grade: 4
+                      lastname: Diaz
+                      reply:
+                        comment: Thank you for your feedback!
+                        date: '2024-10-04T14:44:17.000+00:00'
+                        type: OPERATOR
+                      updatedAt: '2024-10-04T14:44:17.000+00:00'
+                    - assessments:
+                      - code: '1'
+                        label: Shipping method as expected
+                        response: '5'
+                      - code: '2'
+                        label: Product condition matched description
+                        response: 'true'
+                      - code: '3'
+                        label: Delivery deadline respected
+                        response: 'false'
+                      - code: '4'
+                        label: Product well packaged
+                        response: '0'
+                      comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id tortor imperdiet, iaculis risus at, aliquet est. Fusce laoreet gravida orci vitae consectetur. Mauris ac neque semper, vehicula velit non, imperdiet nisl. Morbi pharetra urna in magna posuere fermentum. Donec id dui fermentum, ultrices ligula eu, imperdiet tellus. Morbi efficitur euismod dolor, in tincidunt orci ullamcorper nec. Proin sit amet sapien elementum, faucibus justo vitae, sollicitudin sapien. Mauris eu ipsum non nisi porta vulputate. Duis sollicitudin et felis quis mattis. In in elit lacus.\n Nullam vitae nisl lectus. Suspendisse nec leo consectetur nibh maximus dapibus. Fusce luctus feugiat gravida. Maecenas nisl massa, placerat nec congue scelerisque, euismod at eros. Morbi ac tristique magna, eu placerat ipsum. Integer et felis et lectus viverra aliquet eu vel lectus. Nam scelerisque metus ex, sed lobortis ante finibus suscipit. In vel eros sit amet est congue cursus at at nulla. Praesent volutpat, lacus in gravida dignissim, elit lorem vehicula velit, sit amet sodales massa massa vitae purus. Proin luctus, mi nec lobortis varius, turpis dolor viverra nibh, ut tincidunt orci mauris et mauris. "
+                      createdAt: '2024-10-07T09:09:19.000+00:00'
+                      customerId: customer_id_001
+                      entity:
+                        createdAt: '2024-10-07T09:05:32.000+00:00'
+                        id: Order_00578-A
+                        type: MMP_ORDER
+                      firstname: Smith
+                      grade: 4
+                      lastname: Taylor
+                      reply: null
+                      updatedAt: '2024-10-07T09:09:19.000+00:00'
+                    totalCount: 3
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    evaluations:
+                    - assessments:
+                      - code: string
+                        label: string
+                        response: string
+                      comment: string
+                      createdAt: '2023-03-28T09:34:42Z'
+                      customerId: string
+                      entity:
+                        createdAt: '2023-03-28T09:34:42Z'
+                        id: string
+                        type: MMP_ORDER
+                      firstname: string
+                      grade: 0
+                      lastname: string
+                      reply:
+                        comment: string
+                        date: '2023-03-28T09:34:42Z'
+                        type: OPERATOR
+                      updatedAt: '2023-03-28T09:34:42Z'
+                    totalCount: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/ListShopEvaluations_Response_200'
+          description: OK
+      summary: ListShopEvaluations - List evaluations of a shop
+      tags:
+      - Storefront
+  /api/storefront/graphql:
+    post:
+      description: '> ⚠️ **Content-length header**
+
+        >
+
+        > The Content-Length header must be present with value 0, even when there is no request body.
+
+
+        <div class="extension-title">Description</div>
+
+
+        For security reasons, not all fields are available depending on the context. For example, it is not possible to query the additional fields from the storefront.<br/>For offers queries, the customer location headers are used to resolve the operator shipping zone, which always overwrites the shippingZones filter of the offers input before the query is forwarded to Mirakl. When the X-Customer-Country header is absent, the query is forwarded unchanged.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to retrieve data from Mirakl GraphQL API</div>
+
+        </div>'
+      operationId: MiraklGraphQL
+      parameters:
+      - deprecated: false
+        description: ISO2 country code of the customer (case-insensitive), used to resolve the operator shipping zone injected in offers queries
+        explode: false
+        in: header
+        name: X-Customer-Country
+        required: false
+        schema:
+          type: string
+        style: simple
+      - deprecated: false
+        description: Zip/postal code of the customer, used to refine the shipping zone resolution. Ignored when X-Customer-Country is absent
+        explode: false
+        in: header
+        name: X-Customer-Zip
+        required: false
+        schema:
+          type: string
+        style: simple
+      - deprecated: false
+        description: Province/state code of the customer, used to refine the shipping zone resolution. Ignored when X-Customer-Country is absent
+        explode: false
+        in: header
+        name: X-Customer-Province
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          description: OK
+      summary: MiraklGraphQL - Forward request to Mirakl GraphQL API
+      tags:
+      - Storefront
+  /api/storefront/graphql/upload:
+    put:
+      description: '> ⚠️ **Content-length header**
+
+        >
+
+        > The Content-Length header must be present with value 0, even when there is no request body.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to upload files to Mirakl GraphQL API</div>
+
+        </div>'
+      operationId: MiraklGraphQLUpload
+      parameters: []
+      responses:
+        '200':
+          description: OK
+      summary: MiraklGraphQLUpload - Forward file upload request to Mirakl GraphQL Upload API
+      tags:
+      - Storefront
+  /api/storefront/fulfillments/receive:
+    put:
+      description: '> ⚠️ **Content-length header**
+
+        >
+
+        > The Content-Length header must be present with value 0, even when there is no request body.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to confirm the reception of a fulfillment to Mirakl</div>
+
+        </div>'
+      operationId: ReceiveFulfillment
+      parameters:
+      - description: Shopify fulfillment identifier
+        explode: true
+        in: query
+        name: fulfillmentId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          description: OK
+      summary: ReceiveFulfillment - Confirm the reception of a fulfillment
+      tags:
+      - Storefront
+components:
+  schemas:
+    ListShopEvaluations_Response_200:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          description: Evaluations list
+          items:
+            $ref: '#/components/schemas/ListShopEvaluations_Response_200_Evaluations'
+        totalCount:
+          type: integer
+          format: int64
+          description: Total count of elements returned by the query
+    ListProductOffers_Response_200_Products_Offers_ShippingTypes:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Shipping type code
+        cutOffNextDate:
+          type: string
+          format: date-time
+          description: Next cutoff date
+        cutOffTime:
+          type: string
+          description: Shipping type Cutoff time
+        deliveryTime:
+          $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_ShippingTypes_DeliveryTime'
+          description: Expected delivery time
+        label:
+          type: string
+          description: Shipping type label
+        shippingDeadline:
+          type: string
+          format: date-time
+          description: Estimated shipping date, that includes business closing days and cut-off configured on the platform. Add the earliest and latest delivery times to calculate the estimated delivery date to customers
+        shippingPriceType:
+          type: string
+          description: 'Shipping price type of the offer for a given zone method
+
+
+            Enum: `"FIXED_PRICE"`, `"FREE_SHIPPING"`, `"ORDER_PRICE_RANGE"`
+
+            '
+        shippingPriceUnit:
+          type: number
+          format: with decimals
+          description: Shipping price of the offer
+        shippingZoneCode:
+          type: string
+          description: Shipping zone code
+        shippingZoneLabel:
+          type: string
+          description: Shipping zone label
+        standardCode:
+          type: string
+          description: Shipping type standard code
+    ListAccountingOrdersDocuments_Response_200_Documents:
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: The file name of the document
+        id:
+          type: string
+          description: Unique identifier for the document
+        type:
+          type: string
+          description: Document type as defined in Mirakl document type configuration
+        uploadedDate:
+          type: string
+          format: date-time
+          description: The uploaded date of the document
+        url:
+          type: string
+          description: Secure download URL for the document. This URL includes a unique hash for security, and is generated specifically for the document.
+    GetPromotions_Response_200_Promotions_PublicDescriptions:
+      type: object
+      description: Promotion public description for a given locale
+      properties:
+        locale:
+          type: string
+          description: Locale identifier (e.g. en_US)
+        value:
+          type: string
+          description: Public description text
+    ListProductOffers_Response_200:
+      type: object
+      properties:
+        products:
+          type: array
+          description: List of products information with their offers
+          items:
+            $ref: '#/components/schemas/ListProductOffers_Response_200_Products'
+    GetReturns_Response_200_Returns:
+      type: object
+      description: Return details
+      properties:
+        dateCreated:
+          type: string
+          format: date-time
+          description: Return creation date
+        description:
+          type: string
+          description: Description
+        documents:
+          type: array
+          description: Return documents
+          items:
+            $ref: '#/components/schemas/GetReturns_Response_200_Returns_Documents'
+        id:
+          type: string
+          description: Return id
+        labelUrl:
+          type: string
+          description: Label URL
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Return last updated date
+        methodCode:
+          type: string
+          description: 'Return method code
+
+
+            Enum: `"RETURN_METHOD_BY_MAIL"`, `"RETURN_METHOD_DROP_OFF_POINT"`, `"RETURN_METHOD_HOME_PICKUP"`, `"RETURN_METHOD_IN_STORE"`, `"RETURN_METHOD_RETURNLESS"`
+
+            '
+        orderCommercialId:
+          type: string
+          description: Order commercial id
+        orderId:
+          type: string
+          description: Order id
+        reasonCode:
+          type: string
+          description: 'Return reason code
+
+
+            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`
+
+            '
+        rejectionReasonCode:
+          type: string
+          description: 'Return rejection reason code
+
+
+            Enum: `"RETURN_REJECTION_NOT_ELIGIBLE"`, `"RETURN_REJECTION_NOT_NEEDED"`, `"RETURN_REJECTION_WINDOW_CLOSED"`
+
+            '
+        returnAddress:
+          $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnAddress'
+          description: The address where items must be returned
+        returnLines:
+          type: array
+          description: Return lines
+          items:
+            $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnLines'
+        rma:
+          type: string
+          description: Return RMA
+        state:
+          type: string
+          description: 'Return state
+
+
+            Enum: `"CANCELED"`, `"CLOSED"`, `"IN_PROGRESS"`, `"NO_RECEPTION"`, `"RECEIVED"`, `"REFUSED"`, `"WAITING_ACCEPTANCE"`
+
+            '
+        tracking:
+          $ref: '#/components/schemas/GetReturns_Response_200_Returns_Tracking'
+          description: Return tracking details
+      required:
+      - dateCreated
+      - id
+      - lastUpdated
+      - methodCode
+      - orderCommercialId
+      - orderId
+      - reasonCode
+      - returnAddress
+      - returnLines
+      - state
+    CreateReturn_Response_200:
+      type: object
+      description: Response returned when a return is created
+      properties:
+        miraklReturnId:
+          type: string
+          description: Mirakl return identifier
+        shopifyReturnId:
+          type: string
+          description: Shopify return identifier
+    GetItemsToReturn_Response_200_ItemsToReturn:
+      type: object
+      description: Item available for return
+      properties:
+        availableReturnMethods:
+          type: array
+          description: Available return methods to return items
+          items:
+            type: string
+        availableReturnReasons:
+          type: array
+          description: Available return reasons to return items
+          items:
+            type: string
+        orderCommercialId:
+          type: string
+          description: Order commercial id
+        orderLineId:
+          type: string
+          description: Order line id
+        returnWindow:
+          type: integer
+          format: int32
+          description: Items must be returned during the return window
+        returnableQuantity:
+          type: integer
+          format: int32
+          description: Item quantity available to be returned
+      required:
+      - orderCommercialId
+      - orderLineId
+      - returnableQuantity
+    ListShopEvaluations_Response_200_Evaluations:
+      type: object
+      properties:
+        assessments:
+          type: array
+          description: List of assessments
+          items:
+            $ref: '#/components/schemas/ListShopEvaluations_Response_200_Evaluations_Assessments'
+        comment:
+          type: string
+          description: Evaluation comment
+        createdAt:
+          type: string
+          format: date-time
+          description: Evaluation creation date
+        customerId:
+          type: string
+          description: Identifier of the customer who posted the evaluation
+        entity:
+          $ref: '#/components/schemas/ListShopEvaluations_Response_200_Evaluations_Entity'
+          description: Entity the rating is about
+        firstname:
+          type: string
+          description: First name of the customer who posted the evaluation
+        grade:
+          type: integer
+          format: int32
+          description: Evaluation grade
+        lastname:
+          type: string
+          description: Last name of the customer who posted the evaluation
+        reply:
+          $ref: '#/components/schemas/ListShopEvaluations_Response_200_Evaluations_Reply'
+          description: Reply of a shop or operator on an evaluation
+        updatedAt:
+          type: string
+          format: date-time
+          description: Evaluation last updated date
+      required:
+      - assessments
+      - createdAt
+      - customerId
+      - entity
+      - firstname
+      - grade
+      - lastname
+      - updatedAt
+    CreateReturn_Request_MultipartFormData_Returnrequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Return description
+        methodCode:
+          type: string
+          description: 'Return method code
+
+
+            Enum: `"RETURN_METHOD_BY_MAIL"`, `"RETURN_METHOD_DROP_OFF_POINT"`, `"RETURN_METHOD_HOME_PICKUP"`, `"RETURN_METHOD_IN_STORE"`, `"RETURN_METHOD_RETURNLESS"`
+
+            '
+        orderLogisticId:
+          type: string
+          description: Order logistic id
+        reasonCode:
+          type: string
+          description: 'Return reason code
+
+
+            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`
+
+            '
+        returnLines:
+          type: array
+          description: List of return lines
+          items:
+            $ref: '#/components/schemas/CreateReturn_Request_MultipartFormData_Returnrequest_ReturnLines'
+      required:
+      - methodCode
+      - orderLogisticId
+      - reasonCode
+      - returnLines
+    ListProductOffers_Response_200_Products_Offers_ShippingTypes_DeliveryTime:
+      type: object
+      properties:
+        earliestDays:
+          type: integer
+          format: int32
+          description: Earliest order delivery time
+        earliestDeliveryDate:
+          type: string
+          format: date-time
+          description: Earliest order delivery date
+        latestDays:
+          type: integer
+          format: int32
+          description: Latest order delivery time
+        latestDeliveryDate:
+          type: string
+          format: date-time
+          description: Latest order delivery date
+    GetPromotions_Response_200:
+      type: object
+      description: Response containing storefront promotions
+      properties:
+        promotions:
+          type: array
+          description: Promotions matching the requested trigger offer IDs
+          items:
+            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions'
+        totalCount:
+          type: integer
+          format: int32
+          description: Total number of promotions returned
+    ListShopEvaluations_Response_200_Evaluations_Reply:
+      type: object
+      properties:
+        comment:
+          type: string
+          description: Text of the reply
+          maxLength: 1000
+          minLength: 1
+        date:
+          type: string
+          format: date-time
+          description: Reply date
+        type:
+          type: string
+          description: 'Type of user who replied
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`
+
+            '
+      required:
+      - comment
+      - date
+      - type
+    GetPromotions_Response_200_Promotions_Medias:
+      type: object
+      description: Promotion media asset for a given locale
+      properties:
+        locale:
+          type: string
+          description: Locale of the media (e.g. en_US)
+        url:
+          type: string
+          description: Media URL
+    ListShopEvaluations_Response_200_Evaluations_Entity:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: The creation date of the entity
+        id:
+          type: string
+          description: Id of the entity
+        type:
+          type: string
+          description: 'Type of the entity
+
+
+            Enum: `"MMP_ORDER"`, `"MPS_ORDER"`
+
+            '
+      required:
+      - createdAt
+      - id
+      - type
+    GetReturns_Response_200_Returns_ReturnAddress:
+      type: object
+      description: Return address
+      properties:
+        city:
+          type: string
+          description: City
+        countryIsoCode:
+          type: string
+          description: Country ISO code
+        state:
+          type: string
+          description: State
+        street1:
+          type: string
+          description: First line of the return address
+        street2:
+          type: string
+          description: Second line of the return address
+        zipCode:
+          type: string
+          description: Zip code
+      required:
+      - city
+      - countryIsoCode
+      - street1
+      - zipCode
+    GetPromotions_Response_200_Promotions_Triggers:
+      type: object
+      description: Promotion trigger condition
+      properties:
+        amountPurchased:
+          type: number
+          format: with decimals
+          description: Required amount to trigger the promotion (amount-based triggers)
+        quantityPurchased:
+          type: integer
+          format: int32
+          description: Required quantity to trigger the promotion (quantity-based triggers)
+        sameItemPurchased:
+          type: boolean
+          description: Whether the same item must be purchased (quantity-based triggers)
+        type:
+          type: string
+          description: Trigger type (minimum_quantity, every_quantity, minimum_amount, every_amount)
+    GetReturns_Response_200_Returns_ReturnLines:
+      type: object
+      description: Return line details
+      properties:
+        compliance:
+          type: array
+          description: Compliance
+          items:
+            $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnLines_Compliance'
+        orderLineId:
+          type: string
+          description: Order line id
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity
+      required:
+      - orderLineId
+      - quantity
+    GetReturns_Response_200:
+      type: object
+      description: List of returns
+      properties:
+        returns:
+          type: array
+          description: List of returns
+          items:
+            $ref: '#/components/schemas/GetReturns_Response_200_Returns'
+    ListShopEvaluations_Response_200_Evaluations_Assessments:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Assessment code
+        label:
+          type: string
+          description: Assessment label
+        response:
+          type: string
+          description: Response associated with the assessment
+    ListProductOffers_Response_200_Products_Offers_Fulfillment:
+      type: object
+      properties:
+        center:
+          $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_Fulfillment_Center'
+          description: Fulfillment center code
+    ListProductOffers_Response_200_Products_Offers:
+      type: object
+      properties:
+        allowQuoteRequests:
+          type: boolean
+          description: Whether the offer is eligible for quotation
+        currencyIsoCode:
+          type: string
+          description: The currency of the shop (iso format)
+        description:
+          type: string
+          description: Offer description
+        ecoContributions:
+          type: array
+          description: Eco-contributions of the offer - only available if the operator setting Activate data collection related to circular economy regulations has been enabled.
+          items:
+            $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_EcoContributions'
+        favoriteRank:
+          type: integer
+          format: int32
+          description: Favorite rank for the offer, when the favorite feature is enabled and the offer is a favorite
+        fulfillment:
+          $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_Fulfillment'
+          description: Fulfillment information
+        maxOrderQuantity:
+          type: integer
+          format: int32
+          description: The highest quantity of product items per order
+        minOrderQuantity:
+          type: integer
+          format: int32
+          description: The lowest quantity of product items per order
+        minQuantityAlert:
+          type: integer
+          format: int32
+          description: Minimum quantity of the offer
+        minShippingPrice:
+          type: number
+          format: with decimals
+          description: Unit price of the minimum shipping rate
+        minShippingPriceAdditional:
+          type: number
+          format: with decimals
+          description: Additional unit price associated to the minimum shipping rate
+        minShippingType:
+          type: string
+          description: Code of the shipping type associated to the minimum shipping rate
+        minShippingZone:
+          type: string
+          description: Code of the shipping zone associated to the minimum shipping rate
+        model:
+          type: string
+          description: 'Shop platform model, current possible values :
+
+
+            MARKETPLACE
+
+            DROPSHIP
+
+            ONE_CREDITOR
+
+
+            Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
+
+            '
+        nbEvaluation:
+          type: integer
+          format: int64
+          description: Number of customers evaluations
+        offerId:
+          type: string
+          description: Identifier of the offer
+        packageQuantity:
+          type: integer
+          format: int32
+          description: Indivisible quantity of the same product
+        price:
+          type: number
+          format: with decimals
+          description: 'Price of the offer
+
+
+            For Dropship specifically: the purchasing price of the offer, also referred to as cost or wholesale price'
+        quantity:
+          type: integer
+          format: int32
+          description: Available quantity of the offer
+        shippingDeadline:
+          type: string
+          format: date-time
+          description: Estimated shipping date, that includes business closing days and cut-off configured on the platform. Add the earliest and latest delivery times to calculate the estimated delivery date to customers
+        shippingTypes:
+          type: array
+          description: List of shipping types compatible with the given offer
+          items:
+            $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_ShippingTypes'
+        shopGrade:
+          type: number
+          format: with decimals
+          description: Grade of the shop which proposes the offer
+        shopId:
+          type: string
+          description: Identifier of the shop which proposes the offer
+        shopName:
+          type: string
+          description: Name of the shop which proposes the offer
+        stateCode:
+          type: string
+          description: Offer condition
+        totalPrice:
+          type: number
+          format: with decimals
+          description: 'Total price of the offer (price + minimum shipping rate)
+
+
+            For Dropship specifically: the purchasing price of the offer + minimum shipping rate'
+    GetPromotions_Response_200_Promotions:
+      type: object
+      description: Storefront promotion derived from Mirakl PR01
+      properties:
+        amountOff:
+          type: number
+          format: with decimals
+          description: Amount discount — non-null for AMOUNT_OFF only
+        campaign:
+          $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Campaign'
+          description: Campaign information
+        endDate:
+          type: string
+          format: date-time
+          description: Promotion end date
+        freeItemsQuantity:
+          type: integer
+          format: int32
+          description: Free items quantity — non-null for FREE_ITEMS only
+        internalDescription:
+          type: string
+          description: Internal description of the promotion
+        maxQuantityToDiscount:
+          type: integer
+          format: int32
+          description: Maximum quantity on which the discount applies — non-null for PERCENTAGE_OFF only
+        medias:
+          type: array
+          description: Media assets per locale
+          items:
+            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Medias'
+        percentageOff:
+          type: number
+          format: with decimals
+          description: Percentage discount — non-null for PERCENTAGE_OFF only
+        publicDescriptions:
+          type: array
+          description: Customer-facing descriptions per locale
+          items:
+            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_PublicDescriptions'
+        reducedUnitPrice:
+          type: number
+          format: with decimals
+          description: Reduced unit price — non-null for REDUCED_UNIT_PRICE only
+        rewardOnPurchasedItems:
+          type: boolean
+          description: Whether the reward applies to the purchased items
+        shopId:
+          type: string
+          description: Shop identifier
+        startDate:
+          type: string
+          format: date-time
+          description: Promotion start date
+        state:
+          type: string
+          description: Promotion state (ACTIVE or PENDING)
+        triggerOfferIds:
+          type: array
+          description: Offer IDs that matched the requested triggerOfferIds filter
+          items:
+            type: string
+        triggers:
+          type: array
+          description: Trigger conditions
+          items:
+            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Triggers'
+        type:
+          type: string
+          description: Promotion type (PERCENTAGE_OFF, AMOUNT_OFF, REDUCED_UNIT_PRICE, FREE_ITEMS)
+        withPromoCode:
+          type: boolean
+          description: Whether the promotion requires a promo code to apply
+    GetReturns_Response_200_Returns_ReturnLines_Compliance:
+      type: object
+      description: Return line compliance details
+      properties:
+        compliant:
+          type: boolean
+          description: Compliant
+        nonCompliantAdditionalInfo:
+          type: string
+          description: Non compliance additional info
+        nonCompliantReasonCode:
+          type: string
+          description: Non compliance reason code
+      required:
+      - compliant
+    GetReturns_Response_200_Returns_Documents:
+      type: object
+      description: Return document
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Return document id
+        type:
+          type: string
+          description: Return document type
+      required:
+      - id
+      - type
+    CreateReturn_Request_MultipartFormData_Returnrequest_ReturnLines:
+      type: object
+      description: Return creation return line request
+      properties:
+        orderLineId:
+          type: string
+          description: Return order line id
+        quantity:
+          type: integer
+          format: int32
+          description: Return quantity
+          minimum: 0
+      required:
+      - orderLineId
+      - quantity
+    ListAccountingOrdersDocuments_Response_200:
+      type: object
+      properties:
+        documents:
+          type: array
+          description: List of order documents
+          items:
+            $ref: '#/components/schemas/ListAccountingOrdersDocuments_Response_200_Documents'
+      required:
+      - documents
+    GetItemsToReturn_Response_200:
+      type: object
+      description: Items available for return
+      properties:
+        itemsToReturn:
+          type: array
+          description: List of items available for return
+          items:
+            $ref: '#/components/schemas/GetItemsToReturn_Response_200_ItemsToReturn'
+    ListProductOffers_Response_200_Products_Offers_EcoContributions:
+      type: object
+      properties:
+        ecoContributionAmount:
+          type: number
+          format: with decimals
+          description: Amount of the eco-contribution.
+        eprCategoryCode:
+          type: string
+          description: Extended Producer Responsibility (EPR) category code.
+        producerId:
+          type: string
+          description: Producer identifier of the eco-contribution.
+    ListOrdersDocuments_Response_200_Documents:
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: The file name of the document
+        id:
+          type: string
+          description: Unique identifier for the document
+        type:
+          type: string
+          description: Document type as defined in Mirakl document type configuration
+        uploadedDate:
+          type: string
+          format: date-time
+          description: The uploaded date of the document
+        url:
+          type: string
+          description: Secure download URL for the document. This URL includes a unique hash for security, and is generated specifically for the document.
+    ListProductOffers_Response_200_Products:
+      type: object
+      properties:
+        offers:
+          type: array
+          description: List of offers for the product
+          items:
+            $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers'
+        productSku:
+          type: string
+          description: SKU of the product
+    GetReturns_Response_200_Returns_Tracking:
+      type: object
+      description: Return tracking details
+      properties:
+        carrierCode:
+          type: string
+          description: Carrier code
+        carrierName:
+          type: string
+          description: Carrier name
+        carrierStandardCode:
+          type: string
+          description: Carrier standard code
+        trackingNumber:
+          type: string
+          description: Tracking number
+        trackingUrl:
+          type: string
+          description: Return tracking URL
+    GetPromotions_Response_200_Promotions_Campaign:
+      type: object
+      description: Promotion campaign information
+      properties:
+        identifier:
+          type: string
+          description: Campaign identifier
+    GetEvaluationsAssessments_Response_200:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Assessment code
+        label:
+          type: string
+          description: Assessment label
+        type:
+          type: string
+          description: Assessment type
+    ListProductOffers_Response_200_Products_Offers_Fulfillment_Center:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Center code
+    ListOrdersDocuments_Response_200:
+      type: object
+      properties:
+        documents:
+          type: array
+          description: List of order documents
+          items:
+            $ref: '#/components/schemas/ListOrdersDocuments_Response_200_Documents'
+      required:
+      - documents
+    GetShipment_Response_200:
+      type: object
+      properties:
+        canMarkAsReceived:
+          type: boolean
+          description: Boolean indicating if the shipment can be marked as received
+        logisticOrderId:
+          type: string
+          description: The logistic order ID
+        miraklShipmentId:
+          type: string
+          description: The Mirakl shipment ID
+        shopifyFulfillmentId:
+          type: string
+          description: The shopify fulfillment ID
+        status:
+          type: string
+          description: The Mirakl status of the shipment
+      required:
+      - canMarkAsReceived
+      - logisticOrderId
+      - miraklShipmentId
+      - shopifyFulfillmentId
+      - status
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

@@ -1,0 +1,257 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/product/account-channel-platform/rest/connector/openapi-description.md" /%}'
+  title: Mirakl Account Platform Channel API
+  version: ''
+servers:
+- description: Account Channel Platform API
+  url: https://account.mirakl.net/api/channel-platform
+tags:
+- name: Channel
+paths:
+  /v1/channels:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Api to create or update channels
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: SELLER_ACCOUNT_CHANNEL_UPSERT
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  channels:
+                  - external_id: env1-test
+                    name: Awesome marketplace
+                    status: AVAILABLE
+                    url: https://env1-test.mirakl.net
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  channels:
+                  - external_id: string
+                    name: string
+                    status: string
+                    url: string
+            schema:
+              $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Request'
+      responses:
+        '201':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    channels:
+                    - external_id: string
+                      id: string
+                      name: string
+                      status: AVAILABLE
+                      url: string
+                      vendor: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201'
+          description: Channels created or updated
+        '401':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    channels:
+                    - external_id: string
+                      id: string
+                      name: string
+                      status: AVAILABLE
+                      url: string
+                      vendor: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_401'
+          description: Invalid app-auth token
+        '403':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    channels:
+                    - external_id: string
+                      id: string
+                      name: string
+                      status: AVAILABLE
+                      url: string
+                      vendor: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403'
+          description: Unknown connector
+      summary: SELLER_ACCOUNT_CHANNEL_UPSERT - Create or update channels
+      tags:
+      - Channel
+components:
+  schemas:
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: channels
+          items:
+            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels'
+      required:
+      - channels
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Request_Channels:
+      type: object
+      description: Channels to upsert
+      properties:
+        external_id:
+          type: string
+          description: Channel external id
+        name:
+          type: string
+          description: Channel name
+        status:
+          type: string
+          description: Channel status
+        url:
+          type: string
+          description: Channel url
+          pattern: ''
+      required:
+      - external_id
+      - name
+      - status
+      - url
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Request:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: Channels to upsert
+          items:
+            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Request_Channels'
+      required:
+      - channels
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201_Channels:
+      type: object
+      properties:
+        external_id:
+          type: string
+          description: Channel external id
+        id:
+          type: string
+          description: Channel id
+        name:
+          type: string
+          description: Channel name
+        status:
+          type: string
+          description: 'Channel status
+
+
+            Enum: `"AVAILABLE"`
+
+            '
+        url:
+          type: string
+          description: Channel url
+        vendor:
+          type: string
+          description: Channel vendor
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_401_Channels:
+      type: object
+      properties:
+        external_id:
+          type: string
+          description: Channel external id
+        id:
+          type: string
+          description: Channel id
+        name:
+          type: string
+          description: Channel name
+        status:
+          type: string
+          description: 'Channel status
+
+
+            Enum: `"AVAILABLE"`
+
+            '
+        url:
+          type: string
+          description: Channel url
+        vendor:
+          type: string
+          description: Channel vendor
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: channels
+          items:
+            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201_Channels'
+      required:
+      - channels
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels:
+      type: object
+      properties:
+        external_id:
+          type: string
+          description: Channel external id
+        id:
+          type: string
+          description: Channel id
+        name:
+          type: string
+          description: Channel name
+        status:
+          type: string
+          description: 'Channel status
+
+
+            Enum: `"AVAILABLE"`
+
+            '
+        url:
+          type: string
+          description: Channel url
+        vendor:
+          type: string
+          description: Channel vendor
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_401:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: channels
+          items:
+            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_401_Channels'
+      required:
+      - channels
+  securitySchemes:
+    OAuth-2:
+      description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.mirakl.net/authorize
+          refreshUrl: https://auth.mirakl.net/oauth/token
+          scopes: {}
+          tokenUrl: https://auth.mirakl.net/oauth/token
+      type: oauth2
+x-group-parameters: true

@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
-  title: Mirakl Connect Channel Platform APIs Carriers Catalog Configuration API
-  version: "1.0"
+  title: Mirakl Connect Channel Platform Catalog Configuration API
+  version: ''
 servers:
 - description: Connect Channel Platform API
   url: https://miraklconnect.com/api/channel-platform
@@ -95,7 +95,137 @@ paths:
       tags:
       - Catalog Configuration
 components:
+  parameters:
+    channel_id_path:
+      description: Connect Channel identifier
+      explode: false
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: string
+        examples:
+        - '1234'
+        minLength: 1
+      style: simple
   schemas:
+    OfferConfiguration:
+      type: object
+      properties:
+        custom_attributes:
+          type: array
+          description: Attributes the sellers must configure for offer-related features
+          items:
+            $ref: '#/components/schemas/Attribute'
+        pricing_configuration:
+          $ref: '#/components/schemas/PricingConfiguration'
+    UseCaseConfiguration:
+      type: object
+      description: "Configuration for a specific use case. \nThis API provides the configuration of required offer fields by use cases\n"
+      properties:
+        optional:
+          $ref: '#/components/schemas/UseCaseConfigurationAttributes'
+          description: Optional fields for the use case
+        required:
+          $ref: '#/components/schemas/UseCaseConfigurationAttributes'
+          description: Required fields for the use case
+        support:
+          type: string
+          description: 'Support for the use case
+
+
+            Enum: `"SUPPORTED"`, `"UNSUPPORTED"`
+
+            '
+      required:
+      - required
+      - support
+    UseCaseConfigurationAttributes:
+      type: object
+      properties:
+        custom_attributes:
+          type: array
+          items:
+            type: string
+        standard_attributes:
+          type: array
+          items:
+            type: string
+            description: 'Enum: `"ID"`, `"STANDARD_PRICE"`, `"DISCOUNT_PRICE"`, `"STOCK"`, `"GTIN"`
+
+              '
+    ConfigurationMode:
+      type: string
+      description: 'The user can configure an attribute via:
+
+        - `CONSTANT`: a constant value for all the catalog
+
+        - `VARIABLE`: a value that can be different for each item, based on an attribute
+
+
+
+        Enum: `"CONSTANT"`, `"VARIABLE"`
+
+        '
+    ChannelCatalogCapabilities:
+      type: object
+      properties:
+        offer_configuration:
+          $ref: '#/components/schemas/OfferConfiguration'
+        use_case_configurations:
+          $ref: '#/components/schemas/UseCaseConfigurations'
+    Locale:
+      type: string
+      description: The language format can be ISO-639 or ISO-639_ISO-3166
+      examples:
+      - en_US
+    DiscountPricePeriod:
+      type: object
+      description: Configuration for discount price period.
+      properties:
+        end_date:
+          $ref: '#/components/schemas/PricingConfigurationField'
+        start_date:
+          $ref: '#/components/schemas/PricingConfigurationField'
+        support:
+          type: string
+          description: 'Support for the discount price period
+
+
+            Enum: `"SUPPORTED"`, `"UNSUPPORTED"`
+
+            '
+      required:
+      - end_date
+      - start_date
+      - support
+    PricingConfigurationField:
+      type: object
+      description: Pricing configuration field
+      properties:
+        requirement_level:
+          type: string
+          description: 'Requirement level of the attribute
+
+
+            Enum: `"OPTIONAL"`, `"REQUIRED"`
+
+            '
+      required:
+      - requirement_level
+    UseCaseConfigurations:
+      type: object
+      description: "Configuration for offer related features by use case. \nThis API provides the configuration of required offer fields by use cases\n"
+      properties:
+        offer_creation:
+          $ref: '#/components/schemas/UseCaseConfiguration'
+          description: Configuration for offer creation
+        offer_update:
+          $ref: '#/components/schemas/UseCaseConfiguration'
+          description: Configuration for offer update
+      required:
+      - offer_creation
+      - offer_update
     Attribute:
       type: object
       discriminator:
@@ -143,40 +273,6 @@ components:
       - labels
       - requirement_level
       - type
-    UseCaseConfigurations:
-      type: object
-      description: "Configuration for offer related features by use case. \nThis API provides the configuration of required offer fields by use cases\n"
-      properties:
-        offer_creation:
-          $ref: '#/components/schemas/UseCaseConfiguration'
-          description: Configuration for offer creation
-        offer_update:
-          $ref: '#/components/schemas/UseCaseConfiguration'
-          description: Configuration for offer update
-      required:
-      - offer_creation
-      - offer_update
-    ChannelCatalogCapabilities:
-      type: object
-      properties:
-        offer_configuration:
-          $ref: '#/components/schemas/OfferConfiguration'
-        use_case_configurations:
-          $ref: '#/components/schemas/UseCaseConfigurations'
-    PricingConfigurationField:
-      type: object
-      description: Pricing configuration field
-      properties:
-        requirement_level:
-          type: string
-          description: 'Requirement level of the attribute
-
-
-            Enum: `"OPTIONAL"`, `"REQUIRED"`
-
-            '
-      required:
-      - requirement_level
     Localized:
       type: object
       properties:
@@ -188,113 +284,17 @@ components:
       required:
       - locale
       - value
-    UseCaseConfigurationAttributes:
-      type: object
-      properties:
-        custom_attributes:
-          type: array
-          items:
-            type: string
-        standard_attributes:
-          type: array
-          items:
-            type: string
-            description: 'Enum: `"ID"`, `"STANDARD_PRICE"`, `"DISCOUNT_PRICE"`, `"STOCK"`, `"GTIN"`
-
-              '
-    DiscountPricePeriod:
-      type: object
-      description: Configuration for discount price period.
-      properties:
-        end_date:
-          $ref: '#/components/schemas/PricingConfigurationField'
-        start_date:
-          $ref: '#/components/schemas/PricingConfigurationField'
-        support:
-          type: string
-          description: 'Support for the discount price period
-
-
-            Enum: `"SUPPORTED"`, `"UNSUPPORTED"`
-
-            '
-      required:
-      - end_date
-      - start_date
-      - support
     AttributeType:
       type: string
       description: 'Enum: `"Boolean"`, `"Numeric"`, `"Text"`, `"List"`
 
         '
-    ConfigurationMode:
-      type: string
-      description: 'The user can configure an attribute via:
-
-        - `CONSTANT`: a constant value for all the catalog
-
-        - `VARIABLE`: a value that can be different for each item, based on an attribute
-
-
-
-        Enum: `"CONSTANT"`, `"VARIABLE"`
-
-        '
-    OfferConfiguration:
-      type: object
-      properties:
-        custom_attributes:
-          type: array
-          description: Attributes the sellers must configure for offer-related features
-          items:
-            $ref: '#/components/schemas/Attribute'
-        pricing_configuration:
-          $ref: '#/components/schemas/PricingConfiguration'
-    UseCaseConfiguration:
-      type: object
-      description: "Configuration for a specific use case. \nThis API provides the configuration of required offer fields by use cases\n"
-      properties:
-        optional:
-          $ref: '#/components/schemas/UseCaseConfigurationAttributes'
-          description: Optional fields for the use case
-        required:
-          $ref: '#/components/schemas/UseCaseConfigurationAttributes'
-          description: Required fields for the use case
-        support:
-          type: string
-          description: 'Support for the use case
-
-
-            Enum: `"SUPPORTED"`, `"UNSUPPORTED"`
-
-            '
-      required:
-      - required
-      - support
-    Locale:
-      type: string
-      description: The language format can be ISO-639 or ISO-639_ISO-3166
-      examples:
-      - en_US
     PricingConfiguration:
       type: object
       description: Configuration for pricing capabilities.
       properties:
         discount_price_period:
           $ref: '#/components/schemas/DiscountPricePeriod'
-  parameters:
-    channel_id_path:
-      description: Connect Channel identifier
-      explode: false
-      in: path
-      name: channel_id
-      required: true
-      schema:
-        type: string
-        examples:
-        - '1234'
-        minLength: 1
-      style: simple
   securitySchemes:
     Bearer:
       bearerFormat: JWT

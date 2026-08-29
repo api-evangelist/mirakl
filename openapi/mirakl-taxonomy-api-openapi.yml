@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
-  title: Mirakl Connect Channel Platform APIs Carriers Taxonomy API
-  version: "1.0"
+  title: Mirakl Connect Channel Platform Taxonomy API
+  version: ''
 servers:
 - description: Connect Channel Platform API
   url: https://miraklconnect.com/api/channel-platform
@@ -165,182 +165,6 @@ paths:
       - Taxonomy
 components:
   schemas:
-    ProductAttributeType:
-      type: string
-      description: 'Each type of attributes has a different set of properties
-
-
-        Enum: `"Text"`, `"Integer"`, `"Decimal"`, `"List"`, `"Media"`
-
-        '
-    Localized:
-      type: object
-      properties:
-        locale:
-          $ref: '#/components/schemas/Locale'
-        value:
-          type: string
-          description: The localized value in this locale
-      required:
-      - locale
-      - value
-    ProductTypeRuleConditionIsSet:
-      type: object
-      description: A condition that checks if a specific attribute is set
-      properties:
-        isSet:
-          $ref: '#/components/schemas/IsSetRuleConditionPayload'
-      required:
-      - isSet
-      title: IsSet
-    InRuleConditionPayloadValue:
-      oneOf:
-      - type: string
-      - type: number
-      - type: boolean
-    ProductTypeRuleConditionNot:
-      type: object
-      description: A condition that must not be met to trigger the rule
-      properties:
-        not:
-          $ref: '#/components/schemas/ProductTypeRuleCondition'
-      required:
-      - not
-      title: Not
-    ProductTypeContext:
-      type: object
-      description: "Additional context information about where this product type label is located within \nthe marketplace's data structure. This helps with catalog transformation.\n"
-      properties:
-        labels:
-          type: array
-          description: List of labels context for the product type
-          items:
-            $ref: '#/components/schemas/Localized'
-    ProductAttributeId:
-      type: string
-      description: Anything that uniquely identifies the product attribute.
-      examples:
-      - COLOR
-      maxLength: 255
-      minLength: 1
-    RequirementLevel:
-      type: string
-      description: 'Requirement level of the attribute when creating or updating a product
-
-
-        Enum: `"OPTIONAL"`, `"RECOMMENDED"`, `"REQUIRED"`
-
-        '
-    IsSetRuleConditionPayload:
-      type: object
-      properties:
-        attribute:
-          $ref: '#/components/schemas/ProductAttributeId'
-      required:
-      - attribute
-    AttributeContext:
-      type: object
-      description: "Additional context information about where this attribute label is located within \nthe marketplace's data structure. This helps with catalog transformation.\n"
-      properties:
-        labels:
-          type: array
-          description: List of labels context for the attribute
-          items:
-            $ref: '#/components/schemas/Localized'
-        path:
-          type: string
-          description: 'The path indicating where this attribute label is located in the marketplace''s data structure.
-
-            Used for data mapping and transformation purposes.
-
-            '
-    ProductTypeRuleActionRedefineAttribute:
-      type: object
-      description: An action to redefine an attribute's properties
-      properties:
-        redefine:
-          $ref: '#/components/schemas/RedefineAttributeActionPayload'
-      required:
-      - redefine
-      title: Redefine attribute
-    InRuleConditionPayload:
-      type: object
-      properties:
-        attribute:
-          $ref: '#/components/schemas/ProductAttributeId'
-        values:
-          type: array
-          description: List of values to check against
-          items:
-            $ref: '#/components/schemas/InRuleConditionPayloadValue'
-      required:
-      - attribute
-      - values
-    Locale:
-      type: string
-      description: The language format can be ISO-639 or ISO-639_ISO-3166
-      examples:
-      - en_US
-    ProductTypeId:
-      type: string
-      description: Anything that uniquely identifies the product type.
-      examples:
-      - Smartphones
-      maxLength: 255
-      minLength: 1
-    ProductTypeRuleConditionAny:
-      type: object
-      description: A set of conditions where at least one must be met to trigger the rule
-      properties:
-        any:
-          type: array
-          description: List of conditions where at least one must be satisfied
-          items:
-            $ref: '#/components/schemas/ProductTypeRuleCondition'
-      required:
-      - any
-      title: Any
-    RedefineAttributeActionPayload:
-      type: object
-      properties:
-        attribute:
-          $ref: '#/components/schemas/ProductAttributeId'
-        requirementLevel:
-          $ref: '#/components/schemas/RequirementLevel'
-      required:
-      - attribute
-      - requirementLevel
-    ProductTypeRuleConditionAll:
-      type: object
-      description: A set of conditions that must all be met to trigger the rule
-      properties:
-        all:
-          type: array
-          description: List of conditions to satisfy
-          items:
-            $ref: '#/components/schemas/ProductTypeRuleCondition'
-      required:
-      - all
-      title: All
-    ConnectStandardAttribute:
-      type: string
-      description: 'Equivalent of the attribute in Connect standard taxonomy
-
-
-        Enum: `"PRODUCT_ID"`, `"CATEGORY"`, `"BRAND"`, `"TITLE"`, `"DESCRIPTION"`, `"IMAGE"`, `"GTIN"`, `"VARIANT_GROUP_CODE"`
-
-        '
-    ProductTypeRuleActionAll:
-      type: object
-      description: A set of actions to apply when the rule is triggered
-      properties:
-        all:
-          type: array
-          description: List of actions to apply
-          items:
-            $ref: '#/components/schemas/ProductTypeRuleActionRedefineAttribute'
-      required:
-      - all
     ProductTypeRuleConditionEquals:
       type: object
       description: A condition that checks if a specific attribute equals a given value
@@ -350,6 +174,14 @@ components:
       required:
       - equals
       title: Equals
+    ConnectStandardAttribute:
+      type: string
+      description: 'Equivalent of the attribute in Connect standard taxonomy
+
+
+        Enum: `"PRODUCT_ID"`, `"CATEGORY"`, `"BRAND"`, `"TITLE"`, `"DESCRIPTION"`, `"IMAGE"`, `"GTIN"`, `"VARIANT_GROUP_CODE"`
+
+        '
     EmbeddedAttribute:
       type: object
       discriminator:
@@ -391,10 +223,119 @@ components:
       - labels
       - requirement_level
       - type
+    ProductTypeRule:
+      type: object
+      description: A rule associated with the product type
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the rule
+          example: rule-1234
+        then:
+          $ref: '#/components/schemas/ProductTypeRuleActionAll'
+        when:
+          $ref: '#/components/schemas/ProductTypeRuleCondition'
+      required:
+      - id
+      - then
+      - when
+    ProductTypeRuleActionRedefineAttribute:
+      type: object
+      description: An action to redefine an attribute's properties
+      properties:
+        redefine:
+          $ref: '#/components/schemas/RedefineAttributeActionPayload'
+      required:
+      - redefine
+      title: Redefine attribute
+    ProductTypeRuleConditionNot:
+      type: object
+      description: A condition that must not be met to trigger the rule
+      properties:
+        not:
+          $ref: '#/components/schemas/ProductTypeRuleCondition'
+      required:
+      - not
+      title: Not
+    ProductTypeRuleActionAll:
+      type: object
+      description: A set of actions to apply when the rule is triggered
+      properties:
+        all:
+          type: array
+          description: List of actions to apply
+          items:
+            $ref: '#/components/schemas/ProductTypeRuleActionRedefineAttribute'
+      required:
+      - all
+    ProductTypeRuleCondition:
+      description: Condition to trigger the rule
+      oneOf:
+      - $ref: '#/components/schemas/ProductTypeRuleConditionAll'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionAny'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionNot'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionIsSet'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionEquals'
+      - $ref: '#/components/schemas/ProductTypeRuleConditionIn'
     StoreId:
       type: string
       description: Store identifier in the channel
       minLength: 1
+    ProductTypeRuleReference:
+      type: object
+      description: A reference to a rule associated with the product type
+      properties:
+        ref:
+          type: string
+          description: The unique identifier of the referenced rule
+          examples:
+          - rule-1234
+      required:
+      - ref
+    ProductTypeRuleConditionAny:
+      type: object
+      description: A set of conditions where at least one must be met to trigger the rule
+      properties:
+        any:
+          type: array
+          description: List of conditions where at least one must be satisfied
+          items:
+            $ref: '#/components/schemas/ProductTypeRuleCondition'
+      required:
+      - any
+      title: Any
+    ProductTypeId:
+      type: string
+      description: Anything that uniquely identifies the product type.
+      examples:
+      - Smartphones
+      maxLength: 255
+      minLength: 1
+    ProductTypeRuleConditionIn:
+      type: object
+      description: A condition that checks if a specific attribute's value is in a given list of
+      properties:
+        in:
+          $ref: '#/components/schemas/InRuleConditionPayload'
+      required:
+      - in
+      title: In
+    ProductAttributeId:
+      type: string
+      description: Anything that uniquely identifies the product attribute.
+      examples:
+      - COLOR
+      maxLength: 255
+      minLength: 1
+    ProductTypeRuleConditionIsSet:
+      type: object
+      description: A condition that checks if a specific attribute is set
+      properties:
+        isSet:
+          $ref: '#/components/schemas/IsSetRuleConditionPayload'
+      required:
+      - isSet
+      title: IsSet
     ProductType:
       type: object
       properties:
@@ -419,6 +360,30 @@ components:
       required:
       - embedded_attributes
       - labels
+    IsSetRuleConditionPayload:
+      type: object
+      properties:
+        attribute:
+          $ref: '#/components/schemas/ProductAttributeId'
+      required:
+      - attribute
+    ProductTypeRuleConditionAll:
+      type: object
+      description: A set of conditions that must all be met to trigger the rule
+      properties:
+        all:
+          type: array
+          description: List of conditions to satisfy
+          items:
+            $ref: '#/components/schemas/ProductTypeRuleCondition'
+      required:
+      - all
+      title: All
+    Locale:
+      type: string
+      description: The language format can be ISO-639 or ISO-639_ISO-3166
+      examples:
+      - en_US
     TaxonomyRuleRequest:
       type: object
       description: Request to create a taxonomy rule
@@ -431,57 +396,66 @@ components:
           minItems: 1
       required:
       - rules
-    ProductTypeRuleConditionIn:
+    InRuleConditionPayloadValue:
+      oneOf:
+      - type: string
+      - type: number
+      - type: boolean
+    RequirementLevel:
+      type: string
+      description: 'Requirement level of the attribute when creating or updating a product
+
+
+        Enum: `"OPTIONAL"`, `"RECOMMENDED"`, `"REQUIRED"`
+
+        '
+    Localized:
       type: object
-      description: A condition that checks if a specific attribute's value is in a given list of
       properties:
-        in:
-          $ref: '#/components/schemas/InRuleConditionPayload'
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: The localized value in this locale
       required:
-      - in
-      title: In
+      - locale
+      - value
+    ProductTypeContext:
+      type: object
+      description: "Additional context information about where this product type label is located within \nthe marketplace's data structure. This helps with catalog transformation.\n"
+      properties:
+        labels:
+          type: array
+          description: List of labels context for the product type
+          items:
+            $ref: '#/components/schemas/Localized'
+    ProductAttributeType:
+      type: string
+      description: 'Each type of attributes has a different set of properties
+
+
+        Enum: `"Text"`, `"Integer"`, `"Decimal"`, `"List"`, `"Media"`
+
+        '
     EqualsRuleConditionPayloadValue:
       description: The value to compare against
       oneOf:
       - type: string
       - type: number
       - type: boolean
-    ProductTypeRuleReference:
+    InRuleConditionPayload:
       type: object
-      description: A reference to a rule associated with the product type
       properties:
-        ref:
-          type: string
-          description: The unique identifier of the referenced rule
-          examples:
-          - rule-1234
+        attribute:
+          $ref: '#/components/schemas/ProductAttributeId'
+        values:
+          type: array
+          description: List of values to check against
+          items:
+            $ref: '#/components/schemas/InRuleConditionPayloadValue'
       required:
-      - ref
-    ProductTypeRule:
-      type: object
-      description: A rule associated with the product type
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the rule
-          example: rule-1234
-        then:
-          $ref: '#/components/schemas/ProductTypeRuleActionAll'
-        when:
-          $ref: '#/components/schemas/ProductTypeRuleCondition'
-      required:
-      - id
-      - then
-      - when
-    ProductTypeRuleCondition:
-      description: Condition to trigger the rule
-      oneOf:
-      - $ref: '#/components/schemas/ProductTypeRuleConditionAll'
-      - $ref: '#/components/schemas/ProductTypeRuleConditionAny'
-      - $ref: '#/components/schemas/ProductTypeRuleConditionNot'
-      - $ref: '#/components/schemas/ProductTypeRuleConditionIsSet'
-      - $ref: '#/components/schemas/ProductTypeRuleConditionEquals'
-      - $ref: '#/components/schemas/ProductTypeRuleConditionIn'
+      - attribute
+      - values
     EqualsRuleConditionPayload:
       type: object
       properties:
@@ -492,6 +466,32 @@ components:
       required:
       - attribute
       - value
+    RedefineAttributeActionPayload:
+      type: object
+      properties:
+        attribute:
+          $ref: '#/components/schemas/ProductAttributeId'
+        requirementLevel:
+          $ref: '#/components/schemas/RequirementLevel'
+      required:
+      - attribute
+      - requirementLevel
+    AttributeContext:
+      type: object
+      description: "Additional context information about where this attribute label is located within \nthe marketplace's data structure. This helps with catalog transformation.\n"
+      properties:
+        labels:
+          type: array
+          description: List of labels context for the attribute
+          items:
+            $ref: '#/components/schemas/Localized'
+        path:
+          type: string
+          description: 'The path indicating where this attribute label is located in the marketplace''s data structure.
+
+            Used for data mapping and transformation purposes.
+
+            '
   parameters:
     channel_id_path:
       description: Connect Channel identifier

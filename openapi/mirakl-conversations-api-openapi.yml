@@ -1,0 +1,1049 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/product/connect/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Conversations API
+  version: ''
+servers:
+- description: Connect Production endpoint
+  url: https://miraklconnect.com/api
+tags:
+- name: Conversations
+paths:
+  /conversations:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to initiate a new conversation with a customer on a marketplace. Returns an action identifier to track the asynchronous processing.
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: createConversation
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              conversation:
+                contentType: application/json
+                style: form
+              files:
+                contentType: application/octet-stream
+                style: form
+            examples:
+              multipart/form-data-auto:
+                summary: Complete example with value types (multipart/form-data)
+                value:
+                  conversation:
+                    entity:
+                      type: ORDER
+                      id: 0123_Order1-A
+                    first_message:
+                      body: Hello! How can I assist you today?
+                    topic:
+                      type: FREE_TEXT
+                      value: Customer has a general question about services.
+                  files:
+                  - string
+            schema:
+              type: object
+              properties:
+                conversation:
+                  $ref: '#/components/schemas/CreateConversationInput'
+                files:
+                  type: array
+                  description: Optional file attachments
+                  items:
+                    type: string
+                    format: binary
+                  maxItems: 5
+              required:
+              - conversation
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    action_id: abcd
+              schema:
+                $ref: '#/components/schemas/ConversationActionIdResponse'
+          description: Conversation creation initiated
+        '400':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        '404':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Order or store not found
+      security:
+      - Bearer:
+        - connect:conversation:create
+      summary: createConversation - Create a new conversation
+      tags:
+      - Conversations
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -i -X POST \\\n  https://miraklconnect.com/api/conversations \\\n  -H 'Content-Type: multipart/form-data' \\\n  -F 'conversation=\"{\\\"entity\\\":{\\\"type\\\":\\\"ORDER\\\",\\\"id\\\":\\\"0123_Order1-A\\\"},\\\"first_message\\\":{\\\"body\\\":\\\"Hello! How can I assist you today?\\\"},\\\"topic\\\":{\\\"type\\\":\\\"FREE_TEXT\\\",\\\"value\\\":\\\"Customer has a general question about services.\\\"}}\";type=application/json' \\\n  -F 'files=@path/to/file'\n"
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to synchronize Mirakl Connect conversations with your system.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Pagination</div>
+
+
+        <p>This resource supports seek pagination (<a href="#section/Seek-pagination-and-sort">see documentation</a>)</p>
+
+
+        <div class="extension-title">Sort fields</div>
+
+
+        <code>sort</code> field can have the following values:<ul><li><b>updated_at</b> (Default) - Sort by date time of last conversation modification in Mirakl Connect (desc by default)</li></ul>
+
+
+        </div>'
+      operationId: listConversations
+      parameters:
+      - description: Token to access the next or previous page
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Maximum number of listed conversations
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 50
+          maximum: 100
+          minimum: 1
+        style: form
+      - description: Select conversations that were last updated in Mirakl Connect from the specified date time. Required when conversation_ids is not provided.
+        explode: true
+        in: query
+        name: updated_from
+        required: false
+        schema:
+          type: string
+          format: date-time
+          example: '2026-01-04T08:30:00Z'
+        style: form
+      - description: Type of the entity linked to the conversation. Should be used with entity_ids.
+        explode: true
+        in: query
+        name: entity_type
+        required: false
+        schema:
+          type: string
+          enum:
+          - ORDER
+        style: form
+      - description: List of unique identifiers of the entities linked to the conversation. Should be used with entity_type.
+        explode: true
+        in: query
+        name: entity_ids
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: List of conversation IDs to retrieve. Required when updated_from is not provided.
+        explode: true
+        in: query
+        name: conversation_ids
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    previous_page_token: string
+                    next_page_token: string
+                    data:
+                    - id: string
+                      channel_conversation_id: string
+                      participants:
+                      - type: CHANNEL
+                        id: '123456'
+                        name: Marketplace 1
+                      topic:
+                        type: FREE_TEXT
+                        value: Hello, I have a question about my order
+                      entity:
+                        type: ORDER
+                        id: 0054_MIR-F745HNL8-A
+                        channel_entity_id: MIR-F745HNL8-A
+                      origin:
+                        channel_id: string
+                        channel_name: string
+                        channel_store_id: string
+                        channel_store_name: string
+                      created_at: '2024-01-02T12:13:14.567Z'
+                      updated_at: '2024-01-02T12:42:00.667Z'
+                      anonymized_at: '2024-01-02T13:00:00.000Z'
+              schema:
+                $ref: '#/components/schemas/ConversationsPageResponse'
+          description: List of conversations matching the filter parameters
+        '400':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+      security:
+      - Bearer:
+        - connect:conversation:read
+      summary: listConversations - List all order conversations
+      tags:
+      - Conversations
+  /conversations/{conversationId}/messages:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to create a new message to the customer in a conversation.
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: createMessage
+      parameters:
+      - description: Unique identifier of the conversation
+        explode: false
+        in: path
+        name: conversationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              files:
+                contentType: application/octet-stream
+                style: form
+              message_input:
+                contentType: application/json
+                style: form
+            examples:
+              multipart/form-data-auto:
+                summary: Complete example with value types (multipart/form-data)
+                value:
+                  message_input:
+                    body: Hello! How can I assist you today?
+                  files:
+                  - string
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  description: Optional file attachments
+                  items:
+                    type: string
+                    format: binary
+                  maxItems: 5
+                message_input:
+                  $ref: '#/components/schemas/MessageInput'
+              required:
+              - message_input
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    action_id: abcd
+              schema:
+                $ref: '#/components/schemas/ConversationActionIdResponse'
+          description: Message creation initiated
+        '400':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        '404':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Conversation not found
+      security:
+      - Bearer:
+        - connect:conversation:reply
+      summary: createMessage - Create a message in a conversation
+      tags:
+      - Conversations
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -i -X POST \\\n  https://miraklconnect.com/api/conversations/{conversationId}/messages \\\n  -H 'Content-Type: multipart/form-data' \\\n  -F 'message_input=\"{\\\"body\\\":\\\"Hello! How can I assist you today?\\\"}\";type=application/json' \\\n  -F 'files=@path/to/file'\n"
+  /conversations/{conversationId}/attachments:
+    get:
+      description: "<div class=\"extension-title\">Description</div>\n\nDownloads a ZIP archive of the requested attachments from a conversation.\nZIP archive contains all matching attachments with the following structure :\n\n```\n├── <message_id_1>/\n│   ├── <attachment_id_1>/\n│   │   └── <filename1>\n│   └── <attachment_id_2>/\n│       └── <filename2>\n└── <message_id_2>/\n    └── <attachment_id_3>/\n        └── <filename3>\n```\n\nThe zip file will be named with the following pattern : <conversation_id>_attachments_<timestamp>.zip\n\nUnknown or deleted attachments are silently skipped.\n\n\n<div class=\"api-description-extension\">\n</div>"
+      operationId: downloadConversationAttachments
+      parameters:
+      - description: The ID of the conversation from listConversations API.
+        explode: false
+        in: path
+        name: conversationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A list of attachment ID to retrieve. If not specified, all attachments of the conversation are returned.
+        explode: true
+        in: query
+        name: attachment_ids
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 100
+        style: form
+      responses:
+        '200':
+          content:
+            application/zip:
+              examples:
+                application/zip-auto:
+                  summary: Complete example with value types (application/zip)
+                  value: string
+              schema:
+                $ref: '#/components/schemas/ZipArchive'
+          description: ZIP archive of the requested attachments
+        '404':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Conversation not found or anonymized, or no attachments found for the given parameters
+      security:
+      - Bearer:
+        - connect:conversation:read
+      summary: downloadConversationAttachments - Download attachments of a conversation
+      tags:
+      - Conversations
+  /conversations/actions/{actionId}:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to check the status of your asynchronous conversation action.
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: getConversationActionStatus
+      parameters:
+      - description: Unique identifier of the action
+        explode: false
+        in: path
+        name: actionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    id: abcd
+                    created_at: '2023-03-28T09:34:42Z'
+                    updated_at: '2023-03-28T09:34:42Z'
+                    conversation_id: string
+                    status: PENDING
+                    errors:
+                    - code: DATA_NOT_FOUND
+                      message: Conversation not found for the given ID.
+              schema:
+                $ref: '#/components/schemas/ConversationActionStatusResponse'
+          description: Action status retrieved successfully
+        '404':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Action not found
+      security:
+      - Bearer:
+        - connect:conversation:action:read
+      summary: getConversationActionStatus - Get action status
+      tags:
+      - Conversations
+  /conversations/{conversationId}:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Returns messages of a conversation, ordered by channel creation date descending.
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: getConversationMessages
+      parameters:
+      - description: Unique identifier of the conversation
+        explode: false
+        in: path
+        name: conversationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Return only messages created in Connect after this date (exclusive filter)
+        explode: true
+        in: query
+        name: message_after
+        required: false
+        schema:
+          type: string
+          format: date-time
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    messages:
+                    - id: 550e8400-e29b-41d4-a716-446655440000
+                      channel_message_id: msg-2odjwo
+                      body: Hello, I need help with my billing statement.
+                      sender:
+                        type: CHANNEL
+                        id: '00032'
+                        name: Marketplace 1
+                      visible_to_customer: true
+                      created_at: '2024-06-01T10:05:00Z'
+                      channel_created_at: '2024-06-01T10:05:00Z'
+                      attachments:
+                      - id: 550e8400-e29b-41d4-a716-446655440001
+                        filename: billing_statement.pdf
+                        size_in_bytes: 987
+              schema:
+                $ref: '#/components/schemas/ConversationMessagesResponse'
+          description: Messages for the conversation
+        '404':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Conversation not found or anonymized
+      security:
+      - Bearer:
+        - connect:conversation:read
+      summary: getConversationMessages - Get messages for a conversation
+      tags:
+      - Conversations
+components:
+  schemas:
+    ZipArchive:
+      type: string
+      format: binary
+    CreateConversationInputTopic:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Type of the topic
+
+
+            Enum: `"FREE_TEXT"`
+
+            '
+        value:
+          type: string
+          description: Value of the topic
+          example: Customer has a general question about services.
+          maxLength: 500
+      required:
+      - type
+      - value
+    ResourcesPage:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+          minLength: 1
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+          minLength: 1
+    ConversationParticipant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the participant. Null for type `CUSTOMER`.
+          example: '123456'
+        name:
+          type: string
+          description: Display name of the participant
+          example: Marketplace 1
+        type:
+          type: string
+          description: 'Type of the participant
+
+
+            Enum: `"CHANNEL"`, `"CUSTOMER"`
+
+            '
+          example: CHANNEL
+      required:
+      - name
+      - type
+    MessageInput:
+      type: object
+      properties:
+        body:
+          type: string
+          description: Body of the message
+          example: Hello! How can I assist you today?
+          maxLength: 2000
+          minLength: 1
+      required:
+      - body
+    ConversationOrigin:
+      type: object
+      properties:
+        channel_id:
+          type: string
+          description: Unique identifier of the sales channel
+        channel_name:
+          type: string
+          description: Name of the sales channel
+        channel_store_id:
+          type: string
+          description: Store identifier on the sales channel. This identifier is not guaranteed to be unique as multiple channels can use the same identifier.
+        channel_store_name:
+          type: string
+          description: Store public name on the sales channel
+      required:
+      - channel_id
+      - channel_name
+      - channel_store_id
+      - channel_store_name
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        message:
+          type: string
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - An error occurred while processing your request
+      required:
+      - code
+      - message
+    MessageResponse:
+      type: object
+      properties:
+        attachments:
+          type: array
+          description: List of file attachments on this message
+          items:
+            $ref: '#/components/schemas/MessageAttachment'
+        body:
+          type: string
+          description: Content of the message
+          example: Hello, I need help with my billing statement.
+        channel_created_at:
+          type: string
+          format: date-time
+          description: Date and time when the message was created on the channel
+          example: '2024-06-01T10:05:00Z'
+        channel_message_id:
+          type: string
+          description: Unique identifier of the message on the channel
+          example: msg-2odjwo
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time when the message was stored in Connect
+          example: '2024-06-01T10:05:00Z'
+        id:
+          type: string
+          description: Unique identifier of the message in Connect
+          example: 550e8400-e29b-41d4-a716-446655440000
+        sender:
+          $ref: '#/components/schemas/MessageSender'
+          description: Sender of the message
+        visible_to_customer:
+          type: boolean
+          description: Whether the message is visible to the customer or not. When false the message is only visible to you and the channel. Note that when using createMessage API, the message is always sent to the customer.
+      required:
+      - body
+      - channel_created_at
+      - channel_message_id
+      - created_at
+      - id
+      - sender
+    ConversationActionIdResponse:
+      type: object
+      properties:
+        action_id:
+          type: string
+          description: Unique identifier of the action. Use `getConversationActionStatus` to retrieve the result of your request.
+          example: abcd
+      required:
+      - action_id
+    ConversationResponse:
+      type: object
+      properties:
+        anonymized_at:
+          type: string
+          format: date-time
+          description: Date and time when the conversation was anonymized. Absent if the conversation has not been anonymized.
+          example: '2024-01-02T13:00:00.000Z'
+        channel_conversation_id:
+          type: string
+          description: Unique identifier of the conversation on the channel
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time when the conversation was created
+          example: '2024-01-02T12:13:14.567Z'
+        entity:
+          type: object
+          description: Entity linked to the conversation
+          properties:
+            channel_entity_id:
+              type: string
+              description: Unique identifier of the entity on the channel
+              example: MIR-F745HNL8-A
+            id:
+              type: string
+              description: Connect identifier of the entity. Null if the entity is not yet known to Connect.
+              example: 0054_MIR-F745HNL8-A
+            type:
+              type: string
+              description: 'Type of the entity
+
+
+                Enum: `"ORDER"`
+
+                '
+          required:
+          - channel_entity_id
+          - type
+        id:
+          type: string
+          description: Unique identifier of the conversation
+        origin:
+          $ref: '#/components/schemas/ConversationOrigin'
+          description: Sales channel information
+        participants:
+          type: array
+          description: List of participants in the conversation
+          items:
+            $ref: '#/components/schemas/ConversationParticipant'
+        topic:
+          type: object
+          description: Topic of the conversation
+          properties:
+            type:
+              type: string
+              description: 'Type of the topic
+
+
+                Enum: `"FREE_TEXT"`
+
+                '
+            value:
+              type: string
+              description: Value of the topic
+              example: Hello, I have a question about my order
+              maxLength: 500
+          required:
+          - type
+          - value
+        updated_at:
+          type: string
+          format: date-time
+          description: Date and time when the conversation was last updated. This is updated when a new message is received in the conversation.
+          example: '2024-01-02T12:42:00.667Z'
+      required:
+      - channel_conversation_id
+      - created_at
+      - entity
+      - id
+      - origin
+      - participants
+      - topic
+      - updated_at
+    ConversationMessagesResponse:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: List of messages in the conversation
+          items:
+            $ref: '#/components/schemas/MessageResponse'
+      required:
+      - messages
+    ConversationActionErrorItem:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'One of the following :
+
+            - INVALID_INPUT
+
+            - DATA_NOT_FOUND
+
+            - UNEXPECTED
+
+            - UNAVAILABLE
+
+            - TOO_MANY_REQUEST
+
+            '
+          example: DATA_NOT_FOUND
+        message:
+          type: string
+          description: Human-readable error message
+          example: Conversation not found for the given ID.
+      required:
+      - code
+      - message
+    MessageSender:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the sender. Null for type `CUSTOMER`
+          example: '00032'
+        name:
+          type: string
+          description: Display name of the sender
+          example: Marketplace 1
+        type:
+          type: string
+          description: 'Type of the sender
+
+
+            Enum: `"CUSTOMER"`, `"STORE"`, `"CHANNEL"`
+
+            '
+          example: CHANNEL
+      required:
+      - name
+      - type
+    ConversationActionStatus:
+      type: string
+      description: 'Status of an asynchronous conversation action
+
+
+        Enum: `"PENDING"`, `"SUCCESS"`, `"ERROR"`
+
+        '
+    CreateConversationInput:
+      type: object
+      properties:
+        entity:
+          type: object
+          description: Entity to link to the conversation
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the entity (e.g. order ID)
+              example: 0123_Order1-A
+            type:
+              type: string
+              description: 'Type of the entity linked to the conversation
+
+
+                Enum: `"ORDER"`
+
+                '
+          required:
+          - id
+          - type
+        first_message:
+          type: object
+          description: First message of the conversation
+          properties:
+            body:
+              type: string
+              description: Body of the first message
+              example: Hello! How can I assist you today?
+              maxLength: 2000
+              minLength: 1
+          required:
+          - body
+        topic:
+          $ref: '#/components/schemas/CreateConversationInputTopic'
+          description: Topic of the conversation
+      required:
+      - entity
+      - first_message
+      - topic
+    ConversationActionStatusResponse:
+      type: object
+      properties:
+        conversation_id:
+          type: string
+          description: Identifier of the related conversation.
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time when the action was created
+        errors:
+          type: array
+          description: List of errors if the action failed
+          items:
+            $ref: '#/components/schemas/ConversationActionErrorItem'
+        id:
+          type: string
+          description: Unique identifier of the action
+          example: abcd
+        status:
+          $ref: '#/components/schemas/ConversationActionStatus'
+          description: Current status of the action
+        updated_at:
+          type: string
+          format: date-time
+          description: Date and time when the action was last updated
+      required:
+      - created_at
+      - id
+      - status
+      - updated_at
+    ConversationsPageResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResourcesPage'
+      - type: object
+        properties:
+          data:
+            type: array
+            description: Page of conversations corresponding to the filter parameters
+            items:
+              $ref: '#/components/schemas/ConversationResponse'
+        required:
+        - data
+    ErrorItem:
+      type: object
+      properties:
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
+        message:
+          type: string
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - 'An error occurred while processing your request: id is null'
+      required:
+      - message
+    MessageAttachment:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: Original filename of the attachment
+          example: billing_statement.pdf
+        id:
+          type: string
+          description: Unique identifier of the attachment in Connect
+          example: 550e8400-e29b-41d4-a716-446655440001
+        size_in_bytes:
+          type: integer
+          format: int64
+          description: Size of the attachment in bytes
+          example: 987
+      required:
+      - filename
+      - id
+      - size_in_bytes
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

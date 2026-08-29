@@ -1,0 +1,103 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/connector/operator/shopify/app-operator-shopify/rest/public/openapi-description.md" /%}'
+  title: Shopify Operator Connector Connection API
+  version: ''
+servers:
+- description: Shopify production endpoint.
+  url: https://operator-shpy.mirakl.net
+tags:
+- name: Connection
+paths:
+  /api/environment:
+    get:
+      description: '<div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to read your environment configuration</div>
+
+        </div>'
+      operationId: GetConnection
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    createdAt: '2024-08-22T16:38:23.691537Z'
+                    enabled: true
+                    id: 720817da-16b4-41cb-8321-b490063ce844
+                    miraklApiEndpoint: https://tenant-test.mirakl.net/api
+                    miraklTenant: shopify-op-test
+                    shopifyShopDomain: mirakl-connector-test.myshopify.com
+                    updatedAt: '2024-09-20T12:00:00.691539Z'
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    createdAt: '2023-03-28T09:34:42Z'
+                    enabled: true
+                    id: string
+                    miraklApiEndpoint: string
+                    miraklTenant: string
+                    shopifyShopDomain: string
+                    updatedAt: '2023-03-28T09:34:42Z'
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetConnection_Response_200'
+          description: OK
+      summary: GetConnection - Get the information of the connection between a Shopify store an a Mirakl instance
+      tags:
+      - Connection
+  /api/environment-dev:
+    delete:
+      description: '<div class="api-description-extension">
+
+        </div>'
+      operationId: HardDeleteConnectionDev
+      parameters: []
+      responses:
+        '200':
+          description: OK
+      summary: HardDeleteConnectionDev - Hard delete environment for dev/test only
+      tags:
+      - Connection
+components:
+  schemas:
+    GetConnection_Response_200:
+      type: object
+      description: Environment response
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: The creation date of the environment
+        enabled:
+          type: boolean
+          description: Enabled status of the environment
+        id:
+          type: string
+          description: Unique identifier for the environment
+        miraklApiEndpoint:
+          type: string
+          description: Mirakl API endpoint
+        miraklTenant:
+          type: string
+          description: The Mirakl tenant identifier
+        shopifyShopDomain:
+          type: string
+          description: The domain of the Shopify shop
+        updatedAt:
+          type: string
+          format: date-time
+          description: The last update date of the environment
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

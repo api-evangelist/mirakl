@@ -1,11 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
-  title: Mirakl Connect Channel Platform APIs Carriers Picklists API
-  version: "1.0"
+  title: Mirakl Picklists API
+  version: ''
+  description: 'Operations tagged Picklists across 3 of this provider''s published API definitions: mirakl-mmp-front-openapi.yaml, mirakl-mmp-operator-openapi.json, mirakl-mmp-seller-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
-- description: Connect Channel Platform API
-  url: https://miraklconnect.com/api/channel-platform
+- description: URL to be replaced by your Mirakl instance URL
+  url: https://your-instance.mirakl.net
 tags:
 - name: Picklists
 paths:
@@ -166,21 +166,32 @@ paths:
                 $ref: '#/components/schemas/PL11_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: PL11 - List picklists
       tags:
       - Picklists
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
 components:
   schemas:
-    PL11_Response_200_Data_OrderLines:
+    PL11_Response_200:
       type: object
       properties:
-        id:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/PL11_Response_200_Data'
+        next_page_token:
           type: string
-          description: Picklist order line id
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
       required:
-      - id
+      - data
     PL11_Response_200_Data:
       type: object
       properties:
@@ -232,6 +243,14 @@ components:
       - picklist_lines
       - pickup_date
       - state
+    PL11_Response_200_Data_OrderLines:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Picklist order line id
+      required:
+      - id
     PL11_Response_200_Data_PicklistLines:
       type: object
       properties:
@@ -246,25 +265,43 @@ components:
       required:
       - offer_id
       - quantity
-    PL11_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/PL11_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
   securitySchemes:
-    Bearer:
+    Front-Bearer-Token:
       bearerFormat: JWT
       scheme: bearer
       type: http
+      x-authorization: '{{FRONT_BEARER_TOKEN}}'
+    OAuth-2:
+      description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.mirakl.net/authorize
+          refreshUrl: https://auth.mirakl.net/oauth/token
+          scopes: {}
+          tokenUrl: https://auth.mirakl.net/oauth/token
+      type: oauth2
+    Operator-Bearer-Token:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
+    operator_bearer_token:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
+    Shop-API-Key:
+      in: header
+      name: Authorization
+      type: apiKey
+      x-authorization: '{{SHOP_KEY}}'
+    shop_api_key:
+      in: header
+      name: Authorization
+      type: apiKey
+      x-authorization: '{{SHOP_KEY}}'
+x-refined-from:
+- mirakl-mmp-front-openapi.yaml
+- mirakl-mmp-operator-openapi.json
+- mirakl-mmp-seller-openapi.json
 x-group-parameters: true

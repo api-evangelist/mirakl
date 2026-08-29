@@ -1,0 +1,295 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/connector/operator/shopify/app-operator-shopify/rest/public/openapi-description.md" /%}'
+  title: Shopify Operator Connector Mapping API
+  version: ''
+servers:
+- description: Shopify production endpoint.
+  url: https://operator-shpy.mirakl.net
+tags:
+- name: Mapping
+paths:
+  /api/mapping/returns/{orderId}:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Returns all Mirakl marketplace returns tracked for the given Shopify order, ordered by creation date descending.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to display Mirakl returns on the Shopify order page</div>
+
+        </div>'
+      operationId: ListOrderReturnMappings
+      parameters:
+      - description: Shopify Order identifier (= mirakl_order_commercial_id)
+        explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                  - createdAt: '2023-03-28T09:34:42Z'
+                    id: string
+                    miraklOrderCommercialId: string
+                    miraklOrderId: string
+                    miraklOrderUrl: string
+                    miraklReturnId: string
+                    miraklReturnReasonCode: string
+                    miraklState: CANCELED
+                    returnLines:
+                    - orderLineId: string
+                      quantity: 0
+                    shopifyReturnId: string
+                    shopifyState: CANCELED
+                    updatedAt: '2023-03-28T09:34:42Z'
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListOrderReturnMappings_Response_200'
+          description: OK
+      summary: ListOrderReturnMappings - List Mirakl returns for a Shopify order
+      tags:
+      - Mapping
+  /api/mapping/transactions/{orderId}:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Returns all Mirakl transactions (debit, refund, refusal, cancellation, items-not-shippable) tracked for the given Shopify order, ordered by creation date descending.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to display Mirakl transactions on the Shopify order page</div>
+
+        </div>'
+      operationId: ListOrderTransactionMappings
+      parameters:
+      - description: Shopify Order identifier (= mirakl_commercial_id)
+        explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                  - amount: 0
+                    createdAt: '2023-03-28T09:34:42Z'
+                    id: string
+                    miraklCommercialId: string
+                    miraklEntityId: string
+                    miraklOrderId: string
+                    miraklOrderUrl: string
+                    miraklSellerId: string
+                    miraklSellerUrl: string
+                    miraklStatus: PENDING
+                    paymentId: string
+                    shopifyGateway: string
+                    shopifyParentTransactionId: string
+                    shopifyStatus: PENDING
+                    shopifyTransactionId: string
+                    type: ITEMS_NOT_SHIPPABLE
+                    updatedAt: '2023-03-28T09:34:42Z'
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListOrderTransactionMappings_Response_200'
+          description: OK
+      summary: ListOrderTransactionMappings - List Mirakl transactions for a Shopify order
+      tags:
+      - Mapping
+components:
+  schemas:
+    ListOrderTransactionMappings_Response_200:
+      type: object
+      description: Mirakl transaction (debit/refund/refusal/cancellation/items-not-shippable) associated with a Shopify order
+      properties:
+        amount:
+          type: number
+          format: with decimals
+          description: Transaction amount in the order currency
+        createdAt:
+          type: string
+          format: date-time
+          description: Transaction creation date in UTC
+        id:
+          type: string
+          description: Internal identifier of the transaction mapping (stable React key)
+        miraklCommercialId:
+          type: string
+          description: Mirakl commercial identifier (= Shopify Order ID), used as fallback when miraklOrderId cannot be resolved
+        miraklEntityId:
+          type: string
+          description: Raw Mirakl entity identifier (Mirakl Order ID for DEBIT, Refund ID for REFUND, cancellation/refusal/event ID for the other types)
+        miraklOrderId:
+          type: string
+          description: 'Resolved Mirakl logistic Order ID when identifiable: read from the persisted transaction when available, otherwise resolved from legacy data (DEBIT, or REFUND with unambiguous parent), null otherwise'
+        miraklOrderUrl:
+          type: string
+          description: Direct URL to the Mirakl order when miraklOrderId is known, otherwise URL to a Mirakl search page filtered by miraklCommercialId
+        miraklSellerId:
+          type: string
+          description: Mirakl seller (= shop) identifier
+        miraklSellerUrl:
+          type: string
+          description: URL to the Mirakl shop (= seller) page, null when no seller is associated
+        miraklStatus:
+          type: string
+          description: 'Mirakl-side status of the transaction
+
+
+            Enum: `"PENDING"`, `"OK"`, `"REFUSED"`, `"ERROR"`
+
+            '
+        paymentId:
+          type: string
+          description: Shopify payment identifier when known
+        shopifyGateway:
+          type: string
+          description: Shopify payment gateway (PSP) name (Stripe, Mollie, Bogus, etc.)
+        shopifyParentTransactionId:
+          type: string
+          description: Identifier of the Shopify OrderTransaction this one is linked to (raw id, gid:// prefix stripped)
+        shopifyStatus:
+          type: string
+          description: 'Shopify-side status of the transaction
+
+
+            Enum: `"PENDING"`, `"MANUAL_CAPTURE_REQUIRED"`, `"SENDING_SHOPIFY"`, `"WAITING_IN_SHOPIFY"`, `"SUCCESS"`, `"ERROR"`
+
+            '
+        shopifyTransactionId:
+          type: string
+          description: Shopify OrderTransaction identifier (raw id, gid:// prefix stripped)
+        type:
+          type: string
+          description: 'Mirakl transaction type
+
+
+            Enum: `"ITEMS_NOT_SHIPPABLE"`, `"SELLER_REFUSAL"`, `"SELLER_CANCELATION"`, `"DEBIT"`, `"REFUND"`
+
+            '
+        updatedAt:
+          type: string
+          format: date-time
+          description: Transaction last update date in UTC
+      required:
+      - amount
+      - createdAt
+      - id
+      - miraklCommercialId
+      - miraklEntityId
+      - miraklOrderUrl
+      - miraklStatus
+      - shopifyStatus
+      - type
+      - updatedAt
+    ListOrderReturnMappings_Response_200_ReturnLines:
+      type: object
+      description: Order line targeted by a Mirakl return
+      properties:
+        orderLineId:
+          type: string
+          description: Raw Shopify LineItem identifier targeted by the return
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity of the order line included in the return
+      required:
+      - orderLineId
+    ListOrderReturnMappings_Response_200:
+      type: object
+      description: Mirakl marketplace return associated with a Shopify order
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: Return creation date in UTC
+        id:
+          type: string
+          description: Internal identifier of the return mapping (stable React key)
+        miraklOrderCommercialId:
+          type: string
+          description: Mirakl commercial identifier (= Shopify Order ID)
+        miraklOrderId:
+          type: string
+          description: Mirakl Order ID the return is attached to
+        miraklOrderUrl:
+          type: string
+          description: Direct URL to the Mirakl order the return is attached to
+        miraklReturnId:
+          type: string
+          description: Mirakl return identifier
+        miraklReturnReasonCode:
+          type: string
+          description: Raw Mirakl return reason code (label resolution is done client-side)
+        miraklState:
+          type: string
+          description: 'Mirakl-side state of the return, null when the stored value is not a known Mirakl return state
+
+
+            Enum: `"CANCELED"`, `"CLOSED"`, `"IN_PROGRESS"`, `"NO_RECEPTION"`, `"RECEIVED"`, `"REFUSED"`, `"WAITING_ACCEPTANCE"`
+
+            '
+        returnLines:
+          type: array
+          description: Order lines targeted by the return
+          items:
+            $ref: '#/components/schemas/ListOrderReturnMappings_Response_200_ReturnLines'
+        shopifyReturnId:
+          type: string
+          description: Shopify Return identifier (raw id, gid:// prefix stripped), null when not yet synced to Shopify
+        shopifyState:
+          type: string
+          description: 'Shopify-side state of the return, null when not yet synced or when the stored value is not a known Shopify return state
+
+
+            Enum: `"CANCELED"`, `"CLOSED"`, `"DECLINED"`, `"OPEN"`, `"REQUESTED"`
+
+            '
+        updatedAt:
+          type: string
+          format: date-time
+          description: Return last update date in UTC
+      required:
+      - createdAt
+      - id
+      - miraklOrderCommercialId
+      - miraklOrderId
+      - miraklOrderUrl
+      - miraklReturnId
+      - miraklReturnReasonCode
+      - returnLines
+      - updatedAt
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

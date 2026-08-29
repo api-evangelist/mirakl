@@ -1,0 +1,1625 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/connector/operator/shopify/app-operator-shopify/rest/public/openapi-description.md" /%}'
+  title: Shopify Operator Connector Public API
+  version: ''
+servers:
+- description: Shopify production endpoint.
+  url: https://operator-shpy.mirakl.net
+tags:
+- name: Public
+paths:
+  /api/public/checkout-data:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Using to display marketplace information during the checkout process
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Each display of the checkout page</div>
+
+        </div>'
+      operationId: GetCheckoutData
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  cartLines:
+                  - attributes:
+                    - key: string
+                      value: string
+                    cost:
+                      totalAmount:
+                        amount: 0
+                        currencyCode: string
+                    discountAllocations:
+                    - code: string
+                      discountedAmount:
+                        amount: 0
+                        currencyCode: string
+                      title: string
+                      type: string
+                    id: string
+                    lineComponents:
+                    - attributes:
+                      - key: string
+                        value: string
+                      cost:
+                        totalAmount:
+                          amount: 0
+                          currencyCode: string
+                      id: string
+                      merchandise:
+                        id: string
+                        image:
+                          altText: string
+                          url: string
+                        product:
+                          id: string
+                          productType: string
+                          vendor: string
+                        requiresShipping: true
+                        selectedOptions:
+                        - name: string
+                          value: string
+                        sellingPlan:
+                          id: string
+                        sku: string
+                        subtitle: string
+                        title: string
+                        type: string
+                      quantity: 0
+                      type: string
+                    merchandise:
+                      id: string
+                      image:
+                        altText: string
+                        url: string
+                      product:
+                        id: string
+                        productType: string
+                        vendor: string
+                      requiresShipping: true
+                      selectedOptions:
+                      - name: string
+                        value: string
+                      sellingPlan:
+                        id: string
+                      sku: string
+                      subtitle: string
+                      title: string
+                      type: string
+                    quantity: 0
+                  locale: string
+                  promotionCodes:
+                  - string
+                  shippingAddress:
+                    address1: string
+                    address2: string
+                    city: string
+                    company: string
+                    countryCode: string
+                    firstName: string
+                    lastName: string
+                    name: string
+                    oneTimeUse: true
+                    phone: string
+                    provinceCode: string
+                    zip: string
+            schema:
+              $ref: '#/components/schemas/GetCheckoutData_Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    errors:
+                    - code: string
+                      offerId: string
+                    sellers:
+                    - choices:
+                      - code: string
+                        currencyIsoCode: string
+                        deliveryEstimate:
+                          earliestDays: 0
+                          earliestDeliveryDate: '2023-03-28T09:34:42Z'
+                          latestDays: 0
+                          latestDeliveryDate: '2023-03-28T09:34:42Z'
+                        label: string
+                        price: 0
+                      offers:
+                      - availableQuantity: 0
+                        currencyIsoCode: string
+                        id: string
+                        offerPrice: 0
+                        originalQuantity: 0
+                        promotions:
+                        - apportioned: true
+                          campaign:
+                            identifier: string
+                          configuration:
+                            amountOff: 0
+                            freeItemsQuantity: 0
+                            internalDescription: string
+                            percentageOff: 0
+                            reducedUnitPrice: 0
+                            type: string
+                          deducedAmount: 0
+                          id: string
+                          offeredQuantity: 0
+                          promoCode: string
+                          publicDescription: string
+                        shippingPriceAdditionalUnit: 0
+                        shippingPriceUnit: 0
+                      selectedMethod: string
+                      sellerId: string
+                      sellerName: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetCheckoutData_Response_200'
+          description: OK
+      summary: GetCheckoutData - Get checkout data
+      tags:
+      - Public
+  /api/public/shipping-fees:
+    post:
+      deprecated: true
+      description: '<div class="extension-title">Description</div>
+
+
+        Using to display shipping methods per seller during the checkout process
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Each display of the shipping method selection in checkout</div>
+
+        </div>'
+      operationId: GetShippingFees
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  cartLines:
+                  - attributes:
+                    - key: Shop name
+                      value: '* Super Shop'
+                    - key: _mkp_offer_id
+                      value: '3090'
+                    - key: _mkp_shipping_method_code
+                      value: STD
+                    cost:
+                      totalAmount:
+                        amount: 35
+                        currencyCode: USD
+                    discountAllocations: []
+                    id: gid://shopify/CartLine/f8483e37e89e6432c1ce004267e8683f
+                    lineComponents: []
+                    merchandise:
+                      id: gid://shopify/ProductVariant/49202975801683
+                      image:
+                        altText: ''
+                        url: https://cdn.shopify.com/s/files/aa8ab4876d3d_256x256.jpg?v=1723551528
+                      product:
+                        id: gid://shopify/Product/9393674715475
+                        productType: toys
+                        vendor: Lego
+                      requiresShipping: true
+                      selectedOptions:
+                      - name: Title
+                        value: Default Title
+                      sku: '4654321654'
+                      title: LEGO Hero Factory - Furno Jet Machine
+                      type: variant
+                    quantity: 3
+                  - attributes:
+                    - key: Shop name
+                      value: '* Super Shop'
+                    - key: _mkp_offer_id
+                      value: '3092'
+                    - key: _mkp_shipping_method_code
+                      value: STD
+                    cost:
+                      totalAmount:
+                        amount: 60
+                        currencyCode: USD
+                    discountAllocations: []
+                    id: gid://shopify/CartLine/f8483e37e89e6432c1ce004267e86840
+                    lineComponents: []
+                    merchandise:
+                      id: gid://shopify/ProductVariant/49202975801684
+                      image:
+                        altText: ''
+                        url: https://cdn.shopify.com/s/files/aa8ab4854d3d_256x256.jpg?v=1723551528
+                      product:
+                        id: gid://shopify/Product/9393674715475
+                        productType: accessories
+                        vendor: Belkin
+                      requiresShipping: true
+                      selectedOptions:
+                      - name: Title
+                        value: Default Title
+                      sku: '9765435467'
+                      title: Belkin Auto Charger for iPhone and iPod
+                      type: variant
+                    quantity: 5
+                  - attributes:
+                    - key: Shop name
+                      value: Wag's
+                    - key: _mkp_offer_id
+                      value: '3088'
+                    - key: _mkp_shipping_method_code
+                      value: NEX
+                    cost:
+                      totalAmount:
+                        amount: 264
+                        currencyCode: USD
+                    discountAllocations: []
+                    id: gid://shopify/CartLine/f8483e37e89e6432c1ce004267e86841
+                    lineComponents: []
+                    merchandise:
+                      id: gid://shopify/ProductVariant/49202975801685
+                      image:
+                        altText: ''
+                        url: https://cdn.shopify.com/s/files/a87ab4876d3d_256x256.jpg?v=1723551528
+                      product:
+                        id: gid://shopify/Product/9393674715475
+                        productType: shoes
+                        vendor: Pull
+                      requiresShipping: true
+                      selectedOptions:
+                      - name: Title
+                        value: Default Title
+                      sku: '9734842562'
+                      title: Pull-On Sneaker
+                      type: variant
+                    quantity: 1
+                  shippingAddress:
+                    address1: 47 Rue de Lubeck
+                    city: Paris
+                    countryCode: FR
+                    firstName: Alexandre
+                    lastName: Marie
+                    name: Alexandre
+                    oneTimeUse: false
+                    phone: ''
+                    zip: '75116'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  cart_lines:
+                  - attributes:
+                    - key: string
+                      value: string
+                    cost:
+                      total_amount:
+                        amount: 0
+                        currency_code: string
+                    discount_allocations:
+                    - code: string
+                      discounted_amount:
+                        amount: 0
+                        currency_code: string
+                      title: string
+                      type: string
+                    id: string
+                    line_components:
+                    - attributes:
+                      - key: string
+                        value: string
+                      cost:
+                        total_amount:
+                          amount: 0
+                          currency_code: string
+                      id: string
+                      merchandise:
+                        id: string
+                        image:
+                          alt_text: string
+                          url: string
+                        product:
+                          id: string
+                          product_type: string
+                          vendor: string
+                        requires_shipping: true
+                        selected_options:
+                        - name: string
+                          value: string
+                        selling_plan:
+                          id: string
+                        sku: string
+                        subtitle: string
+                        title: string
+                        type: string
+                      quantity: 0
+                      type: string
+                    merchandise:
+                      id: string
+                      image:
+                        alt_text: string
+                        url: string
+                      product:
+                        id: string
+                        product_type: string
+                        vendor: string
+                      requires_shipping: true
+                      selected_options:
+                      - name: string
+                        value: string
+                      selling_plan:
+                        id: string
+                      sku: string
+                      subtitle: string
+                      title: string
+                      type: string
+                    quantity: 0
+                  locale: string
+                  shipping_address:
+                    address1: string
+                    address2: string
+                    city: string
+                    company: string
+                    country_code: string
+                    first_name: string
+                    last_name: string
+                    name: string
+                    one_time_use: true
+                    phone: string
+                    province_code: string
+                    zip: string
+            schema:
+              $ref: '#/components/schemas/GetShippingFees_Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    errors: null
+                    fees:
+                    - choices:
+                      - code: STD
+                        currencyIsoCode: USD
+                        deliveryEstimate:
+                          earliestDays: 3
+                          earliestDeliveryDate: '2024-12-28T22:59:59.999Z'
+                          latestDays: 10
+                          latestDeliveryDate: '2025-01-04T22:59:59.999Z'
+                        label: Standard
+                        price: 29
+                      - code: EXP
+                        currencyIsoCode: USD
+                        deliveryEstimate:
+                          earliestDays: 2
+                          earliestDeliveryDate: '2024-12-27T22:59:59.999Z'
+                          latestDays: 3
+                          latestDeliveryDate: '2024-12-28T22:59:59.999Z'
+                        label: Express
+                        price: 60
+                      offerIds:
+                      - '3090'
+                      - '3092'
+                      selectedMethod: STD
+                      sellerId: '2000'
+                      sellerName: '* Super Shop'
+                    - choices:
+                      - code: STD
+                        currencyIsoCode: USD
+                        deliveryEstimate:
+                          earliestDays: 3
+                          earliestDeliveryDate: '2024-12-28T22:59:59.999Z'
+                          latestDays: 10
+                          latestDeliveryDate: '2025-01-04T22:59:59.999Z'
+                        label: Standard
+                        price: 8
+                      - code: EXP
+                        currencyIsoCode: USD
+                        deliveryEstimate:
+                          earliestDays: 2
+                          earliestDeliveryDate: '2024-12-27T22:59:59.999Z'
+                          latestDays: 3
+                          latestDeliveryDate: '2024-12-28T22:59:59.999Z'
+                        label: Express
+                        price: 18
+                      - code: NEX
+                        currencyIsoCode: USD
+                        deliveryEstimate:
+                          earliestDays: 1
+                          earliestDeliveryDate: '2024-12-26T22:59:59.999Z'
+                          latestDays: 1
+                          latestDeliveryDate: '2024-12-26T22:59:59.999Z'
+                        label: Next day delivery
+                        price: 39
+                      offerIds:
+                      - '3088'
+                      selectedMethod: NEX
+                      sellerId: '2001'
+                      sellerName: Wag's
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    errors:
+                    - code: string
+                      offer_id: string
+                    fees:
+                    - choices:
+                      - code: string
+                        currency_iso_code: string
+                        delivery_estimate:
+                          earliest_days: 0
+                          earliest_delivery_date: '2023-03-28T09:34:42Z'
+                          latest_days: 0
+                          latest_delivery_date: '2023-03-28T09:34:42Z'
+                        label: string
+                        price: 0
+                      offer_ids:
+                      - string
+                      selected_method: string
+                      seller_id: string
+                      seller_name: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetShippingFees_Response_200'
+          description: OK
+      summary: GetShippingFees - Get shipping fees
+      tags:
+      - Public
+      x-badges:
+      - color: noIntegrationBadge
+        name: ⚠️ No Integration Allowed ⚠️
+        position: after
+components:
+  schemas:
+    GetCheckoutData_Request_CartLines_Merchandise_SelectedOptions:
+      type: object
+      description: A product option applied to the variant
+      properties:
+        name:
+          type: string
+          description: The name of the merchandise option
+        value:
+          type: string
+          description: The value of the merchandise option
+      required:
+      - name
+      - value
+    GetCheckoutData_Request_CartLines_Merchandise_Product:
+      type: object
+      description: The product object
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+        productType:
+          type: string
+          description: A categorization that a product can be tagged with, commonly used for filtering and searching
+        vendor:
+          type: string
+          description: The product's vendor name
+      required:
+      - id
+      - productType
+      - vendor
+    GetShippingFees_Request_CartLines_Attributes:
+      type: object
+      description: The custom attribute
+      properties:
+        key:
+          type: string
+          description: The key for the attribute
+        value:
+          type: string
+          description: The value for the attribute
+      required:
+      - key
+      - value
+    GetCheckoutData_Request_CartLines_Cost_TotalAmount:
+      type: object
+      description: The monetary value with currency
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The price amount
+        currencyCode:
+          type: string
+          description: The ISO 4217 format for the currency
+      required:
+      - amount
+      - currencyCode
+    GetCheckoutData_Request_CartLines_Attributes:
+      type: object
+      description: The custom attribute
+      properties:
+        key:
+          type: string
+          description: The key for the attribute
+        value:
+          type: string
+          description: The value for the attribute
+      required:
+      - key
+      - value
+    GetCheckoutData_Request_CartLines:
+      type: object
+      description: The line containing information about the items the customer intends to purchase
+      properties:
+        attributes:
+          type: array
+          description: The line item additional custom attributes
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_Attributes'
+        cost:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_Cost'
+          description: The details about the cost components attributed to the cart line
+        discountAllocations:
+          type: array
+          description: Discounts applied to the cart line
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_DiscountAllocations'
+        id:
+          type: string
+          description: These line item IDs are not stable at the moment, they might change after any operations on the line items. You should always look up for an updated ID before any call to applyCartLinesChange because you'll need the ID to create a CartLineChange object
+        lineComponents:
+          type: array
+          description: Sub lines of the merchandise line. If no sub lines are present, this will be an empty array
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents'
+        merchandise:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_Merchandise'
+          description: The merchandise being purchased
+        quantity:
+          type: number
+          format: double
+          description: The quantity of the merchandise being purchased
+      required:
+      - attributes
+      - cost
+      - discountAllocations
+      - id
+      - lineComponents
+      - merchandise
+      - quantity
+    GetShippingFees_Response_200_Fees:
+      type: object
+      description: Shipping charges per seller
+      properties:
+        choices:
+          type: array
+          description: List of shipping methods
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Response_200_Fees_Choices'
+        offer_ids:
+          type: array
+          description: List of offer identifiers
+          items:
+            type: string
+        selected_method:
+          type: string
+          description: Selected shipping method
+        seller_id:
+          type: string
+          description: Shop identifier
+        seller_name:
+          type: string
+          description: Shop name
+    GetShippingFees_Response_200_Fees_Choices:
+      type: object
+      description: Shipping method
+      properties:
+        code:
+          type: string
+          description: Shipping method code
+        currency_iso_code:
+          type: string
+          description: Shipping method currency ISO code
+        delivery_estimate:
+          $ref: '#/components/schemas/GetShippingFees_Response_200_Fees_Choices_DeliveryEstimate'
+          description: Shipping method delivery estimate
+        label:
+          type: string
+          description: Shipping method label
+        price:
+          type: number
+          format: with decimals
+          description: Shipping method price
+    GetCheckoutData_Request_CartLines_DiscountAllocations:
+      type: object
+      description: The discounts applied to the cart line
+      properties:
+        code:
+          type: string
+          description: The code for the discount
+        discountedAmount:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_DiscountAllocations_DiscountedAmount'
+          description: The money amount that has been discounted from the order
+        title:
+          type: string
+          description: The title of the discount
+        type:
+          type: string
+          description: The type of the discount
+      required:
+      - discountedAmount
+      - type
+    GetCheckoutData_Request_CartLines_DiscountAllocations_DiscountedAmount:
+      type: object
+      description: The monetary value with currency
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The price amount
+        currencyCode:
+          type: string
+          description: The ISO 4217 format for the currency
+      required:
+      - amount
+      - currencyCode
+    GetCheckoutData_Request_CartLines_LineComponents_Merchandise:
+      type: object
+      description: The merchandise
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+        image:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents_Merchandise_Image'
+          description: Image associated with the product variant. This field falls back to the product image if no image is available
+        product:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents_Merchandise_Product'
+          description: The product object that the product variant belongs to
+        requiresShipping:
+          type: boolean
+          description: Whether or not the product requires shipping
+        selectedOptions:
+          type: array
+          description: List of product options applied to the variant
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents_Merchandise_SelectedOptions'
+        sellingPlan:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents_Merchandise_SellingPlan'
+          description: The selling plan associated with the merchandise
+        sku:
+          type: string
+          description: The product variant's sku
+        subtitle:
+          type: string
+          description: The product variant's subtitle
+        title:
+          type: string
+          description: The product variant's title
+        type:
+          type: string
+          description: Always "variant"
+      required:
+      - id
+      - product
+      - requiresShipping
+      - selectedOptions
+      - sku
+      - title
+      - type
+    GetCheckoutData_Request_CartLines_LineComponents_Merchandise_Image:
+      type: object
+      description: The image details
+      properties:
+        altText:
+          type: string
+          description: The alternative text for the image
+        url:
+          type: string
+          description: The image URL
+      required:
+      - url
+    GetCheckoutData_Response_200:
+      type: object
+      description: Checkout data per seller
+      properties:
+        errors:
+          type: array
+          description: Errors
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Response_200_Errors'
+        sellers:
+          type: array
+          description: Seller split
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Response_200_Sellers'
+    GetShippingFees_Request:
+      type: object
+      description: Request object to retrieve shipping fees
+      properties:
+        cart_lines:
+          type: array
+          description: A list of lines containing information about the items the customer intends to purchase
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Request_CartLines'
+        locale:
+          type: string
+          description: The locale of the customer. Must be an activated locale in Mirakl. (optional)
+        shipping_address:
+          $ref: '#/components/schemas/GetShippingFees_Request_ShippingAddress'
+          description: The proposed customer shipping address. An address value is only present if delivery is required
+      required:
+      - cart_lines
+    GetShippingFees_Request_CartLines_Merchandise_Product:
+      type: object
+      description: The product object
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+        product_type:
+          type: string
+          description: A categorization that a product can be tagged with, commonly used for filtering and searching
+        vendor:
+          type: string
+          description: The product's vendor name
+      required:
+      - id
+      - product_type
+      - vendor
+    GetShippingFees_Request_CartLines_LineComponents_Merchandise_Image:
+      type: object
+      description: The image details
+      properties:
+        alt_text:
+          type: string
+          description: The alternative text for the image
+        url:
+          type: string
+          description: The image URL
+      required:
+      - url
+    GetCheckoutData_Response_200_Sellers_Offers_Promotions_Configuration:
+      type: object
+      description: Configuration used to calculate the applied promotion
+      properties:
+        amountOff:
+          type: number
+          format: with decimals
+          description: The amount off of the promotion
+        freeItemsQuantity:
+          type: integer
+          format: int32
+          description: The free item target quantity of the promotion
+        internalDescription:
+          type: string
+          description: Promotion's internal description
+        percentageOff:
+          type: number
+          format: with decimals
+          description: The percentage off of the promotion
+        reducedUnitPrice:
+          type: number
+          format: with decimals
+          description: The new offer's unit price triggered by the promotion
+        type:
+          type: string
+          description: Promotion's type
+    GetCheckoutData_Request_CartLines_LineComponents:
+      type: object
+      description: The sub lines of the merchandise line
+      properties:
+        attributes:
+          type: array
+          description: Additional custom attributes for the bundle line component
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents_Attributes'
+        cost:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents_Cost'
+          description: The cost attributed to this bundle line component
+        id:
+          type: string
+          description: A unique identifier for the bundle line component. This ID is not stable. If an operation updates the line items in any way, all IDs could change
+        merchandise:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents_Merchandise'
+          description: The merchandise of this bundle line component
+        quantity:
+          type: number
+          format: double
+          description: The quantity of merchandise being purchased
+        type:
+          type: string
+          description: Always "bundle"
+      required:
+      - attributes
+      - cost
+      - id
+      - merchandise
+      - quantity
+      - type
+    GetCheckoutData_Request_CartLines_LineComponents_Merchandise_SellingPlan:
+      type: object
+      description: The selling plan
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+      required:
+      - id
+    GetShippingFees_Request_CartLines_LineComponents_Attributes:
+      type: object
+      description: The custom attribute
+      properties:
+        key:
+          type: string
+          description: The key for the attribute
+        value:
+          type: string
+          description: The value for the attribute
+      required:
+      - key
+      - value
+    GetCheckoutData_Request_CartLines_LineComponents_Cost_TotalAmount:
+      type: object
+      description: The monetary value with currency
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The price amount
+        currencyCode:
+          type: string
+          description: The ISO 4217 format for the currency
+      required:
+      - amount
+      - currencyCode
+    GetShippingFees_Request_CartLines_LineComponents_Merchandise:
+      type: object
+      description: The merchandise
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+        image:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents_Merchandise_Image'
+          description: Image associated with the product variant. This field falls back to the product image if no image is available
+        product:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents_Merchandise_Product'
+          description: The product object that the product variant belongs to
+        requires_shipping:
+          type: boolean
+          description: Whether or not the product requires shipping
+        selected_options:
+          type: array
+          description: List of product options applied to the variant
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents_Merchandise_SelectedOptions'
+        selling_plan:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents_Merchandise_SellingPlan'
+          description: The selling plan associated with the merchandise
+        sku:
+          type: string
+          description: The product variant's sku
+        subtitle:
+          type: string
+          description: The product variant's subtitle
+        title:
+          type: string
+          description: The product variant's title
+        type:
+          type: string
+          description: Always "variant"
+      required:
+      - id
+      - product
+      - requires_shipping
+      - selected_options
+      - sku
+      - title
+      - type
+    GetShippingFees_Response_200:
+      type: object
+      description: Shipping charges per seller
+      properties:
+        errors:
+          type: array
+          description: Errors
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Response_200_Errors'
+        fees:
+          type: array
+          description: Seller fees
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Response_200_Fees'
+    GetShippingFees_Request_ShippingAddress:
+      type: object
+      description: The shipping address
+      properties:
+        address1:
+          type: string
+          description: The first line of the buyer's address, including street name and number
+        address2:
+          type: string
+          description: The second line of the buyer's address, like apartment number, suite, etc
+        city:
+          type: string
+          description: The buyer's city
+        company:
+          type: string
+          description: The buyer's company name
+        country_code:
+          type: string
+          description: The ISO 3166 Alpha-2 format for the buyer's country. Refer to https://www.iso.org/iso-3166-country-codes.html
+        first_name:
+          type: string
+          description: The buyer's first name
+        last_name:
+          type: string
+          description: The buyer's last name
+        name:
+          type: string
+          description: The buyer's full name
+        one_time_use:
+          type: boolean
+          description: Specifies whether the address should be saved to the buyer's account
+        phone:
+          type: string
+          description: The buyer's phone number
+        province_code:
+          type: string
+          description: The buyer's province code, such as state, province, prefecture, or region
+        zip:
+          type: string
+          description: The buyer's postal or ZIP code
+    GetCheckoutData_Request_CartLines_Merchandise_Image:
+      type: object
+      description: The image details
+      properties:
+        altText:
+          type: string
+          description: The alternative text for the image
+        url:
+          type: string
+          description: The image URL
+      required:
+      - url
+    GetShippingFees_Request_CartLines:
+      type: object
+      description: The line containing information about the items the customer intends to purchase
+      properties:
+        attributes:
+          type: array
+          description: The line item additional custom attributes
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Request_CartLines_Attributes'
+        cost:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_Cost'
+          description: The details about the cost components attributed to the cart line
+        discount_allocations:
+          type: array
+          description: Discounts applied to the cart line
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Request_CartLines_DiscountAllocations'
+        id:
+          type: string
+          description: These line item IDs are not stable at the moment, they might change after any operations on the line items. You should always look up for an updated ID before any call to applyCartLinesChange because you'll need the ID to create a CartLineChange object
+        line_components:
+          type: array
+          description: Sub lines of the merchandise line. If no sub lines are present, this will be an empty array
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents'
+        merchandise:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_Merchandise'
+          description: The merchandise being purchased
+        quantity:
+          type: number
+          format: double
+          description: The quantity of the merchandise being purchased
+      required:
+      - attributes
+      - cost
+      - discount_allocations
+      - id
+      - line_components
+      - merchandise
+      - quantity
+    GetCheckoutData_Request_CartLines_Merchandise_SellingPlan:
+      type: object
+      description: The selling plan
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+      required:
+      - id
+    GetCheckoutData_Response_200_Sellers_Offers:
+      type: object
+      description: Offer details
+      properties:
+        availableQuantity:
+          type: integer
+          format: int32
+          description: Quantity of offers available for delivery
+        currencyIsoCode:
+          type: string
+          description: Currency ISO code of the offer price
+        id:
+          type: string
+          description: Identifier of the offer
+        offerPrice:
+          type: number
+          format: with decimals
+          description: Offer unit price in the seller currency
+        originalQuantity:
+          type: integer
+          format: int32
+          description: Quantity of offers originally requested
+        promotions:
+          type: array
+          description: Promotions applied to the order
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Response_200_Sellers_Offers_Promotions'
+        shippingPriceAdditionalUnit:
+          type: number
+          format: with decimals
+          description: Additional shipping price of the offer
+        shippingPriceUnit:
+          type: number
+          format: with decimals
+          description: Shipping price for the first unit of the offer
+    GetShippingFees_Request_CartLines_LineComponents_Cost_TotalAmount:
+      type: object
+      description: The monetary value with currency
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The price amount
+        currency_code:
+          type: string
+          description: The ISO 4217 format for the currency
+      required:
+      - amount
+      - currency_code
+    GetCheckoutData_Response_200_Sellers:
+      type: object
+      description: Shipping charges per seller
+      properties:
+        choices:
+          type: array
+          description: List of shipping methods available
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Response_200_Sellers_Choices'
+        offers:
+          type: array
+          description: List of offers
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Response_200_Sellers_Offers'
+        selectedMethod:
+          type: string
+          description: Selected shipping method
+        sellerId:
+          type: string
+          description: Seller identifier
+        sellerName:
+          type: string
+          description: Seller name
+    GetCheckoutData_Response_200_Errors:
+      type: object
+      description: Checkout error
+      properties:
+        code:
+          type: string
+          description: 'The error code. One of: SHIPPING_ZONE_NOT_ALLOWED, SHIPPING_TYPE_NOT_ALLOWED, OFFER_NOT_FOUND, INSUFFICIENT_QUANTITY'
+        offerId:
+          type: string
+          description: The offer identifier
+    GetShippingFees_Request_CartLines_Merchandise_SellingPlan:
+      type: object
+      description: The selling plan
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+      required:
+      - id
+    GetCheckoutData_Request_CartLines_LineComponents_Merchandise_Product:
+      type: object
+      description: The product object
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+        productType:
+          type: string
+          description: A categorization that a product can be tagged with, commonly used for filtering and searching
+        vendor:
+          type: string
+          description: The product's vendor name
+      required:
+      - id
+      - productType
+      - vendor
+    GetShippingFees_Request_CartLines_Merchandise_SelectedOptions:
+      type: object
+      description: A product option applied to the variant
+      properties:
+        name:
+          type: string
+          description: The name of the merchandise option
+        value:
+          type: string
+          description: The value of the merchandise option
+      required:
+      - name
+      - value
+    GetCheckoutData_Response_200_Sellers_Choices:
+      type: object
+      description: Shipping method
+      properties:
+        code:
+          type: string
+          description: Shipping method code
+        currencyIsoCode:
+          type: string
+          description: Shipping method currency ISO code
+        deliveryEstimate:
+          $ref: '#/components/schemas/GetCheckoutData_Response_200_Sellers_Choices_DeliveryEstimate'
+          description: Shipping method delivery estimate
+        label:
+          type: string
+          description: Shipping method label
+        price:
+          type: number
+          format: with decimals
+          description: Shipping method price
+    GetShippingFees_Request_CartLines_Merchandise_Image:
+      type: object
+      description: The image details
+      properties:
+        alt_text:
+          type: string
+          description: The alternative text for the image
+        url:
+          type: string
+          description: The image URL
+      required:
+      - url
+    GetShippingFees_Request_CartLines_Merchandise:
+      type: object
+      description: The merchandise
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+        image:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_Merchandise_Image'
+          description: Image associated with the product variant. This field falls back to the product image if no image is available
+        product:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_Merchandise_Product'
+          description: The product object that the product variant belongs to
+        requires_shipping:
+          type: boolean
+          description: Whether or not the product requires shipping
+        selected_options:
+          type: array
+          description: List of product options applied to the variant
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Request_CartLines_Merchandise_SelectedOptions'
+        selling_plan:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_Merchandise_SellingPlan'
+          description: The selling plan associated with the merchandise
+        sku:
+          type: string
+          description: The product variant's sku
+        subtitle:
+          type: string
+          description: The product variant's subtitle
+        title:
+          type: string
+          description: The product variant's title
+        type:
+          type: string
+          description: Always "variant"
+      required:
+      - id
+      - product
+      - requires_shipping
+      - selected_options
+      - sku
+      - title
+      - type
+    GetCheckoutData_Request_CartLines_LineComponents_Merchandise_SelectedOptions:
+      type: object
+      description: A product option applied to the variant
+      properties:
+        name:
+          type: string
+          description: The name of the merchandise option
+        value:
+          type: string
+          description: The value of the merchandise option
+      required:
+      - name
+      - value
+    GetCheckoutData_Request_ShippingAddress:
+      type: object
+      description: The shipping address
+      properties:
+        address1:
+          type: string
+          description: The first line of the buyer's address, including street name and number
+        address2:
+          type: string
+          description: The second line of the buyer's address, like apartment number, suite, etc
+        city:
+          type: string
+          description: The buyer's city
+        company:
+          type: string
+          description: The buyer's company name
+        countryCode:
+          type: string
+          description: The ISO 3166 Alpha-2 format for the buyer's country. Refer to https://www.iso.org/iso-3166-country-codes.html
+        firstName:
+          type: string
+          description: The buyer's first name
+        lastName:
+          type: string
+          description: The buyer's last name
+        name:
+          type: string
+          description: The buyer's full name
+        oneTimeUse:
+          type: boolean
+          description: Specifies whether the address should be saved to the buyer's account
+        phone:
+          type: string
+          description: The buyer's phone number
+        provinceCode:
+          type: string
+          description: The buyer's province code, such as state, province, prefecture, or region
+        zip:
+          type: string
+          description: The buyer's postal or ZIP code
+    GetCheckoutData_Request_CartLines_Cost:
+      type: object
+      description: The details about the cost components attributed to the cart line
+      properties:
+        totalAmount:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_Cost_TotalAmount'
+          description: The total amount after reductions the buyer can expect to pay that is directly attributable to a single cart line
+      required:
+      - totalAmount
+    GetShippingFees_Request_CartLines_LineComponents_Merchandise_Product:
+      type: object
+      description: The product object
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+        product_type:
+          type: string
+          description: A categorization that a product can be tagged with, commonly used for filtering and searching
+        vendor:
+          type: string
+          description: The product's vendor name
+      required:
+      - id
+      - product_type
+      - vendor
+    GetCheckoutData_Request_CartLines_Merchandise:
+      type: object
+      description: The merchandise
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+        image:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_Merchandise_Image'
+          description: Image associated with the product variant. This field falls back to the product image if no image is available
+        product:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_Merchandise_Product'
+          description: The product object that the product variant belongs to
+        requiresShipping:
+          type: boolean
+          description: Whether or not the product requires shipping
+        selectedOptions:
+          type: array
+          description: List of product options applied to the variant
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_Merchandise_SelectedOptions'
+        sellingPlan:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_Merchandise_SellingPlan'
+          description: The selling plan associated with the merchandise
+        sku:
+          type: string
+          description: The product variant's sku
+        subtitle:
+          type: string
+          description: The product variant's subtitle
+        title:
+          type: string
+          description: The product variant's title
+        type:
+          type: string
+          description: Always "variant"
+      required:
+      - id
+      - product
+      - requiresShipping
+      - selectedOptions
+      - sku
+      - title
+      - type
+    GetCheckoutData_Request_CartLines_LineComponents_Cost:
+      type: object
+      description: The details about the cost components attributed to the cart line
+      properties:
+        totalAmount:
+          $ref: '#/components/schemas/GetCheckoutData_Request_CartLines_LineComponents_Cost_TotalAmount'
+          description: The total amount after reductions the buyer can expect to pay that is directly attributable to a single cart line
+      required:
+      - totalAmount
+    GetCheckoutData_Response_200_Sellers_Offers_Promotions_Campaign:
+      type: object
+      description: Promotion campaign information
+      properties:
+        identifier:
+          type: string
+          description: The identifier of the promotion campaign.
+    GetShippingFees_Request_CartLines_Cost:
+      type: object
+      description: The details about the cost components attributed to the cart line
+      properties:
+        total_amount:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_Cost_TotalAmount'
+          description: The total amount after reductions the buyer can expect to pay that is directly attributable to a single cart line
+      required:
+      - total_amount
+    GetShippingFees_Request_CartLines_LineComponents_Cost:
+      type: object
+      description: The details about the cost components attributed to the cart line
+      properties:
+        total_amount:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents_Cost_TotalAmount'
+          description: The total amount after reductions the buyer can expect to pay that is directly attributable to a single cart line
+      required:
+      - total_amount
+    GetShippingFees_Request_CartLines_DiscountAllocations:
+      type: object
+      description: The discounts applied to the cart line
+      properties:
+        code:
+          type: string
+          description: The code for the discount
+        discounted_amount:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_DiscountAllocations_DiscountedAmount'
+          description: The money amount that has been discounted from the order
+        title:
+          type: string
+          description: The title of the discount
+        type:
+          type: string
+          description: The type of the discount
+      required:
+      - discounted_amount
+      - type
+    GetShippingFees_Request_CartLines_LineComponents_Merchandise_SelectedOptions:
+      type: object
+      description: A product option applied to the variant
+      properties:
+        name:
+          type: string
+          description: The name of the merchandise option
+        value:
+          type: string
+          description: The value of the merchandise option
+      required:
+      - name
+      - value
+    GetShippingFees_Request_CartLines_LineComponents:
+      type: object
+      description: The sub lines of the merchandise line
+      properties:
+        attributes:
+          type: array
+          description: Additional custom attributes for the bundle line component
+          items:
+            $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents_Attributes'
+        cost:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents_Cost'
+          description: The cost attributed to this bundle line component
+        id:
+          type: string
+          description: A unique identifier for the bundle line component. This ID is not stable. If an operation updates the line items in any way, all IDs could change
+        merchandise:
+          $ref: '#/components/schemas/GetShippingFees_Request_CartLines_LineComponents_Merchandise'
+          description: The merchandise of this bundle line component
+        quantity:
+          type: number
+          format: double
+          description: The quantity of merchandise being purchased
+        type:
+          type: string
+          description: Always "bundle"
+      required:
+      - attributes
+      - cost
+      - id
+      - merchandise
+      - quantity
+      - type
+    GetCheckoutData_Response_200_Sellers_Choices_DeliveryEstimate:
+      type: object
+      description: Expected delivery time
+      properties:
+        earliestDays:
+          type: integer
+          format: int32
+          description: Earliest delivery time
+        earliestDeliveryDate:
+          type: string
+          format: date-time
+          description: Earliest delivery date
+        latestDays:
+          type: integer
+          format: int32
+          description: Latest delivery time
+        latestDeliveryDate:
+          type: string
+          format: date-time
+          description: Latest delivery date
+    GetShippingFees_Request_CartLines_Cost_TotalAmount:
+      type: object
+      description: The monetary value with currency
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The price amount
+        currency_code:
+          type: string
+          description: The ISO 4217 format for the currency
+      required:
+      - amount
+      - currency_code
+    GetCheckoutData_Request_CartLines_LineComponents_Attributes:
+      type: object
+      description: The custom attribute
+      properties:
+        key:
+          type: string
+          description: The key for the attribute
+        value:
+          type: string
+          description: The value for the attribute
+      required:
+      - key
+      - value
+    GetShippingFees_Response_200_Fees_Choices_DeliveryEstimate:
+      type: object
+      description: Expected delivery time
+      properties:
+        earliest_days:
+          type: integer
+          format: int32
+          description: Earliest delivery time
+        earliest_delivery_date:
+          type: string
+          format: date-time
+          description: Earliest delivery date
+        latest_days:
+          type: integer
+          format: int32
+          description: Latest delivery time
+        latest_delivery_date:
+          type: string
+          format: date-time
+          description: Latest delivery date
+    GetShippingFees_Request_CartLines_DiscountAllocations_DiscountedAmount:
+      type: object
+      description: The monetary value with currency
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The price amount
+        currency_code:
+          type: string
+          description: The ISO 4217 format for the currency
+      required:
+      - amount
+      - currency_code
+    GetCheckoutData_Request:
+      type: object
+      description: Request object to retrieve checkout data
+      properties:
+        cartLines:
+          type: array
+          description: A list of lines containing information about the items the customer intends to purchase
+          items:
+            $ref: '#/components/schemas/GetCheckoutData_Request_CartLines'
+        locale:
+          type: string
+          description: The locale of the customer. Must be an activated locale in Mirakl. (optional)
+        promotionCodes:
+          type: array
+          description: Promotion codes (optional)
+          items:
+            type: string
+        shippingAddress:
+          $ref: '#/components/schemas/GetCheckoutData_Request_ShippingAddress'
+          description: The proposed customer shipping address. An address value is only present if delivery is required
+      required:
+      - cartLines
+    GetShippingFees_Response_200_Errors:
+      type: object
+      description: Checkout error
+      properties:
+        code:
+          type: string
+          description: 'The error code. One of: SHIPPING_ZONE_NOT_ALLOWED, SHIPPING_TYPE_NOT_ALLOWED, OFFER_NOT_FOUND, INSUFFICIENT_QUANTITY'
+        offer_id:
+          type: string
+          description: The offer identifier
+    GetCheckoutData_Response_200_Sellers_Offers_Promotions:
+      type: object
+      description: Promotion applied to the order
+      properties:
+        apportioned:
+          type: boolean
+          description: If reward amount is divided and allocated proportionally to multiple order lines or allocated to one order line
+        campaign:
+          $ref: '#/components/schemas/GetCheckoutData_Response_200_Sellers_Offers_Promotions_Campaign'
+          description: Promotion campaign information, when applicable
+        configuration:
+          $ref: '#/components/schemas/GetCheckoutData_Response_200_Sellers_Offers_Promotions_Configuration'
+          description: Configuration used to calculate the applied promotion
+        deducedAmount:
+          type: number
+          format: with decimals
+          description: Promotion's amount for this line
+        id:
+          type: string
+          description: Promotion's id
+        offeredQuantity:
+          type: integer
+          format: int32
+          description: The quantity of free items offered by the promotion
+        promoCode:
+          type: string
+          description: Promo code associated to the promotion
+        publicDescription:
+          type: string
+          description: Promotion's customer-facing description, resolved for the requested locale
+    GetShippingFees_Request_CartLines_LineComponents_Merchandise_SellingPlan:
+      type: object
+      description: The selling plan
+      properties:
+        id:
+          type: string
+          description: A globally-unique identifier
+      required:
+      - id
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

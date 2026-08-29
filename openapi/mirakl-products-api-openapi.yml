@@ -1,11 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
-  title: Mirakl Connect Channel Platform APIs Carriers Products API
-  version: "1.0"
+  title: Mirakl Products API
+  version: ''
+  description: 'Operations tagged Products across 6 of this provider''s published API definitions: mirakl-mcm-front-openapi.yaml, mirakl-mcm-operator-openapi.json, mirakl-mcm-seller-openapi.json, mirakl-mmp-front-openapi.yaml, mirakl-mmp-operator-openapi.json, mirakl-mmp-seller-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
-- description: Connect Channel Platform API
-  url: https://miraklconnect.com/api/channel-platform
+- description: URL to be replaced by your Mirakl instance URL
+  url: https://your-instance.mirakl.net
 tags:
 - name: Products
 paths:
@@ -166,11 +166,14 @@ paths:
         '204':
           description: No source product data sheet status to export
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: CM11 - Export Source Product Data Sheet status
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/hierarchies:
     get:
       description: '<div class="api-description-extension">
@@ -254,11 +257,14 @@ paths:
                 $ref: '#/components/schemas/H11_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: H11 - List Catalog categories (parents and children) related to a Catalog category
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/products/imports:
     post:
       description: '<div class="extension-title">Description</div>
@@ -353,7 +359,7 @@ paths:
               schema: {}
               style: simple
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: P41 - Import products to the operator information system
       tags:
@@ -503,11 +509,14 @@ paths:
                 $ref: '#/components/schemas/P51_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: P51 - Get information about product import statuses
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/products/imports/{import}:
     get:
       description: '<div class="api-description-extension">
@@ -589,11 +598,14 @@ paths:
                 $ref: '#/components/schemas/P42_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: P42 - Get the import status for a product import
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/products/imports/{import}/error_report:
     get:
       description: '<div class="extension-title">Description</div>
@@ -639,11 +651,14 @@ paths:
                 format: binary
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: P44 - Get the error report file for a product import ("Non-integrated products report")
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/products/imports/{import}/new_product_report:
     get:
       description: '<div class="extension-title">Description</div>
@@ -686,11 +701,14 @@ paths:
                 format: binary
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: P45 - Get the product integration report file for a product import ("Added products report")
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/products/imports/{import}/transformed_file:
     get:
       description: '<div class="extension-title">Description</div>
@@ -733,11 +751,14 @@ paths:
                 format: binary
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: P46 - Get the transformed file for a product import ("File in operator format")
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/products/imports/{import}/transformation_error_report:
     get:
       description: '<div class="extension-title">Description</div>
@@ -780,11 +801,14 @@ paths:
                 format: binary
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: P47 - Get the transformation error report file for a product import ("Source file error report")
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/products/attributes:
     get:
       description: '<div class="extension-title">Description</div>
@@ -954,11 +978,14 @@ paths:
                 $ref: '#/components/schemas/PM11_Response_200_TextCsv_Ext_FileStructure'
           description: Export success
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: PM11 - Get the product attribute configuration
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/values_lists:
     get:
       description: '<div class="api-description-extension">
@@ -1046,11 +1073,14 @@ paths:
                 $ref: '#/components/schemas/VL11_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: VL11 - Get information about operator's value lists
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/products:
     get:
       description: '<div class="extension-title">Description</div>
@@ -1140,39 +1170,142 @@ paths:
                 $ref: '#/components/schemas/P31_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: P31 - Get products for a list of product references
       tags:
       - Products
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
 components:
   schemas:
-    H11_Response_200_Hierarchies:
+    PM11_Response_200_Attributes_LabelTranslations:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Locale
+        value:
+          type: string
+          description: Translation
+      required:
+      - locale
+      - value
+    P42_Response_200_ConversionOptions:
+      type: object
+      properties:
+        ai_enrichment:
+          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiEnrichment'
+          description: Enable AI enrichment
+        ai_rewrite:
+          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiRewrite'
+          description: Enable AI rewrite
+        ai_translation:
+          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiTranslation'
+          description: Enable AI translation
+    CM11_Response_200_Ext_FileStructure_UniqueIdentifiers:
       type: object
       properties:
         code:
           type: string
-          description: Hierarchy code
-        label:
+          description: The unique identifier type
+        value:
           type: string
-          description: Hierarchy label
-        label_translations:
+          description: The unique identifier value
+      required:
+      - code
+      - value
+    PM11_Response_200_Attributes_Channels:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Channel code
+      required:
+      - code
+    VL11_Response_200:
+      type: object
+      properties:
+        values_lists:
           type: array
-          description: Hierarchy label translation
+          description: List of values list
           items:
-            $ref: '#/components/schemas/H11_Response_200_Hierarchies_LabelTranslations'
-        level:
+            $ref: '#/components/schemas/VL11_Response_200_ValuesLists'
+    H11_Response_200_Hierarchies_LabelTranslations:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Locale
+        value:
+          type: string
+          description: Translation
+    H11_Response_200:
+      type: object
+      properties:
+        hierarchies:
+          type: array
+          description: List of hierarchies
+          items:
+            $ref: '#/components/schemas/H11_Response_200_Hierarchies'
+      required:
+      - hierarchies
+    P51_Response_200:
+      type: object
+      properties:
+        product_import_trackings:
+          type: array
+          description: List of product import status information
+          items:
+            $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings'
+        total_count:
           type: integer
           format: int32
-          description: Hierarchy level
-        parent_code:
+          description: Total count of product import status information
+      required:
+      - total_count
+    VL11_Response_200_ValuesLists_Values:
+      type: object
+      properties:
+        code:
           type: string
-          description: Parent Hierarchy code
+          description: Value code
+        label:
+          type: string
+          description: Value label
+        label_translations:
+          type: array
+          description: Value label translation
+          items:
+            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_Values_LabelTranslations'
       required:
       - code
       - label_translations
-      - level
-      - parent_code
+    PM11_Response_200_Attributes_Roles_Parameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the parameter
+        value:
+          type: string
+          description: Value of the parameter
+      required:
+      - name
+      - value
+    P51_Response_200_ProductImportTrackings_ConversionOptions:
+      type: object
+      properties:
+        ai_enrichment:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiEnrichment'
+          description: Enable AI enrichment
+        ai_rewrite:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiRewrite'
+          description: Enable AI rewrite
+        ai_translation:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiTranslation'
+          description: Enable AI translation
     PM11_Response_200_Attributes:
       type: object
       properties:
@@ -1283,15 +1416,79 @@ components:
       - type
       - type_parameter
       - variant
-    P42_Response_200_ConversionOptions_AiRewrite:
+    CM11_Response_200_Ext_FileStructure_Errors:
       type: object
       properties:
-        status:
+        channels:
+          type: array
+          description: Channels on which the rejection reason applies
+          items:
+            type: string
+          uniqueItems: true
+        code:
           type: string
-          description: 'Enum: `"ENABLED"`, `"DISABLED"`
-
-            '
-    VL11_Response_200_ValuesLists_Values_LabelTranslations:
+          description: The Mirakl error code
+        integration_details:
+          type: array
+          description: The details of the integration error
+          items:
+            $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Errors_IntegrationDetails'
+        message:
+          type: string
+          description: The error message
+        rejection_details:
+          $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Errors_RejectionDetails'
+          description: The details of the rejection reason
+      required:
+      - code
+      - message
+    H11_Response_200_Hierarchies:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Hierarchy code
+        label:
+          type: string
+          description: Hierarchy label
+        label_translations:
+          type: array
+          description: Hierarchy label translation
+          items:
+            $ref: '#/components/schemas/H11_Response_200_Hierarchies_LabelTranslations'
+        level:
+          type: integer
+          format: int32
+          description: Hierarchy level
+        parent_code:
+          type: string
+          description: Parent Hierarchy code
+      required:
+      - code
+      - label_translations
+      - level
+      - parent_code
+    P41_Response_201:
+      type: object
+      properties:
+        import_id:
+          type: integer
+          format: int64
+          description: Import identifier
+      required:
+      - import_id
+    PM11_Response_200:
+      type: object
+      description: JSON output
+      properties:
+        attributes:
+          type: array
+          description: List of attributes
+          items:
+            $ref: '#/components/schemas/PM11_Response_200_Attributes'
+      required:
+      - attributes
+    PM11_Response_200_Attributes_DescriptionTranslations:
       type: object
       properties:
         locale:
@@ -1300,182 +1497,9 @@ components:
         value:
           type: string
           description: Translation
-    P42_Response_200_IntegrationDetails:
-      type: object
-      properties:
-        invalid_products:
-          type: integer
-          format: int64
-          description: Number of invalid products
-        products_not_accepted_in_time:
-          type: integer
-          format: int64
-          description: Number of products that haven't been accepted in the required time
-        products_not_synchronized_in_time:
-          type: integer
-          format: int64
-          description: Number of products that haven't been synchronized in the required time
-        products_reimported:
-          type: integer
-          format: int64
-          description: Number of products that have been reimported in a more recent file
-        products_successfully_synchronized:
-          type: integer
-          format: int64
-          description: Number of products successfully synchronized on operator system
-        products_with_synchronization_issues:
-          type: integer
-          format: int64
-          description: Number of products having synchronization issues with operator system
-        products_with_wrong_identifiers:
-          type: integer
-          format: int64
-          description: Number of products having wrong identifiers
-        rejected_products:
-          type: integer
-          format: int64
-          description: Number of rejected products by operator system
-    P51_Response_200_ProductImportTrackings:
-      type: object
-      properties:
-        conversion_options:
-          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions'
-          description: Options used for the conversion
-        conversion_type:
-          type: string
-          description: 'Type of conversion applied on products
-
-
-            Enum: `"AI_CONVERTER"`
-
-            '
-        date_created:
-          type: string
-          format: date-time
-          description: Import creation date
-        has_error_report:
-          type: boolean
-          description: Returns true if error report is available. Value is filled when the import status is <code>COMPLETE</code>.
-        has_new_product_report:
-          type: boolean
-          description: Returns true if new product report is available. Value is filled when the import status is <code>COMPLETE</code>.
-        has_transformation_error_report:
-          type: boolean
-          description: Returns true if transformation error report is available. Value is filled when the import status is <code>SENT</code> or <code>COMPLETE</code>.
-        has_transformed_file:
-          type: boolean
-          description: Returns true if transformed file is available. Value is filled when the import status is <code>SENT</code> or <code>COMPLETE</code>.
-        import_id:
-          type: integer
-          format: int64
-          description: Import identifier
-        import_status:
-          type: string
-          description: 'Import status
-
-
-            Enum: `"TRANSFORMATION_WAITING"`, `"TRANSFORMATION_RUNNING"`, `"TRANSFORMATION_FAILED"`, `"WAITING"`, `"RUNNING"`, `"SENT"`, `"COMPLETE"`, `"CANCELLED"`, `"FAILED"`
-
-            '
-        integration_details:
-          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_IntegrationDetails'
-          description: Integration details
-        reason_status:
-          type: string
-          description: A message explaining the reason of the import status, if relevant
-        shop_id:
-          type: integer
-          format: int64
-          description: Shop identifier
-        transform_lines_in_error:
-          type: integer
-          format: int64
-          description: Total count of transformed lines in error
-        transform_lines_in_success:
-          type: integer
-          format: int64
-          description: Total count of transformed lines in success
-        transform_lines_read:
-          type: integer
-          format: int64
-          description: Total count of transformed lines read
-        transform_lines_with_warning:
-          type: integer
-          format: int64
-          description: Total count of transformed lines with warning
       required:
-      - date_created
-      - has_error_report
-      - has_new_product_report
-      - has_transformed_file
-      - import_id
-      - import_status
-      - shop_id
-      - transform_lines_in_error
-      - transform_lines_in_success
-      - transform_lines_read
-      - transform_lines_with_warning
-    CM11_Response_200_Ext_FileStructure_Errors_IntegrationDetails:
-      type: object
-      properties:
-        attribute_code:
-          type: string
-          description: The integration error's attribute code
-        code:
-          type: string
-          description: The Mirakl code of the integration error
-        message:
-          type: string
-          description: The Mirakl label of the integration error
-      required:
-      - attribute_code
-      - code
-    P31_Response_200_Products:
-      type: object
-      properties:
-        authorized_shop_ids:
-          type: array
-          description: List of the shop ids that are allowed to sell this product, or an empty list if there is no restriction on this product
-          items:
-            type: string
-        category_code:
-          type: string
-          description: Product category code
-        category_label:
-          type: string
-          description: '<span>Product category label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-        product_id:
-          type: string
-          description: Product ID
-        product_id_type:
-          type: string
-          description: Product ID type
-        product_sku:
-          type: string
-          description: Product SKU
-        product_title:
-          type: string
-          description: Product title
-      required:
-      - authorized_shop_ids
-      - category_code
-      - category_label
-      - product_id
-      - product_id_type
-      - product_sku
-      - product_title
-    P41_Request_MultipartFormData_ConversionOptions:
-      type: object
-      properties:
-        ai_enrichment:
-          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiEnrichment'
-          description: Enable AI enrichment. Default to <code>DISABLED</code>
-        ai_rewrite:
-          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiRewrite'
-          description: Enable AI rewrite. Default to <code>ENABLED</code>
-        ai_translation:
-          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiTranslation'
-          description: Enable AI translation. Default to <code>DISABLED</code>
+      - locale
+      - value
     P42_Response_200:
       type: object
       properties:
@@ -1556,38 +1580,53 @@ components:
       - transform_lines_in_success
       - transform_lines_read
       - transform_lines_with_warning
-    P51_Response_200_ProductImportTrackings_ConversionOptions_AiRewrite:
+    PM11_Response_200_Attributes_Values:
       type: object
+      deprecated: true
       properties:
-        status:
+        code:
           type: string
-          description: 'Enum: `"ENABLED"`, `"DISABLED"`
-
-            '
-    PM11_Response_200:
-      type: object
-      description: JSON output
-      properties:
-        attributes:
-          type: array
-          description: List of attributes
-          items:
-            $ref: '#/components/schemas/PM11_Response_200_Attributes'
+          description: <p>Value code</p><p>This API is deprecated. Use the "type_parameter" field for "LIST" attribute types to retrieve the value list code.</p>
       required:
-      - attributes
-    P51_Response_200_ProductImportTrackings_ConversionOptions:
+      - code
+    VL11_Response_200_ValuesLists:
       type: object
       properties:
-        ai_enrichment:
-          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiEnrichment'
-          description: Enable AI enrichment
-        ai_rewrite:
-          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiRewrite'
-          description: Enable AI rewrite
-        ai_translation:
-          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions_AiTranslation'
-          description: Enable AI translation
-    P41_Request_MultipartFormData_ConversionOptions_AiTranslation:
+        code:
+          type: string
+          description: Value list code
+        label:
+          type: string
+          description: Value list label
+        label_translations:
+          type: array
+          description: Value list translations
+          items:
+            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_LabelTranslations'
+        values:
+          type: array
+          description: Value list's of value list
+          items:
+            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_Values'
+      required:
+      - code
+      - label_translations
+    CM11_Response_200_Ext_FileStructure_Errors_RejectionDetails:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The operator's message for the rejection reason
+        reason_code:
+          type: string
+          description: The Mirakl code of the rejection reason
+        reason_label:
+          type: string
+          description: '<span>The Mirakl label of the rejection reason </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - reason_code
+      - reason_label
+    P41_Request_MultipartFormData_ConversionOptions_AiRewrite:
       type: object
       description: Enable AI translation. Default to <code>DISABLED</code>
       properties:
@@ -1596,44 +1635,18 @@ components:
           description: 'Enum: `"ENABLED"`, `"DISABLED"`
 
             '
-    PM11_Response_200_Attributes_DescriptionTranslations:
+    PM11_Response_200_Attributes_TypeParameters:
       type: object
       properties:
-        locale:
+        name:
           type: string
-          description: Locale
+          description: Name of the parameter
         value:
           type: string
-          description: Translation
+          description: Value of the parameter
       required:
-      - locale
+      - name
       - value
-    CM11_Response_200_Ext_FileStructure_Errors:
-      type: object
-      properties:
-        channels:
-          type: array
-          description: Channels on which the rejection reason applies
-          items:
-            type: string
-          uniqueItems: true
-        code:
-          type: string
-          description: The Mirakl error code
-        integration_details:
-          type: array
-          description: The details of the integration error
-          items:
-            $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Errors_IntegrationDetails'
-        message:
-          type: string
-          description: The error message
-        rejection_details:
-          $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Errors_RejectionDetails'
-          description: The details of the rejection reason
-      required:
-      - code
-      - message
     PM11_Response_200_TextCsv_Ext_FileStructure:
       type: object
       description: CSV output
@@ -1733,6 +1746,38 @@ components:
       - type
       - type-parameter
       - variant
+    VL11_Response_200_ValuesLists_LabelTranslations:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Locale
+        value:
+          type: string
+          description: Translation
+    P42_Response_200_ConversionOptions_AiEnrichment:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    CM11_Response_200_Ext_FileStructure_Warnings:
+      type: object
+      properties:
+        attribute_code:
+          type: string
+          description: The warning's attribute code
+        code:
+          type: string
+          description: The Mirakl warning code
+        message:
+          type: string
+          description: The warning message
+      required:
+      - code
+      - message
     P51_Response_200_ProductImportTrackings_IntegrationDetails:
       type: object
       properties:
@@ -1768,78 +1813,41 @@ components:
           type: integer
           format: int64
           description: Number of rejected products by operator system
-    P31_Response_200:
+    P42_Response_200_IntegrationDetails:
       type: object
       properties:
-        products:
-          type: array
-          description: Products
-          items:
-            $ref: '#/components/schemas/P31_Response_200_Products'
-        total_count:
+        invalid_products:
           type: integer
-          format: int32
-          deprecated: true
-          description: Total count
-      required:
-      - products
-      - total_count
-    P51_Response_200_ProductImportTrackings_ConversionOptions_AiTranslation:
-      type: object
-      properties:
-        status:
-          type: string
-          description: 'Enum: `"ENABLED"`, `"DISABLED"`
-
-            '
-    VL11_Response_200_ValuesLists:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Value list code
-        label:
-          type: string
-          description: Value list label
-        label_translations:
-          type: array
-          description: Value list translations
-          items:
-            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_LabelTranslations'
-        values:
-          type: array
-          description: Value list's of value list
-          items:
-            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_Values'
-      required:
-      - code
-      - label_translations
-    PM11_Response_200_Attributes_Values:
-      type: object
-      deprecated: true
-      properties:
-        code:
-          type: string
-          description: <p>Value code</p><p>This API is deprecated. Use the "type_parameter" field for "LIST" attribute types to retrieve the value list code.</p>
-      required:
-      - code
-    VL11_Response_200_ValuesLists_Values:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Value code
-        label:
-          type: string
-          description: Value label
-        label_translations:
-          type: array
-          description: Value label translation
-          items:
-            $ref: '#/components/schemas/VL11_Response_200_ValuesLists_Values_LabelTranslations'
-      required:
-      - code
-      - label_translations
+          format: int64
+          description: Number of invalid products
+        products_not_accepted_in_time:
+          type: integer
+          format: int64
+          description: Number of products that haven't been accepted in the required time
+        products_not_synchronized_in_time:
+          type: integer
+          format: int64
+          description: Number of products that haven't been synchronized in the required time
+        products_reimported:
+          type: integer
+          format: int64
+          description: Number of products that have been reimported in a more recent file
+        products_successfully_synchronized:
+          type: integer
+          format: int64
+          description: Number of products successfully synchronized on operator system
+        products_with_synchronization_issues:
+          type: integer
+          format: int64
+          description: Number of products having synchronization issues with operator system
+        products_with_wrong_identifiers:
+          type: integer
+          format: int64
+          description: Number of products having wrong identifiers
+        rejected_products:
+          type: integer
+          format: int64
+          description: Number of rejected products by operator system
     P41_Request_MultipartFormData_ConversionOptions_AiEnrichment:
       type: object
       description: Enable AI translation. Default to <code>DISABLED</code>
@@ -1849,133 +1857,18 @@ components:
           description: 'Enum: `"ENABLED"`, `"DISABLED"`
 
             '
-    P42_Response_200_ConversionOptions:
+    P41_Request_MultipartFormData_ConversionOptions:
       type: object
       properties:
         ai_enrichment:
-          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiEnrichment'
-          description: Enable AI enrichment
+          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiEnrichment'
+          description: Enable AI enrichment. Default to <code>DISABLED</code>
         ai_rewrite:
-          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiRewrite'
-          description: Enable AI rewrite
+          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiRewrite'
+          description: Enable AI rewrite. Default to <code>ENABLED</code>
         ai_translation:
-          $ref: '#/components/schemas/P42_Response_200_ConversionOptions_AiTranslation'
-          description: Enable AI translation
-    CM11_Response_200_Ext_FileStructure_Warnings:
-      type: object
-      properties:
-        attribute_code:
-          type: string
-          description: The warning's attribute code
-        code:
-          type: string
-          description: The Mirakl warning code
-        message:
-          type: string
-          description: The warning message
-      required:
-      - code
-      - message
-    VL11_Response_200_ValuesLists_LabelTranslations:
-      type: object
-      properties:
-        locale:
-          type: string
-          description: Locale
-        value:
-          type: string
-          description: Translation
-    H11_Response_200_Hierarchies_LabelTranslations:
-      type: object
-      properties:
-        locale:
-          type: string
-          description: Locale
-        value:
-          type: string
-          description: Translation
-    P51_Response_200_ProductImportTrackings_ConversionOptions_AiEnrichment:
-      type: object
-      properties:
-        status:
-          type: string
-          description: 'Enum: `"ENABLED"`, `"DISABLED"`
-
-            '
-    P41_Response_201:
-      type: object
-      properties:
-        import_id:
-          type: integer
-          format: int64
-          description: Import identifier
-      required:
-      - import_id
-    CM11_Response_200_Ext_FileStructure_Errors_RejectionDetails:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The operator's message for the rejection reason
-        reason_code:
-          type: string
-          description: The Mirakl code of the rejection reason
-        reason_label:
-          type: string
-          description: '<span>The Mirakl label of the rejection reason </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-      required:
-      - reason_code
-      - reason_label
-    P42_Response_200_ConversionOptions_AiEnrichment:
-      type: object
-      properties:
-        status:
-          type: string
-          description: 'Enum: `"ENABLED"`, `"DISABLED"`
-
-            '
-    PM11_Response_200_Attributes_Channels:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Channel code
-      required:
-      - code
-    PM11_Response_200_Attributes_Roles:
-      type: object
-      properties:
-        parameters:
-          type: array
-          description: Attribute role parameters
-          items:
-            $ref: '#/components/schemas/PM11_Response_200_Attributes_Roles_Parameters'
-        type:
-          type: string
-          description: Role type of the attribute
-      required:
-      - parameters
-      - type
-    PM11_Response_200_Attributes_LabelTranslations:
-      type: object
-      properties:
-        locale:
-          type: string
-          description: Locale
-        value:
-          type: string
-          description: Translation
-      required:
-      - locale
-      - value
-    VL11_Response_200:
-      type: object
-      properties:
-        values_lists:
-          type: array
-          description: List of values list
-          items:
-            $ref: '#/components/schemas/VL11_Response_200_ValuesLists'
+          $ref: '#/components/schemas/P41_Request_MultipartFormData_ConversionOptions_AiTranslation'
+          description: Enable AI translation. Default to <code>DISABLED</code>
     P42_Response_200_ConversionOptions_AiTranslation:
       type: object
       properties:
@@ -1984,53 +1877,39 @@ components:
           description: 'Enum: `"ENABLED"`, `"DISABLED"`
 
             '
-    CM11_Response_200_Ext_FileStructure_UniqueIdentifiers:
+    P51_Response_200_ProductImportTrackings_ConversionOptions_AiEnrichment:
       type: object
-      properties:
-        code:
-          type: string
-          description: The unique identifier type
-        value:
-          type: string
-          description: The unique identifier value
-      required:
-      - code
-      - value
-    P41_Request_MultipartFormData_ConversionOptions_AiRewrite:
-      type: object
-      description: Enable AI translation. Default to <code>DISABLED</code>
       properties:
         status:
           type: string
           description: 'Enum: `"ENABLED"`, `"DISABLED"`
 
             '
-    PM11_Response_200_Attributes_Roles_Parameters:
+    VL11_Response_200_ValuesLists_Values_LabelTranslations:
       type: object
       properties:
-        name:
+        locale:
           type: string
-          description: Name of the parameter
+          description: Locale
         value:
           type: string
-          description: Value of the parameter
-      required:
-      - name
-      - value
-    P51_Response_200:
+          description: Translation
+    P51_Response_200_ProductImportTrackings_ConversionOptions_AiTranslation:
       type: object
       properties:
-        product_import_trackings:
-          type: array
-          description: List of product import status information
-          items:
-            $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings'
-        total_count:
-          type: integer
-          format: int32
-          description: Total count of product import status information
-      required:
-      - total_count
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    P42_Response_200_ConversionOptions_AiRewrite:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
     CM11_Response_200_Ext_FileStructure:
       type: object
       description: JSON output
@@ -2058,31 +1937,266 @@ components:
             $ref: '#/components/schemas/CM11_Response_200_Ext_FileStructure_Warnings'
       required:
       - status
-    PM11_Response_200_Attributes_TypeParameters:
+    PM11_Response_200_Attributes_Roles:
       type: object
       properties:
-        name:
-          type: string
-          description: Name of the parameter
-        value:
-          type: string
-          description: Value of the parameter
-      required:
-      - name
-      - value
-    H11_Response_200:
-      type: object
-      properties:
-        hierarchies:
+        parameters:
           type: array
-          description: List of hierarchies
+          description: Attribute role parameters
           items:
-            $ref: '#/components/schemas/H11_Response_200_Hierarchies'
+            $ref: '#/components/schemas/PM11_Response_200_Attributes_Roles_Parameters'
+        type:
+          type: string
+          description: Role type of the attribute
       required:
-      - hierarchies
+      - parameters
+      - type
+    P41_Request_MultipartFormData_ConversionOptions_AiTranslation:
+      type: object
+      description: Enable AI translation. Default to <code>DISABLED</code>
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    P51_Response_200_ProductImportTrackings:
+      type: object
+      properties:
+        conversion_options:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_ConversionOptions'
+          description: Options used for the conversion
+        conversion_type:
+          type: string
+          description: 'Type of conversion applied on products
+
+
+            Enum: `"AI_CONVERTER"`
+
+            '
+        date_created:
+          type: string
+          format: date-time
+          description: Import creation date
+        has_error_report:
+          type: boolean
+          description: Returns true if error report is available. Value is filled when the import status is <code>COMPLETE</code>.
+        has_new_product_report:
+          type: boolean
+          description: Returns true if new product report is available. Value is filled when the import status is <code>COMPLETE</code>.
+        has_transformation_error_report:
+          type: boolean
+          description: Returns true if transformation error report is available. Value is filled when the import status is <code>SENT</code> or <code>COMPLETE</code>.
+        has_transformed_file:
+          type: boolean
+          description: Returns true if transformed file is available. Value is filled when the import status is <code>SENT</code> or <code>COMPLETE</code>.
+        import_id:
+          type: integer
+          format: int64
+          description: Import identifier
+        import_status:
+          type: string
+          description: 'Import status
+
+
+            Enum: `"TRANSFORMATION_WAITING"`, `"TRANSFORMATION_RUNNING"`, `"TRANSFORMATION_FAILED"`, `"WAITING"`, `"RUNNING"`, `"SENT"`, `"COMPLETE"`, `"CANCELLED"`, `"FAILED"`
+
+            '
+        integration_details:
+          $ref: '#/components/schemas/P51_Response_200_ProductImportTrackings_IntegrationDetails'
+          description: Integration details
+        reason_status:
+          type: string
+          description: A message explaining the reason of the import status, if relevant
+        shop_id:
+          type: integer
+          format: int64
+          description: Shop identifier
+        transform_lines_in_error:
+          type: integer
+          format: int64
+          description: Total count of transformed lines in error
+        transform_lines_in_success:
+          type: integer
+          format: int64
+          description: Total count of transformed lines in success
+        transform_lines_read:
+          type: integer
+          format: int64
+          description: Total count of transformed lines read
+        transform_lines_with_warning:
+          type: integer
+          format: int64
+          description: Total count of transformed lines with warning
+      required:
+      - date_created
+      - has_error_report
+      - has_new_product_report
+      - has_transformed_file
+      - import_id
+      - import_status
+      - shop_id
+      - transform_lines_in_error
+      - transform_lines_in_success
+      - transform_lines_read
+      - transform_lines_with_warning
+    P51_Response_200_ProductImportTrackings_ConversionOptions_AiRewrite:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Enum: `"ENABLED"`, `"DISABLED"`
+
+            '
+    CM11_Response_200_Ext_FileStructure_Errors_IntegrationDetails:
+      type: object
+      properties:
+        attribute_code:
+          type: string
+          description: The integration error's attribute code
+        code:
+          type: string
+          description: The Mirakl code of the integration error
+        message:
+          type: string
+          description: The Mirakl label of the integration error
+      required:
+      - attribute_code
+      - code
+    P31_Response_200:
+      type: object
+      properties:
+        products:
+          type: array
+          description: Products
+          items:
+            $ref: '#/components/schemas/P31_Response_200_Products'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count
+      required:
+      - products
+      - total_count
+    P31_Response_200_Products:
+      type: object
+      properties:
+        authorized_shop_ids:
+          type: array
+          description: List of the shop ids that are allowed to sell this product, or an empty list if there is no restriction on this product
+          items:
+            type: string
+        category_code:
+          type: string
+          description: Product category code
+        category_label:
+          type: string
+          description: '<span>Product category label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        product_id:
+          type: string
+          description: Product ID
+        product_id_type:
+          type: string
+          description: Product ID type
+        product_sku:
+          type: string
+          description: Product SKU
+        product_title:
+          type: string
+          description: Product title
+      required:
+      - authorized_shop_ids
+      - category_code
+      - category_label
+      - product_id
+      - product_id_type
+      - product_sku
+      - product_title
+    P31_Response_200_2:
+      type: object
+      properties:
+        products:
+          type: array
+          description: Products list
+          items:
+            $ref: '#/components/schemas/P31_Response_200_Products_2'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count
+      required:
+      - products
+      - total_count
+    P31_Response_200_Products_2:
+      type: object
+      properties:
+        category_code:
+          type: string
+          description: Product category code
+        category_label:
+          type: string
+          description: '<span>Product category label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        product_id:
+          type: string
+          description: Product ID
+        product_id_type:
+          type: string
+          description: Product ID type
+        product_sku:
+          type: string
+          description: Product SKU
+        product_title:
+          type: string
+          description: Product title
+      required:
+      - category_code
+      - category_label
+      - product_id
+      - product_id_type
+      - product_sku
+      - product_title
   securitySchemes:
-    Bearer:
+    Front-Bearer-Token:
       bearerFormat: JWT
       scheme: bearer
       type: http
+      x-authorization: '{{FRONT_BEARER_TOKEN}}'
+    OAuth-2:
+      description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.mirakl.net/authorize
+          refreshUrl: https://auth.mirakl.net/oauth/token
+          scopes: {}
+          tokenUrl: https://auth.mirakl.net/oauth/token
+      type: oauth2
+    Operator-Bearer-Token:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
+    Shop-API-Key:
+      in: header
+      name: Authorization
+      type: apiKey
+      x-authorization: '{{SHOP_KEY}}'
+    operator_bearer_token:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
+    shop_api_key:
+      in: header
+      name: Authorization
+      type: apiKey
+      x-authorization: '{{SHOP_KEY}}'
+x-refined-from:
+- mirakl-mcm-front-openapi.yaml
+- mirakl-mcm-operator-openapi.json
+- mirakl-mcm-seller-openapi.json
+- mirakl-mmp-front-openapi.yaml
+- mirakl-mmp-operator-openapi.json
+- mirakl-mmp-seller-openapi.json
 x-group-parameters: true

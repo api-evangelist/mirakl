@@ -1,11 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
-  title: Mirakl Connect Channel Platform APIs Carriers Multiple shipments API
-  version: "1.0"
+  title: Mirakl Multiple shipments API
+  version: ''
+  description: 'Operations tagged Multiple shipments across 3 of this provider''s published API definitions: mirakl-mmp-front-openapi.yaml, mirakl-mmp-operator-openapi.json, mirakl-mmp-seller-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
-- description: Connect Channel Platform API
-  url: https://miraklconnect.com/api/channel-platform
+- description: URL to be replaced by your Mirakl instance URL
+  url: https://your-instance.mirakl.net
 tags:
 - name: Multiple shipments
 paths:
@@ -268,103 +268,9 @@ paths:
                 $ref: '#/components/schemas/ST01_Response_201'
           description: Created
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: ST01 - Create shipments
-      tags:
-      - Multiple shipments
-    put:
-      description: '<div class="extension-title">Description</div>
-
-
-        Limited to 100 shipments at a time
-
-
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
-
-
-        <div class="recommended-call-frequency">Recommended usage: At each update of shipments for one or multiple shipment</div>
-
-        </div>'
-      operationId: ST07
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            examples:
-              application/json-0:
-                summary: Example with business values (application/json)
-                value:
-                  shipments:
-                  - id: 5b2269b6-3918-43bc-9262-fddd815398f3
-                    shipping_from:
-                      warehouse:
-                        code: WHC1
-                  - id: 0e450a4c-704f-4e2c-845a-71b65b4ff16a
-                    shipping_from:
-                      warehouse:
-                        code: WHC2
-              application/json-auto:
-                summary: Complete example with value types (application/json)
-                value:
-                  shipments:
-                  - id: string
-                    shipping_from:
-                      warehouse:
-                        code: string
-            schema:
-              $ref: '#/components/schemas/ST07_Request'
-      responses:
-        '200':
-          content:
-            application/json:
-              examples:
-                application/json-0:
-                  summary: Example with business values (application/json)
-                  value:
-                    shipment_errors:
-                    - id: 0e450a4c-704f-4e2c-845a-71b65b4ff16a
-                      message: Warehouse with code WHC2 does not exist
-                    shipment_success:
-                    - id: 5b2269b6-3918-43bc-9262-fddd815398f3
-                      shipping_from:
-                        address:
-                          city: Paris
-                          country_iso_code: FRA
-                          state: Ile de France
-                          street_1: 12 rue de Lubeck
-                          street_2: null
-                          zip_code: '75016'
-                        warehouse:
-                          code: WHC1
-                application/json-auto:
-                  summary: Complete example with value types (application/json)
-                  value:
-                    shipment_errors:
-                    - id: string
-                      message: string
-                    shipment_success:
-                    - id: string
-                      shipping_from:
-                        address:
-                          city: string
-                          country_iso_code: string
-                          state: string
-                          street_1: string
-                          street_2: string
-                          zip_code: string
-                        warehouse:
-                          code: string
-              schema:
-                type: object
-                $ref: '#/components/schemas/ST07_Response_200'
-          description: OK
-      security:
-      - Operator-Bearer-Token: []
-      - OAuth-2: []
-      summary: ST07 - Update shipment shipping origin
       tags:
       - Multiple shipments
     get:
@@ -724,11 +630,108 @@ paths:
                 $ref: '#/components/schemas/ST11_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: ST11 - List shipments
       tags:
       - Multiple shipments
+    put:
+      description: '<div class="extension-title">Description</div>
+
+
+        Limited to 100 shipments at a time
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: At each update of shipments for one or multiple shipment</div>
+
+        </div>'
+      operationId: ST07
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  shipments:
+                  - id: 5b2269b6-3918-43bc-9262-fddd815398f3
+                    shipping_from:
+                      warehouse:
+                        code: WHC1
+                  - id: 0e450a4c-704f-4e2c-845a-71b65b4ff16a
+                    shipping_from:
+                      warehouse:
+                        code: WHC2
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  shipments:
+                  - id: string
+                    shipping_from:
+                      warehouse:
+                        code: string
+            schema:
+              $ref: '#/components/schemas/ST07_Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    shipment_errors:
+                    - id: 0e450a4c-704f-4e2c-845a-71b65b4ff16a
+                      message: Warehouse with code WHC2 does not exist
+                    shipment_success:
+                    - id: 5b2269b6-3918-43bc-9262-fddd815398f3
+                      shipping_from:
+                        address:
+                          city: Paris
+                          country_iso_code: FRA
+                          state: Ile de France
+                          street_1: 12 rue de Lubeck
+                          street_2: null
+                          zip_code: '75016'
+                        warehouse:
+                          code: WHC1
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    shipment_errors:
+                    - id: string
+                      message: string
+                    shipment_success:
+                    - id: string
+                      shipping_from:
+                        address:
+                          city: string
+                          country_iso_code: string
+                          state: string
+                          street_1: string
+                          street_2: string
+                          zip_code: string
+                        warehouse:
+                          code: string
+              schema:
+                type: object
+                $ref: '#/components/schemas/ST07_Response_200'
+          description: OK
+      security:
+      - Operator-Bearer-Token: []
+      - OAuth-2: []
+      summary: ST07 - Update shipment shipping origin
+      tags:
+      - Multiple shipments
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/shipments/delete:
     put:
       description: '<div class="extension-title">Description</div>
@@ -798,11 +801,14 @@ paths:
                 $ref: '#/components/schemas/ST06_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: ST06 - Delete shipments
       tags:
       - Multiple shipments
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/shipments/items_to_ship:
     get:
       description: '<div class="api-description-extension">
@@ -962,11 +968,14 @@ paths:
                 $ref: '#/components/schemas/ST12_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: ST12 - List items to ship
       tags:
       - Multiple shipments
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/shipments/tracking:
     post:
       description: '<div class="extension-title">Description</div>
@@ -1051,11 +1060,14 @@ paths:
                 $ref: '#/components/schemas/ST23_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: ST23 - Update carrier tracking information for shipments
       tags:
       - Multiple shipments
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/shipments/ship:
     put:
       description: '<div class="extension-title">Description</div>
@@ -1124,11 +1136,14 @@ paths:
                 $ref: '#/components/schemas/ST24_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: ST24 - Validate shipments as shipped
       tags:
       - Multiple shipments
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/shipments/ready_for_pick_up:
     put:
       description: '<div class="extension-title">Description</div>
@@ -1194,11 +1209,14 @@ paths:
                 $ref: '#/components/schemas/ST26_Response_200'
           description: OK
       security:
-      - Operator-Bearer-Token: []
+      - Front-Bearer-Token: []
       - OAuth-2: []
       summary: ST26 - Validate shipments as ready to pick up
       tags:
       - Multiple shipments
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
   /api/shipments/additional_information:
     put:
       description: '<div class="extension-title">Description</div>
@@ -1300,45 +1318,12 @@ paths:
       summary: ST31 - Update shipment additional information
       tags:
       - Multiple shipments
+    servers:
+    - description: URL to be replaced by your Mirakl instance URL
+      url: https://your-instance.mirakl.net
 components:
   schemas:
-    ST01_Response_201_ShipmentSuccess_Tracking:
-      type: object
-      properties:
-        carrier_code:
-          type: string
-          description: The code of a carrier. This information is mandatory for a registered carrier.
-        carrier_expected_delivery_date:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate'
-        carrier_name:
-          type: string
-          description: The name of a carrier. This information is mandatory for an unregistered carrier.
-        carrier_standard_code:
-          type: string
-          description: The standard code of a carrier based on mirakl carrier referential
-        last_known_location:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_LastKnownLocation'
-          description: The last location known and transmitted by carriers
-        milestones:
-          type: array
-          description: Retrieves the main stages of the delivery of a shipment coming from carrier's systems
-          items:
-            $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_Milestones'
-        tracking_number:
-          type: string
-          description: The carrier tracking number. This information is mandatory for a registered carrier with a URL requiring a tracking number.
-        tracking_url:
-          type: string
-          description: The tracking url of a carrier. This information is unused for registered carriers (because computed automatically). This information is optional for unregistered carriers.
-        validity_status:
-          type: string
-          description: 'Retrieves if mirakl is able to get tracking information (if not, then unverified) and if we manage to get tracking information and if we do get tracking information on this tracking, then it moves to verified, if we don''t it remains in unverified
-
-
-            Enum: `"MISSING_TRACKING"`, `"UNVERIFIED"`, `"UNCOVERED"`, `"INVALID"`, `"VERIFIED"`
-
-            '
-    ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate_Earliest:
+    ST01_Response_201_ShipmentSuccess_Tracking_Milestones_AdditionalInfo_OccurrenceDate:
       type: object
       properties:
         date:
@@ -1351,64 +1336,6 @@ components:
         time:
           type: string
           description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST06_Response_200_ShipmentErrors:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Shipment id
-        message:
-          type: string
-          description: Error message
-    ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate_Earliest:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date
-        offset:
-          type: string
-          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
-        time:
-          type: string
-          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST01_Response_201_ShipmentSuccess_Tracking_Milestones_OccurrenceDate:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date
-        offset:
-          type: string
-          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
-        time:
-          type: string
-          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST01_Response_201_ShipmentSuccess_ShippingFrom_Warehouse:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Warehouse's code
-    ST06_Response_200_ShipmentSuccess:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Shipment id
-          maxLength: 2147483647
-          minLength: 1
-      required:
-      - id
-    ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate:
-      type: object
-      properties:
-        earliest:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate_Earliest'
-        latest:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate_Latest'
     ST01_Response_201_ShipmentSuccess_ShippingFrom_Address:
       type: object
       properties:
@@ -1430,561 +1357,6 @@ components:
         zip_code:
           type: string
           description: Address zip code
-    ST01_Request:
-      type: object
-      properties:
-        shipments:
-          type: array
-          description: Shipments list
-          items:
-            $ref: '#/components/schemas/ST01_Request_Shipments'
-          maxItems: 1000
-          minItems: 1
-      required:
-      - shipments
-    ST23_Request_Shipments_Tracking:
-      type: object
-      description: Shipment tracking details
-      properties:
-        carrier_code:
-          type: string
-          description: The code of a carrier. This information is mandatory for a registered carrier.
-        carrier_name:
-          type: string
-          description: The name of a carrier. This information is mandatory for an unregistered carrier.
-        carrier_standard_code:
-          type: string
-          description: The standard code of a carrier based on mirakl carrier referential
-        tracking_number:
-          type: string
-          description: The carrier tracking number. This information is mandatory for a registered carrier with a URL requiring a tracking number.
-        tracking_url:
-          type: string
-          description: 'The tracking url of a carrier. This information is unused for registered carriers (because computed automatically). This information is optional for unregistered carriers.
-
-            '
-    ST11_Response_200_Data_Tracking_LastKnownLocation_OccurrenceDate:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date
-        offset:
-          type: string
-          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
-        time:
-          type: string
-          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST07_Response_200_ShipmentSuccess_ShippingFrom_Warehouse:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Warehouse's code
-    ST01_Response_201_ShipmentSuccess_Tracking_LastKnownLocation_OccurrenceDate:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date
-        offset:
-          type: string
-          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
-        time:
-          type: string
-          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST24_Request:
-      type: object
-      properties:
-        shipments:
-          type: array
-          description: Shipment ids
-          items:
-            $ref: '#/components/schemas/ST24_Request_Shipments'
-          maxItems: 1000
-          minItems: 1
-      required:
-      - shipments
-    ST06_Request_Shipments:
-      type: object
-      description: Shipment ids
-      properties:
-        id:
-          type: string
-          description: Shipment id
-          maxLength: 2147483647
-          minLength: 1
-      required:
-      - id
-    ST23_Response_200:
-      type: object
-      properties:
-        shipment_errors:
-          type: array
-          description: Shipment workflow update errors
-          items:
-            $ref: '#/components/schemas/ST23_Response_200_ShipmentErrors'
-        shipment_success:
-          type: array
-          description: Shipment workflow update success
-          items:
-            $ref: '#/components/schemas/ST23_Response_200_ShipmentSuccess'
-    ST01_Response_201_ShipmentSuccess_Tracking_LastKnownLocation:
-      type: object
-      properties:
-        location:
-          type: string
-          description: Last known location of the shipment
-        occurrence_date:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_LastKnownLocation_OccurrenceDate'
-          description: Occurrence date of the known location
-    ST01_Response_201_ShipmentErrors:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Shipment error creation message
-        order_id:
-          type: string
-          description: Order id of the shipment creation error
-    ST01_Response_201_ShipmentSuccess_PaymentDetails:
-      type: object
-      properties:
-        customer_debited_date:
-          type: string
-          format: date-time
-          description: Payment's date of the shipment by the customer
-        transaction_date:
-          type: string
-          format: date-time
-          description: Payment transaction date
-        transaction_number:
-          type: string
-          description: Payment transaction number
-      required:
-      - customer_debited_date
-      - transaction_date
-    ST31_Response_200_ShipmentUpdateErrors:
-      type: object
-      properties:
-        errors:
-          type: array
-          description: List of errors
-          items:
-            $ref: '#/components/schemas/ST31_Response_200_ShipmentUpdateErrors_Errors'
-        shipment_id:
-          type: string
-          description: Shipment id
-    ST11_Response_200_Data_ShippingFrom_Address:
-      type: object
-      properties:
-        city:
-          type: string
-          description: City
-        country_iso_code:
-          type: string
-          description: Country ISO code
-        state:
-          type: string
-          description: State
-        street_1:
-          type: string
-          description: First information line of the address street
-        street_2:
-          type: string
-          description: Second information line of the address street
-        zip_code:
-          type: string
-          description: Address zip code
-    ST11_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/ST11_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate_Latest:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date
-        offset:
-          type: string
-          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
-        time:
-          type: string
-          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST11_Response_200_Data_Tracking_Milestones:
-      type: object
-      properties:
-        additional_info:
-          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_Milestones_AdditionalInfo'
-          description: Additional information about the current milestone
-        occurrence_date:
-          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_Milestones_OccurrenceDate'
-          description: Occurrence date
-        type:
-          type: string
-          description: 'Type of milestone
-
-
-            Enum: `"IN_TRANSIT"`, `"OUT_FOR_DELIVERY"`, `"TO_COLLECT"`, `"DELIVERED"`, `"EXCEPTION"`
-
-            '
-    ST01_Request_Shipments_Tracking:
-      type: object
-      description: Shipment tracking details
-      properties:
-        carrier_code:
-          type: string
-          description: The code of a carrier. This information is mandatory for a registered carrier.
-        carrier_name:
-          type: string
-          description: The name of a carrier. This information is mandatory for an unregistered carrier.
-        carrier_standard_code:
-          type: string
-          description: The standard code of a carrier based on mirakl carrier referential
-        tracking_number:
-          type: string
-          description: The carrier tracking number. This information is mandatory for a registered carrier with a URL requiring a tracking number.
-        tracking_url:
-          type: string
-          description: 'The tracking url of a carrier. This information is unused for registered carriers (because computed automatically). This information is optional for unregistered carriers.
-
-            '
-    ST11_Response_200_Data_PaymentDetails:
-      type: object
-      properties:
-        customer_debited_date:
-          type: string
-          format: date-time
-          description: Payment's date of the shipment by the customer
-        transaction_date:
-          type: string
-          format: date-time
-          description: Payment transaction date
-        transaction_number:
-          type: string
-          description: Payment transaction number
-      required:
-      - customer_debited_date
-      - transaction_date
-    ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate:
-      type: object
-      properties:
-        earliest:
-          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate_Earliest'
-        latest:
-          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate_Latest'
-    ST31_Response_200_ShipmentUpdateErrors_Errors:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        field:
-          type: string
-          description: 'Name of the field on the input object. Can be composed, e.g.: address.zip_code'
-        message:
-          type: string
-          description: Error message
-      required:
-      - code
-      - field
-      - message
-    ST07_Response_200_ShipmentErrors:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Shipment id
-        message:
-          type: string
-          description: Shipment update error message
-    ST26_Request_Shipments:
-      type: object
-      description: Shipment ids
-      properties:
-        id:
-          type: string
-          description: Shipment id
-          maxLength: 2147483647
-          minLength: 1
-      required:
-      - id
-    ST01_Response_201_ShipmentSuccess_ShippingFrom:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_ShippingFrom_Address'
-          description: Shipping origin address
-        warehouse:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_ShippingFrom_Warehouse'
-          description: Shipping origin warehouse
-    ST01_Response_201:
-      type: object
-      properties:
-        shipment_errors:
-          type: array
-          description: Shipment creation errors
-          items:
-            $ref: '#/components/schemas/ST01_Response_201_ShipmentErrors'
-        shipment_success:
-          type: array
-          description: Shipment creation success
-          items:
-            $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess'
-      required:
-      - shipment_errors
-      - shipment_success
-    ST11_Response_200_Data_ShippingFrom:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/ST11_Response_200_Data_ShippingFrom_Address'
-          description: Shipping origin address
-        warehouse:
-          $ref: '#/components/schemas/ST11_Response_200_Data_ShippingFrom_Warehouse'
-          description: Shipping origin warehouse
-    ST12_Response_200_Data:
-      type: object
-      properties:
-        fulfillment:
-          $ref: '#/components/schemas/ST12_Response_200_Data_Fulfillment'
-          description: Fulfillment information
-        order_id:
-          type: string
-          description: Order id
-        references:
-          $ref: '#/components/schemas/ST12_Response_200_Data_References'
-          description: References
-        shipment_lines:
-          type: array
-          description: Shipment lines
-          items:
-            $ref: '#/components/schemas/ST12_Response_200_Data_ShipmentLines'
-        shipping_address:
-          $ref: '#/components/schemas/ST12_Response_200_Data_ShippingAddress'
-          description: Customer's shipping address
-        shipping_date:
-          type: string
-          format: date-time
-          description: Shipping date
-        shipping_deadline:
-          type: string
-          format: date-time
-          description: Shipping deadline
-        shipping_type_code:
-          type: string
-          description: Code of shipping's type
-        shipping_type_standard_code:
-          type: string
-          description: Shipping type's standard code
-      required:
-      - order_id
-      - shipping_address
-      - shipping_date
-      - shipping_type_code
-    ST26_Request:
-      type: object
-      properties:
-        shipments:
-          type: array
-          description: Shipment ids
-          items:
-            $ref: '#/components/schemas/ST26_Request_Shipments'
-          maxItems: 1000
-          minItems: 1
-      required:
-      - shipments
-    ST01_Request_Shipments:
-      type: object
-      description: Shipments list
-      properties:
-        invoice_reference:
-          type: string
-          description: Shipment's invoice reference
-          maxLength: 255
-          minLength: 0
-          pattern: '[0-9a-zA-Z_-]*'
-        order_id:
-          type: string
-          description: Order identifier
-          maxLength: 2147483647
-          minLength: 1
-        shipment_additional_information:
-          type: array
-          description: Shipment's additional information
-          items:
-            $ref: '#/components/schemas/ST01_Request_Shipments_ShipmentAdditionalInformation'
-        shipment_lines:
-          type: array
-          description: Shipment lines
-          items:
-            $ref: '#/components/schemas/ST01_Request_Shipments_ShipmentLines'
-          maxItems: 2147483647
-          minItems: 1
-        shipped:
-          type: boolean
-          default: false
-          description: If true, the shipment is shipped after its creation
-        shipping_from:
-          $ref: '#/components/schemas/ST01_Request_Shipments_ShippingFrom'
-          description: Shipment's shipping origin
-        tracking:
-          $ref: '#/components/schemas/ST01_Request_Shipments_Tracking'
-          description: Shipment tracking details
-      required:
-      - order_id
-      - shipment_lines
-    ST23_Request:
-      type: object
-      properties:
-        shipments:
-          type: array
-          description: Shipments list
-          items:
-            $ref: '#/components/schemas/ST23_Request_Shipments'
-          maxItems: 1000
-          minItems: 1
-      required:
-      - shipments
-    ST23_Response_200_ShipmentErrors:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Shipment id
-        message:
-          type: string
-          description: Error message
-    ST11_Response_200_Data_Tracking_Milestones_OccurrenceDate:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date
-        offset:
-          type: string
-          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
-        time:
-          type: string
-          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST31_Request_Shipments:
-      type: object
-      description: List of shipments additional information
-      properties:
-        id:
-          type: string
-          description: Shipment id
-        shipment_additional_information:
-          type: array
-          description: Shipment additional information
-          items:
-            $ref: '#/components/schemas/ST31_Request_Shipments_ShipmentAdditionalInformation'
-      required:
-      - id
-      - shipment_additional_information
-    ST06_Response_200:
-      type: object
-      properties:
-        shipment_errors:
-          type: array
-          description: Shipment workflow update errors
-          items:
-            $ref: '#/components/schemas/ST06_Response_200_ShipmentErrors'
-        shipment_success:
-          type: array
-          description: Shipment workflow update success
-          items:
-            $ref: '#/components/schemas/ST06_Response_200_ShipmentSuccess'
-    ST23_Response_200_ShipmentSuccess:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Shipment id
-          maxLength: 2147483647
-          minLength: 1
-      required:
-      - id
-    ST07_Request_Shipments:
-      type: object
-      description: Shipments list
-      properties:
-        id:
-          type: string
-          description: The shipment id
-        shipping_from:
-          $ref: '#/components/schemas/ST07_Request_Shipments_ShippingFrom'
-          description: Shipment's shipping origin
-      required:
-      - id
-      - shipping_from
-    ST24_Request_Shipments:
-      type: object
-      description: Shipment ids
-      properties:
-        id:
-          type: string
-          description: Shipment id
-          maxLength: 2147483647
-          minLength: 1
-      required:
-      - id
-    ST31_Request_Shipments_ShipmentAdditionalInformation:
-      type: object
-      description: Shipment additional information
-      discriminator:
-        mapping:
-          DATE: '#/components/schemas/ST31_Request_Shipments_ShipmentAdditionalInformation_Date'
-          STRING: '#/components/schemas/ST31_Request_Shipments_ShipmentAdditionalInformation_String'
-        propertyName: type
-      properties:
-        code:
-          type: string
-          description: The code associated to shipment additional information that you want to complete
-        type:
-          type: string
-          description: 'The type associated to the shipment additional information that you want to complete
-
-
-            Enum: `"STRING"`, `"DATE"`
-
-            '
-        value:
-          type: object
-          description: The value associated to the shipment additional information that you want to complete for this specific shipment
-      required:
-      - code
-      - type
-      - value
-    ST31_Request:
-      type: object
-      properties:
-        shipments:
-          type: array
-          description: List of shipments additional information
-          items:
-            $ref: '#/components/schemas/ST31_Request_Shipments'
-          maxItems: 100
-          minItems: 1
-      required:
-      - shipments
     ST24_Response_200_ShipmentSuccess:
       type: object
       properties:
@@ -1995,13 +1367,7 @@ components:
           minLength: 1
       required:
       - id
-    ST11_Response_200_Data_ShippingFrom_Warehouse:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Warehouse's code
-    ST01_Response_201_ShipmentSuccess_Tracking_Milestones_AdditionalInfo_OccurrenceDate:
+    ST01_Response_201_ShipmentSuccess_Tracking_Milestones_OccurrenceDate:
       type: object
       properties:
         date:
@@ -2034,62 +1400,6 @@ components:
           minimum: 1
       required:
       - quantity
-    ST11_Response_200_Data_Tracking_Milestones_AdditionalInfo_OccurrenceDate:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date
-        offset:
-          type: string
-          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
-        time:
-          type: string
-          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST01_Request_Shipments_ShippingFrom:
-      type: object
-      description: Shipment's shipping origin
-      properties:
-        warehouse:
-          $ref: '#/components/schemas/ST01_Request_Shipments_ShippingFrom_Warehouse'
-          description: The warehouse from where the shipment is shipped
-    ST06_Request:
-      type: object
-      properties:
-        shipments:
-          type: array
-          description: Shipment ids
-          items:
-            $ref: '#/components/schemas/ST06_Request_Shipments'
-          maxItems: 1000
-          minItems: 1
-      required:
-      - shipments
-    ST31_Response_200_ShipmentUpdateSuccess:
-      type: object
-      properties:
-        shipment_additional_information:
-          type: array
-          description: Shipment additional information
-          items:
-            $ref: '#/components/schemas/ST31_Response_200_ShipmentUpdateSuccess_ShipmentAdditionalInformation'
-        shipment_id:
-          type: string
-          description: Shipment id
-    ST26_Response_200:
-      type: object
-      properties:
-        shipment_errors:
-          type: array
-          description: Shipment workflow update errors
-          items:
-            $ref: '#/components/schemas/ST26_Response_200_ShipmentErrors'
-        shipment_success:
-          type: array
-          description: Shipment workflow update success
-          items:
-            $ref: '#/components/schemas/ST26_Response_200_ShipmentSuccess'
     ST11_Response_200_Data_Tracking:
       type: object
       properties:
@@ -2126,14 +1436,6 @@ components:
             Enum: `"MISSING_TRACKING"`, `"UNVERIFIED"`, `"UNCOVERED"`, `"INVALID"`, `"VERIFIED"`
 
             '
-    ST12_Response_200_Data_Fulfillment_Center:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Center code
-      required:
-      - code
     ST11_Response_200_Data:
       type: object
       properties:
@@ -2200,56 +1502,29 @@ components:
       - order_id
       - status
       - status_customer_debit
-    ST01_Response_201_ShipmentSuccess_ShipmentAdditionalInformation:
-      type: object
-      discriminator:
-        mapping:
-          DATE: '#/components/schemas/ST01_Response_201_ShipmentSuccess_ShipmentAdditionalInformation_Date'
-          STRING: '#/components/schemas/ST01_Response_201_ShipmentSuccess_ShipmentAdditionalInformation_String'
-        propertyName: type
-      properties:
-        code:
-          type: string
-          description: Shipment's additional information code
-        type:
-          type: string
-          description: 'Shipment''s additional information type
-
-
-            Enum: `"STRING"`, `"DATE"`
-
-            '
-    ST07_Request:
+    ST06_Response_200_ShipmentErrors:
       type: object
       properties:
-        shipments:
-          type: array
-          description: Shipments list
-          items:
-            $ref: '#/components/schemas/ST07_Request_Shipments'
-          maxItems: 100
-          minItems: 1
-      required:
-      - shipments
-    ST11_Response_200_Data_ShipmentAdditionalInformation:
+        id:
+          type: string
+          description: Shipment id
+        message:
+          type: string
+          description: Error message
+    ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate:
       type: object
-      discriminator:
-        mapping:
-          DATE: '#/components/schemas/ST11_Response_200_Data_ShipmentAdditionalInformation_Date'
-          STRING: '#/components/schemas/ST11_Response_200_Data_ShipmentAdditionalInformation_String'
-        propertyName: type
       properties:
-        code:
-          type: string
-          description: Shipment's additional information code
-        type:
-          type: string
-          description: 'Shipment''s additional information type
-
-
-            Enum: `"STRING"`, `"DATE"`
-
-            '
+        earliest:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate_Earliest'
+        latest:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate_Latest'
+    ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate:
+      type: object
+      properties:
+        earliest:
+          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate_Earliest'
+        latest:
+          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate_Latest'
     ST12_Response_200_Data_ShippingAddress:
       type: object
       properties:
@@ -2309,6 +1584,127 @@ components:
       - country_iso_code
       - lastname
       - street_1
+    ST23_Request:
+      type: object
+      properties:
+        shipments:
+          type: array
+          description: Shipments list
+          items:
+            $ref: '#/components/schemas/ST23_Request_Shipments'
+          maxItems: 1000
+          minItems: 1
+      required:
+      - shipments
+    ST01_Request_Shipments:
+      type: object
+      description: Shipments list
+      properties:
+        invoice_reference:
+          type: string
+          description: Shipment's invoice reference
+          maxLength: 255
+          minLength: 0
+          pattern: '[0-9a-zA-Z_-]*'
+        order_id:
+          type: string
+          description: Order identifier
+          maxLength: 2147483647
+          minLength: 1
+        shipment_additional_information:
+          type: array
+          description: Shipment's additional information
+          items:
+            $ref: '#/components/schemas/ST01_Request_Shipments_ShipmentAdditionalInformation'
+        shipment_lines:
+          type: array
+          description: Shipment lines
+          items:
+            $ref: '#/components/schemas/ST01_Request_Shipments_ShipmentLines'
+          maxItems: 2147483647
+          minItems: 1
+        shipped:
+          type: boolean
+          default: false
+          description: If true, the shipment is shipped after its creation
+        shipping_from:
+          $ref: '#/components/schemas/ST01_Request_Shipments_ShippingFrom'
+          description: Shipment's shipping origin
+        tracking:
+          $ref: '#/components/schemas/ST01_Request_Shipments_Tracking'
+          description: Shipment tracking details
+      required:
+      - order_id
+      - shipment_lines
+    ST01_Response_201_ShipmentSuccess_PaymentDetails:
+      type: object
+      properties:
+        customer_debited_date:
+          type: string
+          format: date-time
+          description: Payment's date of the shipment by the customer
+        transaction_date:
+          type: string
+          format: date-time
+          description: Payment transaction date
+        transaction_number:
+          type: string
+          description: Payment transaction number
+      required:
+      - customer_debited_date
+      - transaction_date
+    ST01_Request_Shipments_ShippingFrom:
+      type: object
+      description: Shipment's shipping origin
+      properties:
+        warehouse:
+          $ref: '#/components/schemas/ST01_Request_Shipments_ShippingFrom_Warehouse'
+          description: The warehouse from where the shipment is shipped
+    ST01_Response_201_ShipmentSuccess_Tracking:
+      type: object
+      properties:
+        carrier_code:
+          type: string
+          description: The code of a carrier. This information is mandatory for a registered carrier.
+        carrier_expected_delivery_date:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate'
+        carrier_name:
+          type: string
+          description: The name of a carrier. This information is mandatory for an unregistered carrier.
+        carrier_standard_code:
+          type: string
+          description: The standard code of a carrier based on mirakl carrier referential
+        last_known_location:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_LastKnownLocation'
+          description: The last location known and transmitted by carriers
+        milestones:
+          type: array
+          description: Retrieves the main stages of the delivery of a shipment coming from carrier's systems
+          items:
+            $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_Milestones'
+        tracking_number:
+          type: string
+          description: The carrier tracking number. This information is mandatory for a registered carrier with a URL requiring a tracking number.
+        tracking_url:
+          type: string
+          description: The tracking url of a carrier. This information is unused for registered carriers (because computed automatically). This information is optional for unregistered carriers.
+        validity_status:
+          type: string
+          description: 'Retrieves if mirakl is able to get tracking information (if not, then unverified) and if we manage to get tracking information and if we do get tracking information on this tracking, then it moves to verified, if we don''t it remains in unverified
+
+
+            Enum: `"MISSING_TRACKING"`, `"UNVERIFIED"`, `"UNCOVERED"`, `"INVALID"`, `"VERIFIED"`
+
+            '
+    ST23_Response_200_ShipmentErrors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Shipment id
+        message:
+          type: string
+          description: Error message
     ST12_Response_200_Data_ShipmentLines:
       type: object
       properties:
@@ -2335,12 +1731,58 @@ components:
           minimum: 1
       required:
       - quantity
-    ST31_Response_200_ShipmentUpdateSuccess_ShipmentAdditionalInformation:
+    ST23_Response_200_ShipmentSuccess:
       type: object
+      properties:
+        id:
+          type: string
+          description: Shipment id
+          maxLength: 2147483647
+          minLength: 1
+      required:
+      - id
+    ST01_Response_201_ShipmentSuccess_ShippingFrom_Warehouse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Warehouse's code
+    ST12_Response_200_Data_References:
+      type: object
+      properties:
+        order_reference_for_customer:
+          type: string
+          description: Order reference for customer
+        order_reference_for_seller:
+          type: string
+          description: Order reference for seller
+    ST24_Request_Shipments:
+      type: object
+      description: Shipment ids
+      properties:
+        id:
+          type: string
+          description: Shipment id
+          maxLength: 2147483647
+          minLength: 1
+      required:
+      - id
+    ST01_Response_201_ShipmentSuccess_ShippingFrom:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_ShippingFrom_Address'
+          description: Shipping origin address
+        warehouse:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_ShippingFrom_Warehouse'
+          description: Shipping origin warehouse
+    ST01_Request_Shipments_ShipmentAdditionalInformation:
+      type: object
+      description: Shipment's additional information
       discriminator:
         mapping:
-          DATE: '#/components/schemas/ST31_Response_200_ShipmentUpdateSuccess_ShipmentAdditionalInformation_Date'
-          STRING: '#/components/schemas/ST31_Response_200_ShipmentUpdateSuccess_ShipmentAdditionalInformation_String'
+          DATE: '#/components/schemas/ST01_Request_Shipments_ShipmentAdditionalInformation_Date'
+          STRING: '#/components/schemas/ST01_Request_Shipments_ShipmentAdditionalInformation_String'
         propertyName: type
       properties:
         code:
@@ -2361,106 +1803,125 @@ components:
       - code
       - type
       - value
-    ST01_Request_Shipments_ShippingFrom_Warehouse:
+    ST26_Request_Shipments:
       type: object
-      description: The warehouse from where the shipment is shipped
-      properties:
-        code:
-          type: string
-          description: The code of the warehouse
-    ST01_Response_201_ShipmentSuccess_Tracking_Milestones_AdditionalInfo:
-      type: object
-      properties:
-        occurrence_date:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_Milestones_AdditionalInfo_OccurrenceDate'
-          description: Occurrence date
-        type:
-          type: string
-          description: 'Type of the additional information
-
-
-            Enum: `"DESTINATION_ARRIVAL"`, `"DATA_ORDER_CANCELLED"`, `"DATA_DELIVERY_PROPOSED"`, `"DATA_DELIVERY_DECIDED"`, `"CUSTOMS_RECEIVED"`, `"CUSTOMS_EXCEPTION"`, `"CUSTOMS_CLEARED"`, `"CUSTOMS_REJECTED"`, `"DELIVERY_ATTEMPTED"`, `"DELIVERY_EXCEPTION"`
-
-            '
-    ST23_Request_Shipments:
-      type: object
-      description: Shipments list
+      description: Shipment ids
       properties:
         id:
           type: string
           description: Shipment id
-        tracking:
-          $ref: '#/components/schemas/ST23_Request_Shipments_Tracking'
-          description: Shipment tracking details
+          maxLength: 2147483647
+          minLength: 1
       required:
       - id
-      - tracking
-    ST01_Response_201_ShipmentSuccess_Tracking_Milestones:
+    ST11_Response_200_Data_Tracking_Milestones_OccurrenceDate:
       type: object
       properties:
-        additional_info:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_Milestones_AdditionalInfo'
-          description: Additional information about the current milestone
-        occurrence_date:
-          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_Milestones_OccurrenceDate'
-          description: Occurrence date
-        type:
+        date:
           type: string
-          description: 'Type of milestone
-
-
-            Enum: `"IN_TRANSIT"`, `"OUT_FOR_DELIVERY"`, `"TO_COLLECT"`, `"DELIVERED"`, `"EXCEPTION"`
-
-            '
-    ST11_Response_200_Data_Tracking_Milestones_AdditionalInfo:
+          format: date
+          description: Date
+        offset:
+          type: string
+          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
+        time:
+          type: string
+          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
+    ST12_Response_200_Data:
       type: object
       properties:
-        occurrence_date:
-          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_Milestones_AdditionalInfo_OccurrenceDate'
-          description: Occurrence date
-        type:
+        fulfillment:
+          $ref: '#/components/schemas/ST12_Response_200_Data_Fulfillment'
+          description: Fulfillment information
+        order_id:
           type: string
-          description: 'Type of the additional information
-
-
-            Enum: `"DESTINATION_ARRIVAL"`, `"DATA_ORDER_CANCELLED"`, `"DATA_DELIVERY_PROPOSED"`, `"DATA_DELIVERY_DECIDED"`, `"CUSTOMS_RECEIVED"`, `"CUSTOMS_EXCEPTION"`, `"CUSTOMS_CLEARED"`, `"CUSTOMS_REJECTED"`, `"DELIVERY_ATTEMPTED"`, `"DELIVERY_EXCEPTION"`
-
-            '
-    ST07_Response_200:
+          description: Order id
+        references:
+          $ref: '#/components/schemas/ST12_Response_200_Data_References'
+          description: References
+        shipment_lines:
+          type: array
+          description: Shipment lines
+          items:
+            $ref: '#/components/schemas/ST12_Response_200_Data_ShipmentLines'
+        shipping_address:
+          $ref: '#/components/schemas/ST12_Response_200_Data_ShippingAddress'
+          description: Customer's shipping address
+        shipping_date:
+          type: string
+          format: date-time
+          description: Shipping date
+        shipping_deadline:
+          type: string
+          format: date-time
+          description: Shipping deadline
+        shipping_type_code:
+          type: string
+          description: Code of shipping's type
+        shipping_type_standard_code:
+          type: string
+          description: Shipping type's standard code
+      required:
+      - order_id
+      - shipping_address
+      - shipping_date
+      - shipping_type_code
+    ST06_Response_200_ShipmentSuccess:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Shipment id
+          maxLength: 2147483647
+          minLength: 1
+      required:
+      - id
+    ST06_Response_200:
       type: object
       properties:
         shipment_errors:
           type: array
-          description: Shipment update errors
+          description: Shipment workflow update errors
           items:
-            $ref: '#/components/schemas/ST07_Response_200_ShipmentErrors'
+            $ref: '#/components/schemas/ST06_Response_200_ShipmentErrors'
         shipment_success:
           type: array
-          description: Shipment update success
+          description: Shipment workflow update success
           items:
-            $ref: '#/components/schemas/ST07_Response_200_ShipmentSuccess'
-      required:
-      - shipment_errors
-      - shipment_success
-    ST24_Response_200_ShipmentErrors:
+            $ref: '#/components/schemas/ST06_Response_200_ShipmentSuccess'
+    ST11_Response_200_Data_ShipmentAdditionalInformation:
+      type: object
+      discriminator:
+        mapping:
+          DATE: '#/components/schemas/ST11_Response_200_Data_ShipmentAdditionalInformation_Date'
+          STRING: '#/components/schemas/ST11_Response_200_Data_ShipmentAdditionalInformation_String'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Shipment's additional information code
+        type:
+          type: string
+          description: 'Shipment''s additional information type
+
+
+            Enum: `"STRING"`, `"DATE"`
+
+            '
+    ST24_Response_200:
       type: object
       properties:
-        id:
-          type: string
-          description: Shipment id
-        message:
-          type: string
-          description: Error message
-    ST07_Request_Shipments_ShippingFrom:
-      type: object
-      description: Shipment's shipping origin
-      properties:
-        warehouse:
-          $ref: '#/components/schemas/ST07_Request_Shipments_ShippingFrom_Warehouse'
-          description: The warehouse from where the shipment is shipped
-      required:
-      - warehouse
-    ST07_Response_200_ShipmentSuccess_ShippingFrom_Address:
+        shipment_errors:
+          type: array
+          description: Shipment workflow update errors
+          items:
+            $ref: '#/components/schemas/ST24_Response_200_ShipmentErrors'
+        shipment_success:
+          type: array
+          description: Shipment workflow update success
+          items:
+            $ref: '#/components/schemas/ST24_Response_200_ShipmentSuccess'
+    ST11_Response_200_Data_ShippingFrom_Address:
       type: object
       properties:
         city:
@@ -2481,33 +1942,26 @@ components:
         zip_code:
           type: string
           description: Address zip code
-    ST24_Response_200:
+    ST01_Response_201_ShipmentSuccess_ShipmentAdditionalInformation:
       type: object
+      discriminator:
+        mapping:
+          DATE: '#/components/schemas/ST01_Response_201_ShipmentSuccess_ShipmentAdditionalInformation_Date'
+          STRING: '#/components/schemas/ST01_Response_201_ShipmentSuccess_ShipmentAdditionalInformation_String'
+        propertyName: type
       properties:
-        shipment_errors:
-          type: array
-          description: Shipment workflow update errors
-          items:
-            $ref: '#/components/schemas/ST24_Response_200_ShipmentErrors'
-        shipment_success:
-          type: array
-          description: Shipment workflow update success
-          items:
-            $ref: '#/components/schemas/ST24_Response_200_ShipmentSuccess'
-    ST31_Response_200:
-      type: object
-      properties:
-        shipment_update_errors:
-          type: array
-          description: Shipment additional information update errors
-          items:
-            $ref: '#/components/schemas/ST31_Response_200_ShipmentUpdateErrors'
-        shipment_update_success:
-          type: array
-          description: Shipment additional information update success
-          items:
-            $ref: '#/components/schemas/ST31_Response_200_ShipmentUpdateSuccess'
-    ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate_Latest:
+        code:
+          type: string
+          description: Shipment's additional information code
+        type:
+          type: string
+          description: 'Shipment''s additional information type
+
+
+            Enum: `"STRING"`, `"DATE"`
+
+            '
+    ST01_Response_201_ShipmentSuccess_Tracking_LastKnownLocation_OccurrenceDate:
       type: object
       properties:
         date:
@@ -2520,37 +1974,42 @@ components:
         time:
           type: string
           description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
-    ST26_Response_200_ShipmentSuccess:
+    ST12_Response_200_Data_Fulfillment:
       type: object
       properties:
-        id:
-          type: string
-          description: Shipment id
-          maxLength: 2147483647
-          minLength: 1
+        center:
+          $ref: '#/components/schemas/ST12_Response_200_Data_Fulfillment_Center'
+          description: Fulfillment center code
       required:
-      - id
-    ST07_Response_200_ShipmentSuccess:
+      - center
+    ST26_Request:
       type: object
       properties:
-        id:
-          type: string
-          description: Shipment id
-        shipping_from:
-          $ref: '#/components/schemas/ST07_Response_200_ShipmentSuccess_ShippingFrom'
-          description: Shipment's shipping origin
-    ST12_Response_200_Data_References:
+        shipments:
+          type: array
+          description: Shipment ids
+          items:
+            $ref: '#/components/schemas/ST26_Request_Shipments'
+          maxItems: 1000
+          minItems: 1
+      required:
+      - shipments
+    ST11_Response_200_Data_Tracking_Milestones_AdditionalInfo:
       type: object
       properties:
-        order_reference_for_customer:
+        occurrence_date:
+          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_Milestones_AdditionalInfo_OccurrenceDate'
+          description: Occurrence date
+        type:
           type: string
-          description: Order reference for customer
-        order_reference_for_seller:
-          type: string
-          description: Order reference for seller
-    ST01_Request_Shipments_ShipmentLines:
+          description: 'Type of the additional information
+
+
+            Enum: `"DESTINATION_ARRIVAL"`, `"DATA_ORDER_CANCELLED"`, `"DATA_DELIVERY_PROPOSED"`, `"DATA_DELIVERY_DECIDED"`, `"CUSTOMS_RECEIVED"`, `"CUSTOMS_EXCEPTION"`, `"CUSTOMS_CLEARED"`, `"CUSTOMS_REJECTED"`, `"DELIVERY_ATTEMPTED"`, `"DELIVERY_EXCEPTION"`
+
+            '
+    ST01_Response_201_ShipmentSuccess_ShipmentLines:
       type: object
-      description: Shipment lines
       properties:
         offer_sku:
           type: string
@@ -2569,15 +2028,120 @@ components:
           minimum: 1
       required:
       - quantity
-    ST11_Response_200_Data_Tracking_LastKnownLocation:
+    ST01_Request:
+      type: object
+      properties:
+        shipments:
+          type: array
+          description: Shipments list
+          items:
+            $ref: '#/components/schemas/ST01_Request_Shipments'
+          maxItems: 1000
+          minItems: 1
+      required:
+      - shipments
+    ST26_Response_200_ShipmentErrors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Shipment id
+        message:
+          type: string
+          description: Error message
+    ST11_Response_200_Data_Tracking_LastKnownLocation_OccurrenceDate:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date
+        offset:
+          type: string
+          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
+        time:
+          type: string
+          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
+    ST11_Response_200_Data_Tracking_Milestones:
+      type: object
+      properties:
+        additional_info:
+          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_Milestones_AdditionalInfo'
+          description: Additional information about the current milestone
+        occurrence_date:
+          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_Milestones_OccurrenceDate'
+          description: Occurrence date
+        type:
+          type: string
+          description: 'Type of milestone
+
+
+            Enum: `"IN_TRANSIT"`, `"OUT_FOR_DELIVERY"`, `"TO_COLLECT"`, `"DELIVERED"`, `"EXCEPTION"`
+
+            '
+    ST06_Request:
+      type: object
+      properties:
+        shipments:
+          type: array
+          description: Shipment ids
+          items:
+            $ref: '#/components/schemas/ST06_Request_Shipments'
+          maxItems: 1000
+          minItems: 1
+      required:
+      - shipments
+    ST01_Response_201_ShipmentSuccess_Tracking_Milestones:
+      type: object
+      properties:
+        additional_info:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_Milestones_AdditionalInfo'
+          description: Additional information about the current milestone
+        occurrence_date:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_Milestones_OccurrenceDate'
+          description: Occurrence date
+        type:
+          type: string
+          description: 'Type of milestone
+
+
+            Enum: `"IN_TRANSIT"`, `"OUT_FOR_DELIVERY"`, `"TO_COLLECT"`, `"DELIVERED"`, `"EXCEPTION"`
+
+            '
+    ST01_Response_201:
+      type: object
+      properties:
+        shipment_errors:
+          type: array
+          description: Shipment creation errors
+          items:
+            $ref: '#/components/schemas/ST01_Response_201_ShipmentErrors'
+        shipment_success:
+          type: array
+          description: Shipment creation success
+          items:
+            $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess'
+      required:
+      - shipment_errors
+      - shipment_success
+    ST01_Response_201_ShipmentSuccess_Tracking_LastKnownLocation:
       type: object
       properties:
         location:
           type: string
           description: Last known location of the shipment
         occurrence_date:
-          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_LastKnownLocation_OccurrenceDate'
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_LastKnownLocation_OccurrenceDate'
           description: Occurrence date of the known location
+    ST11_Response_200_Data_ShippingFrom:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/ST11_Response_200_Data_ShippingFrom_Address'
+          description: Shipping origin address
+        warehouse:
+          $ref: '#/components/schemas/ST11_Response_200_Data_ShippingFrom_Warehouse'
+          description: Shipping origin warehouse
     ST12_Response_200:
       type: object
       properties:
@@ -2594,22 +2158,45 @@ components:
           description: Token to access the previous page. Absent if the current page is the first one.
       required:
       - data
-    ST26_Response_200_ShipmentErrors:
+    ST11_Response_200_Data_PaymentDetails:
       type: object
       properties:
-        id:
+        customer_debited_date:
           type: string
-          description: Shipment id
-        message:
+          format: date-time
+          description: Payment's date of the shipment by the customer
+        transaction_date:
           type: string
-          description: Error message
-    ST07_Request_Shipments_ShippingFrom_Warehouse:
+          format: date-time
+          description: Payment transaction date
+        transaction_number:
+          type: string
+          description: Payment transaction number
+      required:
+      - customer_debited_date
+      - transaction_date
+    ST11_Response_200:
       type: object
-      description: The warehouse from where the shipment is shipped
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/ST11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    ST12_Response_200_Data_Fulfillment_Center:
+      type: object
       properties:
         code:
           type: string
-          description: The code of the warehouse
+          description: Center code
       required:
       - code
     ST01_Response_201_ShipmentSuccess:
@@ -2678,8 +2265,138 @@ components:
       - order_id
       - status
       - status_customer_debit
-    ST01_Response_201_ShipmentSuccess_ShipmentLines:
+    ST24_Response_200_ShipmentErrors:
       type: object
+      properties:
+        id:
+          type: string
+          description: Shipment id
+        message:
+          type: string
+          description: Error message
+    ST01_Request_Shipments_Tracking:
+      type: object
+      description: Shipment tracking details
+      properties:
+        carrier_code:
+          type: string
+          description: The code of a carrier. This information is mandatory for a registered carrier.
+        carrier_name:
+          type: string
+          description: The name of a carrier. This information is mandatory for an unregistered carrier.
+        carrier_standard_code:
+          type: string
+          description: The standard code of a carrier based on mirakl carrier referential
+        tracking_number:
+          type: string
+          description: The carrier tracking number. This information is mandatory for a registered carrier with a URL requiring a tracking number.
+        tracking_url:
+          type: string
+          description: 'The tracking url of a carrier. This information is unused for registered carriers (because computed automatically). This information is optional for unregistered carriers.
+
+            '
+    ST23_Request_Shipments_Tracking:
+      type: object
+      description: Shipment tracking details
+      properties:
+        carrier_code:
+          type: string
+          description: The code of a carrier. This information is mandatory for a registered carrier.
+        carrier_name:
+          type: string
+          description: The name of a carrier. This information is mandatory for an unregistered carrier.
+        carrier_standard_code:
+          type: string
+          description: The standard code of a carrier based on mirakl carrier referential
+        tracking_number:
+          type: string
+          description: The carrier tracking number. This information is mandatory for a registered carrier with a URL requiring a tracking number.
+        tracking_url:
+          type: string
+          description: 'The tracking url of a carrier. This information is unused for registered carriers (because computed automatically). This information is optional for unregistered carriers.
+
+            '
+    ST11_Response_200_Data_Tracking_LastKnownLocation:
+      type: object
+      properties:
+        location:
+          type: string
+          description: Last known location of the shipment
+        occurrence_date:
+          $ref: '#/components/schemas/ST11_Response_200_Data_Tracking_LastKnownLocation_OccurrenceDate'
+          description: Occurrence date of the known location
+    ST23_Response_200:
+      type: object
+      properties:
+        shipment_errors:
+          type: array
+          description: Shipment workflow update errors
+          items:
+            $ref: '#/components/schemas/ST23_Response_200_ShipmentErrors'
+        shipment_success:
+          type: array
+          description: Shipment workflow update success
+          items:
+            $ref: '#/components/schemas/ST23_Response_200_ShipmentSuccess'
+    ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate_Earliest:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date
+        offset:
+          type: string
+          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
+        time:
+          type: string
+          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
+    ST01_Response_201_ShipmentSuccess_Tracking_Milestones_AdditionalInfo:
+      type: object
+      properties:
+        occurrence_date:
+          $ref: '#/components/schemas/ST01_Response_201_ShipmentSuccess_Tracking_Milestones_AdditionalInfo_OccurrenceDate'
+          description: Occurrence date
+        type:
+          type: string
+          description: 'Type of the additional information
+
+
+            Enum: `"DESTINATION_ARRIVAL"`, `"DATA_ORDER_CANCELLED"`, `"DATA_DELIVERY_PROPOSED"`, `"DATA_DELIVERY_DECIDED"`, `"CUSTOMS_RECEIVED"`, `"CUSTOMS_EXCEPTION"`, `"CUSTOMS_CLEARED"`, `"CUSTOMS_REJECTED"`, `"DELIVERY_ATTEMPTED"`, `"DELIVERY_EXCEPTION"`
+
+            '
+    ST26_Response_200_ShipmentSuccess:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Shipment id
+          maxLength: 2147483647
+          minLength: 1
+      required:
+      - id
+    ST23_Request_Shipments:
+      type: object
+      description: Shipments list
+      properties:
+        id:
+          type: string
+          description: Shipment id
+        tracking:
+          $ref: '#/components/schemas/ST23_Request_Shipments_Tracking'
+          description: Shipment tracking details
+      required:
+      - id
+      - tracking
+    ST11_Response_200_Data_ShippingFrom_Warehouse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Warehouse's code
+    ST01_Request_Shipments_ShipmentLines:
+      type: object
+      description: Shipment lines
       properties:
         offer_sku:
           type: string
@@ -2698,13 +2415,116 @@ components:
           minimum: 1
       required:
       - quantity
-    ST01_Request_Shipments_ShipmentAdditionalInformation:
+    ST01_Request_Shipments_ShippingFrom_Warehouse:
       type: object
-      description: Shipment's additional information
+      description: The warehouse from where the shipment is shipped
+      properties:
+        code:
+          type: string
+          description: The code of the warehouse
+    ST26_Response_200:
+      type: object
+      properties:
+        shipment_errors:
+          type: array
+          description: Shipment workflow update errors
+          items:
+            $ref: '#/components/schemas/ST26_Response_200_ShipmentErrors'
+        shipment_success:
+          type: array
+          description: Shipment workflow update success
+          items:
+            $ref: '#/components/schemas/ST26_Response_200_ShipmentSuccess'
+    ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate_Earliest:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date
+        offset:
+          type: string
+          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
+        time:
+          type: string
+          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
+    ST24_Request:
+      type: object
+      properties:
+        shipments:
+          type: array
+          description: Shipment ids
+          items:
+            $ref: '#/components/schemas/ST24_Request_Shipments'
+          maxItems: 1000
+          minItems: 1
+      required:
+      - shipments
+    ST11_Response_200_Data_Tracking_CarrierExpectedDeliveryDate_Latest:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date
+        offset:
+          type: string
+          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
+        time:
+          type: string
+          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
+    ST01_Response_201_ShipmentErrors:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Shipment error creation message
+        order_id:
+          type: string
+          description: Order id of the shipment creation error
+    ST11_Response_200_Data_Tracking_Milestones_AdditionalInfo_OccurrenceDate:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date
+        offset:
+          type: string
+          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
+        time:
+          type: string
+          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
+    ST01_Response_201_ShipmentSuccess_Tracking_CarrierExpectedDeliveryDate_Latest:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date
+        offset:
+          type: string
+          description: 'Zone offset, with the following format (compliant with ISO8601) : ±hh:mm. The offset +00:00 can be replaced by Z (the zero UTC offset).'
+        time:
+          type: string
+          description: 'Time, with the following format (compliant with ISO8601) : hh:mm[:ss]'
+    ST06_Request_Shipments:
+      type: object
+      description: Shipment ids
+      properties:
+        id:
+          type: string
+          description: Shipment id
+          maxLength: 2147483647
+          minLength: 1
+      required:
+      - id
+    ST31_Response_200_ShipmentUpdateSuccess_ShipmentAdditionalInformation:
+      type: object
       discriminator:
         mapping:
-          DATE: '#/components/schemas/ST01_Request_Shipments_ShipmentAdditionalInformation_Date'
-          STRING: '#/components/schemas/ST01_Request_Shipments_ShipmentAdditionalInformation_String'
+          DATE: '#/components/schemas/ST31_Response_200_ShipmentUpdateSuccess_ShipmentAdditionalInformation_Date'
+          STRING: '#/components/schemas/ST31_Response_200_ShipmentUpdateSuccess_ShipmentAdditionalInformation_String'
         propertyName: type
       properties:
         code:
@@ -2725,6 +2545,181 @@ components:
       - code
       - type
       - value
+    ST31_Request_Shipments:
+      type: object
+      description: List of shipments additional information
+      properties:
+        id:
+          type: string
+          description: Shipment id
+        shipment_additional_information:
+          type: array
+          description: Shipment additional information
+          items:
+            $ref: '#/components/schemas/ST31_Request_Shipments_ShipmentAdditionalInformation'
+      required:
+      - id
+      - shipment_additional_information
+    ST31_Request_Shipments_ShipmentAdditionalInformation:
+      type: object
+      description: Shipment additional information
+      discriminator:
+        mapping:
+          DATE: '#/components/schemas/ST31_Request_Shipments_ShipmentAdditionalInformation_Date'
+          STRING: '#/components/schemas/ST31_Request_Shipments_ShipmentAdditionalInformation_String'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: The code associated to shipment additional information that you want to complete
+        type:
+          type: string
+          description: 'The type associated to the shipment additional information that you want to complete
+
+
+            Enum: `"STRING"`, `"DATE"`
+
+            '
+        value:
+          type: object
+          description: The value associated to the shipment additional information that you want to complete for this specific shipment
+      required:
+      - code
+      - type
+      - value
+    ST07_Request_Shipments_ShippingFrom:
+      type: object
+      description: Shipment's shipping origin
+      properties:
+        warehouse:
+          $ref: '#/components/schemas/ST07_Request_Shipments_ShippingFrom_Warehouse'
+          description: The warehouse from where the shipment is shipped
+      required:
+      - warehouse
+    ST07_Request_Shipments_ShippingFrom_Warehouse:
+      type: object
+      description: The warehouse from where the shipment is shipped
+      properties:
+        code:
+          type: string
+          description: The code of the warehouse
+      required:
+      - code
+    ST31_Response_200:
+      type: object
+      properties:
+        shipment_update_errors:
+          type: array
+          description: Shipment additional information update errors
+          items:
+            $ref: '#/components/schemas/ST31_Response_200_ShipmentUpdateErrors'
+        shipment_update_success:
+          type: array
+          description: Shipment additional information update success
+          items:
+            $ref: '#/components/schemas/ST31_Response_200_ShipmentUpdateSuccess'
+    ST31_Response_200_ShipmentUpdateSuccess:
+      type: object
+      properties:
+        shipment_additional_information:
+          type: array
+          description: Shipment additional information
+          items:
+            $ref: '#/components/schemas/ST31_Response_200_ShipmentUpdateSuccess_ShipmentAdditionalInformation'
+        shipment_id:
+          type: string
+          description: Shipment id
+    ST07_Request:
+      type: object
+      properties:
+        shipments:
+          type: array
+          description: Shipments list
+          items:
+            $ref: '#/components/schemas/ST07_Request_Shipments'
+          maxItems: 100
+          minItems: 1
+      required:
+      - shipments
+    ST07_Response_200:
+      type: object
+      properties:
+        shipment_errors:
+          type: array
+          description: Shipment update errors
+          items:
+            $ref: '#/components/schemas/ST07_Response_200_ShipmentErrors'
+        shipment_success:
+          type: array
+          description: Shipment update success
+          items:
+            $ref: '#/components/schemas/ST07_Response_200_ShipmentSuccess'
+      required:
+      - shipment_errors
+      - shipment_success
+    ST31_Request:
+      type: object
+      properties:
+        shipments:
+          type: array
+          description: List of shipments additional information
+          items:
+            $ref: '#/components/schemas/ST31_Request_Shipments'
+          maxItems: 100
+          minItems: 1
+      required:
+      - shipments
+    ST07_Response_200_ShipmentSuccess:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Shipment id
+        shipping_from:
+          $ref: '#/components/schemas/ST07_Response_200_ShipmentSuccess_ShippingFrom'
+          description: Shipment's shipping origin
+    ST31_Response_200_ShipmentUpdateErrors:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: List of errors
+          items:
+            $ref: '#/components/schemas/ST31_Response_200_ShipmentUpdateErrors_Errors'
+        shipment_id:
+          type: string
+          description: Shipment id
+    ST07_Response_200_ShipmentSuccess_ShippingFrom_Warehouse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Warehouse's code
+    ST31_Response_200_ShipmentUpdateErrors_Errors:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        field:
+          type: string
+          description: 'Name of the field on the input object. Can be composed, e.g.: address.zip_code'
+        message:
+          type: string
+          description: Error message
+      required:
+      - code
+      - field
+      - message
+    ST07_Response_200_ShipmentErrors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Shipment id
+        message:
+          type: string
+          description: Shipment update error message
     ST07_Response_200_ShipmentSuccess_ShippingFrom:
       type: object
       properties:
@@ -2734,17 +2729,77 @@ components:
         warehouse:
           $ref: '#/components/schemas/ST07_Response_200_ShipmentSuccess_ShippingFrom_Warehouse'
           description: Shipping origin warehouse
-    ST12_Response_200_Data_Fulfillment:
+    ST07_Request_Shipments:
+      type: object
+      description: Shipments list
+      properties:
+        id:
+          type: string
+          description: The shipment id
+        shipping_from:
+          $ref: '#/components/schemas/ST07_Request_Shipments_ShippingFrom'
+          description: Shipment's shipping origin
+      required:
+      - id
+      - shipping_from
+    ST07_Response_200_ShipmentSuccess_ShippingFrom_Address:
       type: object
       properties:
-        center:
-          $ref: '#/components/schemas/ST12_Response_200_Data_Fulfillment_Center'
-          description: Fulfillment center code
-      required:
-      - center
+        city:
+          type: string
+          description: City
+        country_iso_code:
+          type: string
+          description: Country ISO code
+        state:
+          type: string
+          description: State
+        street_1:
+          type: string
+          description: First information line of the address street
+        street_2:
+          type: string
+          description: Second information line of the address street
+        zip_code:
+          type: string
+          description: Address zip code
   securitySchemes:
-    Bearer:
+    Front-Bearer-Token:
       bearerFormat: JWT
       scheme: bearer
       type: http
+      x-authorization: '{{FRONT_BEARER_TOKEN}}'
+    OAuth-2:
+      description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.mirakl.net/authorize
+          refreshUrl: https://auth.mirakl.net/oauth/token
+          scopes: {}
+          tokenUrl: https://auth.mirakl.net/oauth/token
+      type: oauth2
+    Operator-Bearer-Token:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
+    operator_bearer_token:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
+    Shop-API-Key:
+      in: header
+      name: Authorization
+      type: apiKey
+      x-authorization: '{{SHOP_KEY}}'
+    shop_api_key:
+      in: header
+      name: Authorization
+      type: apiKey
+      x-authorization: '{{SHOP_KEY}}'
+x-refined-from:
+- mirakl-mmp-front-openapi.yaml
+- mirakl-mmp-operator-openapi.json
+- mirakl-mmp-seller-openapi.json
 x-group-parameters: true

@@ -1,0 +1,590 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/connector/operator/shopify/app-operator-shopify/rest/public/openapi-description.md" /%}'
+  title: Shopify Operator Connector Synchronization API
+  version: ''
+servers:
+- description: Shopify production endpoint.
+  url: https://operator-shpy.mirakl.net
+tags:
+- name: Synchronization
+paths:
+  /api/sync/taxonomy:
+    post:
+      description: '> ⚠️ **Content-length header**
+
+        >
+
+        > The Content-Length header must be present with value 0, even when there is no request body.
+
+
+        <div class="extension-title">Description</div>
+
+
+        Synchronize categories and attributes from Shopify to Mirakl. This operation is asynchronous.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to synchronize your taxonomy</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one taxonomy synchronization at a time</div>
+
+        </div>'
+      operationId: SyncCatalogStructure
+      parameters: []
+      responses:
+        '202':
+          description: A taxonomy synchronization task has been created.
+        '425':
+          description: A taxonomy synchronization task is already running. Please wait for the task to complete before starting a new one.
+      summary: SyncCatalogStructure - Synchronize your Shopify catalog structure to Mirakl
+      tags:
+      - Synchronization
+  /api/sync/deleted-mirakl-products:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Deletes third-party (3P) products from Shopify that have been deleted in Mirakl. This operation also cleans up the middleware by deleting the corresponding product bindings for both third-party (3P) and first-party (1P) products. The operation is asynchronous and scheduled to run periodically, so manual triggering is typically not required.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Only when you need to trigger the synchronization manually.</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one Mirakl deleted products synchronization at a time</div>
+
+        </div>'
+      operationId: SyncDeletedMiraklProducts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values for synchronization using since date from configuration (application/json)
+                value: {}
+              application/json-1:
+                summary: Example with business values for full synchronization (application/json)
+                value:
+                  sinceDate: null
+              application/json-2:
+                summary: Example with business values for synchronization using defined since date (application/json)
+                value:
+                  sinceDate: '2025-08-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  deletedSince: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncDeletedMiraklProducts_Request'
+      responses:
+        '202':
+          description: A deleted Mirakl products synchronization to Shopify has successfully been scheduled.
+        '425':
+          description: A deleted Mirakl products synchronization to Shopify task is already running. Please wait for the task to complete before starting a new one.
+      summary: SyncDeletedMiraklProducts - Synchronize deleted products from Mirakl to Shopify
+      tags:
+      - Synchronization
+  /api/sync/product-shopify-to-mirakl:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Synchronize products from Shopify to Mirakl. This operation is asynchronous.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to manually run the synchronization</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one synchronization at a time</div>
+
+        </div>'
+      operationId: SyncFirstPartyProducts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values for synchronization using since date from configuration (application/json)
+                value: {}
+              application/json-1:
+                summary: Example with business values for full synchronization (application/json)
+                value:
+                  sinceDate: null
+              application/json-2:
+                summary: Example with business values for synchronization using defined since date (application/json)
+                value:
+                  sinceDate: '2024-01-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  sinceDate: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncFirstPartyProducts_Request'
+      responses:
+        '202':
+          description: A product synchronization from Shopify to Mirak has successfully been scheduled.
+        '425':
+          description: A product synchronization from Shopify to Mirakl task is already running. Please wait for the task to complete before starting a new one.
+      summary: SyncFirstPartyProducts - Synchronize first-party products from Shopify to Mirakl
+      tags:
+      - Synchronization
+  /api/sync/offer-conditions:
+    post:
+      description: '> ⚠️ **Content-length header**
+
+        >
+
+        > The Content-Length header must be present with value 0, even when there is no request body.
+
+
+        <div class="extension-title">Description</div>
+
+
+        Synchronizes offer conditions from Mirakl to Shopify.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you need to synchronize offer conditions</div>
+
+        </div>'
+      operationId: SyncOfferConditions
+      parameters: []
+      responses:
+        '200':
+          description: Synchronization completed successfully
+        '400':
+          description: One or more offer conditions could not be synchronized
+      summary: SyncOfferConditions - Synchronize offer conditions from Mirakl to Shopify
+      tags:
+      - Synchronization
+  /api/sync/offers:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Import offers from Mirakl into Shopify. This operation is asynchronous and is scheduled to run periodically, so in most cases, you don''t need to trigger it manually.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Only when you need to trigger the import manually.</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one offer synchronization at a time</div>
+
+        </div>'
+      operationId: SyncOffers
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-1:
+                summary: Example with business values for full synchronization (application/json)
+                value:
+                  sinceDate: null
+              application/json-2:
+                summary: Example with business values for synchronization using defined since date (application/json)
+                value:
+                  sinceDate: '2024-01-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  sinceDate: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncOffers_Request'
+      responses:
+        '202':
+          description: An offer synchronization task has been created.
+        '425':
+          description: An offer synchronization task is already running. Please wait for the task to complete before starting a new one.
+      summary: SyncOffers - Sync Offers
+      tags:
+      - Synchronization
+  /api/sync/orders:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Synchronize orders between Mirakl and Shopify. This operation is asynchronous.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to synchronize your orders</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one order synchronization at a time</div>
+
+        </div>'
+      operationId: SyncOrders
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values for synchronization using since date from configuration (application/json)
+                value: {}
+              application/json-1:
+                summary: Example with business values for full synchronization (application/json)
+                value:
+                  sinceDate: null
+              application/json-2:
+                summary: Example with business values for synchronization using defined since date (application/json)
+                value:
+                  sinceDate: '2024-01-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  sinceDate: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncOrders_Request'
+      responses:
+        '202':
+          description: An order synchronization task has been created.
+        '425':
+          description: An order synchronization task is already running. Please wait for the task to complete before starting a new one.
+      summary: SyncOrders - Synchronize orders between Mirakl and Shopify
+      tags:
+      - Synchronization
+  /api/sync/promotions:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Sync Mirakl promotions (PR01) into Shopify metaobjects and code discounts. This operation is asynchronous.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Only when you need to trigger the import manually.</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one promotion synchronization at a time</div>
+
+        </div>'
+      operationId: SyncPromotions
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  sinceDate: '2024-01-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  sinceDate: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncPromotions_Request'
+      responses:
+        '202':
+          description: A promotion synchronization task has been created.
+        '425':
+          description: A promotion synchronization task is already running. Please wait for the task to complete before starting a new one.
+      summary: SyncPromotions - Synchronize promotions from Mirakl to Shopify
+      tags:
+      - Synchronization
+  /api/sync/returns:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Synchronizes returns from Mirakl to Shopify. This operation is asynchronous.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to synchronizes returns on demand</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one return synchronization at a time</div>
+
+        </div>'
+      operationId: SyncReturns
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values for synchronization using since date from configuration (application/json)
+                value: {}
+              application/json-1:
+                summary: Example with business values for full synchronization (application/json)
+                value:
+                  sinceDate: null
+              application/json-2:
+                summary: Example with business values for synchronization using defined since date (application/json)
+                value:
+                  sinceDate: '2024-01-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  sinceDate: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncReturns_Request'
+      responses:
+        '202':
+          description: A return synchronization has successfully been scheduled.
+        '425':
+          description: A return synchronization task is already running.
+      summary: SyncReturns - Synchronize returns from Mirakl to Shopify
+      tags:
+      - Synchronization
+  /api/sync/shipment-mirakl-to-shopify:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Synchronize shipments from Mirakl to Shopify. This operation is asynchronous.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to synchronize your shipments</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one shipment synchronization at a time</div>
+
+        </div>'
+      operationId: SyncShipments
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values for synchronization using since date from configuration (application/json)
+                value: {}
+              application/json-1:
+                summary: Example with business values for full synchronization (application/json)
+                value:
+                  sinceDate: null
+              application/json-2:
+                summary: Example with business values for synchronization using defined since date (application/json)
+                value:
+                  sinceDate: '2024-01-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  sinceDate: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncShipments_Request'
+      responses:
+        '202':
+          description: An order synchronization task has been created.
+        '425':
+          description: An order synchronization task is already running. Please wait for the task to complete before starting a new one.
+      summary: SyncShipments - Synchronize shipments from Mirakl to Shopify
+      tags:
+      - Synchronization
+  /api/sync/shops:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Synchronizes shops from Mirakl to Shopify. This operation is asynchronous.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to synchronizes shops on demand</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one shop synchronization at a time</div>
+
+        </div>'
+      operationId: SyncShops
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values for synchronization using since date from configuration (application/json)
+                value: {}
+              application/json-1:
+                summary: Example with business values for full synchronization (application/json)
+                value:
+                  sinceDate: null
+              application/json-2:
+                summary: Example with business values for synchronization using defined since date (application/json)
+                value:
+                  sinceDate: '2024-01-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  sinceDate: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncShops_Request'
+      responses:
+        '202':
+          description: A shop synchronization has successfully been scheduled.
+        '425':
+          description: A shop synchronization task is already running.
+      summary: SyncShops - Synchronize shops from Mirakl to Shopify
+      tags:
+      - Synchronization
+  /api/sync/product-mirakl-to-shopify:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Import products from Mirakl into Shopify. This operation is asynchronous and is scheduled to run periodically, so in most cases, you don''t need to trigger it manually.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Only when you need to trigger the import manually.</div>
+
+        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one product synchronization at a time</div>
+
+        </div>'
+      operationId: SyncThirdPartyProducts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values for synchronization using since date from configuration (application/json)
+                value: {}
+              application/json-1:
+                summary: Example with business values for full synchronization (application/json)
+                value:
+                  sinceDate: null
+              application/json-2:
+                summary: Example with business values for synchronization using defined since date (application/json)
+                value:
+                  sinceDate: '2024-01-01T00:00:00Z'
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  sinceDate: '2023-03-28T09:34:42Z'
+            schema:
+              $ref: '#/components/schemas/SyncThirdPartyProducts_Request'
+      responses:
+        '202':
+          description: A product synchronization from Mirakl to Shopify has successfully been scheduled.
+        '425':
+          description: A product synchronization from Mirakl to Shopify task is already running. Please wait for the task to complete before starting a new one.
+      summary: SyncThirdPartyProducts - Synchronize third-party products from Mirakl to Shopify
+      tags:
+      - Synchronization
+components:
+  schemas:
+    SyncFirstPartyProducts_Request:
+      type: object
+      description: Request object to update Shopify to Mirakl product synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last product synchronization
+    SyncShops_Request:
+      type: object
+      description: Request object for shop synchronization from Shopify to Mirakl
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: 'Date threshold: only syncs shops modified after this date'
+    SyncThirdPartyProducts_Request:
+      type: object
+      description: Request object holding the parameters for the product import
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last product import into Shopify
+    SyncOrders_Request:
+      type: object
+      description: Request object to update order synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last order synchronization
+    SyncDeletedMiraklProducts_Request:
+      type: object
+      description: Request object holding the parameters for the deleted Mirakl product synchronization request
+      properties:
+        deletedSince:
+          type: string
+          format: date-time
+          description: Sync Mirakl deleted products to Shopify since this date
+    SyncPromotions_Request:
+      type: object
+      description: Request object to update promotion synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last promotion synchronization
+    SyncShipments_Request:
+      type: object
+      description: Request object to update Mirakl to Shopify shipment synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last shipment synchronization
+    SyncReturns_Request:
+      type: object
+      description: Request object for return synchronization from Shopify to Mirakl
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: 'Date threshold: only syncs returns modified after this date'
+    SyncOffers_Request:
+      type: object
+      description: Request object holding the parameters for the offer import
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last offer import into Shopify
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

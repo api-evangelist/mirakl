@@ -1,0 +1,285 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/connector/operator/shopify/app-operator-shopify/rest/public/openapi-description.md" /%}'
+  title: Shopify Operator Connector Setup API
+  version: ''
+servers:
+- description: Shopify production endpoint.
+  url: https://operator-shpy.mirakl.net
+tags:
+- name: Setup
+paths:
+  /api/setup/check-consistency:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Description: Verifies whether the data initialized during the application''s installation is still up to date. It compares the currently used data with the initial or expected version and returns an update status indicator. This ensures data consistency and helps detect potential refresh needs.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you need to check initialized data</div>
+
+        </div>'
+      operationId: SetupCheckConsistency
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    checkedElements:
+                    - code: METAOBJECT_DEFINITION
+                      name: Metaobject Definition
+                      status:
+                      - key: OFFER_CONDITION
+                        message: null
+                        status: INITIALIZED
+                    - code: METAFIELD_DEFINITION
+                      name: Metafield Definition
+                      status:
+                      - key: COLLECTION.mirakl.shop_data
+                        message: null
+                        status: INITIALIZED
+                      - key: COLLECTION.mirakl.shop_banner
+                        message: null
+                        status: MISSING
+                      - key: COLLECTION.mirakl.shop_logo
+                        message: null
+                        status: MISSING
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    checkedElements:
+                    - code: string
+                      name: string
+                      status:
+                      - key: string
+                        message: string
+                        status: INITIALIZED
+              schema:
+                type: object
+                $ref: '#/components/schemas/SetupCheckConsistency_Response_200'
+          description: OK
+      summary: SetupCheckConsistency - Check initialized data
+      tags:
+      - Setup
+  /api/setup/check-permissions:
+    get:
+      description: '<div class="extension-title">Description</div>
+
+
+        Verify Shopify App has all the required permissions granted.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you need to check Shopify permissions</div>
+
+        </div>'
+      operationId: SetupCheckPermissions
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    missingPermissions:
+                    - read_products
+                    - write_products
+                    - read_customers
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    missingPermissions:
+                    - string
+              schema:
+                type: object
+                $ref: '#/components/schemas/SetupCheckPermissions_Response_200'
+          description: OK
+      summary: SetupCheckPermissions - Check Shopify permissions
+      tags:
+      - Setup
+  /api/setup/update:
+    post:
+      description: '> ⚠️ **Content-length header**
+
+        >
+
+        > The Content-Length header must be present with value 0, even when there is no request body.
+
+
+        <div class="extension-title">Description</div>
+
+
+        Updates all the data that was initialized during the application''s installation. It ensures that the latest versions of the required data are applied, maintaining consistency and preventing outdated information from affecting the system''s functionality.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- When you need to update initialized data</div>
+
+        </div>'
+      operationId: SetupUpdate
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    updatedElements:
+                    - code: METAOBJECT_DEFINITION
+                      name: Metaobject Definition
+                      status:
+                      - key: OFFER_CONDITION
+                        message: null
+                        status: UP_TO_DATE
+                    - code: METAFIELD_DEFINITION
+                      name: Metafield Definition
+                      status:
+                      - key: COLLECTION.mirakl.shop_data
+                        message: null
+                        status: SKIPPED
+                      - key: COLLECTION.mirakl.shop_banner
+                        message: null
+                        status: CREATED
+                      - key: COLLECTION.mirakl.shop_logo
+                        message: Error updating metaobject definition "Offer condition" / [LIMIT_EXCEEDED] The maximum limit of definitions per owner type has exceeded.
+                        status: ERROR
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    updatedElements:
+                    - code: string
+                      name: string
+                      status:
+                      - key: string
+                        message: string
+                        status: CREATED
+              schema:
+                type: object
+                $ref: '#/components/schemas/SetupUpdate_Response_200'
+          description: OK
+      summary: SetupUpdate - Update initialized data
+      tags:
+      - Setup
+components:
+  schemas:
+    SetupCheckPermissions_Response_200:
+      type: object
+      description: Check permissions response
+      properties:
+        missingPermissions:
+          type: array
+          description: List of missing permissions
+          items:
+            type: string
+    SetupUpdate_Response_200_UpdatedElements:
+      type: object
+      description: Component updated
+      properties:
+        code:
+          type: string
+          description: Code of the component
+        name:
+          type: string
+          description: Name of the component
+        status:
+          type: array
+          description: Status for each element
+          items:
+            $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements_Status'
+    SetupCheckConsistency_Response_200:
+      type: object
+      description: Checked setup data response
+      properties:
+        checkedElements:
+          type: array
+          description: List of checked components
+          items:
+            $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements'
+    SetupUpdate_Response_200_UpdatedElements_Status:
+      type: object
+      description: Element updated
+      properties:
+        key:
+          type: string
+          description: Key of the element
+        message:
+          type: string
+          description: A message related to the status
+        status:
+          type: string
+          description: 'Status of the element
+
+
+            Enum: `"CREATED"`, `"UPDATED"`, `"UP_TO_DATE"`, `"SKIPPED"`, `"ERROR"`
+
+            '
+    SetupUpdate_Response_200:
+      type: object
+      description: Updated setup data response
+      properties:
+        updatedElements:
+          type: array
+          description: List of updated components
+          items:
+            $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements'
+    SetupCheckConsistency_Response_200_CheckedElements_Status:
+      type: object
+      description: Element checked
+      properties:
+        key:
+          type: string
+          description: Key of the element
+        message:
+          type: string
+          description: A message related to the status
+        status:
+          type: string
+          description: 'Status of the element
+
+
+            Enum: `"INITIALIZED"`, `"MISSING"`, `"UPDATE_REQUIRED"`, `"ERROR"`
+
+            '
+    SetupCheckConsistency_Response_200_CheckedElements:
+      type: object
+      description: Component checked
+      properties:
+        code:
+          type: string
+          description: Code of the component
+        name:
+          type: string
+          description: Name of the component
+        status:
+          type: array
+          description: Status for each element
+          items:
+            $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements_Status'
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

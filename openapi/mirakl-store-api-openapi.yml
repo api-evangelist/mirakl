@@ -1,256 +1,206 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: '{% partial file="/partial-content/product/connect-channel-platform/rest/connect/openapi-description.md" /%}'
-  title: Mirakl Connect Channel Platform APIs Carriers Store API
-  version: "1.0"
+  title: Mirakl Store API
+  version: ''
+  description: 'Operations tagged Store across 2 of this provider''s published API definitions: mirakl-account-channel-platform-openapi.yaml, mirakl-connect-channel-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
+- description: Account Channel Platform API
+  url: https://account.mirakl.net/api/channel-platform
 - description: Connect Channel Platform API
   url: https://miraklconnect.com/api/channel-platform
 tags:
 - name: Store
 paths:
+  /v1/users/stores:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Create multiple stores and link them to a user. This API should be used by connectors.
+
+
+        <div class="api-description-extension">
+
+        </div>'
+      operationId: SELLER_ACCOUNT_STORE_CREATE
+      parameters:
+      - description: Token used by app-account to identify the user, product, and vendor
+        explode: true
+        in: query
+        name: token
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  stores:
+                  - access_expiration_date: '2025-04-25T10:00:00Z'
+                    channel_id: '0001'
+                    channel_store_id: id-store-1
+                    name: Store 1
+                    state: OPEN
+                    suspension_type: null
+                  - channel_id: '0002'
+                    channel_store_id: id-store-2
+                    name: Store 2
+                    state: CLOSED
+                    suspension_type: null
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  stores:
+                  - access_expiration_date: '2023-03-28T09:34:42Z'
+                    channel_id: string
+                    channel_store_id: string
+                    name: string
+                    state: string
+                    suspension_type: string
+            schema:
+              $ref: '#/components/schemas/SELLER_ACCOUNT_STORE_CREATE_Request'
+      responses:
+        '201':
+          description: Stores have been created and linked to user
+        '401':
+          description: Invalid app-auth token
+        '403':
+          description: Unknown connector
+        '410':
+          description: Invalid link-store token
+      summary: SELLER_ACCOUNT_STORE_CREATE - Create stores and link them to a user
+      tags:
+      - Store
+    servers:
+    - description: Account Channel Platform API
+      url: https://account.mirakl.net/api/channel-platform
   /v1/channels/{channel_id}/stores/{channel_store_id}:
     put:
       description: '<div class="extension-title">Description</div>
 
 
-        Update business information of a store.
-
-        Those information will be displayed to the seller in Mirakl Connect.
-
-        They are mandatory to consider a store as usable in Mirakl Connect.
-
-        This API is replacing all data at once. Developer have to provide the complete state every time.
-
+        Update store. This API should be used by connectors.
 
 
         <div class="api-description-extension">
 
-        <div class="extension-title">Call Frequency</div>
-
-
-        <div class="recommended-call-frequency">Recommended usage: 1 per minute</div>
-
-        <div class="max-call-frequency">Maximum usage: 5 per minute</div>
-
         </div>'
-      operationId: upsertBusinessInformation
+      operationId: SELLER_ACCOUNT_STORE_UPDATE
       parameters:
-      - explode: false
+      - description: Unique identifier of the channel that hosts the store
+        explode: false
         in: path
         name: channel_id
         required: true
         schema:
           type: string
-          minLength: 1
         style: simple
-      - explode: false
+      - description: Unique identifier of the store within the specified channel
+        explode: false
         in: path
         name: channel_store_id
         required: true
         schema:
           type: string
-          description: Id of the store in channel
-          minLength: 1
         style: simple
       requestBody:
         content:
           application/json:
             examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  access_expiration_date: null
+                  name: Store
+                  state: CLOSED
+                  suspension_type: null
               application/json-auto:
                 summary: Complete example with value types (application/json)
                 value:
-                  currency: USD
-                  kyc_status: PENDING_SUBMISSION
-                  kyc_status_reason: string
-                  shipping_warning: string
-                  payment_information_warning: string
-                  payment_information_configured: true
-                  quality_suspension_reasons:
-                  - rule: Evaluation Grade last month was lower than 3.5 expected to never be lower than 4.0
-                    period: Last month
-                    rule_comparison_method: lower than
-                    rule_type: DECIMAL
-                    stat_value: 3.5
-                    threshold: 0
-                  sub_channels:
-                  - id: 12345
-                    name: Premium Sellers
-                    currency: USD
-                  missing_configuration: true
-                  updated_at: '2023-03-28T09:34:42Z'
+                  access_expiration_date: '2023-03-28T09:34:42Z'
+                  name: string
+                  state: string
+                  suspension_type: string
             schema:
-              $ref: '#/components/schemas/BusinessInformationInput'
-        description: Input to update business information of a store
-        required: true
+              $ref: '#/components/schemas/SELLER_ACCOUNT_STORE_UPDATE_Request'
       responses:
         '200':
-          description: Store information updated
-        '400':
-          content:
-            application/json:
-              examples:
-                application/json-auto:
-                  summary: Complete example with value types (application/json)
-                  value:
-                    code: DATA_NOT_FOUND
-                    message: An error occurred while processing your request
-                    errors:
-                    - message: 'An error occurred while processing your request: id is null'
-                      field: input.account.id
-                      extensions:
-                        minLength: 1
-                        maxLength: 255
-                    extensions:
-                      minLength: 1
-                      maxLength: 255
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request Error
+          description: Store has been updated
         '401':
-          content:
-            application/json:
-              examples:
-                application/json-auto:
-                  summary: Complete example with value types (application/json)
-                  value:
-                    code: DATA_NOT_FOUND
-                    message: An error occurred while processing your request
-                    errors:
-                    - message: 'An error occurred while processing your request: id is null'
-                      field: input.account.id
-                      extensions:
-                        minLength: 1
-                        maxLength: 255
-                    extensions:
-                      minLength: 1
-                      maxLength: 255
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized Error
+          description: Invalid token
         '403':
-          content:
-            application/json:
-              examples:
-                application/json-auto:
-                  summary: Complete example with value types (application/json)
-                  value:
-                    code: DATA_NOT_FOUND
-                    message: An error occurred while processing your request
-                    errors:
-                    - message: 'An error occurred while processing your request: id is null'
-                      field: input.account.id
-                      extensions:
-                        minLength: 1
-                        maxLength: 255
-                    extensions:
-                      minLength: 1
-                      maxLength: 255
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Forbidden Error
+          description: Unknown connector
         '404':
-          content:
-            application/json:
-              examples:
-                application/json-auto:
-                  summary: Complete example with value types (application/json)
-                  value:
-                    code: DATA_NOT_FOUND
-                    message: An error occurred while processing your request
-                    errors:
-                    - message: 'An error occurred while processing your request: id is null'
-                      field: input.account.id
-                      extensions:
-                        minLength: 1
-                        maxLength: 255
-                    extensions:
-                      minLength: 1
-                      maxLength: 255
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Not Found Error
-        '500':
-          content:
-            application/json:
-              examples:
-                application/json-auto:
-                  summary: Complete example with value types (application/json)
-                  value:
-                    code: DATA_NOT_FOUND
-                    message: An error occurred while processing your request
-                    errors:
-                    - message: 'An error occurred while processing your request: id is null'
-                      field: input.account.id
-                      extensions:
-                        minLength: 1
-                        maxLength: 255
-                    extensions:
-                      minLength: 1
-                      maxLength: 255
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      security:
-      - Bearer:
-        - connect-channel-platform:store:write
-      summary: 'upsertBusinessInformation - Update business information of a store
-
-        '
+          description: Unknown channel
+      summary: SELLER_ACCOUNT_STORE_UPDATE - Update store
       tags:
       - Store
+    servers:
+    - description: Account Channel Platform API
+      url: https://account.mirakl.net/api/channel-platform
 components:
   schemas:
-    QualitySuspensionReason:
+    SELLER_ACCOUNT_STORE_UPDATE_Request:
       type: object
       properties:
-        period:
+        access_expiration_date:
           type: string
-          description: 'Period considered by the Marketplace for the statistics related to the rule.
-
-            '
-          example: Last month
-        rule:
+          format: date-time
+          description: Access expiration date
+        name:
           type: string
-          description: 'Rule that triggered the suspension of the store.
-
-            This can be a rule related to quality, payment, shipping or any other rule defined by the Marketplace.
-
-            By assembling every parameters, we can build a human readable description of the rule.
-
-            '
-          example: Evaluation Grade last month was lower than 3.5 expected to never be lower than 4.0
-        rule_comparison_method:
+          description: Store name
+        state:
           type: string
-          description: 'Comparison method used by the Marketplace to evaluate the rule.
-
-            '
-          example: lower than
-        rule_type:
+          description: Store state
+        suspension_type:
           type: string
-          description: 'Type of the rule that triggered the suspension of the store such as DECIMAL or INTEGER.
-
-            '
-          example: DECIMAL
-        stat_value:
-          type: number
-          format: with decimals
-          description: 'Value of the statistic that triggered the rule.
-
-            This is the value that was compared to the threshold defined by the Marketplace.
-
-            '
-          example: 3.5
-        threshold:
-          type: number
-          format: with decimals
-          description: 'Threshold value defined by the Marketplace for the rule.
-
-            If the stat_value is lower than this threshold, the store is considered suspended.
-
-            '
+          description: Store suspension type
       required:
-      - rule
+      - name
+      - state
+    SELLER_ACCOUNT_STORE_CREATE_Request:
+      type: object
+      properties:
+        stores:
+          type: array
+          description: Stores to create
+          items:
+            $ref: '#/components/schemas/SELLER_ACCOUNT_STORE_CREATE_Request_Stores'
+      required:
+      - stores
+    SELLER_ACCOUNT_STORE_CREATE_Request_Stores:
+      type: object
+      description: Stores to create
+      properties:
+        access_expiration_date:
+          type: string
+          format: date-time
+          description: Access expiration date
+        channel_id:
+          type: string
+          description: Channel id
+        channel_store_id:
+          type: string
+          description: Channel store id
+        name:
+          type: string
+          description: Store name
+        state:
+          type: string
+          description: Store state
+        suspension_type:
+          type: string
+          description: Store suspension type
+      required:
+      - channel_id
+      - channel_store_id
+      - name
+      - state
     Error:
       type: object
       properties:
@@ -276,49 +226,6 @@ components:
           - An error occurred while processing your request
       required:
       - code
-      - message
-    SubChannel:
-      type: object
-      properties:
-        currency:
-          type: string
-          description: Currency tag of the sub-channel, expected in ISO 4217 format. Cannot be changed later.
-          example: USD
-          maxLength: 3
-          minLength: 1
-          pattern: ^[A-Z]{3}$
-        id:
-          type: string
-          description: Id of the sub-channel inside the Marketplace where the store is located.
-          example: 12345
-        name:
-          type: string
-          description: Name of the sub-channel inside the Marketplace where the store is located.
-          example: Premium Sellers
-      required:
-      - currency
-      - id
-      - name
-    ErrorItem:
-      type: object
-      properties:
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        field:
-          type: string
-          description: JsonPath to the field where the error occurred
-          examples:
-          - input.account.id
-        message:
-          type: string
-          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - 'An error occurred while processing your request: id is null'
-      required:
       - message
     BusinessInformationInput:
       type: object
@@ -395,9 +302,114 @@ components:
       required:
       - currency
       - updated_at
+    QualitySuspensionReason:
+      type: object
+      properties:
+        period:
+          type: string
+          description: 'Period considered by the Marketplace for the statistics related to the rule.
+
+            '
+          example: Last month
+        rule:
+          type: string
+          description: 'Rule that triggered the suspension of the store.
+
+            This can be a rule related to quality, payment, shipping or any other rule defined by the Marketplace.
+
+            By assembling every parameters, we can build a human readable description of the rule.
+
+            '
+          example: Evaluation Grade last month was lower than 3.5 expected to never be lower than 4.0
+        rule_comparison_method:
+          type: string
+          description: 'Comparison method used by the Marketplace to evaluate the rule.
+
+            '
+          example: lower than
+        rule_type:
+          type: string
+          description: 'Type of the rule that triggered the suspension of the store such as DECIMAL or INTEGER.
+
+            '
+          example: DECIMAL
+        stat_value:
+          type: number
+          format: with decimals
+          description: 'Value of the statistic that triggered the rule.
+
+            This is the value that was compared to the threshold defined by the Marketplace.
+
+            '
+          example: 3.5
+        threshold:
+          type: number
+          format: with decimals
+          description: 'Threshold value defined by the Marketplace for the rule.
+
+            If the stat_value is lower than this threshold, the store is considered suspended.
+
+            '
+      required:
+      - rule
+    SubChannel:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: Currency tag of the sub-channel, expected in ISO 4217 format. Cannot be changed later.
+          example: USD
+          maxLength: 3
+          minLength: 1
+          pattern: ^[A-Z]{3}$
+        id:
+          type: string
+          description: Id of the sub-channel inside the Marketplace where the store is located.
+          example: 12345
+        name:
+          type: string
+          description: Name of the sub-channel inside the Marketplace where the store is located.
+          example: Premium Sellers
+      required:
+      - currency
+      - id
+      - name
+    ErrorItem:
+      type: object
+      properties:
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
+        message:
+          type: string
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - 'An error occurred while processing your request: id is null'
+      required:
+      - message
   securitySchemes:
+    OAuth-2:
+      description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.mirakl.net/authorize
+          refreshUrl: https://auth.mirakl.net/oauth/token
+          scopes: {}
+          tokenUrl: https://auth.mirakl.net/oauth/token
+      type: oauth2
     Bearer:
       bearerFormat: JWT
       scheme: bearer
       type: http
+x-refined-from:
+- mirakl-account-channel-platform-openapi.yaml
+- mirakl-connect-channel-openapi.json
 x-group-parameters: true

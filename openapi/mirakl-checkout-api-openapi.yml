@@ -1,0 +1,367 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/connector/operator/shopify/app-operator-shopify/rest/public/openapi-description.md" /%}'
+  title: Shopify Operator Connector Checkout API
+  version: ''
+servers:
+- description: Shopify production endpoint.
+  url: https://operator-shpy.mirakl.net
+tags:
+- name: Checkout
+paths:
+  /api/storefront/custom-carrier:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Using to display the Mirakl shipment method during the checkout process
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: <br/>- Each time we need to compute the Mirakl shipping fees during the checkout</div>
+
+        </div>'
+      operationId: GetCustomCarrierRates
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Example with business values (application/json)
+                value:
+                  rate:
+                    currency: USD
+                    destination:
+                      address1: 47 Rue de Lubeck
+                      address2: null
+                      address3: null
+                      address_type: null
+                      city: Paris
+                      company_name: Mirakl
+                      country: FR
+                      email: contact@Mirakl.com
+                      fax: null
+                      latitude: 48.8640412
+                      longitude: 2.2903055
+                      name: Corporate Headquarters
+                      phone: '0172316200'
+                      postal_code: '75116'
+                      province: null
+                    items:
+                    - fulfillment_service: manual
+                      grams: '0'
+                      name: LEGO Hero Factory - Furno Jet Machine
+                      price: 3500
+                      properties:
+                        Shop name: '* Super Shop'
+                        _mkp_offer_id: '3090'
+                        _mkp_shipping_method_code: STD
+                      quantity: '3'
+                      requires_shipping: true
+                      sku: '4654321654'
+                      taxable: true
+                      vendor: Lego
+                    - fulfillment_service: manual
+                      grams: '0'
+                      name: Belkin Auto Charger for iPhone and iPod
+                      price: 60
+                      properties:
+                        Shop name: '* Super Shop'
+                        _mkp_offer_id: '3092'
+                        _mkp_shipping_method_code: STD
+                      quantity: '5'
+                      requires_shipping: true
+                      sku: '9765435467'
+                      taxable: true
+                      vendor: Belkin
+                    - fulfillment_service: manual
+                      grams: '0'
+                      name: Pull-On Sneaker
+                      price: 264
+                      properties:
+                        Shop name: Wag's
+                        _mkp_offer_id: '3088'
+                        _mkp_shipping_method_code: NEX
+                      quantity: '1'
+                      requires_shipping: true
+                      sku: '9734842562'
+                      taxable: true
+                      vendor: Lego
+                    locale: en-US
+                    origin:
+                      address1: ''
+                      address2: ''
+                      address3: ''
+                      address_type: ''
+                      city: ''
+                      company_name: ''
+                      country: FR
+                      email: ''
+                      fax: ''
+                      latitude: null
+                      longitude: null
+                      name: ''
+                      phone: ''
+                      postal_code: ''
+                      province: ''
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  rate:
+                    currency: string
+                    destination:
+                      address1: string
+                      address2: string
+                      city: string
+                      country: string
+                      email: string
+                      latitude: string
+                      longitude: string
+                      name: string
+                      phone: string
+                      postalCode: string
+                      province: string
+                    items:
+                    - fulfillmentService: string
+                      grams: 0
+                      name: string
+                      price: 0
+                      productId: string
+                      properties: object
+                      quantity: 0
+                      requiresShipping: true
+                      sku: string
+                      taxable: true
+                      variantId: string
+                      vendor: string
+                    locale: string
+                    origin:
+                      address1: string
+                      address2: string
+                      city: string
+                      country: string
+                      email: string
+                      latitude: string
+                      longitude: string
+                      name: string
+                      phone: string
+                      postalCode: string
+                      province: string
+            schema:
+              $ref: '#/components/schemas/GetCustomCarrierRates_Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Example with business values (application/json)
+                  value:
+                    rates:
+                    - currency: USD
+                      description: For convenience, your marketplace orders are grouped
+                      service_code: mirakl_shipment_USD
+                      service_name: Marketplace orders
+                      total_price: 7300
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    rates:
+                    - currency: string
+                      description: string
+                      serviceCode: string
+                      serviceName: string
+                      totalPrice: 0
+              schema:
+                type: object
+                $ref: '#/components/schemas/GetCustomCarrierRates_Response_200'
+          description: OK
+      summary: GetCustomCarrierRates - Get Mirakl custom carrier information
+      tags:
+      - Checkout
+components:
+  schemas:
+    GetCustomCarrierRates_Request:
+      type: object
+      properties:
+        rate:
+          $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate'
+          description: Shipping rate request
+    GetCustomCarrierRates_Response_200_Rates:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: The currency of the shipment with this carrier
+        description:
+          type: string
+          description: The description of the carrier
+        serviceCode:
+          type: string
+          description: The code of the carrier
+        serviceName:
+          type: string
+          description: The name of the carrier
+        totalPrice:
+          type: integer
+          format: int32
+          description: The total price of the shipment with this carrier
+    GetCustomCarrierRates_Request_Rate_Destination:
+      type: object
+      description: Destination address of the shipment
+      properties:
+        address1:
+          type: string
+          description: The first line of the address
+        address2:
+          type: string
+          description: The second line of the address
+        city:
+          type: string
+          description: The city
+        country:
+          type: string
+          description: The country
+        email:
+          type: string
+          description: The email
+        latitude:
+          type: string
+          description: The latitude
+        longitude:
+          type: string
+          description: The longitude
+        name:
+          type: string
+          description: The address name
+        phone:
+          type: string
+          description: The phone number
+        postalCode:
+          type: string
+          description: The postal code
+        province:
+          type: string
+          description: The province
+    GetCustomCarrierRates_Request_Rate_Origin:
+      type: object
+      description: Destination address of the shipment
+      properties:
+        address1:
+          type: string
+          description: The first line of the address
+        address2:
+          type: string
+          description: The second line of the address
+        city:
+          type: string
+          description: The city
+        country:
+          type: string
+          description: The country
+        email:
+          type: string
+          description: The email
+        latitude:
+          type: string
+          description: The latitude
+        longitude:
+          type: string
+          description: The longitude
+        name:
+          type: string
+          description: The address name
+        phone:
+          type: string
+          description: The phone number
+        postalCode:
+          type: string
+          description: The postal code
+        province:
+          type: string
+          description: The province
+    GetCustomCarrierRates_Request_Rate_Items:
+      type: object
+      description: Items in the shipment
+      properties:
+        fulfillmentService:
+          type: string
+          description: The fulfillment service
+        grams:
+          type: integer
+          format: int32
+          description: The weight of the item in grams
+        name:
+          type: string
+          description: The name of the item
+        price:
+          type: integer
+          format: int32
+          description: The price of the item (x100)
+        productId:
+          type: string
+          description: The product ID
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: Custom attributes of the item
+        quantity:
+          type: integer
+          format: int32
+          description: The quantity of the item
+        requiresShipping:
+          type: boolean
+          description: If the item requires shipping
+        sku:
+          type: string
+          description: The SKU of the item
+        taxable:
+          type: boolean
+          description: If the item is taxable
+        variantId:
+          type: string
+          description: The variant ID
+        vendor:
+          type: string
+          description: The vendor of the item
+    GetCustomCarrierRates_Request_Rate:
+      type: object
+      description: Shipping rate request
+      properties:
+        currency:
+          type: string
+          description: Currency of the shipment
+        destination:
+          $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate_Destination'
+          description: Destination address of the shipment
+        items:
+          type: array
+          description: Items in the shipment
+          items:
+            $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate_Items'
+        locale:
+          type: string
+          description: Locale of the shipment
+        origin:
+          $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate_Origin'
+          description: Origin address of the shipment
+    GetCustomCarrierRates_Response_200:
+      type: object
+      properties:
+        rates:
+          type: array
+          description: Shipping rates response
+          items:
+            $ref: '#/components/schemas/GetCustomCarrierRates_Response_200_Rates'
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true

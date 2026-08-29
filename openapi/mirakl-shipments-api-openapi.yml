@@ -1,0 +1,530 @@
+openapi: 3.2.0
+info:
+  description: '{% partial file="/partial-content/product/connect/rest/connect/openapi-description.md" /%}'
+  title: Mirakl Connect Shipments API
+  version: ''
+servers:
+- description: Connect Production endpoint
+  url: https://miraklconnect.com/api
+tags:
+- name: Shipments
+paths:
+  /orders/{order_id}/shipments:
+    post:
+      deprecated: true
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to ship one or more items from the same order within the same package (using the same tracking information). We recommend integrating this API in synchronous mode, directly in your shipment creation process.
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: On each new shipment</div>
+
+        <div class="max-call-frequency">Maximum usage: On each new shipment</div>
+
+        </div>'
+      operationId: createShipment
+      parameters:
+      - description: Connect order identifier
+        example: 1328ab88-0412-40f9-bc8f-deb4e338fb84
+        explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Create Shipment Request
+                value:
+                  carrier: Custom carrier
+                  items:
+                  - id: '10000'
+                    quantity: 3
+                  tracking_number: '123456'
+                  tracking_url: http://www.customcarrier.com/tracking
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  items:
+                  - quantity: '10'
+                    id: SELLER_ID_1
+                    order_line_id: 0024_COMMERCIAL_ID-A-1
+                  carrier: DHL Express
+                  return_tracking_number: '78910'
+                  tracking_number: '123456'
+                  tracking_url: https://wwwapps.ups.com/WebTracking/track
+            schema:
+              $ref: '#/components/schemas/CreateShipmentRequest'
+        description: Shipment object and its items' details
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Create Shipment Response
+                  value:
+                    carrier: Custom carrier
+                    channel_shipment_id: SHIPMENT_ID
+                    created_at: '2021-07-06T09:24:36.32Z'
+                    id: 0001_SHIPMENT_ID
+                    items:
+                    - id: '1000'
+                      quantity: 3
+                    tracking_number: '1123456'
+                    tracking_url: http://www.customcarrier.com/tracking
+                    updated_at: '2021-07-06T09:25:42.18Z'
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    id: 0001_SHIPMENT-0001
+                    channel_shipment_id: SHIPMENT_CHANNEL_ID_1
+                    created_at: '2021-07-06T09:24:36.32Z'
+                    updated_at: '2021-07-06T09:24:36.32Z'
+                    items:
+                    - quantity: '10'
+                      id: SELLER_ID_1
+                      order_line_id: 0024_COMMERCIAL_ID-A-1
+                    carrier: DHL Express
+                    tracking_number: '123456'
+                    tracking_url: https://www.apps.ups.com/WebTracking/track
+              schema:
+                $ref: '#/components/schemas/ShipmentResponse'
+          description: Success. The shipment has been created.
+        '400':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Failure. The shipment has not been created because of wrong parameters.
+        '404':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Failure. The shipment has not been created because the order was missing.
+      security:
+      - Bearer:
+        - connect:shipment:create
+      summary: createShipment - Ship items of a Connect order
+      tags:
+      - Shipments
+      x-badges:
+      - color: noIntegrationBadge
+        name: ⚠️ No Integration Allowed ⚠️
+        position: after
+  /v2/orders/{order_id}/shipments:
+    post:
+      description: '<div class="extension-title">Description</div>
+
+
+        Use this API to ship one or more items from the same order within the same package (using the same tracking information).
+
+
+        <div class="api-description-extension">
+
+        <div class="extension-title">Call Frequency</div>
+
+
+        <div class="recommended-call-frequency">Recommended usage: On each new shipment</div>
+
+        <div class="max-call-frequency">Maximum usage: On each new shipment</div>
+
+        </div>'
+      operationId: v2-createShipment
+      parameters:
+      - description: Connect order identifier
+        example: 1328ab88-0412-40f9-bc8f-deb4e338fb84
+        explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              application/json-0:
+                summary: Create Shipment Request
+                value:
+                  carrier: Custom carrier
+                  items:
+                  - id: '10000'
+                    quantity: 3
+                  tracking_number: '123456'
+                  tracking_url: http://www.customcarrier.com/tracking
+                  warehouse_id: WH-001
+              application/json-auto:
+                summary: Complete example with value types (application/json)
+                value:
+                  items:
+                  - quantity: '10'
+                    id: SELLER_ID_1
+                    order_line_id: 0024_COMMERCIAL_ID-A-1
+                  carrier: DHL Express
+                  return_tracking_number: '78910'
+                  tracking_number: '123456'
+                  tracking_url: https://wwwapps.ups.com/WebTracking/track
+                  warehouse_id: WH-001
+            schema:
+              $ref: '#/components/schemas/V2CreateShipmentRequest'
+        description: Shipment object and its items' details
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              examples:
+                application/json-0:
+                  summary: Create Shipment Response
+                  value:
+                    action_id: 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+                    tracking_id: 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    action_id: 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+                    tracking_id: 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+              schema:
+                $ref: '#/components/schemas/AsynchronousActionResponse'
+          description: Success. The shipment has been created.
+        '400':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Failure. The shipment has not been created because of wrong parameters.
+        '404':
+          content:
+            application/json:
+              examples:
+                application/json-auto:
+                  summary: Complete example with value types (application/json)
+                  value:
+                    code: DATA_NOT_FOUND
+                    message: An error occurred while processing your request
+                    errors:
+                    - message: 'An error occurred while processing your request: id is null'
+                      field: input.account.id
+                      extensions:
+                        minLength: 1
+                        maxLength: 255
+                    extensions:
+                      minLength: 1
+                      maxLength: 255
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Failure. The shipment has not been created because the order was missing.
+      security:
+      - Bearer:
+        - connect:shipment:create
+      summary: v2-createShipment - Ship items of a Connect order
+      tags:
+      - Shipments
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        message:
+          type: string
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - An error occurred while processing your request
+      required:
+      - code
+      - message
+    AsynchronousActionResponse:
+      type: object
+      properties:
+        action_id:
+          type: string
+          description: 'The unique identifier for the asynchronous action. It should be used with the [v2-getActionStatus API](#operation/v2-getActionStatus) to retrieve current action status and potential errors.
+
+            '
+          examples:
+          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+        tracking_id:
+          type: string
+          deprecated: true
+          description: '**Deprecated:** This field was previously used to obtain the action ID. It has been replaced by `action_id` and contains the same value. It is retained for backward compatibility.
+
+            '
+          examples:
+          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+      required:
+      - action_id
+    ShipmentItemResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Seller product identifier on the channel
+          examples:
+          - SELLER_ID_1
+          minLength: 1
+        order_line_id:
+          type: string
+          description: Order line identifier
+          examples:
+          - 0024_COMMERCIAL_ID-A-1
+          minLength: 1
+        quantity:
+          type: integer
+          description: Product quantity to ship
+          examples:
+          - '10'
+          minimum: 1
+      required:
+      - id
+      - order_line_id
+      - quantity
+    CreateShipmentRequest:
+      type: object
+      description: Shipment object and its items' details
+      properties:
+        carrier:
+          type: string
+          description: "Carrier company name. For example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ..."
+          examples:
+          - DHL Express
+          minLength: 1
+        items:
+          type: array
+          description: Shipment items
+          items:
+            $ref: '#/components/schemas/CreateShipmentItemRequest'
+        return_tracking_number:
+          type: string
+          description: Return shipment tracking number is required only for marketplaces that expect return tracking information when the shipment is created. If the marketplace doesn’t require it to create the shipment, the value won’t be synchronized.
+          examples:
+          - '78910'
+          minLength: 1
+        tracking_number:
+          type: string
+          description: Carrier tracking number
+          examples:
+          - '123456'
+          minLength: 1
+        tracking_url:
+          type: string
+          description: Carrier tracking URL
+          examples:
+          - https://wwwapps.ups.com/WebTracking/track
+      required:
+      - items
+    ShipmentResponse:
+      type: object
+      properties:
+        carrier:
+          type: string
+          description: "Carrier company name. For example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ..."
+          examples:
+          - DHL Express
+        channel_shipment_id:
+          type: string
+          description: Shipment identifier on the sales channel. This identifier is unique for a sales channel, but multiple channels can use the same identifier.
+          examples:
+          - SHIPMENT_CHANNEL_ID_1
+        created_at:
+          type: string
+          format: date-time
+          description: Shipment creation date
+          examples:
+          - '2021-07-06T09:24:36.32Z'
+        id:
+          type: string
+          description: Unique shipment identifier used by Connect. This identifier can be used as a primary key, but it must not be shared with final users.
+          examples:
+          - 0001_SHIPMENT-0001
+        items:
+          type: array
+          description: Items to ship
+          items:
+            $ref: '#/components/schemas/ShipmentItemResponse'
+        tracking_number:
+          type: string
+          description: Carrier tracking number
+          examples:
+          - '123456'
+          minLength: 1
+        tracking_url:
+          type: string
+          description: Carrier tracking URL
+          examples:
+          - https://www.apps.ups.com/WebTracking/track
+        updated_at:
+          type: string
+          format: date-time
+          description: Date of last shipment modification
+          examples:
+          - '2021-07-06T09:24:36.32Z'
+      required:
+      - channel_shipment_id
+      - created_at
+      - id
+      - items
+      - updated_at
+    V2CreateShipmentRequest:
+      type: object
+      description: Shipment object and its items' details
+      properties:
+        carrier:
+          type: string
+          description: "Carrier company name. For example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ..."
+          examples:
+          - DHL Express
+          minLength: 1
+        items:
+          type: array
+          description: Shipment items
+          items:
+            $ref: '#/components/schemas/CreateShipmentItemRequest'
+        return_tracking_number:
+          type: string
+          description: Return shipment tracking number is required only for marketplaces that expect return tracking information when the shipment is created. If the marketplace doesn't require it to create the shipment, the value won't be synchronized.
+          examples:
+          - '78910'
+          minLength: 1
+        tracking_number:
+          type: string
+          description: Carrier tracking number
+          examples:
+          - '123456'
+          minLength: 1
+        tracking_url:
+          type: string
+          description: Carrier tracking URL
+          examples:
+          - https://wwwapps.ups.com/WebTracking/track
+        warehouse_id:
+          type: string
+          description: Identifier of the warehouse from which the items are shipped. Optional; ignored by channels that do not require it.
+          examples:
+          - WH-001
+          minLength: 1
+      required:
+      - items
+    ErrorItem:
+      type: object
+      properties:
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
+        message:
+          type: string
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - 'An error occurred while processing your request: id is null'
+      required:
+      - message
+    CreateShipmentItemRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Seller product identifier
+          examples:
+          - SELLER_ID_1
+          minLength: 1
+        order_line_id:
+          type: string
+          description: Order line identifier
+          examples:
+          - 0024_COMMERCIAL_ID-A-1
+          minLength: 1
+        quantity:
+          type: integer
+          description: Product quantity to ship
+          examples:
+          - '10'
+          minimum: 1
+      required:
+      - quantity
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+x-group-parameters: true
