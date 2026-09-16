@@ -1,15 +1,13 @@
 aid: mirakl
 name: Mirakl
-description: >-
-  Mirakl is the global leader in platform business innovation, providing an operating
-  system for commerce that lets retailers, brands, and B2B distributors launch and
-  scale online marketplaces and dropship programs without holding inventory. The
-  platform spans the Mirakl Marketplace Platform (MMP), Mirakl Platform for Services
-  (MPS), the Mirakl Catalog Platform, Mirakl Connect for multichannel selling, Mirakl
-  Ads retail media, and Mirakl Payout. Mirakl exposes extensive REST APIs (OpenAPI
-  3.1) for sellers/shops and operators covering orders, offers, products, catalog,
-  invoicing, messaging, returns, and shipments, plus a Connect Channel Platform with
-  push webhooks for offer, price/stock, product, order-action, and store events.
+description: Mirakl is the global leader in platform business innovation, providing an operating system
+  for commerce that lets retailers, brands, and B2B distributors launch and scale online marketplaces
+  and dropship programs without holding inventory. The platform spans the Mirakl Marketplace Platform
+  (MMP), Mirakl Platform for Services (MPS), the Mirakl Catalog Platform, Mirakl Connect for multichannel
+  selling, Mirakl Ads retail media, and Mirakl Payout. Mirakl exposes extensive REST APIs (OpenAPI 3.1)
+  for sellers/shops and operators covering orders, offers, products, catalog, invoicing, messaging, returns,
+  and shipments, plus a Connect Channel Platform with push webhooks for offer, price/stock, product, order-action,
+  and store events.
 deliveryModel:
   model: saas
   open_source: false
@@ -44,7 +42,7 @@ x-tier: profiled
 x-tier-reason: enriched-from-developer-portal
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-08-13'
+modified: '2026-09-16'
 tags:
 - Company
 - Commerce
@@ -111,8 +109,7 @@ apis:
     url: openapi/_original/mirakl-connect-channel-webhooks-openapi.yaml
 - aid: mirakl:mirakl-invoicing-and-accounting-api
   name: Mirakl Invoicing and Accounting API
-  description: >-
-    The Invoicing and Accounting API from Mirakl — 11 operation(s) for invoicing and accounting.
+  description: The Invoicing and Accounting API from Mirakl — 11 operation(s) for invoicing and accounting.
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
@@ -371,10 +368,9 @@ apis:
   - type: OpenAPI
     url: openapi/mirakl-mapping-api-openapi.yml
 - aid: mirakl:mirakl-mirakl-connect-channel-platform-webhooks-api
-  name: Mirakl Mirakl Connect Channel Platform Webhooks API
-  description: >-
-    The Mirakl Connect Channel Platform Webhooks API from Mirakl — 0 operation(s) for mirakl connect channel
-    platform webhooks.
+  name: Mirakl Connect Channel Platform Webhooks API
+  description: The Mirakl Connect Channel Platform Webhooks API from Mirakl — 0 operation(s) for mirakl
+    connect channel platform webhooks.
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
