@@ -77,6 +77,8 @@ apis:
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
+  - Carrier
+  tags_raw:
   - Carriers
   properties:
   - type: OpenAPI
@@ -323,6 +325,8 @@ apis:
   humanURL: https://developer.mirakl.com/content/product/mmp/rest/seller/openapi3
   baseURL: https://your-instance.mirakl.net
   tags:
+  - Channels
+  tags_raw:
   - Channel
   properties:
   - type: OpenAPI
