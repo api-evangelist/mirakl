@@ -11,15 +11,10 @@ tags:
 paths:
   /conversations:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
-        Use this API to initiate a new conversation with a customer on a marketplace. Returns an action identifier to track the asynchronous processing.
-
-
-        <div class="api-description-extension">
-
-        </div>'
+        Use this API to initiate a new conversation with a customer on a marketplace. Returns an action identifier to track the asynchronous processing.'
       operationId: createConversation
       requestBody:
         content:
@@ -125,27 +120,25 @@ paths:
       - lang: cURL
         source: "curl -i -X POST \\\n  https://miraklconnect.com/api/conversations \\\n  -H 'Content-Type: multipart/form-data' \\\n  -F 'conversation=\"{\\\"entity\\\":{\\\"type\\\":\\\"ORDER\\\",\\\"id\\\":\\\"0123_Order1-A\\\"},\\\"first_message\\\":{\\\"body\\\":\\\"Hello! How can I assist you today?\\\"},\\\"topic\\\":{\\\"type\\\":\\\"FREE_TEXT\\\",\\\"value\\\":\\\"Customer has a general question about services.\\\"}}\";type=application/json' \\\n  -F 'files=@path/to/file'\n"
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Use this API to synchronize Mirakl Connect conversations with your system.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Pagination</div>
+        Pagination
 
 
-        <p>This resource supports seek pagination (<a href="#section/Seek-pagination-and-sort">see documentation</a>)</p>
+        This resource supports seek pagination (see documentation)
 
 
-        <div class="extension-title">Sort fields</div>
+        Sort fields
 
 
-        <code>sort</code> field can have the following values:<ul><li><b>updated_at</b> (Default) - Sort by date time of last conversation modification in Mirakl Connect (desc by default)</li></ul>
+        sort field can have the following values:
 
 
-        </div>'
+        updated_at (Default) - Sort by date time of last conversation modification in Mirakl Connect (desc by default)'
       operationId: listConversations
       parameters:
       - description: Token to access the next or previous page
@@ -271,15 +264,10 @@ paths:
       - Conversations
   /conversations/{conversationId}/messages:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
-        Use this API to create a new message to the customer in a conversation.
-
-
-        <div class="api-description-extension">
-
-        </div>'
+        Use this API to create a new message to the customer in a conversation.'
       operationId: createMessage
       parameters:
       - description: Unique identifier of the conversation
@@ -388,7 +376,39 @@ paths:
         source: "curl -i -X POST \\\n  https://miraklconnect.com/api/conversations/{conversationId}/messages \\\n  -H 'Content-Type: multipart/form-data' \\\n  -F 'message_input=\"{\\\"body\\\":\\\"Hello! How can I assist you today?\\\"}\";type=application/json' \\\n  -F 'files=@path/to/file'\n"
   /conversations/{conversationId}/attachments:
     get:
-      description: "<div class=\"extension-title\">Description</div>\n\nDownloads a ZIP archive of the requested attachments from a conversation.\nZIP archive contains all matching attachments with the following structure :\n\n```\n├── <message_id_1>/\n│   ├── <attachment_id_1>/\n│   │   └── <filename1>\n│   └── <attachment_id_2>/\n│       └── <filename2>\n└── <message_id_2>/\n    └── <attachment_id_3>/\n        └── <filename3>\n```\n\nThe zip file will be named with the following pattern : <conversation_id>_attachments_<timestamp>.zip\n\nUnknown or deleted attachments are silently skipped.\n\n\n<div class=\"api-description-extension\">\n</div>"
+      description: 'Description
+
+
+        Downloads a ZIP archive of the requested attachments from a conversation.
+
+        ZIP archive contains all matching attachments with the following structure :
+
+
+        ```
+
+        ├── /
+
+        │ ├── /
+
+        │ │ └──
+
+        │ └── /
+
+        │ └──
+
+        └── /
+
+        └── /
+
+        └──
+
+        ```
+
+
+        The zip file will be named with the following pattern : _attachments_.zip
+
+
+        Unknown or deleted attachments are silently skipped.'
       operationId: downloadConversationAttachments
       parameters:
       - description: The ID of the conversation from listConversations API.
@@ -450,15 +470,10 @@ paths:
       - Conversations
   /conversations/actions/{actionId}:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
-        Use this API to check the status of your asynchronous conversation action.
-
-
-        <div class="api-description-extension">
-
-        </div>'
+        Use this API to check the status of your asynchronous conversation action.'
       operationId: getConversationActionStatus
       parameters:
       - description: Unique identifier of the action
@@ -517,15 +532,10 @@ paths:
       - Conversations
   /conversations/{conversationId}:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
-        Returns messages of a conversation, ordered by channel creation date descending.
-
-
-        <div class="api-description-extension">
-
-        </div>'
+        Returns messages of a conversation, ordered by channel creation date descending.'
       operationId: getConversationMessages
       parameters:
       - description: Unique identifier of the conversation
@@ -600,28 +610,6 @@ paths:
       - Conversations
 components:
   schemas:
-    ZipArchive:
-      type: string
-      format: binary
-    CreateConversationInputTopic:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'Type of the topic
-
-
-            Enum: `"FREE_TEXT"`
-
-            '
-        value:
-          type: string
-          description: Value of the topic
-          example: Customer has a general question about services.
-          maxLength: 500
-      required:
-      - type
-      - value
     ResourcesPage:
       type: object
       properties:
@@ -633,60 +621,56 @@ components:
           type: string
           description: Token to access the previous page. Absent if the current page is the first one.
           minLength: 1
-    ConversationParticipant:
+    CreateConversationInput:
       type: object
       properties:
-        id:
-          type: string
-          description: Unique identifier of the participant. Null for type `CUSTOMER`.
-          example: '123456'
-        name:
-          type: string
-          description: Display name of the participant
-          example: Marketplace 1
-        type:
-          type: string
-          description: 'Type of the participant
+        entity:
+          type: object
+          description: Entity to link to the conversation
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the entity (e.g. order ID)
+              example: 0123_Order1-A
+            type:
+              type: string
+              description: 'Type of the entity linked to the conversation
 
 
-            Enum: `"CHANNEL"`, `"CUSTOMER"`
+                Enum: `"ORDER"`
 
-            '
-          example: CHANNEL
+                '
+          required:
+          - id
+          - type
+        first_message:
+          type: object
+          description: First message of the conversation
+          properties:
+            body:
+              type: string
+              description: Body of the first message
+              example: Hello! How can I assist you today?
+              maxLength: 2000
+              minLength: 1
+          required:
+          - body
+        topic:
+          $ref: '#/components/schemas/CreateConversationInputTopic'
+          description: Topic of the conversation
       required:
-      - name
-      - type
-    MessageInput:
+      - entity
+      - first_message
+      - topic
+    ConversationActionIdResponse:
       type: object
       properties:
-        body:
+        action_id:
           type: string
-          description: Body of the message
-          example: Hello! How can I assist you today?
-          maxLength: 2000
-          minLength: 1
+          description: Unique identifier of the action. Use `getConversationActionStatus` to retrieve the result of your request.
+          example: abcd
       required:
-      - body
-    ConversationOrigin:
-      type: object
-      properties:
-        channel_id:
-          type: string
-          description: Unique identifier of the sales channel
-        channel_name:
-          type: string
-          description: Name of the sales channel
-        channel_store_id:
-          type: string
-          description: Store identifier on the sales channel. This identifier is not guaranteed to be unique as multiple channels can use the same identifier.
-        channel_store_name:
-          type: string
-          description: Store public name on the sales channel
-      required:
-      - channel_id
-      - channel_name
-      - channel_store_id
-      - channel_store_name
+      - action_id
     Error:
       type: object
       properties:
@@ -713,6 +697,110 @@ components:
       required:
       - code
       - message
+    ConversationOrigin:
+      type: object
+      properties:
+        channel_id:
+          type: string
+          description: Unique identifier of the sales channel
+        channel_name:
+          type: string
+          description: Name of the sales channel
+        channel_store_id:
+          type: string
+          description: Store identifier on the sales channel. This identifier is not guaranteed to be unique as multiple channels can use the same identifier.
+        channel_store_name:
+          type: string
+          description: Store public name on the sales channel
+      required:
+      - channel_id
+      - channel_name
+      - channel_store_id
+      - channel_store_name
+    MessageAttachment:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: Original filename of the attachment
+          example: billing_statement.pdf
+        id:
+          type: string
+          description: Unique identifier of the attachment in Connect
+          example: 550e8400-e29b-41d4-a716-446655440001
+        size_in_bytes:
+          type: integer
+          format: int64
+          description: Size of the attachment in bytes
+          example: 987
+      required:
+      - filename
+      - id
+      - size_in_bytes
+    ErrorItem:
+      type: object
+      properties:
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
+        message:
+          type: string
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - 'An error occurred while processing your request: id is null'
+      required:
+      - message
+    ConversationParticipant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the participant. Null for type `CUSTOMER`.
+          example: '123456'
+        name:
+          type: string
+          description: Display name of the participant
+          example: Marketplace 1
+        type:
+          type: string
+          description: 'Type of the participant
+
+
+            Enum: `"CHANNEL"`, `"CUSTOMER"`
+
+            '
+          example: CHANNEL
+      required:
+      - name
+      - type
+    ConversationActionStatus:
+      type: string
+      description: 'Status of an asynchronous conversation action
+
+
+        Enum: `"PENDING"`, `"SUCCESS"`, `"ERROR"`
+
+        '
+    ConversationsPageResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResourcesPage'
+      - type: object
+        properties:
+          data:
+            type: array
+            description: Page of conversations corresponding to the filter parameters
+            items:
+              $ref: '#/components/schemas/ConversationResponse'
+        required:
+        - data
     MessageResponse:
       type: object
       properties:
@@ -756,15 +844,6 @@ components:
       - created_at
       - id
       - sender
-    ConversationActionIdResponse:
-      type: object
-      properties:
-        action_id:
-          type: string
-          description: Unique identifier of the action. Use `getConversationActionStatus` to retrieve the result of your request.
-          example: abcd
-      required:
-      - action_id
     ConversationResponse:
       type: object
       properties:
@@ -849,114 +928,6 @@ components:
       - participants
       - topic
       - updated_at
-    ConversationMessagesResponse:
-      type: object
-      properties:
-        messages:
-          type: array
-          description: List of messages in the conversation
-          items:
-            $ref: '#/components/schemas/MessageResponse'
-      required:
-      - messages
-    ConversationActionErrorItem:
-      type: object
-      properties:
-        code:
-          type: string
-          description: 'One of the following :
-
-            - INVALID_INPUT
-
-            - DATA_NOT_FOUND
-
-            - UNEXPECTED
-
-            - UNAVAILABLE
-
-            - TOO_MANY_REQUEST
-
-            '
-          example: DATA_NOT_FOUND
-        message:
-          type: string
-          description: Human-readable error message
-          example: Conversation not found for the given ID.
-      required:
-      - code
-      - message
-    MessageSender:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the sender. Null for type `CUSTOMER`
-          example: '00032'
-        name:
-          type: string
-          description: Display name of the sender
-          example: Marketplace 1
-        type:
-          type: string
-          description: 'Type of the sender
-
-
-            Enum: `"CUSTOMER"`, `"STORE"`, `"CHANNEL"`
-
-            '
-          example: CHANNEL
-      required:
-      - name
-      - type
-    ConversationActionStatus:
-      type: string
-      description: 'Status of an asynchronous conversation action
-
-
-        Enum: `"PENDING"`, `"SUCCESS"`, `"ERROR"`
-
-        '
-    CreateConversationInput:
-      type: object
-      properties:
-        entity:
-          type: object
-          description: Entity to link to the conversation
-          properties:
-            id:
-              type: string
-              description: Unique identifier of the entity (e.g. order ID)
-              example: 0123_Order1-A
-            type:
-              type: string
-              description: 'Type of the entity linked to the conversation
-
-
-                Enum: `"ORDER"`
-
-                '
-          required:
-          - id
-          - type
-        first_message:
-          type: object
-          description: First message of the conversation
-          properties:
-            body:
-              type: string
-              description: Body of the first message
-              example: Hello! How can I assist you today?
-              maxLength: 2000
-              minLength: 1
-          required:
-          - body
-        topic:
-          $ref: '#/components/schemas/CreateConversationInputTopic'
-          description: Topic of the conversation
-      required:
-      - entity
-      - first_message
-      - topic
     ConversationActionStatusResponse:
       type: object
       properties:
@@ -988,59 +959,98 @@ components:
       - id
       - status
       - updated_at
-    ConversationsPageResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResourcesPage'
-      - type: object
-        properties:
-          data:
-            type: array
-            description: Page of conversations corresponding to the filter parameters
-            items:
-              $ref: '#/components/schemas/ConversationResponse'
-        required:
-        - data
-    ErrorItem:
+    MessageSender:
       type: object
       properties:
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        field:
-          type: string
-          description: JsonPath to the field where the error occurred
-          examples:
-          - input.account.id
-        message:
-          type: string
-          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - 'An error occurred while processing your request: id is null'
-      required:
-      - message
-    MessageAttachment:
-      type: object
-      properties:
-        filename:
-          type: string
-          description: Original filename of the attachment
-          example: billing_statement.pdf
         id:
           type: string
-          description: Unique identifier of the attachment in Connect
-          example: 550e8400-e29b-41d4-a716-446655440001
-        size_in_bytes:
-          type: integer
-          format: int64
-          description: Size of the attachment in bytes
-          example: 987
+          description: Unique identifier of the sender. Null for type `CUSTOMER`
+          example: '00032'
+        name:
+          type: string
+          description: Display name of the sender
+          example: Marketplace 1
+        type:
+          type: string
+          description: 'Type of the sender
+
+
+            Enum: `"CUSTOMER"`, `"STORE"`, `"CHANNEL"`
+
+            '
+          example: CHANNEL
       required:
-      - filename
-      - id
-      - size_in_bytes
+      - name
+      - type
+    ConversationMessagesResponse:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: List of messages in the conversation
+          items:
+            $ref: '#/components/schemas/MessageResponse'
+      required:
+      - messages
+    ZipArchive:
+      type: string
+      format: binary
+    ConversationActionErrorItem:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'One of the following :
+
+            - INVALID_INPUT
+
+            - DATA_NOT_FOUND
+
+            - UNEXPECTED
+
+            - UNAVAILABLE
+
+            - TOO_MANY_REQUEST
+
+            '
+          example: DATA_NOT_FOUND
+        message:
+          type: string
+          description: Human-readable error message
+          example: Conversation not found for the given ID.
+      required:
+      - code
+      - message
+    MessageInput:
+      type: object
+      properties:
+        body:
+          type: string
+          description: Body of the message
+          example: Hello! How can I assist you today?
+          maxLength: 2000
+          minLength: 1
+      required:
+      - body
+    CreateConversationInputTopic:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Type of the topic
+
+
+            Enum: `"FREE_TEXT"`
+
+            '
+        value:
+          type: string
+          description: Value of the topic
+          example: Customer has a general question about services.
+          maxLength: 500
+      required:
+      - type
+      - value
   securitySchemes:
     Bearer:
       bearerFormat: JWT

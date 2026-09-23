@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Mirakl Users API
   version: ''
-  description: 'Operations tagged Users across 9 of this provider''s published API definitions: mirakl-mcm-front-openapi.yaml, mirakl-mcm-operator-openapi.json, mirakl-mcm-seller-openapi.json, mirakl-mmp-front-openapi.yaml, mirakl-mmp-operator-openapi.json, mirakl-mmp-seller-openapi.json, mirakl-mms-front-openapi.yaml, mirakl-mms-operator-openapi.json, mirakl-mms-seller-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Users across 4 of this provider''s published API definitions: mirakl-mcm-seller-openapi.json, mirakl-mmp-front-openapi.yaml, mirakl-mmp-seller-openapi.json, mirakl-mms-seller-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - description: URL to be replaced by your Mirakl instance URL
   url: https://your-instance.mirakl.net
@@ -11,21 +11,30 @@ tags:
 paths:
   /api/users/shops/roles:
     get:
-      description: '<div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+      description: 'Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: On each user role view</div>
-
-        <div class="max-call-frequency">Maximum usage: On each user role view</div>
-
-        <div class="extension-title">Read More</div>
+        Recommended usage: On each user role view
 
 
-        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage_user_and_rights/store_users/managing_store_users.html">More context</a></li></ul></div>'
+        Maximum usage: On each user role view
+
+
+        Read More
+
+
+        More context'
       operationId: RO02
-      parameters: []
+      parameters:
+      - description: Use this parameter when your user has access to several shops. If not specified, the shop_id from your default shop will be used.
+        explode: true
+        in: query
+        name: shop_id
+        required: false
+        schema:
+          type: integer
+          format: int64
+        style: form
       responses:
         '200':
           content:
@@ -56,8 +65,9 @@ paths:
                 $ref: '#/components/schemas/RO02_Response_200'
           description: OK
       security:
-      - Front-Bearer-Token: []
-      - OAuth-2: []
+      - Shop-API-Key:
+        - ROLE_PARTNER_SHOP_USER_CREATE
+        - ROLE_SHOP_ADMIN
       summary: RO02 - List shop roles
       tags:
       - Users
@@ -66,13 +76,6 @@ paths:
       url: https://your-instance.mirakl.net
 components:
   schemas:
-    RO02_Response_200:
-      type: object
-      properties:
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/RO02_Response_200_Roles'
     RO02_Response_200_Roles:
       type: object
       properties:
@@ -80,7 +83,19 @@ components:
           type: string
         description:
           type: string
+    RO02_Response_200:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RO02_Response_200_Roles'
   securitySchemes:
+    Shop-API-Key:
+      in: header
+      name: Authorization
+      type: apiKey
+      x-authorization: '{{SHOP_KEY}}'
     Front-Bearer-Token:
       bearerFormat: JWT
       scheme: bearer
@@ -95,44 +110,14 @@ components:
           scopes: {}
           tokenUrl: https://auth.mirakl.net/oauth/token
       type: oauth2
-    Operator-Bearer-Token:
-      bearerFormat: JWT
-      scheme: bearer
-      type: http
-      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
-    Shop-API-Key:
-      in: header
-      name: Authorization
-      type: apiKey
-      x-authorization: '{{SHOP_KEY}}'
-    operator_bearer_token:
-      bearerFormat: JWT
-      scheme: bearer
-      type: http
-      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
     shop_api_key:
       in: header
       name: Authorization
       type: apiKey
       x-authorization: '{{SHOP_KEY}}'
-    front_api_key:
-      in: header
-      name: Authorization
-      type: apiKey
-      x-authorization: '{{FRONT_KEY}}'
-    operator_api_key:
-      in: header
-      name: Authorization
-      type: apiKey
-      x-authorization: '{{OPERATOR_KEY}}'
 x-refined-from:
-- mirakl-mcm-front-openapi.yaml
-- mirakl-mcm-operator-openapi.json
 - mirakl-mcm-seller-openapi.json
 - mirakl-mmp-front-openapi.yaml
-- mirakl-mmp-operator-openapi.json
 - mirakl-mmp-seller-openapi.json
-- mirakl-mms-front-openapi.yaml
-- mirakl-mms-operator-openapi.json
 - mirakl-mms-seller-openapi.json
 x-group-parameters: true

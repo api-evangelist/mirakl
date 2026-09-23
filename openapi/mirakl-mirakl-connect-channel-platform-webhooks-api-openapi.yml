@@ -803,91 +803,6 @@ webhooks:
       - Mirakl Connect Channel Platform Webhooks
 components:
   schemas:
-    TaxPayload:
-      description: Tax payload
-      properties:
-        amount:
-          $ref: '#/components/schemas/PricePayload'
-          description: Canceled tax amount
-        code:
-          type: string
-          description: Tax code on the sales channel
-      required:
-      - amount
-      - code
-    UploadOrderDocumentEntityEvent:
-      properties:
-        id:
-          type: string
-          description: Identifier of the entity to which the order document is linked.
-        type:
-          type: string
-          description: 'Type of the entity to which the order document is linked.
-
-
-            Enum: `"RETURN"`
-
-            '
-      required:
-      - id
-      - type
-    ReturnAcceptanceCommandEvent:
-      description: Return Acceptance payload command, used to process return acceptance or refusal
-      properties:
-        accepted:
-          type: boolean
-          description: Indicates if a return is accepted (true) or refused (false).
-        action_id:
-          type: string
-          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
-        channel_id:
-          type: string
-          description: The channel id
-        channel_order_id:
-          type: string
-          description: The order id on the channel
-        channel_return_id:
-          type: string
-          description: The return id on the channel
-        channel_store_id:
-          type: string
-          description: The store id on the channel
-        rejection_reason:
-          type: string
-          description: 'Reason code for the refusal
-
-
-            Enum: `"RETURN_WINDOW_CLOSED"`, `"NOT_ELIGIBLE_FOR_RETURN"`, `"FINAL_SALES"`, `"OTHER"`
-
-            '
-        sub_channel_code:
-          type: string
-          description: The sub-channel code
-      required:
-      - accepted
-      - action_id
-      - channel_id
-      - channel_order_id
-      - channel_return_id
-      - channel_store_id
-      title: ACCEPT_RETURN
-    SubChannelPrice:
-      deprecated: true
-      description: 'Deprecated: internal-only type. Not intended for integration and may be removed without notice.'
-      properties:
-        code:
-          type: string
-          description: Sub-channel code
-        discount_price:
-          $ref: '#/components/schemas/DiscountPriceUpsert'
-          description: Sub-channel discount price
-        standard_price:
-          $ref: '#/components/schemas/StandardPriceUpsert'
-          description: Sub-channel standard price
-      required:
-      - code
-      - discount_price
-      - standard_price
     OrderCancelationCommandEvent:
       description: Order Cancellation payload command, used to process full or partial order cancellation
       properties:
@@ -918,20 +833,38 @@ components:
       - channel_order_id
       - channel_store_id
       title: CANCEL
-    StatusFeatureConfigurationPayload:
-      description: Parameterized configuration of the feature
-      discriminator:
-        mapping:
-          business-information-sync: '#/components/schemas/EnableStatusFeatureConfigurationPayload'
-          store-linking: '#/components/schemas/LinkStatusFeatureConfigurationPayload'
-        propertyName: feature
-      oneOf:
-      - $ref: '#/components/schemas/EnableStatusFeatureConfigurationPayload'
-      - $ref: '#/components/schemas/LinkStatusFeatureConfigurationPayload'
+    DeliveryPartner:
       properties:
-        feature:
+        name:
           type: string
-          description: Name of the feature
+    PricePayload:
+      description: Price payload
+      properties:
+        amount:
+          type: number
+          format: with decimals
+          description: Price amount
+          example: 1234.56
+        currency:
+          type: string
+          description: Currency ISO code
+          example: EUR
+      required:
+      - amount
+      - currency
+    ProductIdentifierDTO:
+      properties:
+        type:
+          type: string
+          description: Product identifier type
+          example: GTIN
+        value:
+          type: string
+          description: Product identifier value
+          example: '12345678'
+      required:
+      - type
+      - value
     StoreFeatureDataStatusFeatureConfigurationPayload:
       properties:
         channel_id:
@@ -961,525 +894,6 @@ components:
       - feature
       - store_id
       - trigger_date
-    OrderShipmentCommandEvent:
-      description: Order Shipment payload command, Used to create a shipment for an order
-      properties:
-        action_id:
-          type: string
-          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
-        carrier:
-          type: string
-          description: "The name of the carrier responsible for the shipment.\n\nFor example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ...\n"
-          example: DHL Express
-        channel_id:
-          type: string
-          description: The channel id
-        channel_order_id:
-          type: string
-          description: The order id on the channel
-        channel_store_id:
-          type: string
-          description: The store id on the channel
-        items:
-          type: array
-          description: List of items included in the shipment, detailing each item being shipped
-          items:
-            $ref: '#/components/schemas/OrderShipmentItemPayload'
-        return_tracking_number:
-          type: string
-          description: The return tracking number. This field is only required for marketplaces that expect return tracking information at shipment creation.
-          example: 1Z999AA1234567891
-        sub_channel_code:
-          type: string
-          description: The sub-channel code
-        tracking_number:
-          type: string
-          description: The tracking number assigned for this shipment
-          example: 1Z999AA1234567890
-        tracking_url:
-          type: string
-          description: The URL provided for shipment tracking
-          example: https://tracking.carrier.com/123456
-        warehouse_id:
-          type: string
-          description: Identifier of the warehouse from which the items are shipped. Ignore this field if your channel does not require it.
-          example: WH-001
-      required:
-      - action_id
-      - carrier
-      - channel_id
-      - channel_order_id
-      - channel_store_id
-      title: CREATE_SHIPMENT
-    OrderActionEvent:
-      description: Command to perform an action on an order. This event is processed by the channel technology connector
-      properties:
-        data:
-          $ref: '#/components/schemas/ActionPayload'
-          description: ''
-        id:
-          type: string
-          description: Unique identifier for the payload in ULID format
-        time:
-          type: string
-          format: date-time
-          description: Event creation date
-        type:
-          type: string
-          description: 'Type of the action to perform on the order, acts as a discriminator for the `data` field
-
-
-            Enum: `"ACCEPT"`, `"CREATE_SHIPMENT"`, `"REFUND"`, `"CANCEL"`, `"ACCEPT_RETURN"`, `"UPDATE_RETURN_TRACKING_INFORMATION"`, `"ACKNOWLEDGE_RETURN_RECEPTION"`, `"CLOSE_RETURN"`, `"UPLOAD_DOCUMENT"`
-
-            '
-      required:
-      - id
-      - time
-      - type
-    PricePayload:
-      description: Price payload
-      properties:
-        amount:
-          type: number
-          format: with decimals
-          description: Price amount
-          example: 1234.56
-        currency:
-          type: string
-          description: Currency ISO code
-          example: EUR
-      required:
-      - amount
-      - currency
-    Attribute:
-      description: An attribute of the product.
-      properties:
-        id:
-          type: string
-          description: Id of the attribute, in the channel's format.
-        locale:
-          type: string
-          description: 'For localized attribute, locale used for the `value`.
-
-
-            Format can be either `<ISO-639>` or `<ISO-639>_<ISO-3166>`.
-
-
-            This `locale` property is only available when actually set (never `null` nor empty).
-
-            '
-        value:
-          type: string
-          description: Value of the attribute, in the channel's format.
-      required:
-      - id
-    Price:
-      properties:
-        amount:
-          type: number
-          format: with decimals
-        currency:
-          type: string
-    DiscountPriceUpsert:
-      properties:
-        action_type:
-          type: string
-          description: 'Enum: `"UPDATE"`, `"DELETE"`, `"IGNORE"`
-
-            '
-        end_date:
-          type: string
-          format: date-time
-        price:
-          $ref: '#/components/schemas/Price'
-        start_date:
-          type: string
-          format: date-time
-    InventoryUpsert:
-      properties:
-        action_type:
-          type: string
-          description: 'Enum: `"UPDATE"`, `"DELETE"`, `"IGNORE"`
-
-            '
-        delivery_partner:
-          $ref: '#/components/schemas/DeliveryPartner'
-        quantity:
-          type: integer
-          format: int32
-    DeliveryPartner:
-      properties:
-        name:
-          type: string
-    OrderAcceptanceCommandEvent:
-      description: Order Acceptance payload command, Used to accept or decline order
-      properties:
-        action_id:
-          type: string
-          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
-        channel_id:
-          type: string
-          description: The channel id
-        channel_order_id:
-          type: string
-          description: The order id on the channel
-        channel_store_id:
-          type: string
-          description: The store id on the channel
-        order_lines:
-          type: array
-          description: List of acceptance order line items
-          items:
-            $ref: '#/components/schemas/OrderLineAcceptancePayload'
-        sub_channel_code:
-          type: string
-          description: The sub-channel code
-      required:
-      - action_id
-      - channel_id
-      - channel_order_id
-      - channel_store_id
-      - order_lines
-      title: ACCEPT
-    OrderRefundCommandEvent:
-      description: Order Refund payload command, Used to refund order
-      properties:
-        action_id:
-          type: string
-          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
-        channel_id:
-          type: string
-          description: The channel id
-        channel_order_id:
-          type: string
-          description: The order id on the channel
-        channel_store_id:
-          type: string
-          description: The store id on the channel
-        refunds:
-          type: array
-          description: List of order line refund actions, detailing each line item to be refunded
-          items:
-            $ref: '#/components/schemas/OrderLineRefundPayload'
-        sub_channel_code:
-          type: string
-          description: The sub-channel code
-      required:
-      - action_id
-      - channel_id
-      - channel_order_id
-      - channel_store_id
-      title: REFUND
-    ReturnTrackingInformationUpdateCommandEvent:
-      description: Return tracking information update payload command, used to process return tracking information updates
-      properties:
-        action_id:
-          type: string
-          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
-        channel_id:
-          type: string
-          description: The channel id
-        channel_order_id:
-          type: string
-          description: The order id on the channel
-        channel_return_id:
-          type: string
-          description: The return id on the channel
-        channel_store_id:
-          type: string
-          description: The store id on the channel
-        label_url:
-          type: string
-          description: The URL provided by the carrier that allows the customer to download/print the return label
-          example: https://gls-group.eu/GROUP/en/parcel-tracking?match=ABP4IVBG
-        rma_id:
-          type: string
-          description: RMA ID (Return Merchandise Authorization)
-          example: CR117B72FEF5E8391187
-        sub_channel_code:
-          type: string
-          description: The sub-channel code
-        tracking:
-          $ref: '#/components/schemas/Tracking'
-          description: Object that contains all the information concerning the return tracking
-      required:
-      - action_id
-      - channel_id
-      - channel_order_id
-      - channel_return_id
-      - channel_store_id
-      title: UPDATE_RETURN_TRACKING_INFORMATION
-    OfferUpsertEvent:
-      properties:
-        data:
-          $ref: '#/components/schemas/OfferUpsertEventData'
-          description: Domain-specific business data
-        id:
-          type: string
-          description: Unique identifier for the payload in ULID format
-        time:
-          type: string
-          format: date-time
-          description: Event creation date
-        type:
-          type: string
-          description: 'Type of the payload which defines the data
-
-
-            Enum: `"OFFER_UPSERT"`
-
-            '
-      required:
-      - data
-      - id
-      - time
-      - type
-    OrderLineRefundPayload:
-      properties:
-        channel_order_line_id:
-          type: string
-          description: The order line identified as defined by the channel. ID of the order line to refund.
-          example: 0002_3202630-A-2
-        price:
-          $ref: '#/components/schemas/PricePayload'
-          description: Product price to refund, excluding taxes and shipping price
-        product_id:
-          type: string
-          description: Seller product identifier on the channel
-          example: SELLER_ID_1
-        quantity:
-          type: integer
-          format: int32
-          description: Product quantity to refund
-          example: 10
-        reason:
-          type: string
-          description: 'The reason why the order line is refunded
-
-
-            Enum: `"CUSTOMER_CANCELATION"`, `"OUT_OF_STOCK"`, `"RETURN"`, `"ITEM_NOT_RECEIVED"`, `"AGREEMENT"`, `"DEFECT"`, `"UNABLE_TO_DELIVER"`, `"CHANNEL_SPECIFIC"`
-
-            '
-        shipping_price:
-          $ref: '#/components/schemas/PricePayload'
-          description: Shipping price to refund, excluding shipping taxes
-        shipping_taxes:
-          type: array
-          description: List of shipping taxes to refund
-          items:
-            $ref: '#/components/schemas/TaxPayload'
-        taxes:
-          type: array
-          description: List of taxes to refund
-          items:
-            $ref: '#/components/schemas/TaxPayload'
-      required:
-      - channel_order_line_id
-      - price
-      - product_id
-      - quantity
-      - reason
-      - shipping_price
-    OrderLineAcceptancePayload:
-      description: Acceptance order line payload
-      properties:
-        accepted:
-          type: boolean
-          description: Indicates if an order line is accepted (true) or refused (false).
-          example: true
-        channel_order_line_id:
-          type: string
-          description: The order line identified as defined by the channel. ID of the order line to accept or refuse.
-          example: 0002_3202630-A-2
-      required:
-      - accepted
-      - channel_order_line_id
-    PriceStockUpsertEventData:
-      properties:
-        channel_id:
-          type: string
-          description: Identifier of the channel to be notified
-        discount_price:
-          $ref: '#/components/schemas/DiscountPriceUpsert'
-          description: Discount price (store-level)
-        identifiers:
-          type: array
-          description: Product identifiers
-          items:
-            $ref: '#/components/schemas/ProductIdentifierDTO'
-        inventory:
-          $ref: '#/components/schemas/InventoryUpsert'
-          description: Aggregated stock, kept for backward compatibility
-        offer_attributes:
-          type: array
-          description: Offer attributes
-          items:
-            $ref: '#/components/schemas/ProductOfferAttribute'
-        product_id:
-          type: string
-          description: Reference of the product
-        standard_price:
-          $ref: '#/components/schemas/StandardPriceUpsert'
-          description: Standard price (store-level)
-        stock:
-          $ref: '#/components/schemas/StockUpsert'
-          description: Stock breakdown per warehouse and per logistic partner
-        store_id:
-          type: string
-          description: Store id of the marketplace to be notified
-        sub_channel:
-          $ref: '#/components/schemas/SubChannelData'
-          description: Sub-channel
-      required:
-      - channel_id
-      - inventory
-      - offer_attributes
-      - product_id
-      - stock
-      - store_id
-    ProductUpsertEvent:
-      properties:
-        data:
-          $ref: '#/components/schemas/ProductUpsertEventData'
-          description: Domain-specific business data
-        id:
-          type: string
-          description: Unique identifier for the payload in ULID format
-        sequence:
-          type: integer
-          format: int64
-          description: Sequence number of the payload, used to order payloads of the same source
-        sequenceSize:
-          type: integer
-          format: int64
-          description: Total number of payloads of the same source
-        sequenceType:
-          type: string
-          description: Type of sequencing applied to this payload (for now it's always PROGRESS)
-        source:
-          type: string
-          description: Source of the payload
-        time:
-          type: string
-          format: date-time
-          description: Event creation date
-        type:
-          type: string
-          description: 'Type of the payload which defines the data
-
-
-            Enum: `"PRODUCT_UPSERT"`
-
-            '
-      required:
-      - data
-      - id
-      - time
-      - type
-    StandardPriceUpsert:
-      properties:
-        action_type:
-          type: string
-          description: 'Enum: `"UPDATE"`, `"DELETE"`, `"IGNORE"`
-
-            '
-        price:
-          $ref: '#/components/schemas/Price'
-    SubChannelData:
-      properties:
-        code:
-          type: string
-          description: Sub-channel code
-        discount_price:
-          $ref: '#/components/schemas/DiscountPriceUpsert'
-          description: Sub-channel discount price
-        standard_price:
-          $ref: '#/components/schemas/StandardPriceUpsert'
-          description: Sub-channel standard price
-        stock:
-          $ref: '#/components/schemas/StockUpsert'
-          description: Sub-channel stock
-      required:
-      - code
-      - discount_price
-      - standard_price
-      - stock
-    StockDetail:
-      discriminator:
-        mapping:
-          FULFILLMENT_PARTNER: '#/components/schemas/FulfillmentPartnerStock'
-          SELLER_CENTRALIZED: '#/components/schemas/SellerCentralizedStock'
-          SELLER_WAREHOUSE: '#/components/schemas/SellerWarehouseStock'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Nature of the stock
-
-
-            Enum: `"SELLER_CENTRALIZED"`, `"SELLER_WAREHOUSE"`, `"FULFILLMENT_PARTNER"`
-
-            '
-      required:
-      - type
-    OrderShipmentItemPayload:
-      description: Order Shipment Item payload
-      properties:
-        channel_order_line_id:
-          type: string
-          description: The order line identified as defined by the channel. ID of the order line to ship.
-          example: 0002_3202630-A-2
-        id:
-          type: string
-          description: Seller product identifier
-          example: SELLER_ID_1
-        quantity:
-          type: integer
-          format: int32
-          description: Product quantity to ship
-          example: 10
-      required:
-      - channel_order_line_id
-      - id
-      - quantity
-    LinkStatusFeatureConfigurationPayload:
-      properties:
-        status:
-          type: string
-          description: 'Status of the feature, either linked or unlinked
-
-
-            Enum: `"linked"`, `"unlinked"`
-
-            '
-      required:
-      - status
-      title: store-linking
-    PriceStockUpsertEvent:
-      properties:
-        data:
-          $ref: '#/components/schemas/PriceStockUpsertEventData'
-          description: Domain-specific business data
-        id:
-          type: string
-          description: Unique identifier for the payload in ULID format
-        time:
-          type: string
-          format: date-time
-          description: Event creation date
-        type:
-          type: string
-          description: 'Type of the payload which defines the data
-
-
-            Enum: `"PRICE_STOCK_UPSERT"`
-
-            '
-      required:
-      - data
-      - id
-      - time
-      - type
     CloseReturnCommandEvent:
       description: Close return payload command, used to marked return as closed
       properties:
@@ -1508,74 +922,119 @@ components:
       - channel_return_id
       - channel_store_id
       title: CLOSE_RETURN
-    EnableStatusFeatureConfigurationPayload:
+    StandardPriceUpsert:
+      properties:
+        action_type:
+          type: string
+          description: 'Enum: `"UPDATE"`, `"DELETE"`, `"IGNORE"`
+
+            '
+        price:
+          $ref: '#/components/schemas/Price'
+    ActionPayload:
+      description: Event payload details for the specific action type
+      oneOf:
+      - $ref: '#/components/schemas/OrderRefundCommandEvent'
+      - $ref: '#/components/schemas/OrderCancelationCommandEvent'
+      - $ref: '#/components/schemas/OrderAcceptanceCommandEvent'
+      - $ref: '#/components/schemas/OrderShipmentCommandEvent'
+      - $ref: '#/components/schemas/ReturnAcceptanceCommandEvent'
+      - $ref: '#/components/schemas/ReturnTrackingInformationUpdateCommandEvent'
+      - $ref: '#/components/schemas/AcknowledgeReturnReceptionCommandEvent'
+      - $ref: '#/components/schemas/CloseReturnCommandEvent'
+      - $ref: '#/components/schemas/DocumentUploadCommandEvent'
+    LinkStatusFeatureConfigurationPayload:
       properties:
         status:
           type: string
-          description: 'Status of the feature, either enabled or disabled
+          description: 'Status of the feature, either linked or unlinked
 
 
-            Enum: `"enabled"`, `"disabled"`
+            Enum: `"linked"`, `"unlinked"`
 
             '
       required:
       - status
-      title: business-information-sync
-    Tracking:
+      title: store-linking
+    UploadOrderDocumentEntityEvent:
       properties:
-        carrier:
-          type: string
-          description: "The name of the carrier responsible for the return.\n\nFor example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ...\n"
-          example: DHL Express
-        tracking_number:
-          type: string
-          description: The tracking number assigned by the carrier for this return
-          example: '781234567890'
-        tracking_url:
-          type: string
-          description: The URL provided by the carrier for return tracking
-          example: https://www.fedex.com/fedextrack/?trknbr=781234567890
-    StoreManagementFeatureEvent:
-      examples:
-      - data:
-          channel_id: '001'
-          configuration:
-            status: enabled
-          feature: business-information-sync
-          store_id: '2005'
-          trigger_date: '2024-05-20T10:15:30.500Z'
-        id: 01jv299c9wxxfg4b7vvzzq3c3y
-        time: '2024-05-20T10:15:30.500Z'
-        type: STORE_FEATURE
-      - data:
-          channel_id: '001'
-          configuration:
-            status: linked
-          feature: store-linking
-          store_id: '2005'
-          trigger_date: '2024-05-20T10:15:30.500Z'
-        id: 01jv299c9wxxfg4b7vvzzq3c3y
-        time: '2024-05-20T10:15:30.500Z'
-        type: STORE_FEATURE
-      properties:
-        data:
-          $ref: '#/components/schemas/StoreFeatureDataStatusFeatureConfigurationPayload'
-          description: Domain-specific business data
         id:
           type: string
-          description: Unique identifier for the payload in ULID format
-        time:
-          type: string
-          format: date-time
-          description: Event creation date
+          description: Identifier of the entity to which the order document is linked.
         type:
           type: string
-          description: Type of the payload which defines the data
+          description: 'Type of the entity to which the order document is linked.
+
+
+            Enum: `"RETURN"`
+
+            '
       required:
-      - data
       - id
-      - time
       - type
+    StockUpsert:
+      properties:
+        action_type:
+          type: string
+          description: 'Action to apply on the stock
+
+
+            Enum: `"UPDATE"`, `"DELETE"`, `"IGNORE"`
+
+            '
+        breakdown:
+          type: array
+          description: Stock breakdown per seller-centralized stock, seller warehouse and logistic partner; null unless actionType is UPDATE
+          items:
+            $ref: '#/components/schemas/StockDetail'
+      required:
+      - action_type
+    OrderShipmentItemPayload:
+      description: Order Shipment Item payload
+      properties:
+        channel_order_line_id:
+          type: string
+          description: The order line identified as defined by the channel. ID of the order line to ship.
+          example: 0002_3202630-A-2
+        id:
+          type: string
+          description: Seller product identifier
+          example: SELLER_ID_1
+        quantity:
+          type: integer
+          format: int32
+          description: Product quantity to ship
+          example: 10
+      required:
+      - channel_order_line_id
+      - id
+      - quantity
+    TaxPayload:
+      description: Tax payload
+      properties:
+        amount:
+          $ref: '#/components/schemas/PricePayload'
+          description: Canceled tax amount
+        code:
+          type: string
+          description: Tax code on the sales channel
+      required:
+      - amount
+      - code
+    OrderLineAcceptancePayload:
+      description: Acceptance order line payload
+      properties:
+        accepted:
+          type: boolean
+          description: Indicates if an order line is accepted (true) or refused (false).
+          example: true
+        channel_order_line_id:
+          type: string
+          description: The order line identified as defined by the channel. ID of the order line to accept or refuse.
+          example: 0002_3202630-A-2
+      required:
+      - accepted
+      - channel_order_line_id
     OfferUpsertEventData:
       properties:
         channel_id:
@@ -1631,69 +1090,163 @@ components:
       - stock
       - store_id
       - use_case
-    AcknowledgeReturnReceptionCommandEvent:
-      description: Acknowledge return reception payload command, used to marked return as received
+    PriceStockUpsertEventData:
       properties:
-        action_id:
-          type: string
-          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
         channel_id:
           type: string
-          description: The channel id
-        channel_order_id:
+          description: Identifier of the channel to be notified
+        discount_price:
+          $ref: '#/components/schemas/DiscountPriceUpsert'
+          description: Discount price (store-level)
+        identifiers:
+          type: array
+          description: Product identifiers
+          items:
+            $ref: '#/components/schemas/ProductIdentifierDTO'
+        inventory:
+          $ref: '#/components/schemas/InventoryUpsert'
+          description: Aggregated stock, kept for backward compatibility
+        offer_attributes:
+          type: array
+          description: Offer attributes
+          items:
+            $ref: '#/components/schemas/ProductOfferAttribute'
+        product_id:
           type: string
-          description: The order id on the channel
-        channel_return_id:
+          description: Reference of the product
+        standard_price:
+          $ref: '#/components/schemas/StandardPriceUpsert'
+          description: Standard price (store-level)
+        stock:
+          $ref: '#/components/schemas/StockUpsert'
+          description: Stock breakdown per warehouse and per logistic partner
+        store_id:
           type: string
-          description: The return id on the channel
-        channel_store_id:
-          type: string
-          description: The store id on the channel
-        sub_channel_code:
-          type: string
-          description: The sub-channel code
+          description: Store id of the marketplace to be notified
+        sub_channel:
+          $ref: '#/components/schemas/SubChannelData'
+          description: Sub-channel
       required:
-      - action_id
       - channel_id
-      - channel_order_id
-      - channel_return_id
-      - channel_store_id
-      title: ACKNOWLEDGE_RETURN_RECEPTION
-    ProductIdentifierDTO:
+      - inventory
+      - offer_attributes
+      - product_id
+      - stock
+      - store_id
+    OrderLineCancelationPayload:
+      description: Cancelation order line payload
       properties:
-        type:
+        channel_order_line_id:
           type: string
-          description: Product identifier type
-          example: GTIN
-        value:
+          description: The order line identified as defined by the channel. ID of the order line to cancel.
+          example: 0002_3202630-A-2
+        price:
+          $ref: '#/components/schemas/PricePayload'
+          description: Product price to cancel, excluding taxes and shipping price
+        product_id:
           type: string
-          description: Product identifier value
-          example: '12345678'
+          description: Seller product identifier on the channel
+        quantity:
+          type: integer
+          format: int32
+          description: Product quantity to cancel
+          example: 10
+          minimum: 0
+        reason:
+          type: string
+          description: 'Reason code for the cancellation
+
+
+            Enum: `"CUSTOMER_CANCELATION"`, `"OUT_OF_STOCK"`, `"RETURN"`, `"ITEM_NOT_RECEIVED"`, `"AGREEMENT"`, `"DEFECT"`, `"UNABLE_TO_DELIVER"`, `"CHANNEL_SPECIFIC"`
+
+            '
+        shipping_price:
+          $ref: '#/components/schemas/PricePayload'
+          description: Shipping price to cancel, excluding shipping taxes
+        shipping_taxes:
+          type: array
+          description: List of shipping taxes to cancel
+          items:
+            $ref: '#/components/schemas/TaxPayload'
+        taxes:
+          type: array
+          description: List of taxes to cancel
+          items:
+            $ref: '#/components/schemas/TaxPayload'
       required:
-      - type
-      - value
-    ProductOfferAttribute:
-      discriminator:
-        mapping:
-          BOOLEAN: '#/components/schemas/ProductOfferBooleanAttribute'
-          LIST: '#/components/schemas/ProductOfferListAttribute'
-          NUMERIC: '#/components/schemas/ProductOfferNumericAttribute'
-          TEXT: '#/components/schemas/ProductOfferTextAttribute'
-        propertyName: type
+      - channel_order_line_id
+      - price
+      - product_id
+      - quantity
+      - reason
+      - shipping_price
+    OfferUpsertEvent:
       properties:
+        data:
+          $ref: '#/components/schemas/OfferUpsertEventData'
+          description: Domain-specific business data
         id:
           type: string
-          description: Id of the attribute
+          description: Unique identifier for the payload in ULID format
+        time:
+          type: string
+          format: date-time
+          description: Event creation date
         type:
           type: string
-          description: 'Type of the attribute
+          description: 'Type of the payload which defines the data
 
 
-            Enum: `"BOOLEAN"`, `"LIST"`, `"NUMERIC"`, `"TEXT"`
+            Enum: `"OFFER_UPSERT"`
 
             '
       required:
+      - data
       - id
+      - time
+      - type
+    PriceStockUpsertEvent:
+      properties:
+        data:
+          $ref: '#/components/schemas/PriceStockUpsertEventData'
+          description: Domain-specific business data
+        id:
+          type: string
+          description: Unique identifier for the payload in ULID format
+        time:
+          type: string
+          format: date-time
+          description: Event creation date
+        type:
+          type: string
+          description: 'Type of the payload which defines the data
+
+
+            Enum: `"PRICE_STOCK_UPSERT"`
+
+            '
+      required:
+      - data
+      - id
+      - time
+      - type
+    StockDetail:
+      discriminator:
+        mapping:
+          FULFILLMENT_PARTNER: '#/components/schemas/FulfillmentPartnerStock'
+          SELLER_CENTRALIZED: '#/components/schemas/SellerCentralizedStock'
+          SELLER_WAREHOUSE: '#/components/schemas/SellerWarehouseStock'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Nature of the stock
+
+
+            Enum: `"SELLER_CENTRALIZED"`, `"SELLER_WAREHOUSE"`, `"FULFILLMENT_PARTNER"`
+
+            '
+      required:
       - type
     DocumentUploadCommandEvent:
       description: Order Document Upload payload command, used to upload a document on an order or its related entities (e.g. returns)
@@ -1739,23 +1292,6 @@ components:
       - document_name
       - document_type
       title: UPLOAD_DOCUMENT
-    StockUpsert:
-      properties:
-        action_type:
-          type: string
-          description: 'Action to apply on the stock
-
-
-            Enum: `"UPDATE"`, `"DELETE"`, `"IGNORE"`
-
-            '
-        breakdown:
-          type: array
-          description: Stock breakdown per seller-centralized stock, seller warehouse and logistic partner; null unless actionType is UPDATE
-          items:
-            $ref: '#/components/schemas/StockDetail'
-      required:
-      - action_type
     ProductUpsertEventData:
       properties:
         attributes:
@@ -1814,40 +1350,195 @@ components:
       - standard_price
       - stock
       - store_id
-    ActionPayload:
-      description: Event payload details for the specific action type
-      oneOf:
-      - $ref: '#/components/schemas/OrderRefundCommandEvent'
-      - $ref: '#/components/schemas/OrderCancelationCommandEvent'
-      - $ref: '#/components/schemas/OrderAcceptanceCommandEvent'
-      - $ref: '#/components/schemas/OrderShipmentCommandEvent'
-      - $ref: '#/components/schemas/ReturnAcceptanceCommandEvent'
-      - $ref: '#/components/schemas/ReturnTrackingInformationUpdateCommandEvent'
-      - $ref: '#/components/schemas/AcknowledgeReturnReceptionCommandEvent'
-      - $ref: '#/components/schemas/CloseReturnCommandEvent'
-      - $ref: '#/components/schemas/DocumentUploadCommandEvent'
-    OrderLineCancelationPayload:
-      description: Cancelation order line payload
+    Price:
+      properties:
+        amount:
+          type: number
+          format: with decimals
+        currency:
+          type: string
+    Tracking:
+      properties:
+        carrier:
+          type: string
+          description: "The name of the carrier responsible for the return.\n\nFor example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ...\n"
+          example: DHL Express
+        tracking_number:
+          type: string
+          description: The tracking number assigned by the carrier for this return
+          example: '781234567890'
+        tracking_url:
+          type: string
+          description: The URL provided by the carrier for return tracking
+          example: https://www.fedex.com/fedextrack/?trknbr=781234567890
+    OrderActionEvent:
+      description: Command to perform an action on an order. This event is processed by the channel technology connector
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionPayload'
+          description: ''
+        id:
+          type: string
+          description: Unique identifier for the payload in ULID format
+        time:
+          type: string
+          format: date-time
+          description: Event creation date
+        type:
+          type: string
+          description: 'Type of the action to perform on the order, acts as a discriminator for the `data` field
+
+
+            Enum: `"ACCEPT"`, `"CREATE_SHIPMENT"`, `"REFUND"`, `"CANCEL"`, `"ACCEPT_RETURN"`, `"UPDATE_RETURN_TRACKING_INFORMATION"`, `"ACKNOWLEDGE_RETURN_RECEPTION"`, `"CLOSE_RETURN"`, `"UPLOAD_DOCUMENT"`
+
+            '
+      required:
+      - id
+      - time
+      - type
+    SubChannelData:
+      properties:
+        code:
+          type: string
+          description: Sub-channel code
+        discount_price:
+          $ref: '#/components/schemas/DiscountPriceUpsert'
+          description: Sub-channel discount price
+        standard_price:
+          $ref: '#/components/schemas/StandardPriceUpsert'
+          description: Sub-channel standard price
+        stock:
+          $ref: '#/components/schemas/StockUpsert'
+          description: Sub-channel stock
+      required:
+      - code
+      - discount_price
+      - standard_price
+      - stock
+    ReturnTrackingInformationUpdateCommandEvent:
+      description: Return tracking information update payload command, used to process return tracking information updates
+      properties:
+        action_id:
+          type: string
+          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
+        channel_id:
+          type: string
+          description: The channel id
+        channel_order_id:
+          type: string
+          description: The order id on the channel
+        channel_return_id:
+          type: string
+          description: The return id on the channel
+        channel_store_id:
+          type: string
+          description: The store id on the channel
+        label_url:
+          type: string
+          description: The URL provided by the carrier that allows the customer to download/print the return label
+          example: https://gls-group.eu/GROUP/en/parcel-tracking?match=ABP4IVBG
+        rma_id:
+          type: string
+          description: RMA ID (Return Merchandise Authorization)
+          example: CR117B72FEF5E8391187
+        sub_channel_code:
+          type: string
+          description: The sub-channel code
+        tracking:
+          $ref: '#/components/schemas/Tracking'
+          description: Object that contains all the information concerning the return tracking
+      required:
+      - action_id
+      - channel_id
+      - channel_order_id
+      - channel_return_id
+      - channel_store_id
+      title: UPDATE_RETURN_TRACKING_INFORMATION
+    StoreManagementFeatureEvent:
+      examples:
+      - data:
+          channel_id: '001'
+          configuration:
+            status: enabled
+          feature: business-information-sync
+          store_id: '2005'
+          trigger_date: '2024-05-20T10:15:30.500Z'
+        id: 01jv299c9wxxfg4b7vvzzq3c3y
+        time: '2024-05-20T10:15:30.500Z'
+        type: STORE_FEATURE
+      - data:
+          channel_id: '001'
+          configuration:
+            status: linked
+          feature: store-linking
+          store_id: '2005'
+          trigger_date: '2024-05-20T10:15:30.500Z'
+        id: 01jv299c9wxxfg4b7vvzzq3c3y
+        time: '2024-05-20T10:15:30.500Z'
+        type: STORE_FEATURE
+      properties:
+        data:
+          $ref: '#/components/schemas/StoreFeatureDataStatusFeatureConfigurationPayload'
+          description: Domain-specific business data
+        id:
+          type: string
+          description: Unique identifier for the payload in ULID format
+        time:
+          type: string
+          format: date-time
+          description: Event creation date
+        type:
+          type: string
+          description: Type of the payload which defines the data
+      required:
+      - data
+      - id
+      - time
+      - type
+    ProductOfferAttribute:
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/ProductOfferBooleanAttribute'
+          LIST: '#/components/schemas/ProductOfferListAttribute'
+          NUMERIC: '#/components/schemas/ProductOfferNumericAttribute'
+          TEXT: '#/components/schemas/ProductOfferTextAttribute'
+        propertyName: type
+      properties:
+        id:
+          type: string
+          description: Id of the attribute
+        type:
+          type: string
+          description: 'Type of the attribute
+
+
+            Enum: `"BOOLEAN"`, `"LIST"`, `"NUMERIC"`, `"TEXT"`
+
+            '
+      required:
+      - id
+      - type
+    OrderLineRefundPayload:
       properties:
         channel_order_line_id:
           type: string
-          description: The order line identified as defined by the channel. ID of the order line to cancel.
+          description: The order line identified as defined by the channel. ID of the order line to refund.
           example: 0002_3202630-A-2
         price:
           $ref: '#/components/schemas/PricePayload'
-          description: Product price to cancel, excluding taxes and shipping price
+          description: Product price to refund, excluding taxes and shipping price
         product_id:
           type: string
           description: Seller product identifier on the channel
+          example: SELLER_ID_1
         quantity:
           type: integer
           format: int32
-          description: Product quantity to cancel
+          description: Product quantity to refund
           example: 10
-          minimum: 0
         reason:
           type: string
-          description: 'Reason code for the cancellation
+          description: 'The reason why the order line is refunded
 
 
             Enum: `"CUSTOMER_CANCELATION"`, `"OUT_OF_STOCK"`, `"RETURN"`, `"ITEM_NOT_RECEIVED"`, `"AGREEMENT"`, `"DEFECT"`, `"UNABLE_TO_DELIVER"`, `"CHANNEL_SPECIFIC"`
@@ -1855,15 +1546,15 @@ components:
             '
         shipping_price:
           $ref: '#/components/schemas/PricePayload'
-          description: Shipping price to cancel, excluding shipping taxes
+          description: Shipping price to refund, excluding shipping taxes
         shipping_taxes:
           type: array
-          description: List of shipping taxes to cancel
+          description: List of shipping taxes to refund
           items:
             $ref: '#/components/schemas/TaxPayload'
         taxes:
           type: array
-          description: List of taxes to cancel
+          description: List of taxes to refund
           items:
             $ref: '#/components/schemas/TaxPayload'
       required:
@@ -1873,4 +1564,313 @@ components:
       - quantity
       - reason
       - shipping_price
+    OrderAcceptanceCommandEvent:
+      description: Order Acceptance payload command, Used to accept or decline order
+      properties:
+        action_id:
+          type: string
+          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
+        channel_id:
+          type: string
+          description: The channel id
+        channel_order_id:
+          type: string
+          description: The order id on the channel
+        channel_store_id:
+          type: string
+          description: The store id on the channel
+        order_lines:
+          type: array
+          description: List of acceptance order line items
+          items:
+            $ref: '#/components/schemas/OrderLineAcceptancePayload'
+        sub_channel_code:
+          type: string
+          description: The sub-channel code
+      required:
+      - action_id
+      - channel_id
+      - channel_order_id
+      - channel_store_id
+      - order_lines
+      title: ACCEPT
+    Attribute:
+      description: An attribute of the product.
+      properties:
+        id:
+          type: string
+          description: Id of the attribute, in the channel's format.
+        locale:
+          type: string
+          description: 'For localized attribute, locale used for the `value`.
+
+
+            Format can be either `<ISO-639>` or `<ISO-639>_<ISO-3166>`.
+
+
+            This `locale` property is only available when actually set (never `null` nor empty).
+
+            '
+        value:
+          type: string
+          description: Value of the attribute, in the channel's format.
+      required:
+      - id
+    StatusFeatureConfigurationPayload:
+      description: Parameterized configuration of the feature
+      discriminator:
+        mapping:
+          business-information-sync: '#/components/schemas/EnableStatusFeatureConfigurationPayload'
+          store-linking: '#/components/schemas/LinkStatusFeatureConfigurationPayload'
+        propertyName: feature
+      oneOf:
+      - $ref: '#/components/schemas/EnableStatusFeatureConfigurationPayload'
+      - $ref: '#/components/schemas/LinkStatusFeatureConfigurationPayload'
+      properties:
+        feature:
+          type: string
+          description: Name of the feature
+    ReturnAcceptanceCommandEvent:
+      description: Return Acceptance payload command, used to process return acceptance or refusal
+      properties:
+        accepted:
+          type: boolean
+          description: Indicates if a return is accepted (true) or refused (false).
+        action_id:
+          type: string
+          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
+        channel_id:
+          type: string
+          description: The channel id
+        channel_order_id:
+          type: string
+          description: The order id on the channel
+        channel_return_id:
+          type: string
+          description: The return id on the channel
+        channel_store_id:
+          type: string
+          description: The store id on the channel
+        rejection_reason:
+          type: string
+          description: 'Reason code for the refusal
+
+
+            Enum: `"RETURN_WINDOW_CLOSED"`, `"NOT_ELIGIBLE_FOR_RETURN"`, `"FINAL_SALES"`, `"OTHER"`
+
+            '
+        sub_channel_code:
+          type: string
+          description: The sub-channel code
+      required:
+      - accepted
+      - action_id
+      - channel_id
+      - channel_order_id
+      - channel_return_id
+      - channel_store_id
+      title: ACCEPT_RETURN
+    InventoryUpsert:
+      properties:
+        action_type:
+          type: string
+          description: 'Enum: `"UPDATE"`, `"DELETE"`, `"IGNORE"`
+
+            '
+        delivery_partner:
+          $ref: '#/components/schemas/DeliveryPartner'
+        quantity:
+          type: integer
+          format: int32
+    DiscountPriceUpsert:
+      properties:
+        action_type:
+          type: string
+          description: 'Enum: `"UPDATE"`, `"DELETE"`, `"IGNORE"`
+
+            '
+        end_date:
+          type: string
+          format: date-time
+        price:
+          $ref: '#/components/schemas/Price'
+        start_date:
+          type: string
+          format: date-time
+    OrderRefundCommandEvent:
+      description: Order Refund payload command, Used to refund order
+      properties:
+        action_id:
+          type: string
+          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
+        channel_id:
+          type: string
+          description: The channel id
+        channel_order_id:
+          type: string
+          description: The order id on the channel
+        channel_store_id:
+          type: string
+          description: The store id on the channel
+        refunds:
+          type: array
+          description: List of order line refund actions, detailing each line item to be refunded
+          items:
+            $ref: '#/components/schemas/OrderLineRefundPayload'
+        sub_channel_code:
+          type: string
+          description: The sub-channel code
+      required:
+      - action_id
+      - channel_id
+      - channel_order_id
+      - channel_store_id
+      title: REFUND
+    ProductUpsertEvent:
+      properties:
+        data:
+          $ref: '#/components/schemas/ProductUpsertEventData'
+          description: Domain-specific business data
+        id:
+          type: string
+          description: Unique identifier for the payload in ULID format
+        sequence:
+          type: integer
+          format: int64
+          description: Sequence number of the payload, used to order payloads of the same source
+        sequenceSize:
+          type: integer
+          format: int64
+          description: Total number of payloads of the same source
+        sequenceType:
+          type: string
+          description: Type of sequencing applied to this payload (for now it's always PROGRESS)
+        source:
+          type: string
+          description: Source of the payload
+        time:
+          type: string
+          format: date-time
+          description: Event creation date
+        type:
+          type: string
+          description: 'Type of the payload which defines the data
+
+
+            Enum: `"PRODUCT_UPSERT"`
+
+            '
+      required:
+      - data
+      - id
+      - time
+      - type
+    SubChannelPrice:
+      deprecated: true
+      description: 'Deprecated: internal-only type. Not intended for integration and may be removed without notice.'
+      properties:
+        code:
+          type: string
+          description: Sub-channel code
+        discount_price:
+          $ref: '#/components/schemas/DiscountPriceUpsert'
+          description: Sub-channel discount price
+        standard_price:
+          $ref: '#/components/schemas/StandardPriceUpsert'
+          description: Sub-channel standard price
+      required:
+      - code
+      - discount_price
+      - standard_price
+    OrderShipmentCommandEvent:
+      description: Order Shipment payload command, Used to create a shipment for an order
+      properties:
+        action_id:
+          type: string
+          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
+        carrier:
+          type: string
+          description: "The name of the carrier responsible for the shipment.\n\nFor example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ...\n"
+          example: DHL Express
+        channel_id:
+          type: string
+          description: The channel id
+        channel_order_id:
+          type: string
+          description: The order id on the channel
+        channel_store_id:
+          type: string
+          description: The store id on the channel
+        items:
+          type: array
+          description: List of items included in the shipment, detailing each item being shipped
+          items:
+            $ref: '#/components/schemas/OrderShipmentItemPayload'
+        return_tracking_number:
+          type: string
+          description: The return tracking number. This field is only required for marketplaces that expect return tracking information at shipment creation.
+          example: 1Z999AA1234567891
+        sub_channel_code:
+          type: string
+          description: The sub-channel code
+        tracking_number:
+          type: string
+          description: The tracking number assigned for this shipment
+          example: 1Z999AA1234567890
+        tracking_url:
+          type: string
+          description: The URL provided for shipment tracking
+          example: https://tracking.carrier.com/123456
+        warehouse_id:
+          type: string
+          description: Identifier of the warehouse from which the items are shipped. Ignore this field if your channel does not require it.
+          example: WH-001
+      required:
+      - action_id
+      - carrier
+      - channel_id
+      - channel_order_id
+      - channel_store_id
+      title: CREATE_SHIPMENT
+    EnableStatusFeatureConfigurationPayload:
+      properties:
+        status:
+          type: string
+          description: 'Status of the feature, either enabled or disabled
+
+
+            Enum: `"enabled"`, `"disabled"`
+
+            '
+      required:
+      - status
+      title: business-information-sync
+    AcknowledgeReturnReceptionCommandEvent:
+      description: Acknowledge return reception payload command, used to marked return as received
+      properties:
+        action_id:
+          type: string
+          description: A unique identifier for the order action request. Will be used by the connector to update the order action status. see updateActionStatus
+        channel_id:
+          type: string
+          description: The channel id
+        channel_order_id:
+          type: string
+          description: The order id on the channel
+        channel_return_id:
+          type: string
+          description: The return id on the channel
+        channel_store_id:
+          type: string
+          description: The store id on the channel
+        sub_channel_code:
+          type: string
+          description: The sub-channel code
+      required:
+      - action_id
+      - channel_id
+      - channel_order_id
+      - channel_return_id
+      - channel_store_id
+      title: ACKNOWLEDGE_RETURN_RECEPTION
 x-group-parameters: true

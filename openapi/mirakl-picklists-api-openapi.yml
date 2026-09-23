@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Mirakl Picklists API
   version: ''
-  description: 'Operations tagged Picklists across 3 of this provider''s published API definitions: mirakl-mmp-front-openapi.yaml, mirakl-mmp-operator-openapi.json, mirakl-mmp-seller-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Picklists across 2 of this provider''s published API definitions: mirakl-mmp-front-openapi.yaml, mirakl-mmp-seller-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - description: URL to be replaced by your Mirakl instance URL
   url: https://your-instance.mirakl.net
@@ -11,31 +11,34 @@ tags:
 paths:
   /api/picklists:
     get:
-      description: '<div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+      description: 'Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: Every 15 minutes</div>
-
-        <div class="max-call-frequency">Maximum usage: Every 5 minutes</div>
-
-        <div class="extension-title">Read More</div>
+        Recommended usage: Every 15 minutes
 
 
-        <ul><li><a href="https://help.mirakl.com/bundle/customers/page/topics/Mirakl/mmp/Operator/manage-picklists.htm">More context</a></li></ul><div class="extension-title">Pagination</div>
+        Maximum usage: Every 5 minutes
 
 
-        <p>This resource supports seek pagination (<a href="#section/Seek-pagination-and-sort">see documentation</a>)</p>
+        Read More
 
 
-        <div class="extension-title">Sort fields</div>
+        More context
 
 
-        <code>sort</code> field can have the following values:<ul><li><b>pickupDate</b> (Default) - Sort by pickup date (asc by default)</li></ul>
+        Pagination
 
 
-        </div>'
+        This resource supports seek pagination (see documentation)
+
+
+        Sort fields
+
+
+        sort field can have the following values:
+
+
+        pickupDate (Default) - Sort by pickup date (asc by default)'
       operationId: PL11
       parameters:
       - description: Pick run code for filtering.
@@ -176,6 +179,20 @@ paths:
       url: https://your-instance.mirakl.net
 components:
   schemas:
+    PL11_Response_200_Data_PicklistLines:
+      type: object
+      properties:
+        offer_id:
+          type: integer
+          format: int64
+          description: Identifier of the offer to pick
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity of offers to pick
+      required:
+      - offer_id
+      - quantity
     PL11_Response_200:
       type: object
       properties:
@@ -192,6 +209,14 @@ components:
           description: Token to access the previous page. Absent if the current page is the first one.
       required:
       - data
+    PL11_Response_200_Data_OrderLines:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Picklist order line id
+      required:
+      - id
     PL11_Response_200_Data:
       type: object
       properties:
@@ -243,28 +268,6 @@ components:
       - picklist_lines
       - pickup_date
       - state
-    PL11_Response_200_Data_OrderLines:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Picklist order line id
-      required:
-      - id
-    PL11_Response_200_Data_PicklistLines:
-      type: object
-      properties:
-        offer_id:
-          type: integer
-          format: int64
-          description: Identifier of the offer to pick
-        quantity:
-          type: integer
-          format: int32
-          description: Quantity of offers to pick
-      required:
-      - offer_id
-      - quantity
   securitySchemes:
     Front-Bearer-Token:
       bearerFormat: JWT
@@ -280,16 +283,6 @@ components:
           scopes: {}
           tokenUrl: https://auth.mirakl.net/oauth/token
       type: oauth2
-    Operator-Bearer-Token:
-      bearerFormat: JWT
-      scheme: bearer
-      type: http
-      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
-    operator_bearer_token:
-      bearerFormat: JWT
-      scheme: bearer
-      type: http
-      x-authorization: '{{OPERATOR_BEARER_TOKEN}}'
     Shop-API-Key:
       in: header
       name: Authorization
@@ -302,6 +295,5 @@ components:
       x-authorization: '{{SHOP_KEY}}'
 x-refined-from:
 - mirakl-mmp-front-openapi.yaml
-- mirakl-mmp-operator-openapi.json
 - mirakl-mmp-seller-openapi.json
 x-group-parameters: true

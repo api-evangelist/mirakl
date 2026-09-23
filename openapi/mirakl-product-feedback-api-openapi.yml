@@ -14,7 +14,7 @@ paths:
     - $ref: '#/components/parameters/channel_id_path'
     - $ref: '#/components/parameters/store_id_path'
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Updates the store catalog items for a specific channel with the provided product IDs.
@@ -31,17 +31,13 @@ paths:
         - Successfully matched products will be updated regardless of unmatched products in the same request.
 
 
-
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: 20 per second</div>
+        Recommended usage: 20 per second
 
-        <div class="max-call-frequency">Maximum usage: 30 per second</div>
 
-        </div>'
+        Maximum usage: 30 per second'
       operationId: updateStoreCatalogItems
       requestBody:
         content:
@@ -93,31 +89,45 @@ paths:
       tags:
       - Product Feedback
 components:
-  parameters:
-    channel_id_path:
-      description: Connect Channel identifier
-      explode: false
-      in: path
-      name: channel_id
-      required: true
-      schema:
-        type: string
-        examples:
-        - '1234'
-        minLength: 1
-      style: simple
-    store_id_path:
-      deprecated: true
-      description: Store identifier in the channel
-      explode: false
-      in: path
-      name: store_id
-      required: true
-      schema:
-        type: string
-        minLength: 1
-      style: simple
   schemas:
+    Diagnostic:
+      type: object
+      description: Represents a diagnostic message related to a catalog item.
+      properties:
+        channel_attribute_id:
+          type:
+          - string
+          - 'null'
+          description: The identifier of the channel attribute related to the diagnostic.
+        channel_diagnostic_id:
+          type:
+          - string
+          - 'null'
+          description: The diagnostic identifier in the channel.
+        connector_override_action:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          description: 'Enum: `"REMOVED"`, `null`
+
+            '
+        message:
+          type: string
+          description: The diagnostic message.
+      required:
+      - message
+    UpdateStoreCatalogItemsRequest:
+      type: object
+      properties:
+        store_catalog_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateStoreCatalogItem'
+          maxItems: 10000
+          minItems: 1
+      required:
+      - store_catalog_items
     UpdateStoreCatalogItem:
       type: object
       properties:
@@ -196,44 +206,30 @@ components:
             '
       required:
       - id
-    UpdateStoreCatalogItemsRequest:
-      type: object
-      properties:
-        store_catalog_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateStoreCatalogItem'
-          maxItems: 10000
-          minItems: 1
-      required:
-      - store_catalog_items
-    Diagnostic:
-      type: object
-      description: Represents a diagnostic message related to a catalog item.
-      properties:
-        channel_attribute_id:
-          type:
-          - string
-          - 'null'
-          description: The identifier of the channel attribute related to the diagnostic.
-        channel_diagnostic_id:
-          type:
-          - string
-          - 'null'
-          description: The diagnostic identifier in the channel.
-        connector_override_action:
-          type:
-          - string
-          - 'null'
-          deprecated: true
-          description: 'Enum: `"REMOVED"`, `null`
-
-            '
-        message:
-          type: string
-          description: The diagnostic message.
-      required:
-      - message
+  parameters:
+    store_id_path:
+      deprecated: true
+      description: Store identifier in the channel
+      explode: false
+      in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
+        minLength: 1
+      style: simple
+    channel_id_path:
+      description: Connect Channel identifier
+      explode: false
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: string
+        examples:
+        - '1234'
+        minLength: 1
+      style: simple
   securitySchemes:
     Bearer:
       bearerFormat: JWT

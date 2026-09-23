@@ -16,61 +16,62 @@ server:
     token_endpoint: https://developer.mirakl.com/_mcp/oauth2/token-portal
     registration_endpoint: https://developer.mirakl.com/_mcp/register
     dynamic_client_registration: true
-    grant_types: [authorization_code, refresh_token, client_credentials]
-    pkce: [S256]
-    scopes_supported: [openid, profile, email, offline_access]
-  note: >-
-    Mirakl's developer portal runs on Redocly Reunite, which serves a hosted MCP
-    server over the documentation. It answers questions and searches the API docs;
-    it is NOT a per-operation execution server for the Mirakl product APIs.
+    grant_types:
+    - authorization_code
+    - refresh_token
+    - client_credentials
+    pkce:
+    - S256
+    scopes_supported:
+    - openid
+    - profile
+    - email
+    - offline_access
+  note: Mirakl's developer portal runs on Redocly Reunite, which serves a hosted MCP server over the documentation.
+    It answers questions and searches the API docs; it is NOT a per-operation execution server for the
+    Mirakl product APIs.
 probe:
   checked: '2026-08-13'
   endpoint: https://developer.mirakl.com/mcp
-  method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  method: POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}
   http_status: 401
   body: '{"error":"unauthorized","message":"Authentication required"}'
-  www_authenticate: >-
-    Bearer resource_metadata="https://developer.mirakl.com/.well-known/oauth-protected-resource/mcp"
-  verdict: >-
-    LIVE but auth-gated. This corrects the 2026-08-12 catalog MCP census, which
-    recorded this server as dead — that census probed https://developer.mirakl.com/_mcp,
-    the OAuth console prefix, which returns the SPA 404 shell. The MCP endpoint
-    itself is /mcp and answers a correct RFC 9728 challenge.
+  www_authenticate: Bearer resource_metadata="https://developer.mirakl.com/.well-known/oauth-protected-resource/mcp"
+  verdict: LIVE but auth-gated. This corrects the 2026-08-12 catalog MCP census, which recorded this server
+    as dead — that census probed https://developer.mirakl.com/_mcp, the OAuth console prefix, which returns
+    the SPA 404 shell. The MCP endpoint itself is /mcp and answers a correct RFC 9728 challenge.
 tools:
   known: false
-  note: >-
-    tools/list requires a bearer token, so the real tool names and inputSchemas
-    could not be enumerated anonymously. Mirakl publishes no llms.txt tool list
-    either, so nothing is recorded rather than guessed. Authenticated
-    introspection is required to capture the tool surface.
+  note: tools/list requires a bearer token, so the real tool names and inputSchemas could not be enumerated
+    anonymously. Mirakl publishes no llms.txt tool list either, so nothing is recorded rather than guessed.
+    Authenticated introspection is required to capture the tool surface.
 candidate_tools:
   method: derived
   source: openapi/ operations
-  note: >-
-    Candidate tool surface an EXECUTION MCP could expose over the Mirakl product
-    APIs. Not shipped by Mirakl — a design sketch only.
+  note: Candidate tool surface an EXECUTION MCP could expose over the Mirakl product APIs. Not shipped
+    by Mirakl — a design sketch only.
   tools:
-    - name: list_orders
-      description: List seller orders
-      source_operation: openapi/_original/mirakl-mmp-seller-openapi.json#OR11
-    - name: list_offers
-      description: List a shop's offers
-      source_operation: openapi/_original/mirakl-mmp-seller-openapi.json#OF21
-    - name: list_invoices
-      description: List operator invoices/accounting documents
-      source_operation: openapi/_original/mirakl-mmp-operator-openapi.json#IV01
-    - name: list_messages
-      description: List inbox messages/threads
-      source_operation: openapi/_original/mirakl-mmp-operator-openapi.json#M11
+  - name: list_orders
+    description: List seller orders
+    source_operation: openapi/_original/mirakl-mmp-seller-openapi.json#OR11
+  - name: list_offers
+    description: List a shop's offers
+    source_operation: openapi/_original/mirakl-mmp-seller-openapi.json#OF21
+  - name: list_invoices
+    description: List operator invoices/accounting documents
+    source_operation: openapi/_original/mirakl-mmp-operator-openapi.json#IV01
+  - name: list_messages
+    description: List inbox messages/threads
+    source_operation: openapi/_original/mirakl-mmp-operator-openapi.json#M11
 deployment:
-  mode: remote
-  endpoint: https://developer.mirakl.com/mcp
-  auth: oauth
+  mode: none
+  endpoint: https://developer.mirakl.com/_mcp
   verified: probed
-  checked: '2026-08-13'
-  note: >-
-    Remote HTTP endpoint an MCP client POSTs to directly. No stdio package, no npx
-    installer — Mirakl ships no local MCP server.
+  probe: dead
+  note: the endpoint this manifest claimed did not answer; recorded as none rather than deleted so the
+    claim stays auditable
+  checked: '2026-08-12'
+  source: catalog MCP census
 cross_reference:
   well_known: well-known/mirakl-well-known.yml
   authentication: authentication/mirakl-authentication.yml

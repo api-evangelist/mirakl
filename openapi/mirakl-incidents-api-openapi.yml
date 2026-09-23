@@ -11,19 +11,19 @@ tags:
 paths:
   /api/orders/{order_id}/lines/{line}/resolve_incident:
     put:
-      description: '<div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+      description: 'Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: At each incident resolution on an order line</div>
-
-        <div class="max-call-frequency">Maximum usage: At each incident resolution on an order line</div>
-
-        <div class="extension-title">Read More</div>
+        Recommended usage: At each incident resolution on an order line
 
 
-        <ul><li><a href="https://help.mirakl.com/bundle/sellers/page/topics/Mirakl/mmp/Seller/manage_orders/view_orders_incidents/solve_incidents.html">More context</a></li></ul></div>'
+        Maximum usage: At each incident resolution on an order line
+
+
+        Read More
+
+
+        More context'
       operationId: OR64
       parameters:
       - description: Order identifier

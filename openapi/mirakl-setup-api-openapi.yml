@@ -11,20 +11,18 @@ tags:
 paths:
   /api/setup/check-consistency:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Description: Verifies whether the data initialized during the application''s installation is still up to date. It compares the currently used data with the initial or expected version and returns an update status indicator. This ensures data consistency and helps detect potential refresh needs.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you need to check initialized data</div>
+        Recommended usage:
 
-        </div>'
+        - When you need to check initialized data'
       operationId: SetupCheckConsistency
       parameters: []
       responses:
@@ -73,20 +71,18 @@ paths:
       - Setup
   /api/setup/check-permissions:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Verify Shopify App has all the required permissions granted.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you need to check Shopify permissions</div>
+        Recommended usage:
 
-        </div>'
+        - When you need to check Shopify permissions'
       operationId: SetupCheckPermissions
       parameters: []
       responses:
@@ -122,20 +118,18 @@ paths:
         > The Content-Length header must be present with value 0, even when there is no request body.
 
 
-        <div class="extension-title">Description</div>
+        Description
 
 
         Updates all the data that was initialized during the application''s installation. It ensures that the latest versions of the required data are applied, maintaining consistency and preventing outdated information from affecting the system''s functionality.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you need to update initialized data</div>
+        Recommended usage:
 
-        </div>'
+        - When you need to update initialized data'
       operationId: SetupUpdate
       parameters: []
       responses:
@@ -184,18 +178,9 @@ paths:
       - Setup
 components:
   schemas:
-    SetupCheckPermissions_Response_200:
+    SetupCheckConsistency_Response_200_CheckedElements:
       type: object
-      description: Check permissions response
-      properties:
-        missingPermissions:
-          type: array
-          description: List of missing permissions
-          items:
-            type: string
-    SetupUpdate_Response_200_UpdatedElements:
-      type: object
-      description: Component updated
+      description: Component checked
       properties:
         code:
           type: string
@@ -207,16 +192,7 @@ components:
           type: array
           description: Status for each element
           items:
-            $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements_Status'
-    SetupCheckConsistency_Response_200:
-      type: object
-      description: Checked setup data response
-      properties:
-        checkedElements:
-          type: array
-          description: List of checked components
-          items:
-            $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements'
+            $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements_Status'
     SetupUpdate_Response_200_UpdatedElements_Status:
       type: object
       description: Element updated
@@ -235,6 +211,24 @@ components:
             Enum: `"CREATED"`, `"UPDATED"`, `"UP_TO_DATE"`, `"SKIPPED"`, `"ERROR"`
 
             '
+    SetupCheckPermissions_Response_200:
+      type: object
+      description: Check permissions response
+      properties:
+        missingPermissions:
+          type: array
+          description: List of missing permissions
+          items:
+            type: string
+    SetupCheckConsistency_Response_200:
+      type: object
+      description: Checked setup data response
+      properties:
+        checkedElements:
+          type: array
+          description: List of checked components
+          items:
+            $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements'
     SetupUpdate_Response_200:
       type: object
       description: Updated setup data response
@@ -244,6 +238,21 @@ components:
           description: List of updated components
           items:
             $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements'
+    SetupUpdate_Response_200_UpdatedElements:
+      type: object
+      description: Component updated
+      properties:
+        code:
+          type: string
+          description: Code of the component
+        name:
+          type: string
+          description: Name of the component
+        status:
+          type: array
+          description: Status for each element
+          items:
+            $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements_Status'
     SetupCheckConsistency_Response_200_CheckedElements_Status:
       type: object
       description: Element checked
@@ -262,21 +271,6 @@ components:
             Enum: `"INITIALIZED"`, `"MISSING"`, `"UPDATE_REQUIRED"`, `"ERROR"`
 
             '
-    SetupCheckConsistency_Response_200_CheckedElements:
-      type: object
-      description: Component checked
-      properties:
-        code:
-          type: string
-          description: Code of the component
-        name:
-          type: string
-          description: Name of the component
-        status:
-          type: array
-          description: Status for each element
-          items:
-            $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements_Status'
   securitySchemes:
     Bearer:
       bearerFormat: JWT

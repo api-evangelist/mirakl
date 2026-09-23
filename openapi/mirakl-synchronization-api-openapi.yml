@@ -18,22 +18,23 @@ paths:
         > The Content-Length header must be present with value 0, even when there is no request body.
 
 
-        <div class="extension-title">Description</div>
+        Description
 
 
         Synchronize categories and attributes from Shopify to Mirakl. This operation is asynchronous.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to synchronize your taxonomy</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one taxonomy synchronization at a time</div>
+        - When you are required to synchronize your taxonomy
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one taxonomy synchronization at a time'
       operationId: SyncCatalogStructure
       parameters: []
       responses:
@@ -46,22 +47,23 @@ paths:
       - Synchronization
   /api/sync/deleted-mirakl-products:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Deletes third-party (3P) products from Shopify that have been deleted in Mirakl. This operation also cleans up the middleware by deleting the corresponding product bindings for both third-party (3P) and first-party (1P) products. The operation is asynchronous and scheduled to run periodically, so manual triggering is typically not required.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- Only when you need to trigger the synchronization manually.</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one Mirakl deleted products synchronization at a time</div>
+        - Only when you need to trigger the synchronization manually.
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one Mirakl deleted products synchronization at a time'
       operationId: SyncDeletedMiraklProducts
       parameters: []
       requestBody:
@@ -95,22 +97,23 @@ paths:
       - Synchronization
   /api/sync/product-shopify-to-mirakl:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Synchronize products from Shopify to Mirakl. This operation is asynchronous.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to manually run the synchronization</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one synchronization at a time</div>
+        - When you are required to manually run the synchronization
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one synchronization at a time'
       operationId: SyncFirstPartyProducts
       parameters: []
       requestBody:
@@ -151,20 +154,18 @@ paths:
         > The Content-Length header must be present with value 0, even when there is no request body.
 
 
-        <div class="extension-title">Description</div>
+        Description
 
 
         Synchronizes offer conditions from Mirakl to Shopify.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you need to synchronize offer conditions</div>
+        Recommended usage:
 
-        </div>'
+        - When you need to synchronize offer conditions'
       operationId: SyncOfferConditions
       parameters: []
       responses:
@@ -177,22 +178,23 @@ paths:
       - Synchronization
   /api/sync/offers:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Import offers from Mirakl into Shopify. This operation is asynchronous and is scheduled to run periodically, so in most cases, you don''t need to trigger it manually.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- Only when you need to trigger the import manually.</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one offer synchronization at a time</div>
+        - Only when you need to trigger the import manually.
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one offer synchronization at a time'
       operationId: SyncOffers
       parameters: []
       requestBody:
@@ -223,22 +225,23 @@ paths:
       - Synchronization
   /api/sync/orders:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Synchronize orders between Mirakl and Shopify. This operation is asynchronous.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to synchronize your orders</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one order synchronization at a time</div>
+        - When you are required to synchronize your orders
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one order synchronization at a time'
       operationId: SyncOrders
       parameters: []
       requestBody:
@@ -272,22 +275,23 @@ paths:
       - Synchronization
   /api/sync/promotions:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Sync Mirakl promotions (PR01) into Shopify metaobjects and code discounts. This operation is asynchronous.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- Only when you need to trigger the import manually.</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one promotion synchronization at a time</div>
+        - Only when you need to trigger the import manually.
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one promotion synchronization at a time'
       operationId: SyncPromotions
       parameters: []
       requestBody:
@@ -314,22 +318,23 @@ paths:
       - Synchronization
   /api/sync/returns:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Synchronizes returns from Mirakl to Shopify. This operation is asynchronous.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to synchronizes returns on demand</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one return synchronization at a time</div>
+        - When you want to synchronizes returns on demand
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one return synchronization at a time'
       operationId: SyncReturns
       parameters: []
       requestBody:
@@ -363,22 +368,23 @@ paths:
       - Synchronization
   /api/sync/shipment-mirakl-to-shopify:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Synchronize shipments from Mirakl to Shopify. This operation is asynchronous.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to synchronize your shipments</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one shipment synchronization at a time</div>
+        - When you are required to synchronize your shipments
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one shipment synchronization at a time'
       operationId: SyncShipments
       parameters: []
       requestBody:
@@ -412,22 +418,23 @@ paths:
       - Synchronization
   /api/sync/shops:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Synchronizes shops from Mirakl to Shopify. This operation is asynchronous.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to synchronizes shops on demand</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one shop synchronization at a time</div>
+        - When you want to synchronizes shops on demand
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one shop synchronization at a time'
       operationId: SyncShops
       parameters: []
       requestBody:
@@ -461,22 +468,23 @@ paths:
       - Synchronization
   /api/sync/product-mirakl-to-shopify:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Import products from Mirakl into Shopify. This operation is asynchronous and is scheduled to run periodically, so in most cases, you don''t need to trigger it manually.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- Only when you need to trigger the import manually.</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- You can run only one product synchronization at a time</div>
+        - Only when you need to trigger the import manually.
 
-        </div>'
+
+        Maximum usage:
+
+        - You can run only one product synchronization at a time'
       operationId: SyncThirdPartyProducts
       parameters: []
       requestBody:
@@ -510,6 +518,22 @@ paths:
       - Synchronization
 components:
   schemas:
+    SyncPromotions_Request:
+      type: object
+      description: Request object to update promotion synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last promotion synchronization
+    SyncOrders_Request:
+      type: object
+      description: Request object to update order synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last order synchronization
     SyncFirstPartyProducts_Request:
       type: object
       description: Request object to update Shopify to Mirakl product synchronization since date
@@ -526,46 +550,6 @@ components:
           type: string
           format: date-time
           description: 'Date threshold: only syncs shops modified after this date'
-    SyncThirdPartyProducts_Request:
-      type: object
-      description: Request object holding the parameters for the product import
-      properties:
-        sinceDate:
-          type: string
-          format: date-time
-          description: Timestamp of the last product import into Shopify
-    SyncOrders_Request:
-      type: object
-      description: Request object to update order synchronization since date
-      properties:
-        sinceDate:
-          type: string
-          format: date-time
-          description: Timestamp of the last order synchronization
-    SyncDeletedMiraklProducts_Request:
-      type: object
-      description: Request object holding the parameters for the deleted Mirakl product synchronization request
-      properties:
-        deletedSince:
-          type: string
-          format: date-time
-          description: Sync Mirakl deleted products to Shopify since this date
-    SyncPromotions_Request:
-      type: object
-      description: Request object to update promotion synchronization since date
-      properties:
-        sinceDate:
-          type: string
-          format: date-time
-          description: Timestamp of the last promotion synchronization
-    SyncShipments_Request:
-      type: object
-      description: Request object to update Mirakl to Shopify shipment synchronization since date
-      properties:
-        sinceDate:
-          type: string
-          format: date-time
-          description: Timestamp of the last shipment synchronization
     SyncReturns_Request:
       type: object
       description: Request object for return synchronization from Shopify to Mirakl
@@ -574,6 +558,14 @@ components:
           type: string
           format: date-time
           description: 'Date threshold: only syncs returns modified after this date'
+    SyncDeletedMiraklProducts_Request:
+      type: object
+      description: Request object holding the parameters for the deleted Mirakl product synchronization request
+      properties:
+        deletedSince:
+          type: string
+          format: date-time
+          description: Sync Mirakl deleted products to Shopify since this date
     SyncOffers_Request:
       type: object
       description: Request object holding the parameters for the offer import
@@ -582,6 +574,22 @@ components:
           type: string
           format: date-time
           description: Timestamp of the last offer import into Shopify
+    SyncThirdPartyProducts_Request:
+      type: object
+      description: Request object holding the parameters for the product import
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last product import into Shopify
+    SyncShipments_Request:
+      type: object
+      description: Request object to update Mirakl to Shopify shipment synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last shipment synchronization
   securitySchemes:
     Bearer:
       bearerFormat: JWT

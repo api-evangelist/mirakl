@@ -11,14 +11,12 @@ tags:
 paths:
   /api/environment:
     get:
-      description: '<div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+      description: 'Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you are required to read your environment configuration</div>
+        Recommended usage:
 
-        </div>'
+        - When you are required to read your environment configuration'
       operationId: GetConnection
       parameters: []
       responses:
@@ -50,14 +48,12 @@ paths:
                 type: object
                 $ref: '#/components/schemas/GetConnection_Response_200'
           description: OK
-      summary: GetConnection - Get the information of the connection between a Shopify store an a Mirakl instance
+      summary: GetConnection - Get the information of the connection between a Shopify store…
       tags:
       - Connection
   /api/environment-dev:
     delete:
-      description: '<div class="api-description-extension">
-
-        </div>'
+      description: ''
       operationId: HardDeleteConnectionDev
       parameters: []
       responses:

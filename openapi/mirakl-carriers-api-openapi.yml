@@ -11,7 +11,7 @@ tags:
 paths:
   /v1/orders/channels/{channel_id}/carriers:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Use this API to share the channel''s allowed list of carriers with Mirakl Connect, and keep it synchronized over time.
@@ -26,17 +26,13 @@ paths:
         - We recommend sharing the full list of carriers: Mirakl Connect automatically maps carriers with slight naming differences
 
 
-
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: When the channel''s allowed list of carriers changes</div>
+        Recommended usage: When the channel''s allowed list of carriers changes
 
-        <div class="max-call-frequency">Maximum usage: 1 / hour</div>
 
-        </div>'
+        Maximum usage: 1 / hour'
       operationId: upsertCarriers
       parameters:
       - description: Unique identifier of the sales channel
@@ -113,6 +109,30 @@ paths:
       - Carriers
 components:
   schemas:
+    CarrierRequest:
+      type: object
+      properties:
+        channel_carrier_id:
+          type: string
+          description: Unique identifier of the carrier on the channel
+        name:
+          type: string
+          description: Display name of the carrier
+      required:
+      - channel_carrier_id
+      - name
+    UpsertCarriersRequest:
+      type: object
+      properties:
+        carriers:
+          type: array
+          description: List of carriers available on the channel
+          items:
+            $ref: '#/components/schemas/CarrierRequest'
+          maxItems: 5000
+          minItems: 1
+      required:
+      - carriers
     ErrorItem:
       type: object
       properties:
@@ -160,30 +180,6 @@ components:
       required:
       - code
       - message
-    CarrierRequest:
-      type: object
-      properties:
-        channel_carrier_id:
-          type: string
-          description: Unique identifier of the carrier on the channel
-        name:
-          type: string
-          description: Display name of the carrier
-      required:
-      - channel_carrier_id
-      - name
-    UpsertCarriersRequest:
-      type: object
-      properties:
-        carriers:
-          type: array
-          description: List of carriers available on the channel
-          items:
-            $ref: '#/components/schemas/CarrierRequest'
-          maxItems: 5000
-          minItems: 1
-      required:
-      - carriers
   securitySchemes:
     Bearer:
       bearerFormat: JWT

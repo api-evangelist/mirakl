@@ -11,14 +11,12 @@ tags:
 paths:
   /api/storefront/return:
     post:
-      description: '<div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+      description: 'Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to create a return for an order</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to create a return for an order'
       operationId: CreateReturn
       parameters: []
       requestBody:
@@ -79,14 +77,12 @@ paths:
         source: "curl -i -X POST \\\n  https://operator-shpy.mirakl.net/api/storefront/return \\\n  -H 'Content-Type: multipart/form-data' \\\n  -F 'files=@path/to/file' \\\n  -F 'returnRequest=\"{\\\"description\\\":\\\"string\\\",\\\"methodCode\\\":\\\"RETURN_METHOD_BY_MAIL\\\",\\\"orderLogisticId\\\":\\\"string\\\",\\\"reasonCode\\\":\\\"RETURN_BROKEN_ITEM\\\",\\\"returnLines\\\":[{\\\"orderLineId\\\":\\\"string\\\",\\\"quantity\\\":0}]}\";type=application/json'\n"
   /api/storefront/evaluations/assessments:
     get:
-      description: '<div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+      description: 'Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to retrieve the evaluations assessments</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to retrieve the evaluations assessments'
       operationId: GetEvaluationsAssessments
       parameters:
       - description: Locale tag used to translate assessment labels (e.g. en_US, fr_FR). Optional — defaults to the operator's primary locale when omitted.
@@ -118,22 +114,23 @@ paths:
       - Storefront
   /api/storefront/returns/items-to-return:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         When you want to retrieve items to return for a list of orders
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- At each customer return request</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- At each customer return request</div>
+        - At each customer return request
 
-        </div>'
+
+        Maximum usage:
+
+        - At each customer return request'
       operationId: GetItemsToReturn
       parameters:
       - description: Mirakl order commercial identifiers separated by comma (e.g. order1,order2,...)
@@ -190,20 +187,18 @@ paths:
       - Storefront
   /api/storefront/promotions:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Returns Mirakl promotions for the given trigger offer IDs.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- Each display of the PDP for products with 3P offers</div>
+        Recommended usage:
 
-        </div>'
+        - Each display of the PDP for products with 3P offers'
       operationId: GetPromotions
       parameters:
       - description: Promotion-triggering offer ids, separated by commas
@@ -344,14 +339,12 @@ paths:
       - Storefront
   /api/storefront/returns:
     get:
-      description: '<div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+      description: 'Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- At each page display</div>
+        Recommended usage:
 
-        </div>'
+        - At each page display'
       operationId: GetReturns
       parameters:
       - description: Mirakl order commercial identifiers separated by comma (e.g. order1,order2,...)
@@ -481,20 +474,18 @@ paths:
       - Storefront
   /api/storefront/shipment:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         When you want to retrieve shipment details
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to retrieve shipment details</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to retrieve shipment details'
       operationId: GetShipment
       parameters:
       - description: Shopify fulfillment identifier
@@ -535,15 +526,10 @@ paths:
       - Storefront
   /api/storefront/orders/accounting-documents:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
-        Retrieves a list of accounting documents for specified Mirakl orders, with secure URLs for downloading each document.
-
-
-        <div class="api-description-extension">
-
-        </div>'
+        Retrieves a list of accounting documents for specified Mirakl orders, with secure URLs for downloading each document.'
       operationId: ListAccountingOrdersDocuments
       parameters:
       - description: Mirakl orders identifier
@@ -577,20 +563,18 @@ paths:
       - Storefront
   /api/storefront/orders/documents:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Retrieves a list of general order documents for specified Mirakl orders, with secure URLs for downloading each document.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to get documents for orders</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to get documents for orders'
       operationId: ListOrdersDocuments
       parameters:
       - description: Mirakl orders identifier
@@ -624,22 +608,23 @@ paths:
       - Storefront
   /api/storefront/products/offers:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Calls the Mirakl P11 API and returns a trimmed payload tailored to the PDP.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- At each product page display</div>
+        Recommended usage:
 
-        <div class="max-call-frequency">Maximum usage: <br/>- At each product page display</div>
+        - At each product page display
 
-        </div>'
+
+        Maximum usage:
+
+        - At each product page display'
       operationId: ListProductOffers
       parameters:
       - description: Mirakl product SKUs separated by comma (max 100)
@@ -742,20 +727,18 @@ paths:
       - Storefront
   /api/storefront/shop-ratings/{shopId}:
     get:
-      description: '<div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+      description: 'Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to display shop ratings</div>
+        Recommended usage:
 
-        <div class="extension-title">Pagination</div>
-
-
-        <p>This resource supports offset pagination (<a href="#section/Offset-pagination-and-sort">see documentation</a>)</p>
+        - When you want to display shop ratings
 
 
-        </div>'
+        Pagination
+
+
+        This resource supports offset pagination (see documentation)'
       operationId: ListShopEvaluations
       parameters:
       - description: Mirakl shop identifier
@@ -894,20 +877,20 @@ paths:
         > The Content-Length header must be present with value 0, even when there is no request body.
 
 
-        <div class="extension-title">Description</div>
+        Description
 
 
-        For security reasons, not all fields are available depending on the context. For example, it is not possible to query the additional fields from the storefront.<br/>For offers queries, the customer location headers are used to resolve the operator shipping zone, which always overwrites the shippingZones filter of the offers input before the query is forwarded to Mirakl. When the X-Customer-Country header is absent, the query is forwarded unchanged.
+        For security reasons, not all fields are available depending on the context. For example, it is not possible to query the additional fields from the storefront.
+
+        For offers queries, the customer location headers are used to resolve the operator shipping zone, which always overwrites the shippingZones filter of the offers input before the query is forwarded to Mirakl. When the X-Customer-Country header is absent, the query is forwarded unchanged.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to retrieve data from Mirakl GraphQL API</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to retrieve data from Mirakl GraphQL API'
       operationId: MiraklGraphQL
       parameters:
       - deprecated: false
@@ -952,14 +935,12 @@ paths:
         > The Content-Length header must be present with value 0, even when there is no request body.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to upload files to Mirakl GraphQL API</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to upload files to Mirakl GraphQL API'
       operationId: MiraklGraphQLUpload
       parameters: []
       responses:
@@ -977,14 +958,12 @@ paths:
         > The Content-Length header must be present with value 0, even when there is no request body.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to confirm the reception of a fulfillment to Mirakl</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to confirm the reception of a fulfillment to Mirakl'
       operationId: ReceiveFulfillment
       parameters:
       - description: Shopify fulfillment identifier
@@ -1003,198 +982,6 @@ paths:
       - Storefront
 components:
   schemas:
-    ListShopEvaluations_Response_200:
-      type: object
-      properties:
-        evaluations:
-          type: array
-          description: Evaluations list
-          items:
-            $ref: '#/components/schemas/ListShopEvaluations_Response_200_Evaluations'
-        totalCount:
-          type: integer
-          format: int64
-          description: Total count of elements returned by the query
-    ListProductOffers_Response_200_Products_Offers_ShippingTypes:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Shipping type code
-        cutOffNextDate:
-          type: string
-          format: date-time
-          description: Next cutoff date
-        cutOffTime:
-          type: string
-          description: Shipping type Cutoff time
-        deliveryTime:
-          $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_ShippingTypes_DeliveryTime'
-          description: Expected delivery time
-        label:
-          type: string
-          description: Shipping type label
-        shippingDeadline:
-          type: string
-          format: date-time
-          description: Estimated shipping date, that includes business closing days and cut-off configured on the platform. Add the earliest and latest delivery times to calculate the estimated delivery date to customers
-        shippingPriceType:
-          type: string
-          description: 'Shipping price type of the offer for a given zone method
-
-
-            Enum: `"FIXED_PRICE"`, `"FREE_SHIPPING"`, `"ORDER_PRICE_RANGE"`
-
-            '
-        shippingPriceUnit:
-          type: number
-          format: with decimals
-          description: Shipping price of the offer
-        shippingZoneCode:
-          type: string
-          description: Shipping zone code
-        shippingZoneLabel:
-          type: string
-          description: Shipping zone label
-        standardCode:
-          type: string
-          description: Shipping type standard code
-    ListAccountingOrdersDocuments_Response_200_Documents:
-      type: object
-      properties:
-        fileName:
-          type: string
-          description: The file name of the document
-        id:
-          type: string
-          description: Unique identifier for the document
-        type:
-          type: string
-          description: Document type as defined in Mirakl document type configuration
-        uploadedDate:
-          type: string
-          format: date-time
-          description: The uploaded date of the document
-        url:
-          type: string
-          description: Secure download URL for the document. This URL includes a unique hash for security, and is generated specifically for the document.
-    GetPromotions_Response_200_Promotions_PublicDescriptions:
-      type: object
-      description: Promotion public description for a given locale
-      properties:
-        locale:
-          type: string
-          description: Locale identifier (e.g. en_US)
-        value:
-          type: string
-          description: Public description text
-    ListProductOffers_Response_200:
-      type: object
-      properties:
-        products:
-          type: array
-          description: List of products information with their offers
-          items:
-            $ref: '#/components/schemas/ListProductOffers_Response_200_Products'
-    GetReturns_Response_200_Returns:
-      type: object
-      description: Return details
-      properties:
-        dateCreated:
-          type: string
-          format: date-time
-          description: Return creation date
-        description:
-          type: string
-          description: Description
-        documents:
-          type: array
-          description: Return documents
-          items:
-            $ref: '#/components/schemas/GetReturns_Response_200_Returns_Documents'
-        id:
-          type: string
-          description: Return id
-        labelUrl:
-          type: string
-          description: Label URL
-        lastUpdated:
-          type: string
-          format: date-time
-          description: Return last updated date
-        methodCode:
-          type: string
-          description: 'Return method code
-
-
-            Enum: `"RETURN_METHOD_BY_MAIL"`, `"RETURN_METHOD_DROP_OFF_POINT"`, `"RETURN_METHOD_HOME_PICKUP"`, `"RETURN_METHOD_IN_STORE"`, `"RETURN_METHOD_RETURNLESS"`
-
-            '
-        orderCommercialId:
-          type: string
-          description: Order commercial id
-        orderId:
-          type: string
-          description: Order id
-        reasonCode:
-          type: string
-          description: 'Return reason code
-
-
-            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`
-
-            '
-        rejectionReasonCode:
-          type: string
-          description: 'Return rejection reason code
-
-
-            Enum: `"RETURN_REJECTION_NOT_ELIGIBLE"`, `"RETURN_REJECTION_NOT_NEEDED"`, `"RETURN_REJECTION_WINDOW_CLOSED"`
-
-            '
-        returnAddress:
-          $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnAddress'
-          description: The address where items must be returned
-        returnLines:
-          type: array
-          description: Return lines
-          items:
-            $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnLines'
-        rma:
-          type: string
-          description: Return RMA
-        state:
-          type: string
-          description: 'Return state
-
-
-            Enum: `"CANCELED"`, `"CLOSED"`, `"IN_PROGRESS"`, `"NO_RECEPTION"`, `"RECEIVED"`, `"REFUSED"`, `"WAITING_ACCEPTANCE"`
-
-            '
-        tracking:
-          $ref: '#/components/schemas/GetReturns_Response_200_Returns_Tracking'
-          description: Return tracking details
-      required:
-      - dateCreated
-      - id
-      - lastUpdated
-      - methodCode
-      - orderCommercialId
-      - orderId
-      - reasonCode
-      - returnAddress
-      - returnLines
-      - state
-    CreateReturn_Response_200:
-      type: object
-      description: Response returned when a return is created
-      properties:
-        miraklReturnId:
-          type: string
-          description: Mirakl return identifier
-        shopifyReturnId:
-          type: string
-          description: Shopify return identifier
     GetItemsToReturn_Response_200_ItemsToReturn:
       type: object
       description: Item available for return
@@ -1227,6 +1014,146 @@ components:
       - orderCommercialId
       - orderLineId
       - returnableQuantity
+    ListProductOffers_Response_200_Products_Offers_ShippingTypes_DeliveryTime:
+      type: object
+      properties:
+        earliestDays:
+          type: integer
+          format: int32
+          description: Earliest order delivery time
+        earliestDeliveryDate:
+          type: string
+          format: date-time
+          description: Earliest order delivery date
+        latestDays:
+          type: integer
+          format: int32
+          description: Latest order delivery time
+        latestDeliveryDate:
+          type: string
+          format: date-time
+          description: Latest order delivery date
+    GetPromotions_Response_200_Promotions:
+      type: object
+      description: Storefront promotion derived from Mirakl PR01
+      properties:
+        amountOff:
+          type: number
+          format: with decimals
+          description: Amount discount — non-null for AMOUNT_OFF only
+        campaign:
+          $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Campaign'
+          description: Campaign information
+        endDate:
+          type: string
+          format: date-time
+          description: Promotion end date
+        freeItemsQuantity:
+          type: integer
+          format: int32
+          description: Free items quantity — non-null for FREE_ITEMS only
+        internalDescription:
+          type: string
+          description: Internal description of the promotion
+        maxQuantityToDiscount:
+          type: integer
+          format: int32
+          description: Maximum quantity on which the discount applies — non-null for PERCENTAGE_OFF only
+        medias:
+          type: array
+          description: Media assets per locale
+          items:
+            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Medias'
+        percentageOff:
+          type: number
+          format: with decimals
+          description: Percentage discount — non-null for PERCENTAGE_OFF only
+        publicDescriptions:
+          type: array
+          description: Customer-facing descriptions per locale
+          items:
+            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_PublicDescriptions'
+        reducedUnitPrice:
+          type: number
+          format: with decimals
+          description: Reduced unit price — non-null for REDUCED_UNIT_PRICE only
+        rewardOnPurchasedItems:
+          type: boolean
+          description: Whether the reward applies to the purchased items
+        shopId:
+          type: string
+          description: Shop identifier
+        startDate:
+          type: string
+          format: date-time
+          description: Promotion start date
+        state:
+          type: string
+          description: Promotion state (ACTIVE or PENDING)
+        triggerOfferIds:
+          type: array
+          description: Offer IDs that matched the requested triggerOfferIds filter
+          items:
+            type: string
+        triggers:
+          type: array
+          description: Trigger conditions
+          items:
+            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Triggers'
+        type:
+          type: string
+          description: Promotion type (PERCENTAGE_OFF, AMOUNT_OFF, REDUCED_UNIT_PRICE, FREE_ITEMS)
+        withPromoCode:
+          type: boolean
+          description: Whether the promotion requires a promo code to apply
+    ListProductOffers_Response_200_Products_Offers_EcoContributions:
+      type: object
+      properties:
+        ecoContributionAmount:
+          type: number
+          format: with decimals
+          description: Amount of the eco-contribution.
+        eprCategoryCode:
+          type: string
+          description: Extended Producer Responsibility (EPR) category code.
+        producerId:
+          type: string
+          description: Producer identifier of the eco-contribution.
+    CreateReturn_Request_MultipartFormData_Returnrequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Return description
+        methodCode:
+          type: string
+          description: 'Return method code
+
+
+            Enum: `"RETURN_METHOD_BY_MAIL"`, `"RETURN_METHOD_DROP_OFF_POINT"`, `"RETURN_METHOD_HOME_PICKUP"`, `"RETURN_METHOD_IN_STORE"`, `"RETURN_METHOD_RETURNLESS"`
+
+            '
+        orderLogisticId:
+          type: string
+          description: Order logistic id
+        reasonCode:
+          type: string
+          description: 'Return reason code
+
+
+            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`
+
+            '
+        returnLines:
+          type: array
+          description: List of return lines
+          items:
+            $ref: '#/components/schemas/CreateReturn_Request_MultipartFormData_Returnrequest_ReturnLines'
+      required:
+      - methodCode
+      - orderLogisticId
+      - reasonCode
+      - returnLines
     ListShopEvaluations_Response_200_Evaluations:
       type: object
       properties:
@@ -1274,60 +1201,65 @@ components:
       - grade
       - lastname
       - updatedAt
-    CreateReturn_Request_MultipartFormData_Returnrequest:
+    CreateReturn_Request_MultipartFormData_Returnrequest_ReturnLines:
       type: object
+      description: Return creation return line request
       properties:
-        description:
+        orderLineId:
           type: string
-          description: Return description
-        methodCode:
-          type: string
-          description: 'Return method code
-
-
-            Enum: `"RETURN_METHOD_BY_MAIL"`, `"RETURN_METHOD_DROP_OFF_POINT"`, `"RETURN_METHOD_HOME_PICKUP"`, `"RETURN_METHOD_IN_STORE"`, `"RETURN_METHOD_RETURNLESS"`
-
-            '
-        orderLogisticId:
-          type: string
-          description: Order logistic id
-        reasonCode:
-          type: string
-          description: 'Return reason code
-
-
-            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`
-
-            '
-        returnLines:
-          type: array
-          description: List of return lines
-          items:
-            $ref: '#/components/schemas/CreateReturn_Request_MultipartFormData_Returnrequest_ReturnLines'
+          description: Return order line id
+        quantity:
+          type: integer
+          format: int32
+          description: Return quantity
+          minimum: 0
       required:
-      - methodCode
-      - orderLogisticId
-      - reasonCode
-      - returnLines
-    ListProductOffers_Response_200_Products_Offers_ShippingTypes_DeliveryTime:
+      - orderLineId
+      - quantity
+    GetPromotions_Response_200_Promotions_Campaign:
+      type: object
+      description: Promotion campaign information
+      properties:
+        identifier:
+          type: string
+          description: Campaign identifier
+    GetPromotions_Response_200_Promotions_Medias:
+      type: object
+      description: Promotion media asset for a given locale
+      properties:
+        locale:
+          type: string
+          description: Locale of the media (e.g. en_US)
+        url:
+          type: string
+          description: Media URL
+    CreateReturn_Response_200:
+      type: object
+      description: Response returned when a return is created
+      properties:
+        miraklReturnId:
+          type: string
+          description: Mirakl return identifier
+        shopifyReturnId:
+          type: string
+          description: Shopify return identifier
+    ListProductOffers_Response_200_Products:
       type: object
       properties:
-        earliestDays:
-          type: integer
-          format: int32
-          description: Earliest order delivery time
-        earliestDeliveryDate:
+        offers:
+          type: array
+          description: List of offers for the product
+          items:
+            $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers'
+        productSku:
           type: string
-          format: date-time
-          description: Earliest order delivery date
-        latestDays:
-          type: integer
-          format: int32
-          description: Latest order delivery time
-        latestDeliveryDate:
-          type: string
-          format: date-time
-          description: Latest order delivery date
+          description: SKU of the product
+    ListProductOffers_Response_200_Products_Offers_Fulfillment:
+      type: object
+      properties:
+        center:
+          $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_Fulfillment_Center'
+          description: Fulfillment center code
     GetPromotions_Response_200:
       type: object
       description: Response containing storefront promotions
@@ -1341,62 +1273,145 @@ components:
           type: integer
           format: int32
           description: Total number of promotions returned
-    ListShopEvaluations_Response_200_Evaluations_Reply:
+    GetReturns_Response_200_Returns_ReturnLines_Compliance:
+      type: object
+      description: Return line compliance details
+      properties:
+        compliant:
+          type: boolean
+          description: Compliant
+        nonCompliantAdditionalInfo:
+          type: string
+          description: Non compliance additional info
+        nonCompliantReasonCode:
+          type: string
+          description: Non compliance reason code
+      required:
+      - compliant
+    GetReturns_Response_200:
+      type: object
+      description: List of returns
+      properties:
+        returns:
+          type: array
+          description: List of returns
+          items:
+            $ref: '#/components/schemas/GetReturns_Response_200_Returns'
+    GetReturns_Response_200_Returns_Tracking:
+      type: object
+      description: Return tracking details
+      properties:
+        carrierCode:
+          type: string
+          description: Carrier code
+        carrierName:
+          type: string
+          description: Carrier name
+        carrierStandardCode:
+          type: string
+          description: Carrier standard code
+        trackingNumber:
+          type: string
+          description: Tracking number
+        trackingUrl:
+          type: string
+          description: Return tracking URL
+    ListShopEvaluations_Response_200:
       type: object
       properties:
-        comment:
+        evaluations:
+          type: array
+          description: Evaluations list
+          items:
+            $ref: '#/components/schemas/ListShopEvaluations_Response_200_Evaluations'
+        totalCount:
+          type: integer
+          format: int64
+          description: Total count of elements returned by the query
+    ListShopEvaluations_Response_200_Evaluations_Assessments:
+      type: object
+      properties:
+        code:
           type: string
-          description: Text of the reply
-          maxLength: 1000
-          minLength: 1
-        date:
+          description: Assessment code
+        label:
           type: string
-          format: date-time
-          description: Reply date
+          description: Assessment label
+        response:
+          type: string
+          description: Response associated with the assessment
+    ListAccountingOrdersDocuments_Response_200:
+      type: object
+      properties:
+        documents:
+          type: array
+          description: List of order documents
+          items:
+            $ref: '#/components/schemas/ListAccountingOrdersDocuments_Response_200_Documents'
+      required:
+      - documents
+    GetEvaluationsAssessments_Response_200:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Assessment code
+        label:
+          type: string
+          description: Assessment label
         type:
           type: string
-          description: 'Type of user who replied
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`
-
-            '
-      required:
-      - comment
-      - date
-      - type
-    GetPromotions_Response_200_Promotions_Medias:
-      type: object
-      description: Promotion media asset for a given locale
-      properties:
-        locale:
-          type: string
-          description: Locale of the media (e.g. en_US)
-        url:
-          type: string
-          description: Media URL
-    ListShopEvaluations_Response_200_Evaluations_Entity:
+          description: Assessment type
+    ListProductOffers_Response_200_Products_Offers_ShippingTypes:
       type: object
       properties:
-        createdAt:
+        code:
+          type: string
+          description: Shipping type code
+        cutOffNextDate:
           type: string
           format: date-time
-          description: The creation date of the entity
-        id:
+          description: Next cutoff date
+        cutOffTime:
           type: string
-          description: Id of the entity
-        type:
+          description: Shipping type Cutoff time
+        deliveryTime:
+          $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_ShippingTypes_DeliveryTime'
+          description: Expected delivery time
+        label:
           type: string
-          description: 'Type of the entity
+          description: Shipping type label
+        shippingDeadline:
+          type: string
+          format: date-time
+          description: Estimated shipping date, that includes business closing days and cut-off configured on the platform. Add the earliest and latest delivery times to calculate the estimated delivery date to customers
+        shippingPriceType:
+          type: string
+          description: 'Shipping price type of the offer for a given zone method
 
 
-            Enum: `"MMP_ORDER"`, `"MPS_ORDER"`
+            Enum: `"FIXED_PRICE"`, `"FREE_SHIPPING"`, `"ORDER_PRICE_RANGE"`
 
             '
-      required:
-      - createdAt
-      - id
-      - type
+        shippingPriceUnit:
+          type: number
+          format: with decimals
+          description: Shipping price of the offer
+        shippingZoneCode:
+          type: string
+          description: Shipping zone code
+        shippingZoneLabel:
+          type: string
+          description: Shipping zone label
+        standardCode:
+          type: string
+          description: Shipping type standard code
+    ListProductOffers_Response_200_Products_Offers_Fulfillment_Center:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Center code
     GetReturns_Response_200_Returns_ReturnAddress:
       type: object
       description: Return address
@@ -1424,6 +1439,58 @@ components:
       - countryIsoCode
       - street1
       - zipCode
+    GetReturns_Response_200_Returns_Documents:
+      type: object
+      description: Return document
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Return document id
+        type:
+          type: string
+          description: Return document type
+      required:
+      - id
+      - type
+    ListOrdersDocuments_Response_200_Documents:
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: The file name of the document
+        id:
+          type: string
+          description: Unique identifier for the document
+        type:
+          type: string
+          description: Document type as defined in Mirakl document type configuration
+        uploadedDate:
+          type: string
+          format: date-time
+          description: The uploaded date of the document
+        url:
+          type: string
+          description: Secure download URL for the document. This URL includes a unique hash for security, and is generated specifically for the document.
+    GetPromotions_Response_200_Promotions_PublicDescriptions:
+      type: object
+      description: Promotion public description for a given locale
+      properties:
+        locale:
+          type: string
+          description: Locale identifier (e.g. en_US)
+        value:
+          type: string
+          description: Public description text
+    GetItemsToReturn_Response_200:
+      type: object
+      description: Items available for return
+      properties:
+        itemsToReturn:
+          type: array
+          description: List of items available for return
+          items:
+            $ref: '#/components/schemas/GetItemsToReturn_Response_200_ItemsToReturn'
     GetPromotions_Response_200_Promotions_Triggers:
       type: object
       description: Promotion trigger condition
@@ -1442,52 +1509,38 @@ components:
         type:
           type: string
           description: Trigger type (minimum_quantity, every_quantity, minimum_amount, every_amount)
-    GetReturns_Response_200_Returns_ReturnLines:
+    GetShipment_Response_200:
       type: object
-      description: Return line details
       properties:
-        compliance:
-          type: array
-          description: Compliance
-          items:
-            $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnLines_Compliance'
-        orderLineId:
+        canMarkAsReceived:
+          type: boolean
+          description: Boolean indicating if the shipment can be marked as received
+        logisticOrderId:
           type: string
-          description: Order line id
-        quantity:
-          type: integer
-          format: int32
-          description: Quantity
+          description: The logistic order ID
+        miraklShipmentId:
+          type: string
+          description: The Mirakl shipment ID
+        shopifyFulfillmentId:
+          type: string
+          description: The shopify fulfillment ID
+        status:
+          type: string
+          description: The Mirakl status of the shipment
       required:
-      - orderLineId
-      - quantity
-    GetReturns_Response_200:
+      - canMarkAsReceived
+      - logisticOrderId
+      - miraklShipmentId
+      - shopifyFulfillmentId
+      - status
+    ListProductOffers_Response_200:
       type: object
-      description: List of returns
       properties:
-        returns:
+        products:
           type: array
-          description: List of returns
+          description: List of products information with their offers
           items:
-            $ref: '#/components/schemas/GetReturns_Response_200_Returns'
-    ListShopEvaluations_Response_200_Evaluations_Assessments:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Assessment code
-        label:
-          type: string
-          description: Assessment label
-        response:
-          type: string
-          description: Response associated with the assessment
-    ListProductOffers_Response_200_Products_Offers_Fulfillment:
-      type: object
-      properties:
-        center:
-          $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers_Fulfillment_Center'
-          description: Fulfillment center code
+            $ref: '#/components/schemas/ListProductOffers_Response_200_Products'
     ListProductOffers_Response_200_Products_Offers:
       type: object
       properties:
@@ -1604,156 +1657,152 @@ components:
 
 
             For Dropship specifically: the purchasing price of the offer + minimum shipping rate'
-    GetPromotions_Response_200_Promotions:
+    GetReturns_Response_200_Returns:
       type: object
-      description: Storefront promotion derived from Mirakl PR01
+      description: Return details
       properties:
-        amountOff:
-          type: number
-          format: with decimals
-          description: Amount discount — non-null for AMOUNT_OFF only
-        campaign:
-          $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Campaign'
-          description: Campaign information
-        endDate:
+        dateCreated:
           type: string
           format: date-time
-          description: Promotion end date
-        freeItemsQuantity:
-          type: integer
-          format: int32
-          description: Free items quantity — non-null for FREE_ITEMS only
-        internalDescription:
+          description: Return creation date
+        description:
           type: string
-          description: Internal description of the promotion
-        maxQuantityToDiscount:
-          type: integer
-          format: int32
-          description: Maximum quantity on which the discount applies — non-null for PERCENTAGE_OFF only
-        medias:
+          description: Description
+        documents:
           type: array
-          description: Media assets per locale
+          description: Return documents
           items:
-            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Medias'
-        percentageOff:
-          type: number
-          format: with decimals
-          description: Percentage discount — non-null for PERCENTAGE_OFF only
-        publicDescriptions:
-          type: array
-          description: Customer-facing descriptions per locale
-          items:
-            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_PublicDescriptions'
-        reducedUnitPrice:
-          type: number
-          format: with decimals
-          description: Reduced unit price — non-null for REDUCED_UNIT_PRICE only
-        rewardOnPurchasedItems:
-          type: boolean
-          description: Whether the reward applies to the purchased items
-        shopId:
+            $ref: '#/components/schemas/GetReturns_Response_200_Returns_Documents'
+        id:
           type: string
-          description: Shop identifier
-        startDate:
+          description: Return id
+        labelUrl:
+          type: string
+          description: Label URL
+        lastUpdated:
           type: string
           format: date-time
-          description: Promotion start date
+          description: Return last updated date
+        methodCode:
+          type: string
+          description: 'Return method code
+
+
+            Enum: `"RETURN_METHOD_BY_MAIL"`, `"RETURN_METHOD_DROP_OFF_POINT"`, `"RETURN_METHOD_HOME_PICKUP"`, `"RETURN_METHOD_IN_STORE"`, `"RETURN_METHOD_RETURNLESS"`
+
+            '
+        orderCommercialId:
+          type: string
+          description: Order commercial id
+        orderId:
+          type: string
+          description: Order id
+        reasonCode:
+          type: string
+          description: 'Return reason code
+
+
+            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`
+
+            '
+        rejectionReasonCode:
+          type: string
+          description: 'Return rejection reason code
+
+
+            Enum: `"RETURN_REJECTION_NOT_ELIGIBLE"`, `"RETURN_REJECTION_NOT_NEEDED"`, `"RETURN_REJECTION_WINDOW_CLOSED"`
+
+            '
+        returnAddress:
+          $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnAddress'
+          description: The address where items must be returned
+        returnLines:
+          type: array
+          description: Return lines
+          items:
+            $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnLines'
+        rma:
+          type: string
+          description: Return RMA
         state:
           type: string
-          description: Promotion state (ACTIVE or PENDING)
-        triggerOfferIds:
-          type: array
-          description: Offer IDs that matched the requested triggerOfferIds filter
-          items:
-            type: string
-        triggers:
-          type: array
-          description: Trigger conditions
-          items:
-            $ref: '#/components/schemas/GetPromotions_Response_200_Promotions_Triggers'
+          description: 'Return state
+
+
+            Enum: `"CANCELED"`, `"CLOSED"`, `"IN_PROGRESS"`, `"NO_RECEPTION"`, `"RECEIVED"`, `"REFUSED"`, `"WAITING_ACCEPTANCE"`
+
+            '
+        tracking:
+          $ref: '#/components/schemas/GetReturns_Response_200_Returns_Tracking'
+          description: Return tracking details
+      required:
+      - dateCreated
+      - id
+      - lastUpdated
+      - methodCode
+      - orderCommercialId
+      - orderId
+      - reasonCode
+      - returnAddress
+      - returnLines
+      - state
+    ListShopEvaluations_Response_200_Evaluations_Reply:
+      type: object
+      properties:
+        comment:
+          type: string
+          description: Text of the reply
+          maxLength: 1000
+          minLength: 1
+        date:
+          type: string
+          format: date-time
+          description: Reply date
         type:
           type: string
-          description: Promotion type (PERCENTAGE_OFF, AMOUNT_OFF, REDUCED_UNIT_PRICE, FREE_ITEMS)
-        withPromoCode:
-          type: boolean
-          description: Whether the promotion requires a promo code to apply
-    GetReturns_Response_200_Returns_ReturnLines_Compliance:
-      type: object
-      description: Return line compliance details
-      properties:
-        compliant:
-          type: boolean
-          description: Compliant
-        nonCompliantAdditionalInfo:
-          type: string
-          description: Non compliance additional info
-        nonCompliantReasonCode:
-          type: string
-          description: Non compliance reason code
+          description: 'Type of user who replied
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`
+
+            '
       required:
-      - compliant
-    GetReturns_Response_200_Returns_Documents:
+      - comment
+      - date
+      - type
+    ListShopEvaluations_Response_200_Evaluations_Entity:
       type: object
-      description: Return document
       properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: The creation date of the entity
         id:
-          type: integer
-          format: int32
-          description: Return document id
+          type: string
+          description: Id of the entity
         type:
           type: string
-          description: Return document type
+          description: 'Type of the entity
+
+
+            Enum: `"MMP_ORDER"`, `"MPS_ORDER"`
+
+            '
       required:
+      - createdAt
       - id
       - type
-    CreateReturn_Request_MultipartFormData_Returnrequest_ReturnLines:
-      type: object
-      description: Return creation return line request
-      properties:
-        orderLineId:
-          type: string
-          description: Return order line id
-        quantity:
-          type: integer
-          format: int32
-          description: Return quantity
-          minimum: 0
-      required:
-      - orderLineId
-      - quantity
-    ListAccountingOrdersDocuments_Response_200:
+    ListOrdersDocuments_Response_200:
       type: object
       properties:
         documents:
           type: array
           description: List of order documents
           items:
-            $ref: '#/components/schemas/ListAccountingOrdersDocuments_Response_200_Documents'
+            $ref: '#/components/schemas/ListOrdersDocuments_Response_200_Documents'
       required:
       - documents
-    GetItemsToReturn_Response_200:
-      type: object
-      description: Items available for return
-      properties:
-        itemsToReturn:
-          type: array
-          description: List of items available for return
-          items:
-            $ref: '#/components/schemas/GetItemsToReturn_Response_200_ItemsToReturn'
-    ListProductOffers_Response_200_Products_Offers_EcoContributions:
-      type: object
-      properties:
-        ecoContributionAmount:
-          type: number
-          format: with decimals
-          description: Amount of the eco-contribution.
-        eprCategoryCode:
-          type: string
-          description: Extended Producer Responsibility (EPR) category code.
-        producerId:
-          type: string
-          description: Producer identifier of the eco-contribution.
-    ListOrdersDocuments_Response_200_Documents:
+    ListAccountingOrdersDocuments_Response_200_Documents:
       type: object
       properties:
         fileName:
@@ -1772,95 +1821,25 @@ components:
         url:
           type: string
           description: Secure download URL for the document. This URL includes a unique hash for security, and is generated specifically for the document.
-    ListProductOffers_Response_200_Products:
+    GetReturns_Response_200_Returns_ReturnLines:
       type: object
+      description: Return line details
       properties:
-        offers:
+        compliance:
           type: array
-          description: List of offers for the product
+          description: Compliance
           items:
-            $ref: '#/components/schemas/ListProductOffers_Response_200_Products_Offers'
-        productSku:
+            $ref: '#/components/schemas/GetReturns_Response_200_Returns_ReturnLines_Compliance'
+        orderLineId:
           type: string
-          description: SKU of the product
-    GetReturns_Response_200_Returns_Tracking:
-      type: object
-      description: Return tracking details
-      properties:
-        carrierCode:
-          type: string
-          description: Carrier code
-        carrierName:
-          type: string
-          description: Carrier name
-        carrierStandardCode:
-          type: string
-          description: Carrier standard code
-        trackingNumber:
-          type: string
-          description: Tracking number
-        trackingUrl:
-          type: string
-          description: Return tracking URL
-    GetPromotions_Response_200_Promotions_Campaign:
-      type: object
-      description: Promotion campaign information
-      properties:
-        identifier:
-          type: string
-          description: Campaign identifier
-    GetEvaluationsAssessments_Response_200:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Assessment code
-        label:
-          type: string
-          description: Assessment label
-        type:
-          type: string
-          description: Assessment type
-    ListProductOffers_Response_200_Products_Offers_Fulfillment_Center:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Center code
-    ListOrdersDocuments_Response_200:
-      type: object
-      properties:
-        documents:
-          type: array
-          description: List of order documents
-          items:
-            $ref: '#/components/schemas/ListOrdersDocuments_Response_200_Documents'
+          description: Order line id
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity
       required:
-      - documents
-    GetShipment_Response_200:
-      type: object
-      properties:
-        canMarkAsReceived:
-          type: boolean
-          description: Boolean indicating if the shipment can be marked as received
-        logisticOrderId:
-          type: string
-          description: The logistic order ID
-        miraklShipmentId:
-          type: string
-          description: The Mirakl shipment ID
-        shopifyFulfillmentId:
-          type: string
-          description: The shopify fulfillment ID
-        status:
-          type: string
-          description: The Mirakl status of the shipment
-      required:
-      - canMarkAsReceived
-      - logisticOrderId
-      - miraklShipmentId
-      - shopifyFulfillmentId
-      - status
+      - orderLineId
+      - quantity
   securitySchemes:
     Bearer:
       bearerFormat: JWT

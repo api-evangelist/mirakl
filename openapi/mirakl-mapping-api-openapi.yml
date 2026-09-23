@@ -11,20 +11,18 @@ tags:
 paths:
   /api/mapping/returns/{orderId}:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Returns all Mirakl marketplace returns tracked for the given Shopify order, ordered by creation date descending.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to display Mirakl returns on the Shopify order page</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to display Mirakl returns on the Shopify order page'
       operationId: ListOrderReturnMappings
       parameters:
       - description: Shopify Order identifier (= mirakl_order_commercial_id)
@@ -67,20 +65,18 @@ paths:
       - Mapping
   /api/mapping/transactions/{orderId}:
     get:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
         Returns all Mirakl transactions (debit, refund, refusal, cancellation, items-not-shippable) tracked for the given Shopify order, ordered by creation date descending.
 
 
-        <div class="api-description-extension">
-
-        <div class="extension-title">Call Frequency</div>
+        Call Frequency
 
 
-        <div class="recommended-call-frequency">Recommended usage: <br/>- When you want to display Mirakl transactions on the Shopify order page</div>
+        Recommended usage:
 
-        </div>'
+        - When you want to display Mirakl transactions on the Shopify order page'
       operationId: ListOrderTransactionMappings
       parameters:
       - description: Shopify Order identifier (= mirakl_commercial_id)
@@ -126,6 +122,19 @@ paths:
       - Mapping
 components:
   schemas:
+    ListOrderReturnMappings_Response_200_ReturnLines:
+      type: object
+      description: Order line targeted by a Mirakl return
+      properties:
+        orderLineId:
+          type: string
+          description: Raw Shopify LineItem identifier targeted by the return
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity of the order line included in the return
+      required:
+      - orderLineId
     ListOrderTransactionMappings_Response_200:
       type: object
       description: Mirakl transaction (debit/refund/refusal/cancellation/items-not-shippable) associated with a Shopify order
@@ -210,19 +219,6 @@ components:
       - shopifyStatus
       - type
       - updatedAt
-    ListOrderReturnMappings_Response_200_ReturnLines:
-      type: object
-      description: Order line targeted by a Mirakl return
-      properties:
-        orderLineId:
-          type: string
-          description: Raw Shopify LineItem identifier targeted by the return
-        quantity:
-          type: integer
-          format: int32
-          description: Quantity of the order line included in the return
-      required:
-      - orderLineId
     ListOrderReturnMappings_Response_200:
       type: object
       description: Mirakl marketplace return associated with a Shopify order

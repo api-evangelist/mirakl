@@ -11,15 +11,10 @@ tags:
 paths:
   /v1/channels:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
-        Api to create or update channels
-
-
-        <div class="api-description-extension">
-
-        </div>'
+        Api to create or update channels'
       operationId: SELLER_ACCOUNT_CHANNEL_UPSERT
       parameters: []
       requestBody:
@@ -104,16 +99,6 @@ paths:
       - Channel
 components:
   schemas:
-    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403:
-      type: object
-      properties:
-        channels:
-          type: array
-          description: channels
-          items:
-            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels'
-      required:
-      - channels
     SELLER_ACCOUNT_CHANNEL_UPSERT_Request_Channels:
       type: object
       description: Channels to upsert
@@ -136,16 +121,6 @@ components:
       - name
       - status
       - url
-    SELLER_ACCOUNT_CHANNEL_UPSERT_Request:
-      type: object
-      properties:
-        channels:
-          type: array
-          description: Channels to upsert
-          items:
-            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Request_Channels'
-      required:
-      - channels
     SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201_Channels:
       type: object
       properties:
@@ -172,7 +147,7 @@ components:
         vendor:
           type: string
           description: Channel vendor
-    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_401_Channels:
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels:
       type: object
       properties:
         external_id:
@@ -198,6 +173,16 @@ components:
         vendor:
           type: string
           description: Channel vendor
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: channels
+          items:
+            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels'
+      required:
+      - channels
     SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201:
       type: object
       properties:
@@ -208,7 +193,7 @@ components:
             $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201_Channels'
       required:
       - channels
-    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels:
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_401_Channels:
       type: object
       properties:
         external_id:
@@ -242,6 +227,16 @@ components:
           description: channels
           items:
             $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_401_Channels'
+      required:
+      - channels
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Request:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: Channels to upsert
+          items:
+            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Request_Channels'
       required:
       - channels
   securitySchemes:

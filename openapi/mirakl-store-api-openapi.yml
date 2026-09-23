@@ -13,15 +13,10 @@ tags:
 paths:
   /v1/users/stores:
     post:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
-        Create multiple stores and link them to a user. This API should be used by connectors.
-
-
-        <div class="api-description-extension">
-
-        </div>'
+        Create multiple stores and link them to a user. This API should be used by connectors.'
       operationId: SELLER_ACCOUNT_STORE_CREATE
       parameters:
       - description: Token used by app-account to identify the user, product, and vendor
@@ -80,15 +75,10 @@ paths:
       url: https://account.mirakl.net/api/channel-platform
   /v1/channels/{channel_id}/stores/{channel_store_id}:
     put:
-      description: '<div class="extension-title">Description</div>
+      description: 'Description
 
 
-        Update store. This API should be used by connectors.
-
-
-        <div class="api-description-extension">
-
-        </div>'
+        Update store. This API should be used by connectors.'
       operationId: SELLER_ACCOUNT_STORE_UPDATE
       parameters:
       - description: Unique identifier of the channel that hosts the store
@@ -144,35 +134,6 @@ paths:
       url: https://account.mirakl.net/api/channel-platform
 components:
   schemas:
-    SELLER_ACCOUNT_STORE_UPDATE_Request:
-      type: object
-      properties:
-        access_expiration_date:
-          type: string
-          format: date-time
-          description: Access expiration date
-        name:
-          type: string
-          description: Store name
-        state:
-          type: string
-          description: Store state
-        suspension_type:
-          type: string
-          description: Store suspension type
-      required:
-      - name
-      - state
-    SELLER_ACCOUNT_STORE_CREATE_Request:
-      type: object
-      properties:
-        stores:
-          type: array
-          description: Stores to create
-          items:
-            $ref: '#/components/schemas/SELLER_ACCOUNT_STORE_CREATE_Request_Stores'
-      required:
-      - stores
     SELLER_ACCOUNT_STORE_CREATE_Request_Stores:
       type: object
       description: Stores to create
@@ -201,32 +162,35 @@ components:
       - channel_store_id
       - name
       - state
-    Error:
+    SELLER_ACCOUNT_STORE_CREATE_Request:
       type: object
       properties:
-        code:
-          type: string
-          description: Error code (immutable)
-          examples:
-          - DATA_NOT_FOUND
-        errors:
+        stores:
           type: array
+          description: Stores to create
           items:
-            $ref: '#/components/schemas/ErrorItem'
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        message:
-          type: string
-          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - An error occurred while processing your request
+            $ref: '#/components/schemas/SELLER_ACCOUNT_STORE_CREATE_Request_Stores'
       required:
-      - code
-      - message
+      - stores
+    SELLER_ACCOUNT_STORE_UPDATE_Request:
+      type: object
+      properties:
+        access_expiration_date:
+          type: string
+          format: date-time
+          description: Access expiration date
+        name:
+          type: string
+          description: Store name
+        state:
+          type: string
+          description: Store state
+        suspension_type:
+          type: string
+          description: Store suspension type
+      required:
+      - name
+      - state
     BusinessInformationInput:
       type: object
       properties:
@@ -302,6 +266,27 @@ components:
       required:
       - currency
       - updated_at
+    ErrorItem:
+      type: object
+      properties:
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
+        message:
+          type: string
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - 'An error occurred while processing your request: id is null'
+      required:
+      - message
     QualitySuspensionReason:
       type: object
       properties:
@@ -374,26 +359,31 @@ components:
       - currency
       - id
       - name
-    ErrorItem:
+    Error:
       type: object
       properties:
+        code:
+          type: string
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
         extensions:
           type: object
           description: Free map where you find additional context data to better describe the error
           examples:
           - maxLength: 255
             minLength: 1
-        field:
-          type: string
-          description: JsonPath to the field where the error occurred
-          examples:
-          - input.account.id
         message:
           type: string
-          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
           examples:
-          - 'An error occurred while processing your request: id is null'
+          - An error occurred while processing your request
       required:
+      - code
       - message
   securitySchemes:
     OAuth-2:
