@@ -275,72 +275,6 @@ paths:
       - Shipments
 components:
   schemas:
-    AsynchronousActionResponse:
-      type: object
-      properties:
-        action_id:
-          type: string
-          description: 'The unique identifier for the asynchronous action. It should be used with the [v2-getActionStatus API](#operation/v2-getActionStatus) to retrieve current action status and potential errors.
-
-            '
-          examples:
-          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
-        tracking_id:
-          type: string
-          deprecated: true
-          description: '**Deprecated:** This field was previously used to obtain the action ID. It has been replaced by `action_id` and contains the same value. It is retained for backward compatibility.
-
-            '
-          examples:
-          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
-      required:
-      - action_id
-    ErrorItem:
-      type: object
-      properties:
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        field:
-          type: string
-          description: JsonPath to the field where the error occurred
-          examples:
-          - input.account.id
-        message:
-          type: string
-          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - 'An error occurred while processing your request: id is null'
-      required:
-      - message
-    ShipmentItemResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Seller product identifier on the channel
-          examples:
-          - SELLER_ID_1
-          minLength: 1
-        order_line_id:
-          type: string
-          description: Order line identifier
-          examples:
-          - 0024_COMMERCIAL_ID-A-1
-          minLength: 1
-        quantity:
-          type: integer
-          description: Product quantity to ship
-          examples:
-          - '10'
-          minimum: 1
-      required:
-      - id
-      - order_line_id
-      - quantity
     V2CreateShipmentRequest:
       type: object
       description: Shipment object and its items' details
@@ -381,6 +315,91 @@ components:
           minLength: 1
       required:
       - items
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        message:
+          type: string
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - An error occurred while processing your request
+      required:
+      - code
+      - message
+    CreateShipmentRequest:
+      type: object
+      description: Shipment object and its items' details
+      properties:
+        carrier:
+          type: string
+          description: "Carrier company name. For example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ..."
+          examples:
+          - DHL Express
+          minLength: 1
+        items:
+          type: array
+          description: Shipment items
+          items:
+            $ref: '#/components/schemas/CreateShipmentItemRequest'
+        return_tracking_number:
+          type: string
+          description: Return shipment tracking number is required only for marketplaces that expect return tracking information when the shipment is created. If the marketplace doesn’t require it to create the shipment, the value won’t be synchronized.
+          examples:
+          - '78910'
+          minLength: 1
+        tracking_number:
+          type: string
+          description: Carrier tracking number
+          examples:
+          - '123456'
+          minLength: 1
+        tracking_url:
+          type: string
+          description: Carrier tracking URL
+          examples:
+          - https://wwwapps.ups.com/WebTracking/track
+      required:
+      - items
+    ShipmentItemResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Seller product identifier on the channel
+          examples:
+          - SELLER_ID_1
+          minLength: 1
+        order_line_id:
+          type: string
+          description: Order line identifier
+          examples:
+          - 0024_COMMERCIAL_ID-A-1
+          minLength: 1
+        quantity:
+          type: integer
+          description: Product quantity to ship
+          examples:
+          - '10'
+          minimum: 1
+      required:
+      - id
+      - order_line_id
+      - quantity
     ShipmentResponse:
       type: object
       properties:
@@ -456,65 +475,46 @@ components:
           minimum: 1
       required:
       - quantity
-    CreateShipmentRequest:
+    AsynchronousActionResponse:
       type: object
-      description: Shipment object and its items' details
       properties:
-        carrier:
+        action_id:
           type: string
-          description: "Carrier company name. For example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ..."
+          description: 'The unique identifier for the asynchronous action. It should be used with the [v2-getActionStatus API](#operation/v2-getActionStatus) to retrieve current action status and potential errors.
+
+            '
           examples:
-          - DHL Express
-          minLength: 1
-        items:
-          type: array
-          description: Shipment items
-          items:
-            $ref: '#/components/schemas/CreateShipmentItemRequest'
-        return_tracking_number:
+          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+        tracking_id:
           type: string
-          description: Return shipment tracking number is required only for marketplaces that expect return tracking information when the shipment is created. If the marketplace doesn’t require it to create the shipment, the value won’t be synchronized.
+          deprecated: true
+          description: '**Deprecated:** This field was previously used to obtain the action ID. It has been replaced by `action_id` and contains the same value. It is retained for backward compatibility.
+
+            '
           examples:
-          - '78910'
-          minLength: 1
-        tracking_number:
-          type: string
-          description: Carrier tracking number
-          examples:
-          - '123456'
-          minLength: 1
-        tracking_url:
-          type: string
-          description: Carrier tracking URL
-          examples:
-          - https://wwwapps.ups.com/WebTracking/track
+          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
       required:
-      - items
-    Error:
+      - action_id
+    ErrorItem:
       type: object
       properties:
-        code:
-          type: string
-          description: Error code (immutable)
-          examples:
-          - DATA_NOT_FOUND
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
         extensions:
           type: object
           description: Free map where you find additional context data to better describe the error
           examples:
           - maxLength: 255
             minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
         message:
           type: string
-          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
           examples:
-          - An error occurred while processing your request
+          - 'An error occurred while processing your request: id is null'
       required:
-      - code
       - message
   securitySchemes:
     Bearer:

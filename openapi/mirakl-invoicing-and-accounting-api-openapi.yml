@@ -4989,148 +4989,6 @@ paths:
       url: https://your-instance.mirakl.net
 components:
   schemas:
-    SBC11_Response_200_Data_PayOut:
-      type: object
-      properties:
-        failure_reason:
-          type: string
-          description: 'Pay-out failure reason, present only when state is FAILED
-
-
-            Enum: `"INCOMPLETE_KYC"`, `"AWAITING_INVOICE_CHECK"`
-
-            '
-        reference:
-          type: string
-          description: Pay-out reference, present only when state is PAID
-        state:
-          type: string
-          description: 'Pay-out state
-
-
-            Enum: `"TO_PAY"`, `"PAID"`, `"FAILED"`
-
-            '
-        transaction_date:
-          type: string
-          format: date-time
-          description: Pay-out transaction date, present only when state is PAID
-    IV01_Response_200_Invoices_Payment:
-      type: object
-      properties:
-        failure_reason:
-          type: string
-          description: 'Failure reason
-
-
-            Enum: `"INCOMPLETE_KYC"`, `"AWAITING_INVOICE_CHECK"`
-
-            '
-        reference:
-          type: string
-          description: Transaction reference
-        state:
-          type: string
-          description: 'Payment status
-
-
-            Enum: `"PENDING"`, `"PAID"`, `"FAILED"`
-
-            '
-        transaction_date:
-          type: string
-          format: date-time
-          description: Transaction date
-    IV01_Response_200_Invoices_ShopAddress:
-      type: object
-      properties:
-        city:
-          type: string
-          description: Shop contact address city
-        civility:
-          type: string
-          description: Shop contact civility
-        company:
-          type: string
-          deprecated: true
-          description: Shop contact company name
-        complementary:
-          type: string
-          deprecated: true
-          description: Shop contact complementary address field
-        country:
-          type: string
-          description: Shop contact country (Formatted in ISO 3166-1). Used by Mirakl to format the address (back office, delivery bill, invoices...) and to adapt the address validation to the country (see zip_code field)
-        firstname:
-          type: string
-          description: Shop contact first name
-        lastname:
-          type: string
-          description: Shop contact last name
-        phone:
-          type: string
-          description: Shop contact phone number
-        phone_secondary:
-          type: string
-          description: Shop contact secondary phone number
-        state:
-          type: string
-          description: Shop contact address state
-        street1:
-          type: string
-          description: Shop contact address first line
-        street2:
-          type: string
-          description: Shop contact address second line
-        zip_code:
-          type: string
-          description: Shop contact address zip code. <em>Mandatory (unless the country_iso_code corresponds to Chile or Peru)</em>
-    IV01_Response_200_Invoices_TotalTaxes:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: with decimals
-          description: Tax amount
-        code:
-          type: string
-          description: Tax code
-    IV01_Response_200_Invoices_Details:
-      type: object
-      properties:
-        amount_excl_taxes:
-          type: number
-          format: with decimals
-          description: Amount excluding taxes
-        description:
-          type: string
-          description: Description
-        operation_date:
-          type: string
-          format: date-time
-          description: Operation date for <code>MANUAL_INVOICE</code> or <code>MANUAL_CREDIT</code> type
-        order_id:
-          type: string
-          description: Associated order id. Only for <code>MANUAL_INVOICE</code> or <code>MANUAL_CREDIT</code> type
-        quantity:
-          type: integer
-          format: int32
-          description: Quantity
-        taxes:
-          type: array
-          description: Taxes
-          items:
-            $ref: '#/components/schemas/IV01_Response_200_Invoices_Details_Taxes'
-    IV01_Response_200_Invoices_Details_Taxes:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: with decimals
-          description: Tax amount
-        code:
-          type: string
-          description: Tax code
     IV01_Response_200_Invoices_IssuingUser:
       type: object
       properties:
@@ -5145,92 +5003,6 @@ components:
             Enum: `"OPERATOR"`, `"BATCH"`, `"PARTNER"`
 
             '
-    SBC11_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/SBC11_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    SBC11_Response_200_Data_Shop:
-      type: object
-      properties:
-        shop_corporate_name:
-          type: string
-          description: Shop corporate name
-        shop_id:
-          type: integer
-          format: int64
-          description: Shop identifier
-        shop_model:
-          type: string
-          description: 'Shop model
-
-
-            Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
-
-            '
-        shop_name:
-          type: string
-          description: Shop name
-        shop_operator_internal_id:
-          type: string
-          description: Operator internal id for the shop
-    SBC11_Response_200_Data:
-      type: object
-      properties:
-        amount_transferred_to_operator:
-          type: number
-          format: with decimals
-          description: Total amount to be transferred to the operator
-        amount_transferred_to_seller:
-          type: number
-          format: with decimals
-          description: Total amount to be transferred to the seller
-        currency_iso_code:
-          type: string
-          description: 'The currency of the shop
-
-
-            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
-
-            '
-        date_created:
-          type: string
-          format: date-time
-          description: Seller billing cycle creation date
-        id:
-          type: string
-          description: Seller billing cycle identifier
-        pay_out:
-          $ref: '#/components/schemas/SBC11_Response_200_Data_PayOut'
-          description: Pay-out details
-        pay_out_psp_code:
-          type: string
-          description: 'PSP code for Pay-out
-
-
-            Enum: `"NOT_SPECIFIED"`, `"MANGOPAY"`, `"MIRAKL_PAYOUT"`, `"OPERATOR"`
-
-            '
-        payment_voucher_number:
-          type: string
-          description: The payment voucher number
-        shop:
-          $ref: '#/components/schemas/SBC11_Response_200_Data_Shop'
-          description: Shop information
-        summary:
-          $ref: '#/components/schemas/SBC11_Response_200_Data_Summary'
-          description: Financial summary of the billing cycle
     SBC11_Response_200_Data_Summary:
       type: object
       properties:
@@ -5410,18 +5182,32 @@ components:
           type: number
           format: with decimals
           description: Total amount of subscription taxes (including taxes on stores)
-    IV01_Response_200:
+    SBC11_Response_200_Data_PayOut:
       type: object
       properties:
-        invoices:
-          type: array
-          description: Accounting documents
-          items:
-            $ref: '#/components/schemas/IV01_Response_200_Invoices'
-        total_count:
-          type: integer
-          format: int64
-          description: Accounting documents total count
+        failure_reason:
+          type: string
+          description: 'Pay-out failure reason, present only when state is FAILED
+
+
+            Enum: `"INCOMPLETE_KYC"`, `"AWAITING_INVOICE_CHECK"`
+
+            '
+        reference:
+          type: string
+          description: Pay-out reference, present only when state is PAID
+        state:
+          type: string
+          description: 'Pay-out state
+
+
+            Enum: `"TO_PAY"`, `"PAID"`, `"FAILED"`
+
+            '
+        transaction_date:
+          type: string
+          format: date-time
+          description: Pay-out transaction date, present only when state is PAID
     IV01_Response_200_Invoices:
       type: object
       discriminator:
@@ -5536,676 +5322,249 @@ components:
             Enum: `"ALL"`, `"AUTO_INVOICE"`, `"MANUAL_INVOICE"`, `"MANUAL_CREDIT"`
 
             '
-    TL05_Response_200_Ext_FileStructure_Entities_Debit:
+    IV01_Response_200_Invoices_Details:
       type: object
       properties:
-        id:
+        amount_excl_taxes:
+          type: number
+          format: with decimals
+          description: Amount excluding taxes
+        description:
           type: string
-          description: The debit id
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order_PaymentInfo:
-      type: object
-      properties:
-        imprint_number:
-          type: string
-          description: The payment imprint number received by OR01 or SOR01
-        payment_type:
-          type: string
-          description: The payment's type used by the customer to pay this order
-    DR74_Request_MultipartFormData_DocumentsInput_Requests:
-      type: object
-      description: 'The details of the files to be uploaded '
-      properties:
-        document_number:
-          type: string
-          description: The accounting document number
-        due_date:
+          description: Description
+        operation_date:
           type: string
           format: date-time
-          description: The accounting document due date
-        files:
+          description: Operation date for <code>MANUAL_INVOICE</code> or <code>MANUAL_CREDIT</code> type
+        order_id:
+          type: string
+          description: Associated order id. Only for <code>MANUAL_INVOICE</code> or <code>MANUAL_CREDIT</code> type
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity
+        taxes:
           type: array
-          description: The files details for each required format
+          description: Taxes
           items:
-            $ref: '#/components/schemas/DR74_Request_MultipartFormData_DocumentsInput_Requests_Files'
-        issue_date:
-          type: string
-          format: date-time
-          description: The accounting document issue date
-        request_id:
-          type: string
-          description: The document request identifier on which to upload the document
-        total_amount_excluding_taxes:
-          type: number
-          format: with decimals
-          description: The total document amount (excluding taxes)
-        total_tax_amount:
-          type: number
-          format: with decimals
-          description: The total tax amount of the document
-      required:
-      - document_number
-      - files
-      - request_id
-    DR74_Request_MultipartFormData_DocumentsInput_Requests_Files:
+            $ref: '#/components/schemas/IV01_Response_200_Invoices_Details_Taxes'
+    SBC11_Response_200_Data:
       type: object
-      description: The files details for each required format
       properties:
-        format:
+        amount_transferred_to_operator:
+          type: number
+          format: with decimals
+          description: Total amount to be transferred to the operator
+        amount_transferred_to_seller:
+          type: number
+          format: with decimals
+          description: Total amount to be transferred to the seller
+        currency_iso_code:
           type: string
-          description: 'The document format
+          description: 'The currency of the shop
 
 
-            Enum: `"PDF"`, `"cXML"`
+            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
 
             '
-        name:
+        date_created:
           type: string
-          description: The document file name
-      required:
-      - format
-      - name
-    DR12_Response_200_Data_Shop:
-      type: object
-      properties:
+          format: date-time
+          description: Seller billing cycle creation date
         id:
-          type: integer
-          format: int64
-          description: The shop identifier.
-      required:
-      - id
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Channel:
+          type: string
+          description: Seller billing cycle identifier
+        pay_out:
+          $ref: '#/components/schemas/SBC11_Response_200_Data_PayOut'
+          description: Pay-out details
+        pay_out_psp_code:
+          type: string
+          description: 'PSP code for Pay-out
+
+
+            Enum: `"NOT_SPECIFIED"`, `"MANGOPAY"`, `"MIRAKL_PAYOUT"`, `"OPERATOR"`
+
+            '
+        payment_voucher_number:
+          type: string
+          description: The payment voucher number
+        shop:
+          $ref: '#/components/schemas/SBC11_Response_200_Data_Shop'
+          description: Shop information
+        summary:
+          $ref: '#/components/schemas/SBC11_Response_200_Data_Summary'
+          description: Financial summary of the billing cycle
+    SBC11_Response_200:
       type: object
       properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/SBC11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    IV01_Response_200_Invoices_TotalTaxes:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: with decimals
+          description: Tax amount
         code:
           type: string
-          description: The channel code
-    TL05_Response_200_Ext_FileStructure_Entities_OneOffItem_References:
+          description: Tax code
+    IV01_Response_200_Invoices_Details_Taxes:
       type: object
       properties:
-        type:
+        amount:
+          type: number
+          format: with decimals
+          description: Tax amount
+        code:
           type: string
-          description: The type of the reference
-        value:
-          type: string
-          description: The value of the reference
-    DR12_Response_200_Data_ShippingTo_Address:
+          description: Tax code
+    IV01_Response_200_Invoices_ShopAddress:
       type: object
       properties:
         city:
           type: string
-          description: The city of the shipping destination address.
+          description: Shop contact address city
         civility:
           type: string
-          description: The civility or title of the recipient (e.g., Mr., Mrs., Dr.).
+          description: Shop contact civility
         company:
           type: string
-          description: The company or organization name of the shipping destination.
-        company2:
+          deprecated: true
+          description: Shop contact company name
+        complementary:
           type: string
-          description: The secondary company or organization name of the shipping destination (e.g., department or subsidiary).
-        country_iso_code:
+          deprecated: true
+          description: Shop contact complementary address field
+        country:
           type: string
-          description: The ISO 3166-1 alpha-3 country code of the shipping destination address.
+          description: Shop contact country (Formatted in ISO 3166-1). Used by Mirakl to format the address (back office, delivery bill, invoices...) and to adapt the address validation to the country (see zip_code field)
         firstname:
           type: string
-          description: The first name of the recipient.
+          description: Shop contact first name
         lastname:
           type: string
-          description: The last name of the recipient.
+          description: Shop contact last name
         phone:
           type: string
-          description: The primary phone number of the recipient.
+          description: Shop contact phone number
         phone_secondary:
           type: string
-          description: The secondary phone number of the recipient.
+          description: Shop contact secondary phone number
         state:
           type: string
-          description: The state, province, or region of the shipping destination address.
+          description: Shop contact address state
         street1:
           type: string
-          description: The primary line of the shipping destination street address (e.g., street number and name).
+          description: Shop contact address first line
         street2:
           type: string
-          description: The secondary line of the shipping destination street address (e.g., building, floor, or suite number).
+          description: Shop contact address second line
         zip_code:
           type: string
-          description: The postal or zip code of the shipping destination address.
-    TL02_Response_200_Data_Entities_Fee_Cancelations:
+          description: Shop contact address zip code. <em>Mandatory (unless the country_iso_code corresponds to Chile or Peru)</em>
+    IV01_Response_200_Invoices_Payment:
       type: object
       properties:
-        id:
+        failure_reason:
           type: string
-          description: The Cancelation id if the transaction log is relative to a cancelation
-    DR11_Response_200_Data_Payment:
-      type: object
-      properties:
+          description: 'Failure reason
+
+
+            Enum: `"INCOMPLETE_KYC"`, `"AWAITING_INVOICE_CHECK"`
+
+            '
         reference:
           type: string
-          description: The payment transaction reference.
+          description: Transaction reference
         state:
           type: string
-          description: 'The payment state.
+          description: 'Payment status
 
 
-            Enum: `"PAID"`, `"PENDING"`
+            Enum: `"PENDING"`, `"PAID"`, `"FAILED"`
 
             '
         transaction_date:
           type: string
           format: date-time
-          description: The payment transaction date.
-    DR12_Response_200_Data_ShippingTaxes:
+          description: Transaction date
+    SBC11_Response_200_Data_Shop:
       type: object
       properties:
-        amount:
-          type: number
-          format: with decimals
-          description: The tax amount.
-        code:
+        shop_corporate_name:
           type: string
-          description: The tax code.
-        rate:
-          type: number
-          format: with decimals
-          description: The tax rate.
-      required:
-      - amount
-      - code
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure:
-      type: object
-      properties:
-        accounting_document_creation_date:
+          description: Shop corporate name
+        shop_id:
+          type: integer
+          format: int64
+          description: Shop identifier
+        shop_model:
           type: string
-          format: date-time
-          description: The related accounting document creation date
-        accounting_document_id:
-          type: string
-          description: 'The related accounting document request id. This field is available for documents requests with these entity types: <code>SHOP_BILLING_CYCLE_PURCHASE_ORDER</code>, <code>FEES</code> or <code>ONE_OFF_FEES</code>.'
-        accounting_document_number:
-          type: string
-          description: The related accounting document number
-        amount:
-          type: number
-          format: with decimals
-          description: The amount.
-        amount_credited:
-          type: number
-          format: with decimals
-          description: The amount credited.
-        amount_debited:
-          type: number
-          format: with decimals
-          description: The amount debited.
-        balance:
-          type: number
-          format: with decimals
-          description: The balance of the transaction.
-        currency_iso_code:
-          type: string
-          description: The currency of the shop (iso format)
-        date_created:
-          type: string
-          format: date-time
-          description: Creation date of the transaction line
-        entities:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities'
-          description: Node containing additional information depending on type of the transaction and the domain.
-        id:
-          type: string
-          description: Identifier of the transaction
-        last_updated:
-          type: string
-          format: date-time
-          description: Date of last update of the transaction line
-        pay_out_psp_code:
-          type: string
-          description: 'Pay-out PSP code associated with the transaction.
+          description: 'Shop model
 
 
-            Enum: `"NOT_SPECIFIED"`, `"MANGOPAY"`, `"MIRAKL_PAYOUT"`, `"OPERATOR"`
+            Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
 
             '
-        payment_state:
+        shop_name:
           type: string
-          description: 'The payment state of the transaction.
-
-
-            Enum: `"PENDING"`, `"PAYABLE"`, `"PAID"`, `"NOT_APPLICABLE"`, `"RESERVE"`
-
-            '
-        psp_balance:
-          type: number
-          format: with decimals
-          description: The Pay-out balance of the transaction.
-        seller_billing_cycle_id:
+          description: Shop name
+        shop_operator_internal_id:
           type: string
-          description: The Seller Billing Cycle ID associated with the transaction.
-        type:
-          type: string
-          description: 'Type of transaction (refund, transaction fee, etc ...)
-
-
-            Enum: `"MANUAL_CREDIT"`, `"MANUAL_CREDIT_VAT"`, `"MANUAL_INVOICE"`, `"MANUAL_INVOICE_VAT"`, `"INVOICEABLE_ONE_OFF_DEBIT"`, `"INVOICEABLE_ONE_OFF_DEBIT_TAX"`, `"INVOICEABLE_ONE_OFF_CREDIT"`, `"INVOICEABLE_ONE_OFF_CREDIT_TAX"`, `"ORDER_AMOUNT"`, `"ORDER_AMOUNT_TAX"`, `"ORDER_SHIPPING_AMOUNT"`, `"ORDER_SHIPPING_AMOUNT_TAX"`, `"COMMISSION_FEE"`, `"COMMISSION_VAT"`, `"REFUND_ORDER_AMOUNT"`, `"REFUND_ORDER_AMOUNT_TAX"`, `"REFUND_ORDER_SHIPPING_AMOUNT"`, `"REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_COMMISSION_FEE"`, `"REFUND_COMMISSION_VAT"`, `"SUBSCRIPTION_FEE"`, `"SUBSCRIPTION_VAT"`, `"OPERATOR_REMITTED_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"PAYMENT"`, `"PURCHASE_COMMISSION_FEE"`, `"PURCHASE_SHIPPING_COMMISSION_FEE"`, `"PURCHASE_ORDER_AMOUNT_TAX"`, `"PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_PURCHASE_COMMISSION_FEE"`, `"REFUND_PURCHASE_SHIPPING_COMMISSION_FEE"`, `"REFUND_PURCHASE_ORDER_AMOUNT_TAX"`, `"REFUND_PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_ORDER_FEE_AMOUNT"`, `"REFUND_ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_REFUND_ORDER_FEE_AMOUNT"`, `"PURCHASE_FEE_COMMISSION_FEE"`, `"REFUND_PURCHASE_FEE_COMMISSION_FEE"`, `"RESERVE_FUNDING"`, `"RESERVE_SETTLEMENT"`, `"SELLER_FEE_ON_ORDER"`, `"SELLER_FEE_ON_ORDER_TAX"`, `"SELLER_PENALTY_FEE"`, `"SELLER_PENALTY_FEE_TAX"`
-
-            '
-    TL05_Response_200_Ext_FileStructure_Entities_TransactionInfo:
+          description: Operator internal id for the shop
+    IV01_Response_200:
       type: object
       properties:
-        date:
-          type: string
-          format: date-time
-          description: The transaction date.
-        number:
-          type: string
-          description: Transaction number
-    DR11_Response_200_Data_Recipient_ShippingAddress:
-      type: object
-      properties:
-        city:
-          type: string
-          description: The address city.
-        civility:
-          type: string
-          description: The civility of the person associated with the address.
-        company:
-          type: string
-          description: The company name.
-        company_2:
-          type: string
-          description: The secondary company information of the person associated with the address.
-        country:
-          type: string
-          description: The address country.
-        country_iso_code:
-          type: string
-          description: The ISO 3166-1 country code of the address.
-        firstname:
-          type: string
-          description: The first name of the person associated with the address.
-        lastname:
-          type: string
-          description: The last name of the person associated with the address.
-        state:
-          type: string
-          description: The address state.
-        street_1:
-          type: string
-          description: The first line of the address street.
-        street_2:
-          type: string
-          description: The second line of the address street.
-        zip_code:
-          type: string
-          description: The address zip code.
-      required:
-      - city
-      - country
-      - lastname
-      - street_1
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities:
-      type: object
-      properties:
-        channel:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Channel'
-          description: A node containing channel information
-        debit:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Debit'
-          description: A node containing debit information if any
-        domain:
-          type: string
-          description: The domain of the entities related to the transaction line (PRODUCT or SERVICE)
-        fee:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee'
-          description: A node containing seller additional fee information if any
-        manual_accounting_document:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_ManualAccountingDocument'
-          description: A node containing manual accounting document information if any
-        one_off_item:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OneOffItem'
-          description: A node containing invoiceable one-off item information if any
-        order:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order'
-          description: A node containing order information if any
-        order_fee:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderFee'
-          description: A node containing order fee information if any
-        order_line:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderLine'
-          description: A node containing order line information if any
-        order_tax:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderTax'
-          description: A node containing order tax information if any
-        refund:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Refund'
-          description: A node containing refund information if any
-        shipment:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Shipment'
-          description: A node containing shipment information if any
-        shop_tax:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_ShopTax'
-          description: A node containing shop tax information if any
-        transaction_info:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_TransactionInfo'
-          description: A node containing transaction information if any
-    DR12_Response_200_Data_FeesExcludingTaxes:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: with decimals
-          description: The fee amount.
-          minimum: 0
-        code:
-          type: string
-          description: The fee code.
-        label:
-          type: string
-          description: The fee label.
-      required:
-      - amount
-      - code
-      - label
-    TL02_Response_200_Data_Entities_OrderLine:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The order line id
-    TL05_Response_200_Ext_FileStructure_Entities_Fee_Refunds:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The refund id if the transaction log is relative to a refund
-    TL02_Response_200_Data_Entities_Order_References:
-      type: object
-      properties:
-        order_reference_for_customer:
-          type: string
-          description: Order reference for customer.
-        order_reference_for_seller:
-          type: string
-          description: Order reference for seller.
-    TL02_Response_200_Data_Entities_ShopTax:
-      type: object
-      properties:
-        code:
-          type: string
-          description: 'The code of the shop tax applied. <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code>'
-        rate:
-          type: number
-          format: with decimals
-          description: 'Shop tax rate applied <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code><br/>For backward-compatibility reason, this field will be filled for lines of type <code>COMMISSION_FEE</code> with the rate of the first taxapplied to the shop. In this case, the value should be ignored.'
-    TL05_Response_200_Ext_FileStructure_Entities_Fee:
-      type: object
-      properties:
-        cancelations:
+        invoices:
           type: array
-          description: The list of cancelations information if any
+          description: Accounting documents
           items:
-            $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Fee_Cancelations'
-        code:
-          type: string
-          description: The code of the seller additional fee
-        refunds:
-          type: array
-          description: The list of refunds information if any
-          items:
-            $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Fee_Refunds'
-    DR12_Response_200_Data_Taxes:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: with decimals
-          description: The tax amount.
-        code:
-          type: string
-          description: The tax code.
-        rate:
-          type: number
-          format: with decimals
-          description: The tax rate.
-      required:
-      - amount
-      - code
-    TL02_Response_200_Data_Entities_OneOffItem_References:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of the reference
-        value:
-          type: string
-          description: The value of the reference
-    TL02_Response_200_Data:
-      type: object
-      properties:
-        accounting_document_creation_date:
-          type: string
-          format: date-time
-          description: The related accounting document creation date
-        accounting_document_id:
-          type: string
-          description: 'The related accounting document request id. This field is available for documents requests with these entity types: <code>SHOP_BILLING_CYCLE_PURCHASE_ORDER</code>, <code>FEES</code> or <code>ONE_OFF_FEES</code>.'
-        accounting_document_number:
-          type: string
-          description: The related accounting document number
-        amount:
-          type: number
-          format: with decimals
-          description: The amount.
-        amount_credited:
-          type: number
-          format: with decimals
-          description: The amount credited.
-        amount_debited:
-          type: number
-          format: with decimals
-          description: The amount debited.
-        balance:
-          type: number
-          format: with decimals
-          description: The balance of the transaction.
-        currency_iso_code:
-          type: string
-          description: The currency of the shop (iso format)
-        date_created:
-          type: string
-          format: date-time
-          description: Creation date of the transaction line
-        entities:
-          $ref: '#/components/schemas/TL02_Response_200_Data_Entities'
-          description: Node containing additional information depending on type of the transaction and the domain.
-        id:
-          type: string
-          description: Identifier of the transaction
-        last_updated:
-          type: string
-          format: date-time
-          description: Date of last update of the transaction line
-        pay_out_psp_code:
-          type: string
-          description: 'Pay-out PSP code associated with the transaction.
-
-
-            Enum: `"NOT_SPECIFIED"`, `"MANGOPAY"`, `"MIRAKL_PAYOUT"`, `"OPERATOR"`
-
-            '
-        payment_state:
-          type: string
-          description: 'The payment state of the transaction.
-
-
-            Enum: `"PENDING"`, `"PAYABLE"`, `"PAID"`, `"NOT_APPLICABLE"`, `"RESERVE"`
-
-            '
-        psp_balance:
-          type: number
-          format: with decimals
-          description: The Pay-out balance of the transaction.
-        seller_billing_cycle_id:
-          type: string
-          description: The Seller Billing Cycle ID associated with the transaction.
-        type:
-          type: string
-          description: 'Type of transaction (refund, transaction fee, etc ...)
-
-
-            Enum: `"MANUAL_CREDIT"`, `"MANUAL_CREDIT_VAT"`, `"MANUAL_INVOICE"`, `"MANUAL_INVOICE_VAT"`, `"INVOICEABLE_ONE_OFF_DEBIT"`, `"INVOICEABLE_ONE_OFF_DEBIT_TAX"`, `"INVOICEABLE_ONE_OFF_CREDIT"`, `"INVOICEABLE_ONE_OFF_CREDIT_TAX"`, `"ORDER_AMOUNT"`, `"ORDER_AMOUNT_TAX"`, `"ORDER_SHIPPING_AMOUNT"`, `"ORDER_SHIPPING_AMOUNT_TAX"`, `"COMMISSION_FEE"`, `"COMMISSION_VAT"`, `"REFUND_ORDER_AMOUNT"`, `"REFUND_ORDER_AMOUNT_TAX"`, `"REFUND_ORDER_SHIPPING_AMOUNT"`, `"REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_COMMISSION_FEE"`, `"REFUND_COMMISSION_VAT"`, `"SUBSCRIPTION_FEE"`, `"SUBSCRIPTION_VAT"`, `"OPERATOR_REMITTED_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"PAYMENT"`, `"PURCHASE_COMMISSION_FEE"`, `"PURCHASE_SHIPPING_COMMISSION_FEE"`, `"PURCHASE_ORDER_AMOUNT_TAX"`, `"PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_PURCHASE_COMMISSION_FEE"`, `"REFUND_PURCHASE_SHIPPING_COMMISSION_FEE"`, `"REFUND_PURCHASE_ORDER_AMOUNT_TAX"`, `"REFUND_PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_ORDER_FEE_AMOUNT"`, `"REFUND_ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_REFUND_ORDER_FEE_AMOUNT"`, `"PURCHASE_FEE_COMMISSION_FEE"`, `"REFUND_PURCHASE_FEE_COMMISSION_FEE"`, `"RESERVE_FUNDING"`, `"RESERVE_SETTLEMENT"`, `"SELLER_FEE_ON_ORDER"`, `"SELLER_FEE_ON_ORDER_TAX"`, `"SELLER_PENALTY_FEE"`, `"SELLER_PENALTY_FEE_TAX"`
-
-            '
-    TL02_Response_200_Data_Entities_ManualAccountingDocument:
-      type: object
-      properties:
-        emission_date:
-          type: string
-          format: date-time
-          deprecated: true
-          description: The manual accounting document emission date.
-        number:
-          type: string
-          description: The manual accounting document number.
-    TL05_Response_200_Ext_FileStructure_Entities_Order:
-      type: object
-      properties:
-        commercial_id:
-          type: string
-          description: The order commercial id
-        creation_date:
-          type: string
-          format: date-time
-          description: The order creation date
-        id:
-          type: string
-          description: The order id
-        payment_info:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Order_PaymentInfo'
-          description: A node containing payment information
-        references:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Order_References'
-          description: A node containing order references
-    TL03_Response_200:
-      type: object
-      properties:
-        tracking_id:
-          type: string
-          description: The asynchronous transaction log export id
-    TL02_Response_200_Data_Entities_Debit:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The debit id
-    TL05_Response_200_Ext_FileStructure_Entities_Shipment:
+            $ref: '#/components/schemas/IV01_Response_200_Invoices'
+        total_count:
+          type: integer
+          format: int64
+          description: Accounting documents total count
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Shipment:
       type: object
       properties:
         id:
           type: string
           description: The shipment id if the transaction log is relative to a shipment
-    DR11_Response_200_Data_Issuer:
+    TL05_Response_200_Ext_FileStructure_Entities_OneOffItem:
       type: object
       properties:
-        id:
+        description:
           type: string
-          description: The issuer's identifier — either the operator's or the shop's billing information identifier.
-        locale:
+          description: The description of the invoiceable one-off item
+        operation_date:
           type: string
-          description: The issuer's locale.
-        organization:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer_Organization'
-          description: The issuer organization information.
-        type:
-          type: string
-          description: 'The issuer''s type.
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`
-
-            '
-      required:
-      - organization
-      - type
-    TL05_Response_200_Ext_FileStructure_Entities_Order_PaymentInfo:
-      type: object
-      properties:
-        imprint_number:
-          type: string
-          description: The payment imprint number received by OR01 or SOR01
-        payment_type:
-          type: string
-          description: The payment's type used by the customer to pay this order
-    TL05_Response_200_Ext_FileStructure_Entities_ShopTax:
-      type: object
-      properties:
-        code:
-          type: string
-          description: 'The code of the shop tax applied. <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code>'
-        rate:
+          format: date
+          description: The operation date of the invoiceable one-off item
+        quantity:
+          type: integer
+          format: int32
+          description: The quantity of the invoiceable one-off item
+        references:
+          type: array
+          description: The references of the invoiceable one-off item
+          items:
+            $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OneOffItem_References'
+        unit_price:
           type: number
           format: with decimals
-          description: 'Shop tax rate applied <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code><br/>For backward-compatibility reason, this field will be filled for lines of type <code>COMMISSION_FEE</code> with the rate of the first taxapplied to the shop. In this case, the value should be ignored.'
-    DR11_Response_200_Data_Issuer_Organization_FiscalRepresentative:
-      type: object
-      properties:
-        city:
-          type: string
-          description: The city where the fiscal representative is located.
-        civility:
-          type: string
-          description: The civility of the fiscal representative.
-        company_registration_name:
-          type: string
-          description: The name of the fiscal representative.
-        company_registration_number:
-          type: string
-          description: The registration number of the fiscal representative.
-        country_iso_code:
-          type: string
-          description: The country ISO 3166-1 code of the fiscal representative address.
-        first_name:
-          type: string
-          description: The first name of the fiscal representative.
-        last_name:
-          type: string
-          description: The last name of the fiscal representative.
-        local_tax_number:
-          type: string
-          description: The VAT/GST number.
-        state:
-          type: string
-          description: The state/province/region where the fiscal representative is located.
-        street_1:
-          type: string
-          description: The first line of address of the fiscal representative.
-        street_2:
-          type: string
-          description: The second line of address of the fiscal representative.
-        zip_code:
-          type: string
-          description: The Zip/Postal code corresponding to the fiscal representative location.
-      required:
-      - city
-      - civility
-      - company_registration_name
-      - company_registration_number
-      - country_iso_code
-      - first_name
-      - last_name
-      - street_1
-    DR11_Response_200_Data_DocumentDetails:
-      type: object
-      properties:
-        format:
-          type: string
-          description: 'The document format.
-
-
-            Enum: `"PDF"`, `"cXML"`
-
-            '
-      required:
-      - format
+          description: The unit price of the invoiceable one-off item
     DR11_Response_200_Data_Issuer_Organization_Address:
       type: object
       properties:
@@ -6231,625 +5590,69 @@ components:
       - city
       - country_iso_code
       - street_1
-    DR12_Response_200_Data_Product:
+    DR74_Response_200_Requests_Input:
       type: object
       properties:
-        references:
-          type: array
-          description: The product references.
-          items:
-            $ref: '#/components/schemas/DR12_Response_200_Data_Product_References'
-        sku:
-          type: string
-          description: The product SKU.
-        title:
-          type: string
-          description: The product title.
-      required:
-      - references
-      - title
-    DR11_Response_200_Data:
-      type: object
-      properties:
-        currency_iso_code:
-          type: string
-          description: 'The currency used for the accounting document request.
-
-
-            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
-
-            '
-        date_created:
-          type: string
-          format: date-time
-          description: The accounting document request creation date.
-        document_details:
-          type: array
-          description: Details about each accounting document representation.
-          items:
-            $ref: '#/components/schemas/DR11_Response_200_Data_DocumentDetails'
         document_number:
           type: string
-          description: 'The accounting document number.
-
-
-            It is only populated once an accounting document has been issued (e.g. when state is `ISSUED` or `CANCELED`).'
-        document_upload_date:
-          type: string
-          format: date-time
-          description: 'The last upload date of the accounting document representations.
-
-
-            It is only populated once an accounting document has been issued (e.g. when state is `ISSUED` or `CANCELED`).'
+          description: The accounting document number
         due_date:
           type: string
           format: date-time
-          description: The accounting document due date.
-        entities:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Entities'
-          description: 'Node containing additional information depending on the type of the accounting document request.
-
-
-            Sub-fields are selectively populated depending on `entity_type`; see individual field descriptions.'
-        entity_date_created:
-          type: string
-          format: date-time
-          description: 'The creation date of the entity the accounting document request relates to.
-
-
-            This is not applicable when entity_type is `SHOP_BILLING_CYCLE_PURCHASE_ORDER`.'
-        entity_id:
-          type: string
-          description: The identifier of the entity the accounting document request relates to. The format varies by `entity_type`.
-        entity_type:
-          type: string
-          description: 'The type of the entity the accounting document request relates to.
-
-
-            Enum: `"PRODUCT_LOGISTIC_ORDER"`, `"SHOP_BILLING_CYCLE_PURCHASE_ORDER"`, `"LOGISTIC_PURCHASE_ORDER"`, `"FEES"`, `"ONE_OFF_FEES"`
-
-            '
-        id:
-          type: string
-          description: The accounting document request unique identifier.
-        initial_documents:
+          description: The accounting document due date
+        files:
           type: array
-          description: 'Information about the initial accounting document(s) or accounting document request(s).
-
-
-            It is only provided in the case of a `CREDIT_NOTE` or a reissued `INVOICE`.'
+          description: The files details for each required format
           items:
-            $ref: '#/components/schemas/DR11_Response_200_Data_InitialDocuments'
-        initial_payment_state:
-          type: string
-          description: 'The accounting document payment state when the document request was created.
-
-
-            Enum: `"PAID"`, `"NOT_PAID"`
-
-            '
+            $ref: '#/components/schemas/DR74_Response_200_Requests_Input_Files'
         issue_date:
           type: string
           format: date-time
-          description: The accounting document request issue date.
-        issuer:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer'
-          description: The issuer details for the accounting document.
-        last_updated:
+          description: The accounting document issue date
+        request_id:
           type: string
-          format: date-time
-          description: The accounting document request last updated date.
-        payment:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Payment'
-          description: 'The accounting document payment details.
-
-
-            It is only populated after the payment has been confirmed.'
-        payment_destination:
-          $ref: '#/components/schemas/DR11_Response_200_Data_PaymentDestination'
-          description: Information about how the accounting document payment should be settled.
-        payment_terms:
-          $ref: '#/components/schemas/DR11_Response_200_Data_PaymentTerms'
-          description: 'The accounting document payment terms.
-
-
-            It is always provided when `entity_type` is `SHOP_BILLING_CYCLE_PURCHASE_ORDER`, `LOGISTIC_PURCHASE_ORDER`, `FEES`, `ONE_OFF_FEES`.
-
-            It is optional when `entity_type` is `PRODUCT_LOGISTIC_ORDER`.'
-        recipient:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient'
-          description: The recipient details for the accounting document.
-        state:
-          type: string
-          description: 'The accounting document request state.
-
-
-            Enum: `"STAGING"`, `"TO_PROCESS"`, `"ISSUED"`, `"CANCELED"`
-
-            '
-        taxes:
-          type: array
-          description: A breakdown of `total_tax_amount` by tax code and rate.
-          items:
-            $ref: '#/components/schemas/DR11_Response_200_Data_Taxes'
+          description: The document request identifier on which to upload the document
         total_amount_excluding_taxes:
           type: number
           format: with decimals
-          description: The total amount for the accounting document, excluding taxes.
-        total_amount_including_taxes:
-          type: number
-          format: with decimals
-          description: The total amount for the accounting document, including taxes.
+          description: The total document amount (excluding taxes)
         total_tax_amount:
           type: number
           format: with decimals
-          description: The total tax amount for the accounting document.
-        type:
-          type: string
-          description: 'The accounting document request type.
-
-
-            Enum: `"INVOICE"`, `"CREDIT_NOTE"`
-
-            '
+          description: The total tax amount of the document
       required:
-      - currency_iso_code
-      - date_created
-      - document_details
-      - due_date
-      - entity_id
-      - entity_type
-      - id
-      - initial_payment_state
-      - issue_date
-      - issuer
-      - last_updated
-      - state
-      - total_amount_excluding_taxes
-      - total_amount_including_taxes
-      - total_tax_amount
-      - type
-    DR74_Response_200_Requests_Input_Files:
+      - document_number
+      - files
+      - request_id
+    DR11_Response_200_Data_Entities:
       type: object
-      properties:
-        format:
-          type: string
-          description: 'The document format
-
-
-            Enum: `"PDF"`, `"cXML"`
-
-            '
-        name:
-          type: string
-          description: The document file name
-      required:
-      - format
-      - name
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee_Cancelations:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Cancelation id if the transaction log is relative to a cancelation
-    DR11_Response_200_Data_Taxes:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The tax code.
-        rate:
-          type: number
-          format: with decimals
-          description: The tax rate.
-        total_amount:
-          type: number
-          format: with decimals
-          description: The total tax amount, aggregated by tax code and rate.
-      required:
-      - code
-      - total_amount
-    TL05_Response_200_Ext_FileStructure_Entities_Fee_Cancelations:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Cancelation id if the transaction log is relative to a cancelation
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OneOffItem_References:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of the reference
-        value:
-          type: string
-          description: The value of the reference
-    TL02_Response_200_Data_Entities_Refund:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The refund id if the transaction log is relative to a refund
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderFee:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The code of the transaction log fee
-    TL02_Response_200_Data_Entities_OrderFee:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The code of the transaction log fee
-    TL05_Response_200_Ext_FileStructure_Entities:
-      type: object
-      properties:
-        channel:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Channel'
-          description: A node containing channel information
-        debit:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Debit'
-          description: A node containing debit information if any
-        domain:
-          type: string
-          description: The domain of the entities related to the transaction line (PRODUCT or SERVICE)
-        fee:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Fee'
-          description: A node containing seller additional fee information if any
-        manual_accounting_document:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_ManualAccountingDocument'
-          description: A node containing manual accounting document information if any
-        one_off_item:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OneOffItem'
-          description: A node containing invoiceable one-off item information if any
-        order:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Order'
-          description: A node containing order information if any
-        order_fee:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OrderFee'
-          description: A node containing order fee information if any
-        order_line:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OrderLine'
-          description: A node containing order line information if any
-        order_tax:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OrderTax'
-          description: A node containing order tax information if any
-        refund:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Refund'
-          description: A node containing refund information if any
-        shipment:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Shipment'
-          description: A node containing shipment information if any
-        shop_tax:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_ShopTax'
-          description: A node containing shop tax information if any
-        transaction_info:
-          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_TransactionInfo'
-          description: A node containing transaction information if any
-    TL02_Response_200_Data_Entities_Fee_Refunds:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The refund id if the transaction log is relative to a refund
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order:
-      type: object
-      properties:
-        commercial_id:
-          type: string
-          description: The order commercial id
-        creation_date:
-          type: string
-          format: date-time
-          description: The order creation date
-        id:
-          type: string
-          description: The order id
-        payment_info:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order_PaymentInfo'
-          description: A node containing payment information
-        references:
-          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order_References'
-          description: A node containing order references
-    TL05_Response_200_Ext_FileStructure_Entities_OrderFee:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The code of the transaction log fee
-    IV01_Response_200_Invoices_2:
-      type: object
-      discriminator:
-        mapping:
-          AUTO_INVOICE: '#/components/schemas/IV01_Response_200_Invoices_AutoInvoice'
-          MANUAL_CREDIT: '#/components/schemas/IV01_Response_200_Invoices_ManualCredit'
-          MANUAL_INVOICE: '#/components/schemas/IV01_Response_200_Invoices_ManualInvoice'
-        propertyName: type
-      properties:
-        currency_iso_code:
-          type: string
-          description: 'The currency of the shop
-
-
-            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
-
-            '
-        date_created:
-          type: string
-          format: date-time
-          description: Accounting document creation date
-        details:
-          type: array
-          description: Accounting details
-          items:
-            $ref: '#/components/schemas/IV01_Response_200_Invoices_Details'
-        due_date:
-          type: string
-          format: date-time
-          description: Due date for the payment of the accounting document
-        id:
-          type: string
-          description: Accounting document identifier (use it for draft document)
-        invoice_id:
-          type: integer
-          format: int64
-          description: Accounting document identifier (present if the accounting document is issued)
-        issue_date:
-          type: string
-          format: date-time
-          description: Issue date of an accounting document
-        issuing_user:
-          $ref: '#/components/schemas/IV01_Response_200_Invoices_IssuingUser'
-          description: Accounting document issuing user
-        pay_out_psp_code:
-          type: string
-          description: 'PSP code for Pay-out
-
-
-            Enum: `"NOT_SPECIFIED"`, `"MANGOPAY"`, `"MIRAKL_PAYOUT"`, `"OPERATOR"`
-
-            '
-        payment:
-          $ref: '#/components/schemas/IV01_Response_200_Invoices_Payment'
-          description: Accounting document payment details
-        shop_address:
-          $ref: '#/components/schemas/IV01_Response_200_Invoices_ShopAddress'
-          description: Shop address
-        shop_corporate_name:
-          type: string
-          description: Shop corporate name if it is a professional shop
-        shop_id:
-          type: integer
-          format: int64
-          description: Shop id
-        shop_model:
-          type: string
-          description: 'Shop model
-
-
-            Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
-
-            '
-        shop_name:
-          type: string
-          description: Shop name
-        shop_operator_internal_id:
-          type: string
-          description: Operator internal id for the shop
-        shop_tax_number:
-          type: string
-          description: Shop tax number if it is a professional shop
-        state:
-          type: string
-          description: Accounting document state
-        total_amount_excl_taxes:
-          type: number
-          format: with decimals
-          description: Total amount charged to the shop (excluding taxes)
-        total_amount_incl_taxes:
-          type: number
-          format: with decimals
-          description: Total amount charged to the shop (including taxes)
-        total_charged_amount:
-          type: number
-          format: with decimals
-          deprecated: true
-          description: Use “total_amount_incl_taxes” attribute instead
-        total_taxes:
-          type: array
-          description: Total taxes
-          items:
-            $ref: '#/components/schemas/IV01_Response_200_Invoices_TotalTaxes'
-        type:
-          type: string
-          description: 'Accounting document type
-
-
-            Enum: `"ALL"`, `"AUTO_INVOICE"`, `"MANUAL_INVOICE"`, `"MANUAL_CREDIT"`
-
-            '
-    TL02_Response_200_Data_Entities_Shipment:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The shipment id if the transaction log is relative to a shipment
-    DR12_Response_200_Data:
-      type: object
-      discriminator:
-        mapping:
-          FEES_CREDIT_COMMISSION_REFUND: '#/components/schemas/DR12_Response_200_Data_FeesCreditCommissionRefund'
-          FEES_CREDIT_ONE_OFF: '#/components/schemas/DR12_Response_200_Data_FeesCreditOneOff'
-          FEES_DEBIT_COMMISSION: '#/components/schemas/DR12_Response_200_Data_FeesDebitCommission'
-          FEES_DEBIT_ONE_OFF: '#/components/schemas/DR12_Response_200_Data_FeesDebitOneOff'
-          FEES_DEBIT_SELLER_FEE_ON_ORDER: '#/components/schemas/DR12_Response_200_Data_FeesDebitSellerFeeOnOrder'
-          FEES_DEBIT_SELLER_PENALTY_FEE: '#/components/schemas/DR12_Response_200_Data_FeesDebitSellerPenaltyFee'
-          FEES_DEBIT_SUBSCRIPTION: '#/components/schemas/DR12_Response_200_Data_FeesDebitSubscription'
-          PRODUCT_CREDIT_CANCEL: '#/components/schemas/DR12_Response_200_Data_ProductCreditCancel'
-          PRODUCT_CREDIT_CANCEL_ADJUSTMENT: '#/components/schemas/DR12_Response_200_Data_ProductCreditCancelAdjustment'
-          PRODUCT_CREDIT_CANCEL_COMMERCIAL_GESTURE: '#/components/schemas/DR12_Response_200_Data_ProductCreditCancelCommercialGesture'
-          PRODUCT_CREDIT_REFUND: '#/components/schemas/DR12_Response_200_Data_ProductCreditRefund'
-          PRODUCT_CREDIT_REFUND_ADJUSTMENT: '#/components/schemas/DR12_Response_200_Data_ProductCreditRefundAdjustment'
-          PRODUCT_CREDIT_REFUND_COMMERCIAL_GESTURE: '#/components/schemas/DR12_Response_200_Data_ProductCreditRefundCommercialGesture'
-          PRODUCT_DEBIT: '#/components/schemas/DR12_Response_200_Data_ProductDebit'
-          PURCHASE_ORDER_CREDIT: '#/components/schemas/DR12_Response_200_Data_PurchaseOrderCredit'
-          PURCHASE_ORDER_DEBIT: '#/components/schemas/DR12_Response_200_Data_PurchaseOrderDebit'
-        propertyName: entity_type
       properties:
         delivery_bill_information:
           type: array
-          description: The delivery bill information.
+          description: 'The delivery bill information.
+
+
+            It may be provided when the accounting document request is `LOGISTIC_PURCHASE_ORDER` or `PRODUCT_LOGISTIC_ORDER`.'
           items:
-            $ref: '#/components/schemas/DR12_Response_200_Data_DeliveryBillInformation'
-        eco_contributions:
-          type: array
-          description: 'List of eco-contributions that apply to the accounting document request line.
-
-
-            This is only available:
-
-            - if the operator activates the circular economy information collection,
-
-            - and when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-          items:
-            $ref: '#/components/schemas/DR12_Response_200_Data_EcoContributions'
-        entity_id:
+            $ref: '#/components/schemas/DR11_Response_200_Data_Entities_DeliveryBillInformation'
+        ship_to_iso_country_code:
           type: string
-          description: The identifier of the entity the accounting document request line relates to.
-        entity_type:
-          type: string
-          description: 'The type of the entity the accounting document request line relates to.
+          description: 'The ISO country code of the ship-to destination.
 
 
-            Enum: `"PRODUCT_DEBIT"`, `"PRODUCT_CREDIT_CANCEL"`, `"PRODUCT_CREDIT_CANCEL_COMMERCIAL_GESTURE"`, `"PRODUCT_CREDIT_CANCEL_ADJUSTMENT"`, `"PRODUCT_CREDIT_REFUND"`, `"PRODUCT_CREDIT_REFUND_COMMERCIAL_GESTURE"`, `"PRODUCT_CREDIT_REFUND_ADJUSTMENT"`, `"PURCHASE_ORDER_DEBIT"`, `"PURCHASE_ORDER_CREDIT"`, `"FEES_DEBIT_COMMISSION"`, `"FEES_CREDIT_COMMISSION_REFUND"`, `"FEES_DEBIT_SUBSCRIPTION"`, `"FEES_DEBIT_SELLER_FEE_ON_ORDER"`, `"FEES_DEBIT_SELLER_PENALTY_FEE"`, `"FEES_CREDIT_ONE_OFF"`, `"FEES_DEBIT_ONE_OFF"`
-
-            '
-        fees_excluding_taxes:
-          type: array
-          description: 'The fees applied to the order line.
+            It is only provided when the accounting document request is `SHOP_BILLING_CYCLE_PURCHASE_ORDER`.'
+        shipping_information:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Entities_ShippingInformation'
+          description: 'The shipping information.
 
 
-            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-          items:
-            $ref: '#/components/schemas/DR12_Response_200_Data_FeesExcludingTaxes'
-        id:
-          type: string
-          description: The accounting document request line unique identifier.
-        order:
-          $ref: '#/components/schemas/DR12_Response_200_Data_Order'
-          description: 'The order the accounting document request line relates to.
+            It may be provided when the accounting document request is `LOGISTIC_PURCHASE_ORDER`.'
+        shop_billing_cycle:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Entities_ShopBillingCycle'
+          description: 'The shop billing cycle information.
 
 
-            This is only provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-        order_line:
-          $ref: '#/components/schemas/DR12_Response_200_Data_OrderLine'
-          description: 'The order line the accounting document request line relates to.
-
-
-            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-        origin_unit_price_excluding_taxes:
-          type: number
-          format: with decimals
-          description: 'The original unit price, excluding tax, of the offer associated with the order line.
-
-
-            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-        origin_unit_price_including_taxes:
-          type: number
-          format: with decimals
-          description: 'The original unit price including tax of the offer associated with the order line.
-
-
-            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-        price_excluding_taxes:
-          type: number
-          format: with decimals
-          description: The price excluding taxes for the accounting document request line (after promotions).
-        product:
-          $ref: '#/components/schemas/DR12_Response_200_Data_Product'
-          description: 'The product the accounting document request line relates to.
-
-
-            This is only provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-        quantity:
-          type: integer
-          format: int32
-          description: The quantity for the accounting document request line.
-        shipping_from:
-          $ref: '#/components/schemas/DR12_Response_200_Data_ShippingFrom'
-          description: 'From where (country or full address) the order line is shipped.
-
-
-            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-        shipping_price_excluding_taxes:
-          type: number
-          format: with decimals
-          description: 'The shipping price excluding taxes for the accounting document request line.
-
-
-            This is only provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-        shipping_taxes:
-          type: array
-          description: 'The shipping tax breakdown for the accounting document request line, by tax code and rate.
-
-
-            This is only provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-          items:
-            $ref: '#/components/schemas/DR12_Response_200_Data_ShippingTaxes'
-        shipping_to:
-          $ref: '#/components/schemas/DR12_Response_200_Data_ShippingTo'
-          description: 'To where (country or full address) the order line is shipped.
-
-
-            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
-        shop:
-          $ref: '#/components/schemas/DR12_Response_200_Data_Shop'
-          description: The shop the accounting document request line relates to.
-        tax_legal_notice:
-          type: string
-          description: The legal notice applying to the accounting document request line.
-        taxes:
-          type: array
-          description: The taxes breakdown for the accounting document request line, by tax code and rate.
-          items:
-            $ref: '#/components/schemas/DR12_Response_200_Data_Taxes'
-        total_price_including_taxes:
-          type: number
-          format: with decimals
-          description: The total price for the accounting document request line.
-        unit_price_excluding_taxes:
-          type: number
-          format: with decimals
-          description: The unit price excluding taxes for the accounting document request line (after promotions).
-      required:
-      - entity_id
-      - entity_type
-      - id
-      - price_excluding_taxes
-      - quantity
-      - shop
-      - taxes
-      - total_price_including_taxes
-      - unit_price_excluding_taxes
-    TL02_Response_200_Data_Entities_Channel:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The channel code
-    TL05_Response_200_Ext_FileStructure_Entities_Channel:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The channel code
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderLine:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The order line id
+            It is only provided when the accounting document request is `SHOP_BILLING_CYCLE_PURCHASE_ORDER`, `FEES`, or `ONE_OFF_FEES`.'
     TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OneOffItem:
       type: object
       properties:
@@ -6873,6 +5676,93 @@ components:
           type: number
           format: with decimals
           description: The unit price of the invoiceable one-off item
+    TL02_Response_200_Data_Entities_Fee_Refunds:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The refund id if the transaction log is relative to a refund
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee_Refunds:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The refund id if the transaction log is relative to a refund
+    DR11_Response_200_Data_Issuer_Organization:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer_Organization_Address'
+          description: The address of the organization.
+        business_activity_code:
+          type: string
+          description: The business activity code of the organization.
+        company_shareholders:
+          type: string
+          description: Indicates if there is a single shareholder or several shareholders.
+        electronic_address:
+          type: string
+          description: The organization’s electronic address used for e-invoice delivery. Can also be found as ‘Routing Identifier’ or ‘PEPPOL Participant ID’.
+        fiscal_representative:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer_Organization_FiscalRepresentative'
+          description: The fiscal representative of the organization.
+        identification_number:
+          type: string
+          description: The identification number of the organization.
+        is_in_liquidation:
+          type: boolean
+          description: Indicates whether the company is in liquidation or not.
+        legal_form:
+          type: string
+          description: The legal form of the organization.
+        local_tax_number:
+          type: string
+          description: The VAT/GST number.
+        local_tax_number_country:
+          type: string
+          description: The local tax number country of the organization.
+        name:
+          type: string
+          description: The organization name.
+        personal_information:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer_Organization_PersonalInformation'
+          description: The personal information of the organization.
+        phone_number:
+          type: string
+          description: The contact phone number of the organization.
+        share_capital:
+          type: number
+          format: with decimals
+          description: The share capital of the organization.
+        share_capital_currency:
+          type: string
+          description: The share capital currency of the organization.
+        sole_trader:
+          type: boolean
+          description: Indicates if the organization is a sole trader.
+        tax_identification_number:
+          type: string
+          description: The tax identification number of the organization.
+        tax_number_country:
+          type: string
+          description: The tax number country of the organization.
+        trade_company_registration_location:
+          type: string
+          description: The trade company registration location of the organization.
+      required:
+      - name
+    DR11_Response_200_Data_Issuer_Organization_PersonalInformation:
+      type: object
+      properties:
+        civility:
+          type: string
+          description: The civility of the shop owner.
+        first_name:
+          type: string
+          description: The first name of the shop owner.
+        last_name:
+          type: string
+          description: The last name of the shop owner.
     SBC11_Response_200_Data_Summary_2:
       type: object
       properties:
@@ -7036,68 +5926,65 @@ components:
           type: number
           format: with decimals
           description: Total amount of subscription taxes (including taxes on stores)
-    DR11_Response_200_Data_PaymentTerms:
+    TL02_Response_200_Data_Entities_Order_PaymentInfo:
       type: object
       properties:
-        days:
-          type: integer
-          format: int32
-          description: The number of days for the payment terms.
+        imprint_number:
+          type: string
+          description: The payment imprint number received by OR01 or SOR01
+        payment_type:
+          type: string
+          description: The payment's type used by the customer to pay this order
+    DR74_Request_MultipartFormData_DocumentsInput_Requests:
+      type: object
+      description: 'The details of the files to be uploaded '
+      properties:
+        document_number:
+          type: string
+          description: The accounting document number
+        due_date:
+          type: string
+          format: date-time
+          description: The accounting document due date
+        files:
+          type: array
+          description: The files details for each required format
+          items:
+            $ref: '#/components/schemas/DR74_Request_MultipartFormData_DocumentsInput_Requests_Files'
+        issue_date:
+          type: string
+          format: date-time
+          description: The accounting document issue date
+        request_id:
+          type: string
+          description: The document request identifier on which to upload the document
+        total_amount_excluding_taxes:
+          type: number
+          format: with decimals
+          description: The total document amount (excluding taxes)
+        total_tax_amount:
+          type: number
+          format: with decimals
+          description: The total tax amount of the document
+      required:
+      - document_number
+      - files
+      - request_id
+    TL05_Response_200_Ext_FileStructure_Entities_OneOffItem_References:
+      type: object
+      properties:
         type:
           type: string
-          description: 'The payment terms type.
-
-
-            - `END_OF_MONTH`: payment is due after a number of calendar days following the invoice issue date, at the end of the given month.
-
-            - `NET`: payment is due after a number of calendar days following the invoice issue date.
-
-
-            Enum: `"END_OF_MONTH"`, `"NET"`
-
-            '
-    TL02_Response_200:
+          description: The type of the reference
+        value:
+          type: string
+          description: The value of the reference
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee_Cancelations:
       type: object
       properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/TL02_Response_200_Data'
-        next_page_token:
+        id:
           type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    DR12_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/DR12_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    DR74_Response_200:
-      type: object
-      properties:
-        requests:
-          type: array
-          description: Details of the documents for each request as they were sent
-          items:
-            $ref: '#/components/schemas/DR74_Response_200_Requests'
-      required:
-      - requests
+          description: The Cancelation id if the transaction log is relative to a cancelation
     TL05_Response_200_Ext_FileStructure_Entities_OrderTax:
       type: object
       properties:
@@ -7108,6 +5995,73 @@ components:
           type: number
           format: with decimals
           description: Tax rate
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_ShopTax:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'The code of the shop tax applied. <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code>'
+        rate:
+          type: number
+          format: with decimals
+          description: 'Shop tax rate applied <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code><br/>For backward-compatibility reason, this field will be filled for lines of type <code>COMMISSION_FEE</code> with the rate of the first taxapplied to the shop. In this case, the value should be ignored.'
+    DR11_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/DR11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    TL05_Response_200_Ext_FileStructure_Entities_ShopTax:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'The code of the shop tax applied. <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code>'
+        rate:
+          type: number
+          format: with decimals
+          description: 'Shop tax rate applied <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code><br/>For backward-compatibility reason, this field will be filled for lines of type <code>COMMISSION_FEE</code> with the rate of the first taxapplied to the shop. In this case, the value should be ignored.'
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Channel:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The channel code
+    TL02_Response_200_Data_Entities_TransactionInfo:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: The transaction date.
+        number:
+          type: string
+          description: Transaction number
+    TL05_Response_200_Ext_FileStructure_Entities_Fee_Cancelations:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Cancelation id if the transaction log is relative to a cancelation
+    TL05_Response_200_Ext_FileStructure_Entities_Order_PaymentInfo:
+      type: object
+      properties:
+        imprint_number:
+          type: string
+          description: The payment imprint number received by OR01 or SOR01
+        payment_type:
+          type: string
+          description: The payment's type used by the customer to pay this order
     DR12_Response_200_Data_DeliveryBillInformation:
       type: object
       properties:
@@ -7118,80 +6072,258 @@ components:
         delivery_bill_id:
           type: string
           description: The delivery bill identifier.
-    TL02_Response_200_Data_Entities_Order:
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities:
       type: object
       properties:
-        commercial_id:
+        channel:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Channel'
+          description: A node containing channel information
+        debit:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Debit'
+          description: A node containing debit information if any
+        domain:
           type: string
-          description: The order commercial id
-        creation_date:
+          description: The domain of the entities related to the transaction line (PRODUCT or SERVICE)
+        fee:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee'
+          description: A node containing seller additional fee information if any
+        manual_accounting_document:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_ManualAccountingDocument'
+          description: A node containing manual accounting document information if any
+        one_off_item:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OneOffItem'
+          description: A node containing invoiceable one-off item information if any
+        order:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order'
+          description: A node containing order information if any
+        order_fee:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderFee'
+          description: A node containing order fee information if any
+        order_line:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderLine'
+          description: A node containing order line information if any
+        order_tax:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderTax'
+          description: A node containing order tax information if any
+        refund:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Refund'
+          description: A node containing refund information if any
+        shipment:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Shipment'
+          description: A node containing shipment information if any
+        shop_tax:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_ShopTax'
+          description: A node containing shop tax information if any
+        transaction_info:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_TransactionInfo'
+          description: A node containing transaction information if any
+    TL02_Response_200_Data:
+      type: object
+      properties:
+        accounting_document_creation_date:
           type: string
           format: date-time
-          description: The order creation date
+          description: The related accounting document creation date
+        accounting_document_id:
+          type: string
+          description: 'The related accounting document request id. This field is available for documents requests with these entity types: <code>SHOP_BILLING_CYCLE_PURCHASE_ORDER</code>, <code>FEES</code> or <code>ONE_OFF_FEES</code>.'
+        accounting_document_number:
+          type: string
+          description: The related accounting document number
+        amount:
+          type: number
+          format: with decimals
+          description: The amount.
+        amount_credited:
+          type: number
+          format: with decimals
+          description: The amount credited.
+        amount_debited:
+          type: number
+          format: with decimals
+          description: The amount debited.
+        balance:
+          type: number
+          format: with decimals
+          description: The balance of the transaction.
+        currency_iso_code:
+          type: string
+          description: The currency of the shop (iso format)
+        date_created:
+          type: string
+          format: date-time
+          description: Creation date of the transaction line
+        entities:
+          $ref: '#/components/schemas/TL02_Response_200_Data_Entities'
+          description: Node containing additional information depending on type of the transaction and the domain.
         id:
           type: string
-          description: The order id
-        payment_info:
-          $ref: '#/components/schemas/TL02_Response_200_Data_Entities_Order_PaymentInfo'
-          description: A node containing payment information
-        references:
-          $ref: '#/components/schemas/TL02_Response_200_Data_Entities_Order_References'
-          description: A node containing order references
-    DR74_Response_200_Requests_Errors:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        field:
-          type: string
-          description: Name of the field on the input object
-        message:
-          type: string
-          description: Error message
-      required:
-      - code
-      - field
-      - message
-    DR12_Response_200_Data_Order_TransactionInfo:
-      type: object
-      properties:
-        date:
+          description: Identifier of the transaction
+        last_updated:
           type: string
           format: date-time
-          description: The transaction date.
-        number:
+          description: Date of last update of the transaction line
+        pay_out_psp_code:
           type: string
-          description: The transaction number.
+          description: 'Pay-out PSP code associated with the transaction.
+
+
+            Enum: `"NOT_SPECIFIED"`, `"MANGOPAY"`, `"MIRAKL_PAYOUT"`, `"OPERATOR"`
+
+            '
+        payment_state:
+          type: string
+          description: 'The payment state of the transaction.
+
+
+            Enum: `"PENDING"`, `"PAYABLE"`, `"PAID"`, `"NOT_APPLICABLE"`, `"RESERVE"`
+
+            '
+        psp_balance:
+          type: number
+          format: with decimals
+          description: The Pay-out balance of the transaction.
+        seller_billing_cycle_id:
+          type: string
+          description: The Seller Billing Cycle ID associated with the transaction.
+        type:
+          type: string
+          description: 'Type of transaction (refund, transaction fee, etc ...)
+
+
+            Enum: `"MANUAL_CREDIT"`, `"MANUAL_CREDIT_VAT"`, `"MANUAL_INVOICE"`, `"MANUAL_INVOICE_VAT"`, `"INVOICEABLE_ONE_OFF_DEBIT"`, `"INVOICEABLE_ONE_OFF_DEBIT_TAX"`, `"INVOICEABLE_ONE_OFF_CREDIT"`, `"INVOICEABLE_ONE_OFF_CREDIT_TAX"`, `"ORDER_AMOUNT"`, `"ORDER_AMOUNT_TAX"`, `"ORDER_SHIPPING_AMOUNT"`, `"ORDER_SHIPPING_AMOUNT_TAX"`, `"COMMISSION_FEE"`, `"COMMISSION_VAT"`, `"REFUND_ORDER_AMOUNT"`, `"REFUND_ORDER_AMOUNT_TAX"`, `"REFUND_ORDER_SHIPPING_AMOUNT"`, `"REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_COMMISSION_FEE"`, `"REFUND_COMMISSION_VAT"`, `"SUBSCRIPTION_FEE"`, `"SUBSCRIPTION_VAT"`, `"OPERATOR_REMITTED_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"PAYMENT"`, `"PURCHASE_COMMISSION_FEE"`, `"PURCHASE_SHIPPING_COMMISSION_FEE"`, `"PURCHASE_ORDER_AMOUNT_TAX"`, `"PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_PURCHASE_COMMISSION_FEE"`, `"REFUND_PURCHASE_SHIPPING_COMMISSION_FEE"`, `"REFUND_PURCHASE_ORDER_AMOUNT_TAX"`, `"REFUND_PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_ORDER_FEE_AMOUNT"`, `"REFUND_ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_REFUND_ORDER_FEE_AMOUNT"`, `"PURCHASE_FEE_COMMISSION_FEE"`, `"REFUND_PURCHASE_FEE_COMMISSION_FEE"`, `"RESERVE_FUNDING"`, `"RESERVE_SETTLEMENT"`, `"SELLER_FEE_ON_ORDER"`, `"SELLER_FEE_ON_ORDER_TAX"`, `"SELLER_PENALTY_FEE"`, `"SELLER_PENALTY_FEE_TAX"`
+
+            '
+    DR12_Response_200_Data_EcoContributions:
+      type: object
+      properties:
+        epr_category_code:
+          type: string
+          description: Extended Producer Responsibility category.
+        producer_id:
+          type: string
+          deprecated: true
+          description: 'Producer identifier of the eco-contribution.
+
+
+            This is always `null`.'
+        producer_id_owner:
+          type: string
+          deprecated: true
+          description: 'Owner of the `producer_id`.
+
+
+            This is always `null`.'
+        total_amount:
+          type: number
+          format: with decimals
+          description: The total eco-contribution amount.
+        unit_amount:
+          type: number
+          format: with decimals
+          description: The unit eco-contribution amount.
+    TL02_Response_200_Data_Entities_Fee:
+      type: object
+      properties:
+        cancelations:
+          type: array
+          description: The list of cancelations information if any
+          items:
+            $ref: '#/components/schemas/TL02_Response_200_Data_Entities_Fee_Cancelations'
+        code:
+          type: string
+          description: The code of the seller additional fee
+        refunds:
+          type: array
+          description: The list of refunds information if any
+          items:
+            $ref: '#/components/schemas/TL02_Response_200_Data_Entities_Fee_Refunds'
+    TL02_Response_200_Data_Entities_OrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The order line id
+    DR12_Response_200_Data_ShippingFrom_Address:
+      type: object
+      properties:
+        city:
+          type: string
+          description: The city of the shipping origin address.
+        country_iso_code:
+          type: string
+          description: The ISO 3166-1 alpha-3 country code of the shipping origin address.
+        state:
+          type: string
+          description: The state, province, or region of the shipping origin address.
+        street1:
+          type: string
+          description: The primary line of the shipping origin street address (e.g., street number and name).
+        street2:
+          type: string
+          description: The secondary line of the shipping origin street address (e.g., building, floor, or suite number).
+        zip_code:
+          type: string
+          description: The postal or zip code of the shipping origin address.
       required:
-      - date
-      - number
-    DR12_Response_200_Data_ShippingFrom:
+      - country_iso_code
+    DR11_Response_200_Data_Recipient_Organization:
       type: object
       properties:
         address:
-          $ref: '#/components/schemas/DR12_Response_200_Data_ShippingFrom_Address'
-          description: The address from where the order line is shipped.
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_ManualAccountingDocument:
-      type: object
-      properties:
-        emission_date:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient_Organization_Address'
+          description: The address of the organization.
+        business_activity_code:
           type: string
-          format: date-time
-          deprecated: true
-          description: The manual accounting document emission date.
-        number:
+          description: The business activity code of the organization.
+        company_shareholders:
           type: string
-          description: The manual accounting document number.
-    TL02_Response_200_Data_Entities_Order_PaymentInfo:
-      type: object
-      properties:
-        imprint_number:
+          description: Indicates if there is a single shareholder or several shareholders.
+        electronic_address:
           type: string
-          description: The payment imprint number received by OR01 or SOR01
-        payment_type:
+          description: The organization’s electronic address used for e-invoice delivery. Can also be found as ‘Routing Identifier’ or ‘PEPPOL Participant ID’.
+        identification_number:
           type: string
-          description: The payment's type used by the customer to pay this order
+          description: The identification number of the organization.
+        is_in_liquidation:
+          type: boolean
+          description: Indicates whether the company is in liquidation or not.
+        legal_form:
+          type: string
+          description: The legal form of the organization.
+        local_tax_number:
+          type: string
+          description: The VAT/GST number.
+        local_tax_number_country:
+          type: string
+          description: The local tax number country of the organization.
+        name:
+          type: string
+          description: The organization name.
+        organization_id:
+          type: string
+          description: Identifier of the customer organization
+        phone_number:
+          type: string
+          description: The contact phone number of the organization.
+        share_capital:
+          type: number
+          format: with decimals
+          description: The share capital of the organization.
+        share_capital_currency:
+          type: string
+          description: The share capital currency of the organization.
+        tax_identification_number:
+          type: string
+          description: The tax identification number of the organization.
+        tax_number_country:
+          type: string
+          description: The tax number country of the organization.
+        trade_company_registration_location:
+          type: string
+          description: The trade company registration location of the organization.
+      required:
+      - name
     TL02_Response_200_Data_Entities:
       type: object
       properties:
@@ -7237,109 +6369,22 @@ components:
         transaction_info:
           $ref: '#/components/schemas/TL02_Response_200_Data_Entities_TransactionInfo'
           description: A node containing transaction information if any
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_ShopTax:
+    DR74_Response_200_Requests_Errors:
       type: object
       properties:
         code:
           type: string
-          description: 'The code of the shop tax applied. <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code>'
-        rate:
-          type: number
-          format: with decimals
-          description: 'Shop tax rate applied <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code><br/>For backward-compatibility reason, this field will be filled for lines of type <code>COMMISSION_FEE</code> with the rate of the first taxapplied to the shop. In this case, the value should be ignored.'
-    DR74_Response_200_Requests:
-      type: object
-      properties:
-        errors:
-          type: array
-          description: Error if upload failed for the corresponding document
-          items:
-            $ref: '#/components/schemas/DR74_Response_200_Requests_Errors'
-        input:
-          $ref: '#/components/schemas/DR74_Response_200_Requests_Input'
-          description: Reminder of the inputed API request elements, to help understand possible error messages
+          description: Error code
+        field:
+          type: string
+          description: Name of the field on the input object
+        message:
+          type: string
+          description: Error message
       required:
-      - input
-    DR11_Response_200_Data_Entities_ShopBillingCycle:
-      type: object
-      properties:
-        date_from:
-          type: string
-          format: date-time
-          description: The start date of the shop billing cycle.
-        date_to:
-          type: string
-          format: date-time
-          description: The end date of the shop billing cycle.
-        id:
-          type: string
-          description: The identifier of the shop billing cycle.
-    TL05_Response_200_Ext_FileStructure_Entities_OneOffItem:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The description of the invoiceable one-off item
-        operation_date:
-          type: string
-          format: date
-          description: The operation date of the invoiceable one-off item
-        quantity:
-          type: integer
-          format: int32
-          description: The quantity of the invoiceable one-off item
-        references:
-          type: array
-          description: The references of the invoiceable one-off item
-          items:
-            $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OneOffItem_References'
-        unit_price:
-          type: number
-          format: with decimals
-          description: The unit price of the invoiceable one-off item
-    DR11_Response_200_Data_Recipient:
-      type: object
-      properties:
-        billing_address:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient_BillingAddress'
-          description: The billing address.
-        id:
-          type: string
-          description: 'The recipient''s identifier.
-
-
-            For a customer, this is the customer identifier.
-
-            For an operator, this is the operator''s billing information identifier.'
-        locale:
-          type: string
-          description: The recipient's locale.
-        organization:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient_Organization'
-          description: The recipient organization, if any.
-        shipping_address:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient_ShippingAddress'
-          description: The shipping address.
-        type:
-          type: string
-          description: 'The recipient type (customer, operator, or shop).
-
-
-            This is provided when `entity_type` is `FEES` or `ONE_OFF_FEES`.
-
-
-            Enum: `"CUSTOMER"`, `"SHOP"`, `"OPERATOR"`
-
-            '
-      required:
-      - billing_address
-      - id
-    DR12_Response_200_Data_ShippingTo:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/DR12_Response_200_Data_ShippingTo_Address'
-          description: The address to where the order line is shipped.
+      - code
+      - field
+      - message
     TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_TransactionInfo:
       type: object
       properties:
@@ -7350,301 +6395,48 @@ components:
         number:
           type: string
           description: Transaction number
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Refund:
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order_PaymentInfo:
       type: object
       properties:
-        id:
+        imprint_number:
           type: string
-          description: The refund id if the transaction log is relative to a refund
-    DR12_Response_200_Data_OrderLine:
+          description: The payment imprint number received by OR01 or SOR01
+        payment_type:
+          type: string
+          description: The payment's type used by the customer to pay this order
+    DR11_Response_200_Data_Taxes:
       type: object
       properties:
-        id:
-          type: string
-          description: The order line identifier.
-      required:
-      - id
-    DR11_Response_200_Data_Recipient_BillingAddress:
-      type: object
-      properties:
-        city:
-          type: string
-          description: The address city.
-        civility:
-          type: string
-          description: The civility of the person associated with the address.
-        company:
-          type: string
-          description: The company name.
-        company_2:
-          type: string
-          description: The secondary company information of the person associated with the address.
-        country:
-          type: string
-          description: The address country.
-        country_iso_code:
-          type: string
-          description: The ISO 3166-1 country code of the address.
-        firstname:
-          type: string
-          description: The first name of the person associated with the address.
-        lastname:
-          type: string
-          description: The last name of the person associated with the address.
-        state:
-          type: string
-          description: The address state.
-        street_1:
-          type: string
-          description: The first line of the address street.
-        street_2:
-          type: string
-          description: The second line of the address street.
-        zip_code:
-          type: string
-          description: The address zip code.
-      required:
-      - city
-      - country
-      - lastname
-      - street_1
-    DR11_Response_200_Data_Issuer_Organization_PersonalInformation:
-      type: object
-      properties:
-        civility:
-          type: string
-          description: The civility of the shop owner.
-        first_name:
-          type: string
-          description: The first name of the shop owner.
-        last_name:
-          type: string
-          description: The last name of the shop owner.
-    DR11_Response_200_Data_Entities:
-      type: object
-      properties:
-        delivery_bill_information:
-          type: array
-          description: 'The delivery bill information.
-
-
-            It may be provided when the accounting document request is `LOGISTIC_PURCHASE_ORDER` or `PRODUCT_LOGISTIC_ORDER`.'
-          items:
-            $ref: '#/components/schemas/DR11_Response_200_Data_Entities_DeliveryBillInformation'
-        ship_to_iso_country_code:
-          type: string
-          description: 'The ISO country code of the ship-to destination.
-
-
-            It is only provided when the accounting document request is `SHOP_BILLING_CYCLE_PURCHASE_ORDER`.'
-        shipping_information:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Entities_ShippingInformation'
-          description: 'The shipping information.
-
-
-            It may be provided when the accounting document request is `LOGISTIC_PURCHASE_ORDER`.'
-        shop_billing_cycle:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Entities_ShopBillingCycle'
-          description: 'The shop billing cycle information.
-
-
-            It is only provided when the accounting document request is `SHOP_BILLING_CYCLE_PURCHASE_ORDER`, `FEES`, or `ONE_OFF_FEES`.'
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Debit:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The debit id
-    DR11_Response_200_Data_InitialDocuments:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The initial document request unique identifier.
-        issue_date:
-          type: string
-          format: date-time
-          description: The initial document request issue date.
-        number:
-          type: string
-          description: The initial accounting document number.
-        type:
-          type: string
-          description: 'The initial document request type.
-
-
-            Enum: `"INVOICE"`, `"CREDIT_NOTE"`
-
-            '
-      required:
-      - id
-      - issue_date
-      - type
-    DR11_Response_200_Data_Entities_ShippingInformation_ShipToAddress:
-      type: object
-      properties:
-        city:
-          type: string
-          description: The city of the shipping destination address.
-        civility:
-          type: string
-          description: The civility or title of the recipient (e.g., Mr., Mrs., Dr.).
-        company:
-          type: string
-          description: The company or organization name of the shipping destination.
-        company2:
-          type: string
-          description: The secondary company or organization name of the shipping destination (e.g., department or subsidiary).
-        country_iso_code:
-          type: string
-          description: The ISO 3166-1 alpha-3 country code of the shipping destination address.
-        firstname:
-          type: string
-          description: The first name of the recipient.
-        lastname:
-          type: string
-          description: The last name of the recipient.
-        phone:
-          type: string
-          description: The primary phone number of the recipient.
-        phone_secondary:
-          type: string
-          description: The secondary phone number of the recipient.
-        state:
-          type: string
-          description: The state, province, or region of the shipping destination address.
-        street1:
-          type: string
-          description: The primary line of the shipping destination street address (e.g., street number and name).
-        street2:
-          type: string
-          description: The secondary line of the shipping destination street address (e.g., building, floor, or suite number).
-        zip_code:
-          type: string
-          description: The postal or zip code of the shipping destination address.
-    TL05_Response_200_Ext_FileStructure_Entities_ManualAccountingDocument:
-      type: object
-      properties:
-        emission_date:
-          type: string
-          format: date-time
-          deprecated: true
-          description: The manual accounting document emission date.
-        number:
-          type: string
-          description: The manual accounting document number.
-    TL02_Response_200_Data_Entities_Fee:
-      type: object
-      properties:
-        cancelations:
-          type: array
-          description: The list of cancelations information if any
-          items:
-            $ref: '#/components/schemas/TL02_Response_200_Data_Entities_Fee_Cancelations'
         code:
           type: string
-          description: The code of the seller additional fee
-        refunds:
-          type: array
-          description: The list of refunds information if any
-          items:
-            $ref: '#/components/schemas/TL02_Response_200_Data_Entities_Fee_Refunds'
-    DR11_Response_200_Data_Entities_ShippingInformation:
-      type: object
-      properties:
-        ship_to_address:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Entities_ShippingInformation_ShipToAddress'
-          description: The shipping address information.
-    TL05_Response_200_Ext_FileStructure_Entities_Order_References:
-      type: object
-      properties:
-        order_reference_for_customer:
-          type: string
-          description: Order reference for customer.
-        order_reference_for_seller:
-          type: string
-          description: Order reference for seller.
-    TL05_Response_200_Ext_FileStructure_Entities_OrderLine:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The order line id
-    DR11_Response_200_Data_Issuer_Organization:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer_Organization_Address'
-          description: The address of the organization.
-        business_activity_code:
-          type: string
-          description: The business activity code of the organization.
-        company_shareholders:
-          type: string
-          description: Indicates if there is a single shareholder or several shareholders.
-        electronic_address:
-          type: string
-          description: The organization’s electronic address used for e-invoice delivery. Can also be found as ‘Routing Identifier’ or ‘PEPPOL Participant ID’.
-        fiscal_representative:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer_Organization_FiscalRepresentative'
-          description: The fiscal representative of the organization.
-        identification_number:
-          type: string
-          description: The identification number of the organization.
-        is_in_liquidation:
-          type: boolean
-          description: Indicates whether the company is in liquidation or not.
-        legal_form:
-          type: string
-          description: The legal form of the organization.
-        local_tax_number:
-          type: string
-          description: The VAT/GST number.
-        local_tax_number_country:
-          type: string
-          description: The local tax number country of the organization.
-        name:
-          type: string
-          description: The organization name.
-        personal_information:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer_Organization_PersonalInformation'
-          description: The personal information of the organization.
-        phone_number:
-          type: string
-          description: The contact phone number of the organization.
-        share_capital:
+          description: The tax code.
+        rate:
           type: number
           format: with decimals
-          description: The share capital of the organization.
-        share_capital_currency:
-          type: string
-          description: The share capital currency of the organization.
-        sole_trader:
-          type: boolean
-          description: Indicates if the organization is a sole trader.
-        tax_identification_number:
-          type: string
-          description: The tax identification number of the organization.
-        tax_number_country:
-          type: string
-          description: The tax number country of the organization.
-        trade_company_registration_location:
-          type: string
-          description: The trade company registration location of the organization.
+          description: The tax rate.
+        total_amount:
+          type: number
+          format: with decimals
+          description: The total tax amount, aggregated by tax code and rate.
       required:
-      - name
-    DR12_Response_200_Data_Product_References:
+      - code
+      - total_amount
+    DR12_Response_200:
       type: object
       properties:
-        reference:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/DR12_Response_200_Data'
+        next_page_token:
           type: string
-          description: The value of the product reference.
-        type:
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
           type: string
-          description: The type of the product reference.
+          description: Token to access the previous page. Absent if the current page is the first one.
       required:
-      - reference
-      - type
+      - data
     TL03_Request:
       type: object
       properties:
@@ -7783,6 +6575,262 @@ components:
               '
           maxItems: 100
           minItems: 0
+    TL02_Response_200_Data_Entities_Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The refund id if the transaction log is relative to a refund
+    DR12_Response_200_Data_ShippingFrom:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/DR12_Response_200_Data_ShippingFrom_Address'
+          description: The address from where the order line is shipped.
+    TL05_Response_200_Ext_FileStructure_Entities_Debit:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The debit id
+    TL05_Response_200_Ext_FileStructure_Entities_Fee_Refunds:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The refund id if the transaction log is relative to a refund
+    TL02_Response_200_Data_Entities_Channel:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The channel code
+    DR12_Response_200_Data:
+      type: object
+      discriminator:
+        mapping:
+          FEES_CREDIT_COMMISSION_REFUND: '#/components/schemas/DR12_Response_200_Data_FeesCreditCommissionRefund'
+          FEES_CREDIT_ONE_OFF: '#/components/schemas/DR12_Response_200_Data_FeesCreditOneOff'
+          FEES_DEBIT_COMMISSION: '#/components/schemas/DR12_Response_200_Data_FeesDebitCommission'
+          FEES_DEBIT_ONE_OFF: '#/components/schemas/DR12_Response_200_Data_FeesDebitOneOff'
+          FEES_DEBIT_SELLER_FEE_ON_ORDER: '#/components/schemas/DR12_Response_200_Data_FeesDebitSellerFeeOnOrder'
+          FEES_DEBIT_SELLER_PENALTY_FEE: '#/components/schemas/DR12_Response_200_Data_FeesDebitSellerPenaltyFee'
+          FEES_DEBIT_SUBSCRIPTION: '#/components/schemas/DR12_Response_200_Data_FeesDebitSubscription'
+          PRODUCT_CREDIT_CANCEL: '#/components/schemas/DR12_Response_200_Data_ProductCreditCancel'
+          PRODUCT_CREDIT_CANCEL_ADJUSTMENT: '#/components/schemas/DR12_Response_200_Data_ProductCreditCancelAdjustment'
+          PRODUCT_CREDIT_CANCEL_COMMERCIAL_GESTURE: '#/components/schemas/DR12_Response_200_Data_ProductCreditCancelCommercialGesture'
+          PRODUCT_CREDIT_REFUND: '#/components/schemas/DR12_Response_200_Data_ProductCreditRefund'
+          PRODUCT_CREDIT_REFUND_ADJUSTMENT: '#/components/schemas/DR12_Response_200_Data_ProductCreditRefundAdjustment'
+          PRODUCT_CREDIT_REFUND_COMMERCIAL_GESTURE: '#/components/schemas/DR12_Response_200_Data_ProductCreditRefundCommercialGesture'
+          PRODUCT_DEBIT: '#/components/schemas/DR12_Response_200_Data_ProductDebit'
+          PURCHASE_ORDER_CREDIT: '#/components/schemas/DR12_Response_200_Data_PurchaseOrderCredit'
+          PURCHASE_ORDER_DEBIT: '#/components/schemas/DR12_Response_200_Data_PurchaseOrderDebit'
+        propertyName: entity_type
+      properties:
+        delivery_bill_information:
+          type: array
+          description: The delivery bill information.
+          items:
+            $ref: '#/components/schemas/DR12_Response_200_Data_DeliveryBillInformation'
+        eco_contributions:
+          type: array
+          description: 'List of eco-contributions that apply to the accounting document request line.
+
+
+            This is only available:
+
+            - if the operator activates the circular economy information collection,
+
+            - and when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+          items:
+            $ref: '#/components/schemas/DR12_Response_200_Data_EcoContributions'
+        entity_id:
+          type: string
+          description: The identifier of the entity the accounting document request line relates to.
+        entity_type:
+          type: string
+          description: 'The type of the entity the accounting document request line relates to.
+
+
+            Enum: `"PRODUCT_DEBIT"`, `"PRODUCT_CREDIT_CANCEL"`, `"PRODUCT_CREDIT_CANCEL_COMMERCIAL_GESTURE"`, `"PRODUCT_CREDIT_CANCEL_ADJUSTMENT"`, `"PRODUCT_CREDIT_REFUND"`, `"PRODUCT_CREDIT_REFUND_COMMERCIAL_GESTURE"`, `"PRODUCT_CREDIT_REFUND_ADJUSTMENT"`, `"PURCHASE_ORDER_DEBIT"`, `"PURCHASE_ORDER_CREDIT"`, `"FEES_DEBIT_COMMISSION"`, `"FEES_CREDIT_COMMISSION_REFUND"`, `"FEES_DEBIT_SUBSCRIPTION"`, `"FEES_DEBIT_SELLER_FEE_ON_ORDER"`, `"FEES_DEBIT_SELLER_PENALTY_FEE"`, `"FEES_CREDIT_ONE_OFF"`, `"FEES_DEBIT_ONE_OFF"`
+
+            '
+        fees_excluding_taxes:
+          type: array
+          description: 'The fees applied to the order line.
+
+
+            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+          items:
+            $ref: '#/components/schemas/DR12_Response_200_Data_FeesExcludingTaxes'
+        id:
+          type: string
+          description: The accounting document request line unique identifier.
+        order:
+          $ref: '#/components/schemas/DR12_Response_200_Data_Order'
+          description: 'The order the accounting document request line relates to.
+
+
+            This is only provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+        order_line:
+          $ref: '#/components/schemas/DR12_Response_200_Data_OrderLine'
+          description: 'The order line the accounting document request line relates to.
+
+
+            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+        origin_unit_price_excluding_taxes:
+          type: number
+          format: with decimals
+          description: 'The original unit price, excluding tax, of the offer associated with the order line.
+
+
+            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+        origin_unit_price_including_taxes:
+          type: number
+          format: with decimals
+          description: 'The original unit price including tax of the offer associated with the order line.
+
+
+            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+        price_excluding_taxes:
+          type: number
+          format: with decimals
+          description: The price excluding taxes for the accounting document request line (after promotions).
+        product:
+          $ref: '#/components/schemas/DR12_Response_200_Data_Product'
+          description: 'The product the accounting document request line relates to.
+
+
+            This is only provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+        quantity:
+          type: integer
+          format: int32
+          description: The quantity for the accounting document request line.
+        shipping_from:
+          $ref: '#/components/schemas/DR12_Response_200_Data_ShippingFrom'
+          description: 'From where (country or full address) the order line is shipped.
+
+
+            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+        shipping_price_excluding_taxes:
+          type: number
+          format: with decimals
+          description: 'The shipping price excluding taxes for the accounting document request line.
+
+
+            This is only provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+        shipping_taxes:
+          type: array
+          description: 'The shipping tax breakdown for the accounting document request line, by tax code and rate.
+
+
+            This is only provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+          items:
+            $ref: '#/components/schemas/DR12_Response_200_Data_ShippingTaxes'
+        shipping_to:
+          $ref: '#/components/schemas/DR12_Response_200_Data_ShippingTo'
+          description: 'To where (country or full address) the order line is shipped.
+
+
+            This may be provided when `entity_type` is `PRODUCT_*` or `PURCHASE_ORDER_*`.'
+        shop:
+          $ref: '#/components/schemas/DR12_Response_200_Data_Shop'
+          description: The shop the accounting document request line relates to.
+        tax_legal_notice:
+          type: string
+          description: The legal notice applying to the accounting document request line.
+        taxes:
+          type: array
+          description: The taxes breakdown for the accounting document request line, by tax code and rate.
+          items:
+            $ref: '#/components/schemas/DR12_Response_200_Data_Taxes'
+        total_price_including_taxes:
+          type: number
+          format: with decimals
+          description: The total price for the accounting document request line.
+        unit_price_excluding_taxes:
+          type: number
+          format: with decimals
+          description: The unit price excluding taxes for the accounting document request line (after promotions).
+      required:
+      - entity_id
+      - entity_type
+      - id
+      - price_excluding_taxes
+      - quantity
+      - shop
+      - taxes
+      - total_price_including_taxes
+      - unit_price_excluding_taxes
+    TL03_Response_200:
+      type: object
+      properties:
+        tracking_id:
+          type: string
+          description: The asynchronous transaction log export id
+    TL02_Response_200_Data_Entities_ShopTax:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'The code of the shop tax applied. <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code>'
+        rate:
+          type: number
+          format: with decimals
+          description: 'Shop tax rate applied <br/> Nb: This field will be set for line of type <code>COMMISSION_VAT</code>, <code>MANUAL_CREDIT_VAT</code>, <code>MANUAL_INVOICE_VAT</code>, <code>REFUND_COMMISSION_VAT</code>, <code>SUBSCRIPTION_VAT</code><br/>For backward-compatibility reason, this field will be filled for lines of type <code>COMMISSION_FEE</code> with the rate of the first taxapplied to the shop. In this case, the value should be ignored.'
+    TL05_Response_200_Ext_FileStructure_Entities_ManualAccountingDocument:
+      type: object
+      properties:
+        emission_date:
+          type: string
+          format: date-time
+          deprecated: true
+          description: The manual accounting document emission date.
+        number:
+          type: string
+          description: The manual accounting document number.
+    DR12_Response_200_Data_ShippingTo_Address:
+      type: object
+      properties:
+        city:
+          type: string
+          description: The city of the shipping destination address.
+        civility:
+          type: string
+          description: The civility or title of the recipient (e.g., Mr., Mrs., Dr.).
+        company:
+          type: string
+          description: The company or organization name of the shipping destination.
+        company2:
+          type: string
+          description: The secondary company or organization name of the shipping destination (e.g., department or subsidiary).
+        country_iso_code:
+          type: string
+          description: The ISO 3166-1 alpha-3 country code of the shipping destination address.
+        firstname:
+          type: string
+          description: The first name of the recipient.
+        lastname:
+          type: string
+          description: The last name of the recipient.
+        phone:
+          type: string
+          description: The primary phone number of the recipient.
+        phone_secondary:
+          type: string
+          description: The secondary phone number of the recipient.
+        state:
+          type: string
+          description: The state, province, or region of the shipping destination address.
+        street1:
+          type: string
+          description: The primary line of the shipping destination street address (e.g., street number and name).
+        street2:
+          type: string
+          description: The secondary line of the shipping destination street address (e.g., building, floor, or suite number).
+        zip_code:
+          type: string
+          description: The postal or zip code of the shipping destination address.
     TL02_Response_200_Data_Entities_OneOffItem:
       type: object
       properties:
@@ -7806,6 +6854,704 @@ components:
           type: number
           format: with decimals
           description: The unit price of the invoiceable one-off item
+    DR11_Response_200_Data_Payment:
+      type: object
+      properties:
+        reference:
+          type: string
+          description: The payment transaction reference.
+        state:
+          type: string
+          description: 'The payment state.
+
+
+            Enum: `"PAID"`, `"PENDING"`
+
+            '
+        transaction_date:
+          type: string
+          format: date-time
+          description: The payment transaction date.
+    TL02_Response_200_Data_Entities_Order:
+      type: object
+      properties:
+        commercial_id:
+          type: string
+          description: The order commercial id
+        creation_date:
+          type: string
+          format: date-time
+          description: The order creation date
+        id:
+          type: string
+          description: The order id
+        payment_info:
+          $ref: '#/components/schemas/TL02_Response_200_Data_Entities_Order_PaymentInfo'
+          description: A node containing payment information
+        references:
+          $ref: '#/components/schemas/TL02_Response_200_Data_Entities_Order_References'
+          description: A node containing order references
+    DR11_Response_200_Data_InitialDocuments:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The initial document request unique identifier.
+        issue_date:
+          type: string
+          format: date-time
+          description: The initial document request issue date.
+        number:
+          type: string
+          description: The initial accounting document number.
+        type:
+          type: string
+          description: 'The initial document request type.
+
+
+            Enum: `"INVOICE"`, `"CREDIT_NOTE"`
+
+            '
+      required:
+      - id
+      - issue_date
+      - type
+    DR11_Response_200_Data_Issuer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The issuer's identifier — either the operator's or the shop's billing information identifier.
+        locale:
+          type: string
+          description: The issuer's locale.
+        organization:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer_Organization'
+          description: The issuer organization information.
+        type:
+          type: string
+          description: 'The issuer''s type.
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`
+
+            '
+      required:
+      - organization
+      - type
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OneOffItem_References:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the reference
+        value:
+          type: string
+          description: The value of the reference
+    DR11_Response_200_Data_Recipient_ShippingAddress:
+      type: object
+      properties:
+        city:
+          type: string
+          description: The address city.
+        civility:
+          type: string
+          description: The civility of the person associated with the address.
+        company:
+          type: string
+          description: The company name.
+        company_2:
+          type: string
+          description: The secondary company information of the person associated with the address.
+        country:
+          type: string
+          description: The address country.
+        country_iso_code:
+          type: string
+          description: The ISO 3166-1 country code of the address.
+        firstname:
+          type: string
+          description: The first name of the person associated with the address.
+        lastname:
+          type: string
+          description: The last name of the person associated with the address.
+        state:
+          type: string
+          description: The address state.
+        street_1:
+          type: string
+          description: The first line of the address street.
+        street_2:
+          type: string
+          description: The second line of the address street.
+        zip_code:
+          type: string
+          description: The address zip code.
+      required:
+      - city
+      - country
+      - lastname
+      - street_1
+    DR12_Response_200_Data_Product_References:
+      type: object
+      properties:
+        reference:
+          type: string
+          description: The value of the product reference.
+        type:
+          type: string
+          description: The type of the product reference.
+      required:
+      - reference
+      - type
+    DR74_Request_MultipartFormData_DocumentsInput:
+      type: object
+      properties:
+        requests:
+          type: array
+          description: 'The details of the files to be uploaded '
+          items:
+            $ref: '#/components/schemas/DR74_Request_MultipartFormData_DocumentsInput_Requests'
+      required:
+      - requests
+    TL05_Response_200_Ext_FileStructure_Entities_Fee:
+      type: object
+      properties:
+        cancelations:
+          type: array
+          description: The list of cancelations information if any
+          items:
+            $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Fee_Cancelations'
+        code:
+          type: string
+          description: The code of the seller additional fee
+        refunds:
+          type: array
+          description: The list of refunds information if any
+          items:
+            $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Fee_Refunds'
+    TL05_Response_200_Ext_FileStructure_Entities:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Channel'
+          description: A node containing channel information
+        debit:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Debit'
+          description: A node containing debit information if any
+        domain:
+          type: string
+          description: The domain of the entities related to the transaction line (PRODUCT or SERVICE)
+        fee:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Fee'
+          description: A node containing seller additional fee information if any
+        manual_accounting_document:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_ManualAccountingDocument'
+          description: A node containing manual accounting document information if any
+        one_off_item:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OneOffItem'
+          description: A node containing invoiceable one-off item information if any
+        order:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Order'
+          description: A node containing order information if any
+        order_fee:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OrderFee'
+          description: A node containing order fee information if any
+        order_line:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OrderLine'
+          description: A node containing order line information if any
+        order_tax:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_OrderTax'
+          description: A node containing order tax information if any
+        refund:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Refund'
+          description: A node containing refund information if any
+        shipment:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Shipment'
+          description: A node containing shipment information if any
+        shop_tax:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_ShopTax'
+          description: A node containing shop tax information if any
+        transaction_info:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_TransactionInfo'
+          description: A node containing transaction information if any
+    DR11_Response_200_Data_Recipient_BillingAddress:
+      type: object
+      properties:
+        city:
+          type: string
+          description: The address city.
+        civility:
+          type: string
+          description: The civility of the person associated with the address.
+        company:
+          type: string
+          description: The company name.
+        company_2:
+          type: string
+          description: The secondary company information of the person associated with the address.
+        country:
+          type: string
+          description: The address country.
+        country_iso_code:
+          type: string
+          description: The ISO 3166-1 country code of the address.
+        firstname:
+          type: string
+          description: The first name of the person associated with the address.
+        lastname:
+          type: string
+          description: The last name of the person associated with the address.
+        state:
+          type: string
+          description: The address state.
+        street_1:
+          type: string
+          description: The first line of the address street.
+        street_2:
+          type: string
+          description: The second line of the address street.
+        zip_code:
+          type: string
+          description: The address zip code.
+      required:
+      - city
+      - country
+      - lastname
+      - street_1
+    TL02_Response_200_Data_Entities_Order_References:
+      type: object
+      properties:
+        order_reference_for_customer:
+          type: string
+          description: Order reference for customer.
+        order_reference_for_seller:
+          type: string
+          description: Order reference for seller.
+    DR74_Request_MultipartFormData_DocumentsInput_Requests_Files:
+      type: object
+      description: The files details for each required format
+      properties:
+        format:
+          type: string
+          description: 'The document format
+
+
+            Enum: `"PDF"`, `"cXML"`
+
+            '
+        name:
+          type: string
+          description: The document file name
+      required:
+      - format
+      - name
+    TL02_Response_200_Data_Entities_Shipment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The shipment id if the transaction log is relative to a shipment
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderFee:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code of the transaction log fee
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order_References:
+      type: object
+      properties:
+        order_reference_for_customer:
+          type: string
+          description: Order reference for customer.
+        order_reference_for_seller:
+          type: string
+          description: Order reference for seller.
+    DR11_Response_200_Data_Recipient:
+      type: object
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient_BillingAddress'
+          description: The billing address.
+        id:
+          type: string
+          description: 'The recipient''s identifier.
+
+
+            For a customer, this is the customer identifier.
+
+            For an operator, this is the operator''s billing information identifier.'
+        locale:
+          type: string
+          description: The recipient's locale.
+        organization:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient_Organization'
+          description: The recipient organization, if any.
+        shipping_address:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient_ShippingAddress'
+          description: The shipping address.
+        type:
+          type: string
+          description: 'The recipient type (customer, operator, or shop).
+
+
+            This is provided when `entity_type` is `FEES` or `ONE_OFF_FEES`.
+
+
+            Enum: `"CUSTOMER"`, `"SHOP"`, `"OPERATOR"`
+
+            '
+      required:
+      - billing_address
+      - id
+    DR12_Response_200_Data_Shop:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The shop identifier.
+      required:
+      - id
+    DR11_Response_200_Data_PaymentTerms:
+      type: object
+      properties:
+        days:
+          type: integer
+          format: int32
+          description: The number of days for the payment terms.
+        type:
+          type: string
+          description: 'The payment terms type.
+
+
+            - `END_OF_MONTH`: payment is due after a number of calendar days following the invoice issue date, at the end of the given month.
+
+            - `NET`: payment is due after a number of calendar days following the invoice issue date.
+
+
+            Enum: `"END_OF_MONTH"`, `"NET"`
+
+            '
+    DR11_Response_200_Data_PaymentDestination:
+      type: object
+      discriminator:
+        mapping:
+          IBAN: '#/components/schemas/DR11_Response_200_Data_PaymentDestination_Iban'
+        propertyName: '@type'
+      properties:
+        '@type':
+          type: string
+          description: 'The payment destination type.
+
+
+            Enum: `"IBAN"`
+
+            '
+        payment_reference:
+          type: string
+          description: The payment reference for bank transfer.
+      required:
+      - '@type'
+    DR11_Response_200_Data_DocumentDetails:
+      type: object
+      properties:
+        format:
+          type: string
+          description: 'The document format.
+
+
+            Enum: `"PDF"`, `"cXML"`
+
+            '
+      required:
+      - format
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure:
+      type: object
+      properties:
+        accounting_document_creation_date:
+          type: string
+          format: date-time
+          description: The related accounting document creation date
+        accounting_document_id:
+          type: string
+          description: 'The related accounting document request id. This field is available for documents requests with these entity types: <code>SHOP_BILLING_CYCLE_PURCHASE_ORDER</code>, <code>FEES</code> or <code>ONE_OFF_FEES</code>.'
+        accounting_document_number:
+          type: string
+          description: The related accounting document number
+        amount:
+          type: number
+          format: with decimals
+          description: The amount.
+        amount_credited:
+          type: number
+          format: with decimals
+          description: The amount credited.
+        amount_debited:
+          type: number
+          format: with decimals
+          description: The amount debited.
+        balance:
+          type: number
+          format: with decimals
+          description: The balance of the transaction.
+        currency_iso_code:
+          type: string
+          description: The currency of the shop (iso format)
+        date_created:
+          type: string
+          format: date-time
+          description: Creation date of the transaction line
+        entities:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities'
+          description: Node containing additional information depending on type of the transaction and the domain.
+        id:
+          type: string
+          description: Identifier of the transaction
+        last_updated:
+          type: string
+          format: date-time
+          description: Date of last update of the transaction line
+        pay_out_psp_code:
+          type: string
+          description: 'Pay-out PSP code associated with the transaction.
+
+
+            Enum: `"NOT_SPECIFIED"`, `"MANGOPAY"`, `"MIRAKL_PAYOUT"`, `"OPERATOR"`
+
+            '
+        payment_state:
+          type: string
+          description: 'The payment state of the transaction.
+
+
+            Enum: `"PENDING"`, `"PAYABLE"`, `"PAID"`, `"NOT_APPLICABLE"`, `"RESERVE"`
+
+            '
+        psp_balance:
+          type: number
+          format: with decimals
+          description: The Pay-out balance of the transaction.
+        seller_billing_cycle_id:
+          type: string
+          description: The Seller Billing Cycle ID associated with the transaction.
+        type:
+          type: string
+          description: 'Type of transaction (refund, transaction fee, etc ...)
+
+
+            Enum: `"MANUAL_CREDIT"`, `"MANUAL_CREDIT_VAT"`, `"MANUAL_INVOICE"`, `"MANUAL_INVOICE_VAT"`, `"INVOICEABLE_ONE_OFF_DEBIT"`, `"INVOICEABLE_ONE_OFF_DEBIT_TAX"`, `"INVOICEABLE_ONE_OFF_CREDIT"`, `"INVOICEABLE_ONE_OFF_CREDIT_TAX"`, `"ORDER_AMOUNT"`, `"ORDER_AMOUNT_TAX"`, `"ORDER_SHIPPING_AMOUNT"`, `"ORDER_SHIPPING_AMOUNT_TAX"`, `"COMMISSION_FEE"`, `"COMMISSION_VAT"`, `"REFUND_ORDER_AMOUNT"`, `"REFUND_ORDER_AMOUNT_TAX"`, `"REFUND_ORDER_SHIPPING_AMOUNT"`, `"REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_COMMISSION_FEE"`, `"REFUND_COMMISSION_VAT"`, `"SUBSCRIPTION_FEE"`, `"SUBSCRIPTION_VAT"`, `"OPERATOR_REMITTED_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"PAYMENT"`, `"PURCHASE_COMMISSION_FEE"`, `"PURCHASE_SHIPPING_COMMISSION_FEE"`, `"PURCHASE_ORDER_AMOUNT_TAX"`, `"PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_PURCHASE_COMMISSION_FEE"`, `"REFUND_PURCHASE_SHIPPING_COMMISSION_FEE"`, `"REFUND_PURCHASE_ORDER_AMOUNT_TAX"`, `"REFUND_PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_ORDER_FEE_AMOUNT"`, `"REFUND_ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_REFUND_ORDER_FEE_AMOUNT"`, `"PURCHASE_FEE_COMMISSION_FEE"`, `"REFUND_PURCHASE_FEE_COMMISSION_FEE"`, `"RESERVE_FUNDING"`, `"RESERVE_SETTLEMENT"`, `"SELLER_FEE_ON_ORDER"`, `"SELLER_FEE_ON_ORDER_TAX"`, `"SELLER_PENALTY_FEE"`, `"SELLER_PENALTY_FEE_TAX"`
+
+            '
+    DR12_Response_200_Data_ShippingTo:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/DR12_Response_200_Data_ShippingTo_Address'
+          description: The address to where the order line is shipped.
+    DR11_Response_200_Data:
+      type: object
+      properties:
+        currency_iso_code:
+          type: string
+          description: 'The currency used for the accounting document request.
+
+
+            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
+
+            '
+        date_created:
+          type: string
+          format: date-time
+          description: The accounting document request creation date.
+        document_details:
+          type: array
+          description: Details about each accounting document representation.
+          items:
+            $ref: '#/components/schemas/DR11_Response_200_Data_DocumentDetails'
+        document_number:
+          type: string
+          description: 'The accounting document number.
+
+
+            It is only populated once an accounting document has been issued (e.g. when state is `ISSUED` or `CANCELED`).'
+        document_upload_date:
+          type: string
+          format: date-time
+          description: 'The last upload date of the accounting document representations.
+
+
+            It is only populated once an accounting document has been issued (e.g. when state is `ISSUED` or `CANCELED`).'
+        due_date:
+          type: string
+          format: date-time
+          description: The accounting document due date.
+        entities:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Entities'
+          description: 'Node containing additional information depending on the type of the accounting document request.
+
+
+            Sub-fields are selectively populated depending on `entity_type`; see individual field descriptions.'
+        entity_date_created:
+          type: string
+          format: date-time
+          description: 'The creation date of the entity the accounting document request relates to.
+
+
+            This is not applicable when entity_type is `SHOP_BILLING_CYCLE_PURCHASE_ORDER`.'
+        entity_id:
+          type: string
+          description: The identifier of the entity the accounting document request relates to. The format varies by `entity_type`.
+        entity_type:
+          type: string
+          description: 'The type of the entity the accounting document request relates to.
+
+
+            Enum: `"PRODUCT_LOGISTIC_ORDER"`, `"SHOP_BILLING_CYCLE_PURCHASE_ORDER"`, `"LOGISTIC_PURCHASE_ORDER"`, `"FEES"`, `"ONE_OFF_FEES"`
+
+            '
+        id:
+          type: string
+          description: The accounting document request unique identifier.
+        initial_documents:
+          type: array
+          description: 'Information about the initial accounting document(s) or accounting document request(s).
+
+
+            It is only provided in the case of a `CREDIT_NOTE` or a reissued `INVOICE`.'
+          items:
+            $ref: '#/components/schemas/DR11_Response_200_Data_InitialDocuments'
+        initial_payment_state:
+          type: string
+          description: 'The accounting document payment state when the document request was created.
+
+
+            Enum: `"PAID"`, `"NOT_PAID"`
+
+            '
+        issue_date:
+          type: string
+          format: date-time
+          description: The accounting document request issue date.
+        issuer:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Issuer'
+          description: The issuer details for the accounting document.
+        last_updated:
+          type: string
+          format: date-time
+          description: The accounting document request last updated date.
+        payment:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Payment'
+          description: 'The accounting document payment details.
+
+
+            It is only populated after the payment has been confirmed.'
+        payment_destination:
+          $ref: '#/components/schemas/DR11_Response_200_Data_PaymentDestination'
+          description: Information about how the accounting document payment should be settled.
+        payment_terms:
+          $ref: '#/components/schemas/DR11_Response_200_Data_PaymentTerms'
+          description: 'The accounting document payment terms.
+
+
+            It is always provided when `entity_type` is `SHOP_BILLING_CYCLE_PURCHASE_ORDER`, `LOGISTIC_PURCHASE_ORDER`, `FEES`, `ONE_OFF_FEES`.
+
+            It is optional when `entity_type` is `PRODUCT_LOGISTIC_ORDER`.'
+        recipient:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient'
+          description: The recipient details for the accounting document.
+        state:
+          type: string
+          description: 'The accounting document request state.
+
+
+            Enum: `"STAGING"`, `"TO_PROCESS"`, `"ISSUED"`, `"CANCELED"`
+
+            '
+        taxes:
+          type: array
+          description: A breakdown of `total_tax_amount` by tax code and rate.
+          items:
+            $ref: '#/components/schemas/DR11_Response_200_Data_Taxes'
+        total_amount_excluding_taxes:
+          type: number
+          format: with decimals
+          description: The total amount for the accounting document, excluding taxes.
+        total_amount_including_taxes:
+          type: number
+          format: with decimals
+          description: The total amount for the accounting document, including taxes.
+        total_tax_amount:
+          type: number
+          format: with decimals
+          description: The total tax amount for the accounting document.
+        type:
+          type: string
+          description: 'The accounting document request type.
+
+
+            Enum: `"INVOICE"`, `"CREDIT_NOTE"`
+
+            '
+      required:
+      - currency_iso_code
+      - date_created
+      - document_details
+      - due_date
+      - entity_id
+      - entity_type
+      - id
+      - initial_payment_state
+      - issue_date
+      - issuer
+      - last_updated
+      - state
+      - total_amount_excluding_taxes
+      - total_amount_including_taxes
+      - total_tax_amount
+      - type
+    DR11_Response_200_Data_Entities_ShippingInformation_ShipToAddress:
+      type: object
+      properties:
+        city:
+          type: string
+          description: The city of the shipping destination address.
+        civility:
+          type: string
+          description: The civility or title of the recipient (e.g., Mr., Mrs., Dr.).
+        company:
+          type: string
+          description: The company or organization name of the shipping destination.
+        company2:
+          type: string
+          description: The secondary company or organization name of the shipping destination (e.g., department or subsidiary).
+        country_iso_code:
+          type: string
+          description: The ISO 3166-1 alpha-3 country code of the shipping destination address.
+        firstname:
+          type: string
+          description: The first name of the recipient.
+        lastname:
+          type: string
+          description: The last name of the recipient.
+        phone:
+          type: string
+          description: The primary phone number of the recipient.
+        phone_secondary:
+          type: string
+          description: The secondary phone number of the recipient.
+        state:
+          type: string
+          description: The state, province, or region of the shipping destination address.
+        street1:
+          type: string
+          description: The primary line of the shipping destination street address (e.g., street number and name).
+        street2:
+          type: string
+          description: The secondary line of the shipping destination street address (e.g., building, floor, or suite number).
+        zip_code:
+          type: string
+          description: The postal or zip code of the shipping destination address.
     DR11_Response_200_Data_Entities_DeliveryBillInformation:
       type: object
       properties:
@@ -7816,15 +7562,94 @@ components:
         delivery_bill_id:
           type: string
           description: The delivery bill identifier.
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order_References:
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order:
       type: object
       properties:
-        order_reference_for_customer:
+        commercial_id:
           type: string
-          description: Order reference for customer.
-        order_reference_for_seller:
+          description: The order commercial id
+        creation_date:
           type: string
-          description: Order reference for seller.
+          format: date-time
+          description: The order creation date
+        id:
+          type: string
+          description: The order id
+        payment_info:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order_PaymentInfo'
+          description: A node containing payment information
+        references:
+          $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Order_References'
+          description: A node containing order references
+    DR12_Response_200_Data_Order_TransactionInfo:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: The transaction date.
+        number:
+          type: string
+          description: The transaction number.
+      required:
+      - date
+      - number
+    TL02_Response_200_Data_Entities_OrderFee:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code of the transaction log fee
+    TL02_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/TL02_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_ManualAccountingDocument:
+      type: object
+      properties:
+        emission_date:
+          type: string
+          format: date-time
+          deprecated: true
+          description: The manual accounting document emission date.
+        number:
+          type: string
+          description: The manual accounting document number.
+    TL05_Response_200_Ext_FileStructure_Entities_Channel:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The channel code
+    DR12_Response_200_Data_ShippingTaxes:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: with decimals
+          description: The tax amount.
+        code:
+          type: string
+          description: The tax code.
+        rate:
+          type: number
+          format: with decimals
+          description: The tax rate.
+      required:
+      - amount
+      - code
     DR12_Response_200_Data_Order:
       type: object
       properties:
@@ -7849,310 +7674,18 @@ components:
           description: The transaction information, if any.
       required:
       - id
-    TL02_Response_200_Data_Entities_OrderTax:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The code of the transaction log tax
-        rate:
-          type: number
-          format: with decimals
-          description: Tax rate
-    DR11_Response_200_Data_Recipient_Organization:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/DR11_Response_200_Data_Recipient_Organization_Address'
-          description: The address of the organization.
-        business_activity_code:
-          type: string
-          description: The business activity code of the organization.
-        company_shareholders:
-          type: string
-          description: Indicates if there is a single shareholder or several shareholders.
-        electronic_address:
-          type: string
-          description: The organization’s electronic address used for e-invoice delivery. Can also be found as ‘Routing Identifier’ or ‘PEPPOL Participant ID’.
-        identification_number:
-          type: string
-          description: The identification number of the organization.
-        is_in_liquidation:
-          type: boolean
-          description: Indicates whether the company is in liquidation or not.
-        legal_form:
-          type: string
-          description: The legal form of the organization.
-        local_tax_number:
-          type: string
-          description: The VAT/GST number.
-        local_tax_number_country:
-          type: string
-          description: The local tax number country of the organization.
-        name:
-          type: string
-          description: The organization name.
-        organization_id:
-          type: string
-          description: Identifier of the customer organization
-        phone_number:
-          type: string
-          description: The contact phone number of the organization.
-        share_capital:
-          type: number
-          format: with decimals
-          description: The share capital of the organization.
-        share_capital_currency:
-          type: string
-          description: The share capital currency of the organization.
-        tax_identification_number:
-          type: string
-          description: The tax identification number of the organization.
-        tax_number_country:
-          type: string
-          description: The tax number country of the organization.
-        trade_company_registration_location:
-          type: string
-          description: The trade company registration location of the organization.
-      required:
-      - name
-    DR11_Response_200_Data_PaymentDestination:
-      type: object
-      discriminator:
-        mapping:
-          IBAN: '#/components/schemas/DR11_Response_200_Data_PaymentDestination_Iban'
-        propertyName: '@type'
-      properties:
-        '@type':
-          type: string
-          description: 'The payment destination type.
-
-
-            Enum: `"IBAN"`
-
-            '
-        payment_reference:
-          type: string
-          description: The payment reference for bank transfer.
-      required:
-      - '@type'
-    TL04_Response_200:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/TL04_Response_200_Error'
-          description: Specific error if the status is 'FAILED
-        last_updated:
-          type: string
-          format: date-time
-          description: The last updated date of the export
-        status:
-          type: string
-          description: Current status of the export, can be 'PENDING', 'FAILED', 'CANCELED', or 'COMPLETED'
-        urls:
-          type: array
-          description: List of generated urls to call to download each generated chunks
-          items:
-            type: string
-    DR12_Response_200_Data_EcoContributions:
-      type: object
-      properties:
-        epr_category_code:
-          type: string
-          description: Extended Producer Responsibility category.
-        producer_id:
-          type: string
-          deprecated: true
-          description: 'Producer identifier of the eco-contribution.
-
-
-            This is always `null`.'
-        producer_id_owner:
-          type: string
-          deprecated: true
-          description: 'Owner of the `producer_id`.
-
-
-            This is always `null`.'
-        total_amount:
-          type: number
-          format: with decimals
-          description: The total eco-contribution amount.
-        unit_amount:
-          type: number
-          format: with decimals
-          description: The unit eco-contribution amount.
-    DR11_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/DR11_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee_Refunds:
+    TL02_Response_200_Data_Entities_Fee_Cancelations:
       type: object
       properties:
         id:
           type: string
-          description: The refund id if the transaction log is relative to a refund
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderTax:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The code of the transaction log tax
-        rate:
-          type: number
-          format: with decimals
-          description: Tax rate
-    DR11_Response_200_Data_Recipient_Organization_Address:
-      type: object
-      properties:
-        city:
-          type: string
-          description: Address city
-        country_iso_code:
-          type: string
-          description: Country ISO 3166-1 code of the address
-        state:
-          type: string
-          description: Address state
-        street_1:
-          type: string
-          description: First information line of the address street
-        street_2:
-          type: string
-          description: Second information line of the address street
-        zip_code:
-          type: string
-          description: Address zip code
-      required:
-      - city
-      - country_iso_code
-      - street_1
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee:
-      type: object
-      properties:
-        cancelations:
-          type: array
-          description: The list of cancelations information if any
-          items:
-            $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee_Cancelations'
-        code:
-          type: string
-          description: The code of the seller additional fee
-        refunds:
-          type: array
-          description: The list of refunds information if any
-          items:
-            $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee_Refunds'
-    DR12_Response_200_Data_ShippingFrom_Address:
-      type: object
-      properties:
-        city:
-          type: string
-          description: The city of the shipping origin address.
-        country_iso_code:
-          type: string
-          description: The ISO 3166-1 alpha-3 country code of the shipping origin address.
-        state:
-          type: string
-          description: The state, province, or region of the shipping origin address.
-        street1:
-          type: string
-          description: The primary line of the shipping origin street address (e.g., street number and name).
-        street2:
-          type: string
-          description: The secondary line of the shipping origin street address (e.g., building, floor, or suite number).
-        zip_code:
-          type: string
-          description: The postal or zip code of the shipping origin address.
-      required:
-      - country_iso_code
-    TL04_Response_200_Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The error code
-        detail:
-          type: string
-          description: The error message
-    DR74_Request_MultipartFormData_DocumentsInput:
-      type: object
-      properties:
-        requests:
-          type: array
-          description: 'The details of the files to be uploaded '
-          items:
-            $ref: '#/components/schemas/DR74_Request_MultipartFormData_DocumentsInput_Requests'
-      required:
-      - requests
+          description: The Cancelation id if the transaction log is relative to a cancelation
     TL05_Response_200_Ext_FileStructure_Entities_Refund:
       type: object
       properties:
         id:
           type: string
           description: The refund id if the transaction log is relative to a refund
-    DR74_Response_200_Requests_Input:
-      type: object
-      properties:
-        document_number:
-          type: string
-          description: The accounting document number
-        due_date:
-          type: string
-          format: date-time
-          description: The accounting document due date
-        files:
-          type: array
-          description: The files details for each required format
-          items:
-            $ref: '#/components/schemas/DR74_Response_200_Requests_Input_Files'
-        issue_date:
-          type: string
-          format: date-time
-          description: The accounting document issue date
-        request_id:
-          type: string
-          description: The document request identifier on which to upload the document
-        total_amount_excluding_taxes:
-          type: number
-          format: with decimals
-          description: The total document amount (excluding taxes)
-        total_tax_amount:
-          type: number
-          format: with decimals
-          description: The total tax amount of the document
-      required:
-      - document_number
-      - files
-      - request_id
-    TL02_Response_200_Data_Entities_TransactionInfo:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
-          description: The transaction date.
-        number:
-          type: string
-          description: Transaction number
-    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Shipment:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The shipment id if the transaction log is relative to a shipment
     TL05_Response_200_Ext_FileStructure:
       type: object
       properties:
@@ -8230,7 +7763,224 @@ components:
             Enum: `"MANUAL_CREDIT"`, `"MANUAL_CREDIT_VAT"`, `"MANUAL_INVOICE"`, `"MANUAL_INVOICE_VAT"`, `"INVOICEABLE_ONE_OFF_DEBIT"`, `"INVOICEABLE_ONE_OFF_DEBIT_TAX"`, `"INVOICEABLE_ONE_OFF_CREDIT"`, `"INVOICEABLE_ONE_OFF_CREDIT_TAX"`, `"ORDER_AMOUNT"`, `"ORDER_AMOUNT_TAX"`, `"ORDER_SHIPPING_AMOUNT"`, `"ORDER_SHIPPING_AMOUNT_TAX"`, `"COMMISSION_FEE"`, `"COMMISSION_VAT"`, `"REFUND_ORDER_AMOUNT"`, `"REFUND_ORDER_AMOUNT_TAX"`, `"REFUND_ORDER_SHIPPING_AMOUNT"`, `"REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_COMMISSION_FEE"`, `"REFUND_COMMISSION_VAT"`, `"SUBSCRIPTION_FEE"`, `"SUBSCRIPTION_VAT"`, `"OPERATOR_REMITTED_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_AMOUNT_TAX"`, `"OPERATOR_REMITTED_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_ORDER_SHIPPING_AMOUNT_TAX"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT"`, `"OPERATOR_PAID_REFUND_ORDER_SHIPPING_AMOUNT_TAX"`, `"PAYMENT"`, `"PURCHASE_COMMISSION_FEE"`, `"PURCHASE_SHIPPING_COMMISSION_FEE"`, `"PURCHASE_ORDER_AMOUNT_TAX"`, `"PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"REFUND_PURCHASE_COMMISSION_FEE"`, `"REFUND_PURCHASE_SHIPPING_COMMISSION_FEE"`, `"REFUND_PURCHASE_ORDER_AMOUNT_TAX"`, `"REFUND_PURCHASE_ORDER_SHIPPING_AMOUNT_TAX"`, `"ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_ORDER_FEE_AMOUNT"`, `"REFUND_ORDER_FEE_AMOUNT"`, `"OPERATOR_REMITTED_REFUND_ORDER_FEE_AMOUNT"`, `"PURCHASE_FEE_COMMISSION_FEE"`, `"REFUND_PURCHASE_FEE_COMMISSION_FEE"`, `"RESERVE_FUNDING"`, `"RESERVE_SETTLEMENT"`, `"SELLER_FEE_ON_ORDER"`, `"SELLER_FEE_ON_ORDER_TAX"`, `"SELLER_PENALTY_FEE"`, `"SELLER_PENALTY_FEE_TAX"`
 
             '
-    IV01_Response_200_Invoices_3:
+    DR12_Response_200_Data_OrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The order line identifier.
+      required:
+      - id
+    TL05_Response_200_Ext_FileStructure_Entities_Order:
+      type: object
+      properties:
+        commercial_id:
+          type: string
+          description: The order commercial id
+        creation_date:
+          type: string
+          format: date-time
+          description: The order creation date
+        id:
+          type: string
+          description: The order id
+        payment_info:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Order_PaymentInfo'
+          description: A node containing payment information
+        references:
+          $ref: '#/components/schemas/TL05_Response_200_Ext_FileStructure_Entities_Order_References'
+          description: A node containing order references
+    DR11_Response_200_Data_Entities_ShippingInformation:
+      type: object
+      properties:
+        ship_to_address:
+          $ref: '#/components/schemas/DR11_Response_200_Data_Entities_ShippingInformation_ShipToAddress'
+          description: The shipping address information.
+    TL02_Response_200_Data_Entities_OrderTax:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code of the transaction log tax
+        rate:
+          type: number
+          format: with decimals
+          description: Tax rate
+    TL02_Response_200_Data_Entities_ManualAccountingDocument:
+      type: object
+      properties:
+        emission_date:
+          type: string
+          format: date-time
+          deprecated: true
+          description: The manual accounting document emission date.
+        number:
+          type: string
+          description: The manual accounting document number.
+    TL05_Response_200_Ext_FileStructure_Entities_Order_References:
+      type: object
+      properties:
+        order_reference_for_customer:
+          type: string
+          description: Order reference for customer.
+        order_reference_for_seller:
+          type: string
+          description: Order reference for seller.
+    DR11_Response_200_Data_Recipient_Organization_Address:
+      type: object
+      properties:
+        city:
+          type: string
+          description: Address city
+        country_iso_code:
+          type: string
+          description: Country ISO 3166-1 code of the address
+        state:
+          type: string
+          description: Address state
+        street_1:
+          type: string
+          description: First information line of the address street
+        street_2:
+          type: string
+          description: Second information line of the address street
+        zip_code:
+          type: string
+          description: Address zip code
+      required:
+      - city
+      - country_iso_code
+      - street_1
+    TL02_Response_200_Data_Entities_OneOffItem_References:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the reference
+        value:
+          type: string
+          description: The value of the reference
+    DR12_Response_200_Data_FeesExcludingTaxes:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: with decimals
+          description: The fee amount.
+          minimum: 0
+        code:
+          type: string
+          description: The fee code.
+        label:
+          type: string
+          description: The fee label.
+      required:
+      - amount
+      - code
+      - label
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The refund id if the transaction log is relative to a refund
+    DR11_Response_200_Data_Issuer_Organization_FiscalRepresentative:
+      type: object
+      properties:
+        city:
+          type: string
+          description: The city where the fiscal representative is located.
+        civility:
+          type: string
+          description: The civility of the fiscal representative.
+        company_registration_name:
+          type: string
+          description: The name of the fiscal representative.
+        company_registration_number:
+          type: string
+          description: The registration number of the fiscal representative.
+        country_iso_code:
+          type: string
+          description: The country ISO 3166-1 code of the fiscal representative address.
+        first_name:
+          type: string
+          description: The first name of the fiscal representative.
+        last_name:
+          type: string
+          description: The last name of the fiscal representative.
+        local_tax_number:
+          type: string
+          description: The VAT/GST number.
+        state:
+          type: string
+          description: The state/province/region where the fiscal representative is located.
+        street_1:
+          type: string
+          description: The first line of address of the fiscal representative.
+        street_2:
+          type: string
+          description: The second line of address of the fiscal representative.
+        zip_code:
+          type: string
+          description: The Zip/Postal code corresponding to the fiscal representative location.
+      required:
+      - city
+      - civility
+      - company_registration_name
+      - company_registration_number
+      - country_iso_code
+      - first_name
+      - last_name
+      - street_1
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Debit:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The debit id
+    DR11_Response_200_Data_Entities_ShopBillingCycle:
+      type: object
+      properties:
+        date_from:
+          type: string
+          format: date-time
+          description: The start date of the shop billing cycle.
+        date_to:
+          type: string
+          format: date-time
+          description: The end date of the shop billing cycle.
+        id:
+          type: string
+          description: The identifier of the shop billing cycle.
+    TL04_Response_200:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/TL04_Response_200_Error'
+          description: Specific error if the status is 'FAILED
+        last_updated:
+          type: string
+          format: date-time
+          description: The last updated date of the export
+        status:
+          type: string
+          description: Current status of the export, can be 'PENDING', 'FAILED', 'CANCELED', or 'COMPLETED'
+        urls:
+          type: array
+          description: List of generated urls to call to download each generated chunks
+          items:
+            type: string
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderTax:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code of the transaction log tax
+        rate:
+          type: number
+          format: with decimals
+          description: Tax rate
+    IV01_Response_200_Invoices_2:
       type: object
       discriminator:
         mapping:
@@ -8341,6 +8091,145 @@ components:
             Enum: `"ALL"`, `"AUTO_INVOICE"`, `"MANUAL_INVOICE"`, `"MANUAL_CREDIT"`
 
             '
+    DR74_Response_200_Requests_Input_Files:
+      type: object
+      properties:
+        format:
+          type: string
+          description: 'The document format
+
+
+            Enum: `"PDF"`, `"cXML"`
+
+            '
+        name:
+          type: string
+          description: The document file name
+      required:
+      - format
+      - name
+    DR74_Response_200:
+      type: object
+      properties:
+        requests:
+          type: array
+          description: Details of the documents for each request as they were sent
+          items:
+            $ref: '#/components/schemas/DR74_Response_200_Requests'
+      required:
+      - requests
+    TL02_Response_200_Data_Entities_Debit:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The debit id
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_OrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The order line id
+    TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee:
+      type: object
+      properties:
+        cancelations:
+          type: array
+          description: The list of cancelations information if any
+          items:
+            $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee_Cancelations'
+        code:
+          type: string
+          description: The code of the seller additional fee
+        refunds:
+          type: array
+          description: The list of refunds information if any
+          items:
+            $ref: '#/components/schemas/TL05_Response_200_ApplicationXNdjson_Ext_FileStructure_Entities_Fee_Refunds'
+    DR12_Response_200_Data_Taxes:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: with decimals
+          description: The tax amount.
+        code:
+          type: string
+          description: The tax code.
+        rate:
+          type: number
+          format: with decimals
+          description: The tax rate.
+      required:
+      - amount
+      - code
+    TL05_Response_200_Ext_FileStructure_Entities_TransactionInfo:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: The transaction date.
+        number:
+          type: string
+          description: Transaction number
+    TL04_Response_200_Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The error code
+        detail:
+          type: string
+          description: The error message
+    TL05_Response_200_Ext_FileStructure_Entities_OrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The order line id
+    TL05_Response_200_Ext_FileStructure_Entities_Shipment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The shipment id if the transaction log is relative to a shipment
+    DR12_Response_200_Data_Product:
+      type: object
+      properties:
+        references:
+          type: array
+          description: The product references.
+          items:
+            $ref: '#/components/schemas/DR12_Response_200_Data_Product_References'
+        sku:
+          type: string
+          description: The product SKU.
+        title:
+          type: string
+          description: The product title.
+      required:
+      - references
+      - title
+    DR74_Response_200_Requests:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Error if upload failed for the corresponding document
+          items:
+            $ref: '#/components/schemas/DR74_Response_200_Requests_Errors'
+        input:
+          $ref: '#/components/schemas/DR74_Response_200_Requests_Input'
+          description: Reminder of the inputed API request elements, to help understand possible error messages
+      required:
+      - input
+    TL05_Response_200_Ext_FileStructure_Entities_OrderFee:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code of the transaction log fee
     SBC11_Response_200_Data_Summary_3:
       type: object
       properties:
@@ -8504,6 +8393,117 @@ components:
           type: number
           format: with decimals
           description: Total amount of subscription taxes (including taxes on stores)
+    IV01_Response_200_Invoices_3:
+      type: object
+      discriminator:
+        mapping:
+          AUTO_INVOICE: '#/components/schemas/IV01_Response_200_Invoices_AutoInvoice'
+          MANUAL_CREDIT: '#/components/schemas/IV01_Response_200_Invoices_ManualCredit'
+          MANUAL_INVOICE: '#/components/schemas/IV01_Response_200_Invoices_ManualInvoice'
+        propertyName: type
+      properties:
+        currency_iso_code:
+          type: string
+          description: 'The currency of the shop
+
+
+            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
+
+            '
+        date_created:
+          type: string
+          format: date-time
+          description: Accounting document creation date
+        details:
+          type: array
+          description: Accounting details
+          items:
+            $ref: '#/components/schemas/IV01_Response_200_Invoices_Details'
+        due_date:
+          type: string
+          format: date-time
+          description: Due date for the payment of the accounting document
+        id:
+          type: string
+          description: Accounting document identifier (use it for draft document)
+        invoice_id:
+          type: integer
+          format: int64
+          description: Accounting document identifier (present if the accounting document is issued)
+        issue_date:
+          type: string
+          format: date-time
+          description: Issue date of an accounting document
+        issuing_user:
+          $ref: '#/components/schemas/IV01_Response_200_Invoices_IssuingUser'
+          description: Accounting document issuing user
+        pay_out_psp_code:
+          type: string
+          description: 'PSP code for Pay-out
+
+
+            Enum: `"NOT_SPECIFIED"`, `"MANGOPAY"`, `"MIRAKL_PAYOUT"`, `"OPERATOR"`
+
+            '
+        payment:
+          $ref: '#/components/schemas/IV01_Response_200_Invoices_Payment'
+          description: Accounting document payment details
+        shop_address:
+          $ref: '#/components/schemas/IV01_Response_200_Invoices_ShopAddress'
+          description: Shop address
+        shop_corporate_name:
+          type: string
+          description: Shop corporate name if it is a professional shop
+        shop_id:
+          type: integer
+          format: int64
+          description: Shop id
+        shop_model:
+          type: string
+          description: 'Shop model
+
+
+            Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
+
+            '
+        shop_name:
+          type: string
+          description: Shop name
+        shop_operator_internal_id:
+          type: string
+          description: Operator internal id for the shop
+        shop_tax_number:
+          type: string
+          description: Shop tax number if it is a professional shop
+        state:
+          type: string
+          description: Accounting document state
+        total_amount_excl_taxes:
+          type: number
+          format: with decimals
+          description: Total amount charged to the shop (excluding taxes)
+        total_amount_incl_taxes:
+          type: number
+          format: with decimals
+          description: Total amount charged to the shop (including taxes)
+        total_charged_amount:
+          type: number
+          format: with decimals
+          deprecated: true
+          description: Use “total_amount_incl_taxes” attribute instead
+        total_taxes:
+          type: array
+          description: Total taxes
+          items:
+            $ref: '#/components/schemas/IV01_Response_200_Invoices_TotalTaxes'
+        type:
+          type: string
+          description: 'Accounting document type
+
+
+            Enum: `"ALL"`, `"AUTO_INVOICE"`, `"MANUAL_INVOICE"`, `"MANUAL_CREDIT"`
+
+            '
   securitySchemes:
     Front-Bearer-Token:
       bearerFormat: JWT

@@ -184,6 +184,49 @@ paths:
       - Checkout
 components:
   schemas:
+    GetCustomCarrierRates_Request_Rate_Destination:
+      type: object
+      description: Destination address of the shipment
+      properties:
+        address1:
+          type: string
+          description: The first line of the address
+        address2:
+          type: string
+          description: The second line of the address
+        city:
+          type: string
+          description: The city
+        country:
+          type: string
+          description: The country
+        email:
+          type: string
+          description: The email
+        latitude:
+          type: string
+          description: The latitude
+        longitude:
+          type: string
+          description: The longitude
+        name:
+          type: string
+          description: The address name
+        phone:
+          type: string
+          description: The phone number
+        postalCode:
+          type: string
+          description: The postal code
+        province:
+          type: string
+          description: The province
+    GetCustomCarrierRates_Request:
+      type: object
+      properties:
+        rate:
+          $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate'
+          description: Shipping rate request
     GetCustomCarrierRates_Request_Rate_Items:
       type: object
       description: Items in the shipment
@@ -229,6 +272,14 @@ components:
         vendor:
           type: string
           description: The vendor of the item
+    GetCustomCarrierRates_Response_200:
+      type: object
+      properties:
+        rates:
+          type: array
+          description: Shipping rates response
+          items:
+            $ref: '#/components/schemas/GetCustomCarrierRates_Response_200_Rates'
     GetCustomCarrierRates_Request_Rate:
       type: object
       description: Shipping rate request
@@ -250,7 +301,7 @@ components:
         origin:
           $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate_Origin'
           description: Origin address of the shipment
-    GetCustomCarrierRates_Request_Rate_Destination:
+    GetCustomCarrierRates_Request_Rate_Origin:
       type: object
       description: Destination address of the shipment
       properties:
@@ -306,57 +357,6 @@ components:
           type: integer
           format: int32
           description: The total price of the shipment with this carrier
-    GetCustomCarrierRates_Request:
-      type: object
-      properties:
-        rate:
-          $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate'
-          description: Shipping rate request
-    GetCustomCarrierRates_Response_200:
-      type: object
-      properties:
-        rates:
-          type: array
-          description: Shipping rates response
-          items:
-            $ref: '#/components/schemas/GetCustomCarrierRates_Response_200_Rates'
-    GetCustomCarrierRates_Request_Rate_Origin:
-      type: object
-      description: Destination address of the shipment
-      properties:
-        address1:
-          type: string
-          description: The first line of the address
-        address2:
-          type: string
-          description: The second line of the address
-        city:
-          type: string
-          description: The city
-        country:
-          type: string
-          description: The country
-        email:
-          type: string
-          description: The email
-        latitude:
-          type: string
-          description: The latitude
-        longitude:
-          type: string
-          description: The longitude
-        name:
-          type: string
-          description: The address name
-        phone:
-          type: string
-          description: The phone number
-        postalCode:
-          type: string
-          description: The postal code
-        province:
-          type: string
-          description: The province
   securitySchemes:
     Bearer:
       bearerFormat: JWT

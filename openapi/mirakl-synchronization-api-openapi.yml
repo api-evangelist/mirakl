@@ -518,38 +518,14 @@ paths:
       - Synchronization
 components:
   schemas:
-    SyncPromotions_Request:
+    SyncOffers_Request:
       type: object
-      description: Request object to update promotion synchronization since date
+      description: Request object holding the parameters for the offer import
       properties:
         sinceDate:
           type: string
           format: date-time
-          description: Timestamp of the last promotion synchronization
-    SyncOrders_Request:
-      type: object
-      description: Request object to update order synchronization since date
-      properties:
-        sinceDate:
-          type: string
-          format: date-time
-          description: Timestamp of the last order synchronization
-    SyncFirstPartyProducts_Request:
-      type: object
-      description: Request object to update Shopify to Mirakl product synchronization since date
-      properties:
-        sinceDate:
-          type: string
-          format: date-time
-          description: Timestamp of the last product synchronization
-    SyncShops_Request:
-      type: object
-      description: Request object for shop synchronization from Shopify to Mirakl
-      properties:
-        sinceDate:
-          type: string
-          format: date-time
-          description: 'Date threshold: only syncs shops modified after this date'
+          description: Timestamp of the last offer import into Shopify
     SyncReturns_Request:
       type: object
       description: Request object for return synchronization from Shopify to Mirakl
@@ -566,22 +542,22 @@ components:
           type: string
           format: date-time
           description: Sync Mirakl deleted products to Shopify since this date
-    SyncOffers_Request:
+    SyncFirstPartyProducts_Request:
       type: object
-      description: Request object holding the parameters for the offer import
+      description: Request object to update Shopify to Mirakl product synchronization since date
       properties:
         sinceDate:
           type: string
           format: date-time
-          description: Timestamp of the last offer import into Shopify
-    SyncThirdPartyProducts_Request:
+          description: Timestamp of the last product synchronization
+    SyncShops_Request:
       type: object
-      description: Request object holding the parameters for the product import
+      description: Request object for shop synchronization from Shopify to Mirakl
       properties:
         sinceDate:
           type: string
           format: date-time
-          description: Timestamp of the last product import into Shopify
+          description: 'Date threshold: only syncs shops modified after this date'
     SyncShipments_Request:
       type: object
       description: Request object to update Mirakl to Shopify shipment synchronization since date
@@ -590,6 +566,30 @@ components:
           type: string
           format: date-time
           description: Timestamp of the last shipment synchronization
+    SyncPromotions_Request:
+      type: object
+      description: Request object to update promotion synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last promotion synchronization
+    SyncThirdPartyProducts_Request:
+      type: object
+      description: Request object holding the parameters for the product import
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last product import into Shopify
+    SyncOrders_Request:
+      type: object
+      description: Request object to update order synchronization since date
+      properties:
+        sinceDate:
+          type: string
+          format: date-time
+          description: Timestamp of the last order synchronization
   securitySchemes:
     Bearer:
       bearerFormat: JWT

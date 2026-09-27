@@ -2205,80 +2205,18 @@ paths:
       - Services
 components:
   schemas:
-    SM11_Response_200_Data_Categories:
+    SL01_Response_201_OpeningHours_Friday:
       type: object
       properties:
-        code:
+        closing_time:
           type: string
-          description: Category code
-        label:
+          description: Closing time in hh:mm format
+        opening_time:
           type: string
-          description: Category label
+          description: Opening time in hh:mm format
       required:
-      - code
-      - label
-    SL01_Response_201_Geography:
-      type: object
-      discriminator:
-        mapping:
-          CIRCLE: '#/components/schemas/SL01_Response_201_Geography_Circle'
-          POINT: '#/components/schemas/SL01_Response_201_Geography_Point'
-          ZONE_REFERENCES: '#/components/schemas/SL01_Response_201_Geography_ZoneReferences'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
-
-            '
-    SOF26_Response_200_Consumption:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'Type of consumption
-
-
-            Enum: `"VOUCHER"`, `"CONFIRMATION_BY_SHOP"`
-
-            '
-      required:
-      - type
-    SOF25_Response_201_Model:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Service model code
-        title:
-          type: string
-          description: Service model title
-      required:
-      - code
-      - title
-    SM11_Response_200_Data_Pricing:
-      type: object
-      properties:
-        options:
-          type: array
-          description: Service model pricing options. The list is ordered as configured by the operator.
-          items:
-            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_Options'
-        price_per_unit_options:
-          type: array
-          description: Service model price per unit options. Always present if pricing is multi price.
-          items:
-            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions'
-        type:
-          type: string
-          description: 'Pricing type<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
-
-
-            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
-
-            '
-      required:
-      - type
+      - closing_time
+      - opening_time
     SOF26_Response_200_CustomAttributeValues:
       type: object
       discriminator:
@@ -2315,24 +2253,7 @@ components:
       - code
       - label
       - type
-    SOF25_Request_Booking:
-      type: object
-      description: Service booking method. The type of the booking must reflect the associated Model's booking. By default, <code>booking</code> will be of type <code>NO_BOOKING</code>.
-      discriminator:
-        mapping:
-          DATETIME_REQUEST: '#/components/schemas/SOF25_Request_Booking_DatetimeRequest'
-          NO_BOOKING: '#/components/schemas/SOF25_Request_Booking_NoBooking'
-          SCHEDULED_EVENTS: '#/components/schemas/SOF25_Request_Booking_ScheduledEvents'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
-
-            '
-      required:
-      - type
-    SL01_Response_201_OverriddenOpeningHours_Monday:
+    SL01_Response_201_OverriddenOpeningHours_Thursday:
       type: object
       properties:
         availability:
@@ -2342,54 +2263,23 @@ components:
           type: array
           description: Opening hours
           items:
-            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Monday_OpeningHours'
+            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Thursday_OpeningHours'
       required:
       - availability
-    SL01_Response_201_OverriddenOpeningHours:
+    SL01_Response_201_OverriddenOpeningHours_Tuesday:
       type: object
       properties:
-        friday:
-          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Friday'
-          description: Friday opening hours
-        monday:
-          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Monday'
-          description: Monday opening hours
-        saturday:
-          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Saturday'
-          description: Saturday opening hours
-        sunday:
-          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Sunday'
-          description: Sunday opening hours
-        thursday:
-          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Thursday'
-          description: Thursday opening hours
-        tuesday:
-          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Tuesday'
-          description: Tuesday opening hours
-        wednesday:
-          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Wednesday'
-          description: Wednesday opening hours
-      required:
-      - friday
-      - monday
-      - saturday
-      - sunday
-      - thursday
-      - tuesday
-      - wednesday
-    SL01_Response_201_OpeningHours_Thursday:
-      type: object
-      properties:
-        closing_time:
+        availability:
           type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Tuesday_OpeningHours'
       required:
-      - closing_time
-      - opening_time
-    SOF26_Response_200_Category:
+      - availability
+    SOF11_Response_200_Data_Category:
       type: object
       properties:
         code:
@@ -2401,23 +2291,62 @@ components:
       required:
       - code
       - label
-    SOF25_Request_Location:
+    SL12_Response_200_Data_ContactInfo:
       type: object
-      description: Service location method. The type of the location must reflect the associated Model's location. By default, <code>location</code> will be of type <code>NO_LOCATION</code>.
+      properties:
+        email:
+          type: string
+          description: Contact E-mail
+        phone:
+          type: string
+          description: Contact phone number
+    SOF25_Response_201_Pricing:
+      type: object
       discriminator:
         mapping:
-          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF25_Request_Location_AtCustomerLocation'
-          AT_SHOP_LOCATION: '#/components/schemas/SOF25_Request_Location_AtShopLocation'
-          NO_LOCATION: '#/components/schemas/SOF25_Request_Location_NoLocation'
+          ESTIMATED_PRICE: '#/components/schemas/SOF25_Response_201_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF25_Response_201_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF25_Response_201_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF25_Response_201_Pricing_FixedPriceMulti'
         propertyName: type
       properties:
+        max_price_per_unit:
+          type: number
+          format: with decimals
+          description: Maximum price at which the service will be provided. It's a price per unit.
+        min_price_per_unit:
+          type: number
+          format: with decimals
+          description: Minimum price at which the service will be provided. It's a price per unit.
+        options:
+          type: array
+          description: Service pricing options. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SOF25_Response_201_Pricing_Options'
         type:
           type: string
-          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+          description: 'Price type of the service.<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
 
             '
       required:
+      - max_price_per_unit
+      - min_price_per_unit
       - type
+    SM11_Response_200_Data_Pricing_PricePerUnitOptions_Values:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code
+        label:
+          type: string
+          description: Label
+      required:
+      - code
+      - label
     SM11_Response_200_Data_Consumption:
       type: object
       properties:
@@ -2431,44 +2360,6 @@ components:
             '
       required:
       - type
-    SL12_Response_200_Data_OverriddenOpeningHours_Friday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Friday_OpeningHours'
-      required:
-      - availability
-    SL12_Response_200_Data_OpeningHours_Sunday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL12_Response_200_Data_OverriddenOpeningHours_Wednesday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Wednesday_OpeningHours'
-      required:
-      - availability
     SOF11_Response_200_Data_Location:
       type: object
       discriminator:
@@ -2483,151 +2374,86 @@ components:
           description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
 
             '
-    SOF26_Response_200_Model:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Service model code
-        title:
-          type: string
-          description: Service model title
-      required:
-      - code
-      - title
-    SOF11_Response_200_Data:
-      type: object
-      properties:
-        booking:
-          $ref: '#/components/schemas/SOF11_Response_200_Data_Booking'
-          description: Service booking method
-        category:
-          $ref: '#/components/schemas/SOF11_Response_200_Data_Category'
-          description: Service category
-        code:
-          type: string
-          description: Service code
-        consumption:
-          $ref: '#/components/schemas/SOF11_Response_200_Data_Consumption'
-          description: 'Service consumption method: how will the service be consumed ?'
-        custom_attribute_values:
-          type: array
-          description: Service custom attributes values
-          items:
-            $ref: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues'
-        date_availability_end:
-          type: string
-          format: date-time
-          description: Date when the service ends being available
-        date_availability_start:
-          type: string
-          format: date-time
-          description: Date when the service starts being available
-        date_created:
-          type: string
-          format: date-time
-          description: Service creation date
-        date_updated:
-          type: string
-          format: date-time
-          description: Service update date
-        description:
-          type: string
-          description: Service description
-        inactive_reasons:
-          type: array
-          description: List of reasons why the service is inactive. If the service is active, this list is empty
-          items:
-            type: string
-            description: 'Enum: `"MANUALLY_DISABLED"`, `"ZERO_QUANTITY"`, `"ORDER_REFUSED"`, `"ORDER_ACCEPTANCE_TIMEOUT"`, `"NOT_IN_AVAILABILITY_PERIOD"`, `"SHOP_NOT_OPEN"`, `"SHOP_SUSPENDED"`, `"SHOP_CURRENCY_DISABLED"`, `"MISSING_REQUIRED_FIELDS"`, `"VALIDATION_NEEDED"`, `"NO_SESSION"`
-
-              '
-        location:
-          $ref: '#/components/schemas/SOF11_Response_200_Data_Location'
-          description: 'Service location method: where the service will be provided ?'
-        medias:
-          type: array
-          description: All the medias associated to a service
-          items:
-            $ref: '#/components/schemas/SOF11_Response_200_Data_Medias'
-        model:
-          $ref: '#/components/schemas/SOF11_Response_200_Data_Model'
-          description: Service model
-        pricing:
-          $ref: '#/components/schemas/SOF11_Response_200_Data_Pricing'
-          description: Service pricing method
-        quantity:
-          $ref: '#/components/schemas/SOF11_Response_200_Data_Quantity'
-          description: Service quantity method
-        service_tax_code:
-          type: string
-          description: Service tax code
-        title:
-          type: string
-          description: Service title
-      required:
-      - booking
-      - category
-      - code
-      - consumption
-      - custom_attribute_values
-      - date_created
-      - date_updated
-      - inactive_reasons
-      - location
-      - model
-      - pricing
-      - quantity
-      - title
-    SOF11_Response_200_Data_CustomAttributeValues:
+    SOF25_Response_201_Pricing_Options:
       type: object
       discriminator:
         mapping:
-          BOOLEAN: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Boolean'
-          DATE_TIME: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_DateTime'
-          DECIMAL: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Decimal'
-          INTEGER: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Integer'
-          LINK: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Link'
-          LONG_TEXT: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_LongText'
-          TEXT: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Text'
-          VALUE_LIST: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_ValueList'
-          VIDEO: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Video'
+          BOOLEAN: '#/components/schemas/SOF25_Response_201_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF25_Response_201_Pricing_Options_ValueList'
         propertyName: type
       properties:
         code:
           type: string
-          description: Custom attribute code
+          description: Option code
         label:
           type: string
-          description: Custom attribute label
+          description: Option label
         type:
           type: string
-          description: 'Custom attribute field type
-
-
-            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
 
             '
-        value:
-          type: object
-          description: Custom attribute field value
       required:
       - code
       - label
-      - type
-    SL01_Request_OpeningHours_Saturday:
+    SM11_Response_200_Data_CustomAttributes_ServiceConfiguration:
       type: object
-      description: Sunday opening hours
       properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
+        maximum_number_of_elements:
+          type: integer
+          format: int32
+          description: Maximum number of elements. Present only for ValueLists. Absent when no limit.
+        minimum_number_of_elements:
+          type: integer
+          format: int32
+          description: Minimum number of elements. Equals to 0 if element is optional.
       required:
-      - closing_time
-      - opening_time
+      - minimum_number_of_elements
+    SOF25_Response_201_Category:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Category code
+        label:
+          type: string
+          description: Category label
+      required:
+      - code
+      - label
+    SL12_Response_200_Data:
+      type: object
+      properties:
+        contact_info:
+          $ref: '#/components/schemas/SL12_Response_200_Data_ContactInfo'
+          description: Location contact information
+        description:
+          type: string
+          description: Location description
+        geography:
+          $ref: '#/components/schemas/SL12_Response_200_Data_Geography'
+          description: Geographic information for this location
+        id:
+          type: string
+          description: Location ID
+        label:
+          type: string
+          description: Location label
+        medias:
+          type: array
+          description: Medias associated to the location
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_Medias'
+        opening_hours:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours'
+          description: Location opening hours
+        overridden_opening_hours:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours'
+          description: Overridden opening hours. Only available for an operator location
+      required:
+      - geography
+      - id
+      - label
     SOF26_Request:
       type: object
       properties:
@@ -2684,21 +2510,37 @@ components:
           description: Service title
           maxLength: 150
           minLength: 3
-    SOF25_Response_201_Location:
+    SOF11_Response_200_Data_Quantity:
       type: object
       discriminator:
         mapping:
-          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF25_Response_201_Location_AtCustomerLocation'
-          AT_SHOP_LOCATION: '#/components/schemas/SOF25_Response_201_Location_AtShopLocation'
-          NO_LOCATION: '#/components/schemas/SOF25_Response_201_Location_NoLocation'
+          LIMITED: '#/components/schemas/SOF11_Response_200_Data_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF11_Response_200_Data_Quantity_NoQuantity'
         propertyName: type
       properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
         type:
           type: string
-          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
 
             '
-    SL12_Response_200_Data_OverriddenOpeningHours_Wednesday_OpeningHours:
+    SL12_Response_200_Data_OverriddenOpeningHours_Friday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Friday_OpeningHours'
+      required:
+      - availability
+    SL01_Response_201_OverriddenOpeningHours_Thursday_OpeningHours:
       type: object
       properties:
         closing_time:
@@ -2710,115 +2552,22 @@ components:
       required:
       - closing_time
       - opening_time
-    SOF25_Request_CustomAttributeValues:
+    SM11_Response_200_Data_Pricing_PricePerUnitOptions_OrderConfiguration:
       type: object
-      description: Service custom attributes values
-      discriminator:
-        mapping:
-          BOOLEAN: '#/components/schemas/SOF25_Request_CustomAttributeValues_Boolean'
-          DATE_TIME: '#/components/schemas/SOF25_Request_CustomAttributeValues_DateTime'
-          DECIMAL: '#/components/schemas/SOF25_Request_CustomAttributeValues_Decimal'
-          INTEGER: '#/components/schemas/SOF25_Request_CustomAttributeValues_Integer'
-          LINK: '#/components/schemas/SOF25_Request_CustomAttributeValues_Link'
-          LONG_TEXT: '#/components/schemas/SOF25_Request_CustomAttributeValues_LongText'
-          TEXT: '#/components/schemas/SOF25_Request_CustomAttributeValues_Text'
-          VALUE_LIST: '#/components/schemas/SOF25_Request_CustomAttributeValues_ValueList'
-          VIDEO: '#/components/schemas/SOF25_Request_CustomAttributeValues_Video'
-        propertyName: type
       properties:
-        code:
-          type: string
-          description: Custom attribute code. The attribute must exist in the configuration.
-        type:
-          type: string
-          description: 'Custom attribute type
+        minimum_number_of_elements:
+          type: integer
+          format: int32
+          description: 'Minimum number of elements.
 
 
-            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
-
-            '
-        value:
-          type: object
-      required:
-      - code
-      - type
-      - value
-    SOF11_Response_200_Data_Pricing:
-      type: object
-      discriminator:
-        mapping:
-          ESTIMATED_PRICE: '#/components/schemas/SOF11_Response_200_Data_Pricing_EstimatedPrice'
-          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF11_Response_200_Data_Pricing_EstimatedPriceMulti'
-          FIXED_PRICE: '#/components/schemas/SOF11_Response_200_Data_Pricing_FixedPrice'
-          FIXED_PRICE_MULTI: '#/components/schemas/SOF11_Response_200_Data_Pricing_FixedPriceMulti'
-        propertyName: type
-      properties:
-        max_price_per_unit:
-          type: number
-          format: with decimals
-          description: Maximum price at which the service will be provided. It's a price per unit.
-        min_price_per_unit:
-          type: number
-          format: with decimals
-          description: Minimum price at which the service will be provided. It's a price per unit.
-        options:
-          type: array
-          description: Service pricing options. The list is ordered as configured by the operator.
-          items:
-            $ref: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options'
-        type:
-          type: string
-          description: 'Price type of the service.<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
-
-
-            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+            Enum: `"1"`
 
             '
       required:
-      - max_price_per_unit
-      - min_price_per_unit
-      - type
-    SL12_Response_200_Data_OpeningHours:
+      - minimum_number_of_elements
+    SL12_Response_200_Data_OpeningHours_Sunday:
       type: object
-      properties:
-        friday:
-          type: array
-          description: Friday opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Friday'
-        monday:
-          type: array
-          description: Monday opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Monday'
-        saturday:
-          type: array
-          description: Saturday opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Saturday'
-        sunday:
-          type: array
-          description: Sunday opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Sunday'
-        thursday:
-          type: array
-          description: Thursday opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Thursday'
-        tuesday:
-          type: array
-          description: Tuesday opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Tuesday'
-        wednesday:
-          type: array
-          description: Wednesday opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Wednesday'
-    SL01_Request_OpeningHours_Thursday:
-      type: object
-      description: Sunday opening hours
       properties:
         closing_time:
           type: string
@@ -2829,107 +2578,17 @@ components:
       required:
       - closing_time
       - opening_time
-    SOF26_Request_Pricing_Options:
+    SOF25_Response_201_Model:
       type: object
-      description: Service pricing options.
-      discriminator:
-        mapping:
-          BOOLEAN: '#/components/schemas/SOF26_Request_Pricing_Options_Boolean'
-          VALUE_LIST: '#/components/schemas/SOF26_Request_Pricing_Options_ValueList'
-        propertyName: type
       properties:
         code:
           type: string
-          description: Pricing option identifier
-        type:
-          type: string
-          description: ''
-      required:
-      - code
-      - type
-    SOF26_Response_200:
-      type: object
-      properties:
-        booking:
-          $ref: '#/components/schemas/SOF26_Response_200_Booking'
-          description: Service booking method
-        category:
-          $ref: '#/components/schemas/SOF26_Response_200_Category'
-          description: Service category
-        code:
-          type: string
-          description: Service code
-        consumption:
-          $ref: '#/components/schemas/SOF26_Response_200_Consumption'
-          description: 'Service consumption method: how will the service be consumed ?'
-        custom_attribute_values:
-          type: array
-          description: Service custom attributes values
-          items:
-            $ref: '#/components/schemas/SOF26_Response_200_CustomAttributeValues'
-        date_availability_end:
-          type: string
-          format: date-time
-          description: Date when the service ends being available
-        date_availability_start:
-          type: string
-          format: date-time
-          description: Date when the service starts being available
-        date_created:
-          type: string
-          format: date-time
-          description: Service creation date
-        date_updated:
-          type: string
-          format: date-time
-          description: Service update date
-        description:
-          type: string
-          description: Service description
-        inactive_reasons:
-          type: array
-          description: List of reasons why the service is inactive. If the service is active, this list is empty
-          items:
-            type: string
-            description: 'Enum: `"MANUALLY_DISABLED"`, `"ZERO_QUANTITY"`, `"ORDER_REFUSED"`, `"ORDER_ACCEPTANCE_TIMEOUT"`, `"NOT_IN_AVAILABILITY_PERIOD"`, `"SHOP_NOT_OPEN"`, `"SHOP_SUSPENDED"`, `"SHOP_CURRENCY_DISABLED"`, `"MISSING_REQUIRED_FIELDS"`, `"VALIDATION_NEEDED"`, `"NO_SESSION"`
-
-              '
-        location:
-          $ref: '#/components/schemas/SOF26_Response_200_Location'
-          description: 'Service location method: where the service will be provided ?'
-        medias:
-          type: array
-          description: All the medias associated to a service
-          items:
-            $ref: '#/components/schemas/SOF26_Response_200_Medias'
-        model:
-          $ref: '#/components/schemas/SOF26_Response_200_Model'
-          description: Service model
-        pricing:
-          $ref: '#/components/schemas/SOF26_Response_200_Pricing'
-          description: Service pricing method
-        quantity:
-          $ref: '#/components/schemas/SOF26_Response_200_Quantity'
-          description: Service quantity method
-        service_tax_code:
-          type: string
-          description: Service tax code
+          description: Service model code
         title:
           type: string
-          description: Service title
+          description: Service model title
       required:
-      - booking
-      - category
       - code
-      - consumption
-      - custom_attribute_values
-      - date_created
-      - date_updated
-      - inactive_reasons
-      - location
-      - model
-      - pricing
-      - quantity
       - title
     SL01_Response_201_Medias:
       type: object
@@ -2943,8 +2602,50 @@ components:
       required:
       - mime_type
       - url
-    SL01_Response_201_OpeningHours_Monday:
+    SL01_Request_OpeningHours_Wednesday:
       type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OverriddenOpeningHours_Saturday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SM11_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    SL01_Request_OpeningHours_Thursday:
+      type: object
+      description: Sunday opening hours
       properties:
         closing_time:
           type: string
@@ -2972,22 +2673,226 @@ components:
           description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
 
             '
-    SL12_Response_200:
+    SOF25_Request:
       type: object
       properties:
-        data:
+        booking:
+          $ref: '#/components/schemas/SOF25_Request_Booking'
+          description: Service booking method. The type of the booking must reflect the associated Model's booking. By default, <code>booking</code> will be of type <code>NO_BOOKING</code>.
+        category:
+          $ref: '#/components/schemas/SOF25_Request_Category'
+          description: Service category
+        custom_attribute_values:
           type: array
-          description: Page of data
+          description: Service custom attributes values
           items:
-            $ref: '#/components/schemas/SL12_Response_200_Data'
-        next_page_token:
+            $ref: '#/components/schemas/SOF25_Request_CustomAttributeValues'
+        date_availability_end:
           type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
+          format: date-time
+          description: Date when the service ends being available
+        date_availability_start:
           type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
+          format: date-time
+          description: Date when the service starts being available
+        description:
+          type: string
+          description: Service description
+          maxLength: 2000
+          minLength: 0
+        inactive_reasons:
+          type: array
+          description: Reason why the service is inactive.
+          items:
+            type: string
+            description: 'Enum: `"MANUALLY_DISABLED"`
+
+              '
+          uniqueItems: true
+        location:
+          $ref: '#/components/schemas/SOF25_Request_Location'
+          description: Service location method. The type of the location must reflect the associated Model's location. By default, <code>location</code> will be of type <code>NO_LOCATION</code>.
+        model:
+          $ref: '#/components/schemas/SOF25_Request_Model'
+          description: Service model
+        pricing:
+          $ref: '#/components/schemas/SOF25_Request_Pricing'
+          description: Service pricing method
+        quantity:
+          $ref: '#/components/schemas/SOF25_Request_Quantity'
+          description: Service quantity method. By default, <code>quantity</code> will be of type <code>NO_QUANTITY</code>.
+        service_tax_code:
+          type: string
+          description: Service tax code
+        title:
+          type: string
+          description: Service title
+          maxLength: 150
+          minLength: 3
       required:
-      - data
+      - category
+      - model
+      - pricing
+      - title
+    SL01_Response_201_OpeningHours_Tuesday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OverriddenOpeningHours_Thursday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SM11_Response_200_Data:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Booking'
+          description: Indicates the booking method for services based on the model
+        categories:
+          type: array
+          description: Service model categories
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_Categories'
+        code:
+          type: string
+          description: Service model code
+        consumption:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Consumption'
+          description: Indicates the consumption method for services based on the model
+        custom_attributes:
+          type: array
+          description: Service model custom attributes. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
+        description:
+          type: string
+          description: Service model description
+        location:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Location'
+          description: Indicates the location method for services based on the model
+        pricing:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing'
+          description: Indicates the pricing method for services based on the model
+        quantity:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Quantity'
+          description: Indicate the quantity fields requirements for services based on the model
+        title:
+          type: string
+          description: Service model title
+      required:
+      - booking
+      - categories
+      - code
+      - consumption
+      - custom_attributes
+      - location
+      - pricing
+      - quantity
+      - title
+    SOF26_Request_Location:
+      type: object
+      description: Service location method. The location type must be equal to the location type in the Model configuration.
+      discriminator:
+        mapping:
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF26_Request_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF26_Request_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF26_Request_Location_NoLocation'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Location type. The location type must be equal to the location type in the Model configuration.
+
+
+            Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+      required:
+      - type
+    SM11_Response_200_Data_Categories:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Category code
+        label:
+          type: string
+          description: Category label
+      required:
+      - code
+      - label
+    SOF25_Request_Location:
+      type: object
+      description: Service location method. The type of the location must reflect the associated Model's location. By default, <code>location</code> will be of type <code>NO_LOCATION</code>.
+      discriminator:
+        mapping:
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF25_Request_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF25_Request_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF25_Request_Location_NoLocation'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+      required:
+      - type
+    SL01_Request_OpeningHours:
+      type: object
+      description: Location opening hours
+      properties:
+        friday:
+          type: array
+          description: Friday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Friday'
+        monday:
+          type: array
+          description: Monday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Monday'
+        saturday:
+          type: array
+          description: Saturday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Saturday'
+        sunday:
+          type: array
+          description: Sunday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Sunday'
+        thursday:
+          type: array
+          description: Thursday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Thursday'
+        tuesday:
+          type: array
+          description: Tuesday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Tuesday'
+        wednesday:
+          type: array
+          description: Wednesday opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Request_OpeningHours_Wednesday'
     SOF11_Response_200_Data_Consumption:
       type: object
       properties:
@@ -3001,29 +2906,238 @@ components:
             '
       required:
       - type
-    SL01_Request_Geography:
+    SL01_Request_ContactInfo:
       type: object
-      description: Geographic information for this location
+      description: Location contact information
+      properties:
+        email:
+          type: string
+          description: Contact E-mail
+          maxLength: 255
+          minLength: 0
+        phone:
+          type: string
+          description: Contact phone number
+          maxLength: 50
+          minLength: 0
+    SOF25_Response_201_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
+    SL12_Response_200_Data_OverriddenOpeningHours:
+      type: object
+      properties:
+        friday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Friday'
+          description: Friday opening hours
+        monday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Monday'
+          description: Monday opening hours
+        saturday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Saturday'
+          description: Saturday opening hours
+        sunday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Sunday'
+          description: Sunday opening hours
+        thursday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Thursday'
+          description: Thursday opening hours
+        tuesday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Tuesday'
+          description: Tuesday opening hours
+        wednesday:
+          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Wednesday'
+          description: Wednesday opening hours
+      required:
+      - friday
+      - monday
+      - saturday
+      - sunday
+      - thursday
+      - tuesday
+      - wednesday
+    SL01_Response_201_OpeningHours_Sunday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Request_OpeningHours_Monday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SM11_Response_200_Data_Pricing_PricePerUnitOptions_ServiceConfiguration:
+      type: object
+      properties:
+        minimum_number_of_elements:
+          type: integer
+          format: int32
+          description: 'Minimum number of elements.
+
+
+            Enum: `"1"`
+
+            '
+      required:
+      - minimum_number_of_elements
+    SOF25_Request_Quantity:
+      type: object
+      description: Service quantity method. By default, <code>quantity</code> will be of type <code>NO_QUANTITY</code>.
       discriminator:
         mapping:
-          CIRCLE: '#/components/schemas/SL01_Request_Geography_Circle'
-          POINT: '#/components/schemas/SL01_Request_Geography_Point'
-          ZONE_REFERENCES: '#/components/schemas/SL01_Request_Geography_ZoneReferences'
+          LIMITED: '#/components/schemas/SOF25_Request_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF25_Request_Quantity_NoQuantity'
+        propertyName: type
+      properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
+          maximum: 1000
+          minimum: 1
+        type:
+          type: string
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
+
+            '
+    SOF26_Request_CustomAttributeValues:
+      type: object
+      description: Service custom attributes values
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF26_Request_CustomAttributeValues_Boolean'
+          DATE_TIME: '#/components/schemas/SOF26_Request_CustomAttributeValues_DateTime'
+          DECIMAL: '#/components/schemas/SOF26_Request_CustomAttributeValues_Decimal'
+          INTEGER: '#/components/schemas/SOF26_Request_CustomAttributeValues_Integer'
+          LINK: '#/components/schemas/SOF26_Request_CustomAttributeValues_Link'
+          LONG_TEXT: '#/components/schemas/SOF26_Request_CustomAttributeValues_LongText'
+          TEXT: '#/components/schemas/SOF26_Request_CustomAttributeValues_Text'
+          VALUE_LIST: '#/components/schemas/SOF26_Request_CustomAttributeValues_ValueList'
+          VIDEO: '#/components/schemas/SOF26_Request_CustomAttributeValues_Video'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Custom attribute code. The attribute must exist in the configuration.
+        type:
+          type: string
+          description: 'Custom attribute type
+
+
+            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+        value:
+          type: object
+          description: Custom attribute value. Value is removed if not set or set to <code>null</code>.
+      required:
+      - code
+      - type
+    SOF26_Response_200_Quantity:
+      type: object
+      discriminator:
+        mapping:
+          LIMITED: '#/components/schemas/SOF26_Response_200_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF26_Response_200_Quantity_NoQuantity'
+        propertyName: type
+      properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
+        type:
+          type: string
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
+
+            '
+    SM11_Response_200_Data_Quantity:
+      type: object
+      properties:
+        on_marketplace:
+          type: array
+          description: Quantity requirements on the marketplace
+          items:
+            type: string
+            description: 'Enum: `"ALLOW_UNLIMITED"`, `"ALLOW_FIXED"`, `"NO_QUANTITY"`
+
+              '
+          uniqueItems: true
+        per_order:
+          type: array
+          description: Quantity requirements per order
+          items:
+            type: string
+            description: 'Enum: `"ALLOW_UNLIMITED"`, `"ALLOW_FIXED"`, `"NO_QUANTITY"`
+
+              '
+          uniqueItems: true
+      required:
+      - on_marketplace
+      - per_order
+    SL01_Response_201_OverriddenOpeningHours_Friday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Response_201_Booking:
+      type: object
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF25_Response_201_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF25_Response_201_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF25_Response_201_Booking_ScheduledEvents'
         propertyName: type
       properties:
         type:
           type: string
-          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
+          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
 
             '
+    SOF26_Request_Model:
+      type: object
+      description: Service model
+      properties:
+        code:
+          type: string
+          description: Service model code. Must be equal to the service's model code.
       required:
-      - type
-    SOF25_Response_201_Pricing_Options:
+      - code
+    SOF11_Response_200_Data_Pricing_Options:
       type: object
       discriminator:
         mapping:
-          BOOLEAN: '#/components/schemas/SOF25_Response_201_Pricing_Options_Boolean'
-          VALUE_LIST: '#/components/schemas/SOF25_Response_201_Pricing_Options_ValueList'
+          BOOLEAN: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options_ValueList'
         propertyName: type
       properties:
         code:
@@ -3040,7 +3154,78 @@ components:
       required:
       - code
       - label
-    SL01_Response_201_OverriddenOpeningHours_Friday:
+    SOF26_Response_200_Category:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Category code
+        label:
+          type: string
+          description: Category label
+      required:
+      - code
+      - label
+    SL01_Request_OpeningHours_Sunday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Response_200_Pricing_Options:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF26_Response_200_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF26_Response_200_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Option code
+        label:
+          type: string
+          description: Option label
+        type:
+          type: string
+          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+      required:
+      - code
+      - label
+    SL12_Response_200_Data_OpeningHours_Saturday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OverriddenOpeningHours_Sunday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OverriddenOpeningHours_Monday:
       type: object
       properties:
         availability:
@@ -3050,71 +3235,153 @@ components:
           type: array
           description: Opening hours
           items:
-            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Friday_OpeningHours'
+            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Monday_OpeningHours'
       required:
       - availability
-    SOF26_Response_200_Pricing:
+    SL01_Response_201_OverriddenOpeningHours_Sunday:
       type: object
-      discriminator:
-        mapping:
-          ESTIMATED_PRICE: '#/components/schemas/SOF26_Response_200_Pricing_EstimatedPrice'
-          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF26_Response_200_Pricing_EstimatedPriceMulti'
-          FIXED_PRICE: '#/components/schemas/SOF26_Response_200_Pricing_FixedPrice'
-          FIXED_PRICE_MULTI: '#/components/schemas/SOF26_Response_200_Pricing_FixedPriceMulti'
-        propertyName: type
       properties:
-        max_price_per_unit:
-          type: number
-          format: with decimals
-          description: Maximum price at which the service will be provided. It's a price per unit.
-        min_price_per_unit:
-          type: number
-          format: with decimals
-          description: Minimum price at which the service will be provided. It's a price per unit.
-        options:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
           type: array
-          description: Service pricing options. The list is ordered as configured by the operator.
+          description: Opening hours
           items:
-            $ref: '#/components/schemas/SOF26_Response_200_Pricing_Options'
+            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Sunday_OpeningHours'
+      required:
+      - availability
+    SOF11_Response_200_Data_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
+    SL01_Response_201_OverriddenOpeningHours_Monday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Monday_OpeningHours'
+      required:
+      - availability
+    SL01_Request_OpeningHours_Saturday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SM11_Response_200_Data_Booking:
+      type: object
+      properties:
         type:
           type: string
-          description: 'Price type of the service.<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
+          description: 'Booking type
 
 
-            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+            Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
 
             '
       required:
-      - max_price_per_unit
-      - min_price_per_unit
       - type
-    SOF25_Request_Pricing:
+    SL12_Response_200:
       type: object
-      description: Service pricing method
-      discriminator:
-        mapping:
-          ESTIMATED_PRICE: '#/components/schemas/SOF25_Request_Pricing_EstimatedPrice'
-          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF25_Request_Pricing_EstimatedPriceMulti'
-          FIXED_PRICE: '#/components/schemas/SOF25_Request_Pricing_FixedPrice'
-          FIXED_PRICE_MULTI: '#/components/schemas/SOF25_Request_Pricing_FixedPriceMulti'
-        propertyName: type
       properties:
-        options:
+        data:
           type: array
-          description: Service pricing options.
+          description: Page of data
           items:
-            $ref: '#/components/schemas/SOF25_Request_Pricing_Options'
+            $ref: '#/components/schemas/SL12_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    SL01_Response_201_OpeningHours_Saturday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Response_200_Consumption:
+      type: object
+      properties:
         type:
           type: string
-          description: 'Price type. It must be equal to the price type in the Model configuration.
+          description: 'Type of consumption
 
 
-            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+            Enum: `"VOUCHER"`, `"CONFIRMATION_BY_SHOP"`
 
             '
       required:
       - type
-    SL01_Response_201_OpeningHours_Wednesday:
+    SL12_Response_200_Data_OpeningHours_Wednesday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_OpeningHours_Thursday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_Geography:
+      type: object
+      discriminator:
+        mapping:
+          CIRCLE: '#/components/schemas/SL12_Response_200_Data_Geography_Circle'
+          POINT: '#/components/schemas/SL12_Response_200_Data_Geography_Point'
+          ZONE_REFERENCES: '#/components/schemas/SL12_Response_200_Data_Geography_ZoneReferences'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
+
+            '
+    SL01_Response_201_OverriddenOpeningHours_Saturday_OpeningHours:
       type: object
       properties:
         closing_time:
@@ -3210,32 +3477,34 @@ components:
       - pricing
       - quantity
       - title
-    SL01_Response_201_OverriddenOpeningHours_Monday_OpeningHours:
+    SL01_Response_201_Geography:
       type: object
+      discriminator:
+        mapping:
+          CIRCLE: '#/components/schemas/SL01_Response_201_Geography_Circle'
+          POINT: '#/components/schemas/SL01_Response_201_Geography_Point'
+          ZONE_REFERENCES: '#/components/schemas/SL01_Response_201_Geography_ZoneReferences'
+        propertyName: type
       properties:
-        closing_time:
+        type:
           type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF26_Request_CustomAttributeValues:
+          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
+
+            '
+    SOF25_Request_CustomAttributeValues:
       type: object
       description: Service custom attributes values
       discriminator:
         mapping:
-          BOOLEAN: '#/components/schemas/SOF26_Request_CustomAttributeValues_Boolean'
-          DATE_TIME: '#/components/schemas/SOF26_Request_CustomAttributeValues_DateTime'
-          DECIMAL: '#/components/schemas/SOF26_Request_CustomAttributeValues_Decimal'
-          INTEGER: '#/components/schemas/SOF26_Request_CustomAttributeValues_Integer'
-          LINK: '#/components/schemas/SOF26_Request_CustomAttributeValues_Link'
-          LONG_TEXT: '#/components/schemas/SOF26_Request_CustomAttributeValues_LongText'
-          TEXT: '#/components/schemas/SOF26_Request_CustomAttributeValues_Text'
-          VALUE_LIST: '#/components/schemas/SOF26_Request_CustomAttributeValues_ValueList'
-          VIDEO: '#/components/schemas/SOF26_Request_CustomAttributeValues_Video'
+          BOOLEAN: '#/components/schemas/SOF25_Request_CustomAttributeValues_Boolean'
+          DATE_TIME: '#/components/schemas/SOF25_Request_CustomAttributeValues_DateTime'
+          DECIMAL: '#/components/schemas/SOF25_Request_CustomAttributeValues_Decimal'
+          INTEGER: '#/components/schemas/SOF25_Request_CustomAttributeValues_Integer'
+          LINK: '#/components/schemas/SOF25_Request_CustomAttributeValues_Link'
+          LONG_TEXT: '#/components/schemas/SOF25_Request_CustomAttributeValues_LongText'
+          TEXT: '#/components/schemas/SOF25_Request_CustomAttributeValues_Text'
+          VALUE_LIST: '#/components/schemas/SOF25_Request_CustomAttributeValues_ValueList'
+          VIDEO: '#/components/schemas/SOF25_Request_CustomAttributeValues_Video'
         propertyName: type
       properties:
         code:
@@ -3251,13 +3520,12 @@ components:
             '
         value:
           type: object
-          description: Custom attribute value. Value is removed if not set or set to <code>null</code>.
       required:
       - code
       - type
-    SL01_Request_OpeningHours_Monday:
+      - value
+    SL12_Response_200_Data_OpeningHours_Tuesday:
       type: object
-      description: Sunday opening hours
       properties:
         closing_time:
           type: string
@@ -3268,47 +3536,319 @@ components:
       required:
       - closing_time
       - opening_time
-    SM11_Response_200_Data_Pricing_PricePerUnitOptions:
+    SOF25_Response_201_Location:
+      type: object
+      discriminator:
+        mapping:
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF25_Response_201_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF25_Response_201_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF25_Response_201_Location_NoLocation'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+    SL01_Response_201_OpeningHours_Wednesday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_OverriddenOpeningHours_Friday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Friday_OpeningHours'
+      required:
+      - availability
+    SL12_Response_200_Data_OverriddenOpeningHours_Tuesday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
+    SL01_Response_201_OverriddenOpeningHours_Wednesday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OverriddenOpeningHours_Friday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201:
+      type: object
+      properties:
+        contact_info:
+          $ref: '#/components/schemas/SL01_Response_201_ContactInfo'
+          description: Location contact information
+        description:
+          type: string
+          description: Location description
+        geography:
+          $ref: '#/components/schemas/SL01_Response_201_Geography'
+          description: Geographic information for this location
+        id:
+          type: string
+          description: Location ID
+        label:
+          type: string
+          description: Location label
+        medias:
+          type: array
+          description: Medias associated to the location
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_Medias'
+        opening_hours:
+          $ref: '#/components/schemas/SL01_Response_201_OpeningHours'
+          description: Location opening hours
+        overridden_opening_hours:
+          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours'
+          description: Overridden opening hours. Only available for an operator location
+      required:
+      - geography
+      - id
+      - label
+    SL01_Response_201_ContactInfo:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Contact E-mail
+        phone:
+          type: string
+          description: Contact phone number
+    SL01_Request:
+      type: object
+      properties:
+        contact_info:
+          $ref: '#/components/schemas/SL01_Request_ContactInfo'
+          description: Location contact information
+        description:
+          type: string
+          description: Location description
+          maxLength: 2000
+          minLength: 0
+        geography:
+          $ref: '#/components/schemas/SL01_Request_Geography'
+          description: Geographic information for this location
+        label:
+          type: string
+          description: Location label
+          maxLength: 150
+          minLength: 3
+        opening_hours:
+          $ref: '#/components/schemas/SL01_Request_OpeningHours'
+          description: Location opening hours
+      required:
+      - geography
+      - label
+    SL01_Response_201_OverriddenOpeningHours_Saturday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Saturday_OpeningHours'
+      required:
+      - availability
+    SL12_Response_200_Data_OverriddenOpeningHours_Saturday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Saturday_OpeningHours'
+      required:
+      - availability
+    SOF26_Response_200_Booking:
+      type: object
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF26_Response_200_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF26_Response_200_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF26_Response_200_Booking_ScheduledEvents'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+    SOF11_Response_200_Data_Model:
       type: object
       properties:
         code:
           type: string
-          description: Code
-        label:
+          description: Service model code
+        title:
           type: string
-          description: Label
-        order_configuration:
-          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_OrderConfiguration'
-        service_configuration:
-          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_ServiceConfiguration'
-        type:
-          type: string
-          description: 'Enum: `"VALUE_LIST"`
-
-            '
-        values:
-          type: array
-          description: Values of the list
-          items:
-            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_Values'
+          description: Service model title
       required:
       - code
-      - label
-      - type
-      - values
-    SM11_Response_200_Data_Booking:
+      - title
+    SL12_Response_200_Data_OverriddenOpeningHours_Monday_OpeningHours:
       type: object
       properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OpeningHours_Friday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_OverriddenOpeningHours_Tuesday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF26_Request_Pricing:
+      type: object
+      description: Service pricing method
+      discriminator:
+        mapping:
+          ESTIMATED_PRICE: '#/components/schemas/SOF26_Request_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF26_Request_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF26_Request_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF26_Request_Pricing_FixedPriceMulti'
+        propertyName: type
+      properties:
+        options:
+          type: array
+          description: Service pricing options.
+          items:
+            $ref: '#/components/schemas/SOF26_Request_Pricing_Options'
         type:
           type: string
-          description: 'Booking type
+          description: 'Price type. It must be equal to the price type in the Model configuration.
 
 
-            Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
 
             '
+    SL12_Response_200_Data_OpeningHours:
+      type: object
+      properties:
+        friday:
+          type: array
+          description: Friday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Friday'
+        monday:
+          type: array
+          description: Monday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Monday'
+        saturday:
+          type: array
+          description: Saturday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Saturday'
+        sunday:
+          type: array
+          description: Sunday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Sunday'
+        thursday:
+          type: array
+          description: Thursday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Thursday'
+        tuesday:
+          type: array
+          description: Tuesday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Tuesday'
+        wednesday:
+          type: array
+          description: Wednesday opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours_Wednesday'
+    SOF25_Request_Category:
+      type: object
+      description: Service category
+      properties:
+        code:
+          type: string
+          description: Service category code. The category must exist in the configuration.
       required:
-      - type
+      - code
     SL01_Response_201_OpeningHours:
       type: object
       properties:
@@ -3347,282 +3887,14 @@ components:
           description: Wednesday opening hours
           items:
             $ref: '#/components/schemas/SL01_Response_201_OpeningHours_Wednesday'
-    SL01_Response_201_OverriddenOpeningHours_Sunday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Sunday_OpeningHours'
-      required:
-      - availability
-    SOF26_Response_200_Medias:
-      type: object
-      properties:
-        mime_type:
-          type: string
-          description: Media Mime type
-        url:
-          type: string
-          description: Media URL
-      required:
-      - mime_type
-      - url
-    SOF26_Request_Location:
-      type: object
-      description: Service location method. The location type must be equal to the location type in the Model configuration.
-      discriminator:
-        mapping:
-          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF26_Request_Location_AtCustomerLocation'
-          AT_SHOP_LOCATION: '#/components/schemas/SOF26_Request_Location_AtShopLocation'
-          NO_LOCATION: '#/components/schemas/SOF26_Request_Location_NoLocation'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Location type. The location type must be equal to the location type in the Model configuration.
-
-
-            Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
-
-            '
-      required:
-      - type
-    SL12_Response_200_Data_OverriddenOpeningHours_Tuesday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SM11_Response_200_Data_Pricing_PricePerUnitOptions_Values:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Code
-        label:
-          type: string
-          description: Label
-      required:
-      - code
-      - label
-    SL01_Response_201_ContactInfo:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Contact E-mail
-        phone:
-          type: string
-          description: Contact phone number
-    SL01_Request_ContactInfo:
-      type: object
-      description: Location contact information
-      properties:
-        email:
-          type: string
-          description: Contact E-mail
-          maxLength: 255
-          minLength: 0
-        phone:
-          type: string
-          description: Contact phone number
-          maxLength: 50
-          minLength: 0
-    SL12_Response_200_Data_OverriddenOpeningHours_Monday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL01_Response_201_OverriddenOpeningHours_Saturday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL01_Response_201_OpeningHours_Saturday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SM11_Response_200_Data_Pricing_PricePerUnitOptions_OrderConfiguration:
-      type: object
-      properties:
-        minimum_number_of_elements:
-          type: integer
-          format: int32
-          description: 'Minimum number of elements.
-
-
-            Enum: `"1"`
-
-            '
-      required:
-      - minimum_number_of_elements
-    SM11_Response_200_Data_Location:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'Location type
-
-
-            Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
-
-            '
-      required:
-      - type
-    SL01_Request_OpeningHours_Friday:
-      type: object
-      description: Sunday opening hours
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL01_Request_OpeningHours:
-      type: object
-      description: Location opening hours
-      properties:
-        friday:
-          type: array
-          description: Friday opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Request_OpeningHours_Friday'
-        monday:
-          type: array
-          description: Monday opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Request_OpeningHours_Monday'
-        saturday:
-          type: array
-          description: Saturday opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Request_OpeningHours_Saturday'
-        sunday:
-          type: array
-          description: Sunday opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Request_OpeningHours_Sunday'
-        thursday:
-          type: array
-          description: Thursday opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Request_OpeningHours_Thursday'
-        tuesday:
-          type: array
-          description: Tuesday opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Request_OpeningHours_Tuesday'
-        wednesday:
-          type: array
-          description: Wednesday opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Request_OpeningHours_Wednesday'
-    SOF25_Request:
-      type: object
-      properties:
-        booking:
-          $ref: '#/components/schemas/SOF25_Request_Booking'
-          description: Service booking method. The type of the booking must reflect the associated Model's booking. By default, <code>booking</code> will be of type <code>NO_BOOKING</code>.
-        category:
-          $ref: '#/components/schemas/SOF25_Request_Category'
-          description: Service category
-        custom_attribute_values:
-          type: array
-          description: Service custom attributes values
-          items:
-            $ref: '#/components/schemas/SOF25_Request_CustomAttributeValues'
-        date_availability_end:
-          type: string
-          format: date-time
-          description: Date when the service ends being available
-        date_availability_start:
-          type: string
-          format: date-time
-          description: Date when the service starts being available
-        description:
-          type: string
-          description: Service description
-          maxLength: 2000
-          minLength: 0
-        inactive_reasons:
-          type: array
-          description: Reason why the service is inactive.
-          items:
-            type: string
-            description: 'Enum: `"MANUALLY_DISABLED"`
-
-              '
-          uniqueItems: true
-        location:
-          $ref: '#/components/schemas/SOF25_Request_Location'
-          description: Service location method. The type of the location must reflect the associated Model's location. By default, <code>location</code> will be of type <code>NO_LOCATION</code>.
-        model:
-          $ref: '#/components/schemas/SOF25_Request_Model'
-          description: Service model
-        pricing:
-          $ref: '#/components/schemas/SOF25_Request_Pricing'
-          description: Service pricing method
-        quantity:
-          $ref: '#/components/schemas/SOF25_Request_Quantity'
-          description: Service quantity method. By default, <code>quantity</code> will be of type <code>NO_QUANTITY</code>.
-        service_tax_code:
-          type: string
-          description: Service tax code
-        title:
-          type: string
-          description: Service title
-          maxLength: 150
-          minLength: 3
-      required:
-      - category
-      - model
-      - pricing
-      - title
-    SM11_Response_200:
+    SOF11_Response_200:
       type: object
       properties:
         data:
           type: array
           description: Page of data
           items:
-            $ref: '#/components/schemas/SM11_Response_200_Data'
+            $ref: '#/components/schemas/SOF11_Response_200_Data'
         next_page_token:
           type: string
           description: Token to access the next page. Absent if the current page is the last one.
@@ -3631,271 +3903,20 @@ components:
           description: Token to access the previous page. Absent if the current page is the first one.
       required:
       - data
-    SOF25_Request_Category:
-      type: object
-      description: Service category
-      properties:
-        code:
-          type: string
-          description: Service category code. The category must exist in the configuration.
-      required:
-      - code
-    SL01_Request_OpeningHours_Sunday:
-      type: object
-      description: Sunday opening hours
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL01_Response_201_OpeningHours_Sunday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL01_Request_OpeningHours_Wednesday:
-      type: object
-      description: Sunday opening hours
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF25_Response_201_Category:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Category code
-        label:
-          type: string
-          description: Category label
-      required:
-      - code
-      - label
-    SL01_Response_201_OverriddenOpeningHours_Saturday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Saturday_OpeningHours'
-      required:
-      - availability
-    SOF26_Request_Category:
-      type: object
-      description: Service category
-      properties:
-        code:
-          type: string
-          description: Service category code. The category must exist in the configuration.
-      required:
-      - code
-    SM11_Response_200_Data:
-      type: object
-      properties:
-        booking:
-          $ref: '#/components/schemas/SM11_Response_200_Data_Booking'
-          description: Indicates the booking method for services based on the model
-        categories:
-          type: array
-          description: Service model categories
-          items:
-            $ref: '#/components/schemas/SM11_Response_200_Data_Categories'
-        code:
-          type: string
-          description: Service model code
-        consumption:
-          $ref: '#/components/schemas/SM11_Response_200_Data_Consumption'
-          description: Indicates the consumption method for services based on the model
-        custom_attributes:
-          type: array
-          description: Service model custom attributes. The list is ordered as configured by the operator.
-          items:
-            $ref: '#/components/schemas/SM11_Response_200_Data_CustomAttributes'
-        description:
-          type: string
-          description: Service model description
-        location:
-          $ref: '#/components/schemas/SM11_Response_200_Data_Location'
-          description: Indicates the location method for services based on the model
-        pricing:
-          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing'
-          description: Indicates the pricing method for services based on the model
-        quantity:
-          $ref: '#/components/schemas/SM11_Response_200_Data_Quantity'
-          description: Indicate the quantity fields requirements for services based on the model
-        title:
-          type: string
-          description: Service model title
-      required:
-      - booking
-      - categories
-      - code
-      - consumption
-      - custom_attributes
-      - location
-      - pricing
-      - quantity
-      - title
-    SM11_Response_200_Data_Pricing_Options:
+    SOF26_Response_200_Location:
       type: object
       discriminator:
         mapping:
-          BOOLEAN: '#/components/schemas/SM11_Response_200_Data_Pricing_Options_Boolean'
-          VALUE_LIST: '#/components/schemas/SM11_Response_200_Data_Pricing_Options_ValueList'
+          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF26_Response_200_Location_AtCustomerLocation'
+          AT_SHOP_LOCATION: '#/components/schemas/SOF26_Response_200_Location_AtShopLocation'
+          NO_LOCATION: '#/components/schemas/SOF26_Response_200_Location_NoLocation'
         propertyName: type
       properties:
-        code:
-          type: string
-          description: Option code
-        label:
-          type: string
-          description: Option label
         type:
           type: string
-          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
 
             '
-      required:
-      - code
-      - label
-    SOF26_Response_200_Quantity:
-      type: object
-      discriminator:
-        mapping:
-          LIMITED: '#/components/schemas/SOF26_Response_200_Quantity_Limited'
-          NO_QUANTITY: '#/components/schemas/SOF26_Response_200_Quantity_NoQuantity'
-        propertyName: type
-      properties:
-        max_per_order:
-          type: integer
-          format: int32
-          description: Maximum quantity per order
-        type:
-          type: string
-          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
-
-            '
-    SL01_Request:
-      type: object
-      properties:
-        contact_info:
-          $ref: '#/components/schemas/SL01_Request_ContactInfo'
-          description: Location contact information
-        description:
-          type: string
-          description: Location description
-          maxLength: 2000
-          minLength: 0
-        geography:
-          $ref: '#/components/schemas/SL01_Request_Geography'
-          description: Geographic information for this location
-        label:
-          type: string
-          description: Location label
-          maxLength: 150
-          minLength: 3
-        opening_hours:
-          $ref: '#/components/schemas/SL01_Request_OpeningHours'
-          description: Location opening hours
-      required:
-      - geography
-      - label
-    SM11_Response_200_Data_Pricing_PricePerUnitOptions_ServiceConfiguration:
-      type: object
-      properties:
-        minimum_number_of_elements:
-          type: integer
-          format: int32
-          description: 'Minimum number of elements.
-
-
-            Enum: `"1"`
-
-            '
-      required:
-      - minimum_number_of_elements
-    SL01_Response_201_OverriddenOpeningHours_Tuesday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Tuesday_OpeningHours'
-      required:
-      - availability
-    SL01_Response_201:
-      type: object
-      properties:
-        contact_info:
-          $ref: '#/components/schemas/SL01_Response_201_ContactInfo'
-          description: Location contact information
-        description:
-          type: string
-          description: Location description
-        geography:
-          $ref: '#/components/schemas/SL01_Response_201_Geography'
-          description: Geographic information for this location
-        id:
-          type: string
-          description: Location ID
-        label:
-          type: string
-          description: Location label
-        medias:
-          type: array
-          description: Medias associated to the location
-          items:
-            $ref: '#/components/schemas/SL01_Response_201_Medias'
-        opening_hours:
-          $ref: '#/components/schemas/SL01_Response_201_OpeningHours'
-          description: Location opening hours
-        overridden_opening_hours:
-          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours'
-          description: Overridden opening hours. Only available for an operator location
-      required:
-      - geography
-      - id
-      - label
-    SL12_Response_200_Data_OverriddenOpeningHours_Saturday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Saturday_OpeningHours'
-      required:
-      - availability
     SOF11_Response_200_Data_Booking:
       type: object
       discriminator:
@@ -3910,43 +3931,104 @@ components:
           description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
 
             '
-    SOF26_Response_200_Pricing_Options:
+    SL12_Response_200_Data_OverriddenOpeningHours_Thursday:
       type: object
-      discriminator:
-        mapping:
-          BOOLEAN: '#/components/schemas/SOF26_Response_200_Pricing_Options_Boolean'
-          VALUE_LIST: '#/components/schemas/SOF26_Response_200_Pricing_Options_ValueList'
-        propertyName: type
       properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Thursday_OpeningHours'
+      required:
+      - availability
+    SOF11_Response_200_Data:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Booking'
+          description: Service booking method
+        category:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Category'
+          description: Service category
         code:
           type: string
-          description: Option code
-        label:
+          description: Service code
+        consumption:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Consumption'
+          description: 'Service consumption method: how will the service be consumed ?'
+        custom_attribute_values:
+          type: array
+          description: Service custom attributes values
+          items:
+            $ref: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues'
+        date_availability_end:
           type: string
-          description: Option label
-        type:
+          format: date-time
+          description: Date when the service ends being available
+        date_availability_start:
           type: string
-          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+          format: date-time
+          description: Date when the service starts being available
+        date_created:
+          type: string
+          format: date-time
+          description: Service creation date
+        date_updated:
+          type: string
+          format: date-time
+          description: Service update date
+        description:
+          type: string
+          description: Service description
+        inactive_reasons:
+          type: array
+          description: List of reasons why the service is inactive. If the service is active, this list is empty
+          items:
+            type: string
+            description: 'Enum: `"MANUALLY_DISABLED"`, `"ZERO_QUANTITY"`, `"ORDER_REFUSED"`, `"ORDER_ACCEPTANCE_TIMEOUT"`, `"NOT_IN_AVAILABILITY_PERIOD"`, `"SHOP_NOT_OPEN"`, `"SHOP_SUSPENDED"`, `"SHOP_CURRENCY_DISABLED"`, `"MISSING_REQUIRED_FIELDS"`, `"VALIDATION_NEEDED"`, `"NO_SESSION"`
 
-            '
+              '
+        location:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Location'
+          description: 'Service location method: where the service will be provided ?'
+        medias:
+          type: array
+          description: All the medias associated to a service
+          items:
+            $ref: '#/components/schemas/SOF11_Response_200_Data_Medias'
+        model:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Model'
+          description: Service model
+        pricing:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Pricing'
+          description: Service pricing method
+        quantity:
+          $ref: '#/components/schemas/SOF11_Response_200_Data_Quantity'
+          description: Service quantity method
+        service_tax_code:
+          type: string
+          description: Service tax code
+        title:
+          type: string
+          description: Service title
       required:
+      - booking
+      - category
       - code
-      - label
-    SOF25_Response_201_Booking:
-      type: object
-      discriminator:
-        mapping:
-          DATETIME_REQUEST: '#/components/schemas/SOF25_Response_201_Booking_DatetimeRequest'
-          NO_BOOKING: '#/components/schemas/SOF25_Response_201_Booking_NoBooking'
-          SCHEDULED_EVENTS: '#/components/schemas/SOF25_Response_201_Booking_ScheduledEvents'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
-
-            '
-    SL12_Response_200_Data_OpeningHours_Saturday:
+      - consumption
+      - custom_attribute_values
+      - date_created
+      - date_updated
+      - inactive_reasons
+      - location
+      - model
+      - pricing
+      - quantity
+      - title
+    SL01_Response_201_OverriddenOpeningHours_Monday_OpeningHours:
       type: object
       properties:
         closing_time:
@@ -3958,42 +4040,6 @@ components:
       required:
       - closing_time
       - opening_time
-    SM11_Response_200_Data_Quantity:
-      type: object
-      properties:
-        on_marketplace:
-          type: array
-          description: Quantity requirements on the marketplace
-          items:
-            type: string
-            description: 'Enum: `"ALLOW_UNLIMITED"`, `"ALLOW_FIXED"`, `"NO_QUANTITY"`
-
-              '
-          uniqueItems: true
-        per_order:
-          type: array
-          description: Quantity requirements per order
-          items:
-            type: string
-            description: 'Enum: `"ALLOW_UNLIMITED"`, `"ALLOW_FIXED"`, `"NO_QUANTITY"`
-
-              '
-          uniqueItems: true
-      required:
-      - on_marketplace
-      - per_order
-    SOF25_Response_201_Medias:
-      type: object
-      properties:
-        mime_type:
-          type: string
-          description: Media Mime type
-        url:
-          type: string
-          description: Media URL
-      required:
-      - mime_type
-      - url
     SOF25_Response_201_CustomAttributeValues:
       type: object
       discriminator:
@@ -4030,631 +4076,15 @@ components:
       - code
       - label
       - type
-    SL01_Response_201_OverriddenOpeningHours_Tuesday_OpeningHours:
+    SOF26_Request_Category:
       type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL01_Response_201_OverriddenOpeningHours_Thursday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF26_Request_Quantity:
-      type: object
-      description: Service quantity method.
-      discriminator:
-        mapping:
-          LIMITED: '#/components/schemas/SOF26_Request_Quantity_Limited'
-          NO_QUANTITY: '#/components/schemas/SOF26_Request_Quantity_NoQuantity'
-        propertyName: type
-      properties:
-        max_per_order:
-          type: integer
-          format: int32
-          description: Maximum quantity per order
-          maximum: 1000
-          minimum: 1
-        type:
-          type: string
-          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
-
-            '
-      required:
-      - type
-    SOF25_Request_Quantity:
-      type: object
-      description: Service quantity method. By default, <code>quantity</code> will be of type <code>NO_QUANTITY</code>.
-      discriminator:
-        mapping:
-          LIMITED: '#/components/schemas/SOF25_Request_Quantity_Limited'
-          NO_QUANTITY: '#/components/schemas/SOF25_Request_Quantity_NoQuantity'
-        propertyName: type
-      properties:
-        max_per_order:
-          type: integer
-          format: int32
-          description: Maximum quantity per order
-          maximum: 1000
-          minimum: 1
-        type:
-          type: string
-          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
-
-            '
-    SL01_Response_201_OpeningHours_Tuesday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF26_Response_200_Location:
-      type: object
-      discriminator:
-        mapping:
-          AT_CUSTOMER_LOCATION: '#/components/schemas/SOF26_Response_200_Location_AtCustomerLocation'
-          AT_SHOP_LOCATION: '#/components/schemas/SOF26_Response_200_Location_AtShopLocation'
-          NO_LOCATION: '#/components/schemas/SOF26_Response_200_Location_NoLocation'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
-
-            '
-    SL12_Response_200_Data_OverriddenOpeningHours_Thursday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF11_Response_200_Data_Model:
-      type: object
+      description: Service category
       properties:
         code:
           type: string
-          description: Service model code
-        title:
-          type: string
-          description: Service model title
+          description: Service category code. The category must exist in the configuration.
       required:
       - code
-      - title
-    SL12_Response_200_Data_OverriddenOpeningHours_Saturday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF11_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/SOF11_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    SL12_Response_200_Data_OverriddenOpeningHours:
-      type: object
-      properties:
-        friday:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Friday'
-          description: Friday opening hours
-        monday:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Monday'
-          description: Monday opening hours
-        saturday:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Saturday'
-          description: Saturday opening hours
-        sunday:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Sunday'
-          description: Sunday opening hours
-        thursday:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Thursday'
-          description: Thursday opening hours
-        tuesday:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Tuesday'
-          description: Tuesday opening hours
-        wednesday:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Wednesday'
-          description: Wednesday opening hours
-      required:
-      - friday
-      - monday
-      - saturday
-      - sunday
-      - thursday
-      - tuesday
-      - wednesday
-    SL01_Response_201_OverriddenOpeningHours_Sunday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF11_Response_200_Data_Quantity:
-      type: object
-      discriminator:
-        mapping:
-          LIMITED: '#/components/schemas/SOF11_Response_200_Data_Quantity_Limited'
-          NO_QUANTITY: '#/components/schemas/SOF11_Response_200_Data_Quantity_NoQuantity'
-        propertyName: type
-      properties:
-        max_per_order:
-          type: integer
-          format: int32
-          description: Maximum quantity per order
-        type:
-          type: string
-          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
-
-            '
-    SOF11_Response_200_Data_Medias:
-      type: object
-      properties:
-        mime_type:
-          type: string
-          description: Media Mime type
-        url:
-          type: string
-          description: Media URL
-      required:
-      - mime_type
-      - url
-    SL12_Response_200_Data_OpeningHours_Friday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF26_Request_Model:
-      type: object
-      description: Service model
-      properties:
-        code:
-          type: string
-          description: Service model code. Must be equal to the service's model code.
-      required:
-      - code
-    SL01_Response_201_OverriddenOpeningHours_Wednesday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL12_Response_200_Data_OpeningHours_Wednesday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL12_Response_200_Data_OpeningHours_Monday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL12_Response_200_Data_OverriddenOpeningHours_Sunday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Sunday_OpeningHours'
-      required:
-      - availability
-    SOF11_Response_200_Data_Pricing_Options:
-      type: object
-      discriminator:
-        mapping:
-          BOOLEAN: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options_Boolean'
-          VALUE_LIST: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options_ValueList'
-        propertyName: type
-      properties:
-        code:
-          type: string
-          description: Option code
-        label:
-          type: string
-          description: Option label
-        type:
-          type: string
-          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
-
-            '
-      required:
-      - code
-      - label
-    SOF25_Request_Pricing_Options:
-      type: object
-      description: Service pricing options.
-      discriminator:
-        mapping:
-          BOOLEAN: '#/components/schemas/SOF25_Request_Pricing_Options_Boolean'
-          VALUE_LIST: '#/components/schemas/SOF25_Request_Pricing_Options_ValueList'
-        propertyName: type
-      properties:
-        code:
-          type: string
-          description: Pricing option identifier
-        type:
-          type: string
-          description: ''
-      required:
-      - code
-      - type
-    SL12_Response_200_Data_OverriddenOpeningHours_Monday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Monday_OpeningHours'
-      required:
-      - availability
-    SL01_Response_201_OverriddenOpeningHours_Thursday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Thursday_OpeningHours'
-      required:
-      - availability
-    SL12_Response_200_Data_OverriddenOpeningHours_Tuesday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Tuesday_OpeningHours'
-      required:
-      - availability
-    SL12_Response_200_Data:
-      type: object
-      properties:
-        contact_info:
-          $ref: '#/components/schemas/SL12_Response_200_Data_ContactInfo'
-          description: Location contact information
-        description:
-          type: string
-          description: Location description
-        geography:
-          $ref: '#/components/schemas/SL12_Response_200_Data_Geography'
-          description: Geographic information for this location
-        id:
-          type: string
-          description: Location ID
-        label:
-          type: string
-          description: Location label
-        medias:
-          type: array
-          description: Medias associated to the location
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_Medias'
-        opening_hours:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OpeningHours'
-          description: Location opening hours
-        overridden_opening_hours:
-          $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours'
-          description: Overridden opening hours. Only available for an operator location
-      required:
-      - geography
-      - id
-      - label
-    SOF26_Response_200_Booking:
-      type: object
-      discriminator:
-        mapping:
-          DATETIME_REQUEST: '#/components/schemas/SOF26_Response_200_Booking_DatetimeRequest'
-          NO_BOOKING: '#/components/schemas/SOF26_Response_200_Booking_NoBooking'
-          SCHEDULED_EVENTS: '#/components/schemas/SOF26_Response_200_Booking_ScheduledEvents'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
-
-            '
-    SL12_Response_200_Data_OverriddenOpeningHours_Friday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL12_Response_200_Data_OverriddenOpeningHours_Sunday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL01_Response_201_OverriddenOpeningHours_Friday_OpeningHours:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL12_Response_200_Data_OpeningHours_Thursday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SOF26_Request_Booking:
-      type: object
-      description: Service booking method. The booking type must be equal to the booking type in the Model configuration.
-      discriminator:
-        mapping:
-          DATETIME_REQUEST: '#/components/schemas/SOF26_Request_Booking_DatetimeRequest'
-          NO_BOOKING: '#/components/schemas/SOF26_Request_Booking_NoBooking'
-          SCHEDULED_EVENTS: '#/components/schemas/SOF26_Request_Booking_ScheduledEvents'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'The booking type must be equal to the booking type in the Model configuration.
-
-
-            Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
-
-            '
-      required:
-      - type
-    SL01_Request_OpeningHours_Tuesday:
-      type: object
-      description: Sunday opening hours
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL12_Response_200_Data_Geography:
-      type: object
-      discriminator:
-        mapping:
-          CIRCLE: '#/components/schemas/SL12_Response_200_Data_Geography_Circle'
-          POINT: '#/components/schemas/SL12_Response_200_Data_Geography_Point'
-          ZONE_REFERENCES: '#/components/schemas/SL12_Response_200_Data_Geography_ZoneReferences'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
-
-            '
-    SL01_Response_201_OpeningHours_Friday:
-      type: object
-      properties:
-        closing_time:
-          type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
-      required:
-      - closing_time
-      - opening_time
-    SL12_Response_200_Data_Medias:
-      type: object
-      properties:
-        mime_type:
-          type: string
-          description: Media Mime type
-        url:
-          type: string
-          description: Media URL
-      required:
-      - mime_type
-      - url
-    SL12_Response_200_Data_OverriddenOpeningHours_Thursday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Thursday_OpeningHours'
-      required:
-      - availability
-    SOF25_Response_201_Consumption:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'Type of consumption
-
-
-            Enum: `"VOUCHER"`, `"CONFIRMATION_BY_SHOP"`
-
-            '
-      required:
-      - type
-    SOF25_Request_Model:
-      type: object
-      description: Service model
-      properties:
-        code:
-          type: string
-          description: Service model code
-      required:
-      - code
-    SOF11_Response_200_Data_Category:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Category code
-        label:
-          type: string
-          description: Category label
-      required:
-      - code
-      - label
-    SOF26_Request_Pricing:
-      type: object
-      description: Service pricing method
-      discriminator:
-        mapping:
-          ESTIMATED_PRICE: '#/components/schemas/SOF26_Request_Pricing_EstimatedPrice'
-          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF26_Request_Pricing_EstimatedPriceMulti'
-          FIXED_PRICE: '#/components/schemas/SOF26_Request_Pricing_FixedPrice'
-          FIXED_PRICE_MULTI: '#/components/schemas/SOF26_Request_Pricing_FixedPriceMulti'
-        propertyName: type
-      properties:
-        options:
-          type: array
-          description: Service pricing options.
-          items:
-            $ref: '#/components/schemas/SOF26_Request_Pricing_Options'
-        type:
-          type: string
-          description: 'Price type. It must be equal to the price type in the Model configuration.
-
-
-            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
-
-            '
-    SL01_Response_201_OverriddenOpeningHours_Wednesday:
-      type: object
-      properties:
-        availability:
-          type: string
-          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
-        opening_hours:
-          type: array
-          description: Opening hours
-          items:
-            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Wednesday_OpeningHours'
-      required:
-      - availability
-    SL12_Response_200_Data_ContactInfo:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Contact E-mail
-        phone:
-          type: string
-          description: Contact phone number
     SM11_Response_200_Data_CustomAttributes:
       type: object
       discriminator:
@@ -4697,39 +4127,71 @@ components:
       - code
       - label
       - type
-    SM11_Response_200_Data_CustomAttributes_ServiceConfiguration:
+    SOF25_Request_Pricing:
+      type: object
+      description: Service pricing method
+      discriminator:
+        mapping:
+          ESTIMATED_PRICE: '#/components/schemas/SOF25_Request_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF25_Request_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF25_Request_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF25_Request_Pricing_FixedPriceMulti'
+        propertyName: type
+      properties:
+        options:
+          type: array
+          description: Service pricing options.
+          items:
+            $ref: '#/components/schemas/SOF25_Request_Pricing_Options'
+        type:
+          type: string
+          description: 'Price type. It must be equal to the price type in the Model configuration.
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+      required:
+      - type
+    SOF26_Request_Pricing_Options:
+      type: object
+      description: Service pricing options.
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF26_Request_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF26_Request_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Pricing option identifier
+        type:
+          type: string
+          description: ''
+      required:
+      - code
+      - type
+    SL12_Response_200_Data_OverriddenOpeningHours_Tuesday:
       type: object
       properties:
-        maximum_number_of_elements:
-          type: integer
-          format: int32
-          description: Maximum number of elements. Present only for ValueLists. Absent when no limit.
-        minimum_number_of_elements:
-          type: integer
-          format: int32
-          description: Minimum number of elements. Equals to 0 if element is optional.
-      required:
-      - minimum_number_of_elements
-    SL12_Response_200_Data_OpeningHours_Tuesday:
-      type: object
-      properties:
-        closing_time:
+        availability:
           type: string
-          description: Closing time in hh:mm format
-        opening_time:
-          type: string
-          description: Opening time in hh:mm format
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Tuesday_OpeningHours'
       required:
-      - closing_time
-      - opening_time
-    SOF25_Response_201_Pricing:
+      - availability
+    SOF26_Response_200_Pricing:
       type: object
       discriminator:
         mapping:
-          ESTIMATED_PRICE: '#/components/schemas/SOF25_Response_201_Pricing_EstimatedPrice'
-          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF25_Response_201_Pricing_EstimatedPriceMulti'
-          FIXED_PRICE: '#/components/schemas/SOF25_Response_201_Pricing_FixedPrice'
-          FIXED_PRICE_MULTI: '#/components/schemas/SOF25_Response_201_Pricing_FixedPriceMulti'
+          ESTIMATED_PRICE: '#/components/schemas/SOF26_Response_200_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF26_Response_200_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF26_Response_200_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF26_Response_200_Pricing_FixedPriceMulti'
         propertyName: type
       properties:
         max_price_per_unit:
@@ -4744,7 +4206,7 @@ components:
           type: array
           description: Service pricing options. The list is ordered as configured by the operator.
           items:
-            $ref: '#/components/schemas/SOF25_Response_201_Pricing_Options'
+            $ref: '#/components/schemas/SOF26_Response_200_Pricing_Options'
         type:
           type: string
           description: 'Price type of the service.<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
@@ -4757,6 +4219,544 @@ components:
       - max_price_per_unit
       - min_price_per_unit
       - type
+    SL01_Request_OpeningHours_Tuesday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SM11_Response_200_Data_Pricing:
+      type: object
+      properties:
+        options:
+          type: array
+          description: Service model pricing options. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_Options'
+        price_per_unit_options:
+          type: array
+          description: Service model price per unit options. Always present if pricing is multi price.
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions'
+        type:
+          type: string
+          description: 'Pricing type<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+      required:
+      - type
+    SOF11_Response_200_Data_CustomAttributeValues:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Boolean'
+          DATE_TIME: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_DateTime'
+          DECIMAL: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Decimal'
+          INTEGER: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Integer'
+          LINK: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Link'
+          LONG_TEXT: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_LongText'
+          TEXT: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Text'
+          VALUE_LIST: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_ValueList'
+          VIDEO: '#/components/schemas/SOF11_Response_200_Data_CustomAttributeValues_Video'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Custom attribute code
+        label:
+          type: string
+          description: Custom attribute label
+        type:
+          type: string
+          description: 'Custom attribute field type
+
+
+            Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+        value:
+          type: object
+          description: Custom attribute field value
+      required:
+      - code
+      - label
+      - type
+    SL01_Response_201_OverriddenOpeningHours_Sunday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Request_Model:
+      type: object
+      description: Service model
+      properties:
+        code:
+          type: string
+          description: Service model code
+      required:
+      - code
+    SM11_Response_200_Data_Location:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Location type
+
+
+            Enum: `"NO_LOCATION"`, `"AT_CUSTOMER_LOCATION"`, `"AT_SHOP_LOCATION"`
+
+            '
+      required:
+      - type
+    SL12_Response_200_Data_OverriddenOpeningHours_Wednesday_OpeningHours:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL12_Response_200_Data_OverriddenOpeningHours_Sunday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Sunday_OpeningHours'
+      required:
+      - availability
+    SOF26_Request_Quantity:
+      type: object
+      description: Service quantity method.
+      discriminator:
+        mapping:
+          LIMITED: '#/components/schemas/SOF26_Request_Quantity_Limited'
+          NO_QUANTITY: '#/components/schemas/SOF26_Request_Quantity_NoQuantity'
+        propertyName: type
+      properties:
+        max_per_order:
+          type: integer
+          format: int32
+          description: Maximum quantity per order
+          maximum: 1000
+          minimum: 1
+        type:
+          type: string
+          description: 'Enum: `"NO_QUANTITY"`, `"LIMITED"`
+
+            '
+      required:
+      - type
+    SOF26_Response_200:
+      type: object
+      properties:
+        booking:
+          $ref: '#/components/schemas/SOF26_Response_200_Booking'
+          description: Service booking method
+        category:
+          $ref: '#/components/schemas/SOF26_Response_200_Category'
+          description: Service category
+        code:
+          type: string
+          description: Service code
+        consumption:
+          $ref: '#/components/schemas/SOF26_Response_200_Consumption'
+          description: 'Service consumption method: how will the service be consumed ?'
+        custom_attribute_values:
+          type: array
+          description: Service custom attributes values
+          items:
+            $ref: '#/components/schemas/SOF26_Response_200_CustomAttributeValues'
+        date_availability_end:
+          type: string
+          format: date-time
+          description: Date when the service ends being available
+        date_availability_start:
+          type: string
+          format: date-time
+          description: Date when the service starts being available
+        date_created:
+          type: string
+          format: date-time
+          description: Service creation date
+        date_updated:
+          type: string
+          format: date-time
+          description: Service update date
+        description:
+          type: string
+          description: Service description
+        inactive_reasons:
+          type: array
+          description: List of reasons why the service is inactive. If the service is active, this list is empty
+          items:
+            type: string
+            description: 'Enum: `"MANUALLY_DISABLED"`, `"ZERO_QUANTITY"`, `"ORDER_REFUSED"`, `"ORDER_ACCEPTANCE_TIMEOUT"`, `"NOT_IN_AVAILABILITY_PERIOD"`, `"SHOP_NOT_OPEN"`, `"SHOP_SUSPENDED"`, `"SHOP_CURRENCY_DISABLED"`, `"MISSING_REQUIRED_FIELDS"`, `"VALIDATION_NEEDED"`, `"NO_SESSION"`
+
+              '
+        location:
+          $ref: '#/components/schemas/SOF26_Response_200_Location'
+          description: 'Service location method: where the service will be provided ?'
+        medias:
+          type: array
+          description: All the medias associated to a service
+          items:
+            $ref: '#/components/schemas/SOF26_Response_200_Medias'
+        model:
+          $ref: '#/components/schemas/SOF26_Response_200_Model'
+          description: Service model
+        pricing:
+          $ref: '#/components/schemas/SOF26_Response_200_Pricing'
+          description: Service pricing method
+        quantity:
+          $ref: '#/components/schemas/SOF26_Response_200_Quantity'
+          description: Service quantity method
+        service_tax_code:
+          type: string
+          description: Service tax code
+        title:
+          type: string
+          description: Service title
+      required:
+      - booking
+      - category
+      - code
+      - consumption
+      - custom_attribute_values
+      - date_created
+      - date_updated
+      - inactive_reasons
+      - location
+      - model
+      - pricing
+      - quantity
+      - title
+    SL12_Response_200_Data_OpeningHours_Monday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF11_Response_200_Data_Pricing:
+      type: object
+      discriminator:
+        mapping:
+          ESTIMATED_PRICE: '#/components/schemas/SOF11_Response_200_Data_Pricing_EstimatedPrice'
+          ESTIMATED_PRICE_MULTI: '#/components/schemas/SOF11_Response_200_Data_Pricing_EstimatedPriceMulti'
+          FIXED_PRICE: '#/components/schemas/SOF11_Response_200_Data_Pricing_FixedPrice'
+          FIXED_PRICE_MULTI: '#/components/schemas/SOF11_Response_200_Data_Pricing_FixedPriceMulti'
+        propertyName: type
+      properties:
+        max_price_per_unit:
+          type: number
+          format: with decimals
+          description: Maximum price at which the service will be provided. It's a price per unit.
+        min_price_per_unit:
+          type: number
+          format: with decimals
+          description: Minimum price at which the service will be provided. It's a price per unit.
+        options:
+          type: array
+          description: Service pricing options. The list is ordered as configured by the operator.
+          items:
+            $ref: '#/components/schemas/SOF11_Response_200_Data_Pricing_Options'
+        type:
+          type: string
+          description: 'Price type of the service.<br/>When the price type is <code>FIXED_PRICE</code>, the price defined when placing an order is final. The price cannot be modified.<br/>When the price type is <code>ESTIMATED_PRICE</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order.<br/>When the price type is <code>FIXED_PRICE_MULTI</code>, the price defined when placing an order is final. The price cannot be modified. The price has multiple possibilities.<br/>When the price type is <code>ESTIMATED_PRICE_MULTI</code>, the price can be negotiated between the seller and the customer. The price can be updated by editing the pricing options of the order. The price has multiple possibilities.<br/>
+
+
+            Enum: `"FIXED_PRICE"`, `"ESTIMATED_PRICE"`, `"FIXED_PRICE_MULTI"`, `"ESTIMATED_PRICE_MULTI"`
+
+            '
+      required:
+      - max_price_per_unit
+      - min_price_per_unit
+      - type
+    SOF26_Request_Booking:
+      type: object
+      description: Service booking method. The booking type must be equal to the booking type in the Model configuration.
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF26_Request_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF26_Request_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF26_Request_Booking_ScheduledEvents'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'The booking type must be equal to the booking type in the Model configuration.
+
+
+            Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+      required:
+      - type
+    SL01_Request_OpeningHours_Friday:
+      type: object
+      description: Sunday opening hours
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Response_201_Consumption:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Type of consumption
+
+
+            Enum: `"VOUCHER"`, `"CONFIRMATION_BY_SHOP"`
+
+            '
+      required:
+      - type
+    SL12_Response_200_Data_OverriddenOpeningHours_Wednesday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL12_Response_200_Data_OverriddenOpeningHours_Wednesday_OpeningHours'
+      required:
+      - availability
+    SL01_Request_Geography:
+      type: object
+      description: Geographic information for this location
+      discriminator:
+        mapping:
+          CIRCLE: '#/components/schemas/SL01_Request_Geography_Circle'
+          POINT: '#/components/schemas/SL01_Request_Geography_Point'
+          ZONE_REFERENCES: '#/components/schemas/SL01_Request_Geography_ZoneReferences'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"POINT"`, `"CIRCLE"`, `"ZONE_REFERENCES"`
+
+            '
+      required:
+      - type
+    SOF26_Response_200_Model:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Service model code
+        title:
+          type: string
+          description: Service model title
+      required:
+      - code
+      - title
+    SL12_Response_200_Data_OpeningHours_Thursday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SOF25_Request_Booking:
+      type: object
+      description: Service booking method. The type of the booking must reflect the associated Model's booking. By default, <code>booking</code> will be of type <code>NO_BOOKING</code>.
+      discriminator:
+        mapping:
+          DATETIME_REQUEST: '#/components/schemas/SOF25_Request_Booking_DatetimeRequest'
+          NO_BOOKING: '#/components/schemas/SOF25_Request_Booking_NoBooking'
+          SCHEDULED_EVENTS: '#/components/schemas/SOF25_Request_Booking_ScheduledEvents'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"NO_BOOKING"`, `"DATETIME_REQUEST"`, `"SCHEDULED_EVENTS"`
+
+            '
+      required:
+      - type
+    SL01_Response_201_OverriddenOpeningHours:
+      type: object
+      properties:
+        friday:
+          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Friday'
+          description: Friday opening hours
+        monday:
+          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Monday'
+          description: Monday opening hours
+        saturday:
+          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Saturday'
+          description: Saturday opening hours
+        sunday:
+          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Sunday'
+          description: Sunday opening hours
+        thursday:
+          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Thursday'
+          description: Thursday opening hours
+        tuesday:
+          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Tuesday'
+          description: Tuesday opening hours
+        wednesday:
+          $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Wednesday'
+          description: Wednesday opening hours
+      required:
+      - friday
+      - monday
+      - saturday
+      - sunday
+      - thursday
+      - tuesday
+      - wednesday
+    SL01_Response_201_OpeningHours_Monday:
+      type: object
+      properties:
+        closing_time:
+          type: string
+          description: Closing time in hh:mm format
+        opening_time:
+          type: string
+          description: Opening time in hh:mm format
+      required:
+      - closing_time
+      - opening_time
+    SL01_Response_201_OverriddenOpeningHours_Wednesday:
+      type: object
+      properties:
+        availability:
+          type: string
+          description: Availability of the overridden hours. Either OVERRIDDEN_HOURS or NOT_AVAILABLE
+        opening_hours:
+          type: array
+          description: Opening hours
+          items:
+            $ref: '#/components/schemas/SL01_Response_201_OverriddenOpeningHours_Wednesday_OpeningHours'
+      required:
+      - availability
+    SM11_Response_200_Data_Pricing_Options:
+      type: object
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SM11_Response_200_Data_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SM11_Response_200_Data_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Option code
+        label:
+          type: string
+          description: Option label
+        type:
+          type: string
+          description: 'Enum: `"BOOLEAN"`, `"DATE_TIME"`, `"INTEGER"`, `"DECIMAL"`, `"TEXT"`, `"LONG_TEXT"`, `"VALUE_LIST"`, `"LINK"`, `"VIDEO"`
+
+            '
+      required:
+      - code
+      - label
+    SM11_Response_200_Data_Pricing_PricePerUnitOptions:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code
+        label:
+          type: string
+          description: Label
+        order_configuration:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_OrderConfiguration'
+        service_configuration:
+          $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_ServiceConfiguration'
+        type:
+          type: string
+          description: 'Enum: `"VALUE_LIST"`
+
+            '
+        values:
+          type: array
+          description: Values of the list
+          items:
+            $ref: '#/components/schemas/SM11_Response_200_Data_Pricing_PricePerUnitOptions_Values'
+      required:
+      - code
+      - label
+      - type
+      - values
+    SOF25_Request_Pricing_Options:
+      type: object
+      description: Service pricing options.
+      discriminator:
+        mapping:
+          BOOLEAN: '#/components/schemas/SOF25_Request_Pricing_Options_Boolean'
+          VALUE_LIST: '#/components/schemas/SOF25_Request_Pricing_Options_ValueList'
+        propertyName: type
+      properties:
+        code:
+          type: string
+          description: Pricing option identifier
+        type:
+          type: string
+          description: ''
+      required:
+      - code
+      - type
+    SOF26_Response_200_Medias:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          description: Media Mime type
+        url:
+          type: string
+          description: Media URL
+      required:
+      - mime_type
+      - url
   securitySchemes:
     Shop-API-Key:
       in: header

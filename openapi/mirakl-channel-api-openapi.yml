@@ -99,55 +99,7 @@ paths:
       - Channel
 components:
   schemas:
-    SELLER_ACCOUNT_CHANNEL_UPSERT_Request_Channels:
-      type: object
-      description: Channels to upsert
-      properties:
-        external_id:
-          type: string
-          description: Channel external id
-        name:
-          type: string
-          description: Channel name
-        status:
-          type: string
-          description: Channel status
-        url:
-          type: string
-          description: Channel url
-          pattern: ''
-      required:
-      - external_id
-      - name
-      - status
-      - url
     SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201_Channels:
-      type: object
-      properties:
-        external_id:
-          type: string
-          description: Channel external id
-        id:
-          type: string
-          description: Channel id
-        name:
-          type: string
-          description: Channel name
-        status:
-          type: string
-          description: 'Channel status
-
-
-            Enum: `"AVAILABLE"`
-
-            '
-        url:
-          type: string
-          description: Channel url
-        vendor:
-          type: string
-          description: Channel vendor
-    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels:
       type: object
       properties:
         external_id:
@@ -181,16 +133,6 @@ components:
           description: channels
           items:
             $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels'
-      required:
-      - channels
-    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201:
-      type: object
-      properties:
-        channels:
-          type: array
-          description: channels
-          items:
-            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201_Channels'
       required:
       - channels
     SELLER_ACCOUNT_CHANNEL_UPSERT_Response_401_Channels:
@@ -237,6 +179,64 @@ components:
           description: Channels to upsert
           items:
             $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Request_Channels'
+      required:
+      - channels
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_403_Channels:
+      type: object
+      properties:
+        external_id:
+          type: string
+          description: Channel external id
+        id:
+          type: string
+          description: Channel id
+        name:
+          type: string
+          description: Channel name
+        status:
+          type: string
+          description: 'Channel status
+
+
+            Enum: `"AVAILABLE"`
+
+            '
+        url:
+          type: string
+          description: Channel url
+        vendor:
+          type: string
+          description: Channel vendor
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Request_Channels:
+      type: object
+      description: Channels to upsert
+      properties:
+        external_id:
+          type: string
+          description: Channel external id
+        name:
+          type: string
+          description: Channel name
+        status:
+          type: string
+          description: Channel status
+        url:
+          type: string
+          description: Channel url
+          pattern: ''
+      required:
+      - external_id
+      - name
+      - status
+      - url
+    SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201:
+      type: object
+      properties:
+        channels:
+          type: array
+          description: channels
+          items:
+            $ref: '#/components/schemas/SELLER_ACCOUNT_CHANNEL_UPSERT_Response_201_Channels'
       required:
       - channels
   securitySchemes:

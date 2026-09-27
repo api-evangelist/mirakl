@@ -117,17 +117,6 @@ components:
           description: The diagnostic message.
       required:
       - message
-    UpdateStoreCatalogItemsRequest:
-      type: object
-      properties:
-        store_catalog_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateStoreCatalogItem'
-          maxItems: 10000
-          minItems: 1
-      required:
-      - store_catalog_items
     UpdateStoreCatalogItem:
       type: object
       properties:
@@ -206,18 +195,18 @@ components:
             '
       required:
       - id
+    UpdateStoreCatalogItemsRequest:
+      type: object
+      properties:
+        store_catalog_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateStoreCatalogItem'
+          maxItems: 10000
+          minItems: 1
+      required:
+      - store_catalog_items
   parameters:
-    store_id_path:
-      deprecated: true
-      description: Store identifier in the channel
-      explode: false
-      in: path
-      name: store_id
-      required: true
-      schema:
-        type: string
-        minLength: 1
-      style: simple
     channel_id_path:
       description: Connect Channel identifier
       explode: false
@@ -228,6 +217,17 @@ components:
         type: string
         examples:
         - '1234'
+        minLength: 1
+      style: simple
+    store_id_path:
+      deprecated: true
+      description: Store identifier in the channel
+      explode: false
+      in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
         minLength: 1
       style: simple
   securitySchemes:

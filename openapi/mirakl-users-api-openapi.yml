@@ -76,13 +76,6 @@ paths:
       url: https://your-instance.mirakl.net
 components:
   schemas:
-    RO02_Response_200_Roles:
-      type: object
-      properties:
-        code:
-          type: string
-        description:
-          type: string
     RO02_Response_200:
       type: object
       properties:
@@ -90,6 +83,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RO02_Response_200_Roles'
+    RO02_Response_200_Roles:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
   securitySchemes:
     Shop-API-Key:
       in: header
