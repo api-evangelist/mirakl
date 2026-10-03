@@ -109,32 +109,6 @@ paths:
       - Carriers
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code (immutable)
-          examples:
-          - DATA_NOT_FOUND
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        message:
-          type: string
-          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - An error occurred while processing your request
-      required:
-      - code
-      - message
     ErrorItem:
       type: object
       properties:
@@ -180,6 +154,32 @@ components:
       required:
       - channel_carrier_id
       - name
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        message:
+          type: string
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - An error occurred while processing your request
+      required:
+      - code
+      - message
   securitySchemes:
     Bearer:
       bearerFormat: JWT

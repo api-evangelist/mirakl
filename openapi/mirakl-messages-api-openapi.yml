@@ -1238,32 +1238,98 @@ paths:
       url: https://your-instance.mirakl.net
 components:
   schemas:
-    M01_Response_200_Messages_Documents:
+    OR43_Response_201:
       type: object
       properties:
-        date_uploaded:
+        message_id:
           type: string
-          format: date-time
-          description: Document uploaded date
-        file_name:
+          description: Id of the first message created on the thread
+        thread_id:
           type: string
-          description: Document file name
-        file_size:
-          type: integer
-          format: int64
-          description: File size
+          description: Id of the created thread
+      required:
+      - message_id
+      - thread_id
+    M11_Response_200_Data_Entities:
+      type: object
+      properties:
         id:
-          type: integer
-          format: int64
-          description: Document identifier
+          type: string
+          description: Entity id
+        label:
+          type: string
+          description: Entity label
         type:
           type: string
-          description: Document type code
+          description: Entity type
       required:
-      - file_name
       - id
+      - label
       - type
-    OR43_Request_MultipartFormData_ThreadInput:
+    M10_Response_200_NoStoreReplyNeeded:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: No store reply needed action date
+        user_type:
+          type: string
+          description: 'Entity that operated "no store reply needed" action.
+
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`
+
+            '
+      required:
+      - date
+      - user_type
+    M10_Response_200_CustomerOrganization:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: Customer organization name
+        id:
+          type: string
+          description: Customer organization id
+      required:
+      - display_name
+      - id
+    M11_Response_200_Data_Messages:
+      type: object
+      properties:
+        attachments:
+          type: array
+          description: Message attachments
+          items:
+            $ref: '#/components/schemas/M11_Response_200_Data_Messages_Attachments'
+        body:
+          type: string
+          description: Message body
+        date_created:
+          type: string
+          format: date-time
+          description: Message creation date
+        from:
+          $ref: '#/components/schemas/M11_Response_200_Data_Messages_From'
+          description: Message sender
+        id:
+          type: string
+          description: Message id
+        to:
+          type: array
+          description: Message recipients
+          items:
+            $ref: '#/components/schemas/M11_Response_200_Data_Messages_To'
+      required:
+      - body
+      - date_created
+      - from
+      - id
+      - to
+    M12_Request_MultipartFormData_MessageInput:
       type: object
       properties:
         body:
@@ -1273,28 +1339,15 @@ components:
           minLength: 3
         to:
           type: array
-          description: Message recipients
+          description: List of recipients of the message
           items:
-            type: string
-            description: 'Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-              '
+            $ref: '#/components/schemas/M12_Request_MultipartFormData_MessageInput_To'
         topic:
-          $ref: '#/components/schemas/OR43_Request_MultipartFormData_ThreadInput_Topic'
-          description: Thread topic<br /><br />The topic can either have a free or a fixed value depending on the topic type
+          $ref: '#/components/schemas/M12_Request_MultipartFormData_MessageInput_Topic'
+          description: New topic for the thread. Leave empty if you don't want to update it.
       required:
       - body
       - to
-      - topic
-    M12_Response_201:
-      type: object
-      properties:
-        message_id:
-          type: string
-          description: Id of the message
-        thread_id:
-          type: string
-          description: Id of the thread
     M10_Response_200_Metadata:
       type: object
       properties:
@@ -1318,128 +1371,6 @@ components:
       - last_sender
       - shop_reply_needed_since
       - total_count
-    M12_Request_MultipartFormData_MessageInput:
-      type: object
-      properties:
-        body:
-          type: string
-          description: Message body
-          maxLength: 50000
-          minLength: 3
-        to:
-          type: array
-          description: List of recipients of the message
-          items:
-            $ref: '#/components/schemas/M12_Request_MultipartFormData_MessageInput_To'
-        topic:
-          $ref: '#/components/schemas/M12_Request_MultipartFormData_MessageInput_Topic'
-          description: New topic for the thread. Leave empty if you don't want to update it.
-      required:
-      - body
-      - to
-    M01_Response_200_Messages:
-      type: object
-      properties:
-        archived:
-          type: boolean
-          deprecated: true
-          description: Will be removed in next version
-        body:
-          type: string
-          description: Message body
-        commercial_id:
-          type: string
-          description: Order commercial ID. Used only when retrieving messages of an order.
-        date_created:
-          type: string
-          format: date-time
-          description: Message creation date
-        documents:
-          type: array
-          description: Documents list
-          items:
-            $ref: '#/components/schemas/M01_Response_200_Messages_Documents'
-        from_id:
-          type: string
-          description: Sender user identifier
-        from_name:
-          type: string
-          description: Sender user name
-        from_type:
-          type: string
-          description: 'Sender user type
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-            '
-        id:
-          type: integer
-          format: int64
-          description: Message identifier
-        offer_id:
-          type: integer
-          format: int64
-          description: 'Identifier of offer : this value is not fixed and can changed after a long period'
-        order_id:
-          type: string
-          description: Order ID. Used only when retrieving messages of an order.
-        read:
-          type: boolean
-          deprecated: true
-          description: Will be removed in next version
-        subject:
-          type: string
-          description: Message subject
-        to_customer_archived:
-          type: boolean
-          deprecated: true
-          description: Will be removed in next version
-        to_customer_id:
-          type: string
-          description: Recipient customer ID
-        to_customer_name:
-          type: string
-          description: Recipient customer name
-        to_operator:
-          type: boolean
-          description: Indicates the message sent to operator. <em>Used only when retrieving messages of an order</em>.
-        to_operator_archived:
-          type: boolean
-          deprecated: true
-          description: Will be removed in next version
-        to_shop_archived:
-          type: boolean
-          deprecated: true
-          description: Will be removed in next version
-        to_shop_id:
-          type: integer
-          format: int64
-          description: Recipient shop ID
-        to_shop_name:
-          type: string
-          description: Recipient shop name
-        visible:
-          type: boolean
-          deprecated: true
-          description: States whether or not the message is visible (public). Only relevant for messages on offers and always null for messages on orders.
-      required:
-      - body
-      - commercial_id
-      - date_created
-      - from_id
-      - from_name
-      - from_type
-      - id
-      - subject
-      - to_customer_archived
-      - to_customer_id
-      - to_customer_name
-      - to_operator
-      - to_operator_archived
-      - to_shop_archived
-      - to_shop_id
-      - to_shop_name
     M11_Response_200_Data:
       type: object
       properties:
@@ -1508,7 +1439,166 @@ components:
       - id
       - metadata
       - topic
+    M11_Response_200_Data_CustomerOrganization:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: Customer organization name
+        id:
+          type: string
+          description: Customer organization id
+      required:
+      - display_name
+      - id
+    M10_Response_200_Messages_From_OrganizationDetails:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: Participant display name
+        id:
+          type: string
+          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
+        type:
+          type: string
+          description: 'Participant type
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
+
+            '
+      required:
+      - display_name
+      - type
     M10_Response_200_CurrentParticipants:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: Participant display name
+        id:
+          type: string
+          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
+        type:
+          type: string
+          description: 'Participant type
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
+
+            '
+      required:
+      - display_name
+      - type
+    M11_Response_200_Data_Metadata_LastSender:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: Sender display name
+        organization_details:
+          $ref: '#/components/schemas/M11_Response_200_Data_Metadata_LastSender_OrganizationDetails'
+          description: Organization details of the sender
+        type:
+          type: string
+          description: 'Sender type
+
+
+            Enum: `"OPERATOR_USER"`, `"SHOP_USER"`, `"CUSTOMER_USER"`
+
+            '
+      required:
+      - display_name
+      - type
+    OR42_Response_201:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Identifier of the message created
+      required:
+      - id
+    M12_Response_201:
+      type: object
+      properties:
+        message_id:
+          type: string
+          description: Id of the message
+        thread_id:
+          type: string
+          description: Id of the thread
+    M10_Response_200:
+      type: object
+      properties:
+        authorized_participants:
+          type: array
+          description: 'Thread authorized participants<br/>
+
+            Those are the participants who are authorized to join the thread.
+
+            '
+          items:
+            $ref: '#/components/schemas/M10_Response_200_AuthorizedParticipants'
+        current_participants:
+          type: array
+          description: 'Thread current participants<br/>
+
+            Those are the participants who have actually participated in the thread, meaning that they are either sender or receivers of at least one message of the thread.<br/>
+
+            These participants must be on the list of the <code>authorized_participants</code>
+
+            '
+          items:
+            $ref: '#/components/schemas/M10_Response_200_CurrentParticipants'
+        customer_organization:
+          $ref: '#/components/schemas/M10_Response_200_CustomerOrganization'
+          description: Data related to the customer organization (B2B transactions)
+        date_created:
+          type: string
+          format: date-time
+          description: Thread created date
+        date_updated:
+          type: string
+          format: date-time
+          description: Thread updated date
+        entities:
+          type: array
+          description: Thread entities
+          items:
+            $ref: '#/components/schemas/M10_Response_200_Entities'
+        id:
+          type: string
+          description: Thread id
+        messages:
+          type: array
+          description: Thread messages
+          items:
+            $ref: '#/components/schemas/M10_Response_200_Messages'
+        metadata:
+          $ref: '#/components/schemas/M10_Response_200_Metadata'
+          description: Thread metadata
+        no_store_reply_needed:
+          type: array
+          description: '    Thread "no store reply needed" actions.
+
+            '
+          items:
+            $ref: '#/components/schemas/M10_Response_200_NoStoreReplyNeeded'
+        topic:
+          $ref: '#/components/schemas/M10_Response_200_Topic'
+          description: Thread topic
+      required:
+      - authorized_participants
+      - current_participants
+      - date_created
+      - date_updated
+      - id
+      - messages
+      - metadata
+      - topic
+    M10_Response_200_AuthorizedParticipants:
       type: object
       properties:
         display_name:
@@ -1613,6 +1703,42 @@ components:
       - to_customer
       - to_operator
       - to_shop
+    M10_Response_200_Messages_To:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: Participant display name
+        id:
+          type: string
+          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
+        type:
+          type: string
+          description: 'Participant type
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
+
+            '
+      required:
+      - display_name
+      - type
+    M11_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/M11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
     M10_Response_200_Metadata_LastSender_OrganizationDetails:
       type: object
       properties:
@@ -1633,22 +1759,62 @@ components:
       required:
       - display_name
       - type
-    M10_Response_200_Entities:
+    M10_Response_200_Metadata_LastSender:
       type: object
       properties:
-        id:
+        display_name:
           type: string
-          description: Entity id
-        label:
-          type: string
-          description: Entity label
+          description: Sender display name
+        organization_details:
+          $ref: '#/components/schemas/M10_Response_200_Metadata_LastSender_OrganizationDetails'
+          description: Organization details of the sender
         type:
           type: string
-          description: Entity type
+          description: 'Sender type
+
+
+            Enum: `"OPERATOR_USER"`, `"SHOP_USER"`, `"CUSTOMER_USER"`
+
+            '
       required:
-      - id
-      - label
+      - display_name
       - type
+    M11_Response_200_Data_NoStoreReplyNeeded:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: No store reply needed action date
+        user_type:
+          type: string
+          description: 'Entity that operated "no store reply needed" action.
+
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`
+
+            '
+      required:
+      - date
+      - user_type
+    M10_Response_200_Topic:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Topic type
+
+
+            Enum: `"FREE_TEXT"`, `"REASON_CODE"`
+
+            '
+        value:
+          type: string
+          description: Topic value
+      required:
+      - type
+      - value
     M10_Response_200_Messages_Attachments:
       type: object
       properties:
@@ -1666,6 +1832,78 @@ components:
       - id
       - name
       - size
+    M01_Response_200:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: List of messages
+          items:
+            $ref: '#/components/schemas/M01_Response_200_Messages'
+        total_count:
+          type: integer
+          format: int32
+          description: Messages total count
+      required:
+      - messages
+      - total_count
+    M11_Response_200_Data_Messages_Attachments:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Attachment id
+        name:
+          type: string
+          description: Attachment file name
+        size:
+          type: integer
+          format: int64
+          description: Attachment size
+      required:
+      - id
+      - name
+      - size
+    M11_Response_200_Data_CurrentParticipants:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: Participant display name
+        id:
+          type: string
+          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
+        type:
+          type: string
+          description: 'Participant type
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
+
+            '
+      required:
+      - display_name
+      - type
+    M11_Response_200_Data_Messages_To:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: Participant display name
+        id:
+          type: string
+          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
+        type:
+          type: string
+          description: 'Participant type
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
+
+            '
+      required:
+      - display_name
+      - type
     M11_Response_200_Data_Messages_From:
       type: object
       properties:
@@ -1686,18 +1924,88 @@ components:
       required:
       - display_name
       - type
-    OR43_Response_201:
+    M11_Response_200_Data_Metadata:
       type: object
       properties:
-        message_id:
+        last_message_date:
           type: string
-          description: Id of the first message created on the thread
-        thread_id:
+          format: date-time
+          description: Date of the last message
+        last_sender:
+          $ref: '#/components/schemas/M11_Response_200_Data_Metadata_LastSender'
+          description: Last message sender
+        shop_reply_needed_since:
           type: string
-          description: Id of the created thread
+          format: date-time
+          description: Date since the latest unanswered message awaiting a shop reply. Null when the shop has replied.
+        total_count:
+          type: integer
+          format: int32
+          description: Number of messages in the thread
       required:
-      - message_id
-      - thread_id
+      - last_message_date
+      - last_sender
+      - shop_reply_needed_since
+      - total_count
+    M11_Response_200_Data_Topic:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Topic type
+
+
+            Enum: `"FREE_TEXT"`, `"REASON_CODE"`
+
+            '
+        value:
+          type: string
+          description: Topic value
+      required:
+      - type
+      - value
+    M12_Request_MultipartFormData_MessageInput_To:
+      type: object
+      description: List of recipients of the message
+      properties:
+        id:
+          type: string
+          description: Participant id
+        type:
+          type: string
+          description: 'Participant type
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
+
+            '
+      required:
+      - type
+    M01_Response_200_Messages_Documents:
+      type: object
+      properties:
+        date_uploaded:
+          type: string
+          format: date-time
+          description: Document uploaded date
+        file_name:
+          type: string
+          description: Document file name
+        file_size:
+          type: integer
+          format: int64
+          description: File size
+        id:
+          type: integer
+          format: int64
+          description: Document identifier
+        type:
+          type: string
+          description: Document type code
+      required:
+      - file_name
+      - id
+      - type
     M10_Response_200_Messages_From:
       type: object
       properties:
@@ -1718,63 +2026,126 @@ components:
       required:
       - display_name
       - type
-    M11_Response_200_Data_Messages:
+    M01_Response_200_Messages:
       type: object
       properties:
-        attachments:
-          type: array
-          description: Message attachments
-          items:
-            $ref: '#/components/schemas/M11_Response_200_Data_Messages_Attachments'
+        archived:
+          type: boolean
+          deprecated: true
+          description: Will be removed in next version
         body:
           type: string
           description: Message body
+        commercial_id:
+          type: string
+          description: Order commercial ID. Used only when retrieving messages of an order.
         date_created:
           type: string
           format: date-time
           description: Message creation date
-        from:
-          $ref: '#/components/schemas/M11_Response_200_Data_Messages_From'
-          description: Message sender
-        id:
-          type: string
-          description: Message id
-        to:
+        documents:
           type: array
-          description: Message recipients
+          description: Documents list
           items:
-            $ref: '#/components/schemas/M11_Response_200_Data_Messages_To'
+            $ref: '#/components/schemas/M01_Response_200_Messages_Documents'
+        from_id:
+          type: string
+          description: Sender user identifier
+        from_name:
+          type: string
+          description: Sender user name
+        from_type:
+          type: string
+          description: 'Sender user type
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
+
+            '
+        id:
+          type: integer
+          format: int64
+          description: Message identifier
+        offer_id:
+          type: integer
+          format: int64
+          description: 'Identifier of offer : this value is not fixed and can changed after a long period'
+        order_id:
+          type: string
+          description: Order ID. Used only when retrieving messages of an order.
+        read:
+          type: boolean
+          deprecated: true
+          description: Will be removed in next version
+        subject:
+          type: string
+          description: Message subject
+        to_customer_archived:
+          type: boolean
+          deprecated: true
+          description: Will be removed in next version
+        to_customer_id:
+          type: string
+          description: Recipient customer ID
+        to_customer_name:
+          type: string
+          description: Recipient customer name
+        to_operator:
+          type: boolean
+          description: Indicates the message sent to operator. <em>Used only when retrieving messages of an order</em>.
+        to_operator_archived:
+          type: boolean
+          deprecated: true
+          description: Will be removed in next version
+        to_shop_archived:
+          type: boolean
+          deprecated: true
+          description: Will be removed in next version
+        to_shop_id:
+          type: integer
+          format: int64
+          description: Recipient shop ID
+        to_shop_name:
+          type: string
+          description: Recipient shop name
+        visible:
+          type: boolean
+          deprecated: true
+          description: States whether or not the message is visible (public). Only relevant for messages on offers and always null for messages on orders.
       required:
       - body
+      - commercial_id
       - date_created
-      - from
+      - from_id
+      - from_name
+      - from_type
       - id
-      - to
-    M10_Response_200_CustomerOrganization:
+      - subject
+      - to_customer_archived
+      - to_customer_id
+      - to_customer_name
+      - to_operator
+      - to_operator_archived
+      - to_shop_archived
+      - to_shop_id
+      - to_shop_name
+    M10_Response_200_Entities:
       type: object
       properties:
-        display_name:
-          type: string
-          description: Customer organization name
         id:
           type: string
-          description: Customer organization id
-      required:
-      - display_name
-      - id
-    M11_Response_200_Data_CustomerOrganization:
-      type: object
-      properties:
-        display_name:
+          description: Entity id
+        label:
           type: string
-          description: Customer organization name
-        id:
+          description: Entity label
+        type:
           type: string
-          description: Customer organization id
+          description: Entity type
       required:
-      - display_name
       - id
-    M11_Response_200_Data_CurrentParticipants:
+      - label
+      - type
+    M11_Response_200_Data_Messages_From_OrganizationDetails:
       type: object
       properties:
         display_name:
@@ -1814,63 +2185,65 @@ components:
       required:
       - display_name
       - type
-    M11_Response_200_Data_Metadata_LastSender:
+    M11_Response_200_Data_AuthorizedParticipants:
       type: object
       properties:
         display_name:
           type: string
-          description: Sender display name
-        organization_details:
-          $ref: '#/components/schemas/M11_Response_200_Data_Metadata_LastSender_OrganizationDetails'
-          description: Organization details of the sender
+          description: Participant display name
+        id:
+          type: string
+          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
         type:
           type: string
-          description: 'Sender type
+          description: 'Participant type
 
 
-            Enum: `"OPERATOR_USER"`, `"SHOP_USER"`, `"CUSTOMER_USER"`
+            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
 
             '
       required:
       - display_name
       - type
-    M10_Response_200_Metadata_LastSender:
+    OR43_Request_MultipartFormData_ThreadInput:
       type: object
       properties:
-        display_name:
+        body:
           type: string
-          description: Sender display name
-        organization_details:
-          $ref: '#/components/schemas/M10_Response_200_Metadata_LastSender_OrganizationDetails'
-          description: Organization details of the sender
-        type:
-          type: string
-          description: 'Sender type
+          description: Message body
+          maxLength: 50000
+          minLength: 3
+        to:
+          type: array
+          description: Message recipients
+          items:
+            type: string
+            description: 'Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
 
-
-            Enum: `"OPERATOR_USER"`, `"SHOP_USER"`, `"CUSTOMER_USER"`
-
-            '
+              '
+        topic:
+          $ref: '#/components/schemas/OR43_Request_MultipartFormData_ThreadInput_Topic'
+          description: Thread topic<br /><br />The topic can either have a free or a fixed value depending on the topic type
       required:
-      - display_name
-      - type
-    M10_Response_200_Topic:
+      - body
+      - to
+      - topic
+    M12_Request_MultipartFormData_MessageInput_Topic:
       type: object
+      description: New topic for the thread. Leave empty if you don't want to update it.
+      discriminator:
+        mapping:
+          FREE_TEXT: '#/components/schemas/M12_Request_MultipartFormData_MessageInput_Topic_FreeText'
+          REASON_CODE: '#/components/schemas/M12_Request_MultipartFormData_MessageInput_Topic_ReasonCode'
+        propertyName: type
       properties:
         type:
           type: string
-          description: 'Topic type
-
-
-            Enum: `"FREE_TEXT"`, `"REASON_CODE"`
+          description: 'Enum: `"FREE_TEXT"`, `"REASON_CODE"`
 
             '
         value:
           type: string
-          description: Topic value
-      required:
-      - type
-      - value
     OR43_Request_MultipartFormData_ThreadInput_Topic:
       type: object
       description: Thread topic<br /><br />The topic can either have a free or a fixed value depending on the topic type
@@ -1894,395 +2267,6 @@ components:
       required:
       - type
       - value
-    M12_Request_MultipartFormData_MessageInput_Topic:
-      type: object
-      description: New topic for the thread. Leave empty if you don't want to update it.
-      discriminator:
-        mapping:
-          FREE_TEXT: '#/components/schemas/M12_Request_MultipartFormData_MessageInput_Topic_FreeText'
-          REASON_CODE: '#/components/schemas/M12_Request_MultipartFormData_MessageInput_Topic_ReasonCode'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"FREE_TEXT"`, `"REASON_CODE"`
-
-            '
-        value:
-          type: string
-    M01_Response_200:
-      type: object
-      properties:
-        messages:
-          type: array
-          description: List of messages
-          items:
-            $ref: '#/components/schemas/M01_Response_200_Messages'
-        total_count:
-          type: integer
-          format: int32
-          description: Messages total count
-      required:
-      - messages
-      - total_count
-    M12_Request_MultipartFormData_MessageInput_To:
-      type: object
-      description: List of recipients of the message
-      properties:
-        id:
-          type: string
-          description: Participant id
-        type:
-          type: string
-          description: 'Participant type
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-            '
-      required:
-      - type
-    M11_Response_200_Data_Messages_Attachments:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Attachment id
-        name:
-          type: string
-          description: Attachment file name
-        size:
-          type: integer
-          format: int64
-          description: Attachment size
-      required:
-      - id
-      - name
-      - size
-    M10_Response_200_NoStoreReplyNeeded:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
-          description: No store reply needed action date
-        user_type:
-          type: string
-          description: 'Entity that operated "no store reply needed" action.
-
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`
-
-            '
-      required:
-      - date
-      - user_type
-    M10_Response_200_Messages_To:
-      type: object
-      properties:
-        display_name:
-          type: string
-          description: Participant display name
-        id:
-          type: string
-          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
-        type:
-          type: string
-          description: 'Participant type
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-            '
-      required:
-      - display_name
-      - type
-    M11_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/M11_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    M11_Response_200_Data_Metadata:
-      type: object
-      properties:
-        last_message_date:
-          type: string
-          format: date-time
-          description: Date of the last message
-        last_sender:
-          $ref: '#/components/schemas/M11_Response_200_Data_Metadata_LastSender'
-          description: Last message sender
-        shop_reply_needed_since:
-          type: string
-          format: date-time
-          description: Date since the latest unanswered message awaiting a shop reply. Null when the shop has replied.
-        total_count:
-          type: integer
-          format: int32
-          description: Number of messages in the thread
-      required:
-      - last_message_date
-      - last_sender
-      - shop_reply_needed_since
-      - total_count
-    M11_Response_200_Data_Entities:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Entity id
-        label:
-          type: string
-          description: Entity label
-        type:
-          type: string
-          description: Entity type
-      required:
-      - id
-      - label
-      - type
-    M10_Response_200_Messages_From_OrganizationDetails:
-      type: object
-      properties:
-        display_name:
-          type: string
-          description: Participant display name
-        id:
-          type: string
-          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
-        type:
-          type: string
-          description: 'Participant type
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-            '
-      required:
-      - display_name
-      - type
-    M10_Response_200_AuthorizedParticipants:
-      type: object
-      properties:
-        display_name:
-          type: string
-          description: Participant display name
-        id:
-          type: string
-          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
-        type:
-          type: string
-          description: 'Participant type
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-            '
-      required:
-      - display_name
-      - type
-    M11_Response_200_Data_Messages_From_OrganizationDetails:
-      type: object
-      properties:
-        display_name:
-          type: string
-          description: Participant display name
-        id:
-          type: string
-          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
-        type:
-          type: string
-          description: 'Participant type
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-            '
-      required:
-      - display_name
-      - type
-    OR42_Response_201:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Identifier of the message created
-      required:
-      - id
-    M11_Response_200_Data_Topic:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'Topic type
-
-
-            Enum: `"FREE_TEXT"`, `"REASON_CODE"`
-
-            '
-        value:
-          type: string
-          description: Topic value
-      required:
-      - type
-      - value
-    M11_Response_200_Data_Messages_To:
-      type: object
-      properties:
-        display_name:
-          type: string
-          description: Participant display name
-        id:
-          type: string
-          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
-        type:
-          type: string
-          description: 'Participant type
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-            '
-      required:
-      - display_name
-      - type
-    M11_Response_200_Data_NoStoreReplyNeeded:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
-          description: No store reply needed action date
-        user_type:
-          type: string
-          description: 'Entity that operated "no store reply needed" action.
-
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`
-
-            '
-      required:
-      - date
-      - user_type
-    M10_Response_200:
-      type: object
-      properties:
-        authorized_participants:
-          type: array
-          description: 'Thread authorized participants<br/>
-
-            Those are the participants who are authorized to join the thread.
-
-            '
-          items:
-            $ref: '#/components/schemas/M10_Response_200_AuthorizedParticipants'
-        current_participants:
-          type: array
-          description: 'Thread current participants<br/>
-
-            Those are the participants who have actually participated in the thread, meaning that they are either sender or receivers of at least one message of the thread.<br/>
-
-            These participants must be on the list of the <code>authorized_participants</code>
-
-            '
-          items:
-            $ref: '#/components/schemas/M10_Response_200_CurrentParticipants'
-        customer_organization:
-          $ref: '#/components/schemas/M10_Response_200_CustomerOrganization'
-          description: Data related to the customer organization (B2B transactions)
-        date_created:
-          type: string
-          format: date-time
-          description: Thread created date
-        date_updated:
-          type: string
-          format: date-time
-          description: Thread updated date
-        entities:
-          type: array
-          description: Thread entities
-          items:
-            $ref: '#/components/schemas/M10_Response_200_Entities'
-        id:
-          type: string
-          description: Thread id
-        messages:
-          type: array
-          description: Thread messages
-          items:
-            $ref: '#/components/schemas/M10_Response_200_Messages'
-        metadata:
-          $ref: '#/components/schemas/M10_Response_200_Metadata'
-          description: Thread metadata
-        no_store_reply_needed:
-          type: array
-          description: '    Thread "no store reply needed" actions.
-
-            '
-          items:
-            $ref: '#/components/schemas/M10_Response_200_NoStoreReplyNeeded'
-        topic:
-          $ref: '#/components/schemas/M10_Response_200_Topic'
-          description: Thread topic
-      required:
-      - authorized_participants
-      - current_participants
-      - date_created
-      - date_updated
-      - id
-      - messages
-      - metadata
-      - topic
-    M11_Response_200_Data_AuthorizedParticipants:
-      type: object
-      properties:
-        display_name:
-          type: string
-          description: Participant display name
-        id:
-          type: string
-          description: Participant id<br/>When <code>type</code> equals <code>OPERATOR</code>, no id will be returned.
-        type:
-          type: string
-          description: 'Participant type
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-            '
-      required:
-      - display_name
-      - type
-    M14_Request_MultipartFormData_ThreadInput_Topic:
-      type: object
-      description: Topic of the thread
-      discriminator:
-        mapping:
-          FREE_TEXT: '#/components/schemas/M14_Request_MultipartFormData_ThreadInput_Topic_FreeText'
-          REASON_CODE: '#/components/schemas/M14_Request_MultipartFormData_ThreadInput_Topic_ReasonCode'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"FREE_TEXT"`, `"REASON_CODE"`
-
-            '
-        value:
-          type: string
     M14_Request_MultipartFormData_ThreadInput:
       type: object
       properties:
@@ -2301,15 +2285,6 @@ components:
       - body
       - entity
       - topic
-    M14_Response_201:
-      type: object
-      properties:
-        message_id:
-          type: string
-          description: Id of the message
-        thread_id:
-          type: string
-          description: Id of the thread
     OR42_Request_2:
       type: object
       properties:
@@ -2344,6 +2319,31 @@ components:
       - to_customer
       - to_operator
       - to_shop
+    M14_Request_MultipartFormData_ThreadInput_Topic:
+      type: object
+      description: Topic of the thread
+      discriminator:
+        mapping:
+          FREE_TEXT: '#/components/schemas/M14_Request_MultipartFormData_ThreadInput_Topic_FreeText'
+          REASON_CODE: '#/components/schemas/M14_Request_MultipartFormData_ThreadInput_Topic_ReasonCode'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"FREE_TEXT"`, `"REASON_CODE"`
+
+            '
+        value:
+          type: string
+    M14_Response_201:
+      type: object
+      properties:
+        message_id:
+          type: string
+          description: Id of the message
+        thread_id:
+          type: string
+          description: Id of the thread
     M14_Request_MultipartFormData_ThreadInput_Entity:
       type: object
       description: Entity related to the thread
@@ -2353,29 +2353,6 @@ components:
           description: Entity type
       required:
       - type
-    SOR43_Request_MultipartFormData_ThreadInput:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The message body
-          maxLength: 10000
-          minLength: 3
-        to:
-          type: array
-          description: The message recipients
-          items:
-            type: string
-            description: 'Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
-
-              '
-        topic:
-          $ref: '#/components/schemas/SOR43_Request_MultipartFormData_ThreadInput_Topic'
-          description: Thread topic<br><br>The topic can either have a free or a fixed value depending on the topic type
-      required:
-      - body
-      - to
-      - topic
     SOF43_Request_MultipartFormData_ThreadInput:
       type: object
       properties:
@@ -2399,50 +2376,6 @@ components:
       - body
       - to
       - topic
-    SOR43_Request_MultipartFormData_ThreadInput_Topic:
-      type: object
-      description: Thread topic<br><br>The topic can either have a free or a fixed value depending on the topic type
-      properties:
-        type:
-          type: string
-          description: 'Topic type
-
-
-            Enum: `"FREE_TEXT"`, `"REASON_CODE"`
-
-            '
-        value:
-          type: string
-          description: 'Topic value, which depends on the <code>type</code>:<ul><li>When <code>type</code> equals <code>FREE_TEXT</code>: the topic value is free</li><li>When <code>type</code> equals <code>REASON_CODE</code>: the topic value must be a reason code (example: <code>MPS_ORDER_MESSAGING_ISSUE</code>)</li></ul>'
-          maxLength: 200
-          minLength: 3
-      required:
-      - type
-      - value
-    SOF43_Response_201:
-      type: object
-      properties:
-        message_id:
-          type: string
-          description: Id of the first message created on the thread
-        thread_id:
-          type: string
-          description: Id of the created thread
-      required:
-      - message_id
-      - thread_id
-    SOR43_Response_201:
-      type: object
-      properties:
-        message_id:
-          type: string
-          description: Id of the first message created on the thread
-        thread_id:
-          type: string
-          description: Id of the created thread
-      required:
-      - message_id
-      - thread_id
     SOF43_Request_MultipartFormData_ThreadInput_Topic:
       type: object
       description: Thread topic
@@ -2463,6 +2396,73 @@ components:
       required:
       - type
       - value
+    SOR43_Response_201:
+      type: object
+      properties:
+        message_id:
+          type: string
+          description: Id of the first message created on the thread
+        thread_id:
+          type: string
+          description: Id of the created thread
+      required:
+      - message_id
+      - thread_id
+    SOF43_Response_201:
+      type: object
+      properties:
+        message_id:
+          type: string
+          description: Id of the first message created on the thread
+        thread_id:
+          type: string
+          description: Id of the created thread
+      required:
+      - message_id
+      - thread_id
+    SOR43_Request_MultipartFormData_ThreadInput_Topic:
+      type: object
+      description: Thread topic<br><br>The topic can either have a free or a fixed value depending on the topic type
+      properties:
+        type:
+          type: string
+          description: 'Topic type
+
+
+            Enum: `"FREE_TEXT"`, `"REASON_CODE"`
+
+            '
+        value:
+          type: string
+          description: 'Topic value, which depends on the <code>type</code>:<ul><li>When <code>type</code> equals <code>FREE_TEXT</code>: the topic value is free</li><li>When <code>type</code> equals <code>REASON_CODE</code>: the topic value must be a reason code (example: <code>MPS_ORDER_MESSAGING_ISSUE</code>)</li></ul>'
+          maxLength: 200
+          minLength: 3
+      required:
+      - type
+      - value
+    SOR43_Request_MultipartFormData_ThreadInput:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The message body
+          maxLength: 10000
+          minLength: 3
+        to:
+          type: array
+          description: The message recipients
+          items:
+            type: string
+            description: 'Enum: `"OPERATOR"`, `"SHOP"`, `"CUSTOMER"`
+
+              '
+        topic:
+          $ref: '#/components/schemas/SOR43_Request_MultipartFormData_ThreadInput_Topic'
+          description: Thread topic<br><br>The topic can either have a free or a fixed value depending on the topic type
+      required:
+      - body
+      - to
+      - topic
   securitySchemes:
     Front-Bearer-Token:
       bearerFormat: JWT

@@ -275,6 +275,63 @@ paths:
       - Shipments
 components:
   schemas:
+    CreateShipmentItemRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Seller product identifier
+          examples:
+          - SELLER_ID_1
+          minLength: 1
+        order_line_id:
+          type: string
+          description: Order line identifier
+          examples:
+          - 0024_COMMERCIAL_ID-A-1
+          minLength: 1
+        quantity:
+          type: integer
+          description: Product quantity to ship
+          examples:
+          - '10'
+          minimum: 1
+      required:
+      - quantity
+    CreateShipmentRequest:
+      type: object
+      description: Shipment object and its items' details
+      properties:
+        carrier:
+          type: string
+          description: "Carrier company name. For example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ..."
+          examples:
+          - DHL Express
+          minLength: 1
+        items:
+          type: array
+          description: Shipment items
+          items:
+            $ref: '#/components/schemas/CreateShipmentItemRequest'
+        return_tracking_number:
+          type: string
+          description: Return shipment tracking number is required only for marketplaces that expect return tracking information when the shipment is created. If the marketplace doesn’t require it to create the shipment, the value won’t be synchronized.
+          examples:
+          - '78910'
+          minLength: 1
+        tracking_number:
+          type: string
+          description: Carrier tracking number
+          examples:
+          - '123456'
+          minLength: 1
+        tracking_url:
+          type: string
+          description: Carrier tracking URL
+          examples:
+          - https://wwwapps.ups.com/WebTracking/track
+      required:
+      - items
     V2CreateShipmentRequest:
       type: object
       description: Shipment object and its items' details
@@ -315,6 +372,26 @@ components:
           minLength: 1
       required:
       - items
+    AsynchronousActionResponse:
+      type: object
+      properties:
+        action_id:
+          type: string
+          description: 'The unique identifier for the asynchronous action. It should be used with the [v2-getActionStatus API](#operation/v2-getActionStatus) to retrieve current action status and potential errors.
+
+            '
+          examples:
+          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+        tracking_id:
+          type: string
+          deprecated: true
+          description: '**Deprecated:** This field was previously used to obtain the action ID. It has been replaced by `action_id` and contains the same value. It is retained for backward compatibility.
+
+            '
+          examples:
+          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+      required:
+      - action_id
     Error:
       type: object
       properties:
@@ -341,65 +418,6 @@ components:
       required:
       - code
       - message
-    CreateShipmentRequest:
-      type: object
-      description: Shipment object and its items' details
-      properties:
-        carrier:
-          type: string
-          description: "Carrier company name. For example:\n  - <code>UPS</code>\n  - <code>DHL Express</code>\n  - <code>Amazon Logistics UK</code>\n  - <code>FedEx</code>\n  - <code>China Post</code>\n  - ..."
-          examples:
-          - DHL Express
-          minLength: 1
-        items:
-          type: array
-          description: Shipment items
-          items:
-            $ref: '#/components/schemas/CreateShipmentItemRequest'
-        return_tracking_number:
-          type: string
-          description: Return shipment tracking number is required only for marketplaces that expect return tracking information when the shipment is created. If the marketplace doesn’t require it to create the shipment, the value won’t be synchronized.
-          examples:
-          - '78910'
-          minLength: 1
-        tracking_number:
-          type: string
-          description: Carrier tracking number
-          examples:
-          - '123456'
-          minLength: 1
-        tracking_url:
-          type: string
-          description: Carrier tracking URL
-          examples:
-          - https://wwwapps.ups.com/WebTracking/track
-      required:
-      - items
-    ShipmentItemResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Seller product identifier on the channel
-          examples:
-          - SELLER_ID_1
-          minLength: 1
-        order_line_id:
-          type: string
-          description: Order line identifier
-          examples:
-          - 0024_COMMERCIAL_ID-A-1
-          minLength: 1
-        quantity:
-          type: integer
-          description: Product quantity to ship
-          examples:
-          - '10'
-          minimum: 1
-      required:
-      - id
-      - order_line_id
-      - quantity
     ShipmentResponse:
       type: object
       properties:
@@ -452,12 +470,12 @@ components:
       - id
       - items
       - updated_at
-    CreateShipmentItemRequest:
+    ShipmentItemResponse:
       type: object
       properties:
         id:
           type: string
-          description: Seller product identifier
+          description: Seller product identifier on the channel
           examples:
           - SELLER_ID_1
           minLength: 1
@@ -474,27 +492,9 @@ components:
           - '10'
           minimum: 1
       required:
+      - id
+      - order_line_id
       - quantity
-    AsynchronousActionResponse:
-      type: object
-      properties:
-        action_id:
-          type: string
-          description: 'The unique identifier for the asynchronous action. It should be used with the [v2-getActionStatus API](#operation/v2-getActionStatus) to retrieve current action status and potential errors.
-
-            '
-          examples:
-          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
-        tracking_id:
-          type: string
-          deprecated: true
-          description: '**Deprecated:** This field was previously used to obtain the action ID. It has been replaced by `action_id` and contains the same value. It is retained for backward compatibility.
-
-            '
-          examples:
-          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
-      required:
-      - action_id
     ErrorItem:
       type: object
       properties:

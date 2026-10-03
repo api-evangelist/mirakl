@@ -324,70 +324,6 @@ paths:
       - Product Bindings
 components:
   schemas:
-    DeleteProductBindings_Response_200:
-      type: object
-      description: Response from deleting product bindings
-      properties:
-        deletedBaseProducts:
-          type: integer
-          format: int32
-          description: Number of base product bindings deleted
-        deletedVariants:
-          type: integer
-          format: int32
-          description: Number of variant bindings deleted
-        errors:
-          type: array
-          description: Errors that occurred during deletion
-          items:
-            $ref: '#/components/schemas/DeleteProductBindings_Response_200_Errors'
-    UpdateProductBindings_Request:
-      type: object
-      description: Request to update product bindings
-      properties:
-        products:
-          type: array
-          description: The base products to update
-          items:
-            $ref: '#/components/schemas/UpdateProductBindings_Request_Products'
-        variants:
-          type: array
-          description: The variants to update
-          items:
-            $ref: '#/components/schemas/UpdateProductBindings_Request_Variants'
-    ImportProductBindings_Request_Products_Variants:
-      type: object
-      description: A variant to import as a variant binding
-      properties:
-        inventoryItemGid:
-          type: string
-          description: The Shopify GID of the inventory item
-        operatorManaged:
-          type: boolean
-          description: Whether the variant is operator-managed. Defaults to true when not specified
-        shopifyVariantGid:
-          type: string
-          description: The Shopify GID of the product variant
-        sku:
-          type: string
-          description: The SKU of the variant in Mirakl
-      required:
-      - inventoryItemGid
-      - shopifyVariantGid
-      - sku
-    ListProductBindings_Response_200:
-      type: object
-      description: Paginated list of product bindings
-      properties:
-        bindings:
-          type: array
-          description: The product bindings
-          items:
-            $ref: '#/components/schemas/ListProductBindings_Response_200_Bindings'
-        totalCount:
-          type: integer
-          format: int64
-          description: Total number of matching entries
     ImportProductBindings_Response_200:
       type: object
       description: Response from importing product bindings
@@ -423,88 +359,6 @@ components:
         value:
           type: string
           description: The identifier value
-    UpdateProductBindings_Response_200:
-      type: object
-      description: Response from updating product bindings
-      properties:
-        products:
-          $ref: '#/components/schemas/UpdateProductBindings_Response_200_Products'
-          description: Result of the base product updates
-        variants:
-          $ref: '#/components/schemas/UpdateProductBindings_Response_200_Variants'
-          description: Result of the variant updates
-    UpdateProductBindings_Response_200_Variants_Errors:
-      type: object
-      description: An error that occurred during product binding update
-      properties:
-        message:
-          type: string
-          description: The error message
-        shopifyProductGid:
-          type: string
-          description: The Shopify GID of the product that caused the error
-        shopifyVariantGid:
-          type: string
-          description: The Shopify GID of the product variant that caused the error
-        sku:
-          type: string
-          description: The SKU that caused the error
-        variantGroupCode:
-          type: string
-          description: The variant group code of the product entry that caused the error
-    UpdateProductBindings_Request_Products:
-      type: object
-      description: A base product binding entry to update. Exactly one of shopifyProductGid/variantGroupCode is required.
-      properties:
-        operatorManaged:
-          type: boolean
-          description: Whether the operator manages pricing for this product in Shopify
-        shopifyProductGid:
-          type: string
-          description: The Shopify GID of the product
-        variantGroupCode:
-          type: string
-          description: The variant group code of the product
-    UpdateProductBindings_Response_200_Products:
-      type: object
-      description: Result of updating base products
-      properties:
-        errors:
-          type: array
-          description: Errors that occurred during update
-          items:
-            $ref: '#/components/schemas/UpdateProductBindings_Response_200_Products_Errors'
-        updatedBaseProducts:
-          type: integer
-          format: int32
-          description: Number of base product bindings updated
-    UpdateProductBindings_Request_Variants:
-      type: object
-      description: A variant binding entry to update. Exactly one of shopifyVariantGid/sku is required.
-      properties:
-        operatorManaged:
-          type: boolean
-          description: Whether the operator manages pricing for this variant in Shopify
-        shopifyVariantGid:
-          type: string
-          description: The Shopify GID of the variant
-        sku:
-          type: string
-          description: The SKU of the variant
-    ListProductBindings_Response_200_Bindings:
-      type: object
-      description: A product binding entry
-      discriminator:
-        mapping:
-          BASE_PRODUCT: '#/components/schemas/ListProductBindings_Response_200_Bindings_BaseProduct'
-          VARIANT: '#/components/schemas/ListProductBindings_Response_200_Bindings_Variant'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'Enum: `"BASE_PRODUCT"`, `"VARIANT"`
-
-            '
     DeleteProductBindings_Request:
       type: object
       description: Request to delete product bindings
@@ -516,86 +370,6 @@ components:
             $ref: '#/components/schemas/DeleteProductBindings_Request_Entries'
       required:
       - entries
-    ImportProductBindings_Response_200_Errors:
-      type: object
-      description: An error that occurred during product binding import
-      properties:
-        message:
-          type: string
-          description: The error message
-        shopifyProductGid:
-          type: string
-          description: The Shopify GID of the product that caused the error
-        shopifyVariantGid:
-          type: string
-          description: The Shopify GID of the product variant that caused the error, null for base product-level errors
-        sku:
-          type: string
-          description: The SKU that caused the error, null for base product-level errors
-        variantGroupCode:
-          type: string
-          description: The variant group code of the product entry that caused the error
-    ImportProductBindings_Request:
-      type: object
-      description: Request to import product bindings
-      properties:
-        products:
-          type: array
-          description: The products to import
-          items:
-            $ref: '#/components/schemas/ImportProductBindings_Request_Products'
-      required:
-      - products
-    UpdateProductBindings_Response_200_Variants:
-      type: object
-      description: Result of updating variants
-      properties:
-        errors:
-          type: array
-          description: Errors that occurred during update
-          items:
-            $ref: '#/components/schemas/UpdateProductBindings_Response_200_Variants_Errors'
-        updatedVariants:
-          type: integer
-          format: int32
-          description: Number of variant bindings updated
-    UpdateProductBindings_Response_200_Products_Errors:
-      type: object
-      description: An error that occurred during product binding update
-      properties:
-        message:
-          type: string
-          description: The error message
-        shopifyProductGid:
-          type: string
-          description: The Shopify GID of the product that caused the error
-        shopifyVariantGid:
-          type: string
-          description: The Shopify GID of the product variant that caused the error
-        sku:
-          type: string
-          description: The SKU that caused the error
-        variantGroupCode:
-          type: string
-          description: The variant group code of the product entry that caused the error
-    DeleteProductBindings_Request_Entries:
-      type: object
-      description: A delete instruction for a product binding
-      properties:
-        identifierType:
-          type: string
-          description: 'The type of identifier used to find the binding to delete
-
-
-            Enum: `"VARIANT_GROUP_CODE"`, `"SKU"`, `"SHOPIFY_GID"`, `"MIRAKL_PRODUCT_ID"`
-
-            '
-        value:
-          type: string
-          description: The value of the identifier
-      required:
-      - identifierType
-      - value
     ImportProductBindings_Request_Products:
       type: object
       description: A product and its variants to import as product bindings
@@ -618,6 +392,232 @@ components:
       - shopifyProductGid
       - variantGroupCode
       - variants
+    UpdateProductBindings_Response_200_Variants_Errors:
+      type: object
+      description: An error that occurred during product binding update
+      properties:
+        message:
+          type: string
+          description: The error message
+        shopifyProductGid:
+          type: string
+          description: The Shopify GID of the product that caused the error
+        shopifyVariantGid:
+          type: string
+          description: The Shopify GID of the product variant that caused the error
+        sku:
+          type: string
+          description: The SKU that caused the error
+        variantGroupCode:
+          type: string
+          description: The variant group code of the product entry that caused the error
+    UpdateProductBindings_Response_200_Products_Errors:
+      type: object
+      description: An error that occurred during product binding update
+      properties:
+        message:
+          type: string
+          description: The error message
+        shopifyProductGid:
+          type: string
+          description: The Shopify GID of the product that caused the error
+        shopifyVariantGid:
+          type: string
+          description: The Shopify GID of the product variant that caused the error
+        sku:
+          type: string
+          description: The SKU that caused the error
+        variantGroupCode:
+          type: string
+          description: The variant group code of the product entry that caused the error
+    UpdateProductBindings_Response_200:
+      type: object
+      description: Response from updating product bindings
+      properties:
+        products:
+          $ref: '#/components/schemas/UpdateProductBindings_Response_200_Products'
+          description: Result of the base product updates
+        variants:
+          $ref: '#/components/schemas/UpdateProductBindings_Response_200_Variants'
+          description: Result of the variant updates
+    UpdateProductBindings_Request_Products:
+      type: object
+      description: A base product binding entry to update. Exactly one of shopifyProductGid/variantGroupCode is required.
+      properties:
+        operatorManaged:
+          type: boolean
+          description: Whether the operator manages pricing for this product in Shopify
+        shopifyProductGid:
+          type: string
+          description: The Shopify GID of the product
+        variantGroupCode:
+          type: string
+          description: The variant group code of the product
+    ImportProductBindings_Request_Products_Variants:
+      type: object
+      description: A variant to import as a variant binding
+      properties:
+        inventoryItemGid:
+          type: string
+          description: The Shopify GID of the inventory item
+        operatorManaged:
+          type: boolean
+          description: Whether the variant is operator-managed. Defaults to true when not specified
+        shopifyVariantGid:
+          type: string
+          description: The Shopify GID of the product variant
+        sku:
+          type: string
+          description: The SKU of the variant in Mirakl
+      required:
+      - inventoryItemGid
+      - shopifyVariantGid
+      - sku
+    UpdateProductBindings_Request_Variants:
+      type: object
+      description: A variant binding entry to update. Exactly one of shopifyVariantGid/sku is required.
+      properties:
+        operatorManaged:
+          type: boolean
+          description: Whether the operator manages pricing for this variant in Shopify
+        shopifyVariantGid:
+          type: string
+          description: The Shopify GID of the variant
+        sku:
+          type: string
+          description: The SKU of the variant
+    UpdateProductBindings_Request:
+      type: object
+      description: Request to update product bindings
+      properties:
+        products:
+          type: array
+          description: The base products to update
+          items:
+            $ref: '#/components/schemas/UpdateProductBindings_Request_Products'
+        variants:
+          type: array
+          description: The variants to update
+          items:
+            $ref: '#/components/schemas/UpdateProductBindings_Request_Variants'
+    UpdateProductBindings_Response_200_Products:
+      type: object
+      description: Result of updating base products
+      properties:
+        errors:
+          type: array
+          description: Errors that occurred during update
+          items:
+            $ref: '#/components/schemas/UpdateProductBindings_Response_200_Products_Errors'
+        updatedBaseProducts:
+          type: integer
+          format: int32
+          description: Number of base product bindings updated
+    ImportProductBindings_Request:
+      type: object
+      description: Request to import product bindings
+      properties:
+        products:
+          type: array
+          description: The products to import
+          items:
+            $ref: '#/components/schemas/ImportProductBindings_Request_Products'
+      required:
+      - products
+    DeleteProductBindings_Response_200:
+      type: object
+      description: Response from deleting product bindings
+      properties:
+        deletedBaseProducts:
+          type: integer
+          format: int32
+          description: Number of base product bindings deleted
+        deletedVariants:
+          type: integer
+          format: int32
+          description: Number of variant bindings deleted
+        errors:
+          type: array
+          description: Errors that occurred during deletion
+          items:
+            $ref: '#/components/schemas/DeleteProductBindings_Response_200_Errors'
+    ImportProductBindings_Response_200_Errors:
+      type: object
+      description: An error that occurred during product binding import
+      properties:
+        message:
+          type: string
+          description: The error message
+        shopifyProductGid:
+          type: string
+          description: The Shopify GID of the product that caused the error
+        shopifyVariantGid:
+          type: string
+          description: The Shopify GID of the product variant that caused the error, null for base product-level errors
+        sku:
+          type: string
+          description: The SKU that caused the error, null for base product-level errors
+        variantGroupCode:
+          type: string
+          description: The variant group code of the product entry that caused the error
+    DeleteProductBindings_Request_Entries:
+      type: object
+      description: A delete instruction for a product binding
+      properties:
+        identifierType:
+          type: string
+          description: 'The type of identifier used to find the binding to delete
+
+
+            Enum: `"VARIANT_GROUP_CODE"`, `"SKU"`, `"SHOPIFY_GID"`, `"MIRAKL_PRODUCT_ID"`
+
+            '
+        value:
+          type: string
+          description: The value of the identifier
+      required:
+      - identifierType
+      - value
+    UpdateProductBindings_Response_200_Variants:
+      type: object
+      description: Result of updating variants
+      properties:
+        errors:
+          type: array
+          description: Errors that occurred during update
+          items:
+            $ref: '#/components/schemas/UpdateProductBindings_Response_200_Variants_Errors'
+        updatedVariants:
+          type: integer
+          format: int32
+          description: Number of variant bindings updated
+    ListProductBindings_Response_200:
+      type: object
+      description: Paginated list of product bindings
+      properties:
+        bindings:
+          type: array
+          description: The product bindings
+          items:
+            $ref: '#/components/schemas/ListProductBindings_Response_200_Bindings'
+        totalCount:
+          type: integer
+          format: int64
+          description: Total number of matching entries
+    ListProductBindings_Response_200_Bindings:
+      type: object
+      description: A product binding entry
+      discriminator:
+        mapping:
+          BASE_PRODUCT: '#/components/schemas/ListProductBindings_Response_200_Bindings_BaseProduct'
+          VARIANT: '#/components/schemas/ListProductBindings_Response_200_Bindings_Variant'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'Enum: `"BASE_PRODUCT"`, `"VARIANT"`
+
+            '
   securitySchemes:
     Bearer:
       bearerFormat: JWT

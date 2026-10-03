@@ -134,34 +134,6 @@ paths:
       url: https://account.mirakl.net/api/channel-platform
 components:
   schemas:
-    SELLER_ACCOUNT_STORE_CREATE_Request_Stores:
-      type: object
-      description: Stores to create
-      properties:
-        access_expiration_date:
-          type: string
-          format: date-time
-          description: Access expiration date
-        channel_id:
-          type: string
-          description: Channel id
-        channel_store_id:
-          type: string
-          description: Channel store id
-        name:
-          type: string
-          description: Store name
-        state:
-          type: string
-          description: Store state
-        suspension_type:
-          type: string
-          description: Store suspension type
-      required:
-      - channel_id
-      - channel_store_id
-      - name
-      - state
     SELLER_ACCOUNT_STORE_UPDATE_Request:
       type: object
       properties:
@@ -191,32 +163,34 @@ components:
             $ref: '#/components/schemas/SELLER_ACCOUNT_STORE_CREATE_Request_Stores'
       required:
       - stores
-    Error:
+    SELLER_ACCOUNT_STORE_CREATE_Request_Stores:
       type: object
+      description: Stores to create
       properties:
-        code:
+        access_expiration_date:
           type: string
-          description: Error code (immutable)
-          examples:
-          - DATA_NOT_FOUND
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        message:
+          format: date-time
+          description: Access expiration date
+        channel_id:
           type: string
-          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - An error occurred while processing your request
+          description: Channel id
+        channel_store_id:
+          type: string
+          description: Channel store id
+        name:
+          type: string
+          description: Store name
+        state:
+          type: string
+          description: Store state
+        suspension_type:
+          type: string
+          description: Store suspension type
       required:
-      - code
-      - message
+      - channel_id
+      - channel_store_id
+      - name
+      - state
     QualitySuspensionReason:
       type: object
       properties:
@@ -267,6 +241,32 @@ components:
             '
       required:
       - rule
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        message:
+          type: string
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - An error occurred while processing your request
+      required:
+      - code
+      - message
     BusinessInformationInput:
       type: object
       properties:

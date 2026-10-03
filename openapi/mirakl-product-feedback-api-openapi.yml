@@ -89,6 +89,30 @@ paths:
       tags:
       - Product Feedback
 components:
+  parameters:
+    channel_id_path:
+      description: Connect Channel identifier
+      explode: false
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: string
+        examples:
+        - '1234'
+        minLength: 1
+      style: simple
+    store_id_path:
+      deprecated: true
+      description: Store identifier in the channel
+      explode: false
+      in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
+        minLength: 1
+      style: simple
   schemas:
     Diagnostic:
       type: object
@@ -206,30 +230,6 @@ components:
           minItems: 1
       required:
       - store_catalog_items
-  parameters:
-    channel_id_path:
-      description: Connect Channel identifier
-      explode: false
-      in: path
-      name: channel_id
-      required: true
-      schema:
-        type: string
-        examples:
-        - '1234'
-        minLength: 1
-      style: simple
-    store_id_path:
-      deprecated: true
-      description: Store identifier in the channel
-      explode: false
-      in: path
-      name: store_id
-      required: true
-      schema:
-        type: string
-        minLength: 1
-      style: simple
   securitySchemes:
     Bearer:
       bearerFormat: JWT

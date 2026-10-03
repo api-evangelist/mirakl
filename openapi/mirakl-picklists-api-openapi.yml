@@ -179,22 +179,6 @@ paths:
       url: https://your-instance.mirakl.net
 components:
   schemas:
-    PL11_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/PL11_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
     PL11_Response_200_Data_OrderLines:
       type: object
       properties:
@@ -217,6 +201,22 @@ components:
       required:
       - offer_id
       - quantity
+    PL11_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/PL11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
     PL11_Response_200_Data:
       type: object
       properties:

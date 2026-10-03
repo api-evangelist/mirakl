@@ -829,222 +829,7 @@ paths:
       - Synchronization Errors
 components:
   schemas:
-    ListProductRecoverableErrors_Response_200:
-      type: object
-      description: Response representing all the recoverable error details
-      properties:
-        recoverableErrors:
-          type: array
-          description: List of recoverable error details
-          items:
-            $ref: '#/components/schemas/ListProductRecoverableErrors_Response_200_RecoverableErrors'
-    ListReturnRecoverableErrors_Response_200_RecoverableErrors_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    ListProductRecoverableErrors_Response_200_RecoverableErrors:
-      type: object
-      description: Response representing a recoverable error details
-      properties:
-        attempts:
-          type: integer
-          format: int32
-          description: Number of attempts made to process the error
-          example: 3
-        data:
-          type: object
-          description: Additional data associated with the error
-        discriminant:
-          type: string
-          description: Unique error discriminator
-        firstAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the first recorded attempt
-          example: '2023-10-30T12:00:00Z'
-        lastAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the last attempt
-          example: '2023-10-30T12:34:56Z'
-        lastError:
-          $ref: '#/components/schemas/ListProductRecoverableErrors_Response_200_RecoverableErrors_LastError'
-          description: Details of the last error
-        nextAttempt:
-          type: string
-          format: date-time
-          description: Timestamp for the next retry attempt
-          example: '2023-10-31T00:00:00Z'
-    ListPromotionRecoverableErrors_Response_200_RecoverableErrors:
-      type: object
-      description: Response representing a recoverable error details
-      properties:
-        attempts:
-          type: integer
-          format: int32
-          description: Number of attempts made to process the error
-          example: 3
-        data:
-          type: object
-          description: Additional data associated with the error
-        discriminant:
-          type: string
-          description: Unique error discriminator
-        firstAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the first recorded attempt
-          example: '2023-10-30T12:00:00Z'
-        lastAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the last attempt
-          example: '2023-10-30T12:34:56Z'
-        lastError:
-          $ref: '#/components/schemas/ListPromotionRecoverableErrors_Response_200_RecoverableErrors_LastError'
-          description: Details of the last error
-        nextAttempt:
-          type: string
-          format: date-time
-          description: Timestamp for the next retry attempt
-          example: '2023-10-31T00:00:00Z'
     GetPromotionRecoverableError_Response_200_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    ListOrderRecoverableErrors_Response_200_RecoverableErrors:
-      type: object
-      description: Response representing a recoverable error details
-      properties:
-        attempts:
-          type: integer
-          format: int32
-          description: Number of attempts made to process the error
-          example: 3
-        data:
-          type: object
-          description: Additional data associated with the error
-        discriminant:
-          type: string
-          description: Unique error discriminator
-        firstAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the first recorded attempt
-          example: '2023-10-30T12:00:00Z'
-        lastAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the last attempt
-          example: '2023-10-30T12:34:56Z'
-        lastError:
-          $ref: '#/components/schemas/ListOrderRecoverableErrors_Response_200_RecoverableErrors_LastError'
-          description: Details of the last error
-        nextAttempt:
-          type: string
-          format: date-time
-          description: Timestamp for the next retry attempt
-          example: '2023-10-31T00:00:00Z'
-    ListShopRecoverableErrors_Response_200:
-      type: object
-      description: Response representing all the recoverable error details
-      properties:
-        recoverableErrors:
-          type: array
-          description: List of recoverable error details
-          items:
-            $ref: '#/components/schemas/ListShopRecoverableErrors_Response_200_RecoverableErrors'
-    ListOfferRecoverableErrors_Response_200_RecoverableErrors_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    ListShopRecoverableErrors_Response_200_RecoverableErrors_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    ListPromotionRecoverableErrors_Response_200:
-      type: object
-      description: Response representing all the recoverable error details
-      properties:
-        recoverableErrors:
-          type: array
-          description: List of recoverable error details
-          items:
-            $ref: '#/components/schemas/ListPromotionRecoverableErrors_Response_200_RecoverableErrors'
-    ListOrderRecoverableErrors_Response_200_RecoverableErrors_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    ListShipmentRecoverableErrors_Response_200:
-      type: object
-      description: Response representing all the recoverable error details
-      properties:
-        recoverableErrors:
-          type: array
-          description: List of recoverable error details
-          items:
-            $ref: '#/components/schemas/ListShipmentRecoverableErrors_Response_200_RecoverableErrors'
-    ListPromotionRecoverableErrors_Response_200_RecoverableErrors_LastError:
       type: object
       description: Details of a recoverable error
       properties:
@@ -1087,169 +872,6 @@ components:
           example: '2023-10-30T12:34:56Z'
         lastError:
           $ref: '#/components/schemas/GetOfferRecoverableError_Response_200_LastError'
-          description: Details of the last error
-        nextAttempt:
-          type: string
-          format: date-time
-          description: Timestamp for the next retry attempt
-          example: '2023-10-31T00:00:00Z'
-    GetShopRecoverableError_Response_200_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    GetShipmentRecoverableError_Response_200_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    ListOfferRecoverableErrors_Response_200_RecoverableErrors:
-      type: object
-      description: Response representing a recoverable error details
-      properties:
-        attempts:
-          type: integer
-          format: int32
-          description: Number of attempts made to process the error
-          example: 3
-        data:
-          type: object
-          description: Additional data associated with the error
-        discriminant:
-          type: string
-          description: Unique error discriminator
-        firstAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the first recorded attempt
-          example: '2023-10-30T12:00:00Z'
-        lastAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the last attempt
-          example: '2023-10-30T12:34:56Z'
-        lastError:
-          $ref: '#/components/schemas/ListOfferRecoverableErrors_Response_200_RecoverableErrors_LastError'
-          description: Details of the last error
-        nextAttempt:
-          type: string
-          format: date-time
-          description: Timestamp for the next retry attempt
-          example: '2023-10-31T00:00:00Z'
-    GetProductRecoverableError_Response_200_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    GetShopRecoverableError_Response_200:
-      type: object
-      description: Response representing a recoverable error details
-      properties:
-        attempts:
-          type: integer
-          format: int32
-          description: Number of attempts made to process the error
-          example: 3
-        data:
-          type: object
-          description: Additional data associated with the error
-        discriminant:
-          type: string
-          description: Unique error discriminator
-        firstAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the first recorded attempt
-          example: '2023-10-30T12:00:00Z'
-        lastAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the last attempt
-          example: '2023-10-30T12:34:56Z'
-        lastError:
-          $ref: '#/components/schemas/GetShopRecoverableError_Response_200_LastError'
-          description: Details of the last error
-        nextAttempt:
-          type: string
-          format: date-time
-          description: Timestamp for the next retry attempt
-          example: '2023-10-31T00:00:00Z'
-    ListProductRecoverableErrors_Response_200_RecoverableErrors_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    GetOrderRecoverableError_Response_200:
-      type: object
-      description: Response representing a recoverable error details
-      properties:
-        attempts:
-          type: integer
-          format: int32
-          description: Number of attempts made to process the error
-          example: 3
-        data:
-          type: object
-          description: Additional data associated with the error
-        discriminant:
-          type: string
-          description: Unique error discriminator
-        firstAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the first recorded attempt
-          example: '2023-10-30T12:00:00Z'
-        lastAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the last attempt
-          example: '2023-10-30T12:34:56Z'
-        lastError:
-          $ref: '#/components/schemas/GetOrderRecoverableError_Response_200_LastError'
           description: Details of the last error
         nextAttempt:
           type: string
@@ -1322,7 +944,25 @@ components:
           format: date-time
           description: Timestamp for the next retry attempt
           example: '2023-10-31T00:00:00Z'
-    GetReturnRecoverableError_Response_200:
+    ListShopRecoverableErrors_Response_200:
+      type: object
+      description: Response representing all the recoverable error details
+      properties:
+        recoverableErrors:
+          type: array
+          description: List of recoverable error details
+          items:
+            $ref: '#/components/schemas/ListShopRecoverableErrors_Response_200_RecoverableErrors'
+    ListShipmentRecoverableErrors_Response_200:
+      type: object
+      description: Response representing all the recoverable error details
+      properties:
+        recoverableErrors:
+          type: array
+          description: List of recoverable error details
+          items:
+            $ref: '#/components/schemas/ListShipmentRecoverableErrors_Response_200_RecoverableErrors'
+    GetOrderRecoverableError_Response_200:
       type: object
       description: Response representing a recoverable error details
       properties:
@@ -1348,112 +988,13 @@ components:
           description: Timestamp of the last attempt
           example: '2023-10-30T12:34:56Z'
         lastError:
-          $ref: '#/components/schemas/GetReturnRecoverableError_Response_200_LastError'
+          $ref: '#/components/schemas/GetOrderRecoverableError_Response_200_LastError'
           description: Details of the last error
         nextAttempt:
           type: string
           format: date-time
           description: Timestamp for the next retry attempt
           example: '2023-10-31T00:00:00Z'
-    GetOfferRecoverableError_Response_200_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    GetReturnRecoverableError_Response_200_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    ListOfferRecoverableErrors_Response_200:
-      type: object
-      description: Response representing all the recoverable error details
-      properties:
-        recoverableErrors:
-          type: array
-          description: List of recoverable error details
-          items:
-            $ref: '#/components/schemas/ListOfferRecoverableErrors_Response_200_RecoverableErrors'
-    GetShipmentRecoverableError_Response_200:
-      type: object
-      description: Response representing a recoverable error details
-      properties:
-        attempts:
-          type: integer
-          format: int32
-          description: Number of attempts made to process the error
-          example: 3
-        data:
-          type: object
-          description: Additional data associated with the error
-        discriminant:
-          type: string
-          description: Unique error discriminator
-        firstAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the first recorded attempt
-          example: '2023-10-30T12:00:00Z'
-        lastAttempt:
-          type: string
-          format: date-time
-          description: Timestamp of the last attempt
-          example: '2023-10-30T12:34:56Z'
-        lastError:
-          $ref: '#/components/schemas/GetShipmentRecoverableError_Response_200_LastError'
-          description: Details of the last error
-        nextAttempt:
-          type: string
-          format: date-time
-          description: Timestamp for the next retry attempt
-          example: '2023-10-31T00:00:00Z'
-    GetOrderRecoverableError_Response_200_LastError:
-      type: object
-      description: Details of a recoverable error
-      properties:
-        applicationCode:
-          type: string
-          description: Application specific error code
-          example: CM19248
-        httpCode:
-          type: string
-          description: HTTP status code associated with the error
-          example: '404'
-        message:
-          type: string
-          description: Detailed error message
-          example: Resource not found
-    ListOrderRecoverableErrors_Response_200:
-      type: object
-      description: Response representing all the recoverable error details
-      properties:
-        recoverableErrors:
-          type: array
-          description: List of recoverable error details
-          items:
-            $ref: '#/components/schemas/ListOrderRecoverableErrors_Response_200_RecoverableErrors'
     ListShopRecoverableErrors_Response_200_RecoverableErrors:
       type: object
       description: Response representing a recoverable error details
@@ -1487,6 +1028,218 @@ components:
           format: date-time
           description: Timestamp for the next retry attempt
           example: '2023-10-31T00:00:00Z'
+    ListPromotionRecoverableErrors_Response_200_RecoverableErrors_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListOrderRecoverableErrors_Response_200_RecoverableErrors:
+      type: object
+      description: Response representing a recoverable error details
+      properties:
+        attempts:
+          type: integer
+          format: int32
+          description: Number of attempts made to process the error
+          example: 3
+        data:
+          type: object
+          description: Additional data associated with the error
+        discriminant:
+          type: string
+          description: Unique error discriminator
+        firstAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the first recorded attempt
+          example: '2023-10-30T12:00:00Z'
+        lastAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the last attempt
+          example: '2023-10-30T12:34:56Z'
+        lastError:
+          $ref: '#/components/schemas/ListOrderRecoverableErrors_Response_200_RecoverableErrors_LastError'
+          description: Details of the last error
+        nextAttempt:
+          type: string
+          format: date-time
+          description: Timestamp for the next retry attempt
+          example: '2023-10-31T00:00:00Z'
+    GetOfferRecoverableError_Response_200_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListShopRecoverableErrors_Response_200_RecoverableErrors_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    GetShipmentRecoverableError_Response_200_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListReturnRecoverableErrors_Response_200:
+      type: object
+      description: Response representing all the recoverable error details
+      properties:
+        recoverableErrors:
+          type: array
+          description: List of recoverable error details
+          items:
+            $ref: '#/components/schemas/ListReturnRecoverableErrors_Response_200_RecoverableErrors'
+    GetShopRecoverableError_Response_200_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    GetOrderRecoverableError_Response_200_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListShipmentRecoverableErrors_Response_200_RecoverableErrors_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListProductRecoverableErrors_Response_200:
+      type: object
+      description: Response representing all the recoverable error details
+      properties:
+        recoverableErrors:
+          type: array
+          description: List of recoverable error details
+          items:
+            $ref: '#/components/schemas/ListProductRecoverableErrors_Response_200_RecoverableErrors'
+    GetReturnRecoverableError_Response_200:
+      type: object
+      description: Response representing a recoverable error details
+      properties:
+        attempts:
+          type: integer
+          format: int32
+          description: Number of attempts made to process the error
+          example: 3
+        data:
+          type: object
+          description: Additional data associated with the error
+        discriminant:
+          type: string
+          description: Unique error discriminator
+        firstAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the first recorded attempt
+          example: '2023-10-30T12:00:00Z'
+        lastAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the last attempt
+          example: '2023-10-30T12:34:56Z'
+        lastError:
+          $ref: '#/components/schemas/GetReturnRecoverableError_Response_200_LastError'
+          description: Details of the last error
+        nextAttempt:
+          type: string
+          format: date-time
+          description: Timestamp for the next retry attempt
+          example: '2023-10-31T00:00:00Z'
+    ListProductRecoverableErrors_Response_200_RecoverableErrors_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
     GetPromotionRecoverableError_Response_200:
       type: object
       description: Response representing a recoverable error details
@@ -1514,6 +1267,146 @@ components:
           example: '2023-10-30T12:34:56Z'
         lastError:
           $ref: '#/components/schemas/GetPromotionRecoverableError_Response_200_LastError'
+          description: Details of the last error
+        nextAttempt:
+          type: string
+          format: date-time
+          description: Timestamp for the next retry attempt
+          example: '2023-10-31T00:00:00Z'
+    GetProductRecoverableError_Response_200_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListPromotionRecoverableErrors_Response_200_RecoverableErrors:
+      type: object
+      description: Response representing a recoverable error details
+      properties:
+        attempts:
+          type: integer
+          format: int32
+          description: Number of attempts made to process the error
+          example: 3
+        data:
+          type: object
+          description: Additional data associated with the error
+        discriminant:
+          type: string
+          description: Unique error discriminator
+        firstAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the first recorded attempt
+          example: '2023-10-30T12:00:00Z'
+        lastAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the last attempt
+          example: '2023-10-30T12:34:56Z'
+        lastError:
+          $ref: '#/components/schemas/ListPromotionRecoverableErrors_Response_200_RecoverableErrors_LastError'
+          description: Details of the last error
+        nextAttempt:
+          type: string
+          format: date-time
+          description: Timestamp for the next retry attempt
+          example: '2023-10-31T00:00:00Z'
+    GetShopRecoverableError_Response_200:
+      type: object
+      description: Response representing a recoverable error details
+      properties:
+        attempts:
+          type: integer
+          format: int32
+          description: Number of attempts made to process the error
+          example: 3
+        data:
+          type: object
+          description: Additional data associated with the error
+        discriminant:
+          type: string
+          description: Unique error discriminator
+        firstAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the first recorded attempt
+          example: '2023-10-30T12:00:00Z'
+        lastAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the last attempt
+          example: '2023-10-30T12:34:56Z'
+        lastError:
+          $ref: '#/components/schemas/GetShopRecoverableError_Response_200_LastError'
+          description: Details of the last error
+        nextAttempt:
+          type: string
+          format: date-time
+          description: Timestamp for the next retry attempt
+          example: '2023-10-31T00:00:00Z'
+    GetReturnRecoverableError_Response_200_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListOrderRecoverableErrors_Response_200:
+      type: object
+      description: Response representing all the recoverable error details
+      properties:
+        recoverableErrors:
+          type: array
+          description: List of recoverable error details
+          items:
+            $ref: '#/components/schemas/ListOrderRecoverableErrors_Response_200_RecoverableErrors'
+    GetShipmentRecoverableError_Response_200:
+      type: object
+      description: Response representing a recoverable error details
+      properties:
+        attempts:
+          type: integer
+          format: int32
+          description: Number of attempts made to process the error
+          example: 3
+        data:
+          type: object
+          description: Additional data associated with the error
+        discriminant:
+          type: string
+          description: Unique error discriminator
+        firstAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the first recorded attempt
+          example: '2023-10-30T12:00:00Z'
+        lastAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the last attempt
+          example: '2023-10-30T12:34:56Z'
+        lastError:
+          $ref: '#/components/schemas/GetShipmentRecoverableError_Response_200_LastError'
           description: Details of the last error
         nextAttempt:
           type: string
@@ -1553,7 +1446,82 @@ components:
           format: date-time
           description: Timestamp for the next retry attempt
           example: '2023-10-31T00:00:00Z'
-    ListShipmentRecoverableErrors_Response_200_RecoverableErrors_LastError:
+    ListOfferRecoverableErrors_Response_200_RecoverableErrors:
+      type: object
+      description: Response representing a recoverable error details
+      properties:
+        attempts:
+          type: integer
+          format: int32
+          description: Number of attempts made to process the error
+          example: 3
+        data:
+          type: object
+          description: Additional data associated with the error
+        discriminant:
+          type: string
+          description: Unique error discriminator
+        firstAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the first recorded attempt
+          example: '2023-10-30T12:00:00Z'
+        lastAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the last attempt
+          example: '2023-10-30T12:34:56Z'
+        lastError:
+          $ref: '#/components/schemas/ListOfferRecoverableErrors_Response_200_RecoverableErrors_LastError'
+          description: Details of the last error
+        nextAttempt:
+          type: string
+          format: date-time
+          description: Timestamp for the next retry attempt
+          example: '2023-10-31T00:00:00Z'
+    ListPromotionRecoverableErrors_Response_200:
+      type: object
+      description: Response representing all the recoverable error details
+      properties:
+        recoverableErrors:
+          type: array
+          description: List of recoverable error details
+          items:
+            $ref: '#/components/schemas/ListPromotionRecoverableErrors_Response_200_RecoverableErrors'
+    ListProductRecoverableErrors_Response_200_RecoverableErrors:
+      type: object
+      description: Response representing a recoverable error details
+      properties:
+        attempts:
+          type: integer
+          format: int32
+          description: Number of attempts made to process the error
+          example: 3
+        data:
+          type: object
+          description: Additional data associated with the error
+        discriminant:
+          type: string
+          description: Unique error discriminator
+        firstAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the first recorded attempt
+          example: '2023-10-30T12:00:00Z'
+        lastAttempt:
+          type: string
+          format: date-time
+          description: Timestamp of the last attempt
+          example: '2023-10-30T12:34:56Z'
+        lastError:
+          $ref: '#/components/schemas/ListProductRecoverableErrors_Response_200_RecoverableErrors_LastError'
+          description: Details of the last error
+        nextAttempt:
+          type: string
+          format: date-time
+          description: Timestamp for the next retry attempt
+          example: '2023-10-31T00:00:00Z'
+    ListReturnRecoverableErrors_Response_200_RecoverableErrors_LastError:
       type: object
       description: Details of a recoverable error
       properties:
@@ -1569,7 +1537,39 @@ components:
           type: string
           description: Detailed error message
           example: Resource not found
-    ListReturnRecoverableErrors_Response_200:
+    ListOrderRecoverableErrors_Response_200_RecoverableErrors_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListOfferRecoverableErrors_Response_200_RecoverableErrors_LastError:
+      type: object
+      description: Details of a recoverable error
+      properties:
+        applicationCode:
+          type: string
+          description: Application specific error code
+          example: CM19248
+        httpCode:
+          type: string
+          description: HTTP status code associated with the error
+          example: '404'
+        message:
+          type: string
+          description: Detailed error message
+          example: Resource not found
+    ListOfferRecoverableErrors_Response_200:
       type: object
       description: Response representing all the recoverable error details
       properties:
@@ -1577,7 +1577,7 @@ components:
           type: array
           description: List of recoverable error details
           items:
-            $ref: '#/components/schemas/ListReturnRecoverableErrors_Response_200_RecoverableErrors'
+            $ref: '#/components/schemas/ListOfferRecoverableErrors_Response_200_RecoverableErrors'
   securitySchemes:
     Bearer:
       bearerFormat: JWT

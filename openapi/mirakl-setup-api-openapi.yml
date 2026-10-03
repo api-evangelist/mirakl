@@ -178,39 +178,6 @@ paths:
       - Setup
 components:
   schemas:
-    SetupUpdate_Response_200_UpdatedElements:
-      type: object
-      description: Component updated
-      properties:
-        code:
-          type: string
-          description: Code of the component
-        name:
-          type: string
-          description: Name of the component
-        status:
-          type: array
-          description: Status for each element
-          items:
-            $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements_Status'
-    SetupCheckPermissions_Response_200:
-      type: object
-      description: Check permissions response
-      properties:
-        missingPermissions:
-          type: array
-          description: List of missing permissions
-          items:
-            type: string
-    SetupUpdate_Response_200:
-      type: object
-      description: Updated setup data response
-      properties:
-        updatedElements:
-          type: array
-          description: List of updated components
-          items:
-            $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements'
     SetupUpdate_Response_200_UpdatedElements_Status:
       type: object
       description: Element updated
@@ -229,6 +196,15 @@ components:
             Enum: `"CREATED"`, `"UPDATED"`, `"UP_TO_DATE"`, `"SKIPPED"`, `"ERROR"`
 
             '
+    SetupUpdate_Response_200:
+      type: object
+      description: Updated setup data response
+      properties:
+        updatedElements:
+          type: array
+          description: List of updated components
+          items:
+            $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements'
     SetupCheckConsistency_Response_200:
       type: object
       description: Checked setup data response
@@ -238,6 +214,36 @@ components:
           description: List of checked components
           items:
             $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements'
+    SetupCheckConsistency_Response_200_CheckedElements:
+      type: object
+      description: Component checked
+      properties:
+        code:
+          type: string
+          description: Code of the component
+        name:
+          type: string
+          description: Name of the component
+        status:
+          type: array
+          description: Status for each element
+          items:
+            $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements_Status'
+    SetupUpdate_Response_200_UpdatedElements:
+      type: object
+      description: Component updated
+      properties:
+        code:
+          type: string
+          description: Code of the component
+        name:
+          type: string
+          description: Name of the component
+        status:
+          type: array
+          description: Status for each element
+          items:
+            $ref: '#/components/schemas/SetupUpdate_Response_200_UpdatedElements_Status'
     SetupCheckConsistency_Response_200_CheckedElements_Status:
       type: object
       description: Element checked
@@ -256,21 +262,15 @@ components:
             Enum: `"INITIALIZED"`, `"MISSING"`, `"UPDATE_REQUIRED"`, `"ERROR"`
 
             '
-    SetupCheckConsistency_Response_200_CheckedElements:
+    SetupCheckPermissions_Response_200:
       type: object
-      description: Component checked
+      description: Check permissions response
       properties:
-        code:
-          type: string
-          description: Code of the component
-        name:
-          type: string
-          description: Name of the component
-        status:
+        missingPermissions:
           type: array
-          description: Status for each element
+          description: List of missing permissions
           items:
-            $ref: '#/components/schemas/SetupCheckConsistency_Response_200_CheckedElements_Status'
+            type: string
   securitySchemes:
     Bearer:
       bearerFormat: JWT

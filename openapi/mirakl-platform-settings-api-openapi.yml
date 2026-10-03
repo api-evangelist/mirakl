@@ -1802,45 +1802,86 @@ paths:
       url: https://operator-shpy.mirakl.net
 components:
   schemas:
-    PC01_Response_200_Features_ShopTaxOptions:
+    CH11_Response_200_Channels:
       type: object
       properties:
-        local_tax_number:
-          $ref: '#/components/schemas/PC01_Response_200_Features_ShopTaxOptions_LocalTaxNumber'
-          description: The VAT/GST number of a seller billing information and fiscal representative
-        tax_identification_number:
-          $ref: '#/components/schemas/PC01_Response_200_Features_ShopTaxOptions_TaxIdentificationNumber'
-          description: The tax identification number of a seller billing information
-      required:
-      - tax_identification_number
-    PC01_Response_200_Features_Catalog:
-      type: object
-      properties:
-        allow_shop_contribution_to_all_channels:
-          type: boolean
-          description: Allows shops to contribute data to all sales channels when enabled; otherwise, data can only be pushed to channels the shop belongs to
-        exclude_invalid_products:
-          type: boolean
-          description: When enabled, products with validation errors will be excluded from product imports and won't be transmitted to MCM
-        list_of_multiple_values_separator:
+        code:
           type: string
-          description: Character used to separate values in the 'Multiple Values List' type attributes
-        product_acceptance_by_channel:
-          type: boolean
-          description: Allows operators to accept or reject products according to sales channels
-        product_data_validation_by_channel:
-          type: boolean
-          description: Facilitates the management of attributes in a multilingual context
-        product_import_only_on_leaf:
-          type: boolean
-          description: Prevents the import of products into non-leaf categories
+          description: Channel code
+        description:
+          type: string
+          description: Channel description
+        label:
+          type: string
+          description: '<span>Channel label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
       required:
-      - allow_shop_contribution_to_all_channels
-      - exclude_invalid_products
-      - list_of_multiple_values_separator
-      - product_acceptance_by_channel
-      - product_data_validation_by_channel
-      - product_import_only_on_leaf
+      - code
+      - description
+      - label
+    PC01_Response_200_Features_OrderWorkflows:
+      type: object
+      properties:
+        no_customer_payment_confirmation:
+          type: boolean
+          description: Allows seller payments to be completely separated from customer debits
+        order_acceptance:
+          type: string
+          description: 'Indicate if shop accounts must accept new orders and take responsibility for the transaction. NOT_AUTOMATIC: All shop accounts must accept their orders manually. AUTOMATIC: Orders are automatically accepted. BOTH: AUTOMATIC or NOT_AUTOMATIC mode depending on the store account
+
+
+            Enum: `"AUTOMATIC"`, `"NOT_AUTOMATIC"`, `"BOTH"`
+
+            '
+        pause_debit_workflow:
+          type: boolean
+          description: Pause the order debit workflow when taxes must be recalculated
+        pay_on_due_date:
+          type: boolean
+          description: Allows professionals to pay their orders after the receipt of the items or an explicit invoice
+        pay_on_shipment:
+          type: boolean
+          description: Allows operators to debit orders before they have been fully shipped
+        sellers_edit_shipping_origin:
+          type: boolean
+          description: Allow shop accounts to edit shipping origin to ensures accurate tax calculations with shipping origin data
+        shipping_and_billing_details_before_acceptance:
+          type: boolean
+          description: Indicate if shipping and billing details are displayed before order acceptance
+      required:
+      - no_customer_payment_confirmation
+      - order_acceptance
+      - pause_debit_workflow
+      - pay_on_due_date
+      - pay_on_shipment
+      - sellers_edit_shipping_origin
+      - shipping_and_billing_details_before_acceptance
+    PC01_Response_200_Features_Promotion:
+      type: object
+      properties:
+        cart_promotion_campaign:
+          type: boolean
+          description: Allows the operator to create cart promotion campaigns.
+        discount_campaign:
+          type: boolean
+          description: Allows the operator to create discount campaigns.
+        seller_promotion:
+          type: boolean
+          description: Allows stores to create promotions.
+      required:
+      - cart_promotion_campaign
+      - discount_campaign
+      - seller_promotion
+    PC01_Response_200_Features_ShopTaxOptions_LocalTaxNumber:
+      type: object
+      properties:
+        mandatory:
+          type: boolean
+          description: Defines if the VAT/GST number is mandatory
+        validation_regex:
+          type: string
+          description: Regular expression that the VAT/GST number must match
+      required:
+      - mandatory
     PC01_Response_200_PlatformConfiguration_CustomerModel:
       type: object
       properties:
@@ -1853,58 +1894,106 @@ components:
       required:
       - b2b
       - b2c
-    PC01_Response_200_Modules_TaxManager_TaxProvider:
+    PC01_Response_200_Features_TaxCollection:
       type: object
       properties:
-        avalara:
-          type: boolean
-          description: Avalara configured as tax provider
-        vertex:
-          type: boolean
-          description: Vertex configured as tax provider
-      required:
-      - avalara
-      - vertex
-    PC01_Response_200_Features_Shipment:
-      type: object
-      properties:
-        multi_part_item_shipment:
-          type: boolean
-          description: Allows sellers to create several packages for a same item in an order
-        multi_shipment:
-          type: boolean
-          description: Allows sellers to create several shipments for a same order
-      required:
-      - multi_part_item_shipment
-      - multi_shipment
-    PC01_Response_200_Features_ShopTaxOptions_TaxIdentificationNumber:
-      type: object
-      properties:
-        mandatory:
-          type: boolean
-          description: Defines if the tax identification number is mandatory
-        validation_regex:
+        activated:
           type: string
-          description: Regular expression that the tax identification number must match
+          description: 'Tax collection activated. NO: Not activated. YES: Activated for all stores. YES_PER_STORE: Activated for some stores.
+
+
+            Enum: `"YES"`, `"NO"`, `"YES_PER_STORE"`
+
+            '
+        product_tax_code_mandatory:
+          type: boolean
+          description: Product tax code mandatory at offer level
+        tax_collection_by_operator:
+          type: boolean
+          description: Operator in charge of tax collection on behalf of sellers
       required:
-      - mandatory
-    PC01_Response_200_Features_Warehouses:
+      - activated
+      - product_tax_code_mandatory
+      - tax_collection_by_operator
+    AF01_Response_200_AdditionalFields:
       type: object
       properties:
-        geolocation:
-          type: boolean
-          description: Geolocation on warehouses activated
-        restricted_countries:
+        accepted_values:
           type: array
-          description: 'The list of the restricted countries applying on warehouses. Format ISO 3166-1 alpha-3 code (3 letters country code). Possible values : AFG, ALA, ALB, DZA, ASM, AND, AGO, AIA, ATA, ATG, ARG, ARM, ABW, AUS, AUT, AZE, BHS, BHR, BGD, BRB, BLR, BEL, BLZ, BEN, BMU, BTN, BOL, BES, BIH, BWA, BVT, BRA, IOT, BRN, BGR, BFA, BDI, KHM, CMR, CAN, CPV, CYM, CAF, TCD, CHL, CHN, CXR, CCK, COL, COM, COG, COD, COK, CRI, CIV, HRV, CUB, CUW, CYP, CZE, DNK, DJI, DMA, DOM, ECU, EGY, SLV, GNQ, ERI, EST, ETH, FLK, FRO, FJI, FIN, FRA, GUF, PYF, ATF, GAB, GMB, GEO, DEU, GHA, GIB, GRC, GRL, GRD, GLP, GUM, GTM, GGY, GIN, GNB, GUY, HTI, HMD, VAT, HND, HKG, HUN, ISL, IND, IDN, IRQ, IRL, IMN, ISR, ITA, JAM, JPN, JEY, JOR, KAZ, KEN, KIR, KOR, KWT, KGZ, LAO, LVA, LBN, LSO, LBR, LBY, LIE, LTU, LUX, MAC, MKD, MDG, MWI, MYS, MDV, MLI, MLT, MHL, MTQ, MRT, MUS, MYT, MEX, FSM, MDA, MCO, MNG, MNE, MSR, MAR, MOZ, MMR, NAM, NRU, NPL, NLD, NCL, NZL, NIC, NER, NGA, NIU, NFK, MNP, NOR, OMN, PAK, PLW, PSE, PAN, PNG, PRY, PER, PHL, PCN, POL, PRT, PRI, QAT, REU, ROU, RUS, RWA, BLM, SHN, KNA, LCA, MAF, SPM, VCT, WSM, SMR, STP, SAU, SEN, SRB, SYC, SLE, SGP, SXM, SVK, SVN, SLB, SOM, ZAF, SGS, SSD, ESP, LKA, SUR, SJM, SWZ, SWE, CHE, TWN, TJK, TZA, THA, TLS, TGO, TKL, TON, TTO, TUN, TUR, TKM, TCA, TUV, UGA, UKR, ARE, GBR, USA, UMI, URY, UZB, VUT, VEN, VNM, VGB, VIR, WLF, YEM, ZMB, ZWE'
+          description: The list of accepted values for this additional field. This field is only present for additional fields of type 'LIST'
           items:
             type: string
-            description: 'Enum: `"AFG"`, `"ALA"`, `"ALB"`, `"DZA"`, `"ASM"`, `"AND"`, `"AGO"`, `"AIA"`, `"ATA"`, `"ATG"`, `"ARG"`, `"ARM"`, `"ABW"`, `"AUS"`, `"AUT"`, `"AZE"`, `"BHS"`, `"BHR"`, `"BGD"`, `"BRB"`, `"BLR"`, `"BEL"`, `"BLZ"`, `"BEN"`, `"BMU"`, `"BTN"`, `"BOL"`, `"BES"`, `"BIH"`, `"BWA"`, `"BVT"`, `"BRA"`, `"IOT"`, `"BRN"`, `"BGR"`, `"BFA"`, `"BDI"`, `"KHM"`, `"CMR"`, `"CAN"`, `"CPV"`, `"CYM"`, `"CAF"`, `"TCD"`, `"CHL"`, `"CHN"`, `"CXR"`, `"CCK"`, `"COL"`, `"COM"`, `"COG"`, `"COD"`, `"COK"`, `"CRI"`, `"CIV"`, `"HRV"`, `"CUB"`, `"CUW"`, `"CYP"`, `"CZE"`, `"DNK"`, `"DJI"`, `"DMA"`, `"DOM"`, `"ECU"`, `"EGY"`, `"SLV"`, `"GNQ"`, `"ERI"`, `"EST"`, `"ETH"`, `"FLK"`, `"FRO"`, `"FJI"`, `"FIN"`, `"FRA"`, `"GUF"`, `"PYF"`, `"ATF"`, `"GAB"`, `"GMB"`, `"GEO"`, `"DEU"`, `"GHA"`, `"GIB"`, `"GRC"`, `"GRL"`, `"GRD"`, `"GLP"`, `"GUM"`, `"GTM"`, `"GGY"`, `"GIN"`, `"GNB"`, `"GUY"`, `"HTI"`, `"HMD"`, `"VAT"`, `"HND"`, `"HKG"`, `"HUN"`, `"ISL"`, `"IND"`, `"IDN"`, `"IRQ"`, `"IRL"`, `"IMN"`, `"ISR"`, `"ITA"`, `"JAM"`, `"JPN"`, `"JEY"`, `"JOR"`, `"KAZ"`, `"KEN"`, `"KIR"`, `"KOR"`, `"KWT"`, `"KGZ"`, `"LAO"`, `"LVA"`, `"LBN"`, `"LSO"`, `"LBR"`, `"LBY"`, `"LIE"`, `"LTU"`, `"LUX"`, `"MAC"`, `"MKD"`, `"MDG"`, `"MWI"`, `"MYS"`, `"MDV"`, `"MLI"`, `"MLT"`, `"MHL"`, `"MTQ"`, `"MRT"`, `"MUS"`, `"MYT"`, `"MEX"`, `"FSM"`, `"MDA"`, `"MCO"`, `"MNG"`, `"MNE"`, `"MSR"`, `"MAR"`, `"MOZ"`, `"MMR"`, `"NAM"`, `"NRU"`, `"NPL"`, `"NLD"`, `"NCL"`, `"NZL"`, `"NIC"`, `"NER"`, `"NGA"`, `"NIU"`, `"NFK"`, `"MNP"`, `"NOR"`, `"OMN"`, `"PAK"`, `"PLW"`, `"PSE"`, `"PAN"`, `"PNG"`, `"PRY"`, `"PER"`, `"PHL"`, `"PCN"`, `"POL"`, `"PRT"`, `"PRI"`, `"QAT"`, `"REU"`, `"ROU"`, `"RUS"`, `"RWA"`, `"BLM"`, `"SHN"`, `"KNA"`, `"LCA"`, `"MAF"`, `"SPM"`, `"VCT"`, `"WSM"`, `"SMR"`, `"STP"`, `"SAU"`, `"SEN"`, `"SRB"`, `"SYC"`, `"SLE"`, `"SGP"`, `"SXM"`, `"SVK"`, `"SVN"`, `"SLB"`, `"SOM"`, `"ZAF"`, `"SGS"`, `"SSD"`, `"ESP"`, `"LKA"`, `"SUR"`, `"SJM"`, `"SWZ"`, `"SWE"`, `"CHE"`, `"TWN"`, `"TJK"`, `"TZA"`, `"THA"`, `"TLS"`, `"TGO"`, `"TKL"`, `"TON"`, `"TTO"`, `"TUN"`, `"TUR"`, `"TKM"`, `"TCA"`, `"TUV"`, `"UGA"`, `"UKR"`, `"ARE"`, `"GBR"`, `"USA"`, `"UMI"`, `"URY"`, `"UZB"`, `"VUT"`, `"VEN"`, `"VNM"`, `"VGB"`, `"VIR"`, `"WLF"`, `"YEM"`, `"ZMB"`, `"ZWE"`
+        code:
+          type: string
+          description: Additional field code
+        default_value:
+          type: string
+          deprecated: true
+        description:
+          type: string
+          description: The description of the additional field.
+        editable:
+          type: boolean
+          description: Whether or not the additional field will be editable
+        entity:
+          type: string
+          description: 'The object on which the additional field applies
 
-              '
+
+            Enum: `"SHOP"`, `"OFFER"`, `"ORDER_LINE"`, `"ORDER"`
+
+            '
+        label:
+          type: string
+          description: '<span>Additional field label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        regex:
+          type: string
+          description: The regular expression that is used to validate the value value of this field.<br/>This field is only present for additional fields of type 'REGEX'.
+        required:
+          type: boolean
+          description: Whether or not this additionnal field will be required
+        type:
+          type: string
+          description: 'Additional field type:<ul><li><strong>STRING</strong> chain of characters (up to 2000 characters)</li><li><strong>DATE</strong> date in yyyy-mm-dd format</li><li><strong>NUMERIC</strong> decimal value (eg 52.63)</li><li><strong>BOOLEAN</strong> true or false</li><li><strong>LINK</strong> valid URL</li><li><strong>LIST</strong> list of values. Valid values are specified in accepted_values field</li><li><strong>REGEX</strong> regular expression. The regex that is used to validate the value of this field is specified in the regex field</li><li><strong>TEXTAREA</strong> long chain of characters (up to 5000 characters). May have multiple lines</li></ul>
+
+
+            Enum: `"STRING"`, `"DATE"`, `"NUMERIC"`, `"BOOLEAN"`, `"LINK"`, `"REGEX"`, `"TEXTAREA"`, `"LIST"`, `"MULTIPLE_VALUES_LIST"`
+
+            '
       required:
-      - geolocation
-      - restricted_countries
+      - code
+      - editable
+      - label
+      - required
+      - type
+    PC01_Response_200_PlatformConfiguration_PlatformModel:
+      type: object
+      properties:
+        drop_ship:
+          type: boolean
+          description: Drop ship platform model activated
+        marketplace:
+          type: boolean
+          description: Marketplace platform model activated
+        one_creditor:
+          type: boolean
+          description: One creditor platform model activated
+      required:
+      - drop_ship
+      - marketplace
+      - one_creditor
+    PC01_Response_200_Features_DirectPaymentCustomerStore:
+      type: object
+      properties:
+        activated:
+          type: boolean
+          description: Direct payment customer store activated
+        refund_cancel_authorized:
+          type: boolean
+          description: Allows refund and cancelation for transactions taking place outside of Mirakl between customers and sellers
+      required:
+      - activated
+      - refund_cancel_authorized
     PC01_Response_200:
       type: object
       properties:
@@ -1933,6 +2022,103 @@ components:
       - platform_name
       - tenant_name
       - timezone
+    PC01_Response_200_Features_OrderConditions:
+      type: object
+      properties:
+        lead_time_to_ship:
+          type: boolean
+          deprecated: true
+          description: <p>Allows sellers to inform a lead time to ship on their offers</p><p>Use "lead_time_to_ship_by_sellers_enabled" attribute instead.</p>
+        maximum_order_quantity:
+          type: boolean
+          description: Allows sellers to request for a maximum order quantity
+        minimum_order_quantity:
+          type: boolean
+          description: Allows sellers to request for a minimum order quantity
+        package_order_quantity:
+          type: boolean
+          description: Allows sellers to set an order quantity increment
+      required:
+      - lead_time_to_ship
+      - maximum_order_quantity
+      - minimum_order_quantity
+      - package_order_quantity
+    PC01_Response_200_Modules_TaxManager_TaxProvider:
+      type: object
+      properties:
+        avalara:
+          type: boolean
+          description: Avalara configured as tax provider
+        vertex:
+          type: boolean
+          description: Vertex configured as tax provider
+      required:
+      - avalara
+      - vertex
+    PC01_Response_200_PlatformConfiguration:
+      type: object
+      properties:
+        customer_model:
+          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_CustomerModel'
+          description: The customer organization activation on the platform
+        enhanced_seller_invoicing:
+          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_EnhancedSellerInvoicing'
+          description: Enhanced seller invoicing activation on the platform
+        platform_model:
+          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_PlatformModel'
+          description: 'The platform models activated on the platform '
+      required:
+      - customer_model
+      - enhanced_seller_invoicing
+      - platform_model
+    L01_Response_200_Locales:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Locale code
+        label:
+          type: string
+          description: Locale label
+        platform_default:
+          type: boolean
+          description: Default locale of the platform
+      required:
+      - code
+      - label
+    PC01_Response_200_Features_Pricing:
+      type: object
+      properties:
+        channel_pricing:
+          type: string
+          description: 'Allows sellers to create prices applicable on the operator’s different storefronts materialized as sales channels in Mirakl. DISABLED: No channel pricing. SINGLE: Allows sellers to create one price per channel. MULTI: Allows sellers to create multiple prices per channel.
+
+
+            Enum: `"MULTI"`, `"SINGLE"`, `"DISABLED"`
+
+            '
+        discount_period_required:
+          type: boolean
+          description: Requires sellers to set start and end dates when creating or updating discounts on default and specific prices.
+        discount_price_creation_in_the_past_blocked:
+          type: boolean
+          description: Prevents sellers from setting discount end dates in the past for their default and specific prices.
+        scheduled_pricing:
+          type: boolean
+          description: Allows sellers to set up multiple prices in advance
+        volume_discount:
+          type: boolean
+          description: Allows discounts for bulk purchases
+        volume_pricing:
+          type: boolean
+          description: Allows pricing for bulk purchases
+      required:
+      - channel_pricing
+      - discount_period_required
+      - discount_price_creation_in_the_past_blocked
+      - scheduled_pricing
+      - volume_discount
+      - volume_pricing
     DO01_Response_200_Documents:
       type: object
       properties:
@@ -1963,62 +2149,49 @@ components:
       - description
       - entity
       - label
-    AF01_Response_200:
+    PC01_Response_200_PlatformConfiguration_EnhancedSellerInvoicing:
       type: object
       properties:
-        additional_fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/AF01_Response_200_AdditionalFields'
-        total_count:
-          type: integer
-          format: int32
-          deprecated: true
+        enabled:
+          type: boolean
+          description: Enhanced seller invoicing activated.
       required:
-      - additional_fields
-      - total_count
-    PC01_Response_200_Features_TaxIdNumber:
+      - enabled
+    PC01_Response_200_Features_Dropship:
+      type: object
+      properties:
+        retail_pricing_edition_enabled:
+          type: string
+          description: 'Retail pricing edition enabled
+
+
+            Enum: `"YES"`, `"NO"`, `"YES_PER_STORE"`
+
+            '
+        retail_pricing_enabled:
+          type: boolean
+          description: Retail pricing activated on dropship offers
+    L01_Response_200:
+      type: object
+      properties:
+        locales:
+          type: array
+          description: List of locales
+          items:
+            $ref: '#/components/schemas/L01_Response_200_Locales'
+      required:
+      - locales
+    PC01_Response_200_Features_ShopTaxOptions_TaxIdentificationNumber:
       type: object
       properties:
         mandatory:
           type: boolean
-          description: Tax ID number mandatory
+          description: Defines if the tax identification number is mandatory
         validation_regex:
           type: string
-          description: Regular expression to match for sellers tax number ID
+          description: Regular expression that the tax identification number must match
       required:
       - mandatory
-    PC01_Response_200_Features_Promotion:
-      type: object
-      properties:
-        cart_promotion_campaign:
-          type: boolean
-          description: Allows the operator to create cart promotion campaigns.
-        discount_campaign:
-          type: boolean
-          description: Allows the operator to create discount campaigns.
-        seller_promotion:
-          type: boolean
-          description: Allows stores to create promotions.
-      required:
-      - cart_promotion_campaign
-      - discount_campaign
-      - seller_promotion
-    L01_Response_200_Locales:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Locale code
-        label:
-          type: string
-          description: Locale label
-        platform_default:
-          type: boolean
-          description: Default locale of the platform
-      required:
-      - code
-      - label
     PC01_Response_200_Features:
       type: object
       properties:
@@ -2143,242 +2316,17 @@ components:
       - tax_collection
       - tax_id_number
       - warehouses
-    L01_Response_200:
+    PC01_Response_200_Features_TaxIdNumber:
       type: object
       properties:
-        locales:
-          type: array
-          description: List of locales
-          items:
-            $ref: '#/components/schemas/L01_Response_200_Locales'
-      required:
-      - locales
-    PC01_Response_200_Features_OrderConditions:
-      type: object
-      properties:
-        lead_time_to_ship:
+        mandatory:
           type: boolean
-          deprecated: true
-          description: <p>Allows sellers to inform a lead time to ship on their offers</p><p>Use "lead_time_to_ship_by_sellers_enabled" attribute instead.</p>
-        maximum_order_quantity:
-          type: boolean
-          description: Allows sellers to request for a maximum order quantity
-        minimum_order_quantity:
-          type: boolean
-          description: Allows sellers to request for a minimum order quantity
-        package_order_quantity:
-          type: boolean
-          description: Allows sellers to set an order quantity increment
-      required:
-      - lead_time_to_ship
-      - maximum_order_quantity
-      - minimum_order_quantity
-      - package_order_quantity
-    PC01_Response_200_PlatformConfiguration_EnhancedSellerInvoicing:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Enhanced seller invoicing activated.
-      required:
-      - enabled
-    PC01_Response_200_Features_Returns:
-      type: object
-      properties:
-        drop_ship:
-          type: boolean
-          description: Enables returns management in Drop ship
-        marketplace:
-          type: boolean
-          description: Enables returns management in Marketplace
-        one_creditor:
-          type: boolean
-          description: Enables returns management in One creditor
-    CH11_Response_200_Channels:
-      type: object
-      properties:
-        code:
+          description: Tax ID number mandatory
+        validation_regex:
           type: string
-          description: Channel code
-        description:
-          type: string
-          description: Channel description
-        label:
-          type: string
-          description: '<span>Channel label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+          description: Regular expression to match for sellers tax number ID
       required:
-      - code
-      - description
-      - label
-    CH11_Response_200:
-      type: object
-      properties:
-        channels:
-          type: array
-          description: List of channels
-          items:
-            $ref: '#/components/schemas/CH11_Response_200_Channels'
-    AF01_Response_200_AdditionalFields:
-      type: object
-      properties:
-        accepted_values:
-          type: array
-          description: The list of accepted values for this additional field. This field is only present for additional fields of type 'LIST'
-          items:
-            type: string
-        code:
-          type: string
-          description: Additional field code
-        default_value:
-          type: string
-          deprecated: true
-        description:
-          type: string
-          description: The description of the additional field.
-        editable:
-          type: boolean
-          description: Whether or not the additional field will be editable
-        entity:
-          type: string
-          description: 'The object on which the additional field applies
-
-
-            Enum: `"SHOP"`, `"OFFER"`, `"ORDER_LINE"`, `"ORDER"`
-
-            '
-        label:
-          type: string
-          description: '<span>Additional field label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-        regex:
-          type: string
-          description: The regular expression that is used to validate the value value of this field.<br/>This field is only present for additional fields of type 'REGEX'.
-        required:
-          type: boolean
-          description: Whether or not this additionnal field will be required
-        type:
-          type: string
-          description: 'Additional field type:<ul><li><strong>STRING</strong> chain of characters (up to 2000 characters)</li><li><strong>DATE</strong> date in yyyy-mm-dd format</li><li><strong>NUMERIC</strong> decimal value (eg 52.63)</li><li><strong>BOOLEAN</strong> true or false</li><li><strong>LINK</strong> valid URL</li><li><strong>LIST</strong> list of values. Valid values are specified in accepted_values field</li><li><strong>REGEX</strong> regular expression. The regex that is used to validate the value of this field is specified in the regex field</li><li><strong>TEXTAREA</strong> long chain of characters (up to 5000 characters). May have multiple lines</li></ul>
-
-
-            Enum: `"STRING"`, `"DATE"`, `"NUMERIC"`, `"BOOLEAN"`, `"LINK"`, `"REGEX"`, `"TEXTAREA"`, `"LIST"`, `"MULTIPLE_VALUES_LIST"`
-
-            '
-      required:
-      - code
-      - editable
-      - label
-      - required
-      - type
-    PC01_Response_200_PlatformConfiguration:
-      type: object
-      properties:
-        customer_model:
-          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_CustomerModel'
-          description: The customer organization activation on the platform
-        enhanced_seller_invoicing:
-          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_EnhancedSellerInvoicing'
-          description: Enhanced seller invoicing activation on the platform
-        platform_model:
-          $ref: '#/components/schemas/PC01_Response_200_PlatformConfiguration_PlatformModel'
-          description: 'The platform models activated on the platform '
-      required:
-      - customer_model
-      - enhanced_seller_invoicing
-      - platform_model
-    PC01_Response_200_Features_DirectPaymentCustomerStore:
-      type: object
-      properties:
-        activated:
-          type: boolean
-          description: Direct payment customer store activated
-        refund_cancel_authorized:
-          type: boolean
-          description: Allows refund and cancelation for transactions taking place outside of Mirakl between customers and sellers
-      required:
-      - activated
-      - refund_cancel_authorized
-    PC01_Response_200_Modules_TaxManager:
-      type: object
-      deprecated: true
-      properties:
-        activated:
-          type: boolean
-          description: Tax Manager activated
-        tax_provider:
-          $ref: '#/components/schemas/PC01_Response_200_Modules_TaxManager_TaxProvider'
-          description: The tax provider processing tax estimation
-      required:
-      - activated
-      - tax_provider
-    PC01_Response_200_PlatformConfiguration_PlatformModel:
-      type: object
-      properties:
-        drop_ship:
-          type: boolean
-          description: Drop ship platform model activated
-        marketplace:
-          type: boolean
-          description: Marketplace platform model activated
-        one_creditor:
-          type: boolean
-          description: One creditor platform model activated
-      required:
-      - drop_ship
-      - marketplace
-      - one_creditor
-    PC01_Response_200_Features_Pricing:
-      type: object
-      properties:
-        channel_pricing:
-          type: string
-          description: 'Allows sellers to create prices applicable on the operator’s different storefronts materialized as sales channels in Mirakl. DISABLED: No channel pricing. SINGLE: Allows sellers to create one price per channel. MULTI: Allows sellers to create multiple prices per channel.
-
-
-            Enum: `"MULTI"`, `"SINGLE"`, `"DISABLED"`
-
-            '
-        discount_period_required:
-          type: boolean
-          description: Requires sellers to set start and end dates when creating or updating discounts on default and specific prices.
-        discount_price_creation_in_the_past_blocked:
-          type: boolean
-          description: Prevents sellers from setting discount end dates in the past for their default and specific prices.
-        scheduled_pricing:
-          type: boolean
-          description: Allows sellers to set up multiple prices in advance
-        volume_discount:
-          type: boolean
-          description: Allows discounts for bulk purchases
-        volume_pricing:
-          type: boolean
-          description: Allows pricing for bulk purchases
-      required:
-      - channel_pricing
-      - discount_period_required
-      - discount_price_creation_in_the_past_blocked
-      - scheduled_pricing
-      - volume_discount
-      - volume_pricing
-    CUR01_Response_200:
-      type: object
-      properties:
-        currencies:
-          type: array
-          description: List of currencies
-          items:
-            $ref: '#/components/schemas/CUR01_Response_200_Currencies'
-      required:
-      - currencies
-    DO01_Response_200:
-      type: object
-      properties:
-        documents:
-          type: array
-          description: Document types
-          items:
-            $ref: '#/components/schemas/DO01_Response_200_Documents'
-      required:
-      - documents
+      - mandatory
     PC01_Response_200_Modules:
       type: object
       properties:
@@ -2427,89 +2375,20 @@ components:
       - promotions
       - quotes
       - tax_manager
-    PC01_Response_200_Features_TaxCollection:
+    AF01_Response_200:
       type: object
       properties:
-        activated:
-          type: string
-          description: 'Tax collection activated. NO: Not activated. YES: Activated for all stores. YES_PER_STORE: Activated for some stores.
-
-
-            Enum: `"YES"`, `"NO"`, `"YES_PER_STORE"`
-
-            '
-        product_tax_code_mandatory:
-          type: boolean
-          description: Product tax code mandatory at offer level
-        tax_collection_by_operator:
-          type: boolean
-          description: Operator in charge of tax collection on behalf of sellers
+        additional_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AF01_Response_200_AdditionalFields'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
       required:
-      - activated
-      - product_tax_code_mandatory
-      - tax_collection_by_operator
-    PC01_Response_200_Features_Dropship:
-      type: object
-      properties:
-        retail_pricing_edition_enabled:
-          type: string
-          description: 'Retail pricing edition enabled
-
-
-            Enum: `"YES"`, `"NO"`, `"YES_PER_STORE"`
-
-            '
-        retail_pricing_enabled:
-          type: boolean
-          description: Retail pricing activated on dropship offers
-    PC01_Response_200_Features_ShopTaxOptions_LocalTaxNumber:
-      type: object
-      properties:
-        mandatory:
-          type: boolean
-          description: Defines if the VAT/GST number is mandatory
-        validation_regex:
-          type: string
-          description: Regular expression that the VAT/GST number must match
-      required:
-      - mandatory
-    PC01_Response_200_Features_OrderWorkflows:
-      type: object
-      properties:
-        no_customer_payment_confirmation:
-          type: boolean
-          description: Allows seller payments to be completely separated from customer debits
-        order_acceptance:
-          type: string
-          description: 'Indicate if shop accounts must accept new orders and take responsibility for the transaction. NOT_AUTOMATIC: All shop accounts must accept their orders manually. AUTOMATIC: Orders are automatically accepted. BOTH: AUTOMATIC or NOT_AUTOMATIC mode depending on the store account
-
-
-            Enum: `"AUTOMATIC"`, `"NOT_AUTOMATIC"`, `"BOTH"`
-
-            '
-        pause_debit_workflow:
-          type: boolean
-          description: Pause the order debit workflow when taxes must be recalculated
-        pay_on_due_date:
-          type: boolean
-          description: Allows professionals to pay their orders after the receipt of the items or an explicit invoice
-        pay_on_shipment:
-          type: boolean
-          description: Allows operators to debit orders before they have been fully shipped
-        sellers_edit_shipping_origin:
-          type: boolean
-          description: Allow shop accounts to edit shipping origin to ensures accurate tax calculations with shipping origin data
-        shipping_and_billing_details_before_acceptance:
-          type: boolean
-          description: Indicate if shipping and billing details are displayed before order acceptance
-      required:
-      - no_customer_payment_confirmation
-      - order_acceptance
-      - pause_debit_workflow
-      - pay_on_due_date
-      - pay_on_shipment
-      - sellers_edit_shipping_origin
-      - shipping_and_billing_details_before_acceptance
+      - additional_fields
+      - total_count
     CUR01_Response_200_Currencies:
       type: object
       properties:
@@ -2525,134 +2404,127 @@ components:
       required:
       - code
       - label
-    RE02_Response_200_Reasons:
+    CH11_Response_200:
       type: object
       properties:
-        code:
-          type: string
-          description: Reason code
-        label:
-          type: string
-          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-      required:
-      - code
-      - label
-    SH31_Response_200_LogisticClasses:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Logistic class code
-        description:
-          type: string
-          description: Logistic class description
-        label:
-          type: string
-          description: '<span>Logistic class label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-      required:
-      - code
-      - description
-      - label
-    RE12_Response_200_Reasons:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Reason code
-        label:
-          type: string
-          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-      required:
-      - code
-      - label
-    DO01_Response_200_Documents_2:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Type code
-        description:
-          type: string
-          description: Type description
-        entity:
-          type: string
-          description: 'Entity type linked to the document type
-
-
-            Enum: `"ORDER"`, `"SHOP"`
-
-            '
-        label:
-          type: string
-          description: '<span>Type label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-        mime_types:
+        channels:
           type: array
-          description: Authorized mime types
+          description: List of channels
+          items:
+            $ref: '#/components/schemas/CH11_Response_200_Channels'
+    PC01_Response_200_Features_Returns:
+      type: object
+      properties:
+        drop_ship:
+          type: boolean
+          description: Enables returns management in Drop ship
+        marketplace:
+          type: boolean
+          description: Enables returns management in Marketplace
+        one_creditor:
+          type: boolean
+          description: Enables returns management in One creditor
+    PC01_Response_200_Features_ShopTaxOptions:
+      type: object
+      properties:
+        local_tax_number:
+          $ref: '#/components/schemas/PC01_Response_200_Features_ShopTaxOptions_LocalTaxNumber'
+          description: The VAT/GST number of a seller billing information and fiscal representative
+        tax_identification_number:
+          $ref: '#/components/schemas/PC01_Response_200_Features_ShopTaxOptions_TaxIdentificationNumber'
+          description: The tax identification number of a seller billing information
+      required:
+      - tax_identification_number
+    PC01_Response_200_Modules_TaxManager:
+      type: object
+      deprecated: true
+      properties:
+        activated:
+          type: boolean
+          description: Tax Manager activated
+        tax_provider:
+          $ref: '#/components/schemas/PC01_Response_200_Modules_TaxManager_TaxProvider'
+          description: The tax provider processing tax estimation
+      required:
+      - activated
+      - tax_provider
+    PC01_Response_200_Features_Warehouses:
+      type: object
+      properties:
+        geolocation:
+          type: boolean
+          description: Geolocation on warehouses activated
+        restricted_countries:
+          type: array
+          description: 'The list of the restricted countries applying on warehouses. Format ISO 3166-1 alpha-3 code (3 letters country code). Possible values : AFG, ALA, ALB, DZA, ASM, AND, AGO, AIA, ATA, ATG, ARG, ARM, ABW, AUS, AUT, AZE, BHS, BHR, BGD, BRB, BLR, BEL, BLZ, BEN, BMU, BTN, BOL, BES, BIH, BWA, BVT, BRA, IOT, BRN, BGR, BFA, BDI, KHM, CMR, CAN, CPV, CYM, CAF, TCD, CHL, CHN, CXR, CCK, COL, COM, COG, COD, COK, CRI, CIV, HRV, CUB, CUW, CYP, CZE, DNK, DJI, DMA, DOM, ECU, EGY, SLV, GNQ, ERI, EST, ETH, FLK, FRO, FJI, FIN, FRA, GUF, PYF, ATF, GAB, GMB, GEO, DEU, GHA, GIB, GRC, GRL, GRD, GLP, GUM, GTM, GGY, GIN, GNB, GUY, HTI, HMD, VAT, HND, HKG, HUN, ISL, IND, IDN, IRQ, IRL, IMN, ISR, ITA, JAM, JPN, JEY, JOR, KAZ, KEN, KIR, KOR, KWT, KGZ, LAO, LVA, LBN, LSO, LBR, LBY, LIE, LTU, LUX, MAC, MKD, MDG, MWI, MYS, MDV, MLI, MLT, MHL, MTQ, MRT, MUS, MYT, MEX, FSM, MDA, MCO, MNG, MNE, MSR, MAR, MOZ, MMR, NAM, NRU, NPL, NLD, NCL, NZL, NIC, NER, NGA, NIU, NFK, MNP, NOR, OMN, PAK, PLW, PSE, PAN, PNG, PRY, PER, PHL, PCN, POL, PRT, PRI, QAT, REU, ROU, RUS, RWA, BLM, SHN, KNA, LCA, MAF, SPM, VCT, WSM, SMR, STP, SAU, SEN, SRB, SYC, SLE, SGP, SXM, SVK, SVN, SLB, SOM, ZAF, SGS, SSD, ESP, LKA, SUR, SJM, SWZ, SWE, CHE, TWN, TJK, TZA, THA, TLS, TGO, TKL, TON, TTO, TUN, TUR, TKM, TCA, TUV, UGA, UKR, ARE, GBR, USA, UMI, URY, UZB, VUT, VEN, VNM, VGB, VIR, WLF, YEM, ZMB, ZWE'
           items:
             type: string
-        models:
-          type: array
-          description: The list of platform models on which this document type is available. This field is only present for document types linked to a 'SHOP' entity.
-          items:
-            type: string
-            description: 'Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
+            description: 'Enum: `"AFG"`, `"ALA"`, `"ALB"`, `"DZA"`, `"ASM"`, `"AND"`, `"AGO"`, `"AIA"`, `"ATA"`, `"ATG"`, `"ARG"`, `"ARM"`, `"ABW"`, `"AUS"`, `"AUT"`, `"AZE"`, `"BHS"`, `"BHR"`, `"BGD"`, `"BRB"`, `"BLR"`, `"BEL"`, `"BLZ"`, `"BEN"`, `"BMU"`, `"BTN"`, `"BOL"`, `"BES"`, `"BIH"`, `"BWA"`, `"BVT"`, `"BRA"`, `"IOT"`, `"BRN"`, `"BGR"`, `"BFA"`, `"BDI"`, `"KHM"`, `"CMR"`, `"CAN"`, `"CPV"`, `"CYM"`, `"CAF"`, `"TCD"`, `"CHL"`, `"CHN"`, `"CXR"`, `"CCK"`, `"COL"`, `"COM"`, `"COG"`, `"COD"`, `"COK"`, `"CRI"`, `"CIV"`, `"HRV"`, `"CUB"`, `"CUW"`, `"CYP"`, `"CZE"`, `"DNK"`, `"DJI"`, `"DMA"`, `"DOM"`, `"ECU"`, `"EGY"`, `"SLV"`, `"GNQ"`, `"ERI"`, `"EST"`, `"ETH"`, `"FLK"`, `"FRO"`, `"FJI"`, `"FIN"`, `"FRA"`, `"GUF"`, `"PYF"`, `"ATF"`, `"GAB"`, `"GMB"`, `"GEO"`, `"DEU"`, `"GHA"`, `"GIB"`, `"GRC"`, `"GRL"`, `"GRD"`, `"GLP"`, `"GUM"`, `"GTM"`, `"GGY"`, `"GIN"`, `"GNB"`, `"GUY"`, `"HTI"`, `"HMD"`, `"VAT"`, `"HND"`, `"HKG"`, `"HUN"`, `"ISL"`, `"IND"`, `"IDN"`, `"IRQ"`, `"IRL"`, `"IMN"`, `"ISR"`, `"ITA"`, `"JAM"`, `"JPN"`, `"JEY"`, `"JOR"`, `"KAZ"`, `"KEN"`, `"KIR"`, `"KOR"`, `"KWT"`, `"KGZ"`, `"LAO"`, `"LVA"`, `"LBN"`, `"LSO"`, `"LBR"`, `"LBY"`, `"LIE"`, `"LTU"`, `"LUX"`, `"MAC"`, `"MKD"`, `"MDG"`, `"MWI"`, `"MYS"`, `"MDV"`, `"MLI"`, `"MLT"`, `"MHL"`, `"MTQ"`, `"MRT"`, `"MUS"`, `"MYT"`, `"MEX"`, `"FSM"`, `"MDA"`, `"MCO"`, `"MNG"`, `"MNE"`, `"MSR"`, `"MAR"`, `"MOZ"`, `"MMR"`, `"NAM"`, `"NRU"`, `"NPL"`, `"NLD"`, `"NCL"`, `"NZL"`, `"NIC"`, `"NER"`, `"NGA"`, `"NIU"`, `"NFK"`, `"MNP"`, `"NOR"`, `"OMN"`, `"PAK"`, `"PLW"`, `"PSE"`, `"PAN"`, `"PNG"`, `"PRY"`, `"PER"`, `"PHL"`, `"PCN"`, `"POL"`, `"PRT"`, `"PRI"`, `"QAT"`, `"REU"`, `"ROU"`, `"RUS"`, `"RWA"`, `"BLM"`, `"SHN"`, `"KNA"`, `"LCA"`, `"MAF"`, `"SPM"`, `"VCT"`, `"WSM"`, `"SMR"`, `"STP"`, `"SAU"`, `"SEN"`, `"SRB"`, `"SYC"`, `"SLE"`, `"SGP"`, `"SXM"`, `"SVK"`, `"SVN"`, `"SLB"`, `"SOM"`, `"ZAF"`, `"SGS"`, `"SSD"`, `"ESP"`, `"LKA"`, `"SUR"`, `"SJM"`, `"SWZ"`, `"SWE"`, `"CHE"`, `"TWN"`, `"TJK"`, `"TZA"`, `"THA"`, `"TLS"`, `"TGO"`, `"TKL"`, `"TON"`, `"TTO"`, `"TUN"`, `"TUR"`, `"TKM"`, `"TCA"`, `"TUV"`, `"UGA"`, `"UKR"`, `"ARE"`, `"GBR"`, `"USA"`, `"UMI"`, `"URY"`, `"UZB"`, `"VUT"`, `"VEN"`, `"VNM"`, `"VGB"`, `"VIR"`, `"WLF"`, `"YEM"`, `"ZMB"`, `"ZWE"`
 
               '
       required:
-      - code
-      - description
-      - entity
-      - label
-    RE11_Response_200:
+      - geolocation
+      - restricted_countries
+    DO01_Response_200:
       type: object
       properties:
-        reasons:
+        documents:
           type: array
-          description: List of reasons
+          description: Document types
           items:
-            $ref: '#/components/schemas/RE11_Response_200_Reasons'
-        total_count:
-          type: integer
-          format: int32
-          deprecated: true
-          description: Total count of elements returned by the query (No pagination)
+            $ref: '#/components/schemas/DO01_Response_200_Documents'
       required:
-      - reasons
-      - total_count
-    SH12_Response_200_ShippingTypes:
+      - documents
+    CUR01_Response_200:
       type: object
       properties:
-        click_and_collect:
-          type: boolean
-          description: Shipping type corresponds to “click&collect”
-        code:
-          type: string
-          description: Shipping type code
-        delivery_by_operator:
-          type: boolean
-          description: Shipping type is managed by operator on behalf of shops
-        description:
-          type: string
-          description: Shipping type description
-        ignore_lead_time_to_ship:
-          type: boolean
-          description: When true, the lead time to ship is ignored for shipping deadline computation
-        label:
-          type: string
-          description: '<span>Shipping type label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-        mandatory_tracking:
-          type: boolean
-          description: Shops must provide tracking details before confirming shipment for a given shipping type
-        standard_code:
-          type: string
-          description: Shipping type standard code
+        currencies:
+          type: array
+          description: List of currencies
+          items:
+            $ref: '#/components/schemas/CUR01_Response_200_Currencies'
       required:
-      - click_and_collect
-      - code
-      - delivery_by_operator
-      - description
-      - label
-      - mandatory_tracking
+      - currencies
+    PC01_Response_200_Features_Shipment:
+      type: object
+      properties:
+        multi_part_item_shipment:
+          type: boolean
+          description: Allows sellers to create several packages for a same item in an order
+        multi_shipment:
+          type: boolean
+          description: Allows sellers to create several shipments for a same order
+      required:
+      - multi_part_item_shipment
+      - multi_shipment
+    PC01_Response_200_Features_Catalog:
+      type: object
+      properties:
+        allow_shop_contribution_to_all_channels:
+          type: boolean
+          description: Allows shops to contribute data to all sales channels when enabled; otherwise, data can only be pushed to channels the shop belongs to
+        exclude_invalid_products:
+          type: boolean
+          description: When enabled, products with validation errors will be excluded from product imports and won't be transmitted to MCM
+        list_of_multiple_values_separator:
+          type: string
+          description: Character used to separate values in the 'Multiple Values List' type attributes
+        product_acceptance_by_channel:
+          type: boolean
+          description: Allows operators to accept or reject products according to sales channels
+        product_data_validation_by_channel:
+          type: boolean
+          description: Facilitates the management of attributes in a multilingual context
+        product_import_only_on_leaf:
+          type: boolean
+          description: Prevents the import of products into non-leaf categories
+      required:
+      - allow_shop_contribution_to_all_channels
+      - exclude_invalid_products
+      - list_of_multiple_values_separator
+      - product_acceptance_by_channel
+      - product_data_validation_by_channel
+      - product_import_only_on_leaf
     SH11_Response_200_ShippingZones:
       type: object
       properties:
@@ -2669,24 +2541,22 @@ components:
       - code
       - description
       - label
-    SH11_Response_200:
+    SH12_Response_200:
       type: object
       properties:
-        shipping_zones:
+        shipping_types:
           type: array
-          description: List of shipping zones
+          description: List of shipping types
           items:
-            $ref: '#/components/schemas/SH11_Response_200_ShippingZones'
-      required:
-      - shipping_zones
-    RE12_Response_200:
+            $ref: '#/components/schemas/SH12_Response_200_ShippingTypes'
+    RE11_Response_200:
       type: object
       properties:
         reasons:
           type: array
           description: List of reasons
           items:
-            $ref: '#/components/schemas/RE12_Response_200_Reasons'
+            $ref: '#/components/schemas/RE11_Response_200_Reasons'
         total_count:
           type: integer
           format: int32
@@ -2695,22 +2565,22 @@ components:
       required:
       - reasons
       - total_count
-    OF61_Response_200_OfferStates:
+    RE14_Response_200:
       type: object
       properties:
-        active:
-          type: boolean
-          description: Whether or not the offer state is active on the platform
-        code:
-          type: string
-          description: Offer condition code
-        label:
-          type: string
-          description: '<span>Offer condition label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        reasons:
+          type: array
+          description: List of reasons
+          items:
+            $ref: '#/components/schemas/RE14_Response_200_Reasons'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count of elements returned by the query (No pagination)
       required:
-      - active
-      - code
-      - label
+      - reasons
+      - total_count
     AF01_Response_200_AdditionalFields_2:
       type: object
       properties:
@@ -2780,7 +2650,79 @@ components:
       - required
       - shop_permission
       - type
-    RE14_Response_200_Reasons:
+    SH21_Response_200_Carriers:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Carrier code
+        label:
+          type: string
+          description: Carrier label
+        standard_code:
+          type: string
+          description: Carrier standard code
+        tracking_url:
+          type: string
+          description: Carrier tracking URL
+      required:
+      - code
+      - label
+    SH31_Response_200_LogisticClasses:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Logistic class code
+        description:
+          type: string
+          description: Logistic class description
+        label:
+          type: string
+          description: '<span>Logistic class label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - description
+      - label
+    DO01_Response_200_Documents_2:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Type code
+        description:
+          type: string
+          description: Type description
+        entity:
+          type: string
+          description: 'Entity type linked to the document type
+
+
+            Enum: `"ORDER"`, `"SHOP"`
+
+            '
+        label:
+          type: string
+          description: '<span>Type label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        mime_types:
+          type: array
+          description: Authorized mime types
+          items:
+            type: string
+        models:
+          type: array
+          description: The list of platform models on which this document type is available. This field is only present for document types linked to a 'SHOP' entity.
+          items:
+            type: string
+            description: 'Enum: `"MARKETPLACE"`, `"DROPSHIP"`, `"ONE_CREDITOR"`
+
+              '
+      required:
+      - code
+      - description
+      - entity
+      - label
+    RE12_Response_200_Reasons:
       type: object
       properties:
         code:
@@ -2792,22 +2734,36 @@ components:
       required:
       - code
       - label
-    RE01_Response_200:
+    SH21_Response_200:
       type: object
       properties:
-        reasons:
+        carriers:
           type: array
-          description: List of reasons detailed
+          description: List of carriers
           items:
-            $ref: '#/components/schemas/RE01_Response_200_Reasons'
-        total_count:
-          type: integer
-          format: int32
-          deprecated: true
-          description: Total count of elements returned by the query (no pagination)
+            $ref: '#/components/schemas/SH21_Response_200_Carriers'
       required:
-      - reasons
-      - total_count
+      - carriers
+    SH31_Response_200:
+      type: object
+      properties:
+        logistic_classes:
+          type: array
+          description: List of logistic classes
+          items:
+            $ref: '#/components/schemas/SH31_Response_200_LogisticClasses'
+      required:
+      - logistic_classes
+    SH11_Response_200:
+      type: object
+      properties:
+        shipping_zones:
+          type: array
+          description: List of shipping zones
+          items:
+            $ref: '#/components/schemas/SH11_Response_200_ShippingZones'
+      required:
+      - shipping_zones
     RE11_Response_200_Reasons:
       type: object
       properties:
@@ -2848,24 +2804,54 @@ components:
       - is_shop_right
       - label
       - type
-    SH31_Response_200:
+    RE02_Response_200_Reasons:
       type: object
       properties:
-        logistic_classes:
-          type: array
-          description: List of logistic classes
-          items:
-            $ref: '#/components/schemas/SH31_Response_200_LogisticClasses'
+        code:
+          type: string
+          description: Reason code
+        label:
+          type: string
+          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
       required:
-      - logistic_classes
-    RE14_Response_200:
+      - code
+      - label
+    RE14_Response_200_Reasons:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Reason code
+        label:
+          type: string
+          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+      required:
+      - code
+      - label
+    RE01_Response_200:
+      type: object
+      properties:
+        reasons:
+          type: array
+          description: List of reasons detailed
+          items:
+            $ref: '#/components/schemas/RE01_Response_200_Reasons'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count of elements returned by the query (no pagination)
+      required:
+      - reasons
+      - total_count
+    RE12_Response_200:
       type: object
       properties:
         reasons:
           type: array
           description: List of reasons
           items:
-            $ref: '#/components/schemas/RE14_Response_200_Reasons'
+            $ref: '#/components/schemas/RE12_Response_200_Reasons'
         total_count:
           type: integer
           format: int32
@@ -2874,40 +2860,56 @@ components:
       required:
       - reasons
       - total_count
-    SH12_Response_200:
+    OF61_Response_200_OfferStates:
       type: object
       properties:
-        shipping_types:
-          type: array
-          description: List of shipping types
-          items:
-            $ref: '#/components/schemas/SH12_Response_200_ShippingTypes'
-    RE02_Response_200:
-      type: object
-      properties:
-        reasons:
-          type: array
-          description: List of reasons
-          items:
-            $ref: '#/components/schemas/RE02_Response_200_Reasons'
-        total_count:
-          type: integer
-          format: int32
-          deprecated: true
-          description: Total count of elements returned by the query (No pagination)
+        active:
+          type: boolean
+          description: Whether or not the offer state is active on the platform
+        code:
+          type: string
+          description: Offer condition code
+        label:
+          type: string
+          description: '<span>Offer condition label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
       required:
-      - reasons
-      - total_count
-    SH21_Response_200:
+      - active
+      - code
+      - label
+    SH12_Response_200_ShippingTypes:
       type: object
       properties:
-        carriers:
-          type: array
-          description: List of carriers
-          items:
-            $ref: '#/components/schemas/SH21_Response_200_Carriers'
+        click_and_collect:
+          type: boolean
+          description: Shipping type corresponds to “click&collect”
+        code:
+          type: string
+          description: Shipping type code
+        delivery_by_operator:
+          type: boolean
+          description: Shipping type is managed by operator on behalf of shops
+        description:
+          type: string
+          description: Shipping type description
+        ignore_lead_time_to_ship:
+          type: boolean
+          description: When true, the lead time to ship is ignored for shipping deadline computation
+        label:
+          type: string
+          description: '<span>Shipping type label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        mandatory_tracking:
+          type: boolean
+          description: Shops must provide tracking details before confirming shipment for a given shipping type
+        standard_code:
+          type: string
+          description: Shipping type standard code
       required:
-      - carriers
+      - click_and_collect
+      - code
+      - delivery_by_operator
+      - description
+      - label
+      - mandatory_tracking
     OF61_Response_200:
       type: object
       properties:
@@ -2924,24 +2926,203 @@ components:
       required:
       - offer_states
       - total_count
-    SH21_Response_200_Carriers:
+    RE02_Response_200:
+      type: object
+      properties:
+        reasons:
+          type: array
+          description: List of reasons
+          items:
+            $ref: '#/components/schemas/RE02_Response_200_Reasons'
+        total_count:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Total count of elements returned by the query (No pagination)
+      required:
+      - reasons
+      - total_count
+    SH52_Response_200_Configuration_Prices_Ranges:
+      type: object
+      properties:
+        price:
+          type: number
+          format: with decimals
+          description: The value of the shipping price.
+        threshold:
+          type: number
+          format: with decimals
+          description: The threshold amounts from which the configured shipping price applies.
+      required:
+      - price
+      - threshold
+    SH52_Response_200_Configuration:
+      type: object
+      properties:
+        logistic_class_code:
+          type: string
+          description: The logistic class code.
+        overridden_by_shop:
+          type: boolean
+          description: Indicates whether the shop provided a custom configuration or not.
+        prices:
+          $ref: '#/components/schemas/SH52_Response_200_Configuration_Prices'
+          description: The details of the prices applying on the shipping charge.
+        shipping_method_code:
+          type: string
+          description: The shipping method code.
+        shipping_zone_code:
+          type: string
+          description: The shipping zone code.
+      required:
+      - logistic_class_code
+      - overridden_by_shop
+      - prices
+      - shipping_method_code
+      - shipping_zone_code
+    SH42_Response_200_OrderCutOffTimes:
+      type: object
+      description: Seller order cut-off time entry for a shipping type
+      properties:
+        cut_off_time:
+          type: string
+          description: Order cut-off time
+        is_required:
+          type: boolean
+          description: Whether the cut-off time configuration is mandatory for the shop
+        set_by:
+          type: string
+          description: 'Whether the cut-off time was set by the shop, the operator, or is not needed
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`, `"NOT_NEEDED"`
+
+            '
+        shipping_type_code:
+          type: string
+          description: Shipping type code
+      required:
+      - cut_off_time
+      - is_required
+      - set_by
+      - shipping_type_code
+    SH42_Response_200_DeliveryTimes:
+      type: object
+      description: Delivery time entry for a shipping type and zone
+      properties:
+        delivery_time:
+          $ref: '#/components/schemas/SH42_Response_200_DeliveryTimes_DeliveryTime'
+          description: Delivery time range in days
+        set_by:
+          type: string
+          description: 'Whether the delivery time was set by the shop or the operator
+
+
+            Enum: `"OPERATOR"`, `"SHOP"`
+
+            '
+        shipping_type_code:
+          type: string
+          description: Shipping type code
+        shipping_zone_code:
+          type: string
+          description: Shipping zone code
+      required:
+      - set_by
+      - shipping_type_code
+      - shipping_zone_code
+    SH42_Response_200_DeliveryTimes_DeliveryTime:
+      type: object
+      description: Delivery time range configuration
+      properties:
+        earliest_days:
+          type: integer
+          format: int32
+          description: Minimum number of delivery days
+        latest_days:
+          type: integer
+          format: int32
+          description: Maximum number of delivery days
+      required:
+      - earliest_days
+      - latest_days
+    SH52_Response_200_Configuration_Prices:
+      type: object
+      properties:
+        additional_price:
+          type: number
+          format: with decimals
+          description: The value of the additional price per additional offer unit in the order. Not applicable when type is FREE_SHIPPING or ORDER_RANGE.
+        free_shipping_threshold:
+          type: number
+          format: with decimals
+          description: The minimum order value threshold, above which shipping becomes free for the customer. Not applicable when type is ORDER_RANGE.
+        initial_price:
+          type: number
+          format: with decimals
+          description: The value of the standard shipping price. Not applicable when type is FREE_SHIPPING or ORDER_RANGE.
+        ranges:
+          type: array
+          description: The details of the shipping price ranges. Applicable only when type is ORDER_RANGE.
+          items:
+            $ref: '#/components/schemas/SH52_Response_200_Configuration_Prices_Ranges'
+        type:
+          type: string
+          description: 'The rule applying on the shipping charge.
+
+
+            Enum: `"FIXED_PRICE"`, `"FREE_SHIPPING"`, `"ORDER_RANGE"`
+
+            '
+      required:
+      - type
+    RE01_Response_200_Reasons_2:
       type: object
       properties:
         code:
           type: string
-          description: Carrier code
+          description: Reason code
+        is_shop_right:
+          type: boolean
+          description: Indicate if reason is enabled to the shop
         label:
           type: string
-          description: Carrier label
-        standard_code:
+          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
+        type:
           type: string
-          description: Carrier standard code
-        tracking_url:
+          description: "Type of the reason\n\nEnum: `\"INCIDENT_OPEN\"`, `\"MPS_INCIDENT_OPEN\"`, `\"INCIDENT_CLOSE\"`, `\"MPS_INCIDENT_CLOSE\"`, `\"REFUND\"`, `\"MPS_REFUND\"`, `\"ORDER_MESSAGING\"`, `\"MPS_ORDER_MESSAGING\"`, `\"MPS_OFFER_MESSAGING\"`, `\"OFFER_MESSAGING\"`, `\"CANCELATION\"`, `\"MMP_SELLER_MESSAGING\"`, `\"MPS_SELLER_MESSAGING\"`, `\"RETURN\"`, `\"RETURN_REJECTION\"`, `\"RETURN_NON_COMPLIANT\"`\n\n<details>\n  <summary>See deprecated values</summary>\n\n  Deprecated values: `\"MESSAGING\"`\n</details>\n"
+      required:
+      - code
+      - is_shop_right
+      - label
+      - type
+    OF61_Response_200_OfferStates_2:
+      type: object
+      properties:
+        code:
           type: string
-          description: Carrier tracking URL
+          description: Offer condition code
+        label:
+          type: string
+          description: '<span>Offer condition label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
       required:
       - code
       - label
+    SH42_Response_200_LeadTimeToShip:
+      type: object
+      description: Lead time to ship configuration
+      properties:
+        default_value:
+          type: integer
+          format: int32
+          description: Platform default lead time to ship in days
+        shop_value:
+          type: integer
+          format: int32
+          description: Shop-specific lead time to ship in days
+      required:
+      - default_value
+      - shop_value
     SH52_Response_200:
       type: object
       description: Shop shipping configuration
@@ -2972,32 +3153,6 @@ components:
       - currency_iso_code
       - last_updated_date
       - shop_id
-    SH42_Response_200_OrderCutOffTimes:
-      type: object
-      description: Seller order cut-off time entry for a shipping type
-      properties:
-        cut_off_time:
-          type: string
-          description: Order cut-off time
-        is_required:
-          type: boolean
-          description: Whether the cut-off time configuration is mandatory for the shop
-        set_by:
-          type: string
-          description: 'Whether the cut-off time was set by the shop, the operator, or is not needed
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`, `"NOT_NEEDED"`
-
-            '
-        shipping_type_code:
-          type: string
-          description: Shipping type code
-      required:
-      - cut_off_time
-      - is_required
-      - set_by
-      - shipping_type_code
     SH42_Response_200:
       type: object
       description: Seller shop shipping configuration
@@ -3035,161 +3190,6 @@ components:
       - order_free_shipping
       - shipping_paid_by_operator
       - shop_id
-    SH52_Response_200_Configuration_Prices_Ranges:
-      type: object
-      properties:
-        price:
-          type: number
-          format: with decimals
-          description: The value of the shipping price.
-        threshold:
-          type: number
-          format: with decimals
-          description: The threshold amounts from which the configured shipping price applies.
-      required:
-      - price
-      - threshold
-    SH52_Response_200_Configuration_Prices:
-      type: object
-      properties:
-        additional_price:
-          type: number
-          format: with decimals
-          description: The value of the additional price per additional offer unit in the order. Not applicable when type is FREE_SHIPPING or ORDER_RANGE.
-        free_shipping_threshold:
-          type: number
-          format: with decimals
-          description: The minimum order value threshold, above which shipping becomes free for the customer. Not applicable when type is ORDER_RANGE.
-        initial_price:
-          type: number
-          format: with decimals
-          description: The value of the standard shipping price. Not applicable when type is FREE_SHIPPING or ORDER_RANGE.
-        ranges:
-          type: array
-          description: The details of the shipping price ranges. Applicable only when type is ORDER_RANGE.
-          items:
-            $ref: '#/components/schemas/SH52_Response_200_Configuration_Prices_Ranges'
-        type:
-          type: string
-          description: 'The rule applying on the shipping charge.
-
-
-            Enum: `"FIXED_PRICE"`, `"FREE_SHIPPING"`, `"ORDER_RANGE"`
-
-            '
-      required:
-      - type
-    OF61_Response_200_OfferStates_2:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Offer condition code
-        label:
-          type: string
-          description: '<span>Offer condition label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-      required:
-      - code
-      - label
-    SH42_Response_200_DeliveryTimes:
-      type: object
-      description: Delivery time entry for a shipping type and zone
-      properties:
-        delivery_time:
-          $ref: '#/components/schemas/SH42_Response_200_DeliveryTimes_DeliveryTime'
-          description: Delivery time range in days
-        set_by:
-          type: string
-          description: 'Whether the delivery time was set by the shop or the operator
-
-
-            Enum: `"OPERATOR"`, `"SHOP"`
-
-            '
-        shipping_type_code:
-          type: string
-          description: Shipping type code
-        shipping_zone_code:
-          type: string
-          description: Shipping zone code
-      required:
-      - set_by
-      - shipping_type_code
-      - shipping_zone_code
-    RE01_Response_200_Reasons_2:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Reason code
-        is_shop_right:
-          type: boolean
-          description: Indicate if reason is enabled to the shop
-        label:
-          type: string
-          description: '<span>Reason label </span><span title="This field is localized: its value uses the locale provided in the parameters" class="flag"></span>'
-        type:
-          type: string
-          description: "Type of the reason\n\nEnum: `\"INCIDENT_OPEN\"`, `\"MPS_INCIDENT_OPEN\"`, `\"INCIDENT_CLOSE\"`, `\"MPS_INCIDENT_CLOSE\"`, `\"REFUND\"`, `\"MPS_REFUND\"`, `\"ORDER_MESSAGING\"`, `\"MPS_ORDER_MESSAGING\"`, `\"MPS_OFFER_MESSAGING\"`, `\"OFFER_MESSAGING\"`, `\"CANCELATION\"`, `\"MMP_SELLER_MESSAGING\"`, `\"MPS_SELLER_MESSAGING\"`, `\"RETURN\"`, `\"RETURN_REJECTION\"`, `\"RETURN_NON_COMPLIANT\"`\n\n<details>\n  <summary>See deprecated values</summary>\n\n  Deprecated values: `\"MESSAGING\"`\n</details>\n"
-      required:
-      - code
-      - is_shop_right
-      - label
-      - type
-    SH42_Response_200_LeadTimeToShip:
-      type: object
-      description: Lead time to ship configuration
-      properties:
-        default_value:
-          type: integer
-          format: int32
-          description: Platform default lead time to ship in days
-        shop_value:
-          type: integer
-          format: int32
-          description: Shop-specific lead time to ship in days
-      required:
-      - default_value
-      - shop_value
-    SH52_Response_200_Configuration:
-      type: object
-      properties:
-        logistic_class_code:
-          type: string
-          description: The logistic class code.
-        overridden_by_shop:
-          type: boolean
-          description: Indicates whether the shop provided a custom configuration or not.
-        prices:
-          $ref: '#/components/schemas/SH52_Response_200_Configuration_Prices'
-          description: The details of the prices applying on the shipping charge.
-        shipping_method_code:
-          type: string
-          description: The shipping method code.
-        shipping_zone_code:
-          type: string
-          description: The shipping zone code.
-      required:
-      - logistic_class_code
-      - overridden_by_shop
-      - prices
-      - shipping_method_code
-      - shipping_zone_code
-    SH42_Response_200_DeliveryTimes_DeliveryTime:
-      type: object
-      description: Delivery time range configuration
-      properties:
-        earliest_days:
-          type: integer
-          format: int32
-          description: Minimum number of delivery days
-        latest_days:
-          type: integer
-          format: int32
-          description: Maximum number of delivery days
-      required:
-      - earliest_days
-      - latest_days
     RE01_Response_200_Reasons_3:
       type: object
       properties:
@@ -3210,17 +3210,6 @@ components:
       - is_shop_right
       - label
       - type
-    GetOperatorReturnConfigurations_Response_200:
-      type: object
-      description: Configuration for returns for an operator
-      properties:
-        configurations:
-          type: array
-          description: Operator returns' configuration
-          items:
-            $ref: '#/components/schemas/GetOperatorReturnConfigurations_Response_200_Configurations'
-      required:
-      - configurations
     GetOperatorReturnConfigurations_Response_200_Configurations:
       type: object
       description: Configuration for returns for an operator
@@ -3302,6 +3291,17 @@ components:
       - countryIsoCode
       - street1
       - zipCode
+    GetOperatorReturnConfigurations_Response_200:
+      type: object
+      description: Configuration for returns for an operator
+      properties:
+        configurations:
+          type: array
+          description: Operator returns' configuration
+          items:
+            $ref: '#/components/schemas/GetOperatorReturnConfigurations_Response_200_Configurations'
+      required:
+      - configurations
   securitySchemes:
     Shop-API-Key:
       in: header

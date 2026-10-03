@@ -612,308 +612,6 @@ components:
       description: Product identifier
       maxLength: 256
       minLength: 1
-    Image:
-      type: object
-      properties:
-        url:
-          type: string
-          description: Image URL
-          examples:
-          - http://my_image.png
-          pattern: ^(http|https):\/\/.*$
-      required:
-      - url
-    UpsertProductsRequest:
-      type: object
-      description: 'Update any of the top-elements of all given products.
-
-
-        Omitted top-elements in the API will remain unchanged.
-
-
-        Any nullable field can be explicitly set to null in order to remove its value.
-
-        '
-      properties:
-        products:
-          type: array
-          description: Products to create or to update
-          items:
-            $ref: '#/components/schemas/Product'
-          maxItems: 1000
-          minItems: 1
-    Gtin:
-      type: object
-      properties:
-        value:
-          type: string
-          description: GTIN value on 8, 12 or 13 digits
-          examples:
-          - '9780050666319'
-          pattern: ^([0-9]{8}|[0-9]{12,13})$
-      required:
-      - value
-    AvailableQuantity:
-      type: integer
-      format: int32
-      description: Available quantity of a product
-      maximum: 1000000000
-      minimum: 0
-    Money:
-      type: object
-      properties:
-        amount:
-          type: number
-          description: Price amount
-          examples:
-          - '1234.56'
-          minimum: 0
-        currency:
-          type: string
-          format: iso-4217
-          description: Currency ISO code
-          examples:
-          - EUR
-          minLength: 1
-      required:
-      - amount
-      - currency
-    Title:
-      type: object
-      description: Title with its associated locale
-      properties:
-        locale:
-          $ref: '#/components/schemas/Locale'
-        value:
-          type: string
-          description: Title
-          examples:
-          - My awesome product
-          maxLength: 255
-      required:
-      - locale
-      - value
-    DeleteProductsRequest:
-      type: object
-      description: 'Delete any of corresponding products.
-
-        Unknown or no longer present products won''t generate error.
-
-        '
-      properties:
-        products:
-          type: array
-          description: Identifier of products to delete
-          items:
-            $ref: '#/components/schemas/ProductIdentifier'
-          maxItems: 1000
-          minItems: 1
-      required:
-      - products
-    Description:
-      type: object
-      description: Description with its associated locale
-      properties:
-        locale:
-          $ref: '#/components/schemas/Locale'
-        value:
-          type: string
-          description: Description
-          examples:
-          - My awesome product's description
-          maxLength: 6000
-      required:
-      - locale
-      - value
-    Locale:
-      type: string
-      description: The language format can be ISO-639 or ISO-639_ISO-3166
-      examples:
-      - en_US
-    ProductIdentifier:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/ProductId'
-      required:
-      - id
-    Titles:
-      type:
-      - array
-      - 'null'
-      description: Titles with their associated locale
-      items:
-        $ref: '#/components/schemas/Title'
-      maxItems: 10
-    CategoryLabel:
-      type: object
-      description: A label for the category with its associated locale
-      properties:
-        locale:
-          $ref: '#/components/schemas/Locale'
-        value:
-          type: string
-          description: A label for the category
-          examples:
-          - Fridge
-          maxLength: 255
-      required:
-      - locale
-      - value
-    StandardPrice:
-      type: object
-      properties:
-        price:
-          $ref: '#/components/schemas/Money'
-        scope:
-          $ref: '#/components/schemas/PriceScope'
-      required:
-      - price
-    Descriptions:
-      type:
-      - array
-      - 'null'
-      description: Descriptions with their associated locale
-      items:
-        $ref: '#/components/schemas/Description'
-      maxItems: 10
-    Quantities:
-      type: array
-      description: Product quantities
-      items:
-        $ref: '#/components/schemas/Quantity'
-      maxItems: 20
-      minItems: 1
-    PriceScope:
-      type:
-      - string
-      - 'null'
-      description: Price scope
-      maxLength: 255
-    ResourcesPage:
-      type: object
-      properties:
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-          minLength: 1
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-          minLength: 1
-    Images:
-      type:
-      - array
-      - 'null'
-      description: Images
-      items:
-        $ref: '#/components/schemas/Image'
-      maxItems: 15
-      minItems: 0
-    PartnerQuantity:
-      type: object
-      properties:
-        available_quantity:
-          $ref: '#/components/schemas/AvailableQuantity'
-        partner_id:
-          type: string
-      required:
-      - available_quantity
-      - partner_id
-    PartnerQuantities:
-      type: array
-      description: Product quantities from partners
-      items:
-        $ref: '#/components/schemas/PartnerQuantity'
-      maxItems: 20
-      minItems: 1
-    DiscountPrices:
-      type:
-      - array
-      - 'null'
-      description: Discount prices
-      items:
-        $ref: '#/components/schemas/DiscountPrice'
-      maxItems: 10
-    DiscountPrice:
-      type: object
-      properties:
-        end_date:
-          type:
-          - string
-          - 'null'
-          format: datetime
-          description: The end date of the discount interval in ISO 8601 format (UTC/Zulu time)
-          examples:
-          - '2025-02-19T16:46:00Z'
-        price:
-          $ref: '#/components/schemas/Money'
-        scope:
-          $ref: '#/components/schemas/PriceScope'
-        start_date:
-          type:
-          - string
-          - 'null'
-          format: datetime
-          description: The start date of the discount interval in ISO 8601 format (UTC/Zulu time)
-          examples:
-          - '2025-02-19T16:46:00Z'
-      required:
-      - price
-    Brand:
-      type:
-      - string
-      - 'null'
-      description: Brand
-      examples:
-      - My awesome brand
-      maxLength: 255
-    StandardPrices:
-      type: array
-      description: Standard prices
-      items:
-        $ref: '#/components/schemas/StandardPrice'
-      maxItems: 10
-      minItems: 1
-    Gtins:
-      type: array
-      description: GTIN (EAN, GENCOD, UPC, ISBN, etc.) used to map the product with one of the marketplace’s catalog
-      items:
-        $ref: '#/components/schemas/Gtin'
-      maxItems: 10
-      minItems: 0
-    ListProductsResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResourcesPage'
-      - type: object
-        properties:
-          data:
-            type: array
-            description: Page of products
-            items:
-              $ref: '#/components/schemas/Product'
-        required:
-        - data
-    Attributes:
-      type:
-      - array
-      - 'null'
-      description: Additional product attributes
-      items:
-        $ref: '#/components/schemas/Attribute'
-      maxItems: 1000
-      minItems: 0
-    Quantity:
-      type: object
-      properties:
-        available_quantity:
-          $ref: '#/components/schemas/AvailableQuantity'
-        warehouse_code:
-          type: string
-          description: Warehouse code defined in your Mirakl account
-          minLength: 1
-      required:
-      - available_quantity
     Attribute:
       type: object
       description: An attribute of this product.
@@ -952,6 +650,70 @@ components:
       - name
       - type
       - value
+    ProductIdentifier:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ProductId'
+      required:
+      - id
+    DiscountPrices:
+      type:
+      - array
+      - 'null'
+      description: Discount prices
+      items:
+        $ref: '#/components/schemas/DiscountPrice'
+      maxItems: 10
+    Descriptions:
+      type:
+      - array
+      - 'null'
+      description: Descriptions with their associated locale
+      items:
+        $ref: '#/components/schemas/Description'
+      maxItems: 10
+    StandardPrices:
+      type: array
+      description: Standard prices
+      items:
+        $ref: '#/components/schemas/StandardPrice'
+      maxItems: 10
+      minItems: 1
+    Description:
+      type: object
+      description: Description with its associated locale
+      properties:
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: Description
+          examples:
+          - My awesome product's description
+          maxLength: 6000
+      required:
+      - locale
+      - value
+    AvailableQuantity:
+      type: integer
+      format: int32
+      description: Available quantity of a product
+      maximum: 1000000000
+      minimum: 0
+    Locale:
+      type: string
+      description: The language format can be ISO-639 or ISO-639_ISO-3166
+      examples:
+      - en_US
+    Titles:
+      type:
+      - array
+      - 'null'
+      description: Titles with their associated locale
+      items:
+        $ref: '#/components/schemas/Title'
+      maxItems: 10
     Category:
       type: object
       description: Category
@@ -972,6 +734,215 @@ components:
             $ref: '#/components/schemas/CategoryLabel'
       required:
       - labels
+    Gtins:
+      type: array
+      description: GTIN (EAN, GENCOD, UPC, ISBN, etc.) used to map the product with one of the marketplace’s catalog
+      items:
+        $ref: '#/components/schemas/Gtin'
+      maxItems: 10
+      minItems: 0
+    Quantities:
+      type: array
+      description: Product quantities
+      items:
+        $ref: '#/components/schemas/Quantity'
+      maxItems: 20
+      minItems: 1
+    PriceScope:
+      type:
+      - string
+      - 'null'
+      description: Price scope
+      maxLength: 255
+    Brand:
+      type:
+      - string
+      - 'null'
+      description: Brand
+      examples:
+      - My awesome brand
+      maxLength: 255
+    UpsertProductsRequest:
+      type: object
+      description: 'Update any of the top-elements of all given products.
+
+
+        Omitted top-elements in the API will remain unchanged.
+
+
+        Any nullable field can be explicitly set to null in order to remove its value.
+
+        '
+      properties:
+        products:
+          type: array
+          description: Products to create or to update
+          items:
+            $ref: '#/components/schemas/Product'
+          maxItems: 1000
+          minItems: 1
+    Attributes:
+      type:
+      - array
+      - 'null'
+      description: Additional product attributes
+      items:
+        $ref: '#/components/schemas/Attribute'
+      maxItems: 1000
+      minItems: 0
+    PartnerQuantity:
+      type: object
+      properties:
+        available_quantity:
+          $ref: '#/components/schemas/AvailableQuantity'
+        partner_id:
+          type: string
+      required:
+      - available_quantity
+      - partner_id
+    Money:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Price amount
+          examples:
+          - '1234.56'
+          minimum: 0
+        currency:
+          type: string
+          format: iso-4217
+          description: Currency ISO code
+          examples:
+          - EUR
+          minLength: 1
+      required:
+      - amount
+      - currency
+    Images:
+      type:
+      - array
+      - 'null'
+      description: Images
+      items:
+        $ref: '#/components/schemas/Image'
+      maxItems: 15
+      minItems: 0
+    PartnerQuantities:
+      type: array
+      description: Product quantities from partners
+      items:
+        $ref: '#/components/schemas/PartnerQuantity'
+      maxItems: 20
+      minItems: 1
+    Image:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Image URL
+          examples:
+          - http://my_image.png
+          pattern: ^(http|https):\/\/.*$
+      required:
+      - url
+    DiscountPrice:
+      type: object
+      properties:
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: datetime
+          description: The end date of the discount interval in ISO 8601 format (UTC/Zulu time)
+          examples:
+          - '2025-02-19T16:46:00Z'
+        price:
+          $ref: '#/components/schemas/Money'
+        scope:
+          $ref: '#/components/schemas/PriceScope'
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: datetime
+          description: The start date of the discount interval in ISO 8601 format (UTC/Zulu time)
+          examples:
+          - '2025-02-19T16:46:00Z'
+      required:
+      - price
+    ResourcesPage:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+          minLength: 1
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+          minLength: 1
+    Title:
+      type: object
+      description: Title with its associated locale
+      properties:
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: Title
+          examples:
+          - My awesome product
+          maxLength: 255
+      required:
+      - locale
+      - value
+    StandardPrice:
+      type: object
+      properties:
+        price:
+          $ref: '#/components/schemas/Money'
+        scope:
+          $ref: '#/components/schemas/PriceScope'
+      required:
+      - price
+    Gtin:
+      type: object
+      properties:
+        value:
+          type: string
+          description: GTIN value on 8, 12 or 13 digits
+          examples:
+          - '9780050666319'
+          pattern: ^([0-9]{8}|[0-9]{12,13})$
+      required:
+      - value
+    Quantity:
+      type: object
+      properties:
+        available_quantity:
+          $ref: '#/components/schemas/AvailableQuantity'
+        warehouse_code:
+          type: string
+          description: Warehouse code defined in your Mirakl account
+          minLength: 1
+      required:
+      - available_quantity
+    CategoryLabel:
+      type: object
+      description: A label for the category with its associated locale
+      properties:
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: A label for the category
+          examples:
+          - Fridge
+          maxLength: 255
+      required:
+      - locale
+      - value
     Product:
       type: object
       properties:
@@ -1003,6 +974,35 @@ components:
           $ref: '#/components/schemas/Titles'
       required:
       - id
+    DeleteProductsRequest:
+      type: object
+      description: 'Delete any of corresponding products.
+
+        Unknown or no longer present products won''t generate error.
+
+        '
+      properties:
+        products:
+          type: array
+          description: Identifier of products to delete
+          items:
+            $ref: '#/components/schemas/ProductIdentifier'
+          maxItems: 1000
+          minItems: 1
+      required:
+      - products
+    ListProductsResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResourcesPage'
+      - type: object
+        properties:
+          data:
+            type: array
+            description: Page of products
+            items:
+              $ref: '#/components/schemas/Product'
+        required:
+        - data
   securitySchemes:
     Bearer:
       bearerFormat: JWT
