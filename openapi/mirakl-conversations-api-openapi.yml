@@ -610,69 +610,6 @@ paths:
       - Conversations
 components:
   schemas:
-    ConversationMessagesResponse:
-      type: object
-      properties:
-        messages:
-          type: array
-          description: List of messages in the conversation
-          items:
-            $ref: '#/components/schemas/MessageResponse'
-      required:
-      - messages
-    ConversationsPageResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResourcesPage'
-      - type: object
-        properties:
-          data:
-            type: array
-            description: Page of conversations corresponding to the filter parameters
-            items:
-              $ref: '#/components/schemas/ConversationResponse'
-        required:
-        - data
-    CreateConversationInput:
-      type: object
-      properties:
-        entity:
-          type: object
-          description: Entity to link to the conversation
-          properties:
-            id:
-              type: string
-              description: Unique identifier of the entity (e.g. order ID)
-              example: 0123_Order1-A
-            type:
-              type: string
-              description: 'Type of the entity linked to the conversation
-
-
-                Enum: `"ORDER"`
-
-                '
-          required:
-          - id
-          - type
-        first_message:
-          type: object
-          description: First message of the conversation
-          properties:
-            body:
-              type: string
-              description: Body of the first message
-              example: Hello! How can I assist you today?
-              maxLength: 2000
-              minLength: 1
-          required:
-          - body
-        topic:
-          $ref: '#/components/schemas/CreateConversationInputTopic'
-          description: Topic of the conversation
-      required:
-      - entity
-      - first_message
-      - topic
     CreateConversationInputTopic:
       type: object
       properties:
@@ -692,6 +629,29 @@ components:
       required:
       - type
       - value
+    MessageSender:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the sender. Null for type `CUSTOMER`
+          example: '00032'
+        name:
+          type: string
+          description: Display name of the sender
+          example: Marketplace 1
+        type:
+          type: string
+          description: 'Type of the sender
+
+
+            Enum: `"CUSTOMER"`, `"STORE"`, `"CHANNEL"`
+
+            '
+          example: CHANNEL
+      required:
+      - name
+      - type
     ConversationParticipant:
       type: object
       properties:
@@ -715,9 +675,6 @@ components:
       required:
       - name
       - type
-    ZipArchive:
-      type: string
-      format: binary
     ConversationActionStatus:
       type: string
       description: 'Status of an asynchronous conversation action
@@ -726,60 +683,63 @@ components:
         Enum: `"PENDING"`, `"SUCCESS"`, `"ERROR"`
 
         '
-    MessageInput:
+    ConversationActionErrorItem:
       type: object
       properties:
-        body:
+        code:
           type: string
-          description: Body of the message
-          example: Hello! How can I assist you today?
-          maxLength: 2000
+          description: 'One of the following :
+
+            - INVALID_INPUT
+
+            - DATA_NOT_FOUND
+
+            - UNEXPECTED
+
+            - UNAVAILABLE
+
+            - TOO_MANY_REQUEST
+
+            '
+          example: DATA_NOT_FOUND
+        message:
+          type: string
+          description: Human-readable error message
+          example: Conversation not found for the given ID.
+      required:
+      - code
+      - message
+    ResourcesPage:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
           minLength: 1
-      required:
-      - body
-    MessageResponse:
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+          minLength: 1
+    ConversationOrigin:
       type: object
       properties:
-        attachments:
-          type: array
-          description: List of file attachments on this message
-          items:
-            $ref: '#/components/schemas/MessageAttachment'
-        body:
+        channel_id:
           type: string
-          description: Content of the message
-          example: Hello, I need help with my billing statement.
-        channel_created_at:
+          description: Unique identifier of the sales channel
+        channel_name:
           type: string
-          format: date-time
-          description: Date and time when the message was created on the channel
-          example: '2024-06-01T10:05:00Z'
-        channel_message_id:
+          description: Name of the sales channel
+        channel_store_id:
           type: string
-          description: Unique identifier of the message on the channel
-          example: msg-2odjwo
-        created_at:
+          description: Store identifier on the sales channel. This identifier is not guaranteed to be unique as multiple channels can use the same identifier.
+        channel_store_name:
           type: string
-          format: date-time
-          description: Date and time when the message was stored in Connect
-          example: '2024-06-01T10:05:00Z'
-        id:
-          type: string
-          description: Unique identifier of the message in Connect
-          example: 550e8400-e29b-41d4-a716-446655440000
-        sender:
-          $ref: '#/components/schemas/MessageSender'
-          description: Sender of the message
-        visible_to_customer:
-          type: boolean
-          description: Whether the message is visible to the customer or not. When false the message is only visible to you and the channel. Note that when using createMessage API, the message is always sent to the customer.
+          description: Store public name on the sales channel
       required:
-      - body
-      - channel_created_at
-      - channel_message_id
-      - created_at
-      - id
-      - sender
+      - channel_id
+      - channel_name
+      - channel_store_id
+      - channel_store_name
     MessageAttachment:
       type: object
       properties:
@@ -800,72 +760,9 @@ components:
       - filename
       - id
       - size_in_bytes
-    ConversationActionIdResponse:
-      type: object
-      properties:
-        action_id:
-          type: string
-          description: Unique identifier of the action. Use `getConversationActionStatus` to retrieve the result of your request.
-          example: abcd
-      required:
-      - action_id
-    ConversationActionStatusResponse:
-      type: object
-      properties:
-        conversation_id:
-          type: string
-          description: Identifier of the related conversation.
-        created_at:
-          type: string
-          format: date-time
-          description: Date and time when the action was created
-        errors:
-          type: array
-          description: List of errors if the action failed
-          items:
-            $ref: '#/components/schemas/ConversationActionErrorItem'
-        id:
-          type: string
-          description: Unique identifier of the action
-          example: abcd
-        status:
-          $ref: '#/components/schemas/ConversationActionStatus'
-          description: Current status of the action
-        updated_at:
-          type: string
-          format: date-time
-          description: Date and time when the action was last updated
-      required:
-      - created_at
-      - id
-      - status
-      - updated_at
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code (immutable)
-          examples:
-          - DATA_NOT_FOUND
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        message:
-          type: string
-          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - An error occurred while processing your request
-      required:
-      - code
-      - message
+    ZipArchive:
+      type: string
+      format: binary
     ConversationResponse:
       type: object
       properties:
@@ -950,86 +847,167 @@ components:
       - participants
       - topic
       - updated_at
-    ResourcesPage:
+    MessageResponse:
       type: object
       properties:
-        next_page_token:
+        attachments:
+          type: array
+          description: List of file attachments on this message
+          items:
+            $ref: '#/components/schemas/MessageAttachment'
+        body:
           type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-          minLength: 1
-        previous_page_token:
+          description: Content of the message
+          example: Hello, I need help with my billing statement.
+        channel_created_at:
           type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-          minLength: 1
-    ConversationActionErrorItem:
+          format: date-time
+          description: Date and time when the message was created on the channel
+          example: '2024-06-01T10:05:00Z'
+        channel_message_id:
+          type: string
+          description: Unique identifier of the message on the channel
+          example: msg-2odjwo
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time when the message was stored in Connect
+          example: '2024-06-01T10:05:00Z'
+        id:
+          type: string
+          description: Unique identifier of the message in Connect
+          example: 550e8400-e29b-41d4-a716-446655440000
+        sender:
+          $ref: '#/components/schemas/MessageSender'
+          description: Sender of the message
+        visible_to_customer:
+          type: boolean
+          description: Whether the message is visible to the customer or not. When false the message is only visible to you and the channel. Note that when using createMessage API, the message is always sent to the customer.
+      required:
+      - body
+      - channel_created_at
+      - channel_message_id
+      - created_at
+      - id
+      - sender
+    Error:
       type: object
       properties:
         code:
           type: string
-          description: 'One of the following :
-
-            - INVALID_INPUT
-
-            - DATA_NOT_FOUND
-
-            - UNEXPECTED
-
-            - UNAVAILABLE
-
-            - TOO_MANY_REQUEST
-
-            '
-          example: DATA_NOT_FOUND
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
         message:
           type: string
-          description: Human-readable error message
-          example: Conversation not found for the given ID.
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - An error occurred while processing your request
       required:
       - code
       - message
-    ConversationOrigin:
+    ConversationActionIdResponse:
       type: object
       properties:
-        channel_id:
+        action_id:
           type: string
-          description: Unique identifier of the sales channel
-        channel_name:
-          type: string
-          description: Name of the sales channel
-        channel_store_id:
-          type: string
-          description: Store identifier on the sales channel. This identifier is not guaranteed to be unique as multiple channels can use the same identifier.
-        channel_store_name:
-          type: string
-          description: Store public name on the sales channel
+          description: Unique identifier of the action. Use `getConversationActionStatus` to retrieve the result of your request.
+          example: abcd
       required:
-      - channel_id
-      - channel_name
-      - channel_store_id
-      - channel_store_name
-    MessageSender:
+      - action_id
+    ConversationActionStatusResponse:
       type: object
       properties:
+        conversation_id:
+          type: string
+          description: Identifier of the related conversation.
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time when the action was created
+        errors:
+          type: array
+          description: List of errors if the action failed
+          items:
+            $ref: '#/components/schemas/ConversationActionErrorItem'
         id:
           type: string
-          description: Unique identifier of the sender. Null for type `CUSTOMER`
-          example: '00032'
-        name:
+          description: Unique identifier of the action
+          example: abcd
+        status:
+          $ref: '#/components/schemas/ConversationActionStatus'
+          description: Current status of the action
+        updated_at:
           type: string
-          description: Display name of the sender
-          example: Marketplace 1
-        type:
-          type: string
-          description: 'Type of the sender
-
-
-            Enum: `"CUSTOMER"`, `"STORE"`, `"CHANNEL"`
-
-            '
-          example: CHANNEL
+          format: date-time
+          description: Date and time when the action was last updated
       required:
-      - name
-      - type
+      - created_at
+      - id
+      - status
+      - updated_at
+    CreateConversationInput:
+      type: object
+      properties:
+        entity:
+          type: object
+          description: Entity to link to the conversation
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the entity (e.g. order ID)
+              example: 0123_Order1-A
+            type:
+              type: string
+              description: 'Type of the entity linked to the conversation
+
+
+                Enum: `"ORDER"`
+
+                '
+          required:
+          - id
+          - type
+        first_message:
+          type: object
+          description: First message of the conversation
+          properties:
+            body:
+              type: string
+              description: Body of the first message
+              example: Hello! How can I assist you today?
+              maxLength: 2000
+              minLength: 1
+          required:
+          - body
+        topic:
+          $ref: '#/components/schemas/CreateConversationInputTopic'
+          description: Topic of the conversation
+      required:
+      - entity
+      - first_message
+      - topic
+    MessageInput:
+      type: object
+      properties:
+        body:
+          type: string
+          description: Body of the message
+          example: Hello! How can I assist you today?
+          maxLength: 2000
+          minLength: 1
+      required:
+      - body
     ErrorItem:
       type: object
       properties:
@@ -1051,6 +1029,28 @@ components:
           - 'An error occurred while processing your request: id is null'
       required:
       - message
+    ConversationMessagesResponse:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: List of messages in the conversation
+          items:
+            $ref: '#/components/schemas/MessageResponse'
+      required:
+      - messages
+    ConversationsPageResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResourcesPage'
+      - type: object
+        properties:
+          data:
+            type: array
+            description: Page of conversations corresponding to the filter parameters
+            items:
+              $ref: '#/components/schemas/ConversationResponse'
+        required:
+        - data
   securitySchemes:
     Bearer:
       bearerFormat: JWT

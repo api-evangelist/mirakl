@@ -109,6 +109,18 @@ paths:
       - Carriers
 components:
   schemas:
+    UpsertCarriersRequest:
+      type: object
+      properties:
+        carriers:
+          type: array
+          description: List of carriers available on the channel
+          items:
+            $ref: '#/components/schemas/CarrierRequest'
+          maxItems: 5000
+          minItems: 1
+      required:
+      - carriers
     ErrorItem:
       type: object
       properties:
@@ -130,30 +142,6 @@ components:
           - 'An error occurred while processing your request: id is null'
       required:
       - message
-    UpsertCarriersRequest:
-      type: object
-      properties:
-        carriers:
-          type: array
-          description: List of carriers available on the channel
-          items:
-            $ref: '#/components/schemas/CarrierRequest'
-          maxItems: 5000
-          minItems: 1
-      required:
-      - carriers
-    CarrierRequest:
-      type: object
-      properties:
-        channel_carrier_id:
-          type: string
-          description: Unique identifier of the carrier on the channel
-        name:
-          type: string
-          description: Display name of the carrier
-      required:
-      - channel_carrier_id
-      - name
     Error:
       type: object
       properties:
@@ -180,6 +168,18 @@ components:
       required:
       - code
       - message
+    CarrierRequest:
+      type: object
+      properties:
+        channel_carrier_id:
+          type: string
+          description: Unique identifier of the carrier on the channel
+        name:
+          type: string
+          description: Display name of the carrier
+      required:
+      - channel_carrier_id
+      - name
   securitySchemes:
     Bearer:
       bearerFormat: JWT

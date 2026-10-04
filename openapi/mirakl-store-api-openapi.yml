@@ -134,6 +134,34 @@ paths:
       url: https://account.mirakl.net/api/channel-platform
 components:
   schemas:
+    SELLER_ACCOUNT_STORE_CREATE_Request_Stores:
+      type: object
+      description: Stores to create
+      properties:
+        access_expiration_date:
+          type: string
+          format: date-time
+          description: Access expiration date
+        channel_id:
+          type: string
+          description: Channel id
+        channel_store_id:
+          type: string
+          description: Channel store id
+        name:
+          type: string
+          description: Store name
+        state:
+          type: string
+          description: Store state
+        suspension_type:
+          type: string
+          description: Store suspension type
+      required:
+      - channel_id
+      - channel_store_id
+      - name
+      - state
     SELLER_ACCOUNT_STORE_UPDATE_Request:
       type: object
       properties:
@@ -163,110 +191,6 @@ components:
             $ref: '#/components/schemas/SELLER_ACCOUNT_STORE_CREATE_Request_Stores'
       required:
       - stores
-    SELLER_ACCOUNT_STORE_CREATE_Request_Stores:
-      type: object
-      description: Stores to create
-      properties:
-        access_expiration_date:
-          type: string
-          format: date-time
-          description: Access expiration date
-        channel_id:
-          type: string
-          description: Channel id
-        channel_store_id:
-          type: string
-          description: Channel store id
-        name:
-          type: string
-          description: Store name
-        state:
-          type: string
-          description: Store state
-        suspension_type:
-          type: string
-          description: Store suspension type
-      required:
-      - channel_id
-      - channel_store_id
-      - name
-      - state
-    QualitySuspensionReason:
-      type: object
-      properties:
-        period:
-          type: string
-          description: 'Period considered by the Marketplace for the statistics related to the rule.
-
-            '
-          example: Last month
-        rule:
-          type: string
-          description: 'Rule that triggered the suspension of the store.
-
-            This can be a rule related to quality, payment, shipping or any other rule defined by the Marketplace.
-
-            By assembling every parameters, we can build a human readable description of the rule.
-
-            '
-          example: Evaluation Grade last month was lower than 3.5 expected to never be lower than 4.0
-        rule_comparison_method:
-          type: string
-          description: 'Comparison method used by the Marketplace to evaluate the rule.
-
-            '
-          example: lower than
-        rule_type:
-          type: string
-          description: 'Type of the rule that triggered the suspension of the store such as DECIMAL or INTEGER.
-
-            '
-          example: DECIMAL
-        stat_value:
-          type: number
-          format: with decimals
-          description: 'Value of the statistic that triggered the rule.
-
-            This is the value that was compared to the threshold defined by the Marketplace.
-
-            '
-          example: 3.5
-        threshold:
-          type: number
-          format: with decimals
-          description: 'Threshold value defined by the Marketplace for the rule.
-
-            If the stat_value is lower than this threshold, the store is considered suspended.
-
-            '
-      required:
-      - rule
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code (immutable)
-          examples:
-          - DATA_NOT_FOUND
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        message:
-          type: string
-          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - An error occurred while processing your request
-      required:
-      - code
-      - message
     BusinessInformationInput:
       type: object
       properties:
@@ -342,6 +266,27 @@ components:
       required:
       - currency
       - updated_at
+    ErrorItem:
+      type: object
+      properties:
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
+        message:
+          type: string
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - 'An error occurred while processing your request: id is null'
+      required:
+      - message
     SubChannel:
       type: object
       properties:
@@ -364,27 +309,82 @@ components:
       - currency
       - id
       - name
-    ErrorItem:
+    Error:
       type: object
       properties:
+        code:
+          type: string
+          description: Error code (immutable)
+          examples:
+          - DATA_NOT_FOUND
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
         extensions:
           type: object
           description: Free map where you find additional context data to better describe the error
           examples:
           - maxLength: 255
             minLength: 1
-        field:
-          type: string
-          description: JsonPath to the field where the error occurred
-          examples:
-          - input.account.id
         message:
           type: string
-          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          description: Literal string error description (Please do not base your error handling on this field since it is subject to change)
           examples:
-          - 'An error occurred while processing your request: id is null'
+          - An error occurred while processing your request
       required:
+      - code
       - message
+    QualitySuspensionReason:
+      type: object
+      properties:
+        period:
+          type: string
+          description: 'Period considered by the Marketplace for the statistics related to the rule.
+
+            '
+          example: Last month
+        rule:
+          type: string
+          description: 'Rule that triggered the suspension of the store.
+
+            This can be a rule related to quality, payment, shipping or any other rule defined by the Marketplace.
+
+            By assembling every parameters, we can build a human readable description of the rule.
+
+            '
+          example: Evaluation Grade last month was lower than 3.5 expected to never be lower than 4.0
+        rule_comparison_method:
+          type: string
+          description: 'Comparison method used by the Marketplace to evaluate the rule.
+
+            '
+          example: lower than
+        rule_type:
+          type: string
+          description: 'Type of the rule that triggered the suspension of the store such as DECIMAL or INTEGER.
+
+            '
+          example: DECIMAL
+        stat_value:
+          type: number
+          format: with decimals
+          description: 'Value of the statistic that triggered the rule.
+
+            This is the value that was compared to the threshold defined by the Marketplace.
+
+            '
+          example: 3.5
+        threshold:
+          type: number
+          format: with decimals
+          description: 'Threshold value defined by the Marketplace for the rule.
+
+            If the stat_value is lower than this threshold, the store is considered suspended.
+
+            '
+      required:
+      - rule
   securitySchemes:
     OAuth-2:
       description: For more information, see our [Authentication System documentation](https://help.mirakl.com/docs/customers/page/topics/Mirakl/partners_integration/authentication_system.htm)

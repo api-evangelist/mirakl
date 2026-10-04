@@ -114,33 +114,6 @@ components:
         minLength: 1
       style: simple
   schemas:
-    Diagnostic:
-      type: object
-      description: Represents a diagnostic message related to a catalog item.
-      properties:
-        channel_attribute_id:
-          type:
-          - string
-          - 'null'
-          description: The identifier of the channel attribute related to the diagnostic.
-        channel_diagnostic_id:
-          type:
-          - string
-          - 'null'
-          description: The diagnostic identifier in the channel.
-        connector_override_action:
-          type:
-          - string
-          - 'null'
-          deprecated: true
-          description: 'Enum: `"REMOVED"`, `null`
-
-            '
-        message:
-          type: string
-          description: The diagnostic message.
-      required:
-      - message
     UpdateStoreCatalogItem:
       type: object
       properties:
@@ -219,6 +192,33 @@ components:
             '
       required:
       - id
+    Diagnostic:
+      type: object
+      description: Represents a diagnostic message related to a catalog item.
+      properties:
+        channel_attribute_id:
+          type:
+          - string
+          - 'null'
+          description: The identifier of the channel attribute related to the diagnostic.
+        channel_diagnostic_id:
+          type:
+          - string
+          - 'null'
+          description: The diagnostic identifier in the channel.
+        connector_override_action:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          description: 'Enum: `"REMOVED"`, `null`
+
+            '
+        message:
+          type: string
+          description: The diagnostic message.
+      required:
+      - message
     UpdateStoreCatalogItemsRequest:
       type: object
       properties:

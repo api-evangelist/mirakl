@@ -184,6 +184,12 @@ paths:
       - Checkout
 components:
   schemas:
+    GetCustomCarrierRates_Request:
+      type: object
+      properties:
+        rate:
+          $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate'
+          description: Shipping rate request
     GetCustomCarrierRates_Request_Rate_Origin:
       type: object
       description: Destination address of the shipment
@@ -351,12 +357,6 @@ components:
         origin:
           $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate_Origin'
           description: Origin address of the shipment
-    GetCustomCarrierRates_Request:
-      type: object
-      properties:
-        rate:
-          $ref: '#/components/schemas/GetCustomCarrierRates_Request_Rate'
-          description: Shipping rate request
   securitySchemes:
     Bearer:
       bearerFormat: JWT

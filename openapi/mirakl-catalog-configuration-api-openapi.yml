@@ -92,27 +92,48 @@ paths:
       tags:
       - Catalog Configuration
 components:
-  parameters:
-    channel_id_path:
-      description: Connect Channel identifier
-      explode: false
-      in: path
-      name: channel_id
-      required: true
-      schema:
-        type: string
-        examples:
-        - '1234'
-        minLength: 1
-      style: simple
   schemas:
-    ChannelCatalogCapabilities:
+    AttributeType:
+      type: string
+      description: 'Enum: `"Boolean"`, `"Numeric"`, `"Text"`, `"List"`
+
+        '
+    Localized:
       type: object
       properties:
-        offer_configuration:
-          $ref: '#/components/schemas/OfferConfiguration'
-        use_case_configurations:
-          $ref: '#/components/schemas/UseCaseConfigurations'
+        locale:
+          $ref: '#/components/schemas/Locale'
+        value:
+          type: string
+          description: The localized value in this locale
+      required:
+      - locale
+      - value
+    Locale:
+      type: string
+      description: The language format can be ISO-639 or ISO-639_ISO-3166
+      examples:
+      - en_US
+    PricingConfiguration:
+      type: object
+      description: Configuration for pricing capabilities.
+      properties:
+        discount_price_period:
+          $ref: '#/components/schemas/DiscountPricePeriod'
+    UseCaseConfigurationAttributes:
+      type: object
+      properties:
+        custom_attributes:
+          type: array
+          items:
+            type: string
+        standard_attributes:
+          type: array
+          items:
+            type: string
+            description: 'Enum: `"ID"`, `"STANDARD_PRICE"`, `"DISCOUNT_PRICE"`, `"STOCK"`, `"GTIN"`
+
+              '
     Attribute:
       type: object
       discriminator:
@@ -160,44 +181,6 @@ components:
       - labels
       - requirement_level
       - type
-    Localized:
-      type: object
-      properties:
-        locale:
-          $ref: '#/components/schemas/Locale'
-        value:
-          type: string
-          description: The localized value in this locale
-      required:
-      - locale
-      - value
-    UseCaseConfigurations:
-      type: object
-      description: "Configuration for offer related features by use case. \nThis API provides the configuration of required offer fields by use cases\n"
-      properties:
-        offer_creation:
-          $ref: '#/components/schemas/UseCaseConfiguration'
-          description: Configuration for offer creation
-        offer_update:
-          $ref: '#/components/schemas/UseCaseConfiguration'
-          description: Configuration for offer update
-      required:
-      - offer_creation
-      - offer_update
-    UseCaseConfigurationAttributes:
-      type: object
-      properties:
-        custom_attributes:
-          type: array
-          items:
-            type: string
-        standard_attributes:
-          type: array
-          items:
-            type: string
-            description: 'Enum: `"ID"`, `"STANDARD_PRICE"`, `"DISCOUNT_PRICE"`, `"STOCK"`, `"GTIN"`
-
-              '
     OfferConfiguration:
       type: object
       properties:
@@ -208,19 +191,6 @@ components:
             $ref: '#/components/schemas/Attribute'
         pricing_configuration:
           $ref: '#/components/schemas/PricingConfiguration'
-    ConfigurationMode:
-      type: string
-      description: 'The user can configure an attribute via:
-
-        - `CONSTANT`: a constant value for all the catalog
-
-        - `VARIABLE`: a value that can be different for each item, based on an attribute
-
-
-
-        Enum: `"CONSTANT"`, `"VARIABLE"`
-
-        '
     DiscountPricePeriod:
       type: object
       description: Configuration for discount price period.
@@ -255,22 +225,19 @@ components:
             '
       required:
       - requirement_level
-    Locale:
-      type: string
-      description: The language format can be ISO-639 or ISO-639_ISO-3166
-      examples:
-      - en_US
-    PricingConfiguration:
+    UseCaseConfigurations:
       type: object
-      description: Configuration for pricing capabilities.
+      description: "Configuration for offer related features by use case. \nThis API provides the configuration of required offer fields by use cases\n"
       properties:
-        discount_price_period:
-          $ref: '#/components/schemas/DiscountPricePeriod'
-    AttributeType:
-      type: string
-      description: 'Enum: `"Boolean"`, `"Numeric"`, `"Text"`, `"List"`
-
-        '
+        offer_creation:
+          $ref: '#/components/schemas/UseCaseConfiguration'
+          description: Configuration for offer creation
+        offer_update:
+          $ref: '#/components/schemas/UseCaseConfiguration'
+          description: Configuration for offer update
+      required:
+      - offer_creation
+      - offer_update
     UseCaseConfiguration:
       type: object
       description: "Configuration for a specific use case. \nThis API provides the configuration of required offer fields by use cases\n"
@@ -292,6 +259,39 @@ components:
       required:
       - required
       - support
+    ConfigurationMode:
+      type: string
+      description: 'The user can configure an attribute via:
+
+        - `CONSTANT`: a constant value for all the catalog
+
+        - `VARIABLE`: a value that can be different for each item, based on an attribute
+
+
+
+        Enum: `"CONSTANT"`, `"VARIABLE"`
+
+        '
+    ChannelCatalogCapabilities:
+      type: object
+      properties:
+        offer_configuration:
+          $ref: '#/components/schemas/OfferConfiguration'
+        use_case_configurations:
+          $ref: '#/components/schemas/UseCaseConfigurations'
+  parameters:
+    channel_id_path:
+      description: Connect Channel identifier
+      explode: false
+      in: path
+      name: channel_id
+      required: true
+      schema:
+        type: string
+        examples:
+        - '1234'
+        minLength: 1
+      style: simple
   securitySchemes:
     Bearer:
       bearerFormat: JWT

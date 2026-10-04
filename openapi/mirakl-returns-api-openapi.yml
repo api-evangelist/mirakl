@@ -2172,6 +2172,27 @@ paths:
       url: https://your-instance.mirakl.net
 components:
   schemas:
+    ErrorItem:
+      type: object
+      properties:
+        extensions:
+          type: object
+          description: Free map where you find additional context data to better describe the error
+          examples:
+          - maxLength: 255
+            minLength: 1
+        field:
+          type: string
+          description: JsonPath to the field where the error occurred
+          examples:
+          - input.account.id
+        message:
+          type: string
+          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
+          examples:
+          - 'An error occurred while processing your request: id is null'
+      required:
+      - message
     ReturnRequest:
       type: object
       properties:
@@ -2270,6 +2291,18 @@ components:
       - created_at
       - return_lines
       - status
+    OriginRequest:
+      type: object
+      properties:
+        channel_id:
+          type: string
+          description: Unique identifier of the sales channel
+        channel_store_id:
+          type: string
+          description: Store identifier on the sales channel.
+      required:
+      - channel_id
+      - channel_store_id
     Error:
       type: object
       properties:
@@ -2317,42 +2350,6 @@ components:
       - channel_order_line_id
       - quantity
       - reason
-    ReturnErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        field:
-          type: string
-          description: JsonPath to the field where the error occurred
-        message:
-          type: string
-          description: Human-readable error message
-      required:
-      - code
-      - message
-    ErrorItem:
-      type: object
-      properties:
-        extensions:
-          type: object
-          description: Free map where you find additional context data to better describe the error
-          examples:
-          - maxLength: 255
-            minLength: 1
-        field:
-          type: string
-          description: JsonPath to the field where the error occurred
-          examples:
-          - input.account.id
-        message:
-          type: string
-          description: Literal string error item description (Please do not base your error handling on this field since it is subject to change)
-          examples:
-          - 'An error occurred while processing your request: id is null'
-      required:
-      - message
     UpsertReturnsRequest:
       type: object
       properties:
@@ -2392,29 +2389,57 @@ components:
                 type: string
               channel_return_id:
                 type: string
-    OriginRequest:
+    ReturnErrorDetail:
       type: object
       properties:
-        channel_id:
+        code:
           type: string
-          description: Unique identifier of the sales channel
-        channel_store_id:
+          description: Machine-readable error code
+        field:
           type: string
-          description: Store identifier on the sales channel.
+          description: JsonPath to the field where the error occurred
+        message:
+          type: string
+          description: Human-readable error message
       required:
-      - channel_id
-      - channel_store_id
-    ResourcesPage:
+      - code
+      - message
+    ReturnsPageResponse:
+      allOf:
+      - $ref: '#/components/schemas/ResourcesPage'
+      - type: object
+        properties:
+          data:
+            type: array
+            description: Page of returns corresponding to the filter parameters
+            items:
+              $ref: '#/components/schemas/ReturnResponse'
+        required:
+        - data
+    ReturnLineResponse:
       type: object
       properties:
-        next_page_token:
+        order_line_id:
           type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-          minLength: 1
-        previous_page_token:
+          description: Order line identifier used by Mirakl Connect
+        product_id:
           type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-          minLength: 1
+          description: Returnable item identifier
+        quantity:
+          type: integer
+          description: Quantity of items being returned
+        reason:
+          type: string
+          description: 'Reason for the return
+
+
+            Enum: `"WRONG_ITEM"`, `"MISSING_ITEM"`, `"DEFECTIVE_ITEM"`, `"DAMAGED_ITEM"`, `"UNWANTED_ITEM"`, `"OTHER"`
+
+            '
+      required:
+      - order_line_id
+      - quantity
+      - reason
     ReturnResponse:
       type: object
       properties:
@@ -2522,18 +2547,37 @@ components:
       - origin
       - return_lines
       - status
-    ReturnsPageResponse:
-      allOf:
-      - $ref: '#/components/schemas/ResourcesPage'
-      - type: object
-        properties:
-          data:
-            type: array
-            description: Page of returns corresponding to the filter parameters
-            items:
-              $ref: '#/components/schemas/ReturnResponse'
-        required:
-        - data
+    AsynchronousActionResponse:
+      type: object
+      properties:
+        action_id:
+          type: string
+          description: 'The unique identifier for the asynchronous action. It should be used with the [v2-getActionStatus API](#operation/v2-getActionStatus) to retrieve current action status and potential errors.
+
+            '
+          examples:
+          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+        tracking_id:
+          type: string
+          deprecated: true
+          description: '**Deprecated:** This field was previously used to obtain the action ID. It has been replaced by `action_id` and contains the same value. It is retained for backward compatibility.
+
+            '
+          examples:
+          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
+      required:
+      - action_id
+    ResourcesPage:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+          minLength: 1
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+          minLength: 1
     UpdateReturnTrackingInformationRequest:
       type: object
       properties:
@@ -2566,26 +2610,24 @@ components:
               description: URL to track the return
               examples:
               - https://www.fedex.com/fedextrack/?trknbr=781234567890
-    AsynchronousActionResponse:
+    AcceptReturnRequest:
       type: object
       properties:
-        action_id:
+        accepted:
+          type: boolean
+          description: Indicates if a return is accepted (true) or refused (false).
+          examples:
+          - true
+        rejection_reason:
           type: string
-          description: 'The unique identifier for the asynchronous action. It should be used with the [v2-getActionStatus API](#operation/v2-getActionStatus) to retrieve current action status and potential errors.
+          description: 'Reason for rejecting the return
+
+
+            Enum: `"RETURN_WINDOW_CLOSED"`, `"NOT_ELIGIBLE_FOR_RETURN"`, `"FINAL_SALES"`
 
             '
-          examples:
-          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
-        tracking_id:
-          type: string
-          deprecated: true
-          description: '**Deprecated:** This field was previously used to obtain the action ID. It has been replaced by `action_id` and contains the same value. It is retained for backward compatibility.
-
-            '
-          examples:
-          - 1ba5fc4b-c4fd-4251-880b-3052e301bbd4
       required:
-      - action_id
+      - accepted
     Origin:
       type: object
       properties:
@@ -2609,320 +2651,39 @@ components:
           description: Name of the sub-channel
       required:
       - channel_id
-    AcceptReturnRequest:
-      type: object
-      properties:
-        accepted:
-          type: boolean
-          description: Indicates if a return is accepted (true) or refused (false).
-          examples:
-          - true
-        rejection_reason:
-          type: string
-          description: 'Reason for rejecting the return
-
-
-            Enum: `"RETURN_WINDOW_CLOSED"`, `"NOT_ELIGIBLE_FOR_RETURN"`, `"FINAL_SALES"`
-
-            '
-      required:
-      - accepted
-    ReturnLineResponse:
-      type: object
-      properties:
-        order_line_id:
-          type: string
-          description: Order line identifier used by Mirakl Connect
-        product_id:
-          type: string
-          description: Returnable item identifier
-        quantity:
-          type: integer
-          description: Quantity of items being returned
-        reason:
-          type: string
-          description: 'Reason for the return
-
-
-            Enum: `"WRONG_ITEM"`, `"MISSING_ITEM"`, `"DEFECTIVE_ITEM"`, `"DAMAGED_ITEM"`, `"UNWANTED_ITEM"`, `"OTHER"`
-
-            '
-      required:
-      - order_line_id
-      - quantity
-      - reason
-    RT51_Request_ReturnLabels_Package_Dimensions:
-      type: object
-      description: Physical dimensions of the package
-      properties:
-        height:
-          type: number
-          format: with decimals
-          description: package height
-          minimum: 0
-        length:
-          type: number
-          format: with decimals
-          description: package length
-          minimum: 0
-        unit:
-          type: string
-          description: Dimension unit
-          pattern: ^(in|cm)$
-        width:
-          type: number
-          format: with decimals
-          description: package width
-          minimum: 0
-      required:
-      - height
-      - length
-      - unit
-      - width
-    RT52_Response_200_Data_Errors:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Code of the error
-        message:
-          type: string
-          description: Message of the error
-    RT01_Request_Returns_ReturnLines:
-      type: object
-      description: Return lines
-      properties:
-        order_line_id:
-          type: string
-          description: Return order line id
-        quantity:
-          type: integer
-          format: int32
-          description: Quantity to return
-          minimum: 1
-        reason_code:
-          type: string
-          description: Return reason code.
-      required:
-      - order_line_id
-      - quantity
-      - reason_code
-    RT25_Response_200_ReturnSuccess:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Return id, must be a valid UUID
-          maxLength: 36
-          minLength: 0
-      required:
-      - id
-    RT29_Response_200_ReturnErrors:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Return id
-        message:
-          type: string
-          description: Error message
-    RT51_Request_ReturnLabels_Package_Weight:
-      type: object
-      description: Weight of the package
-      properties:
-        unit:
-          type: string
-          description: Weight unit
-          pattern: ^(lb|kg)$
-        value:
-          type: number
-          format: with decimals
-          description: Numeric weight value
-          minimum: 0
-      required:
-      - unit
-      - value
-    RT51_Request_ReturnLabels_LabelOptions:
-      type: object
-      description: Specific options applying on label generation
-      properties:
-        qr_code:
-          type: boolean
-          description: Whether to generate a QR code alongside the PDF label. Default false
-    RT29_Request:
-      type: object
-      properties:
-        returns:
-          type: array
-          description: Return ids
-          items:
-            $ref: '#/components/schemas/RT29_Request_Returns'
-          maxItems: 100
-          minItems: 1
-      required:
-      - returns
-    RT51_Request_ReturnLabels_Package:
-      type: object
-      description: Details of the package containing the returned items
-      properties:
-        dimensions:
-          $ref: '#/components/schemas/RT51_Request_ReturnLabels_Package_Dimensions'
-          description: Physical dimensions of the package
-        weight:
-          $ref: '#/components/schemas/RT51_Request_ReturnLabels_Package_Weight'
-          description: Weight of the package
-      required:
-      - dimensions
-      - weight
-    RT25_Request:
-      type: object
-      properties:
-        returns:
-          type: array
-          description: Return ids
-          items:
-            $ref: '#/components/schemas/RT25_Request_Returns'
-          maxItems: 100
-          minItems: 1
-      required:
-      - returns
-    RT01_Response_200_ReturnSuccess_Documents:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Return document id
-        type:
-          type: string
-          description: Return document type
-      required:
-      - id
-      - type
-    RT52_Response_200_Data_Files:
-      type: object
-      properties:
-        label:
-          $ref: '#/components/schemas/RT52_Response_200_Data_Files_Label'
-          description: Label file
-        qr_code:
-          $ref: '#/components/schemas/RT52_Response_200_Data_Files_QrCode'
-          description: QR code file
-    RT01_Request_Returns:
+    RT51_Request_ReturnLabels:
       type: object
       description: Returns list
       properties:
-        accepted:
-          type: boolean
-          description: If true, the return is automatically accepted after its creation. If false, the return cannot be accepted automatically. If empty, the returns configuration is taken into account to set the value.
-        description:
+        carrier_code:
           type: string
-          description: Description
-          maxLength: 2000
-          minLength: 0
-        label_url:
+          description: Carrier code to be used to generate the label. Required if no label_selection_mode is provided.
+        carrier_service_code:
           type: string
-          description: Label URL
-          maxLength: 2000
-          minLength: 1
-        method_code:
+          description: Specific code of the service to be used for a given carrier. If not provided, the default service of the carrier will be used. carrier_code needs to be provided in order to use this field.
+        label_options:
+          $ref: '#/components/schemas/RT51_Request_ReturnLabels_LabelOptions'
+          description: Specific options applying on label generation
+        label_selection_mode:
           type: string
-          description: 'Return method code
+          description: 'Indicate whether an automatic selection of a label should be made. Required if no carrier_code is provided. If no carrier code is provided, the requested option from all connected carriers will be selected. If a carrier code is provided, the requested option for the specified carrier will be selected.
 
 
-            Enum: `"RETURN_METHOD_BY_MAIL"`, `"RETURN_METHOD_DROP_OFF_POINT"`, `"RETURN_METHOD_HOME_PICKUP"`, `"RETURN_METHOD_IN_STORE"`, `"RETURN_METHOD_RETURNLESS"`
+            Enum: `"CHEAPEST"`
 
             '
-        order_commercial_id:
+        package:
+          $ref: '#/components/schemas/RT51_Request_ReturnLabels_Package'
+          description: Details of the package containing the returned items
+        return_id:
           type: string
-          description: Order commercial id
-        reason_code:
-          type: string
-          description: 'Return reason code
-
-
-            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`, `"RETURN_INACCURATE_ITEM_DESCRIPTION"`, `"RETURN_WARRANTY"`
-
-            '
-        return_lines:
-          type: array
-          description: Return lines
-          items:
-            $ref: '#/components/schemas/RT01_Request_Returns_ReturnLines'
-          maxItems: 200
-          minItems: 1
-        rma:
-          type: string
-          description: Return RMA
-          maxLength: 100
-          minLength: 1
-          pattern: '[0-9a-zA-Z_-]+'
+          description: Return ID
+        shipping_from:
+          $ref: '#/components/schemas/RT51_Request_ReturnLabels_ShippingFrom'
+          description: Custom pickup address for the return (e.g. store address for in-store returns). If not provided, the initial shipping address of the related order will be used.
       required:
-      - method_code
-      - order_commercial_id
-      - return_lines
-    RT25_Response_200:
-      type: object
-      properties:
-        return_errors:
-          type: array
-          description: Returns update errors
-          items:
-            $ref: '#/components/schemas/RT25_Response_200_ReturnErrors'
-        return_success:
-          type: array
-          description: Returns update success
-          items:
-            $ref: '#/components/schemas/RT25_Response_200_ReturnSuccess'
-    RT11_Response_200_Data_ReturnAddress:
-      type: object
-      properties:
-        city:
-          type: string
-          description: City
-        country_iso_code:
-          type: string
-          description: Country ISO code
-        state:
-          type: string
-          description: State
-        street1:
-          type: string
-          description: First line of the return address
-        street2:
-          type: string
-          description: Second line of the return address
-        zip_code:
-          type: string
-          description: Zip code
-      required:
-      - city
-      - country_iso_code
-      - street1
-      - zip_code
-    RT29_Response_200_ReturnSuccess:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Return id, must be a valid UUID
-          maxLength: 36
-          minLength: 0
-      required:
-      - id
-    RT29_Response_200:
-      type: object
-      properties:
-        return_errors:
-          type: array
-          description: Returns update errors
-          items:
-            $ref: '#/components/schemas/RT29_Response_200_ReturnErrors'
-        return_success:
-          type: array
-          description: Returns update success
-          items:
-            $ref: '#/components/schemas/RT29_Response_200_ReturnSuccess'
+      - package
+      - return_id
     RT51_Response_200:
       type: object
       properties:
@@ -2936,59 +2697,16 @@ components:
           description: Returns for which a label was successfully created
           items:
             $ref: '#/components/schemas/RT51_Response_200_ReturnLabelSuccesses'
-    RT51_Response_200_ReturnLabelErrors:
+    RT29_Response_200_ReturnSuccess:
       type: object
       properties:
-        error_message:
+        id:
           type: string
-          description: Error description
-        return_id:
-          type: string
-          description: Return ID
-    RT11_Response_200_Data_ReturnLines_Compliance:
-      type: object
-      properties:
-        compliant:
-          type: boolean
-          description: Compliant
-        non_compliance_additional_info:
-          type: string
-          description: Non compliance additional info
-        non_compliance_reason_code:
-          type: string
-          description: Non compliance reason code
+          description: Return id, must be a valid UUID
+          maxLength: 36
+          minLength: 0
       required:
-      - compliant
-    RT01_Response_200_ReturnErrors:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Return creation error message
-        order_commercial_id:
-          type: string
-          description: Order commercial id of failed return creations
-    RT52_Response_200_Data_Tracking:
-      type: object
-      properties:
-        carrier_code:
-          type: string
-          description: Code of a carrier
-        carrier_name:
-          type: string
-          description: Name of a carrier
-        carrier_service_code:
-          type: string
-          description: Carrier’s service code used to generate the label
-        carrier_standard_code:
-          type: string
-          description: Standard code of a carrier based on Mirakl carrier referential
-        tracking_number:
-          type: string
-          description: Tracking number
-        tracking_url:
-          type: string
-          description: Tracking url of a carrier
+      - id
     RT11_Response_200_Data_Tracking:
       type: object
       properties:
@@ -3007,63 +2725,6 @@ components:
         tracking_url:
           type: string
           description: Return tracking URL
-    RT11_Response_200_Data_ReturnLines:
-      type: object
-      properties:
-        compliance:
-          type: array
-          description: Compliance
-          items:
-            $ref: '#/components/schemas/RT11_Response_200_Data_ReturnLines_Compliance'
-        order_line_id:
-          type: string
-          description: Order line id
-        quantity:
-          type: integer
-          format: int32
-          description: Quantity
-        reason_code:
-          type: string
-          description: 'Return reason code for this line.
-
-
-            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`, `"RETURN_INACCURATE_ITEM_DESCRIPTION"`, `"RETURN_WARRANTY"`
-
-            '
-      required:
-      - order_line_id
-      - quantity
-      - reason_code
-    RT01_Response_200_ReturnSuccess_ReturnLines_Compliance:
-      type: object
-      properties:
-        compliant:
-          type: boolean
-          description: Compliant
-        non_compliance_additional_info:
-          type: string
-          description: Non compliance additional info
-        non_compliance_reason_code:
-          type: string
-          description: Non compliance reason code
-      required:
-      - compliant
-    RT11_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/RT11_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
     RT01_Response_200_ReturnSuccess:
       type: object
       properties:
@@ -3151,64 +2812,227 @@ components:
       - return_address
       - return_lines
       - state
-    RT52_Response_200:
+    RT51_Response_200_ReturnLabelSuccesses:
       type: object
       properties:
-        data:
-          type: array
-          description: Page of data
-          items:
-            $ref: '#/components/schemas/RT52_Response_200_Data'
-        next_page_token:
+        return_id:
           type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    RT01_Response_200:
+          description: Return ID
+    RT52_Response_200_Data:
       type: object
       properties:
-        return_errors:
+        date_created:
+          type: string
+          format: date-time
+          description: Return label creation date
+        errors:
           type: array
-          description: Return creation errors
+          description: Specific information related to the state of the label. Available only when label_state is FAILED
           items:
-            $ref: '#/components/schemas/RT01_Response_200_ReturnErrors'
-        return_success:
-          type: array
-          description: Return creation success
-          items:
-            $ref: '#/components/schemas/RT01_Response_200_ReturnSuccess'
+            $ref: '#/components/schemas/RT52_Response_200_Data_Errors'
+        estimated_cost:
+          $ref: '#/components/schemas/RT52_Response_200_Data_EstimatedCost'
+          description: Estimated cost of the label from the carrier
+        files:
+          $ref: '#/components/schemas/RT52_Response_200_Data_Files'
+          description: Container for label file(s)
+        label_state:
+          type: string
+          description: 'Current state of the label
+
+
+            Enum: `"PENDING"`, `"CREATED"`, `"FAILED"`
+
+            '
+        last_updated:
+          type: string
+          format: date-time
+          description: Return label last updated date
+        return_id:
+          type: string
+          description: Return ID
+        tracking:
+          $ref: '#/components/schemas/RT52_Response_200_Data_Tracking'
+          description: Return label tracking details
       required:
-      - return_errors
-      - return_success
-    RT01_Response_200_ReturnSuccess_ReturnAddress:
+      - date_created
+      - label_state
+      - last_updated
+      - return_id
+    RT52_Response_200_Data_Tracking:
       type: object
+      properties:
+        carrier_code:
+          type: string
+          description: Code of a carrier
+        carrier_name:
+          type: string
+          description: Name of a carrier
+        carrier_service_code:
+          type: string
+          description: Carrier’s service code used to generate the label
+        carrier_standard_code:
+          type: string
+          description: Standard code of a carrier based on Mirakl carrier referential
+        tracking_number:
+          type: string
+          description: Tracking number
+        tracking_url:
+          type: string
+          description: Tracking url of a carrier
+    RT51_Request_ReturnLabels_ShippingFrom:
+      type: object
+      description: Custom pickup address for the return (e.g. store address for in-store returns). If not provided, the initial shipping address of the related order will be used.
       properties:
         city:
           type: string
           description: City
+        contact_name:
+          type: string
+          description: Contact name
+        contact_phone:
+          type: string
+          description: Contact phone
         country_iso_code:
           type: string
           description: Country ISO code
         state:
           type: string
           description: State
-        street1:
+        street_1:
           type: string
-          description: First line of the return address
-        street2:
+          description: First line of the address
+        street_2:
           type: string
-          description: Second line of the return address
+          description: Second line of the address
         zip_code:
           type: string
-          description: Zip code
+          description: 'Address zip code, mandatory except for: Bahrain, Chile, Egypt, Hong-Kong, Kuwait, Oman, Peru, Qatar, Saudi Arabia, United Arab Emirates or Uruguay'
       required:
       - city
+      - contact_name
+      - contact_phone
       - country_iso_code
-      - street1
-      - zip_code
+      - street_1
+    RT01_Request_Returns:
+      type: object
+      description: Returns list
+      properties:
+        accepted:
+          type: boolean
+          description: If true, the return is automatically accepted after its creation. If false, the return cannot be accepted automatically. If empty, the returns configuration is taken into account to set the value.
+        description:
+          type: string
+          description: Description
+          maxLength: 2000
+          minLength: 0
+        label_url:
+          type: string
+          description: Label URL
+          maxLength: 2000
+          minLength: 1
+        method_code:
+          type: string
+          description: 'Return method code
+
+
+            Enum: `"RETURN_METHOD_BY_MAIL"`, `"RETURN_METHOD_DROP_OFF_POINT"`, `"RETURN_METHOD_HOME_PICKUP"`, `"RETURN_METHOD_IN_STORE"`, `"RETURN_METHOD_RETURNLESS"`
+
+            '
+        order_commercial_id:
+          type: string
+          description: Order commercial id
+        reason_code:
+          type: string
+          description: 'Return reason code
+
+
+            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`, `"RETURN_INACCURATE_ITEM_DESCRIPTION"`, `"RETURN_WARRANTY"`
+
+            '
+        return_lines:
+          type: array
+          description: Return lines
+          items:
+            $ref: '#/components/schemas/RT01_Request_Returns_ReturnLines'
+          maxItems: 200
+          minItems: 1
+        rma:
+          type: string
+          description: Return RMA
+          maxLength: 100
+          minLength: 1
+          pattern: '[0-9a-zA-Z_-]+'
+      required:
+      - method_code
+      - order_commercial_id
+      - return_lines
+    RT51_Request_ReturnLabels_Package:
+      type: object
+      description: Details of the package containing the returned items
+      properties:
+        dimensions:
+          $ref: '#/components/schemas/RT51_Request_ReturnLabels_Package_Dimensions'
+          description: Physical dimensions of the package
+        weight:
+          $ref: '#/components/schemas/RT51_Request_ReturnLabels_Package_Weight'
+          description: Weight of the package
+      required:
+      - dimensions
+      - weight
+    RT52_Response_200_Data_EstimatedCost:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: with decimals
+          description: Label cost amount
+        currency_iso_code:
+          type: string
+          description: 'Label currency (iso format)
+
+
+            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
+
+            '
+    RT01_Response_200_ReturnSuccess_Tracking:
+      type: object
+      properties:
+        carrier_code:
+          type: string
+          description: Carrier code
+        carrier_name:
+          type: string
+          description: Carrier name
+        carrier_standard_code:
+          type: string
+          description: Carrier standard code
+        tracking_number:
+          type: string
+          description: Tracking number
+        tracking_url:
+          type: string
+          description: Return tracking URL
+    RT25_Request_Returns:
+      type: object
+      description: Return ids
+      properties:
+        id:
+          type: string
+          description: Return id, must be a valid UUID
+          maxLength: 36
+          minLength: 0
+      required:
+      - id
+    RT51_Response_200_ReturnLabelErrors:
+      type: object
+      properties:
+        error_message:
+          type: string
+          description: Error description
+        return_id:
+          type: string
+          description: Return ID
     RT12_Response_200_Data:
       type: object
       properties:
@@ -3248,82 +3072,319 @@ components:
       - order_commercial_id
       - order_line_id
       - returnable_quantity
-    RT01_Request:
+    RT29_Response_200:
+      type: object
+      properties:
+        return_errors:
+          type: array
+          description: Returns update errors
+          items:
+            $ref: '#/components/schemas/RT29_Response_200_ReturnErrors'
+        return_success:
+          type: array
+          description: Returns update success
+          items:
+            $ref: '#/components/schemas/RT29_Response_200_ReturnSuccess'
+    RT25_Request:
       type: object
       properties:
         returns:
           type: array
-          description: Returns list
+          description: Return ids
           items:
-            $ref: '#/components/schemas/RT01_Request_Returns'
-          maxItems: 200
+            $ref: '#/components/schemas/RT25_Request_Returns'
+          maxItems: 100
           minItems: 1
       required:
       - returns
-    RT52_Response_200_Data_EstimatedCost:
+    RT12_Response_200:
       type: object
       properties:
-        amount:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/RT12_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    RT01_Response_200_ReturnSuccess_Documents:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Return document id
+        type:
+          type: string
+          description: Return document type
+      required:
+      - id
+      - type
+    RT11_Response_200_Data_ReturnAddress:
+      type: object
+      properties:
+        city:
+          type: string
+          description: City
+        country_iso_code:
+          type: string
+          description: Country ISO code
+        state:
+          type: string
+          description: State
+        street1:
+          type: string
+          description: First line of the return address
+        street2:
+          type: string
+          description: Second line of the return address
+        zip_code:
+          type: string
+          description: Zip code
+      required:
+      - city
+      - country_iso_code
+      - street1
+      - zip_code
+    RT52_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/RT52_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
+    RT01_Response_200_ReturnSuccess_ReturnAddress:
+      type: object
+      properties:
+        city:
+          type: string
+          description: City
+        country_iso_code:
+          type: string
+          description: Country ISO code
+        state:
+          type: string
+          description: State
+        street1:
+          type: string
+          description: First line of the return address
+        street2:
+          type: string
+          description: Second line of the return address
+        zip_code:
+          type: string
+          description: Zip code
+      required:
+      - city
+      - country_iso_code
+      - street1
+      - zip_code
+    RT01_Response_200_ReturnErrors:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Return creation error message
+        order_commercial_id:
+          type: string
+          description: Order commercial id of failed return creations
+    RT29_Response_200_ReturnErrors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Return id
+        message:
+          type: string
+          description: Error message
+    RT25_Response_200_ReturnSuccess:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Return id, must be a valid UUID
+          maxLength: 36
+          minLength: 0
+      required:
+      - id
+    RT25_Response_200:
+      type: object
+      properties:
+        return_errors:
+          type: array
+          description: Returns update errors
+          items:
+            $ref: '#/components/schemas/RT25_Response_200_ReturnErrors'
+        return_success:
+          type: array
+          description: Returns update success
+          items:
+            $ref: '#/components/schemas/RT25_Response_200_ReturnSuccess'
+    RT51_Request_ReturnLabels_Package_Dimensions:
+      type: object
+      description: Physical dimensions of the package
+      properties:
+        height:
           type: number
           format: with decimals
-          description: Label cost amount
-        currency_iso_code:
+          description: package height
+          minimum: 0
+        length:
+          type: number
+          format: with decimals
+          description: package length
+          minimum: 0
+        unit:
           type: string
-          description: 'Label currency (iso format)
+          description: Dimension unit
+          pattern: ^(in|cm)$
+        width:
+          type: number
+          format: with decimals
+          description: package width
+          minimum: 0
+      required:
+      - height
+      - length
+      - unit
+      - width
+    RT11_Response_200_Data_ReturnLines_Compliance:
+      type: object
+      properties:
+        compliant:
+          type: boolean
+          description: Compliant
+        non_compliance_additional_info:
+          type: string
+          description: Non compliance additional info
+        non_compliance_reason_code:
+          type: string
+          description: Non compliance reason code
+      required:
+      - compliant
+    RT25_Response_200_ReturnErrors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Return id
+        message:
+          type: string
+          description: Error message
+    RT51_Request_ReturnLabels_LabelOptions:
+      type: object
+      description: Specific options applying on label generation
+      properties:
+        qr_code:
+          type: boolean
+          description: Whether to generate a QR code alongside the PDF label. Default false
+    RT01_Response_200_ReturnSuccess_ReturnLines:
+      type: object
+      properties:
+        compliance:
+          type: array
+          description: Compliance
+          items:
+            $ref: '#/components/schemas/RT01_Response_200_ReturnSuccess_ReturnLines_Compliance'
+        order_line_id:
+          type: string
+          description: Order line id
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity
+        reason_code:
+          type: string
+          description: 'Return reason code for this line.
 
 
-            Enum: `"AED"`, `"ARS"`, `"AUD"`, `"BAM"`, `"BGN"`, `"BHD"`, `"BRL"`, `"CAD"`, `"CHF"`, `"CLP"`, `"CNY"`, `"COP"`, `"CZK"`, `"DKK"`, `"EGP"`, `"EUR"`, `"GBP"`, `"GEL"`, `"GTQ"`, `"HKD"`, `"HRK"`, `"HUF"`, `"IDR"`, `"ILS"`, `"INR"`, `"IQD"`, `"JOD"`, `"JPY"`, `"KES"`, `"KRW"`, `"KWD"`, `"LKR"`, `"MAD"`, `"MGA"`, `"MXN"`, `"MYR"`, `"NGN"`, `"NOK"`, `"NZD"`, `"OMR"`, `"PEN"`, `"PHP"`, `"PKR"`, `"PLN"`, `"QAR"`, `"RON"`, `"RSD"`, `"RUB"`, `"SAR"`, `"SEK"`, `"SGD"`, `"TND"`, `"TRY"`, `"THB"`, `"TWD"`, `"UAH"`, `"USD"`, `"UYU"`, `"UZS"`, `"VND"`, `"ZAR"`
+            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`, `"RETURN_INACCURATE_ITEM_DESCRIPTION"`, `"RETURN_WARRANTY"`
 
             '
-    RT52_Response_200_Data_Files_Label:
-      type: object
-      properties:
-        file_type:
-          type: string
-          description: File format
-        url:
-          type: string
-          description: Download URL
-    RT01_Response_200_ReturnSuccess_Tracking:
-      type: object
-      properties:
-        carrier_code:
-          type: string
-          description: Carrier code
-        carrier_name:
-          type: string
-          description: Carrier name
-        carrier_standard_code:
-          type: string
-          description: Carrier standard code
-        tracking_number:
-          type: string
-          description: Tracking number
-        tracking_url:
-          type: string
-          description: Return tracking URL
-    RT25_Request_Returns:
-      type: object
-      description: Return ids
-      properties:
-        id:
-          type: string
-          description: Return id, must be a valid UUID
-          maxLength: 36
-          minLength: 0
       required:
-      - id
-    RT29_Request_Returns:
+      - order_line_id
+      - quantity
+      - reason_code
+    RT01_Response_200_ReturnSuccess_ReturnLines_Compliance:
       type: object
-      description: Return ids
       properties:
-        id:
+        compliant:
+          type: boolean
+          description: Compliant
+        non_compliance_additional_info:
           type: string
-          description: Return id, must be a valid UUID
-          maxLength: 36
-          minLength: 0
+          description: Non compliance additional info
+        non_compliance_reason_code:
+          type: string
+          description: Non compliance reason code
       required:
-      - id
+      - compliant
+    RT01_Response_200:
+      type: object
+      properties:
+        return_errors:
+          type: array
+          description: Return creation errors
+          items:
+            $ref: '#/components/schemas/RT01_Response_200_ReturnErrors'
+        return_success:
+          type: array
+          description: Return creation success
+          items:
+            $ref: '#/components/schemas/RT01_Response_200_ReturnSuccess'
+      required:
+      - return_errors
+      - return_success
+    RT01_Request_Returns_ReturnLines:
+      type: object
+      description: Return lines
+      properties:
+        order_line_id:
+          type: string
+          description: Return order line id
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity to return
+          minimum: 1
+        reason_code:
+          type: string
+          description: Return reason code.
+      required:
+      - order_line_id
+      - quantity
+      - reason_code
+    RT11_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Page of data
+          items:
+            $ref: '#/components/schemas/RT11_Response_200_Data'
+        next_page_token:
+          type: string
+          description: Token to access the next page. Absent if the current page is the last one.
+        previous_page_token:
+          type: string
+          description: Token to access the previous page. Absent if the current page is the first one.
+      required:
+      - data
     RT11_Response_200_Data:
       type: object
       properties:
@@ -3411,47 +3472,126 @@ components:
       - return_address
       - return_lines
       - state
-    RT51_Request_ReturnLabels:
+    RT01_Request:
       type: object
-      description: Returns list
       properties:
-        carrier_code:
-          type: string
-          description: Carrier code to be used to generate the label. Required if no label_selection_mode is provided.
-        carrier_service_code:
-          type: string
-          description: Specific code of the service to be used for a given carrier. If not provided, the default service of the carrier will be used. carrier_code needs to be provided in order to use this field.
-        label_options:
-          $ref: '#/components/schemas/RT51_Request_ReturnLabels_LabelOptions'
-          description: Specific options applying on label generation
-        label_selection_mode:
-          type: string
-          description: 'Indicate whether an automatic selection of a label should be made. Required if no carrier_code is provided. If no carrier code is provided, the requested option from all connected carriers will be selected. If a carrier code is provided, the requested option for the specified carrier will be selected.
-
-
-            Enum: `"CHEAPEST"`
-
-            '
-        package:
-          $ref: '#/components/schemas/RT51_Request_ReturnLabels_Package'
-          description: Details of the package containing the returned items
-        return_id:
-          type: string
-          description: Return ID
-        shipping_from:
-          $ref: '#/components/schemas/RT51_Request_ReturnLabels_ShippingFrom'
-          description: Custom pickup address for the return (e.g. store address for in-store returns). If not provided, the initial shipping address of the related order will be used.
+        returns:
+          type: array
+          description: Returns list
+          items:
+            $ref: '#/components/schemas/RT01_Request_Returns'
+          maxItems: 200
+          minItems: 1
       required:
-      - package
-      - return_id
-    RT01_Response_200_ReturnSuccess_ReturnLines:
+      - returns
+    RT52_Response_200_Data_Files:
+      type: object
+      properties:
+        label:
+          $ref: '#/components/schemas/RT52_Response_200_Data_Files_Label'
+          description: Label file
+        qr_code:
+          $ref: '#/components/schemas/RT52_Response_200_Data_Files_QrCode'
+          description: QR code file
+    RT51_Request_ReturnLabels_Package_Weight:
+      type: object
+      description: Weight of the package
+      properties:
+        unit:
+          type: string
+          description: Weight unit
+          pattern: ^(lb|kg)$
+        value:
+          type: number
+          format: with decimals
+          description: Numeric weight value
+          minimum: 0
+      required:
+      - unit
+      - value
+    RT51_Request:
+      type: object
+      properties:
+        return_labels:
+          type: array
+          description: Returns list
+          items:
+            $ref: '#/components/schemas/RT51_Request_ReturnLabels'
+          maxItems: 200
+          minItems: 0
+      required:
+      - return_labels
+    RT29_Request:
+      type: object
+      properties:
+        returns:
+          type: array
+          description: Return ids
+          items:
+            $ref: '#/components/schemas/RT29_Request_Returns'
+          maxItems: 100
+          minItems: 1
+      required:
+      - returns
+    RT52_Response_200_Data_Errors:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code of the error
+        message:
+          type: string
+          description: Message of the error
+    RT52_Response_200_Data_Files_Label:
+      type: object
+      properties:
+        file_type:
+          type: string
+          description: File format
+        url:
+          type: string
+          description: Download URL
+    RT29_Request_Returns:
+      type: object
+      description: Return ids
+      properties:
+        id:
+          type: string
+          description: Return id, must be a valid UUID
+          maxLength: 36
+          minLength: 0
+      required:
+      - id
+    RT52_Response_200_Data_Files_QrCode:
+      type: object
+      properties:
+        file_type:
+          type: string
+          description: File format
+        url:
+          type: string
+          description: Download URL
+    RT11_Response_200_Data_Documents:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Return document id
+        type:
+          type: string
+          description: Return document type
+      required:
+      - id
+      - type
+    RT11_Response_200_Data_ReturnLines:
       type: object
       properties:
         compliance:
           type: array
           description: Compliance
           items:
-            $ref: '#/components/schemas/RT01_Response_200_ReturnSuccess_ReturnLines_Compliance'
+            $ref: '#/components/schemas/RT11_Response_200_Data_ReturnLines_Compliance'
         order_line_id:
           type: string
           description: Order line id
@@ -3471,146 +3611,107 @@ components:
       - order_line_id
       - quantity
       - reason_code
-    RT11_Response_200_Data_Documents:
+    RT21_Response_200_ReturnSuccess:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
-          description: Return document id
-        type:
           type: string
-          description: Return document type
+          description: Return id, must be a valid UUID
+          maxLength: 36
+          minLength: 0
       required:
       - id
-      - type
-    RT51_Request:
+    RT04_Request_Returns_Tracking:
+      type: object
+      description: Tracking information
+      properties:
+        carrier_code:
+          type: string
+          description: Carrier Code
+        carrier_name:
+          type: string
+          description: Carrier name
+        carrier_standard_code:
+          type: string
+          description: Carrier Standard Code
+        tracking_number:
+          type: string
+          description: Tracking number
+        tracking_url:
+          type: string
+          description: Url tracking
+          maxLength: 2000
+    RT04_Response_200_ReturnSuccess_ReturnLines_Compliance:
       type: object
       properties:
-        return_labels:
-          type: array
-          description: Returns list
-          items:
-            $ref: '#/components/schemas/RT51_Request_ReturnLabels'
-          maxItems: 200
-          minItems: 0
+        compliant:
+          type: boolean
+          description: Compliant
+        non_compliance_additional_info:
+          type: string
+          description: Non compliance additional info
+        non_compliance_reason_code:
+          type: string
+          description: Non compliance reason code
       required:
-      - return_labels
-    RT51_Response_200_ReturnLabelSuccesses:
+      - compliant
+    RT26_Request_Returns_ReturnLines:
       type: object
+      description: Return lines
       properties:
-        return_id:
+        compliant:
+          type: boolean
+          description: Compliant
+        non_compliance_additional_info:
           type: string
-          description: Return ID
-    RT51_Request_ReturnLabels_ShippingFrom:
-      type: object
-      description: Custom pickup address for the return (e.g. store address for in-store returns). If not provided, the initial shipping address of the related order will be used.
-      properties:
-        city:
+          description: Non-compliance additional information
+          maxLength: 2000
+          minLength: 0
+        non_compliance_reason_code:
           type: string
-          description: City
-        contact_name:
-          type: string
-          description: Contact name
-        contact_phone:
-          type: string
-          description: Contact phone
-        country_iso_code:
-          type: string
-          description: Country ISO code
-        state:
-          type: string
-          description: State
-        street_1:
-          type: string
-          description: First line of the address
-        street_2:
-          type: string
-          description: Second line of the address
-        zip_code:
-          type: string
-          description: 'Address zip code, mandatory except for: Bahrain, Chile, Egypt, Hong-Kong, Kuwait, Oman, Peru, Qatar, Saudi Arabia, United Arab Emirates or Uruguay'
-      required:
-      - city
-      - contact_name
-      - contact_phone
-      - country_iso_code
-      - street_1
-    RT52_Response_200_Data:
-      type: object
-      properties:
-        date_created:
-          type: string
-          format: date-time
-          description: Return label creation date
-        errors:
-          type: array
-          description: Specific information related to the state of the label. Available only when label_state is FAILED
-          items:
-            $ref: '#/components/schemas/RT52_Response_200_Data_Errors'
-        estimated_cost:
-          $ref: '#/components/schemas/RT52_Response_200_Data_EstimatedCost'
-          description: Estimated cost of the label from the carrier
-        files:
-          $ref: '#/components/schemas/RT52_Response_200_Data_Files'
-          description: Container for label file(s)
-        label_state:
-          type: string
-          description: 'Current state of the label
+          description: 'Non-compliance reason code
 
 
-            Enum: `"PENDING"`, `"CREATED"`, `"FAILED"`
+            Enum: `"RETURN_NON_COMPLIANT_MISSING_ITEM"`, `"RETURN_NON_COMPLIANT_WRONG_PRODUCT"`, `"RETURN_NON_COMPLIANT_DAMAGED_PRODUCT"`, `"RETURN_NON_COMPLIANT_WINDOW_CLOSED"`, `"RETURN_NON_COMPLIANT_OTHER"`
 
             '
-        last_updated:
+        order_line_id:
           type: string
-          format: date-time
-          description: Return label last updated date
-        return_id:
-          type: string
-          description: Return ID
-        tracking:
-          $ref: '#/components/schemas/RT52_Response_200_Data_Tracking'
-          description: Return label tracking details
+          description: Order line id
       required:
-      - date_created
-      - label_state
-      - last_updated
-      - return_id
-    RT25_Response_200_ReturnErrors:
+      - compliant
+      - order_line_id
+    RT04_Response_200_ReturnSuccess_Tracking:
       type: object
       properties:
-        id:
+        carrier_code:
           type: string
-          description: Return id
-        message:
+          description: Carrier code
+        carrier_name:
           type: string
-          description: Error message
-    RT12_Response_200:
+          description: Carrier name
+        carrier_standard_code:
+          type: string
+          description: Carrier standard code
+        tracking_number:
+          type: string
+          description: Tracking number
+        tracking_url:
+          type: string
+          description: Return tracking URL
+    RT04_Response_200:
       type: object
       properties:
-        data:
+        return_errors:
           type: array
-          description: Page of data
+          description: Returns update errors
           items:
-            $ref: '#/components/schemas/RT12_Response_200_Data'
-        next_page_token:
-          type: string
-          description: Token to access the next page. Absent if the current page is the last one.
-        previous_page_token:
-          type: string
-          description: Token to access the previous page. Absent if the current page is the first one.
-      required:
-      - data
-    RT52_Response_200_Data_Files_QrCode:
-      type: object
-      properties:
-        file_type:
-          type: string
-          description: File format
-        url:
-          type: string
-          description: Download URL
+            $ref: '#/components/schemas/RT04_Response_200_ReturnErrors'
+        return_success:
+          type: array
+          description: Returns update success
+          items:
+            $ref: '#/components/schemas/RT04_Response_200_ReturnSuccess'
     RT04_Response_200_ReturnSuccess:
       type: object
       properties:
@@ -3698,45 +3799,19 @@ components:
       - return_address
       - return_lines
       - state
-    RT27_Response_200_ReturnErrors:
+    RT04_Response_200_ReturnSuccess_Documents:
       type: object
       properties:
         id:
+          type: integer
+          format: int64
+          description: Return document id
+        type:
           type: string
-          description: Return id
-        message:
-          type: string
-          description: Error message
-    RT21_Request:
-      type: object
-      properties:
-        returns:
-          type: array
-          description: 'Returns to be accepted, maximum number of returns per call: 100'
-          items:
-            $ref: '#/components/schemas/RT21_Request_Returns'
-          maxItems: 100
-          minItems: 1
+          description: Return document type
       required:
-      - returns
-    RT04_Response_200_ReturnSuccess_Tracking:
-      type: object
-      properties:
-        carrier_code:
-          type: string
-          description: Carrier code
-        carrier_name:
-          type: string
-          description: Carrier name
-        carrier_standard_code:
-          type: string
-          description: Carrier standard code
-        tracking_number:
-          type: string
-          description: Tracking number
-        tracking_url:
-          type: string
-          description: Return tracking URL
+      - id
+      - type
     RT04_Request:
       type: object
       properties:
@@ -3749,19 +3824,6 @@ components:
           minItems: 1
       required:
       - returns
-    RT26_Response_200:
-      type: object
-      properties:
-        return_errors:
-          type: array
-          description: Returns update errors
-          items:
-            $ref: '#/components/schemas/RT26_Response_200_ReturnErrors'
-        return_success:
-          type: array
-          description: Returns update success
-          items:
-            $ref: '#/components/schemas/RT26_Response_200_ReturnSuccess'
     RT27_Request_Returns:
       type: object
       description: Return ids
@@ -3773,44 +3835,6 @@ components:
           minLength: 0
       required:
       - id
-    RT21_Response_200_ReturnErrors:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Return id
-        message:
-          type: string
-          description: Error message
-    RT26_Response_200_ReturnErrors:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Return id
-        message:
-          type: string
-          description: Error message
-    RT04_Request_Returns_Tracking:
-      type: object
-      description: Tracking information
-      properties:
-        carrier_code:
-          type: string
-          description: Carrier Code
-        carrier_name:
-          type: string
-          description: Carrier name
-        carrier_standard_code:
-          type: string
-          description: Carrier Standard Code
-        tracking_number:
-          type: string
-          description: Tracking number
-        tracking_url:
-          type: string
-          description: Url tracking
-          maxLength: 2000
     RT04_Request_Returns_ReturnAddress_Address:
       type: object
       description: The return address details
@@ -3852,56 +3876,20 @@ components:
       - city
       - country_iso_code
       - street1
-    RT04_Response_200_ReturnSuccess_ReturnLines:
+    RT27_Response_200:
       type: object
       properties:
-        compliance:
+        return_errors:
           type: array
-          description: Compliance
+          description: Returns update errors
           items:
-            $ref: '#/components/schemas/RT04_Response_200_ReturnSuccess_ReturnLines_Compliance'
-        order_line_id:
-          type: string
-          description: Order line id
-        quantity:
-          type: integer
-          format: int32
-          description: Quantity
-        reason_code:
-          type: string
-          description: 'Return reason code for this line.
-
-
-            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`, `"RETURN_INACCURATE_ITEM_DESCRIPTION"`, `"RETURN_WARRANTY"`
-
-            '
-      required:
-      - order_line_id
-      - quantity
-      - reason_code
-    RT27_Request:
-      type: object
-      properties:
-        returns:
+            $ref: '#/components/schemas/RT27_Response_200_ReturnErrors'
+        return_success:
           type: array
-          description: Return ids
+          description: Returns update success
           items:
-            $ref: '#/components/schemas/RT27_Request_Returns'
-          maxItems: 100
-          minItems: 1
-      required:
-      - returns
-    RT26_Response_200_ReturnSuccess:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Return id, must be a valid UUID
-          maxLength: 36
-          minLength: 0
-      required:
-      - id
-    RT04_Response_200_ReturnErrors:
+            $ref: '#/components/schemas/RT27_Response_200_ReturnSuccess'
+    RT21_Response_200_ReturnErrors:
       type: object
       properties:
         id:
@@ -3910,32 +3898,25 @@ components:
         message:
           type: string
           description: Error message
-    RT26_Request_Returns_ReturnLines:
+    RT04_Request_Returns_ReturnAddress:
       type: object
-      description: Return lines
+      description: The address where items must be returned
       properties:
-        compliant:
-          type: boolean
-          description: Compliant
-        non_compliance_additional_info:
-          type: string
-          description: Non-compliance additional information
-          maxLength: 2000
-          minLength: 0
-        non_compliance_reason_code:
-          type: string
-          description: 'Non-compliance reason code
-
-
-            Enum: `"RETURN_NON_COMPLIANT_MISSING_ITEM"`, `"RETURN_NON_COMPLIANT_WRONG_PRODUCT"`, `"RETURN_NON_COMPLIANT_DAMAGED_PRODUCT"`, `"RETURN_NON_COMPLIANT_WINDOW_CLOSED"`, `"RETURN_NON_COMPLIANT_OTHER"`
-
-            '
-        order_line_id:
-          type: string
-          description: Order line id
+        address:
+          $ref: '#/components/schemas/RT04_Request_Returns_ReturnAddress_Address'
+          description: The return address details
+    RT26_Request:
+      type: object
+      properties:
+        returns:
+          type: array
+          description: 'Mark returns as compliant or non-compliant, maximum number of returns per call: 100'
+          items:
+            $ref: '#/components/schemas/RT26_Request_Returns'
+          maxItems: 100
+          minItems: 1
       required:
-      - compliant
-      - order_line_id
+      - returns
     RT12_Response_200_Data_2:
       type: object
       properties:
@@ -3967,6 +3948,85 @@ components:
       - order_commercial_id
       - order_line_id
       - returnable_quantity
+    RT26_Request_Returns:
+      type: object
+      description: 'Mark returns as compliant or non-compliant, maximum number of returns per call: 100'
+      properties:
+        id:
+          type: string
+          description: Return id
+        return_lines:
+          type: array
+          description: Return lines
+          items:
+            $ref: '#/components/schemas/RT26_Request_Returns_ReturnLines'
+          maxItems: 200
+          minItems: 1
+      required:
+      - id
+      - return_lines
+    RT26_Response_200_ReturnSuccess:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Return id, must be a valid UUID
+          maxLength: 36
+          minLength: 0
+      required:
+      - id
+    RT27_Response_200_ReturnSuccess:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Return id, must be a valid UUID
+          maxLength: 36
+          minLength: 0
+      required:
+      - id
+    RT21_Request_Returns:
+      type: object
+      description: 'Returns to be accepted, maximum number of returns per call: 100'
+      properties:
+        accepted:
+          type: boolean
+          description: Boolean indicating if the return is accepted or refused
+        id:
+          type: string
+          description: Return id
+        rejection_reason_code:
+          type: string
+          description: 'Return rejection reason code
+
+
+            Enum: `"RETURN_REJECTION_NOT_ELIGIBLE"`, `"RETURN_REJECTION_NOT_NEEDED"`, `"RETURN_REJECTION_WINDOW_CLOSED"`
+
+            '
+      required:
+      - accepted
+      - id
+    RT04_Response_200_ReturnErrors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Return id
+        message:
+          type: string
+          description: Error message
+    RT27_Request:
+      type: object
+      properties:
+        returns:
+          type: array
+          description: Return ids
+          items:
+            $ref: '#/components/schemas/RT27_Request_Returns'
+          maxItems: 100
+          minItems: 1
+      required:
+      - returns
     RT04_Request_Returns:
       type: object
       description: 'Returns to be updated, maximum number of returns per call: 100'
@@ -3997,29 +4057,76 @@ components:
           description: Tracking information
       required:
       - id
-    RT21_Response_200_ReturnSuccess:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Return id, must be a valid UUID
-          maxLength: 36
-          minLength: 0
-      required:
-      - id
-    RT04_Response_200:
+    RT26_Response_200:
       type: object
       properties:
         return_errors:
           type: array
           description: Returns update errors
           items:
-            $ref: '#/components/schemas/RT04_Response_200_ReturnErrors'
+            $ref: '#/components/schemas/RT26_Response_200_ReturnErrors'
         return_success:
           type: array
           description: Returns update success
           items:
-            $ref: '#/components/schemas/RT04_Response_200_ReturnSuccess'
+            $ref: '#/components/schemas/RT26_Response_200_ReturnSuccess'
+    RT27_Response_200_ReturnErrors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Return id
+        message:
+          type: string
+          description: Error message
+    RT21_Request:
+      type: object
+      properties:
+        returns:
+          type: array
+          description: 'Returns to be accepted, maximum number of returns per call: 100'
+          items:
+            $ref: '#/components/schemas/RT21_Request_Returns'
+          maxItems: 100
+          minItems: 1
+      required:
+      - returns
+    RT26_Response_200_ReturnErrors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Return id
+        message:
+          type: string
+          description: Error message
+    RT04_Response_200_ReturnSuccess_ReturnLines:
+      type: object
+      properties:
+        compliance:
+          type: array
+          description: Compliance
+          items:
+            $ref: '#/components/schemas/RT04_Response_200_ReturnSuccess_ReturnLines_Compliance'
+        order_line_id:
+          type: string
+          description: Order line id
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity
+        reason_code:
+          type: string
+          description: 'Return reason code for this line.
+
+
+            Enum: `"RETURN_BROKEN_ITEM"`, `"RETURN_CHANGED_MIND"`, `"RETURN_COUNTERFEIT_ITEM"`, `"RETURN_DAMAGED_PACKAGING"`, `"RETURN_DEFECTIVE_ITEM"`, `"RETURN_DELIVERED_PRODUCT_DIFFERENT"`, `"RETURN_MISSING_ITEM"`, `"RETURN_OTHER"`, `"RETURN_CM_DONT_WANT"`, `"RETURN_CM_DONT_LIKE"`, `"RETURN_CM_QUALITY"`, `"RETURN_DPD_WRONG_SIZE"`, `"RETURN_DPD_WRONG_COLOR"`, `"RETURN_DEFECTIVE_ON_ARRIVAL"`, `"RETURN_PRODUCT_DOES_NOT_FIT"`, `"RETURN_PDNT_TOO_BIG"`, `"RETURN_PDNT_TOO_SMALL"`, `"RETURN_INACCURATE_ITEM_DESCRIPTION"`, `"RETURN_WARRANTY"`
+
+            '
+      required:
+      - order_line_id
+      - quantity
+      - reason_code
     RT04_Response_200_ReturnSuccess_ReturnAddress:
       type: object
       properties:
@@ -4046,92 +4153,6 @@ components:
       - country_iso_code
       - street1
       - zip_code
-    RT04_Response_200_ReturnSuccess_ReturnLines_Compliance:
-      type: object
-      properties:
-        compliant:
-          type: boolean
-          description: Compliant
-        non_compliance_additional_info:
-          type: string
-          description: Non compliance additional info
-        non_compliance_reason_code:
-          type: string
-          description: Non compliance reason code
-      required:
-      - compliant
-    RT26_Request_Returns:
-      type: object
-      description: 'Mark returns as compliant or non-compliant, maximum number of returns per call: 100'
-      properties:
-        id:
-          type: string
-          description: Return id
-        return_lines:
-          type: array
-          description: Return lines
-          items:
-            $ref: '#/components/schemas/RT26_Request_Returns_ReturnLines'
-          maxItems: 200
-          minItems: 1
-      required:
-      - id
-      - return_lines
-    RT27_Response_200:
-      type: object
-      properties:
-        return_errors:
-          type: array
-          description: Returns update errors
-          items:
-            $ref: '#/components/schemas/RT27_Response_200_ReturnErrors'
-        return_success:
-          type: array
-          description: Returns update success
-          items:
-            $ref: '#/components/schemas/RT27_Response_200_ReturnSuccess'
-    RT04_Response_200_ReturnSuccess_Documents:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Return document id
-        type:
-          type: string
-          description: Return document type
-      required:
-      - id
-      - type
-    RT26_Request:
-      type: object
-      properties:
-        returns:
-          type: array
-          description: 'Mark returns as compliant or non-compliant, maximum number of returns per call: 100'
-          items:
-            $ref: '#/components/schemas/RT26_Request_Returns'
-          maxItems: 100
-          minItems: 1
-      required:
-      - returns
-    RT27_Response_200_ReturnSuccess:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Return id, must be a valid UUID
-          maxLength: 36
-          minLength: 0
-      required:
-      - id
-    RT04_Request_Returns_ReturnAddress:
-      type: object
-      description: The address where items must be returned
-      properties:
-        address:
-          $ref: '#/components/schemas/RT04_Request_Returns_ReturnAddress_Address'
-          description: The return address details
     RT21_Response_200:
       type: object
       properties:
@@ -4145,27 +4166,6 @@ components:
           description: Returns update success
           items:
             $ref: '#/components/schemas/RT21_Response_200_ReturnSuccess'
-    RT21_Request_Returns:
-      type: object
-      description: 'Returns to be accepted, maximum number of returns per call: 100'
-      properties:
-        accepted:
-          type: boolean
-          description: Boolean indicating if the return is accepted or refused
-        id:
-          type: string
-          description: Return id
-        rejection_reason_code:
-          type: string
-          description: 'Return rejection reason code
-
-
-            Enum: `"RETURN_REJECTION_NOT_ELIGIBLE"`, `"RETURN_REJECTION_NOT_NEEDED"`, `"RETURN_REJECTION_WINDOW_CLOSED"`
-
-            '
-      required:
-      - accepted
-      - id
   securitySchemes:
     Bearer:
       bearerFormat: JWT

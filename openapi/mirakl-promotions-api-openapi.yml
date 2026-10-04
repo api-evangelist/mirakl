@@ -476,70 +476,6 @@ paths:
       url: https://your-instance.mirakl.net
 components:
   schemas:
-    PR01_Response_200:
-      type: object
-      properties:
-        promotions:
-          type: array
-          description: Promotions list
-          items:
-            $ref: '#/components/schemas/PR01_Response_200_Promotions'
-        total_count:
-          type: integer
-          format: int32
-      required:
-      - promotions
-      - total_count
-    PR01_Response_200_Promotions_Triggers:
-      type: object
-      properties:
-        amount_purchased:
-          type: number
-          format: with decimals
-          description: Amount that triggers the promotion. Available for <code>minimum_amount</code> or <code>every_amount</code> type triggers.
-        quantity_purchased:
-          type: integer
-          format: int32
-          description: Quantity of items that triggers the promotion. Available for <code>minimum_quantity</code> or <code>every_quantity</code> type triggers.
-        same_item_purchased:
-          type: boolean
-          description: Whether the promotion requires the same item to be triggered or not. Available for <code>minimum_quantity</code> or <code>every_quantity</code> type triggers.
-        type:
-          type: string
-          description: 'Type of promotion trigger
-
-
-            Enum: `"minimum_quantity"`, `"every_quantity"`, `"minimum_amount"`, `"every_amount"`
-
-            '
-      required:
-      - type
-    PR01_Response_200_Promotions_ApplicationToCart:
-      type: object
-      properties:
-        promo_code:
-          type: string
-          description: Promo code associated to the promotion
-    PR01_Response_200_Promotions_Campaign:
-      type: object
-      properties:
-        identifier:
-          type: string
-          description: Identifier of the campaign
-      required:
-      - identifier
-    PR01_Response_200_Promotions_PublicDescriptions:
-      type: object
-      properties:
-        locale:
-          type: string
-          description: Description's locale
-        value:
-          type: string
-          description: The description itself
-      required:
-      - locale
-      - value
     PR01_Response_200_Promotions:
       type: object
       properties:
@@ -677,18 +613,70 @@ components:
       - state
       - triggers
       - type
-    PR01_Response_200_Promotions_Channels:
+    PR01_Response_200_Promotions_ApplicationToCart:
       type: object
       properties:
-        code:
+        promo_code:
           type: string
-          description: Channel code
-        label:
+          description: Promo code associated to the promotion
+    PR01_Response_200_Promotions_Campaign:
+      type: object
+      properties:
+        identifier:
           type: string
-          description: Channel label
+          description: Identifier of the campaign
       required:
-      - code
-      - label
+      - identifier
+    PR01_Response_200:
+      type: object
+      properties:
+        promotions:
+          type: array
+          description: Promotions list
+          items:
+            $ref: '#/components/schemas/PR01_Response_200_Promotions'
+        total_count:
+          type: integer
+          format: int32
+      required:
+      - promotions
+      - total_count
+    PR01_Response_200_Promotions_PublicDescriptions:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Description's locale
+        value:
+          type: string
+          description: The description itself
+      required:
+      - locale
+      - value
+    PR01_Response_200_Promotions_Triggers:
+      type: object
+      properties:
+        amount_purchased:
+          type: number
+          format: with decimals
+          description: Amount that triggers the promotion. Available for <code>minimum_amount</code> or <code>every_amount</code> type triggers.
+        quantity_purchased:
+          type: integer
+          format: int32
+          description: Quantity of items that triggers the promotion. Available for <code>minimum_quantity</code> or <code>every_quantity</code> type triggers.
+        same_item_purchased:
+          type: boolean
+          description: Whether the promotion requires the same item to be triggered or not. Available for <code>minimum_quantity</code> or <code>every_quantity</code> type triggers.
+        type:
+          type: string
+          description: 'Type of promotion trigger
+
+
+            Enum: `"minimum_quantity"`, `"every_quantity"`, `"minimum_amount"`, `"every_amount"`
+
+            '
+      required:
+      - type
     PR01_Response_200_Promotions_Medias:
       type: object
       properties:
@@ -701,6 +689,243 @@ components:
       required:
       - locale
       - url
+    PR01_Response_200_Promotions_Channels:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Channel code
+        label:
+          type: string
+          description: Channel label
+      required:
+      - code
+      - label
+    PR04_Request_Trigger:
+      type: object
+      description: Trigger of the promotion
+      properties:
+        selection:
+          $ref: '#/components/schemas/PR04_Request_Trigger_Selection'
+          description: The product assortment triggering the promotion
+      required:
+      - selection
+    PR03_Request:
+      type: object
+      properties:
+        application_to_cart:
+          type: array
+          description: If applicable, promo code to associate to the promotion
+          items:
+            $ref: '#/components/schemas/PR03_Request_ApplicationToCart'
+        channel_codes:
+          type: array
+          description: Channels on which the promotion is applied. If none, promotion applied on all channels
+          items:
+            type: string
+        customer_group_ids:
+          type: array
+          description: The customer groups on which the promotion is applied. If none, promotion applies to all customer groups.
+          items:
+            type: string
+        customer_organization_ids:
+          type: array
+          description: The customer organizations on which the promotion is applied. If none, promotion applies to all customer organizations.
+          items:
+            type: string
+        end_date:
+          type: string
+          format: date-time
+          description: End date of the promotion period of activity
+        internal_description:
+          type: string
+          description: Internal description of the promotion, set by the shop
+        internal_id:
+          type: string
+          description: Promotion identifier
+        public_descriptions:
+          type: array
+          description: The public descriptions of the promotion, with the locales they apply to
+          items:
+            $ref: '#/components/schemas/PR03_Request_PublicDescriptions'
+        reward:
+          $ref: '#/components/schemas/PR03_Request_Reward'
+          description: Defines the reward applied when promotion is triggered
+        start_date:
+          type: string
+          format: date-time
+          description: Start date of the promotion period of activity
+        trigger:
+          $ref: '#/components/schemas/PR03_Request_Trigger'
+          description: Trigger of the promotion
+      required:
+      - internal_description
+      - internal_id
+      - reward
+      - start_date
+      - trigger
+    PR01_Response_200_2:
+      type: object
+      properties:
+        promotions:
+          type: array
+          description: List of promotions
+          items:
+            $ref: '#/components/schemas/PR01_Response_200_Promotions_2'
+        total_count:
+          type: integer
+          format: int32
+      required:
+      - promotions
+      - total_count
+    PR03_Request_ApplicationToCart:
+      type: object
+      description: If applicable, promo code to associate to the promotion
+      properties:
+        promo_code:
+          type: string
+          description: Promo code associated to the promotion
+      required:
+      - promo_code
+    PR04_Request:
+      type: object
+      properties:
+        application_to_cart:
+          type: array
+          description: If applicable, promo code associated to the promotion. Only editable if promotion is upcoming.
+          items:
+            $ref: '#/components/schemas/PR04_Request_ApplicationToCart'
+        channel_codes:
+          type: array
+          description: Channels on which the promotion is applied. If none, promotion applied on all channels
+          items:
+            type: string
+        customer_group_ids:
+          type: array
+          description: The customer groups on which the promotion is applied. If none, promotion applies to all customer groups.
+          items:
+            type: string
+        customer_organization_ids:
+          type: array
+          description: The customer organizations on which the promotion is applied. If none, promotion applies to all customer organizations.
+          items:
+            type: string
+        end_date:
+          type: string
+          format: date-time
+          description: End date of the promotion period of activity
+        internal_description:
+          type: string
+          description: Internal description of the promotion, set by the shop
+        public_descriptions:
+          type: array
+          description: The public descriptions of the promotion, with the locales they apply to
+          items:
+            $ref: '#/components/schemas/PR04_Request_PublicDescriptions'
+        reward:
+          $ref: '#/components/schemas/PR04_Request_Reward'
+          description: Defines the reward applied when promotion is triggered
+        start_date:
+          type: string
+          format: date-time
+          description: Start date of the promotion period of activity. Only editable if promotion is upcoming.
+        trigger:
+          $ref: '#/components/schemas/PR04_Request_Trigger'
+          description: Trigger of the promotion
+      required:
+      - internal_description
+      - reward
+      - start_date
+      - trigger
+    PR04_Request_Reward:
+      type: object
+      description: Defines the reward applied when promotion is triggered
+      properties:
+        selection:
+          $ref: '#/components/schemas/PR04_Request_Reward_Selection'
+          description: The product assortment receiving the reward
+      required:
+      - selection
+    PR03_Request_Trigger_Selection:
+      type: object
+      discriminator:
+        mapping:
+          ALL: '#/components/schemas/PR03_Request_Trigger_Selection_All'
+          BRAND: '#/components/schemas/PR03_Request_Trigger_Selection_Brand'
+          CATEGORY: '#/components/schemas/PR03_Request_Trigger_Selection_Category'
+          OFFER: '#/components/schemas/PR03_Request_Trigger_Selection_Offer'
+          PRODUCT: '#/components/schemas/PR03_Request_Trigger_Selection_Product'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'The type of assortment selection for the trigger
+
+
+            Enum: `"ALL"`, `"OFFER"`, `"PRODUCT"`, `"CATEGORY"`, `"BRAND"`
+
+            '
+      required:
+      - type
+    PR03_Request_Trigger:
+      type: object
+      description: Trigger of the promotion
+      discriminator:
+        mapping:
+          EVERY_AMOUNT: '#/components/schemas/PR03_Request_Trigger_EveryAmount'
+          EVERY_QUANTITY: '#/components/schemas/PR03_Request_Trigger_EveryQuantity'
+          MINIMUM_AMOUNT: '#/components/schemas/PR03_Request_Trigger_MinimumAmount'
+          MINIMUM_QUANTITY: '#/components/schemas/PR03_Request_Trigger_MinimumQuantity'
+        propertyName: type
+      properties:
+        selection:
+          $ref: '#/components/schemas/PR03_Request_Trigger_Selection'
+          description: The product assortment triggering the promotion
+        type:
+          type: string
+          description: 'Type of promotion trigger
+
+
+            Enum: `"MINIMUM_QUANTITY"`, `"EVERY_QUANTITY"`, `"MINIMUM_AMOUNT"`, `"EVERY_AMOUNT"`
+
+            '
+      required:
+      - type
+    PR04_Request_Trigger_Selection:
+      type: object
+      description: The product assortment triggering the promotion
+      discriminator:
+        mapping:
+          ALL: '#/components/schemas/PR04_Request_Trigger_Selection_All'
+          BRAND: '#/components/schemas/PR04_Request_Trigger_Selection_Brand'
+          CATEGORY: '#/components/schemas/PR04_Request_Trigger_Selection_Category'
+          OFFER: '#/components/schemas/PR04_Request_Trigger_Selection_Offer'
+          PRODUCT: '#/components/schemas/PR04_Request_Trigger_Selection_Product'
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: 'The type of assortment selection for the trigger
+
+
+            Enum: `"ALL"`, `"OFFER"`, `"PRODUCT"`, `"CATEGORY"`, `"BRAND"`
+
+            '
+      required:
+      - type
+    PR04_Request_PublicDescriptions:
+      type: object
+      description: The public descriptions of the promotion, with the locales they apply to
+      properties:
+        locale:
+          type: string
+          description: Description's locale
+        value:
+          type: string
+          description: The description itself
+      required:
+      - locale
+      - value
     PR03_Request_Reward_Selection:
       type: object
       discriminator:
@@ -722,20 +947,15 @@ components:
             '
       required:
       - type
-    PR01_Response_200_2:
+    PR04_Request_ApplicationToCart:
       type: object
+      description: If applicable, promo code associated to the promotion. Only editable if promotion is upcoming.
       properties:
-        promotions:
-          type: array
-          description: List of promotions
-          items:
-            $ref: '#/components/schemas/PR01_Response_200_Promotions_2'
-        total_count:
-          type: integer
-          format: int32
+        promo_code:
+          type: string
+          description: Promo code associated to the promotion
       required:
-      - promotions
-      - total_count
+      - promo_code
     PR04_Request_Reward_Selection:
       type: object
       description: The product assortment receiving the reward
@@ -758,15 +978,6 @@ components:
             '
       required:
       - type
-    PR04_Request_ApplicationToCart:
-      type: object
-      description: If applicable, promo code associated to the promotion. Only editable if promotion is upcoming.
-      properties:
-        promo_code:
-          type: string
-          description: Promo code associated to the promotion
-      required:
-      - promo_code
     PR03_Request_PublicDescriptions:
       type: object
       description: The public descriptions of the promotion, with the locales they apply to
@@ -780,6 +991,31 @@ components:
       required:
       - locale
       - value
+    PR03_Request_Reward:
+      type: object
+      description: Defines the reward applied when promotion is triggered
+      discriminator:
+        mapping:
+          AMOUNT_OFF: '#/components/schemas/PR03_Request_Reward_AmountOff'
+          FREE_ITEMS: '#/components/schemas/PR03_Request_Reward_FreeItems'
+          PERCENTAGE_OFF: '#/components/schemas/PR03_Request_Reward_PercentageOff'
+          REDUCED_UNIT_PRICE: '#/components/schemas/PR03_Request_Reward_ReducedUnitPrice'
+        propertyName: type
+      properties:
+        selection:
+          $ref: '#/components/schemas/PR03_Request_Reward_Selection'
+          description: The product assortment receiving the reward
+        type:
+          type: string
+          description: 'Type of promotion reward
+
+
+            Enum: `"FREE_ITEMS"`, `"AMOUNT_OFF"`, `"PERCENTAGE_OFF"`, `"REDUCED_UNIT_PRICE"`
+
+            '
+      required:
+      - selection
+      - type
     PR01_Response_200_Promotions_2:
       type: object
       properties:
@@ -911,242 +1147,6 @@ components:
       - start_date
       - state
       - triggers
-      - type
-    PR04_Request:
-      type: object
-      properties:
-        application_to_cart:
-          type: array
-          description: If applicable, promo code associated to the promotion. Only editable if promotion is upcoming.
-          items:
-            $ref: '#/components/schemas/PR04_Request_ApplicationToCart'
-        channel_codes:
-          type: array
-          description: Channels on which the promotion is applied. If none, promotion applied on all channels
-          items:
-            type: string
-        customer_group_ids:
-          type: array
-          description: The customer groups on which the promotion is applied. If none, promotion applies to all customer groups.
-          items:
-            type: string
-        customer_organization_ids:
-          type: array
-          description: The customer organizations on which the promotion is applied. If none, promotion applies to all customer organizations.
-          items:
-            type: string
-        end_date:
-          type: string
-          format: date-time
-          description: End date of the promotion period of activity
-        internal_description:
-          type: string
-          description: Internal description of the promotion, set by the shop
-        public_descriptions:
-          type: array
-          description: The public descriptions of the promotion, with the locales they apply to
-          items:
-            $ref: '#/components/schemas/PR04_Request_PublicDescriptions'
-        reward:
-          $ref: '#/components/schemas/PR04_Request_Reward'
-          description: Defines the reward applied when promotion is triggered
-        start_date:
-          type: string
-          format: date-time
-          description: Start date of the promotion period of activity. Only editable if promotion is upcoming.
-        trigger:
-          $ref: '#/components/schemas/PR04_Request_Trigger'
-          description: Trigger of the promotion
-      required:
-      - internal_description
-      - reward
-      - start_date
-      - trigger
-    PR04_Request_Trigger_Selection:
-      type: object
-      description: The product assortment triggering the promotion
-      discriminator:
-        mapping:
-          ALL: '#/components/schemas/PR04_Request_Trigger_Selection_All'
-          BRAND: '#/components/schemas/PR04_Request_Trigger_Selection_Brand'
-          CATEGORY: '#/components/schemas/PR04_Request_Trigger_Selection_Category'
-          OFFER: '#/components/schemas/PR04_Request_Trigger_Selection_Offer'
-          PRODUCT: '#/components/schemas/PR04_Request_Trigger_Selection_Product'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'The type of assortment selection for the trigger
-
-
-            Enum: `"ALL"`, `"OFFER"`, `"PRODUCT"`, `"CATEGORY"`, `"BRAND"`
-
-            '
-      required:
-      - type
-    PR03_Request:
-      type: object
-      properties:
-        application_to_cart:
-          type: array
-          description: If applicable, promo code to associate to the promotion
-          items:
-            $ref: '#/components/schemas/PR03_Request_ApplicationToCart'
-        channel_codes:
-          type: array
-          description: Channels on which the promotion is applied. If none, promotion applied on all channels
-          items:
-            type: string
-        customer_group_ids:
-          type: array
-          description: The customer groups on which the promotion is applied. If none, promotion applies to all customer groups.
-          items:
-            type: string
-        customer_organization_ids:
-          type: array
-          description: The customer organizations on which the promotion is applied. If none, promotion applies to all customer organizations.
-          items:
-            type: string
-        end_date:
-          type: string
-          format: date-time
-          description: End date of the promotion period of activity
-        internal_description:
-          type: string
-          description: Internal description of the promotion, set by the shop
-        internal_id:
-          type: string
-          description: Promotion identifier
-        public_descriptions:
-          type: array
-          description: The public descriptions of the promotion, with the locales they apply to
-          items:
-            $ref: '#/components/schemas/PR03_Request_PublicDescriptions'
-        reward:
-          $ref: '#/components/schemas/PR03_Request_Reward'
-          description: Defines the reward applied when promotion is triggered
-        start_date:
-          type: string
-          format: date-time
-          description: Start date of the promotion period of activity
-        trigger:
-          $ref: '#/components/schemas/PR03_Request_Trigger'
-          description: Trigger of the promotion
-      required:
-      - internal_description
-      - internal_id
-      - reward
-      - start_date
-      - trigger
-    PR04_Request_Reward:
-      type: object
-      description: Defines the reward applied when promotion is triggered
-      properties:
-        selection:
-          $ref: '#/components/schemas/PR04_Request_Reward_Selection'
-          description: The product assortment receiving the reward
-      required:
-      - selection
-    PR03_Request_Trigger_Selection:
-      type: object
-      discriminator:
-        mapping:
-          ALL: '#/components/schemas/PR03_Request_Trigger_Selection_All'
-          BRAND: '#/components/schemas/PR03_Request_Trigger_Selection_Brand'
-          CATEGORY: '#/components/schemas/PR03_Request_Trigger_Selection_Category'
-          OFFER: '#/components/schemas/PR03_Request_Trigger_Selection_Offer'
-          PRODUCT: '#/components/schemas/PR03_Request_Trigger_Selection_Product'
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: 'The type of assortment selection for the trigger
-
-
-            Enum: `"ALL"`, `"OFFER"`, `"PRODUCT"`, `"CATEGORY"`, `"BRAND"`
-
-            '
-      required:
-      - type
-    PR04_Request_Trigger:
-      type: object
-      description: Trigger of the promotion
-      properties:
-        selection:
-          $ref: '#/components/schemas/PR04_Request_Trigger_Selection'
-          description: The product assortment triggering the promotion
-      required:
-      - selection
-    PR03_Request_Trigger:
-      type: object
-      description: Trigger of the promotion
-      discriminator:
-        mapping:
-          EVERY_AMOUNT: '#/components/schemas/PR03_Request_Trigger_EveryAmount'
-          EVERY_QUANTITY: '#/components/schemas/PR03_Request_Trigger_EveryQuantity'
-          MINIMUM_AMOUNT: '#/components/schemas/PR03_Request_Trigger_MinimumAmount'
-          MINIMUM_QUANTITY: '#/components/schemas/PR03_Request_Trigger_MinimumQuantity'
-        propertyName: type
-      properties:
-        selection:
-          $ref: '#/components/schemas/PR03_Request_Trigger_Selection'
-          description: The product assortment triggering the promotion
-        type:
-          type: string
-          description: 'Type of promotion trigger
-
-
-            Enum: `"MINIMUM_QUANTITY"`, `"EVERY_QUANTITY"`, `"MINIMUM_AMOUNT"`, `"EVERY_AMOUNT"`
-
-            '
-      required:
-      - type
-    PR04_Request_PublicDescriptions:
-      type: object
-      description: The public descriptions of the promotion, with the locales they apply to
-      properties:
-        locale:
-          type: string
-          description: Description's locale
-        value:
-          type: string
-          description: The description itself
-      required:
-      - locale
-      - value
-    PR03_Request_ApplicationToCart:
-      type: object
-      description: If applicable, promo code to associate to the promotion
-      properties:
-        promo_code:
-          type: string
-          description: Promo code associated to the promotion
-      required:
-      - promo_code
-    PR03_Request_Reward:
-      type: object
-      description: Defines the reward applied when promotion is triggered
-      discriminator:
-        mapping:
-          AMOUNT_OFF: '#/components/schemas/PR03_Request_Reward_AmountOff'
-          FREE_ITEMS: '#/components/schemas/PR03_Request_Reward_FreeItems'
-          PERCENTAGE_OFF: '#/components/schemas/PR03_Request_Reward_PercentageOff'
-          REDUCED_UNIT_PRICE: '#/components/schemas/PR03_Request_Reward_ReducedUnitPrice'
-        propertyName: type
-      properties:
-        selection:
-          $ref: '#/components/schemas/PR03_Request_Reward_Selection'
-          description: The product assortment receiving the reward
-        type:
-          type: string
-          description: 'Type of promotion reward
-
-
-            Enum: `"FREE_ITEMS"`, `"AMOUNT_OFF"`, `"PERCENTAGE_OFF"`, `"REDUCED_UNIT_PRICE"`
-
-            '
-      required:
-      - selection
       - type
   securitySchemes:
     Front-Bearer-Token:
