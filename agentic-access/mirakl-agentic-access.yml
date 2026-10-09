@@ -1,240 +1,60 @@
-generated: '2026-07-20'
+generated: '2026-09-23'
 method: generated
-source: openapi/mirakl-mcm-operator-openapi.json, openapi/mirakl-mcm-seller-openapi.json, openapi/mirakl-mmp-operator-openapi.json,
-  openapi/mirakl-mmp-seller-openapi.json, openapi/mirakl-mms-operator-openapi.json, openapi/mirakl-mms-seller-openapi.json
+source: openapi/mirakl-carriers-api-openapi.yml, openapi/mirakl-catalog-api-openapi.yml, openapi/mirakl-catalog-configuration-api-openapi.yml,
+  openapi/mirakl-channel-api-openapi.yml, openapi/mirakl-checkout-api-openapi.yml, openapi/mirakl-connection-api-openapi.yml,
+  openapi/mirakl-conversations-api-openapi.yml, openapi/mirakl-incidents-api-openapi.yml, openapi/mirakl-invoicing-and-accounting-api-openapi.yml,
+  openapi/mirakl-mapping-api-openapi.yml, openapi/mirakl-messages-api-openapi.yml, openapi/mirakl-multiple-shipments-api-openapi.yml,
+  openapi/mirakl-offers-api-openapi.yml, openapi/mirakl-orders-api-openapi.yml, openapi/mirakl-picklists-api-openapi.yml,
+  openapi/mirakl-platform-settings-api-openapi.yml, openapi/mirakl-product-bindings-api-openapi.yml,
+  openapi/mirakl-product-feedback-api-openapi.yml, openapi/mirakl-products-api-openapi.yml,
+  openapi/mirakl-promotions-api-openapi.yml, openapi/mirakl-public-api-openapi.yml, openapi/mirakl-returns-api-openapi.yml,
+  openapi/mirakl-services-api-openapi.yml, openapi/mirakl-settings-api-openapi.yml, openapi/mirakl-setup-api-openapi.yml,
+  openapi/mirakl-shipments-api-openapi.yml, openapi/mirakl-store-api-openapi.yml, openapi/mirakl-storefront-api-openapi.yml,
+  openapi/mirakl-stores-api-openapi.yml, openapi/mirakl-synchronization-api-openapi.yml, openapi/mirakl-synchronization-errors-api-openapi.yml,
+  openapi/mirakl-taxonomy-api-openapi.yml, openapi/mirakl-users-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 352
+  operations: 239
   by_action_class:
-    connected: 226
-    acting: 126
+    acting: 111
+    connected: 128
   by_consequence:
-    read: 226
-    write: 65
-    physical: 61
+    physical: 55
+    write: 56
+    read: 128
   human_in_the_loop_required: 0
 operations:
-- path: /api/additional_fields
-  method: get
-  operationId: AF01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/channels
-  method: get
-  operationId: CH11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/mcm/products/sources/status/export
-  method: get
-  operationId: CM11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/currencies
-  method: get
-  operationId: CUR01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/documents
-  method: get
-  operationId: DO01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/hierarchies
-  method: get
-  operationId: H11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/locales
-  method: get
-  operationId: L01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports
+- path: /v1/orders/channels/{channel_id}/carriers
   method: post
-  operationId: P41
+  operationId: upsertCarriers
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
+    scope:
+    - connect-channel-platform:carrier:upsert
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /api/products/imports
-  method: get
-  operationId: P51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}
-  method: get
-  operationId: P42
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/error_report
-  method: get
-  operationId: P44
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/new_product_report
-  method: get
-  operationId: P45
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/transformed_file
-  method: get
-  operationId: P46
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/transformation_error_report
-  method: get
-  operationId: P47
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/platform/configuration
-  method: get
-  operationId: PC01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/attributes
-  method: get
-  operationId: PM11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/users/shops/roles
-  method: get
-  operationId: RO02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: get
-  operationId: S30
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: post
-  operationId: S32
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shops/documents/download
-  method: get
-  operationId: S31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents/{document_id}
+- path: /products
   method: delete
-  operationId: S33
+  operationId: deleteProducts
   x-agentic-access:
     action-class: acting
     consequence: write
     subject: required
+    scope:
+    - connect:product:delete
     audience: null
     token:
       max-ttl: 900
@@ -244,131 +64,214 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/values_lists
+- path: /products
   method: get
-  operationId: VL11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/account
-  method: get
-  operationId: A01
+  operationId: listProducts
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     scope:
-    - ROLE_PARTNER_SHOP_READ
-    - ROLE_SHOP_ADMIN
+    - connect:product:read
     token:
       max-ttl: 3600
     audit: none
-- path: /api/account
+- path: /products
+  method: post
+  operationId: upsertProducts
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - connect:product:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog-configuration/channels/{channel_id}
+  method: post
+  operationId: configureChannelCatalog
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - connect-channel-platform:channel-catalog:configure
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/channels
+  method: post
+  operationId: SELLER_ACCOUNT_CHANNEL_UPSERT
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/storefront/custom-carrier
+  method: post
+  operationId: GetCustomCarrierRates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/environment
+  method: get
+  operationId: GetConnection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/environment-dev
+  method: delete
+  operationId: HardDeleteConnectionDev
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /conversations
+  method: post
+  operationId: createConversation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - connect:conversation:create
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /conversations
+  method: get
+  operationId: listConversations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:conversation:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /conversations/{conversationId}/messages
+  method: post
+  operationId: createMessage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - connect:conversation:reply
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /conversations/{conversationId}/attachments
+  method: get
+  operationId: downloadConversationAttachments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:conversation:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /conversations/actions/{actionId}
+  method: get
+  operationId: getConversationActionStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:conversation:action:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /conversations/{conversationId}
+  method: get
+  operationId: getConversationMessages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:conversation:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/orders/{order_id}/lines/{line}/resolve_incident
   method: put
-  operationId: A02
+  operationId: OR64
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
     scope:
-    - ROLE_PARTNER_SHOP_UPDATE
+    - ROLE_PARTNER_ORDER_INCIDENT_RESOLVE
     - ROLE_SHOP_ADMIN
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /api/account/statistics
+- path: /api/document-request/documents/download
   method: get
-  operationId: A21
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/additional_fields
-  method: get
-  operationId: AF01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_OFFER_SETTINGS_READ
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_PARTNER_SHOP_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/channels
-  method: get
-  operationId: CH11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_CHANNEL_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/mcm/products/sources/status/export
-  method: get
-  operationId: CM11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_PRODUCT_SOURCE_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/currencies
-  method: get
-  operationId: CUR01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_CURRENCY_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/documents
-  method: get
-  operationId: DO01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/hierarchies
-  method: get
-  operationId: H11
+  operationId: DR73
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -376,131 +279,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/locales
+- path: /api/invoices
   method: get
-  operationId: L01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_I18N_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports
-  method: post
-  operationId: P41
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_PRODUCT_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/products/imports
-  method: get
-  operationId: P51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_PRODUCT_WRITE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}
-  method: get
-  operationId: P42
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_PRODUCT_WRITE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/error_report
-  method: get
-  operationId: P44
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_PRODUCT_WRITE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/new_product_report
-  method: get
-  operationId: P45
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_PRODUCT_WRITE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/transformed_file
-  method: get
-  operationId: P46
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_PRODUCT_WRITE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/transformation_error_report
-  method: get
-  operationId: P47
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_PRODUCT_WRITE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/platform/configuration
-  method: get
-  operationId: PC01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/attributes
-  method: get
-  operationId: PM11
+  operationId: IV01
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -508,136 +289,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/users/shops/roles
+- path: /api/seller-billing-cycles
   method: get
-  operationId: RO02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_USER_CREATE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: get
-  operationId: S30
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: post
-  operationId: S32
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shops/documents/download
-  method: get
-  operationId: S31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents/{document_id}
-  method: delete
-  operationId: S33
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_DELETE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/version
-  method: get
-  operationId: V01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/values_lists
-  method: get
-  operationId: VL11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/additional_fields
-  method: get
-  operationId: AF01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/channels
-  method: get
-  operationId: CH11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/currencies
-  method: get
-  operationId: CUR01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/documents
-  method: get
-  operationId: DO01
+  operationId: SBC11
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -665,16 +319,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/document-request/documents/download
-  method: get
-  operationId: DR73
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/document-request/documents/upload
   method: post
   operationId: DR74
@@ -691,26 +335,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/hierarchies
-  method: get
-  operationId: H11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/invoices
-  method: get
-  operationId: IV01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/invoices/{accounting_document_id}
   method: get
   operationId: IV02
@@ -718,12 +342,86 @@ operations:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - ROLE_PARTNER_ACCOUNTING_DOCUMENT_READ
+    - ROLE_PARTNER_OWN_ACCOUNTING_DOCUMENT_READ
+    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
-- path: /api/locales
+- path: /api/sellerpayment/transactions_logs
   method: get
-  operationId: L01
+  operationId: TL02
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_TRANSACTION_LOG_READ
+    - ROLE_SHOP_ACCOUNTANCY
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sellerpayment/transactions_logs/async
+  method: post
+  operationId: TL03
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - ROLE_PARTNER_TRANSACTION_LOG_READ
+    - ROLE_SHOP_ACCOUNTANCY
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sellerpayment/transactions_logs/async/status/{tracking_id}
+  method: get
+  operationId: TL04
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_TRANSACTION_LOG_READ
+    - ROLE_SHOP_ACCOUNTANCY
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dynamic-url/The+URL+is+retrieved+from+TL04+output/TL05
+  method: get
+  operationId: TL05
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_TRANSACTION_LOG_READ
+    - ROLE_SHOP_ACCOUNTANCY
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/mapping/returns/{orderId}
+  method: get
+  operationId: ListOrderReturnMappings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/mapping/transactions/{orderId}
+  method: get
+  operationId: ListOrderTransactionMappings
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -803,420 +501,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/offers/imports
-  method: post
-  operationId: OF01
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/offers/imports
-  method: get
-  operationId: OF04
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/imports/{import}
-  method: get
-  operationId: OF02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/imports/{import}/error_report
-  method: get
-  operationId: OF03
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/{offer}
-  method: get
-  operationId: OF22
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers
-  method: post
-  operationId: OF24
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/offers/{offer}/quantity
-  method: get
-  operationId: OF26
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/export
-  method: get
-  operationId: OF51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/export/async
-  method: post
-  operationId: OF52
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/offers/export/async/status/{tracking_id}
-  method: get
-  operationId: OF53
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /dynamic-url/The+URL+is+retrieved+from+OF53+output/OF54
-  method: get
-  operationId: OF54
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/states
-  method: get
-  operationId: OF61
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders
-  method: put
-  operationId: OR04
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders
-  method: get
-  operationId: OR11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/taxes
-  method: get
-  operationId: OR75
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/shipping_from
-  method: put
-  operationId: OR07
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}
-  method: get
-  operationId: OR12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/async-export
-  method: post
-  operationId: OR13
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/async-export/status/{tracking_id}
-  method: get
-  operationId: OR14
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /dynamic-url/The+URL+is+retrieved+from+OR14+output/OR15
-  method: get
-  operationId: OR15
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/{order_id}/accept
-  method: put
-  operationId: OR21
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/tracking
-  method: put
-  operationId: OR23
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/ship
-  method: put
-  operationId: OR24
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/refund
-  method: put
-  operationId: OR26
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/refund
-  method: put
-  operationId: OR28
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/cancel
-  method: put
-  operationId: OR29
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/cancel
-  method: put
-  operationId: OR30
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/additional_fields
-  method: put
-  operationId: OR31
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/adjust
-  method: put
-  operationId: OR32
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/messages
-  method: get
-  operationId: OR41
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/orders/{order_id}/messages
   method: post
   operationId: OR42
@@ -1253,39 +537,25 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/orders/{order_id}/evaluation
-  method: get
-  operationId: OR51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/documents
-  method: get
-  operationId: OR72
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/documents/download
-  method: get
-  operationId: OR73
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/{order_id}/documents
+- path: /api/mms/services/{service_code}/threads
   method: post
-  operationId: OR74
+  operationId: SOF43
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/mms/orders/{order_id}/threads
+  method: post
+  operationId: SOR43
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -1301,543 +571,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/orders/documents/{document_id}
-  method: delete
-  operationId: OR76
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/products/offers
-  method: get
-  operationId: P11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products
-  method: get
-  operationId: P31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports
-  method: post
-  operationId: P41
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/products/imports
-  method: get
-  operationId: P51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}
-  method: get
-  operationId: P42
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/error_report
-  method: get
-  operationId: P44
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/new_product_report
-  method: get
-  operationId: P45
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/transformed_file
-  method: get
-  operationId: P46
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/imports/{import}/transformation_error_report
-  method: get
-  operationId: P47
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/platform/configuration
-  method: get
-  operationId: PC01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/picklists
-  method: get
-  operationId: PL11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/products/attributes
-  method: get
-  operationId: PM11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/promotions
-  method: get
-  operationId: PR01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/promotions
-  method: post
-  operationId: PR03
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/promotions/{promotion_internal_id}
-  method: put
-  operationId: PR04
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/offers/pricing/imports
-  method: post
-  operationId: PRI01
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/offers/pricing/imports
-  method: get
-  operationId: PRI02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/pricing/imports/{import_id}/error_report
-  method: get
-  operationId: PRI03
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons
-  method: get
-  operationId: RE01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/{reason_type}
-  method: get
-  operationId: RE02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/incident_open
-  method: get
-  operationId: RE11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/incident_close
-  method: get
-  operationId: RE12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/messaging
-  method: get
-  operationId: RE14
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/users/shops/roles
-  method: get
-  operationId: RO02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/returns
-  method: post
-  operationId: RT01
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/returns
-  method: put
-  operationId: RT04
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/returns
-  method: get
-  operationId: RT11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/returns/items_to_return
-  method: get
-  operationId: RT12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/returns/accept
-  method: put
-  operationId: RT21
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/returns/receive
-  method: put
-  operationId: RT25
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/returns/compliance
-  method: put
-  operationId: RT26
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/returns/close
-  method: put
-  operationId: RT27
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/returns/cancel
-  method: put
-  operationId: RT29
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shops/documents
-  method: get
-  operationId: S30
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: post
-  operationId: S32
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shops/documents/download
-  method: get
-  operationId: S31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents/{document_id}
-  method: delete
-  operationId: S33
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/seller-billing-cycles
-  method: get
-  operationId: SBC11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/zones
-  method: get
-  operationId: SH11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/types
-  method: get
-  operationId: SH12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/carriers
-  method: get
-  operationId: SH21
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/logistic_classes
-  method: get
-  operationId: SH31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/shipments
   method: post
   operationId: ST01
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shipments
-  method: put
-  operationId: ST07
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -1863,6 +599,27 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /api/shipments
+  method: put
+  operationId: ST07
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - ROLE_PARTNER_ORDER_SHIPMENT_WRITE
+    - ROLE_SHOP_ADMIN
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /api/shipments/delete
   method: put
   operationId: ST06
@@ -1952,6 +709,9 @@ operations:
     action-class: acting
     consequence: physical
     subject: required
+    scope:
+    - ROLE_PARTNER_ORDER_SHIP
+    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 300
@@ -1963,9 +723,39 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/offers/stock/imports
+- path: /api/offers/{offer}
+  method: get
+  operationId: OF22
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offers/{offer}/quantity
+  method: get
+  operationId: OF26
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offers/export
+  method: get
+  operationId: OF51
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offers/export/async
   method: post
-  operationId: STO01
+  operationId: OF52
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1979,9 +769,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/offers/stock/imports/{import_id}/status
+- path: /api/offers/export/async/status/{tracking_id}
   method: get
-  operationId: STO02
+  operationId: OF53
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1989,9 +779,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/offers/stock/imports/{import_id}/error_report
+- path: /dynamic-url/The+URL+is+retrieved+from+OF53+output/OF54
   method: get
-  operationId: STO03
+  operationId: OF54
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1999,279 +789,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/values_lists
+- path: /api/products/offers
   method: get
-  operationId: VL11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/account
-  method: get
-  operationId: A01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/account
-  method: put
-  operationId: A02
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_SHOP_UPDATE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/account/statistics
-  method: get
-  operationId: A21
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/additional_fields
-  method: get
-  operationId: AF01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_OFFER_SETTINGS_READ
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_PARTNER_SHOP_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/channels
-  method: get
-  operationId: CH11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_CHANNEL_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/currencies
-  method: get
-  operationId: CUR01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_CURRENCY_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/documents
-  method: get
-  operationId: DO01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/document-request/requests
-  method: get
-  operationId: DR11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/document-request/{document_request_id}/lines
-  method: get
-  operationId: DR12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/document-request/documents/download
-  method: get
-  operationId: DR73
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/document-request/documents/upload
-  method: post
-  operationId: DR74
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/hierarchies
-  method: get
-  operationId: H11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/invoices
-  method: get
-  operationId: IV01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ACCOUNTING_DOCUMENT_READ
-    - ROLE_PARTNER_OWN_ACCOUNTING_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/invoices/{accounting_document_id}
-  method: get
-  operationId: IV02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ACCOUNTING_DOCUMENT_READ
-    - ROLE_PARTNER_OWN_ACCOUNTING_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/locales
-  method: get
-  operationId: L01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_I18N_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/messages
-  method: get
-  operationId: M01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/inbox/threads/{thread_id}
-  method: get
-  operationId: M10
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/inbox/threads
-  method: get
-  operationId: M11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/inbox/threads
-  method: post
-  operationId: M14
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/inbox/threads/{thread_id}/message
-  method: post
-  operationId: M12
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/inbox/threads/{attachment_id}/download
-  method: get
-  operationId: M13
+  operationId: P11
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2372,48 +892,16 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/offers/{offer}
-  method: get
-  operationId: OF22
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_OFFER_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/{offer}/quantity
-  method: get
-  operationId: OF26
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/export
-  method: get
-  operationId: OF51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/export/async
+- path: /api/offers/pricing/imports
   method: post
-  operationId: OF52
+  operationId: PRI01
   x-agentic-access:
     action-class: acting
     consequence: write
     subject: required
+    scope:
+    - ROLE_PARTNER_OFFER_PRICING_WRITE
+    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 900
@@ -2423,39 +911,369 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/offers/export/async/status/{tracking_id}
+- path: /api/offers/pricing/imports
   method: get
-  operationId: OF53
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /dynamic-url/The+URL+is+retrieved+from+OF53+output/OF54
-  method: get
-  operationId: OF54
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/states
-  method: get
-  operationId: OF61
+  operationId: PRI02
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     scope:
-    - ROLE_PARTNER_OFFER_SETTINGS_READ
+    - ROLE_PARTNER_OFFER_PRICING_READ
     - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
+- path: /api/offers/pricing/imports/{import_id}/error_report
+  method: get
+  operationId: PRI03
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_OFFER_PRICING_READ
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offers/stock/imports
+  method: post
+  operationId: STO01
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - ROLE_PARTNER_OFFER_STOCK_WRITE
+    - ROLE_SHOP_ADMIN
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/offers/stock/imports/{import_id}/status
+  method: get
+  operationId: STO02
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_OFFER_STOCK_WRITE
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offers/stock/imports/{import_id}/error_report
+  method: get
+  operationId: STO03
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_OFFER_STOCK_WRITE
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/orders/documents/{channel_document_id}
+  method: delete
+  operationId: deleteOrderDocument
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect-channel-platform:order-document:delete
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders/actions/{action_id}
+  method: put
+  operationId: updateActionStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect-channel-platform:order-action:upsert
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders/anonymize-after
+  method: put
+  operationId: updateAnonymizeAfterDate
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect-channel-platform:order:update-anonymize-after
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders/{channel_order_id}/documents
+  method: post
+  operationId: uploadOrderDocument
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect-channel-platform:order-document:upload
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders
+  method: post
+  operationId: upsertOrders
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect-channel-platform:orders:upsert
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orders/{order_id}/accept
+  method: put
+  operationId: acceptOrderLines
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order:accept
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orders
+  method: get
+  operationId: listOrders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:order:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/orders/{order_id}/accept
+  method: put
+  operationId: v2-acceptOrderLines
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order:accept
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/orders/{order_id}/cancel
+  method: post
+  operationId: v2-cancelOrderLines
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order:cancel
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/orders/{order_id}/documents
+  method: get
+  operationId: v2-downloadOrderDocuments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:order-document:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/orders/{order_id}/documents
+  method: post
+  operationId: v2-uploadOrderDocument
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order:upload-document
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/orders/actions/{action_id}
+  method: get
+  operationId: v2-getActionStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:order:action:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/orders/tracking/{tracking_id}
+  method: get
+  operationId: v2-getOrderTracking
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:order-tracking:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/orders/documents
+  method: get
+  operationId: v2-listOrderDocuments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:order-document:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/orders
+  method: get
+  operationId: v2-listOrders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - connect:order:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/orders/{order_id}/refund
+  method: post
+  operationId: v2-refundOrderLines
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order:refund
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/orders/actions
+  method: post
+  operationId: v2-reportOrderActions
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order:action:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /api/orders
   method: put
   operationId: OR04
@@ -2463,9 +1281,6 @@ operations:
     action-class: acting
     consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_EDIT
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 300
@@ -2484,9 +1299,6 @@ operations:
     action-class: connected
     consequence: read
     subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_READ
-    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
@@ -2497,9 +1309,6 @@ operations:
     action-class: acting
     consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_SHIP
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 300
@@ -2518,8 +1327,6 @@ operations:
     action-class: connected
     consequence: read
     subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
@@ -2530,9 +1337,6 @@ operations:
     action-class: acting
     consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_READ
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 300
@@ -2551,9 +1355,6 @@ operations:
     action-class: connected
     consequence: read
     subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_READ
-    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
@@ -2564,9 +1365,6 @@ operations:
     action-class: connected
     consequence: read
     subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_READ
-    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
@@ -2577,9 +1375,6 @@ operations:
     action-class: acting
     consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_ACCEPT
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 300
@@ -2598,9 +1393,6 @@ operations:
     action-class: acting
     consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_TRACKING_WRITE
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 300
@@ -2619,9 +1411,146 @@ operations:
     action-class: acting
     consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_SHIP
-    - ROLE_SHOP_ADMIN
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/orders/{order_id}/cancel
+  method: put
+  operationId: OR29
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/orders/cancel
+  method: put
+  operationId: OR30
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/orders/{order_id}/additional_fields
+  method: put
+  operationId: OR31
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/orders/{order_id}/messages
+  method: get
+  operationId: OR41
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/orders/{order_id}/evaluation
+  method: get
+  operationId: OR51
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/orders/documents
+  method: get
+  operationId: OR72
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/orders/documents/download
+  method: get
+  operationId: OR73
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/orders/{order_id}/documents
+  method: post
+  operationId: OR74
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/orders/taxes
+  method: get
+  operationId: OR75
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/orders/documents/{document_id}
+  method: delete
+  operationId: OR76
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
     audience: null
     token:
       max-ttl: 300
@@ -2676,69 +1605,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/orders/{order_id}/cancel
-  method: put
-  operationId: OR29
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_CANCEL
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/cancel
-  method: put
-  operationId: OR30
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_CANCEL
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/additional_fields
-  method: put
-  operationId: OR31
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_ADDITIONAL_FIELD_UPDATE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /api/orders/adjust
   method: put
   operationId: OR32
@@ -2760,79 +1626,13 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/orders/{order_id}/messages
-  method: get
-  operationId: OR41
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/{order_id}/messages
-  method: post
-  operationId: OR42
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/threads
-  method: post
-  operationId: OR43
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_MESSAGE_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/orders/{order_id}/evaluation
-  method: get
-  operationId: OR51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/{order_id}/lines/{line}/resolve_incident
+- path: /api/mms/orders/{order_id}
   method: put
-  operationId: OR64
+  operationId: SOR04
   x-agentic-access:
     action-class: acting
     consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_INCIDENT_RESOLVE
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 300
@@ -2844,42 +1644,23 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/orders/documents
+- path: /api/mms/orders
   method: get
-  operationId: OR72
+  operationId: SOR11
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
-- path: /api/orders/documents/download
-  method: get
-  operationId: OR73
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/orders/{order_id}/documents
-  method: post
-  operationId: OR74
+- path: /api/mms/orders/{order_id}/accept
+  method: put
+  operationId: SOR21
   x-agentic-access:
     action-class: acting
     consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_DOCUMENT_WRITE
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 300
@@ -2891,9 +1672,124 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/orders/taxes
+- path: /api/mms/orders/{order_id}/refuse
+  method: put
+  operationId: SOR22
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/mms/orders/{order_id}/consume
+  method: put
+  operationId: SOR25
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/mms/orders/{order_id}/refund
+  method: put
+  operationId: SOR28
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/mms/orders/{order_id}/evaluation
   method: get
-  operationId: OR75
+  operationId: SOR51
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/picklists
+  method: get
+  operationId: PL11
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/additional_fields
+  method: get
+  operationId: AF01
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_OFFER_SETTINGS_READ
+    - ROLE_PARTNER_ORDER_SETTINGS_READ
+    - ROLE_PARTNER_SHOP_SETTINGS_READ
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/channels
+  method: get
+  operationId: CH11
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_CHANNEL_READ
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/currencies
+  method: get
+  operationId: CUR01
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_CURRENCY_SETTINGS_READ
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/documents
+  method: get
+  operationId: DO01
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2904,50 +1800,271 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/orders/documents/{document_id}
-  method: delete
-  operationId: OR76
+- path: /api/locales
+  method: get
+  operationId: L01
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_I18N_SETTINGS_READ
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/platform/configuration
+  method: get
+  operationId: PC01
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/version
+  method: get
+  operationId: V01
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/offers/states
+  method: get
+  operationId: OF61
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/reasons
+  method: get
+  operationId: RE01
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/reasons/{reason_type}
+  method: get
+  operationId: RE02
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/reasons/incident_open
+  method: get
+  operationId: RE11
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/reasons/incident_close
+  method: get
+  operationId: RE12
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/reasons/messaging
+  method: get
+  operationId: RE14
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/shipping/zones
+  method: get
+  operationId: SH11
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/shipping/types
+  method: get
+  operationId: SH12
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/shipping/carriers
+  method: get
+  operationId: SH21
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/shipping/logistic_classes
+  method: get
+  operationId: SH31
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/shipping/configuration/shop
+  method: get
+  operationId: SH42
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/shipping/charges/shop
+  method: get
+  operationId: SH52
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/platform-settings/operator-return-configurations
+  method: get
+  operationId: GetOperatorReturnConfigurations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/product-bindings/delete
+  method: post
+  operationId: DeleteProductBindings
   x-agentic-access:
     action-class: acting
-    consequence: physical
+    consequence: write
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_DOCUMENT_DELETE
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
+      max-ttl: 900
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /api/products/offers
+- path: /api/product-bindings
+  method: post
+  operationId: ImportProductBindings
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/product-bindings
   method: get
-  operationId: P11
+  operationId: ListProductBindings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/product-bindings
+  method: patch
+  operationId: UpdateProductBindings
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/channel-catalog/{channel_id}/store-catalog-items/{store_id}
+  method: post
+  operationId: updateStoreCatalogItems
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - connect-channel-platform:store-catalog-items:update
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/mcm/products/sources/status/export
+  method: get
+  operationId: CM11
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     scope:
-    - ROLE_PARTNER_PRODUCT_READ
+    - ROLE_PARTNER_PRODUCT_SOURCE_READ
     - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
-- path: /api/products
+- path: /api/hierarchies
   method: get
-  operationId: P31
+  operationId: H11
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
-    scope:
-    - ROLE_PARTNER_PRODUCT_READ
-    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
@@ -3048,34 +2165,29 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/platform/configuration
-  method: get
-  operationId: PC01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/picklists
-  method: get
-  operationId: PL11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_PICKLIST_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/products/attributes
   method: get
   operationId: PM11
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/values_lists
+  method: get
+  operationId: VL11
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/products
+  method: get
+  operationId: P31
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -3090,9 +2202,6 @@ operations:
     action-class: connected
     consequence: read
     subject: optional
-    scope:
-    - ROLE_PARTNER_PROMOTION_READ
-    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
@@ -3132,126 +2241,146 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/offers/pricing/imports
+- path: /api/public/checkout-data
   method: post
-  operationId: PRI01
+  operationId: GetCheckoutData
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
-    scope:
-    - ROLE_PARTNER_OFFER_PRICING_WRITE
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /api/offers/pricing/imports
+- path: /api/public/shipping-fees
+  method: post
+  operationId: GetShippingFees
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/orders/returns
+  method: post
+  operationId: upsertReturns
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect-channel-platform:order-returns:upsert
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/orders/returns/{return_id}/accept
+  method: put
+  operationId: v2-acceptReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order-return:accept
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/orders/returns/{return_id}/receive
+  method: put
+  operationId: v2-acknowledgeReturnReception
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order-return:receive
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/orders/returns/{return_id}/close
+  method: put
+  operationId: v2-closeReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:order-return:close
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/orders/returns
   method: get
-  operationId: PRI02
+  operationId: v2-listReturns
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     scope:
-    - ROLE_PARTNER_OFFER_PRICING_READ
-    - ROLE_SHOP_ADMIN
+    - connect:order-return:read
     token:
       max-ttl: 3600
     audit: none
-- path: /api/offers/pricing/imports/{import_id}/error_report
-  method: get
-  operationId: PRI03
+- path: /v2/orders/returns/{return_id}/trackings
+  method: put
+  operationId: v2-updateReturnTrackingInformation
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: physical
+    subject: required
     scope:
-    - ROLE_PARTNER_OFFER_PRICING_READ
-    - ROLE_SHOP_ADMIN
+    - connect:order-return:update-tracking-information
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons
-  method: get
-  operationId: RE01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/{reason_type}
-  method: get
-  operationId: RE02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/incident_open
-  method: get
-  operationId: RE11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/incident_close
-  method: get
-  operationId: RE12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/messaging
-  method: get
-  operationId: RE14
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/users/shops/roles
-  method: get
-  operationId: RO02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_USER_CREATE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /api/returns
   method: post
   operationId: RT01
@@ -3259,9 +2388,6 @@ operations:
     action-class: acting
     consequence: write
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_RETURN_WRITE
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 900
@@ -3271,6 +2397,16 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /api/returns
+  method: get
+  operationId: RT11
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/returns
   method: put
   operationId: RT04
@@ -3290,19 +2426,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/returns
-  method: get
-  operationId: RT11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_RETURN_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/returns/items_to_return
   method: get
   operationId: RT12
@@ -3310,22 +2433,16 @@ operations:
     action-class: connected
     consequence: read
     subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_RETURN_READ
-    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
-- path: /api/returns/accept
+- path: /api/returns/receive
   method: put
-  operationId: RT21
+  operationId: RT25
   x-agentic-access:
     action-class: acting
     consequence: write
     subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_RETURN_WRITE
-    - ROLE_SHOP_ADMIN
     audience: null
     token:
       max-ttl: 900
@@ -3335,9 +2452,51 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/returns/receive
+- path: /api/returns/cancel
   method: put
-  operationId: RT25
+  operationId: RT29
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/returns/return-labels
+  method: post
+  operationId: RT51
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/returns/return-labels
+  method: get
+  operationId: RT52
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/returns/accept
+  method: put
+  operationId: RT21
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -3392,1153 +2551,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/returns/cancel
-  method: put
-  operationId: RT29
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_RETURN_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shops/documents
-  method: get
-  operationId: S30
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: post
-  operationId: S32
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shops/documents/download
-  method: get
-  operationId: S31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents/{document_id}
-  method: delete
-  operationId: S33
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_DELETE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/seller-billing-cycles
-  method: get
-  operationId: SBC11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ACCOUNTING_DOCUMENT_READ
-    - ROLE_PARTNER_SELLER_BILLING_CYCLE_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/zones
-  method: get
-  operationId: SH11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHIPPING_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/types
-  method: get
-  operationId: SH12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHIPPING_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/carriers
-  method: get
-  operationId: SH21
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHIPPING_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/logistic_classes
-  method: get
-  operationId: SH31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHIPPING_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/configuration/shop
-  method: get
-  operationId: SH42
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipping/charges/shop
-  method: get
-  operationId: SH52
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipments
-  method: post
-  operationId: ST01
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_SHIP
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shipments
-  method: put
-  operationId: ST07
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_SHIPMENT_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shipments
-  method: get
-  operationId: ST11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipments/delete
-  method: put
-  operationId: ST06
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_SHIPMENT_DELETE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shipments/items_to_ship
-  method: get
-  operationId: ST12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_READ
-    - ROLE_PARTNER_ORDER_SHIPMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shipments/tracking
-  method: post
-  operationId: ST23
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_TRACKING_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shipments/ship
-  method: put
-  operationId: ST24
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_SHIP
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shipments/ready_for_pick_up
-  method: put
-  operationId: ST26
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_SHIPMENT_PICK_UP
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shipments/additional_information
-  method: put
-  operationId: ST31
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_ORDER_SHIP
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/offers/stock/imports
-  method: post
-  operationId: STO01
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_OFFER_STOCK_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/offers/stock/imports/{import_id}/status
-  method: get
-  operationId: STO02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_OFFER_STOCK_WRITE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/offers/stock/imports/{import_id}/error_report
-  method: get
-  operationId: STO03
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_OFFER_STOCK_WRITE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/sellerpayment/transactions_logs
-  method: get
-  operationId: TL02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_TRANSACTION_LOG_READ
-    - ROLE_SHOP_ACCOUNTANCY
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/sellerpayment/transactions_logs/async
-  method: post
-  operationId: TL03
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - ROLE_PARTNER_TRANSACTION_LOG_READ
-    - ROLE_SHOP_ACCOUNTANCY
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/sellerpayment/transactions_logs/async/status/{tracking_id}
-  method: get
-  operationId: TL04
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_TRANSACTION_LOG_READ
-    - ROLE_SHOP_ACCOUNTANCY
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /dynamic-url/The+URL+is+retrieved+from+TL04+output/TL05
-  method: get
-  operationId: TL05
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_TRANSACTION_LOG_READ
-    - ROLE_SHOP_ACCOUNTANCY
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/version
-  method: get
-  operationId: V01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/values_lists
-  method: get
-  operationId: VL11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/additional_fields
-  method: get
-  operationId: AF01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/channels
-  method: get
-  operationId: CH11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/currencies
-  method: get
-  operationId: CUR01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/documents
-  method: get
-  operationId: DO01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/invoices
-  method: get
-  operationId: IV01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/invoices/{accounting_document_id}
-  method: get
-  operationId: IV02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/locales
-  method: get
-  operationId: L01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/platform/configuration
-  method: get
-  operationId: PC01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons
-  method: get
-  operationId: RE01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/{reason_type}
-  method: get
-  operationId: RE02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/users/shops/roles
-  method: get
-  operationId: RO02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: get
-  operationId: S30
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: post
-  operationId: S32
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shops/documents/download
-  method: get
-  operationId: S31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents/{document_id}
-  method: delete
-  operationId: S33
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/seller-billing-cycles
-  method: get
-  operationId: SBC11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/mms/locations
-  method: post
-  operationId: SL01
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/locations
-  method: get
-  operationId: SL12
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/mms/locations/{location_id}
-  method: delete
-  operationId: SL06
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/models
-  method: get
-  operationId: SM11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/mms/services
-  method: post
-  operationId: SOF25
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/services/{service_code}
-  method: put
-  operationId: SOF26
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/services/{service_code}
-  method: delete
-  operationId: SOF27
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/services/{service_code}/threads
-  method: post
-  operationId: SOF43
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}
-  method: put
-  operationId: SOR04
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/accept
-  method: put
-  operationId: SOR21
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/refuse
-  method: put
-  operationId: SOR22
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/consume
-  method: put
-  operationId: SOR25
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/refund
-  method: put
-  operationId: SOR28
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/threads
-  method: post
-  operationId: SOR43
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/evaluation
-  method: get
-  operationId: SOR51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/account
-  method: get
-  operationId: A01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/account
-  method: put
-  operationId: A02
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_SHOP_UPDATE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/account/statistics
-  method: get
-  operationId: A21
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/additional_fields
-  method: get
-  operationId: AF01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_OFFER_SETTINGS_READ
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_PARTNER_SHOP_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/channels
-  method: get
-  operationId: CH11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_CHANNEL_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/currencies
-  method: get
-  operationId: CUR01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_CURRENCY_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/documents
-  method: get
-  operationId: DO01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/invoices
-  method: get
-  operationId: IV01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ACCOUNTING_DOCUMENT_READ
-    - ROLE_PARTNER_OWN_ACCOUNTING_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/invoices/{accounting_document_id}
-  method: get
-  operationId: IV02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ACCOUNTING_DOCUMENT_READ
-    - ROLE_PARTNER_OWN_ACCOUNTING_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/locales
-  method: get
-  operationId: L01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_I18N_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/platform/configuration
-  method: get
-  operationId: PC01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons
-  method: get
-  operationId: RE01
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/reasons/{reason_type}
-  method: get
-  operationId: RE02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ORDER_SETTINGS_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/users/shops/roles
-  method: get
-  operationId: RO02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_USER_CREATE
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: get
-  operationId: S30
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents
-  method: post
-  operationId: S32
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_WRITE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/shops/documents/download
-  method: get
-  operationId: S31
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/shops/documents/{document_id}
-  method: delete
-  operationId: S33
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - ROLE_PARTNER_SHOP_DOCUMENT_DELETE
-    - ROLE_SHOP_ADMIN
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/seller-billing-cycles
-  method: get
-  operationId: SBC11
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_ACCOUNTING_DOCUMENT_READ
-    - ROLE_PARTNER_SELLER_BILLING_CYCLE_READ
-    - ROLE_SHOP_ADMIN
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/mms/locations
   method: post
   operationId: SL01
@@ -4649,9 +2661,19 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/mms/services/{service_code}/threads
-  method: post
-  operationId: SOF43
+- path: /api/settings
+  method: get
+  operationId: ListSettings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/settings
+  method: patch
+  operationId: UpdateSettings
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -4665,27 +2687,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/mms/orders/{order_id}
-  method: put
-  operationId: SOR04
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders
+- path: /api/setup/check-consistency
   method: get
-  operationId: SOR11
+  operationId: SetupCheckConsistency
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -4693,129 +2697,41 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/mms/orders/{order_id}/accept
-  method: put
-  operationId: SOR21
+- path: /api/setup/check-permissions
+  method: get
+  operationId: SetupCheckPermissions
   x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/refuse
-  method: put
-  operationId: SOR22
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/consume
-  method: put
-  operationId: SOR25
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/refund
-  method: put
-  operationId: SOR28
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/mms/orders/{order_id}/threads
+      max-ttl: 3600
+    audit: none
+- path: /api/setup/update
   method: post
-  operationId: SOR43
+  operationId: SetupUpdate
   x-agentic-access:
     action-class: acting
-    consequence: physical
+    consequence: write
     subject: required
     audience: null
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
+      max-ttl: 900
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /api/mms/orders/{order_id}/evaluation
-  method: get
-  operationId: SOR51
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/sellerpayment/transactions_logs
-  method: get
-  operationId: TL02
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - ROLE_PARTNER_TRANSACTION_LOG_READ
-    - ROLE_SHOP_ACCOUNTANCY
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/sellerpayment/transactions_logs/async
+- path: /orders/{order_id}/shipments
   method: post
-  operationId: TL03
+  operationId: createShipment
   x-agentic-access:
     action-class: acting
     consequence: physical
     subject: required
     scope:
-    - ROLE_PARTNER_TRANSACTION_LOG_READ
-    - ROLE_SHOP_ACCOUNTANCY
+    - connect:shipment:create
     audience: null
     token:
       max-ttl: 300
@@ -4827,39 +2743,691 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/sellerpayment/transactions_logs/async/status/{tracking_id}
+- path: /v2/orders/{order_id}/shipments
+  method: post
+  operationId: v2-createShipment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - connect:shipment:create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/users/stores
+  method: post
+  operationId: SELLER_ACCOUNT_STORE_CREATE
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/channels/{channel_id}/stores/{channel_store_id}
+  method: put
+  operationId: SELLER_ACCOUNT_STORE_UPDATE
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/storefront/return
+  method: post
+  operationId: CreateReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/storefront/evaluations/assessments
   method: get
-  operationId: TL04
+  operationId: GetEvaluationsAssessments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/returns/items-to-return
+  method: get
+  operationId: GetItemsToReturn
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/promotions
+  method: get
+  operationId: GetPromotions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/returns
+  method: get
+  operationId: GetReturns
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/shipment
+  method: get
+  operationId: GetShipment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/orders/accounting-documents
+  method: get
+  operationId: ListAccountingOrdersDocuments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/orders/documents
+  method: get
+  operationId: ListOrdersDocuments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/products/offers
+  method: get
+  operationId: ListProductOffers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/shop-ratings/{shopId}
+  method: get
+  operationId: ListShopEvaluations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/storefront/graphql
+  method: post
+  operationId: MiraklGraphQL
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/storefront/graphql/upload
+  method: put
+  operationId: MiraklGraphQLUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/storefront/fulfillments/receive
+  method: put
+  operationId: ReceiveFulfillment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/account
+  method: get
+  operationId: A01
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     scope:
-    - ROLE_PARTNER_TRANSACTION_LOG_READ
-    - ROLE_SHOP_ACCOUNTANCY
+    - ROLE_PARTNER_SHOP_READ
+    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
-- path: /dynamic-url/The+URL+is+retrieved+from+TL04+output/TL05
+- path: /api/account
+  method: put
+  operationId: A02
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - ROLE_PARTNER_SHOP_UPDATE
+    - ROLE_SHOP_ADMIN
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/account/statistics
   method: get
-  operationId: TL05
+  operationId: A21
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     scope:
-    - ROLE_PARTNER_TRANSACTION_LOG_READ
-    - ROLE_SHOP_ACCOUNTANCY
+    - ROLE_PARTNER_SHOP_READ
+    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
-- path: /api/version
+- path: /api/shops/documents
   method: get
-  operationId: V01
+  operationId: S30
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - ROLE_PARTNER_SHOP_DOCUMENT_READ
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/shops/documents
+  method: post
+  operationId: S32
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - ROLE_PARTNER_SHOP_DOCUMENT_WRITE
+    - ROLE_SHOP_ADMIN
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/shops/documents/download
+  method: get
+  operationId: S31
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_SHOP_DOCUMENT_READ
+    - ROLE_SHOP_ADMIN
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/shops/documents/{document_id}
+  method: delete
+  operationId: S33
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - ROLE_PARTNER_SHOP_DOCUMENT_DELETE
+    - ROLE_SHOP_ADMIN
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/taxonomy
+  method: post
+  operationId: SyncCatalogStructure
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/deleted-mirakl-products
+  method: post
+  operationId: SyncDeletedMiraklProducts
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/product-shopify-to-mirakl
+  method: post
+  operationId: SyncFirstPartyProducts
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/offer-conditions
+  method: post
+  operationId: SyncOfferConditions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/offers
+  method: post
+  operationId: SyncOffers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/orders
+  method: post
+  operationId: SyncOrders
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/promotions
+  method: post
+  operationId: SyncPromotions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/returns
+  method: post
+  operationId: SyncReturns
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/shipment-mirakl-to-shopify
+  method: post
+  operationId: SyncShipments
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/shops
+  method: post
+  operationId: SyncShops
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/product-mirakl-to-shopify
+  method: post
+  operationId: SyncThirdPartyProducts
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sync/mirakl-offers-sync-error
+  method: get
+  operationId: GetOfferRecoverableError
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/shopify-orders-sync-error
+  method: get
+  operationId: GetOrderRecoverableError
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/shopify-products-sync-error
+  method: get
+  operationId: GetProductRecoverableError
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-promotions-sync-error
+  method: get
+  operationId: GetPromotionRecoverableError
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-returns-sync-error
+  method: get
+  operationId: GetReturnRecoverableError
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-shipments-sync-error
+  method: get
+  operationId: GetShipmentRecoverableError
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-shops-sync-error
+  method: get
+  operationId: GetShopRecoverableError
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-offers-sync-errors
+  method: get
+  operationId: ListOfferRecoverableErrors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/shopify-orders-sync-errors
+  method: get
+  operationId: ListOrderRecoverableErrors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/shopify-products-sync-errors
+  method: get
+  operationId: ListProductRecoverableErrors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-promotions-sync-errors
+  method: get
+  operationId: ListPromotionRecoverableErrors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-returns-sync-errors
+  method: get
+  operationId: ListReturnRecoverableErrors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-shipments-sync-errors
+  method: get
+  operationId: ListShipmentRecoverableErrors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sync/mirakl-shops-sync-errors
+  method: get
+  operationId: ListShopRecoverableErrors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/taxonomy/channels/{channel_id}/rules
+  method: put
+  operationId: createTaxonomyRule
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - connect-channel-platform:taxonomy-rule:create
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/taxonomy/channels/{channel_id}/product-types
+  method: put
+  operationId: upsertProductType
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - connect-channel-platform:taxonomy-product-type:upsert
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/users/shops/roles
+  method: get
+  operationId: RO02
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - ROLE_PARTNER_SHOP_USER_CREATE
+    - ROLE_SHOP_ADMIN
     token:
       max-ttl: 3600
     audit: none
