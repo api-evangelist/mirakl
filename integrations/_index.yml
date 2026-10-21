@@ -84,3 +84,15 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: mirakl-amazon-selling-partner-appstore
+  label: Amazon Selling Partner Appstore
+  partner: amazon-seller-central
+  partner_name: Amazon Selling Partner Appstore
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://sellercentral.amazon.com/selling-partner-appstore/dp/amzn1.sp.solution.5dbe840d-bc6a-4ec2-bd94-d65fe790ab6f
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
