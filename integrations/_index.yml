@@ -96,3 +96,52 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: mirakl-packagist
+  label: Packagist
+  partner: packagist
+  partner_name: Packagist
+  category: official SDK (PHP)
+  type: register
+  channel: package-registry
+  evidence: https://packagist.org/packages/mirakl/magento-seller-connector
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Packagist (public registry JSON)
+    spec_file: null
+    language: PHP
+    packages:
+    - name: mirakl/magento-seller-connector
+      version: 1.3.1
+      released: '2021-07-27'
+      released_field: time
+      lapsed: true
+      page: https://packagist.org/packages/mirakl/magento-seller-connector
+      repo_leg: github-org:mirakl
+      publisher_leg: org:mirakl
+      matched_by: github-org
+    - name: mirakl/magento2-seller-connector
+      version: 1.7.11
+      released: '2024-03-18'
+      released_field: time
+      lapsed: true
+      page: https://packagist.org/packages/mirakl/magento2-seller-connector
+      repo_leg: github-org:mirakl
+      publisher_leg: org:mirakl
+      matched_by: github-org
+    - name: mirakl/sdk-php-shop
+      version: 1.27.0
+      released: '2026-06-24'
+      released_field: time
+      lapsed: false
+      page: https://packagist.org/packages/mirakl/sdk-php-shop
+      repo_leg: github-org:mirakl
+      publisher_leg: email:mirakl.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-php-dart-elixir-package-registries.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
